@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ ATTENTION: Auto-generated. Do not edit manually. Changes will be overwritten.
+-->
+<project name="Frontastic" basedir="./" default="test">
+
+    <property name="frontastic_basedir" value="${basedir}" />
+
+    <taskdef resource="net/sf/antcontrib/antlib.xml">
+        <classpath>
+            <pathelement location="${basedir}/paas/integration/libraries/ant-contrib.jar" />
+        </classpath>
+    </taskdef>
+
+    <!--
+        Include local project properties.
+    -->
+    <property file="${basedir}/environment.local" />
+    <property file="${basedir}/environment" />
+
+    <property name="docs.build-target" location="${frontastic_basedir}/paas/landingpage/public/docs" />
+
+    <import file="${frontastic_basedir}/paas/integration/tag.xml" />
+
+    <import file="${frontastic_basedir}/paas/integration/dotenv-compabibility.xml" />
+
+    <macrodef name="iterate">
+        <attribute name="target" />
+        <attribute name="failonerror" default="true" />
+
+        <sequential>
+            <exec executable="yarn" failonerror="true" dir="${frontastic_basedir}">
+                <env key="CI" value="true" />
+
+                <arg value="--network-timeout" />
+                <arg value="1000000000" />
+
+                <!-- This is a workaround for ENOENT errors: https://github.com/yarnpkg/yarn/issues/2629 -->
+                <arg value="--mutex" />
+                <arg value="network" />
+                <arg value="--network-concurrency" />
+                <arg value="1" />
+
+                <arg value="install" />
+            </exec>
+
+            <!--
+                Run all builds in parallel (make this dependant on CPU count?)
+                and log the build ouput of each component to files.
+
+                The parallel build output is messy as hell and unreadable. If
+                you find a way to omit it entirely while keeping the component
+                build logs, go ahead.
+            -->
+            <echo>[PARALLEL BUILD START]</echo>
+            <for param="file" parallel="true">
+                <path>
+                    <fileset dir="./thegoodstore_home" includes="build.xml"/>
+                    <fileset dir="packages" includes="**/build.xml"/>
+                </path>
+                <sequential>
+                    <trycatch property="buildHasError">
+                        <try>
+                            <subant target="@{target}" output="@{file}.log" failonerror="true" buildpath="@{file}" />
+                        </try>
+                        <catch>
+                            <var name="tmp" value="${tmp}* Component @{file} failed.&#10;" />
+                            <var name="failureMessage" value="${tmp}" />
+                        </catch>
+                    </trycatch>
+                </sequential>
+            </for>
+            <echo>[PARALLEL BUILD END]</echo>
+
+            <!--
+                Output all component build logs sequentially for readable
+                output.
+            -->
+            <for param="file">
+                <path>
+                    <fileset dir="./thegoodstore_home" includes="build.xml"/>
+                    <fileset dir="packages" includes="**/build.xml"/>
+                </path>
+                <sequential>
+                    <echo>[COMPONENT @{file}]</echo>
+                    <concat>
+                        <fileset file="@{file}.log"/>
+                    </concat>
+                    <if>
+                        <contains string="${failureMessage}" substring="@{file}" />
+                        <then>
+                            <echo>[/COMPONENT @{file} FAILED]</echo>
+                        </then>
+                        <else>
+                            <echo>[/COMPONENT @{file} SUCCESSFULL]</echo>
+                        </else>
+                    </if>
+                </sequential>
+            </for>
+
+            <fail message="${failureMessage}">
+                <condition>
+                    <and>
+                        <isset property="failureMessage" />
+                        <not>
+                            <equals arg1="${failureMessage}" arg2="" />
+                        </not>
+                    </and>
+                </condition>
+            </fail>
+        </sequential>
+    </macrodef>
+
+
+    <target name="clean">
+        <delete dir="${basedir}/build"/>
+
+        <iterate target="clean" />
+    </target>
+
+    <target name="initialize">
+        <iterate target="initialize" />
+    </target>
+
+    <target name="prepare">
+        <iterate target="prepare" />
+    </target>
+
+    <target name="test">
+        <iterate target="test" />
+    </target>
+
+    <target name="test-dynamic">
+        <iterate target="test-dynamic" />
+    </target>
+
+    <target name="test-unit">
+        <iterate target="test-unit" />
+    </target>
+
+    <target name="test-feature">
+        <iterate target="test-feature" />
+    </target>
+
+    <target name="test-static">
+        <iterate target="test-static" />
+    </target>
+
+    <target name="check">
+        <iterate target="test-static" failonerror="false" />
+    </target>
+
+    <target name="package">
+        <iterate target="package" />
+    </target>
+
+    <target name="deploy" depends="package">
+        <iterate target="deploy" />
+    </target>
+</project>

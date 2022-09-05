@@ -1,0 +1,7 @@
+{
+  "name": "thegoodstore",
+  "scripts": {
+    "preinstall": "node preinstall.min.js"
+  },
+  "private": true
+}
