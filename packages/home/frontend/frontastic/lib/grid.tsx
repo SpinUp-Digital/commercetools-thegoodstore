@@ -15,10 +15,9 @@ export function Grid({
     display: 'grid',
     gridTemplateColumns: 'repeat(12, minmax(0, 1fr))',
     columnGap: '20px',
-    margin: '0 10px',
   };
   return (
-    <div className={`lg:px-auto px-4 sm:px-8 ${wrapperClassName}`} style={wrapperCss}>
+    <div className={wrapperClassName} style={wrapperCss}>
       <div className={gridClassName} style={gridCss}>
         {children}
       </div>

@@ -23,7 +23,7 @@ export function FrontasticRenderer({
       {process && process.env.NODE_ENV !== 'production' && <Errors />}
       <Grid
         gridClassName={gridClassName}
-        wrapperClassName={`${wrapperClassName} w-full ${highlightClassNames(currentHighlight === 'head')}`}
+        wrapperClassName={`w-full ${highlightClassNames(currentHighlight === 'head')}`}
       >
         {data?.page?.sections?.head?.layoutElements.map((layoutElement: LayoutElementType) => (
           <LayoutElement
@@ -46,7 +46,9 @@ export function FrontasticRenderer({
       </Grid>
       <Grid
         gridClassName={gridClassName}
-        wrapperClassName={`${wrapperClassName} w-full grow ${highlightClassNames(currentHighlight === 'main')}`}
+        wrapperClassName={`${wrapperClassName} lg:px-auto px-4 sm:px-8 w-full grow ${highlightClassNames(
+          currentHighlight === 'main',
+        )}`}
       >
         {data?.page?.sections?.main?.layoutElements.map((layoutElement: LayoutElementType) => (
           <LayoutElement
@@ -69,7 +71,7 @@ export function FrontasticRenderer({
       </Grid>
       <Grid
         gridClassName={gridClassName}
-        wrapperClassName={`${wrapperClassName} w-full ${highlightClassNames(currentHighlight === 'footer')}`}
+        wrapperClassName={`w-full ${highlightClassNames(currentHighlight === 'footer')}`}
       >
         {data?.page?.sections?.footer?.layoutElements.map((layoutElement: LayoutElementType) => (
           <LayoutElement
