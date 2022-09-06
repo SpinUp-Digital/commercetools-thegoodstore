@@ -30,6 +30,7 @@ import Showcase from './showcase';
 import Wishlist from './wishlist';
 import ContentfulBlogTastic from './contentful-blog';
 import CategorySliderTastic from './category-slider';
+import HeroTastic from './content/hero';
 
 export const tastics = {
   // Doc Examples
@@ -46,6 +47,7 @@ export const tastics = {
   'commercetools/ui/footer': Footer,
   'commercetools/ui/header': Header,
   'commercetools/ui/content/tile': Tile,
+  'commercetools/ui/content/hero': HeroTastic,
   'commercetools/ui/content/spacer': Spacer,
   'commercetools/ui/content/showcase': Showcase,
   'commercetools/ui/content/markdown': Markdown,
