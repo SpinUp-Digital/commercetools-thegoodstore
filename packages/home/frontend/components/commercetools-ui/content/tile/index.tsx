@@ -1,9 +1,9 @@
 import Typography from 'components/commercetools-ui/typography';
 import { Reference, ReferenceLink } from 'helpers/reference';
-import Image from 'frontastic/lib/image';
+import Image, { NextFrontasticImage } from 'frontastic/lib/image';
 
 export interface TileProps {
-  image: { media: any } | any;
+  image: NextFrontasticImage;
   title: string;
   subtitle: string;
   ctaLabel?: string;
