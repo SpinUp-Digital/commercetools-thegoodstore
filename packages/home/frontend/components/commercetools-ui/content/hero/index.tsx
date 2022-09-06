@@ -2,19 +2,18 @@ import Typography from 'components/commercetools-ui/typography';
 import { Reference, ReferenceLink } from 'helpers/reference';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
 
-export interface TileProps {
+export interface HeroProps {
   image: NextFrontasticImage;
   title: string;
   subtitle: string;
   ctaLabel?: string;
   ctaReference?: Reference;
-  roundedBorders?: boolean;
 }
 
-const Tile: React.FC<TileProps> = ({ image, title, subtitle, ctaLabel, ctaReference, roundedBorders = true }) => {
+const Hero: React.FC<HeroProps> = ({ image, title, subtitle, ctaLabel, ctaReference }) => {
   return (
     <div className="relative w-full">
-      {image.media && <Image {...image} alt={title} className={`brightness-75 ${roundedBorders ? 'rounded' : ''}`} />}
+      {image.media && <Image {...image} alt={title} className="brightness-75" />}
       <div className="absolute top-1/2 left-1/2 w-fit -translate-x-1/2 -translate-y-1/2 text-center">
         <h1 className="text-sm text-white lg:text-xl">
           <Typography>{subtitle}</Typography>
@@ -32,4 +31,4 @@ const Tile: React.FC<TileProps> = ({ image, title, subtitle, ctaLabel, ctaRefere
   );
 };
 
-export default Tile;
+export default Hero;

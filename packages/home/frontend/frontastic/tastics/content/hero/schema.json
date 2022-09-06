@@ -1,6 +1,6 @@
 {
-  "tasticType": "commercetools/ui/content/tile",
-  "name": "commercetools UI tile",
+  "tasticType": "commercetools/ui/content/hero",
+  "name": "commercetools UI hero",
   "icon": "image",
   "category": "Content",
   "schema": [
@@ -55,18 +55,6 @@
           "required": false,
           "type": "reference",
           "default": null
-        }
-      ]
-    },
-    {
-      "name": "Style",
-      "helpText": "Customize your styling",
-      "fields": [
-        {
-          "label": "Enable rounded borders?",
-          "field": "roundedBorders",
-          "type": "boolean",
-          "default": true
         }
       ]
     }
