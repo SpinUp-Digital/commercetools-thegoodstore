@@ -31,6 +31,7 @@ import Wishlist from './wishlist';
 import ContentfulBlogTastic from './contentful-blog';
 import CategorySliderTastic from './category-slider';
 import HeroTastic from './content/hero';
+import AnnouncementBarTastic from './bar/announcment';
 
 export const tastics = {
   // Doc Examples
@@ -65,5 +66,6 @@ export const tastics = {
   'commercetools/ui/account/reset-password': ResetPassword,
   'commercetools/ui/content/contentful/blog': ContentfulBlogTastic,
   'commercetools/ui/category-slider': CategorySliderTastic,
+  'commercetools/ui/content/announcement-bar': AnnouncementBarTastic,
   default: NotFound,
 };

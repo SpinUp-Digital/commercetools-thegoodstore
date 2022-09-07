@@ -61,6 +61,9 @@ module.exports = {
         light: {
           100: 'var(--light-100)',
         },
+        dark: {
+          400: 'var(--dark-400)',
+        },
       },
       letterSpacing: {
         modest: '0.01em',

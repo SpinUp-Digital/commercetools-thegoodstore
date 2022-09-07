@@ -17,7 +17,8 @@
     }
   },
   "rules": {
-    "tailwindcss/classnames-order": ["warn", {"officialSorting": true}],
+    "@typescript-eslint/no-empty-function": "off",
+    "tailwindcss/classnames-order": ["warn", { "officialSorting": true }],
     "tailwindcss/enforces-negative-arbitrary-values": "warn",
     "tailwindcss/enforces-shorthand": "warn",
     "tailwindcss/migration-from-tailwind-2": "warn",

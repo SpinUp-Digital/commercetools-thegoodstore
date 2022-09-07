@@ -17,13 +17,4 @@ export const Primary = Template.bind({});
 
 Primary.args = {
   tagline: '',
-  logo: 'https://res.cloudinary.com/dlwdq84ig/image/upload/v1646648997/m1qzalyiebn9boow3tth.webp',
-  logoLink: headerButtonLink,
-  links: headerLinks,
-  accountLink: headerAccountLink,
-  searchLink: headerButtonLink,
-  cartLink: headerButtonLink,
-  wishlistLink: headerButtonLink,
-  cartItemCount: 2,
-  wishlistItemCount: 3,
 };
