@@ -31,7 +31,7 @@
 
   --neutral-100: #f7fafc;
   --neutral-200: #edf2f7;
-  --neutral-300: #e2e8f0;
+  --neutral-300: #f6f5f8;
   --neutral-400: #cbd5e0;
   --neutral-500: #a0aec0;
   --neutral-600: #718096;
@@ -42,4 +42,6 @@
   --light-100: #ffffff;
 
   --dark-400: #343434;
+
+  --danger-400: #d14253;
 }

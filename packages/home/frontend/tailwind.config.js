@@ -9,6 +9,14 @@ module.exports = {
   ],
   safelist: ['md:grid-cols-1', 'md:grid-cols-2', 'md:grid-cols-3', 'md:grid-cols-4'],
   theme: {
+    screens: {
+      sm: '480px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+      '2xl': '1440px',
+      '3xl': '1666px',
+    },
     extend: {
       boxShadow: {
         '3xl': '0 4px 10px -5px rgba(255, 255, 255, 0.25)',
@@ -63,6 +71,9 @@ module.exports = {
         },
         dark: {
           400: 'var(--dark-400)',
+        },
+        danger: {
+          400: 'var(--danger-400)',
         },
       },
       letterSpacing: {

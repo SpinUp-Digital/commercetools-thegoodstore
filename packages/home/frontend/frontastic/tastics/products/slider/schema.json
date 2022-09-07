@@ -14,6 +14,12 @@
           "required": true
         },
         {
+          "label": "Subline",
+          "field": "subline",
+          "type": "string",
+          "required": true
+        },
+        {
           "label": "products",
           "field": "data",
           "type": "dataSource",
