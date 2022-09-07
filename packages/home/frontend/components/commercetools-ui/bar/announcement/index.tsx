@@ -11,12 +11,13 @@ const AnnouncementBar: React.FC<Props> = ({ text, highlightedSubstring, target }
   const [previewText, setPreviewText] = useState({ prefix: text, middle: '', suffix: '' });
 
   const processHighlighting = useCallback(() => {
-    if (!highlightedSubstring || highlightedSubstring.length > text.length) {
+    const start = text.indexOf(highlightedSubstring);
+
+    if (!highlightedSubstring || start === -1) {
       setPreviewText({ prefix: text, middle: '', suffix: '' });
       return;
     }
 
-    const start = text.indexOf(highlightedSubstring);
     const end = start + highlightedSubstring.length - 1;
 
     setPreviewText({

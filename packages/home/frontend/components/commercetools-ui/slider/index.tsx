@@ -1,4 +1,4 @@
-import React, { useState, FC, Children, CSSProperties } from 'react';
+import React, { useState, FC, Children, CSSProperties, useRef } from 'react';
 import classnames from 'classnames';
 import { Navigation, Pagination, Thumbs } from 'swiper';
 import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react'; // eslint-disable-line import/no-unresolved
@@ -6,6 +6,7 @@ import 'swiper/css'; // eslint-disable-line import/no-unresolved
 import 'swiper/css/navigation'; // eslint-disable-line import/no-unresolved
 import 'swiper/css/pagination'; // eslint-disable-line import/no-unresolved
 import 'swiper/css/scrollbar'; // eslint-disable-line import/no-unresolved
+import { NavigationOptions } from 'swiper/types';
 
 export type SliderProps = {
   className?: string;
@@ -30,6 +31,9 @@ const Slider: FC<SliderProps> = ({
   children,
   ...props
 }) => {
+  const navigationPrevRef = useRef<HTMLDivElement>(null);
+  const navigationNextRef = useRef<HTMLDivElement>(null);
+
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   const validToFit: boolean = Boolean(fitToSlides) && Boolean(slideWidth) && Boolean(slidesPerView);
@@ -61,8 +65,15 @@ const Slider: FC<SliderProps> = ({
       pagination={dots ? { clickable: true, bulletActiveClass: 'slider__bullet--active' } : false}
       slidesPerView={slidesPerView ?? 'auto'}
       spaceBetween={spaceBetween}
-      navigation={arrows}
+      navigation={{
+        prevEl: navigationPrevRef.current,
+        nextEl: navigationNextRef.current,
+      }}
       style={{ width: sliderWidth }}
+      onBeforeInit={(swiper) => {
+        (swiper.params.navigation as NavigationOptions).prevEl = navigationPrevRef.current;
+        (swiper.params.navigation as NavigationOptions).nextEl = navigationNextRef.current;
+      }}
       {...props}
     >
       {slides}
@@ -92,6 +103,10 @@ const Slider: FC<SliderProps> = ({
       ) : (
         mainSlider
       )}
+      <div style={{ display: arrows ? 'block' : 'none' }}>
+        <div ref={navigationPrevRef} className="slider_arrow slider_arrow_prev" />
+        <div ref={navigationNextRef} className="slider_arrow slider_arrow_next" />
+      </div>
     </div>
   );
 };

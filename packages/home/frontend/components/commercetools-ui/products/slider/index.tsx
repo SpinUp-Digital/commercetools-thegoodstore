@@ -20,45 +20,66 @@ export default function ProductSlider({ products, title, subline, ctaLabel, ctaL
   const [isDesktopSize] = useMediaQuery(desktop);
 
   const sliderFixedMood: SliderProps = {
-    slidesPerView: isMobileSize ? (isTabletSize ? (isDesktopSize ? 4 : 3) : 2) : 1,
-    arrows: isMobileSize ? true : false,
-    dots: isMobileSize ? false : true,
+    slidesPerView: isTabletSize ? 4 : 2.3,
+    arrows: isDesktopSize ? true : false,
+    dots: false,
+    spaceBetween: isMobileSize ? 25 : 8,
   };
 
   const sliderConfiguration: SliderProps = sliderFixedMood;
 
   return (
-    <div className="py-4 lg:mx-auto lg:max-w-7xl">
-      <div className="w-auto text-center">
-        <h2 className="text-xl tracking-tight text-gray-400 dark:text-light-100">{subline}</h2>
-        <h2 className="mt-2 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-light-100">{title}</h2>
-      </div>
-      {ctaLabel && ctaLink && (
-        <div className="flex items-center justify-end px-4 sm:px-6 lg:px-0">
-          <ReferenceLink target={ctaLink} className="hidden text-sm font-semibold text-accent-400 sm:block">
-            {ctaLabel}
-            <span aria-hidden="true"> &rarr;</span>
-          </ReferenceLink>
-        </div>
-      )}
-      <div className="relative mt-8">
-        <div className="relative -mb-6 w-full overflow-x-auto pb-6">
-          <Slider {...sliderConfiguration}>
-            {products.slice(0, 15).map((product, index: number) => (
-              <Tile {...product} key={index} />
-            ))}
-          </Slider>
-        </div>
-      </div>
+    <>
+      <style>
+        {`
+        .slider_arrow_prev {
+          transform: translateY(-160%) rotateZ(135deg);
+        }
+        .slider_arrow_next {
+          transform: translateY(-160%) rotateZ(-45deg);
+        }
+      `}
+      </style>
+      <div>
+        <div className="bg-neutral-300 py-4 px-3 sm:px-5 lg:px-24">
+          <div className="text-start">
+            <h3 className="text-base font-bold text-gray-900 sm:text-2xl md:text-3xl">{title}</h3>
+            <div className="flex items-center justify-between">
+              <h4 className="mt-3 text-xs font-light text-gray-900 sm:text-base">{subline}</h4>
+              {ctaLabel && ctaLink && (
+                <div className="flex items-center justify-end px-4 sm:px-6 lg:px-0">
+                  <ReferenceLink
+                    target={ctaLink}
+                    className="hidden text-base text-gray-700 underline underline-offset-2 lg:block"
+                  >
+                    {ctaLabel}
+                  </ReferenceLink>
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="relative mt-6">
+            <div className="relative w-full">
+              <Slider {...sliderConfiguration}>
+                {products.slice(0, 15).map((product, index: number) => (
+                  <Tile {...product} key={index} />
+                ))}
+              </Slider>
+            </div>
+          </div>
 
-      {ctaLabel && ctaLink && (
-        <div className="mt-12 flex px-4 sm:hidden">
-          <ReferenceLink target={ctaLink} className="text-sm font-semibold text-accent-400 hover:text-accent-500">
-            {ctaLabel}
-            <span aria-hidden="true"> &rarr;</span>
-          </ReferenceLink>
+          {ctaLabel && ctaLink && (
+            <div className="mt-8 flex flex justify-center px-4 lg:hidden">
+              <ReferenceLink
+                target={ctaLink}
+                className="rounded border border-gray-700 py-3 px-12 text-sm font-medium transition duration-150 ease-out hover:bg-gray-700 hover:text-white"
+              >
+                {ctaLabel}
+              </ReferenceLink>
+            </div>
+          )}
         </div>
-      )}
-    </div>
+      </div>
+    </>
   );
 }
