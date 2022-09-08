@@ -3,7 +3,7 @@ import { Reference, ReferenceLink } from 'helpers/reference';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
 
 export interface TileProps {
-  image: NextFrontasticImage;
+  image?: NextFrontasticImage;
   title: string;
   subtitle: string;
   ctaLabel?: string;
@@ -14,7 +14,7 @@ export interface TileProps {
 const Tile: React.FC<TileProps> = ({ image, title, subtitle, ctaLabel, ctaReference, roundedBorders = true }) => {
   return (
     <div className="relative w-full">
-      {image.media && <Image {...image} alt={title} className={`brightness-75 ${roundedBorders ? 'rounded' : ''}`} />}
+      {image?.media && <Image {...image} alt={title} className={`brightness-75 ${roundedBorders ? 'rounded' : ''}`} />}
       <div className="absolute top-1/2 left-1/2 w-fit -translate-x-1/2 -translate-y-1/2 text-center">
         <h1 className="text-sm text-white lg:text-xl">
           <Typography>{subtitle}</Typography>
