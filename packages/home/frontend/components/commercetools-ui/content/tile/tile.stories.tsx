@@ -14,7 +14,9 @@ export default {
 
 const Template: Story<TileProps> = (args) => (
   <Tile
-    image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLB-QKWMqHVctQj_ZVrpk9RGS7N6TBsMHEIE4WeynpD9DCBpvUa7swU_HcMw7PgQARb2U&usqp=CAU"
+    image={{
+      src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLB-QKWMqHVctQj_ZVrpk9RGS7N6TBsMHEIE4WeynpD9DCBpvUa7swU_HcMw7PgQARb2U&usqp=CAU',
+    }}
     title="Here are some lovely texts just for testing if things go great, hopefully so"
     subtitle="Here are some lovely Subtitle texts just for testing if things go great, hopefully so"
     ctaLabel="Call To Action"
