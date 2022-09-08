@@ -18,5 +18,6 @@
   "noProductsFound": "No products found.",
   "items": "Items out of ",
   "product": "Product",
-  "product.view": "View product"
+  "product.view": "View product",
+  "quick.view": "Quick view"
 }

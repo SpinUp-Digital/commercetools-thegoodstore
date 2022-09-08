@@ -32,7 +32,7 @@
   height: 480px;
   width: 80px;
 }
-.slider__bullet--active {
+.swiper-pagination-bullet.slider__bullet--active {
   background: gray;
   opacity: 1;
 }

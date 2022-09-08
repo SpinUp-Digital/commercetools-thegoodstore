@@ -17,6 +17,8 @@ export type SliderProps = {
   fitToSlides?: boolean;
   slideWidth?: number;
   withThumbs?: boolean;
+  prevButtonStyles?: React.CSSProperties;
+  nextButtonStyles?: React.CSSProperties;
 } & SwiperProps;
 
 const Slider: FC<SliderProps> = ({
@@ -29,6 +31,8 @@ const Slider: FC<SliderProps> = ({
   spaceBetween = 20,
   withThumbs,
   children,
+  prevButtonStyles = {},
+  nextButtonStyles = {},
   ...props
 }) => {
   const navigationPrevRef = useRef<HTMLDivElement>(null);
@@ -104,8 +108,8 @@ const Slider: FC<SliderProps> = ({
         mainSlider
       )}
       <div style={{ display: arrows ? 'block' : 'none' }}>
-        <div ref={navigationPrevRef} className="slider_arrow slider_arrow_prev" />
-        <div ref={navigationNextRef} className="slider_arrow slider_arrow_next" />
+        <div ref={navigationPrevRef} className="slider_arrow slider_arrow_prev" style={prevButtonStyles} />
+        <div ref={navigationNextRef} className="slider_arrow slider_arrow_next" style={nextButtonStyles} />
       </div>
     </div>
   );

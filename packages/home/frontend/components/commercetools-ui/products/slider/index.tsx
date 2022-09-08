@@ -30,16 +30,6 @@ export default function ProductSlider({ products, title, subline, ctaLabel, ctaL
 
   return (
     <>
-      <style>
-        {`
-        .slider_arrow_prev {
-          transform: translateY(-160%) rotateZ(135deg);
-        }
-        .slider_arrow_next {
-          transform: translateY(-160%) rotateZ(-45deg);
-        }
-      `}
-      </style>
       <div>
         <div className="bg-neutral-300 py-4 px-3 sm:px-5 lg:px-24">
           <div className="text-start">
@@ -60,7 +50,11 @@ export default function ProductSlider({ products, title, subline, ctaLabel, ctaL
           </div>
           <div className="relative mt-6">
             <div className="relative w-full">
-              <Slider {...sliderConfiguration}>
+              <Slider
+                {...sliderConfiguration}
+                nextButtonStyles={{ transform: 'translateY(-160%) rotateZ(-45deg)' }}
+                prevButtonStyles={{ transform: 'translateY(-160%) rotateZ(135deg)' }}
+              >
                 {products.slice(0, 15).map((product, index: number) => (
                   <Tile {...product} key={index} />
                 ))}
