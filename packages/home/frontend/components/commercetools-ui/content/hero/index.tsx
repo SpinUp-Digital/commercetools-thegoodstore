@@ -13,7 +13,16 @@ export interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ image, title, subtitle, ctaLabel, ctaReference }) => {
   return (
     <div className="relative w-full">
-      {image.media && <Image {...image} alt={title} className="brightness-75" />}
+      {image && (
+        <>
+          <div className="relative block md:hidden">
+            <Image {...image} alt={title} className="brightness-75" />
+          </div>
+          <div className="hidden h-[668px] md:block">
+            <Image {...image} alt={title} layout="fill" objectFit="cover" className="brightness-75" />
+          </div>
+        </>
+      )}
       <div className="absolute top-1/2 left-1/2 w-fit -translate-x-1/2 -translate-y-1/2 text-center">
         <h1 className="text-sm text-white lg:text-xl">
           <Typography>{subtitle}</Typography>
