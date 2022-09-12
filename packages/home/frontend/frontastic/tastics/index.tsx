@@ -32,6 +32,7 @@ import ContentfulBlogTastic from './contentful-blog';
 import CategorySliderTastic from './category-slider';
 import HeroTastic from './content/hero';
 import AnnouncementBarTastic from './bar/announcment';
+import ContentSliderTastic from './content-slider';
 
 export const tastics = {
   // Doc Examples
@@ -67,5 +68,6 @@ export const tastics = {
   'commercetools/ui/content/contentful/blog': ContentfulBlogTastic,
   'commercetools/ui/category-slider': CategorySliderTastic,
   'commercetools/ui/content/announcement-bar': AnnouncementBarTastic,
+  'commercetools/ui/content/content-slider': ContentSliderTastic,
   default: NotFound,
 };
