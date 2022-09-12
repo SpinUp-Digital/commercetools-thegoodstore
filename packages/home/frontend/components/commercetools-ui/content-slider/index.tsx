@@ -17,15 +17,15 @@ export type ContentSliderProps = {
 
 const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
   return (
-    <div className="mx-auto w-full max-w-[1248px] pl-2 md:pl-4 xl:pl-0">
+    <div className="w-full px-3 sm:px-5 lg:px-24">
       {title && <h3 className="bold mb-3 text-3xl">{title}</h3>}
       {subtitle && <p className="mb-6 text-base font-light">{subtitle}</p>}
 
       <div className="overflow-auto scrollbar-hide">
         <div className="flex min-w-min gap-1.5 md:gap-6">
           {slides.map(({ image, title, ctaReference, ctaLabel }, index) => (
-            <div key={index} className="w-60 md:w-[400px]">
-              <Image {...image} className="mb-5 w-full" />
+            <div key={index} className="w-60 md:w-[400px] lg:grow">
+              <Image {...image} className="mb-5 w-full rounded" />
               <h4 className="mb-3.5 mt-3.5 text-lg font-normal">{title}</h4>
               <ReferenceLink target={ctaReference} className="flex gap-1.5">
                 <p className="text-base font-normal">{ctaLabel}</p>

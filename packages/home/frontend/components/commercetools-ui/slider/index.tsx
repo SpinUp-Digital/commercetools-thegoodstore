@@ -69,11 +69,11 @@ const Slider: FC<SliderProps> = ({
       pagination={dots ? { clickable: true, bulletActiveClass: 'slider__bullet--active' } : false}
       slidesPerView={slidesPerView ?? 'auto'}
       spaceBetween={spaceBetween}
+      style={{ width: sliderWidth }}
       navigation={{
         prevEl: navigationPrevRef.current,
         nextEl: navigationNextRef.current,
       }}
-      style={{ width: sliderWidth }}
       onBeforeInit={(swiper) => {
         (swiper.params.navigation as NavigationOptions).prevEl = navigationPrevRef.current;
         (swiper.params.navigation as NavigationOptions).nextEl = navigationNextRef.current;
@@ -92,12 +92,19 @@ const Slider: FC<SliderProps> = ({
             <Swiper
               className={thumbsClassName}
               modules={[Navigation, Thumbs]}
-              navigation
               spaceBetween={15}
               slidesPerView={5}
               direction={'vertical'}
               watchSlidesProgress
               onSwiper={setThumbsSwiper}
+              navigation={{
+                prevEl: navigationPrevRef.current,
+                nextEl: navigationNextRef.current,
+              }}
+              onBeforeInit={(swiper) => {
+                (swiper.params.navigation as NavigationOptions).prevEl = navigationPrevRef.current;
+                (swiper.params.navigation as NavigationOptions).nextEl = navigationNextRef.current;
+              }}
             >
               {thumbs}
             </Swiper>

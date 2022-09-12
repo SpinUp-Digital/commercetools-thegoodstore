@@ -70,6 +70,7 @@ module.exports = {
           100: 'var(--light-100)',
         },
         dark: {
+          300: 'var(--dark-300)',
           400: 'var(--dark-400)',
         },
         danger: {

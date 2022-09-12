@@ -8,9 +8,13 @@ import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useWishlist } from 'frontastic';
 import Image from 'frontastic/lib/image';
+import useMediaQuery from 'helpers/hooks/useMediaQuery';
+import { desktop } from 'helpers/utils/screensizes';
 
 const Tile: React.FC<Product> = ({ variants, name, _url }) => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
+
+  const [isDesktopSize] = useMediaQuery(desktop);
 
   const variantWithDiscount = useMemo(() => {
     let variantReturned: Variant;
@@ -70,12 +74,12 @@ const Tile: React.FC<Product> = ({ variants, name, _url }) => {
       >
         <Slider
           slidesPerView={1}
-          arrows={imageHovered}
+          arrows={imageHovered && isDesktopSize}
           spaceBetween={0}
           prevButtonStyles={{ left: 25, padding: '7px', transform: 'translateY(-50%) rotateZ(135deg)' }}
           nextButtonStyles={{ right: 25, padding: '7px', transform: 'translateY(-50%) rotateZ(-45deg)' }}
-          noSwiping
           dots={false}
+          loop
         >
           {selectedVariant.images.map((image, index) => (
             <Image key={index} src={image} alt={name} className="aspect-[3/4] w-full group-hover:opacity-75" />
@@ -83,7 +87,7 @@ const Tile: React.FC<Product> = ({ variants, name, _url }) => {
         </Slider>
         <span onClick={handleAddToWishlist}>
           <HeartIcon
-            className="absolute right-[16px] top-[16px] z-10 h-[30px] w-[40px] cursor-pointer"
+            className="absolute right-[16px] top-[16px] z-10 h-[6.5%] w-[8%] cursor-pointer"
             pathClassName={`transition duration-150 ease-out hover:fill-accent-400 hover:stroke-accent-400 ${
               wishlistLineItem ? 'fill-accent-400 stroke-accent-400' : ''
             }`}

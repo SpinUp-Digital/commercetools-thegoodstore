@@ -24,6 +24,7 @@ export default function ProductSlider({ products, title, subline, ctaLabel, ctaL
     arrows: isDesktopSize ? true : false,
     dots: false,
     spaceBetween: isMobileSize ? 25 : 8,
+    slidesPerGroup: isTabletSize ? 4 : 2,
   };
 
   const sliderConfiguration: SliderProps = sliderFixedMood;
@@ -47,6 +48,23 @@ export default function ProductSlider({ products, title, subline, ctaLabel, ctaL
                 </div>
               )}
             </div>
+            {ctaLabel && ctaLink && (
+              <div className="mt-8 lg:hidden">
+                <ReferenceLink target={ctaLink} className="flex items-center gap-3 text-sm font-bold">
+                  <span className="block text-dark-300">{ctaLabel}</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="h-6 w-6"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                  </svg>
+                </ReferenceLink>
+              </div>
+            )}
           </div>
           <div className="relative mt-6">
             <div className="relative w-full">
@@ -61,17 +79,6 @@ export default function ProductSlider({ products, title, subline, ctaLabel, ctaL
               </Slider>
             </div>
           </div>
-
-          {ctaLabel && ctaLink && (
-            <div className="mt-8 flex flex justify-center px-4 lg:hidden">
-              <ReferenceLink
-                target={ctaLink}
-                className="rounded border border-gray-700 py-3 px-12 text-sm font-medium transition duration-150 ease-out hover:bg-gray-700 hover:text-white"
-              >
-                {ctaLabel}
-              </ReferenceLink>
-            </div>
-          )}
         </div>
       </div>
     </>
