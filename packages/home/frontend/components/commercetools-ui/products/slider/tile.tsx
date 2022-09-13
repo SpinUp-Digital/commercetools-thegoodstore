@@ -73,6 +73,7 @@ const Tile: React.FC<Product> = ({ variants, name, _url }) => {
         onMouseLeave={() => setImageHovered(false)}
       >
         <Slider
+          key={`${isDesktopSize}`}
           slidesPerView={1}
           arrows={imageHovered && isDesktopSize}
           spaceBetween={0}
@@ -80,9 +81,15 @@ const Tile: React.FC<Product> = ({ variants, name, _url }) => {
           nextButtonStyles={{ right: 25, padding: '7px', transform: 'translateY(-50%) rotateZ(-45deg)' }}
           dots={false}
           loop
+          allowTouchMove={!isDesktopSize}
         >
           {selectedVariant.images.map((image, index) => (
-            <Image key={index} src={image} alt={name} className="aspect-[3/4] w-full group-hover:opacity-75" />
+            <Image
+              key={index}
+              src={image}
+              alt={name}
+              className="aspect-[3/4] w-full rounded-sm group-hover:opacity-75"
+            />
           ))}
         </Slider>
         <span onClick={handleAddToWishlist}>
@@ -114,10 +121,8 @@ const Tile: React.FC<Product> = ({ variants, name, _url }) => {
       </div>
       <div>
         <NextLink href={_url}>
-          <a>
-            <h3 className="mt-4 overflow-hidden truncate text-xs font-normal uppercase text-gray-700 sm:text-sm">
-              {name}
-            </h3>
+          <a className="mt-4 block overflow-hidden truncate text-xs font-normal uppercase text-gray-700 sm:text-sm">
+            {name}
           </a>
         </NextLink>
         <div className="mt-2 flex items-center gap-1">

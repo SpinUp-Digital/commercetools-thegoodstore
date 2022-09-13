@@ -78,6 +78,8 @@ const Slider: FC<SliderProps> = ({
         (swiper.params.navigation as NavigationOptions).prevEl = navigationPrevRef.current;
         (swiper.params.navigation as NavigationOptions).nextEl = navigationNextRef.current;
       }}
+      observer
+      observeParents
       {...props}
     >
       {slides}
@@ -105,6 +107,9 @@ const Slider: FC<SliderProps> = ({
                 (swiper.params.navigation as NavigationOptions).prevEl = navigationPrevRef.current;
                 (swiper.params.navigation as NavigationOptions).nextEl = navigationNextRef.current;
               }}
+              observer
+              observeParents
+              {...props}
             >
               {thumbs}
             </Swiper>
