@@ -16,7 +16,7 @@ const WishListButton: React.FC<WishListButtonProps> = ({ wishlistItemCount, wish
     <div className="flow-root pr-3">
       <ReferenceLink target={wishlistLink} className="group relative -m-2 flex items-center p-2">
         <HeartIcon
-          className="text-primary-400 dark:text-light-100 dark:group-hover:text-light-100 h-6 w-6 shrink-0 group-hover:text-primary-500"
+          className="text-primary-400 dark:text-light-100 dark:group-hover:text-light-100 group-hover:text-primary-500 h-6 w-6 shrink-0"
           aria-hidden="true"
         />
         {wishlistItemCount > 0 && (
