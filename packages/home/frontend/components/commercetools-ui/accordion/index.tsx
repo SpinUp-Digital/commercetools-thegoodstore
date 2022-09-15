@@ -4,24 +4,29 @@ import { ChevronDownIcon } from '@heroicons/react/solid';
 
 export interface AccordionProps {
   index?: number;
-
   accordionListLength?: number;
   className?: string;
-  sectionTitle: string;
+  openSectionTitle: string;
+  closedSectionTitle: string;
+  iconColor?: string;
 }
 
-const AccordionBtn: React.FC<AccordionProps> = ({ sectionTitle, children, className }) => {
+const AccordionBtn: React.FC<AccordionProps> = ({
+  openSectionTitle,
+  closedSectionTitle,
+  iconColor,
+  children,
+  className,
+}) => {
   return (
     <div className={`${className}`}>
       <Disclosure>
         {({ open }) => (
           <>
-            <Disclosure.Button className={`${open ? 'border-b-2' : ''}  w-full py-2 px-4`}>
+            <Disclosure.Button className="w-full py-14 px-12 text-14 font-medium text-neutral-200">
               <div className="flex justify-between">
-                <p className={`${open ? 'text-accent-400' : ''} transition`}>{sectionTitle}</p>
-                <ChevronDownIcon
-                  className={`${open ? 'text-accent-400 rotate-180 transform' : ''} h-7 w-7 transition`}
-                />
+                <p className="self-center transition">{open ? openSectionTitle : closedSectionTitle}</p>
+                <ChevronDownIcon className={`${open ? 'rotate-180 transform' : ''} h-8 w-15 ${iconColor} transition`} />
               </div>
             </Disclosure.Button>
             <Transition
@@ -32,7 +37,7 @@ const AccordionBtn: React.FC<AccordionProps> = ({ sectionTitle, children, classN
               leaveFrom="transform scale-y-100 opacity-100"
               leaveTo="transform scale-y-95 opacity-0"
             >
-              <Disclosure.Panel className="p-5 text-gray-500">{children}</Disclosure.Panel>
+              <Disclosure.Panel className="mb-18 px-20 text-neutral-200 md:p-20">{children}</Disclosure.Panel>
             </Transition>
           </>
         )}

@@ -15096,319 +15096,65 @@ export const headerLinks = [
   },
 ];
 
+export const linkReferenceOne = {
+  link: '/',
+  openInNewWindow: false,
+  type: 'link',
+  _type: 'Frontastic\\Catwalk\\NextJsBundle\\Domain\\Api\\TasticFieldValue\\LinkReferenceValue',
+};
+
+export const linkReferenceTwo = {
+  type: 'page-folder',
+  pageFolder: {
+    pageFolderId: 'b27378fbe05639798e9b23399a373bc0',
+    name: 'Men',
+    _urls: { de_CH: '/men', fr_CH: '/men', it_CH: '/men', de_LI: '/men' },
+    _url: '/men',
+  },
+  openInNewWindow: false,
+};
+
+const footerLinkOne = {
+  name: 'Careers',
+  reference: linkReferenceOne,
+};
+
+const footerLinkTwo = {
+  name: 'About us',
+  reference: linkReferenceOne,
+};
+
+const footerLinksOne = new Array(3).fill(footerLinkOne);
+const footerLinksTwo = new Array(4).fill(footerLinkTwo);
+
+const footerSocialMedia = {
+  logo: {
+    media: {
+      file: 'https://res.cloudinary.com/dlwdq84ig/image/upload/v1663076081/twdj7ucrddbfgahsuh89.png',
+      height: 24,
+      mediaId: 'twdj7ucrddbfgahsuh89',
+      name: 'Social Media Logo',
+      width: 24,
+    },
+  },
+  reference: linkReferenceOne,
+};
+
 export const footerColumns = [
-  {
-    header: 'Help & Information',
-    icon: 'question',
-    links: [
-      {
-        name: 'Order status',
-        reference: {
-          openInNewWindow: false,
-          type: 'page-folder',
-          pageFolder: {
-            pageFolderId: '595b5c44de02a8957bc5821913e58fa2',
-            name: 'Start',
-            _url: '/',
-            _urls: {
-              de_CH: '/',
-              de_LI: '/',
-              fr_CH: '/',
-              it_CH: '/',
-            },
-          },
-        },
-      },
-      {
-        name: 'Shipment',
-        reference: {
-          openInNewWindow: false,
-          type: 'page-folder',
-          pageFolder: {
-            pageFolderId: '595b5c44de02a8957bc5821913e58fa2',
-            name: 'Start',
-            _url: '/',
-            _urls: {
-              de_CH: '/',
-              de_LI: '/',
-              fr_CH: '/',
-              it_CH: '/',
-            },
-          },
-        },
-      },
-      {
-        name: 'Returns and exchanges',
-        reference: {
-          openInNewWindow: false,
-          type: 'page-folder',
-          pageFolder: {
-            pageFolderId: '595b5c44de02a8957bc5821913e58fa2',
-            name: 'Start',
-            _url: '/',
-            _urls: {
-              de_CH: '/',
-              de_LI: '/',
-              fr_CH: '/',
-              it_CH: '/',
-            },
-          },
-        },
-      },
-      {
-        name: 'Refunds',
-        reference: {
-          openInNewWindow: false,
-          type: 'page-folder',
-          pageFolder: {
-            pageFolderId: '595b5c44de02a8957bc5821913e58fa2',
-            name: 'Start',
-            _url: '/',
-            _urls: {
-              de_CH: '/',
-              de_LI: '/',
-              fr_CH: '/',
-              it_CH: '/',
-            },
-          },
-        },
-      },
-    ],
-  },
-  {
-    header: 'Contact us',
-    icon: 'inbox',
-    links: [
-      {
-        name: '02300 77 77 5',
-        reference: {
-          openInNewWindow: false,
-          type: 'page-folder',
-          pageFolder: {
-            pageFolderId: '595b5c44de02a8957bc5821913e58fa2',
-            name: 'Start',
-            _url: '/',
-            _urls: {
-              de_CH: '/',
-              de_LI: '/',
-              fr_CH: '/',
-              it_CH: '/',
-            },
-          },
-        },
-      },
-      {
-        name: 'hello@frontastic.cloud',
-        reference: {
-          openInNewWindow: false,
-          type: 'page-folder',
-          pageFolder: {
-            pageFolderId: '595b5c44de02a8957bc5821913e58fa2',
-            name: 'Start',
-            _url: '/',
-            _urls: {
-              de_CH: '/',
-              de_LI: '/',
-              fr_CH: '/',
-              it_CH: '/',
-            },
-          },
-        },
-      },
-    ],
-  },
-  {
-    header: 'About us',
-    icon: 'speaker',
-    links: [
-      {
-        name: 'About Us',
-        reference: {
-          openInNewWindow: false,
-          type: 'page-folder',
-          pageFolder: {
-            pageFolderId: '595b5c44de02a8957bc5821913e58fa2',
-            name: 'Start',
-            _url: '/',
-            _urls: {
-              de_CH: '/',
-              de_LI: '/',
-              fr_CH: '/',
-              it_CH: '/',
-            },
-          },
-        },
-      },
-      {
-        name: 'Careers',
-        reference: {
-          openInNewWindow: false,
-          type: 'page-folder',
-          pageFolder: {
-            pageFolderId: '595b5c44de02a8957bc5821913e58fa2',
-            name: 'Start',
-            _url: '/',
-            _urls: {
-              de_CH: '/',
-              de_LI: '/',
-              fr_CH: '/',
-              it_CH: '/',
-            },
-          },
-        },
-      },
-      {
-        name: 'Partnership',
-        reference: {
-          openInNewWindow: false,
-          type: 'page-folder',
-          pageFolder: {
-            pageFolderId: '595b5c44de02a8957bc5821913e58fa2',
-            name: 'Start',
-            _url: '/',
-            _urls: {
-              de_CH: '/',
-              de_LI: '/',
-              fr_CH: '/',
-              it_CH: '/',
-            },
-          },
-        },
-      },
-      {
-        name: 'Press',
-        reference: {
-          openInNewWindow: false,
-          type: 'page-folder',
-          pageFolder: {
-            pageFolderId: '595b5c44de02a8957bc5821913e58fa2',
-            name: 'Start',
-            _url: '/',
-            _urls: {
-              de_CH: '/',
-              de_LI: '/',
-              fr_CH: '/',
-              it_CH: '/',
-            },
-          },
-        },
-      },
-    ],
-  },
-  {
-    header: 'Products & Services',
-    links: [
-      {
-        name: 'Limitless Customizability',
-        reference: {
-          openInNewWindow: false,
-          type: 'page-folder',
-          pageFolder: {
-            pageFolderId: '595b5c44de02a8957bc5821913e58fa2',
-            name: 'Start',
-            _url: '/',
-            _urls: {
-              de_CH: '/',
-              de_LI: '/',
-              fr_CH: '/',
-              it_CH: '/',
-            },
-          },
-        },
-      },
-      {
-        name: 'Amazing Performance',
-        reference: {
-          openInNewWindow: false,
-          type: 'page-folder',
-          pageFolder: {
-            pageFolderId: '595b5c44de02a8957bc5821913e58fa2',
-            name: 'Start',
-            _url: '/',
-            _urls: {
-              de_CH: '/',
-              de_LI: '/',
-              fr_CH: '/',
-              it_CH: '/',
-            },
-          },
-        },
-      },
-      {
-        name: 'Functional Usability',
-        reference: {
-          openInNewWindow: false,
-          type: 'page-folder',
-          pageFolder: {
-            pageFolderId: '595b5c44de02a8957bc5821913e58fa2',
-            name: 'Start',
-            _url: '/',
-            _urls: {
-              de_CH: '/',
-              de_LI: '/',
-              fr_CH: '/',
-              it_CH: '/',
-            },
-          },
-        },
-      },
-    ],
-  },
+  { header: 'My pages', links: footerLinksOne },
+  { header: 'Terms & conditions', links: footerLinksTwo },
+  { header: 'Customer service', links: footerLinksOne },
+  { header: 'Work with us', links: footerLinksTwo },
 ];
 
-export const footerCopyrightLinks: Link[] = [
-  {
-    name: 'T&C',
-    reference: {
-      openInNewWindow: false,
-      type: 'page-folder',
-      pageFolder: {
-        pageFolderId: '595b5c44de02a8957bc5821913e58fa2',
-        name: 'Start',
-        _url: '/',
-        _urls: {
-          de_CH: '/',
-          de_LI: '/',
-          fr_CH: '/',
-          it_CH: '/',
-        },
-      },
-    },
+export const footerLogo = {
+  media: {
+    file: 'https://res.cloudinary.com/dlwdq84ig/image/upload/v1663053482/plc6rqvurx1n4py9qprn.png',
+    height: 384,
+    mediaId: 'plc6rqvurx1n4py9qprn',
+    name: 'Logo',
+    width: 1144,
   },
-  {
-    name: 'Cookies',
-    reference: {
-      openInNewWindow: false,
-      type: 'page-folder',
-      pageFolder: {
-        pageFolderId: '595b5c44de02a8957bc5821913e58fa2',
-        name: 'Start',
-        _url: '/',
-        _urls: {
-          de_CH: '/',
-          de_LI: '/',
-          fr_CH: '/',
-          it_CH: '/',
-        },
-      },
-    },
-  },
-  {
-    name: 'Privacy policy',
-    reference: {
-      openInNewWindow: false,
-      type: 'page-folder',
-      pageFolder: {
-        pageFolderId: '595b5c44de02a8957bc5821913e58fa2',
-        name: 'Start',
-        _url: '/',
-        _urls: {
-          de_CH: '/',
-          de_LI: '/',
-          fr_CH: '/',
-          it_CH: '/',
-        },
-      },
-    },
-  },
-];
+};
+
+export const footerSocialMediaLinks = new Array(3).fill(footerSocialMedia);

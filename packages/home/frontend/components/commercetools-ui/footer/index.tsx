@@ -1,53 +1,78 @@
 import React from 'react';
-import LanguageSwitcher from 'components/commercetools-ui/language-switcher';
-import Typography from 'components/commercetools-ui/typography';
-import Column, { Link, Column as FooterColumn } from './column';
-import { renderIcon } from './renderIcon';
+import Column, { Link } from './column';
+import Image, { NextFrontasticImage } from 'frontastic/lib/image';
+import { Reference, ReferenceLink } from 'helpers/reference';
+import useMediaQuery from 'helpers/hooks/useMediaQuery';
+import { tablet, mobile } from 'helpers/utils/screensizes';
+import Accordion from 'components/commercetools-ui/accordion';
+
+export interface FooterColumn {
+  header?: string;
+  links?: Link[];
+}
 export interface Props {
   columns: FooterColumn[];
-  copyright?: string;
-  copyrightLinks?: Link[];
+  logo?: NextFrontasticImage;
+  socialMedia?: SocialMedia[];
 }
 
-const Footer: React.FC<Props> = ({ columns, copyright, copyrightLinks }) => {
+export interface SocialMedia {
+  logo: NextFrontasticImage;
+  reference: Reference;
+}
+
+const Footer: React.FC<Props> = ({ columns, logo, socialMedia }) => {
+  const [isBiggerThanMobileSize] = useMediaQuery(mobile);
+
   return (
-    <footer aria-labelledby="footer-heading">
-      <div className="mx-auto w-full bg-gray-100 px-6 dark:bg-transparent lg:px-8">
-        <div className="mx-auto max-w-5xl py-10 px-2 xl:grid xl:grid-cols-2 xl:gap-8">
-          <div
-            className={`grid grid-cols-1 gap-10 md:gap-4 md:grid-cols-${(columns.length + 1).toString()} xl:col-span-2`}
-          >
+    <footer aria-labelledby="footer-heading" className="w-full bg-primary-black">
+      {isBiggerThanMobileSize ? (
+        <div className="w-full md:px-25 md:py-58 lg:px-175 lg:py-90 ">
+          <div className="grid md:grid-cols-4 md:gap-80 ">
             {columns?.map((column, index) => (
-              <div key={index} className="md:flex md:justify-center">
-                <Column column={column} />
+              <div key={index} className="lg:justify-left">
+                <Column
+                  header={column.header}
+                  links={column.links}
+                  className="flex flex-col md:items-center lg:items-start"
+                />
               </div>
             ))}
-            <div className="justify-start md:justify-center">
-              <div className="flex space-x-2 md:justify-start">
-                {renderIcon('speaker')}
-                <h3 className="dark:text-light-100 text-sm font-medium text-gray-800">
-                  <Typography>Language</Typography>
-                </h3>
-              </div>
-              <LanguageSwitcher className="p-4 md:px-8" />
-            </div>
           </div>
         </div>
-      </div>
-      {copyright && (
-        <div className="bg-primary-400 flex place-content-between border-t border-gray-200 p-4 sm:px-10">
-          <p className="text-xs text-white sm:text-sm">© {copyright}</p>
-          <ul className="flex">
-            {copyrightLinks?.map((item, i) => (
-              <li key={i} className="text-xs">
-                <p className="px-2 text-gray-300 hover:text-white sm:text-sm">
-                  <Typography>{item.name}</Typography>
-                </p>
-              </li>
-            ))}
-          </ul>
-        </div>
+      ) : (
+        <ul className="flex flex-col">
+          {columns?.map((column, index) => (
+            <li key={index} className="border-b border-neutral-300">
+              <Accordion
+                closedSectionTitle={column.header}
+                openSectionTitle={column.header}
+                iconColor="text-neutral-500"
+              >
+                <div className="mb-16 flex flex-row text-14 md:ml-24" key={index}>
+                  <Column links={column.links} className="px-0" />
+                </div>
+              </Accordion>
+            </li>
+          ))}
+        </ul>
       )}
+      <div className="lg:items-auto flex flex-col-reverse items-center gap-y-32 md:border-t md:border-secondary-grey lg:flex-row lg:flex-row lg:justify-between lg:gap-y-0 lg:px-165 lg:py-40">
+        {logo && (
+          <div className="mb-32 w-160 self-center lg:mb-0">
+            <Image {...logo} alt="logo" />
+          </div>
+        )}
+        <ul className="mt-40 flex flex-row gap-20 self-center lg:mt-0">
+          {socialMedia?.map((item, i) => (
+            <li key={i} className="w-22">
+              <ReferenceLink target={item.reference}>
+                <Image {...item.logo} className="mb-20" />
+              </ReferenceLink>
+            </li>
+          ))}
+        </ul>
+      </div>
     </footer>
   );
 };
