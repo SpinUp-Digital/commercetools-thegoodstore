@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @import url('./components/slider.css');
@@ -10,7 +10,8 @@
 
 body {
   @apply font-body;
-  @apply text-neutral-800;
+  @apply leading-normal;
+  @apply text-primary-black;
 }
 
 h1,
