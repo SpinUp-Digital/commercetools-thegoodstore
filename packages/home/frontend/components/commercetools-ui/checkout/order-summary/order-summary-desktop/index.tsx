@@ -39,7 +39,7 @@ const DesktopOrderSummary = ({
   return (
     <section
       aria-labelledby="summary-heading"
-      className="hidden w-full max-w-md flex-col bg-gray-50 dark:bg-primary-400 lg:flex"
+      className="dark:bg-primary-400 hidden w-full max-w-md flex-col bg-gray-50 lg:flex"
     >
       <h2 id="summary-heading" className="sr-only">
         {formatCartMessage({ id: 'order.summary', defaultMessage: 'Order summary' })}
@@ -57,24 +57,24 @@ const DesktopOrderSummary = ({
             <div className="flex flex-col justify-between space-y-4">
               <div className="space-y-1 text-sm font-medium">
                 <h3
-                  className="cursor-pointer text-gray-900 dark:text-light-100"
+                  className="dark:text-light-100 cursor-pointer text-gray-900"
                   onClick={() => handleClick(lineItem._url)}
                 >
                   {lineItem.name}
                 </h3>
                 <div className="flex space-x-4">
-                  <p className="text-gray-900 dark:text-light-100">
+                  <p className="dark:text-light-100 text-gray-900">
                     {CurrencyHelpers.formatForCurrency(lineItem.price)}
                   </p>
-                  {lineItem.count && <p className="text-gray-900 dark:text-light-100">{`x${lineItem.count}`}</p>}
+                  {lineItem.count && <p className="dark:text-light-100 text-gray-900">{`x${lineItem.count}`}</p>}
                 </div>
                 {lineItem.variant.attributes?.color && (
-                  <p className="text-gray-500 dark:text-light-100">
+                  <p className="dark:text-light-100 text-gray-500">
                     {StringHelpers.capitaliseFirstLetter(lineItem.variant.attributes.color.label)}
                   </p>
                 )}
                 {lineItem.variant.attributes?.size && (
-                  <p className="text-gray-500 dark:text-light-100">
+                  <p className="dark:text-light-100 text-gray-500">
                     {StringHelpers.isNumeric(lineItem.variant.attributes.size)
                       ? lineItem.variant.attributes.size
                       : StringHelpers.capitaliseFirstLetter(lineItem.variant.attributes.size)}
@@ -85,7 +85,7 @@ const DesktopOrderSummary = ({
                 <button
                   type="button"
                   onClick={editCartItem}
-                  className="text-sm font-medium text-accent-400 hover:text-accent-500"
+                  className="text-accent-400 hover:text-accent-500 text-sm font-medium"
                 >
                   {formatMessage({ id: 'edit', defaultMessage: 'Edit' })}
                 </button>
@@ -93,7 +93,7 @@ const DesktopOrderSummary = ({
                   <button
                     type="button"
                     onClick={() => removeCartItem(lineItem.lineItemId)}
-                    className="text-sm font-medium text-accent-400 hover:text-accent-500"
+                    className="text-accent-400 hover:text-accent-500 text-sm font-medium"
                   >
                     {formatMessage({ id: 'remove', defaultMessage: 'Remove' })}
                   </button>
@@ -111,11 +111,11 @@ const DesktopOrderSummary = ({
           <span>{formatCheckoutMessage({ id: 'outOfStock', defaultMessage: 'Some products are out of stock' })}</span>
         </p>
       )}
-      <div className="sticky bottom-0 flex-none border-t border-gray-200 bg-gray-50 p-6 dark:bg-primary-400">
-        <dl className="mt-8 space-y-6 text-sm font-medium text-gray-500 dark:text-light-100">
+      <div className="dark:bg-primary-400 sticky bottom-0 flex-none border-t border-gray-200 bg-gray-50 p-6">
+        <dl className="dark:text-light-100 mt-8 space-y-6 text-sm font-medium text-gray-500">
           <div className="flex justify-between">
             <dt>{formatCheckoutMessage({ id: 'subtotal', defaultMessage: 'Subtotal' })}</dt>
-            <dd className="text-gray-900 dark:text-light-100">
+            <dd className="dark:text-light-100 text-gray-900">
               {CurrencyHelpers.formatForCurrency(
                 cart.lineItems.reduce(
                   (prev, current) =>
@@ -131,7 +131,7 @@ const DesktopOrderSummary = ({
           </div>
           <div className="flex justify-between">
             <dt className="flex">{formatCartMessage({ id: 'discounts', defaultMessage: 'Discounts' })}</dt>
-            <dd className="text-gray-900 dark:text-light-100">
+            <dd className="dark:text-light-100 text-gray-900">
               {CurrencyHelpers.formatForCurrency(
                 cart.lineItems.reduce(
                   (prev, current) =>
@@ -153,11 +153,11 @@ const DesktopOrderSummary = ({
           </div>
           <div className="flex justify-between">
             <dt>{formatCheckoutMessage({ id: 'shipping', defaultMessage: 'Shipping' })}</dt>
-            <dd className="text-gray-900 dark:text-light-100">
+            <dd className="dark:text-light-100 text-gray-900">
               {CurrencyHelpers.formatForCurrency(selectedShipping?.rates?.[0]?.price || {})}
             </dd>
           </div>
-          <div className="flex items-center justify-between border-t border-gray-200 pt-6 text-gray-900 dark:text-light-100">
+          <div className="dark:text-light-100 flex items-center justify-between border-t border-gray-200 pt-6 text-gray-900">
             <dt className="text-base">{formatCheckoutMessage({ id: 'total', defaultMessage: 'Total' })}</dt>
             <dd className="text-base">
               {CurrencyHelpers.formatForCurrency(

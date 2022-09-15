@@ -45,7 +45,7 @@ const SortingDisclosure: FC<SortingDisclosureProps> = ({ updateSortingParams }) 
         {({ open }) => (
           <>
             <Disclosure.Button className="flex w-full items-center justify-between py-3 text-gray-400 hover:text-gray-500">
-              <span className="font-medium text-neutral-600 dark:text-light-100">
+              <span className="dark:text-light-100 font-medium text-neutral-600">
                 {formatMessage({ id: 'sortBy', defaultMessage: 'Sort by' })}
               </span>
               <span className="ml-6 flex items-center">

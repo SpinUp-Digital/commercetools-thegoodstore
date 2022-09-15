@@ -72,7 +72,7 @@ const Editable: React.FC<EditableProps> = ({
         const options = input.options ?? [];
         return (
           <select
-            className="mt-1 block w-full rounded-md border-gray-300 py-2 pr-10 pl-3 text-base focus:border-accent-400 focus:outline-none focus:ring-accent-400 sm:text-sm"
+            className="focus:border-accent-400 focus:ring-accent-400 mt-1 block w-full rounded-md border-gray-300 py-2 pr-10 pl-3 text-base focus:outline-none sm:text-sm"
             defaultValue={value}
             onChange={handleChange}
           >
@@ -88,7 +88,7 @@ const Editable: React.FC<EditableProps> = ({
           <input
             {...input}
             value={value}
-            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-accent-400 focus:ring-accent-400 sm:text-sm"
+            className="focus:border-accent-400 focus:ring-accent-400 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
             onChange={handleChange}
           />
         );
@@ -97,21 +97,21 @@ const Editable: React.FC<EditableProps> = ({
 
   return (
     <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-      {label && <dt className="text-sm font-medium text-gray-500 dark:text-light-100">{label}</dt>}
+      {label && <dt className="dark:text-light-100 text-sm font-medium text-gray-500">{label}</dt>}
       <dd className="mt-1 flex items-center text-sm text-gray-900 sm:col-span-2 sm:mt-0">
         {isEdit ? (
           <form id="editable-form" className="grow" onSubmit={handleSubmit}>
             {InputComponent}
           </form>
         ) : (
-          <span className="grow dark:text-light-100">{displayed}</span>
+          <span className="dark:text-light-100 grow">{displayed}</span>
         )}
         {isEdit ? (
           <div className="flex md:ml-20">
             <span className="ml-4 shrink-0">
               <button
                 type="submit"
-                className="rounded-md font-medium text-accent-400 focus:outline-none focus:ring-2 focus:ring-accent-400 focus:ring-offset-2"
+                className="text-accent-400 focus:ring-accent-400 rounded-md font-medium focus:outline-none focus:ring-2 focus:ring-offset-2"
                 form="editable-form"
               >
                 {formatMessage({ id: 'save', defaultMessage: 'Save' })}
@@ -120,7 +120,7 @@ const Editable: React.FC<EditableProps> = ({
             <span className="ml-4 shrink-0">
               <button
                 type="button"
-                className="rounded-md font-medium text-accent-400 focus:outline-none focus:ring-2 focus:ring-accent-400 focus:ring-offset-2"
+                className="text-accent-400 focus:ring-accent-400 rounded-md font-medium focus:outline-none focus:ring-2 focus:ring-offset-2"
                 onClick={stopEdit}
               >
                 {formatMessage({ id: 'cancel', defaultMessage: 'Cancel' })}
@@ -132,7 +132,7 @@ const Editable: React.FC<EditableProps> = ({
             <span className="ml-4 shrink-0">
               <button
                 type="button"
-                className="rounded-md font-medium text-accent-400 focus:outline-none focus:ring-2 focus:ring-accent-400 focus:ring-offset-2"
+                className="text-accent-400 focus:ring-accent-400 rounded-md font-medium focus:outline-none focus:ring-2 focus:ring-offset-2"
                 onClick={startEdit}
               >
                 {formatMessage({ id: 'update', defaultMessage: 'Update' })}

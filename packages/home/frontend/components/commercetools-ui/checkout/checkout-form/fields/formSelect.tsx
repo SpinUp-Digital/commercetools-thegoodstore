@@ -10,14 +10,14 @@ interface Props {
 const FormSelect = ({ name, label, options, selectedOptionValue, onChange, containerClassName }: Props) => {
   return (
     <div className={containerClassName}>
-      <label htmlFor={name} className="block text-sm font-medium text-gray-700 dark:text-light-100">
+      <label htmlFor={name} className="dark:text-light-100 block text-sm font-medium text-gray-700">
         {label}
       </label>
       <select
         id={name}
         name={name}
         className={
-          'mt-1 block w-full rounded-md border-gray-300 py-2 pr-10 pl-3 text-base focus:border-accent-400 focus:outline-none focus:ring-accent-400 sm:text-sm'
+          'focus:border-accent-400 focus:ring-accent-400 mt-1 block w-full rounded-md border-gray-300 py-2 pr-10 pl-3 text-base focus:outline-none sm:text-sm'
         }
         value={selectedOptionValue}
         onChange={(e) => onChange(e.target.name, e.target.value)}

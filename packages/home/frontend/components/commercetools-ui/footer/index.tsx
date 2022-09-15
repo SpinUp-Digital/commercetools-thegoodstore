@@ -25,7 +25,7 @@ const Footer: React.FC<Props> = ({ columns, copyright, copyrightLinks }) => {
             <div className="justify-start md:justify-center">
               <div className="flex space-x-2 md:justify-start">
                 {renderIcon('speaker')}
-                <h3 className="text-sm font-medium text-gray-800 dark:text-light-100">
+                <h3 className="dark:text-light-100 text-sm font-medium text-gray-800">
                   <Typography>Language</Typography>
                 </h3>
               </div>
@@ -35,7 +35,7 @@ const Footer: React.FC<Props> = ({ columns, copyright, copyrightLinks }) => {
         </div>
       </div>
       {copyright && (
-        <div className="flex place-content-between border-t border-gray-200 bg-primary-400 p-4 sm:px-10">
+        <div className="bg-primary-400 flex place-content-between border-t border-gray-200 p-4 sm:px-10">
           <p className="text-xs text-white sm:text-sm">© {copyright}</p>
           <ul className="flex">
             {copyrightLinks?.map((item, i) => (

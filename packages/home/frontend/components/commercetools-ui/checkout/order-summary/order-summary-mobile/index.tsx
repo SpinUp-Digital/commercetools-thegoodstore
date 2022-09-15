@@ -39,7 +39,7 @@ const MobileOrderSummary = ({
                 <h2 id="order-heading" className="text-lg font-medium text-gray-900">
                   {formatCheckoutMessage({ id: 'yourOrder', defaultMessage: 'Your Order' })}
                 </h2>
-                <Disclosure.Button className="font-medium text-accent-400 hover:text-accent-500">
+                <Disclosure.Button className="text-accent-400 hover:text-accent-500 font-medium">
                   {open ? (
                     <span>
                       {formatCheckoutMessage({ id: 'fullsummary.hide', defaultMessage: 'Hide full summary' })}
@@ -88,7 +88,7 @@ const MobileOrderSummary = ({
                           <button
                             type="button"
                             onClick={editCartItem}
-                            className="text-sm font-medium text-accent-400 hover:text-accent-500"
+                            className="text-accent-400 hover:text-accent-500 text-sm font-medium"
                           >
                             {formatMessage({ id: 'edit', defaultMessage: 'Edit' })}
                           </button>
@@ -96,7 +96,7 @@ const MobileOrderSummary = ({
                             <button
                               type="button"
                               onClick={() => removeCartItem(lineItem.lineItemId)}
-                              className="text-sm font-medium text-accent-400 hover:text-accent-500"
+                              className="text-accent-400 hover:text-accent-500 text-sm font-medium"
                             >
                               {formatMessage({ id: 'remove', defaultMessage: 'Remove' })}
                             </button>

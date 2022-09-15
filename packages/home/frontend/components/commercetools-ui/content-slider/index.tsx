@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import Image, { NextFrontasticImage } from 'frontastic/lib/image';
 import { Reference, ReferenceLink } from 'helpers/reference';
+import Image, { NextFrontasticImage } from 'frontastic/lib/image';
 
 type ContentSliderSlide = {
   image: NextFrontasticImage;
@@ -18,15 +18,15 @@ export type ContentSliderProps = {
 const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
   return (
     <div className="w-full px-3 sm:px-5 lg:px-24">
-      {title && <h3 className="bold mb-3 font-libre-baskerville text-28">{title}</h3>}
-      {subtitle && <p className="mb-6 font-inter text-16 font-light">{subtitle}</p>}
+      {title && <h3 className="bold font-libre-baskerville mb-3 text-28">{title}</h3>}
+      {subtitle && <p className="font-inter mb-6 text-16 font-light">{subtitle}</p>}
 
       <div className="overflow-auto scrollbar-hide">
         <div className="flex min-w-min gap-1.5 md:gap-6">
           {slides.map(({ image, title, ctaReference, ctaLabel }, index) => (
             <div key={index} className="w-60 md:w-[400px] lg:grow">
               <Image {...image} className="mb-5 w-full rounded" />
-              <h4 className="mb-3.5 mt-3.5 font-libre-baskerville text-18 font-normal">{title}</h4>
+              <h4 className="font-libre-baskerville my-3.5 text-18 font-normal">{title}</h4>
               <ReferenceLink target={ctaReference} className="flex gap-1.5">
                 <p className="font-inter text-16 font-normal">{ctaLabel}</p>
                 <svg

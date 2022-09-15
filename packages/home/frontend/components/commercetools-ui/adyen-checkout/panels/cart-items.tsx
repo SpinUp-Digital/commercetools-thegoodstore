@@ -19,16 +19,16 @@ const CartItems: React.FC<Props> = ({ cart }) => {
           />
           <div className="flex flex-col justify-between space-y-4">
             <div className="space-y-1 text-sm font-medium">
-              <h3 className="text-gray-900 dark:text-light-100">
+              <h3 className="dark:text-light-100 text-gray-900">
                 <span className="pr-2">{`${lineItem.count}x`}</span> {lineItem.name}
               </h3>
               {lineItem.variant.attributes?.color && (
-                <p className="text-gray-500 dark:text-light-100">
+                <p className="dark:text-light-100 text-gray-500">
                   {StringHelpers.capitaliseFirstLetter(lineItem.variant.attributes.color.label)}
                 </p>
               )}
               {lineItem.variant.attributes?.size && (
-                <p className="capitalize text-gray-500 dark:text-light-100">{lineItem.variant.attributes.size}</p>
+                <p className="dark:text-light-100 capitalize text-gray-500">{lineItem.variant.attributes.size}</p>
               )}
             </div>
           </div>
