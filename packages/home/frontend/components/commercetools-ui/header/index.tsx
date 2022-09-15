@@ -6,7 +6,6 @@ import Typography from 'components/commercetools-ui/typography';
 import { headerNavigation } from 'helpers/mocks/mockData';
 import { Reference, ReferenceLink } from 'helpers/reference';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
-import DarkModeWidget from '../darkmode-widget';
 import AccountButton from './account-button';
 import CartButton from './cart-button';
 import HeaderMenu from './header-menu';
@@ -51,13 +50,13 @@ const Header: React.FC<HeaderProps> = ({
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="fixed-screen-width lg:relative-width">
+    <div className="hidden">
       {/* Mobile menu */}
       <HeaderMenu open={open} setOpen={setOpen} links={links} navigation={headerNavigation} />
 
       <header className="relative">
         {tagline && (
-          <p className="flex items-center justify-center bg-primary-400 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
+          <p className="bg-primary-400 flex items-center justify-center px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
             <Typography>{tagline}</Typography>
           </p>
         )}
@@ -83,7 +82,7 @@ const Header: React.FC<HeaderProps> = ({
               <div className="flex flex-1 items-center lg:hidden">
                 <button
                   type="button"
-                  className="-ml-2 rounded-md bg-none p-2 text-primary-400 dark:text-light-100"
+                  className="text-primary-400 dark:text-light-100 -ml-2 rounded-md bg-none p-2"
                   onClick={() => setOpen(!open)}
                 >
                   <span className="sr-only">Open menu</span>
@@ -136,7 +135,7 @@ const Header: React.FC<HeaderProps> = ({
                     <ReferenceLink
                       key={id}
                       target={link.reference}
-                      className="flex items-center text-base font-medium text-primary-400 hover:text-primary-500 dark:text-light-100"
+                      className="text-primary-400 dark:text-light-100 flex items-center text-base font-medium hover:text-primary-500"
                     >
                       <Typography>{link.name}</Typography>
                     </ReferenceLink>
@@ -146,7 +145,6 @@ const Header: React.FC<HeaderProps> = ({
 
               <div className="flex flex-1 items-center justify-end">
                 <div className="flex w-fit items-center">
-                  <DarkModeWidget className="mr-4 text-primary-400 hover:text-primary-500 dark:text-light-100" />
                   <SearchButton />
                   <AccountButton account={account} accountLink={accountLink} />
 

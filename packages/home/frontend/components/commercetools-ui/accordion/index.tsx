@@ -20,7 +20,7 @@ const AccordionBtn: React.FC<AccordionProps> = ({ sectionTitle, children, classN
               <div className="flex justify-between">
                 <p className={`${open ? 'text-accent-400' : ''} transition`}>{sectionTitle}</p>
                 <ChevronDownIcon
-                  className={`${open ? 'rotate-180 transform text-accent-400' : ''} h-7 w-7 transition`}
+                  className={`${open ? 'text-accent-400 rotate-180 transform' : ''} h-7 w-7 transition`}
                 />
               </div>
             </Disclosure.Button>

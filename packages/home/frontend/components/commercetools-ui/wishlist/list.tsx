@@ -56,22 +56,22 @@ const List: React.FC<Props> = ({ items, removeLineItems }) => {
                     <h4 className="text-sm">
                       <p
                         onClick={() => goToProductPage(item._url)}
-                        className="cursor-pointer font-medium text-gray-700 hover:text-gray-800 dark:text-light-100"
+                        className="dark:text-light-100 cursor-pointer font-medium text-gray-700 hover:text-gray-800"
                       >
                         {item.name}
                       </p>
                     </h4>
                     {isLargerThanMobile ? (
-                      <p className="ml-4 text-sm font-medium text-gray-900 dark:text-light-100">{item.variant.sku}</p>
+                      <p className="dark:text-light-100 ml-4 text-sm font-medium text-gray-900">{item.variant.sku}</p>
                     ) : null}
                   </div>
                   {isLargerThanMobile ? (
-                    <p className="mt-1 text-sm text-gray-500 dark:text-light-100">{item.lineItemId}</p>
+                    <p className="dark:text-light-100 mt-1 text-sm text-gray-500">{item.lineItemId}</p>
                   ) : null}
                 </div>
 
                 <div className="mt-4 flex flex-1 items-end justify-between">
-                  <p className="flex items-center space-x-2 text-sm text-gray-700 dark:text-light-100">
+                  <p className="dark:text-light-100 flex items-center space-x-2 text-sm text-gray-700">
                     {isLargerThanMobile ? (
                       <svg
                         className="h-5 w-5 shrink-0 text-gray-300"
@@ -96,7 +96,7 @@ const List: React.FC<Props> = ({ items, removeLineItems }) => {
                     <button
                       type="button"
                       onClick={() => removeLineItems(item)}
-                      className="text-sm font-medium text-accent-400 hover:text-accent-500"
+                      className="text-accent-400 hover:text-accent-500 text-sm font-medium"
                     >
                       <span>{formatMessage({ id: 'remove', defaultMessage: 'Remove' })}</span>
                     </button>

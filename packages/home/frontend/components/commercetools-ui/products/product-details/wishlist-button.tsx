@@ -16,7 +16,7 @@ export default function WishlistButton({ onAddToWishlist, variant }: WishlistBut
     <button
       type="button"
       onClick={() => handleAddToWishlist()}
-      className={`ml-5 items-center justify-center rounded-md border-2 border-slate-300 bg-white py-3 px-4 text-base font-medium text-primary-400 ring-transparent  hover:border-transparent hover:bg-accent-400 hover:text-[#fff] active:bg-accent-500  active:text-[#fff] active:outline-none`}
+      className={`text-primary-400 hover:bg-accent-400 active:bg-accent-500 ml-5 items-center justify-center rounded-md border-2 border-slate-300 bg-white py-3 px-4 text-base  font-medium ring-transparent hover:border-transparent hover:text-[#fff]  active:text-[#fff] active:outline-none`}
     >
       <HeartIcon className="h-6 w-6 shrink-0 " aria-hidden="true" />
     </button>

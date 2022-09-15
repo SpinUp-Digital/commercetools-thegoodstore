@@ -57,7 +57,7 @@ const Security = () => {
     <div>
       <div className="mt-10 divide-y divide-gray-200">
         <div className="space-y-1">
-          <h3 className="text-lg font-medium leading-6 text-gray-900 dark:text-light-100">Password</h3>
+          <h3 className="dark:text-light-100 text-lg font-medium leading-6 text-gray-900">Password</h3>
           <p className="max-w-2xl text-sm text-gray-500">
             {formatAccountMessage({
               id: 'account.security.warning',
@@ -68,13 +68,13 @@ const Security = () => {
       </div>
       <form className="mt-6" onSubmit={handleSubmit}>
         {success && <p className="text-sm text-green-600">{success}</p>}
-        {error && <p className="text-sm text-accent-400">{error}</p>}
+        {error && <p className="text-accent-400 text-sm">{error}</p>}
         <div className="mt-3 max-w-sm">
           <input
             id="old-password"
             name="oldPassword"
             type="password"
-            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-accent-400 focus:ring-accent-400 sm:text-sm"
+            className="focus:border-accent-400 focus:ring-accent-400 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
             placeholder={formatAccountMessage({
               id: 'password.old',
               defaultMessage: 'Old password',
@@ -89,7 +89,7 @@ const Security = () => {
             id="password"
             name="password"
             type="password"
-            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-accent-400 focus:ring-accent-400 sm:text-sm"
+            className="focus:border-accent-400 focus:ring-accent-400 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
             placeholder={formatAccountMessage({
               id: 'password',
               defaultMessage: 'Password',
@@ -104,7 +104,7 @@ const Security = () => {
             id="confirm-password"
             name="confirmPassword"
             type="password"
-            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-accent-400 focus:ring-accent-400 sm:text-sm"
+            className="focus:border-accent-400 focus:ring-accent-400 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
             placeholder={formatAccountMessage({
               id: 'password.confirm',
               defaultMessage: 'Confirm password',
@@ -116,7 +116,7 @@ const Security = () => {
         </div>
         <button
           type="submit"
-          className="mt-4 w-20 items-center rounded-md border border-transparent bg-accent-400 py-2 px-4 text-center text-sm font-medium text-white shadow-sm transition-colors duration-150 ease-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:bg-gray-300"
+          className="bg-accent-400 mt-4 w-20 items-center rounded-md border border-transparent py-2 px-4 text-center text-sm font-medium text-white shadow-sm transition-colors duration-150 ease-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:bg-gray-300"
           disabled={submitDisabled || processing}
         >
           Save

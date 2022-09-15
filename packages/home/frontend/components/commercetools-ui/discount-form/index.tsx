@@ -48,7 +48,7 @@ const DiscountForm: React.FC<Props> = ({ className, cart }) => {
         <div className="flex w-full justify-between">
           <div className=" pr-3">
             <input
-              className=" w-full appearance-none rounded border-none py-3 px-4 leading-tight text-gray-700 shadow focus:border-accent-400"
+              className=" focus:border-accent-400 w-full appearance-none rounded border-none py-3 px-4 leading-tight text-gray-700 shadow"
               type="text"
               value={code}
               placeholder={formatCartMessage({
@@ -62,7 +62,7 @@ const DiscountForm: React.FC<Props> = ({ className, cart }) => {
             type="button"
             onClick={onApplyDiscount}
             disabled={code === '' ? true : false}
-            className="w-24 cursor-pointer content-center rounded border-2 border-accent-400 bg-white p-2 font-bold text-accent-400 hover:bg-accent-400 hover:text-white focus:outline-none disabled:cursor-not-allowed disabled:border-none disabled:bg-gray-300 disabled:text-gray-500"
+            className="border-accent-400 text-accent-400 hover:bg-accent-400 w-24 cursor-pointer content-center rounded border-2 bg-white p-2 font-bold hover:text-white focus:outline-none disabled:cursor-not-allowed disabled:border-none disabled:bg-gray-300 disabled:text-gray-500"
           >
             {formatCartMessage({
               id: 'cart.apply',

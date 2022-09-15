@@ -6,7 +6,6 @@ import classNames from 'classnames';
 import Typography from 'components/commercetools-ui/typography';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { ReferenceLink } from 'helpers/reference';
-import { useDarkMode } from 'frontastic';
 import { Link } from './index';
 
 interface HeaderMenuProps {
@@ -17,9 +16,6 @@ interface HeaderMenuProps {
 }
 
 const HeaderMenu: React.FC<HeaderMenuProps> = ({ open, setOpen, navigation, links }) => {
-  //Darkmode
-  const { mode } = useDarkMode();
-
   //i18n messages
   const { formatMessage } = useFormat({ name: 'common' });
 
@@ -35,7 +31,7 @@ const HeaderMenu: React.FC<HeaderMenuProps> = ({ open, setOpen, navigation, link
 
   return (
     <Transition.Root show={open} as={Fragment}>
-      <Dialog className={`${mode} fixed inset-0 z-40 flex lg:hidden`} onClose={closeMenu}>
+      <Dialog className={`fixed inset-0 z-40 flex lg:hidden`} onClose={closeMenu}>
         <Transition.Child
           as={Fragment}
           enter="transition-opacity ease-linear duration-300"
@@ -57,11 +53,11 @@ const HeaderMenu: React.FC<HeaderMenuProps> = ({ open, setOpen, navigation, link
           leaveFrom="translate-x-0"
           leaveTo="-translate-x-full"
         >
-          <div className="relative flex w-full max-w-xs flex-col overflow-y-auto bg-white pb-12 shadow-xl dark:bg-primary-200">
+          <div className="dark:bg-primary-200 relative flex w-full max-w-xs flex-col overflow-y-auto bg-white pb-12 shadow-xl">
             <div className="flex px-4 pt-5 pb-2">
               <button
                 type="button"
-                className="-m-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400 dark:text-light-100"
+                className="dark:text-light-100 -m-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400"
                 onClick={() => setOpen(false)}
               >
                 <span className="sr-only">{formatMessage({ id: 'menu.close', defaultMessage: 'Close menu' })}</span>
@@ -88,7 +84,7 @@ const HeaderMenu: React.FC<HeaderMenuProps> = ({ open, setOpen, navigation, link
                         <div>
                           <p
                             id={`mobile-featured-heading-${categoryIdx}`}
-                            className="font-medium text-gray-900 dark:text-light-100"
+                            className="dark:text-light-100 font-medium text-gray-900"
                           >
                             {formatMessage({ id: 'featured', defaultMessage: 'Featured' })}
                           </p>
@@ -100,7 +96,7 @@ const HeaderMenu: React.FC<HeaderMenuProps> = ({ open, setOpen, navigation, link
                             {category.featured.map((item) => (
                               <li key={item.name} className="flex">
                                 <NextLink href={item.href}>
-                                  <a className="text-gray-500 dark:text-light-100" onClick={closeMenu}>
+                                  <a className="dark:text-light-100 text-gray-500" onClick={closeMenu}>
                                     <Typography>{item.name}</Typography>
                                   </a>
                                 </NextLink>
@@ -109,14 +105,14 @@ const HeaderMenu: React.FC<HeaderMenuProps> = ({ open, setOpen, navigation, link
                           </ul>
                         </div>
                         <div>
-                          <p id="mobile-categories-heading" className="font-medium text-gray-900 dark:text-light-100">
+                          <p id="mobile-categories-heading" className="dark:text-light-100 font-medium text-gray-900">
                             {formatMessage({ id: 'categories', defaultMessage: 'Categories' })}
                           </p>
                           <ul role="list" aria-labelledby="mobile-categories-heading" className="mt-6 space-y-6">
                             {category.categories.map((item) => (
                               <li key={item.name} className="flex">
                                 <NextLink href={item.href}>
-                                  <a className="text-gray-500 dark:text-light-100" onClick={closeMenu}>
+                                  <a className="dark:text-light-100 text-gray-500" onClick={closeMenu}>
                                     <Typography>{item.name}</Typography>
                                   </a>
                                 </NextLink>
@@ -127,14 +123,14 @@ const HeaderMenu: React.FC<HeaderMenuProps> = ({ open, setOpen, navigation, link
                       </div>
                       <div className="grid grid-cols-1 gap-x-6 gap-y-10">
                         <div>
-                          <p id="mobile-collection-heading" className="font-medium text-gray-900 dark:text-light-100">
+                          <p id="mobile-collection-heading" className="dark:text-light-100 font-medium text-gray-900">
                             {formatMessage({ id: 'collection', defaultMessage: 'Collection' })}
                           </p>
                           <ul role="list" aria-labelledby="mobile-collection-heading" className="mt-6 space-y-6">
                             {category.collection.map((item) => (
                               <li key={item.name} className="flex">
                                 <NextLink href={item.href}>
-                                  <a className="text-gray-500 dark:text-light-100" onClick={closeMenu}>
+                                  <a className="dark:text-light-100 text-gray-500" onClick={closeMenu}>
                                     <Typography>{item.name}</Typography>
                                   </a>
                                 </NextLink>
@@ -144,14 +140,14 @@ const HeaderMenu: React.FC<HeaderMenuProps> = ({ open, setOpen, navigation, link
                         </div>
 
                         <div>
-                          <p id="mobile-brand-heading" className="font-medium text-gray-900 dark:text-light-100">
+                          <p id="mobile-brand-heading" className="dark:text-light-100 font-medium text-gray-900">
                             {formatMessage({ id: 'brands', defaultMessage: 'Brands' })}
                           </p>
                           <ul role="list" aria-labelledby="mobile-brand-heading" className="mt-6 space-y-6">
                             {category.brands.map((item) => (
                               <li key={item.name} className="flex">
                                 <NextLink href={item.href}>
-                                  <a className="text-gray-500 dark:text-light-100" onClick={closeMenu}>
+                                  <a className="dark:text-light-100 text-gray-500" onClick={closeMenu}>
                                     <Typography>{item.name}</Typography>
                                   </a>
                                 </NextLink>
@@ -171,7 +167,7 @@ const HeaderMenu: React.FC<HeaderMenuProps> = ({ open, setOpen, navigation, link
                 <div key={link.name} className="flow-root" onClick={closeMenu}>
                   <ReferenceLink
                     target={link.reference}
-                    className="-m-2 block p-2 font-medium text-gray-900 dark:text-light-100"
+                    className="dark:text-light-100 -m-2 block p-2 font-medium text-gray-900"
                   >
                     <Typography>{link.name}</Typography>
                   </ReferenceLink>

@@ -51,7 +51,7 @@ export default function ProductSlider({ products, title, subline, ctaLabel, ctaL
             {ctaLabel && ctaLink && (
               <div className="mt-8 lg:hidden">
                 <ReferenceLink target={ctaLink} className="flex w-fit items-center gap-3 text-sm font-bold">
-                  <span className="block text-dark-300">{ctaLabel}</span>
+                  <span className="text-dark-300 block">{ctaLabel}</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"

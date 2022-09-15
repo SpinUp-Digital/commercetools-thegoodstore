@@ -85,14 +85,14 @@ export default function Newsletter({
   };
 
   return (
-    <div className="mx-auto max-w-7xl rounded-lg bg-gray-100 py-2 px-4 dark:bg-primary-200 sm:px-6 lg:px-0">
+    <div className="dark:bg-primary-200 mx-auto max-w-7xl rounded-lg bg-gray-100 py-2 px-4 sm:px-6 lg:px-0">
       {!isConfirm ? (
         <div className="relative py-3 px-6 text-neutral-700 md:py-6 md:px-12 lg:py-9 lg:px-16 xl:flex xl:items-center">
           <div className="xl:w-0 xl:flex-1">
-            <h2 className="mt-2 text-center text-2xl font-bold tracking-[0.010em] dark:text-light-100 md:text-left">
+            <h2 className="dark:text-light-100 mt-2 text-center text-2xl font-bold tracking-[0.010em] md:text-left">
               {headline || fallbackHeadline}
             </h2>
-            <p className="mt-3 max-w-2xl text-center text-sm dark:text-light-100 md:text-left">
+            <p className="dark:text-light-100 mt-3 max-w-2xl text-center text-sm md:text-left">
               {description || fallbackDescription}
             </p>
           </div>
@@ -105,20 +105,20 @@ export default function Newsletter({
                 id="cta-email"
                 name="email"
                 type="email"
-                className="block w-full rounded-md border border-transparent py-3 px-5 text-sm leading-5 text-gray-600 shadow-sm placeholder:text-gray-500 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-accent-400"
+                className="focus:ring-offset-accent-400 block w-full rounded-md border border-transparent py-3 px-5 text-sm leading-5 text-gray-600 shadow-sm placeholder:text-gray-500 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
                 placeholder={inputPlaceholder}
                 onChange={onChange}
               />
               <div className="mt-4 sm:mt-0 sm:ml-3">
                 <button
                   type="submit"
-                  className="block w-full rounded-md bg-accent-400 py-3 px-6 text-base font-bold leading-5 text-white hover:bg-accent-500 sm:px-11"
+                  className="bg-accent-400 hover:bg-accent-500 block w-full rounded-md py-3 px-6 text-base font-bold leading-5 text-white sm:px-11"
                 >
                   <Typography>{ctaLabel || fallbackCta}</Typography>
                 </button>
               </div>
             </form>
-            <p className="mt-2 max-w-md text-left text-xs text-neutral-600 dark:text-light-100 xl:px-5">
+            <p className="dark:text-light-100 mt-2 max-w-md text-left text-xs text-neutral-600 xl:px-5">
               <Typography>{disclaimer || fallbackDisclaimer}</Typography>
             </p>
           </div>

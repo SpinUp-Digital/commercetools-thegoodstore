@@ -148,7 +148,7 @@ export default function ProductDetail({ product, onAddToCart, onAddToWishlist, v
 
           {/* Product info */}
           <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
-            <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-light-100">
+            <h1 className="dark:text-light-100 text-3xl font-extrabold tracking-tight text-gray-900">
               {product?.name}
             </h1>
 
@@ -156,7 +156,7 @@ export default function ProductDetail({ product, onAddToCart, onAddToWishlist, v
               <h2 className="sr-only">
                 {formatProductMessage({ id: 'product?.info', defaultMessage: 'Product information' })}
               </h2>
-              <p className="text-3xl text-accent-400">{CurrencyHelpers.formatForCurrency(product?.price)}</p>
+              <p className="text-accent-400 text-3xl">{CurrencyHelpers.formatForCurrency(product?.price)}</p>
             </div>
 
             <div className="mt-6">
@@ -165,7 +165,7 @@ export default function ProductDetail({ product, onAddToCart, onAddToWishlist, v
               </h3>
 
               <div
-                className="space-y-6 text-base text-gray-700 dark:text-light-100"
+                className="dark:text-light-100 space-y-6 text-base text-gray-700"
                 dangerouslySetInnerHTML={{ __html: product?.description }}
               />
             </div>
@@ -173,7 +173,7 @@ export default function ProductDetail({ product, onAddToCart, onAddToWishlist, v
             <form className="mt-6">
               {/* Colors */}
               <div>
-                <h3 className="text-sm font-medium text-gray-900 dark:text-light-100">
+                <h3 className="dark:text-light-100 text-sm font-medium text-gray-900">
                   {formatProductMessage({ id: 'color', defaultMessage: 'Color' })}
                 </h3>
 
@@ -189,9 +189,9 @@ export default function ProductDetail({ product, onAddToCart, onAddToWishlist, v
                             classNames(
                               color.selectedColor,
                               (active && checked) || selectedColor?.key === color.key
-                                ? 'ring-2 ring-accent-400 ring-offset-1'
+                                ? 'ring-accent-400 ring-2 ring-offset-1'
                                 : '',
-                              !active && checked ? 'ring-2 ring-accent-400 ring-offset-1' : '',
+                              !active && checked ? 'ring-accent-400 ring-2 ring-offset-1' : '',
                               'relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none',
                             )
                           }
@@ -215,7 +215,7 @@ export default function ProductDetail({ product, onAddToCart, onAddToWishlist, v
               {product?.sizes.length > 1 && (
                 <div className="mt-8">
                   <div className="flex items-center justify-between">
-                    <h2 className="text-sm font-medium text-gray-900 dark:text-light-100">
+                    <h2 className="dark:text-light-100 text-sm font-medium text-gray-900">
                       {formatProductMessage({ id: 'size', defaultMessage: 'Size' })}
                     </h2>
                   </div>
@@ -229,9 +229,9 @@ export default function ProductDetail({ product, onAddToCart, onAddToWishlist, v
                           value={size}
                           className={({ active, checked }) =>
                             classNames(
-                              active || selectedSize?.key == size.key ? 'ring-2 ring-accent-400 ring-offset-2' : '',
+                              active || selectedSize?.key == size.key ? 'ring-accent-400 ring-2 ring-offset-2' : '',
                               checked
-                                ? 'bg-transparent text-gray-900 hover:bg-gray-50 dark:text-light-100'
+                                ? 'dark:text-light-100 bg-transparent text-gray-900 hover:bg-gray-50'
                                 : 'border-gray-200 bg-white text-gray-900 hover:bg-gray-50',
                               'flex cursor-pointer items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase sm:flex-1',
                             )
@@ -251,7 +251,7 @@ export default function ProductDetail({ product, onAddToCart, onAddToWishlist, v
                 <button
                   type="button"
                   onClick={() => handleAddToCart(variant, 1)}
-                  className="flex w-full flex-1 items-center justify-center rounded-md border border-transparent bg-accent-400 py-3 px-8 text-base font-medium text-white hover:bg-accent-500 focus:bg-accent-500 focus:outline-none focus:ring-2 focus:ring-accent-400 focus:ring-offset-2 focus:ring-offset-gray-50 disabled:bg-gray-400"
+                  className="bg-accent-400 hover:bg-accent-500 focus:bg-accent-500 focus:ring-accent-400 flex w-full flex-1 items-center justify-center rounded-md border border-transparent py-3 px-8 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 disabled:bg-gray-400"
                   disabled={!variant.isOnStock}
                 >
                   {!loading && !added && (
@@ -301,7 +301,7 @@ export default function ProductDetail({ product, onAddToCart, onAddToWishlist, v
                             <Disclosure.Button className="group relative flex w-full items-center justify-between py-6 text-left">
                               <span
                                 className={classNames(
-                                  open ? 'text-accent-400' : 'text-gray-900 dark:text-light-100',
+                                  open ? 'text-accent-400' : 'dark:text-light-100 text-gray-900',
                                   'text-sm font-medium',
                                 )}
                               >
@@ -310,7 +310,7 @@ export default function ProductDetail({ product, onAddToCart, onAddToWishlist, v
                               <span className="ml-6 flex items-center">
                                 {open ? (
                                   <MinusSmIcon
-                                    className="block h-6 w-6 text-accent-400 group-hover:text-accent-500"
+                                    className="text-accent-400 group-hover:text-accent-500 block h-6 w-6"
                                     aria-hidden="true"
                                   />
                                 ) : (
@@ -323,7 +323,7 @@ export default function ProductDetail({ product, onAddToCart, onAddToWishlist, v
                             </Disclosure.Button>
                           </h3>
                           <Disclosure.Panel>
-                            <div className="prose prose-sm py-6 dark:text-light-100">
+                            <div className="dark:text-light-100 prose prose-sm py-6">
                               <ul role="list">
                                 {detail.items?.map((item, index) => (
                                   <li key={index}>{item}</li>

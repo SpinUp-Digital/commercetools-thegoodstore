@@ -54,7 +54,7 @@ const FormCheckbox = ({
   inverseLabel,
 }: Props) => {
   const labelElement = (
-    <label htmlFor={name} className={labelClassNames || 'text-sm font-medium text-gray-900 dark:text-light-100'}>
+    <label htmlFor={name} className={labelClassNames || 'dark:text-light-100 text-sm font-medium text-gray-900'}>
       {label}
     </label>
   );
@@ -66,7 +66,7 @@ const FormCheckbox = ({
         id={name}
         name={name}
         autoComplete={inputAutoComplete}
-        className={inputClassNames || 'h-4 w-4 rounded border-gray-300 text-accent-400 focus:ring-accent-400'}
+        className={inputClassNames || 'text-accent-400 focus:ring-accent-400 h-4 w-4 rounded border-gray-300'}
         onChange={(e: React.FormEvent) => onChange((e.target as HTMLInputElement).checked)}
         checked={checked}
       />

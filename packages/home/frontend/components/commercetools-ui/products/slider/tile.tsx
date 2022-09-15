@@ -6,10 +6,10 @@ import Slider from 'components/commercetools-ui/slider';
 import HeartIcon from 'components/icons/heart';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { useWishlist } from 'frontastic';
-import Image from 'frontastic/lib/image';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import { desktop } from 'helpers/utils/screensizes';
+import { useWishlist } from 'frontastic';
+import Image from 'frontastic/lib/image';
 
 const Tile: React.FC<Product> = ({ variants, name, _url }) => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
@@ -102,14 +102,14 @@ const Tile: React.FC<Product> = ({ variants, name, _url }) => {
         </span>
         <div className="absolute left-0 bottom-0 z-10 w-full text-center">
           {variantWithDiscount && (
-            <span className="ml-[16px] mb-[16px] flex h-[25px] w-[45px] items-center justify-center bg-danger-400 text-xs text-white">
+            <span className="bg-danger-400 ml-[16px] mb-[16px] flex h-[25px] w-[45px] items-center justify-center text-xs text-white">
               {Math.round(discountPercentage)}%
             </span>
           )}
           <NextLink href={_url}>
             <a>
               <button
-                className={`w-full border border-neutral-400 bg-white py-4 text-center text-sm capitalize transition duration-150 ease-out hover:border-dark-400 ${
+                className={`hover:border-dark-400 w-full border border-neutral-400 bg-white py-4 text-center text-sm capitalize transition duration-150 ease-out ${
                   imageHovered ? 'block' : 'hidden'
                 }`}
               >
@@ -139,7 +139,7 @@ const Tile: React.FC<Product> = ({ variants, name, _url }) => {
         </div>
         {variantWithDiscount ? (
           <div className="mt-2 flex items-end gap-2">
-            <span className="block text-xs font-semibold text-danger-400 sm:text-sm">
+            <span className="text-danger-400 block text-xs font-semibold sm:text-sm">
               {CurrencyHelpers.formatForCurrency(discountedPrice)}
             </span>
             <span className="block text-xs text-gray-500 line-through">

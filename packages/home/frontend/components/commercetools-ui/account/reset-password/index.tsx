@@ -81,7 +81,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({ logo, token, accountLink 
           <div className="relative h-12 dark:invert">
             <Image {...logo} alt="Logo" layout="fill" objectFit="contain" />
           </div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-light-100">
+          <h2 className="dark:text-light-100 mt-6 text-center text-3xl font-extrabold text-gray-900">
             {formatAccountMessage({ id: 'password.reset.headline', defaultMessage: 'Reset your password' })}
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
@@ -93,11 +93,11 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({ logo, token, accountLink 
         </div>
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="bg-white py-8 px-4 shadow dark:bg-primary-200 sm:rounded-lg sm:px-10">
+          <div className="dark:bg-primary-200 bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <form className="space-y-6" onSubmit={handleSubmit}>
-              {error && <p className="text-sm text-accent-400">{error}</p>}
+              {error && <p className="text-accent-400 text-sm">{error}</p>}
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-light-100">
+                <label htmlFor="password" className="dark:text-light-100 block text-sm font-medium text-gray-700">
                   {formatAccountMessage({ id: 'password', defaultMessage: 'Password' })}
                 </label>
                 <div className="mt-1">
@@ -107,7 +107,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({ logo, token, accountLink 
                     type="password"
                     autoComplete="current-password"
                     required
-                    className="block w-full appearance-none rounded-md border border-gray-300 py-2 px-3 shadow-sm placeholder:text-gray-400 focus:border-accent-400 focus:outline-none focus:ring-accent-400 sm:text-sm"
+                    className="focus:border-accent-400 focus:ring-accent-400 block w-full appearance-none rounded-md border border-gray-300 py-2 px-3 shadow-sm placeholder:text-gray-400 focus:outline-none sm:text-sm"
                     onChange={handleChange}
                   />
                 </div>
@@ -116,7 +116,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({ logo, token, accountLink 
               <div>
                 <label
                   htmlFor="confirm-password"
-                  className="block text-sm font-medium text-gray-700 dark:text-light-100"
+                  className="dark:text-light-100 block text-sm font-medium text-gray-700"
                 >
                   {formatAccountMessage({ id: 'password.confirm', defaultMessage: 'Confirm Password' })}
                 </label>
@@ -127,7 +127,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({ logo, token, accountLink 
                     type="password"
                     autoComplete="current-password"
                     required
-                    className="block w-full appearance-none rounded-md border border-gray-300 py-2 px-3 shadow-sm placeholder:text-gray-400 focus:border-accent-400 focus:outline-none focus:ring-accent-400 sm:text-sm"
+                    className="focus:border-accent-400 focus:ring-accent-400 block w-full appearance-none rounded-md border border-gray-300 py-2 px-3 shadow-sm placeholder:text-gray-400 focus:outline-none sm:text-sm"
                     onChange={handleChange}
                   />
                 </div>
@@ -135,7 +135,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({ logo, token, accountLink 
               <div>
                 <button
                   type="submit"
-                  className="flex w-full justify-center rounded-md border border-transparent bg-accent-400 py-2 px-4 text-sm font-medium text-white shadow-sm transition-colors duration-200 ease-out hover:bg-accent-500 focus:outline-none focus:ring-2 focus:ring-accent-400 focus:ring-offset-2 disabled:bg-gray-200"
+                  className="bg-accent-400 hover:bg-accent-500 focus:ring-accent-400 flex w-full justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-white shadow-sm transition-colors duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:bg-gray-200"
                   disabled={loading}
                 >
                   {formatAccountMessage({ id: 'submit', defaultMessage: 'Submit' })}

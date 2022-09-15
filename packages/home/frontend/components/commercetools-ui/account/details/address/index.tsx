@@ -33,25 +33,25 @@ const Address: React.FC<AddressProps> = ({ address }) => {
       <div className="flex flex-col gap-4 py-4 sm:py-8 md:flex-row" key={address.addressId}>
         <div className="flex-1">
           <dt className="flex items-center justify-start gap-2">
-            <span className="text-base font-bold text-gray-700 dark:text-light-100">
+            <span className="dark:text-light-100 text-base font-bold text-gray-700">
               {address.firstName} {address.lastName}
             </span>
             {(address.isDefaultBillingAddress || address.isDefaultShippingAddress) && (
-              <StarIcon className="h-4 text-accent-400" />
+              <StarIcon className="text-accent-400 h-4" />
             )}
           </dt>
-          <dt className="mt-2 text-sm dark:text-light-100">
+          <dt className="dark:text-light-100 mt-2 text-sm">
             {address.streetName} {address.streetNumber}
           </dt>
-          <dt className="text-sm dark:text-light-100">
+          <dt className="dark:text-light-100 text-sm">
             {address.postalCode} {address.city}
           </dt>
-          <dt className="mt-2 text-sm text-slate-500 dark:text-light-100">{address.phone}</dt>
+          <dt className="dark:text-light-100 mt-2 text-sm text-slate-500">{address.phone}</dt>
         </div>
         <span className="flex shrink-0 items-start space-x-4 md:ml-4">
           <button
             type="button"
-            className="rounded-md text-sm font-medium text-accent-400 focus:outline-none focus:ring-2 focus:ring-accent-400 focus:ring-offset-2"
+            className="text-accent-400 focus:ring-accent-400 rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2"
             onClick={openUpdateModal}
           >
             {formatMessage({ id: 'update', defaultMessage: 'Update' })}
@@ -61,7 +61,7 @@ const Address: React.FC<AddressProps> = ({ address }) => {
           </span>
           <button
             type="button"
-            className="rounded-md text-sm font-medium text-accent-400 focus:outline-none focus:ring-2 focus:ring-accent-400 focus:ring-offset-2"
+            className="text-accent-400 focus:ring-accent-400 rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2"
             onClick={handleDelete}
           >
             {formatMessage({ id: 'remove', defaultMessage: 'Remove' })}

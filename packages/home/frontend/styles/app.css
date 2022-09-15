@@ -3,11 +3,14 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@import url('./components/slider.css');
+@import url('./components/default-loader.css');
 
 body {
-  color: #2d3748;
-  font-family: 'Inter', sans-serif;
+  @apply font-body;
+  @apply text-neutral-800;
 }
 
 h1,
@@ -16,36 +19,5 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Libre Baskerville', serif;
-}
-
-@layer utilities {
-  .relative-width {
-    width: 100%;
-    left: 0;
-    right: 0;
-    margin-left: 0px;
-    margin-right: 0px;
-  }
-
-  .fixed-screen-width {
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-  }
-
-  .markdown {
-    @apply max-w-none overflow-x-hidden;
-    @apply mx-auto pb-10 text-neutral-800 prose-h1:text-neutral-800 prose-h2:text-neutral-800 prose-h3:text-neutral-800 prose-h4:text-neutral-800 lg:prose-lg;
-    @apply prose-a:text-accent-600 prose-blockquote:text-neutral-700;
-    @apply prose-code:rounded prose-code:bg-neutral-200 prose-code:p-1 prose-code:text-accent-600 prose-pre:bg-neutral-200;
-    @apply prose-img:rounded-sm;
-    @apply prose-strong:font-bold prose-strong:text-neutral-800;
-    @apply prose-ol:list-decimal;
-    @apply prose-ul:list-disc;
-    @apply prose-li:text-neutral-800;
-  }
+  @apply font-heading;
 }

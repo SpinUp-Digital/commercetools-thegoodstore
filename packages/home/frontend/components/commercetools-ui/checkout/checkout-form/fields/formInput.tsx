@@ -61,7 +61,7 @@ const FormInput = ({
   const labelElement = (
     <label
       htmlFor={name}
-      className={labelClassNames ? labelClassNames : 'block text-sm font-medium text-gray-700 dark:text-light-100'}
+      className={labelClassNames ? labelClassNames : 'dark:text-light-100 block text-sm font-medium text-gray-700'}
     >
       {label}
     </label>
@@ -77,7 +77,7 @@ const FormInput = ({
         className={
           inputClassNames
             ? inputClassNames
-            : 'block w-full rounded-md border-gray-300 shadow-sm focus:border-accent-400 focus:ring-accent-400 sm:text-sm'
+            : 'focus:border-accent-400 focus:ring-accent-400 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm'
         }
         onChange={(e: React.FormEvent) =>
           onChange((e.target as HTMLInputElement).name, (e.target as HTMLInputElement).value)

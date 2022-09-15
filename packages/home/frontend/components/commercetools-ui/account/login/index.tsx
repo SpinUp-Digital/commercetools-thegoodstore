@@ -137,14 +137,14 @@ const Login: React.FC<LoginProps> = ({ logo, registerLink, accountLink }) => {
           <div className="relative h-12 dark:invert">
             <Image {...logo} alt="Logo" layout="fill" objectFit="contain" />
           </div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-light-100">
+          <h2 className="dark:text-light-100 mt-6 text-center text-3xl font-extrabold text-gray-900">
             {formatAccountMessage({ id: 'account.sign.in', defaultMessage: 'Sign in to your account' })}
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             {formatAccountMessage({ id: 'account.doNotHave', defaultMessage: "Don't have an account?" })}{' '}
             <ReferenceLink
               target={registerLink}
-              className="font-medium text-accent-400 underline hover:text-accent-500"
+              className="text-accent-400 hover:text-accent-500 font-medium underline"
             >
               {formatAccountMessage({ id: 'account.register.here', defaultMessage: 'Register here' })}
             </ReferenceLink>
@@ -152,12 +152,12 @@ const Login: React.FC<LoginProps> = ({ logo, registerLink, accountLink }) => {
         </div>
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="bg-white py-8 px-4 shadow dark:bg-primary-200 sm:rounded-lg sm:px-10">
+          <div className="dark:bg-primary-200 bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <form className="space-y-6" onSubmit={handleSubmit}>
               {success && <p className="text-sm text-green-600">{success}</p>}
-              {error && <p className="text-sm text-accent-400">{error}</p>}
+              {error && <p className="text-accent-400 text-sm">{error}</p>}
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-light-100">
+                <label htmlFor="email" className="dark:text-light-100 block text-sm font-medium text-gray-700">
                   {formatMessage({ id: 'emailAddress', defaultMessage: 'Email Address' })}
                 </label>
                 <div className="mt-1">
@@ -167,7 +167,7 @@ const Login: React.FC<LoginProps> = ({ logo, registerLink, accountLink }) => {
                     type="email"
                     autoComplete="email"
                     required
-                    className="block w-full appearance-none rounded-md border border-gray-300 py-2 px-3 shadow-sm placeholder:text-gray-400 focus:border-accent-400 focus:outline-none focus:ring-accent-400 sm:text-sm"
+                    className="focus:border-accent-400 focus:ring-accent-400 block w-full appearance-none rounded-md border border-gray-300 py-2 px-3 shadow-sm placeholder:text-gray-400 focus:outline-none sm:text-sm"
                     onChange={handleChange}
                   />
                 </div>
@@ -175,7 +175,7 @@ const Login: React.FC<LoginProps> = ({ logo, registerLink, accountLink }) => {
 
               {!resendPasswordReset && (
                 <div>
-                  <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-light-100">
+                  <label htmlFor="password" className="dark:text-light-100 block text-sm font-medium text-gray-700">
                     {formatAccountMessage({ id: 'password', defaultMessage: 'Password' })}
                   </label>
                   <div className="mt-1">
@@ -185,7 +185,7 @@ const Login: React.FC<LoginProps> = ({ logo, registerLink, accountLink }) => {
                       type="password"
                       autoComplete="current-password"
                       required
-                      className="block w-full appearance-none rounded-md border border-gray-300 py-2 px-3 shadow-sm placeholder:text-gray-400 focus:border-accent-400 focus:outline-none focus:ring-accent-400 sm:text-sm"
+                      className="focus:border-accent-400 focus:ring-accent-400 block w-full appearance-none rounded-md border border-gray-300 py-2 px-3 shadow-sm placeholder:text-gray-400 focus:outline-none sm:text-sm"
                       onChange={handleChange}
                     />
                   </div>
@@ -195,7 +195,7 @@ const Login: React.FC<LoginProps> = ({ logo, registerLink, accountLink }) => {
               {subModal ? (
                 <div>
                   <ArrowLeftIcon
-                    className="w-4 cursor-pointer text-accent-400 hover:text-accent-500"
+                    className="text-accent-400 hover:text-accent-500 w-4 cursor-pointer"
                     onClick={backToLogin}
                   />
                 </div>
@@ -207,17 +207,17 @@ const Login: React.FC<LoginProps> = ({ logo, registerLink, accountLink }) => {
                         id="remember-me"
                         name="rememberMe"
                         type="checkbox"
-                        className="h-4 w-4 rounded border-gray-300 text-accent-400 focus:ring-accent-500"
+                        className="text-accent-400 focus:ring-accent-500 h-4 w-4 rounded border-gray-300"
                         onChange={handleCheckboxChange}
                       />
-                      <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900 dark:text-light-100">
+                      <label htmlFor="remember-me" className="dark:text-light-100 ml-2 block text-sm text-gray-900">
                         {formatMessage({ id: 'rememberMe', defaultMessage: 'Remember me' })}
                       </label>
                     </div>
 
                     <div className="text-sm">
                       <span
-                        className="cursor-pointer font-medium text-accent-400 hover:text-accent-500"
+                        className="text-accent-400 hover:text-accent-500 cursor-pointer font-medium"
                         onClick={toResendPassword}
                       >
                         {formatAccountMessage({ id: 'password.forgot', defaultMessage: 'Forgot your password?' })}
@@ -228,7 +228,7 @@ const Login: React.FC<LoginProps> = ({ logo, registerLink, accountLink }) => {
                   <div className="flex items-center justify-end">
                     <div className="text-sm">
                       <span
-                        className="cursor-pointer font-medium text-accent-400 hover:text-accent-500"
+                        className="text-accent-400 hover:text-accent-500 cursor-pointer font-medium"
                         onClick={toResendVerification}
                       >
                         {formatAccountMessage({
@@ -243,7 +243,7 @@ const Login: React.FC<LoginProps> = ({ logo, registerLink, accountLink }) => {
               <div>
                 <button
                   type="submit"
-                  className="flex w-full justify-center rounded-md border border-transparent bg-accent-400 py-2 px-4 text-sm font-medium text-white shadow-sm transition-colors duration-200 ease-out hover:bg-accent-500 focus:outline-none focus:ring-2 focus:ring-accent-400 focus:ring-offset-2 disabled:bg-gray-200"
+                  className="bg-accent-400 hover:bg-accent-500 focus:ring-accent-400 flex w-full justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-white shadow-sm transition-colors duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:bg-gray-200"
                   disabled={loading}
                 >
                   {resendVerification
