@@ -75,7 +75,7 @@ const AccountButton: React.FC<AccountButtonProps> = ({ accountLink, account }) =
           <div className="flex">
             <ReferenceLink
               target={accountLink}
-              className="text-primary-400 dark:text-light-100 -m-2 p-2 hover:text-primary-500"
+              className="text-primary-400 dark:text-light-100 hover:text-primary-500 -m-2 p-2"
             >
               <span className="sr-only">Account</span>
               <UserIcon className="h-6 w-6" aria-hidden="true" />

@@ -13,25 +13,20 @@ module.exports = {
         body: 'Inter, sans-serif',
         heading: 'Libre Baskerville, serif',
       },
-      fontSize: {
-        12: '12px',
-        14: '14px',
-        16: '16px',
-        18: '18px',
-        20: '20px',
-        24: '24px',
-        28: '28px',
-        32: '32px',
-        36: '36px',
-        48: '48px',
-      },
+      fontSize: Object.fromEntries(
+        Array(100)
+          .fill(0)
+          .map((_, i) => [i + 1, `${i + 1}px`]),
+      ),
       lineHeight: {
         tight: '100%',
         normal: '125%',
         loose: '150%',
       },
       fontWeight: {
+        light: 300,
         regular: 400,
+        medium: 500,
         semibold: 600,
         bold: 700,
       },
@@ -53,33 +48,26 @@ module.exports = {
         200: '0px 4px 4px rgba(25, 40, 81, 0.05)',
         300: '0px 8px 8px rgba(25, 40, 81, 0.05)',
         400: '0px 16px 16px rgba(25, 40, 81, 0.05)',
+        dark: '0px 1px 6px rgba(0, 0, 0, 0.25)',
       },
       colors: {
         primary: {
-          100: '#E4EEF4',
-          300: '#6D9CC8',
-          500: '#355B98',
-          600: '#17317E',
-          700: '#0D1C68',
-          800: '#050B4E',
+          black: '#212121',
         },
-        grey: {
-          100: '#FFFFFF',
-          300: '#D1D1D1',
-          500: '#767676',
-          600: '#484848',
-          700: '#1A1A1A',
-          800: '#000000',
+        secondary: {
+          black: '#494949',
+          grey: '#474747',
+        },
+        accent: {
+          red: '#D14253',
         },
         neutral: {
           100: '#FFFFFF',
-          200: '#F7F9FC',
+          150: '#F7F9FC',
+          200: '#F8F8F8',
           300: '#EFF0F5',
           400: '#DCE0EB',
-          500: '#8F9BB3',
-          600: '#4F5D79',
-          700: '#25304D',
-          800: '#192038',
+          500: '#959595',
         },
         green: {
           100: '#ECF5F3',
@@ -110,16 +98,11 @@ module.exports = {
           700: '#274082',
         },
       },
-      spacing: {
-        4: '4px',
-        8: '8px',
-        16: '16px',
-        24: '24px',
-        32: '32px',
-        48: '48px',
-        64: '64px',
-        80: '80px',
-      },
+      spacing: Object.fromEntries(
+        Array(100)
+          .fill(0)
+          .map((_, i) => [i + 1, `${i + 1}px`]),
+      ),
     },
   },
   plugins: [

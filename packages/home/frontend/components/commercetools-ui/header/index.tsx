@@ -135,7 +135,7 @@ const Header: React.FC<HeaderProps> = ({
                     <ReferenceLink
                       key={id}
                       target={link.reference}
-                      className="text-primary-400 dark:text-light-100 flex items-center text-base font-medium hover:text-primary-500"
+                      className="text-primary-400 dark:text-light-100 hover:text-primary-500 flex items-center text-base font-medium"
                     >
                       <Typography>{link.name}</Typography>
                     </ReferenceLink>
