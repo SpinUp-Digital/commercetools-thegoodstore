@@ -102,14 +102,14 @@ const Tile: React.FC<Product> = ({ variants, name, _url }) => {
         </span>
         <div className="absolute left-0 bottom-0 z-10 w-full text-center">
           {variantWithDiscount && (
-            <span className="ml-[16px] mb-[16px] flex h-[25px] w-[45px] items-center justify-center bg-danger-400 text-xs text-white">
+            <span className="text-xs ml-[16px] mb-[16px] flex h-[25px] w-[45px] items-center justify-center bg-danger-400 text-white">
               {Math.round(discountPercentage)}%
             </span>
           )}
           <NextLink href={_url}>
             <a>
               <button
-                className={`w-full border border-neutral-400 bg-white py-4 text-center text-sm capitalize transition duration-150 ease-out hover:border-dark-400 ${
+                className={`text-sm w-full border border-neutral-400 bg-white py-4 text-center capitalize transition duration-150 ease-out hover:border-dark-400 ${
                   imageHovered ? 'block' : 'hidden'
                 }`}
               >
@@ -121,7 +121,7 @@ const Tile: React.FC<Product> = ({ variants, name, _url }) => {
       </div>
       <div>
         <NextLink href={_url}>
-          <a className="mt-4 block overflow-hidden truncate text-xs font-normal uppercase text-gray-700 sm:text-sm">
+          <a className="text-xs sm:text-sm mt-4 block overflow-hidden truncate font-normal uppercase text-gray-700">
             {name}
           </a>
         </NextLink>
@@ -139,15 +139,15 @@ const Tile: React.FC<Product> = ({ variants, name, _url }) => {
         </div>
         {variantWithDiscount ? (
           <div className="mt-2 flex items-end gap-2">
-            <span className="block text-xs font-semibold text-danger-400 sm:text-sm">
+            <span className="text-xs sm:text-sm block font-semibold text-danger-400">
               {CurrencyHelpers.formatForCurrency(discountedPrice)}
             </span>
-            <span className="block text-xs text-gray-500 line-through">
+            <span className="text-xs block text-gray-500 line-through">
               {CurrencyHelpers.formatForCurrency(variantWithDiscount.price)}
             </span>
           </div>
         ) : (
-          <span className="mt-2 block text-xs font-semibold text-gray-900 sm:text-sm">
+          <span className="text-xs sm:text-sm mt-2 block font-semibold text-gray-900">
             {CurrencyHelpers.formatForCurrency(variants[0].price)}
           </span>
         )}

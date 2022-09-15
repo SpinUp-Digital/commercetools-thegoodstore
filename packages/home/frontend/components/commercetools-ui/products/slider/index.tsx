@@ -34,14 +34,14 @@ export default function ProductSlider({ products, title, subline, ctaLabel, ctaL
       <div>
         <div className="bg-neutral-300 py-4 px-3 sm:px-5 lg:px-24">
           <div className="text-start">
-            <h3 className="text-2xl text-gray-900 md:text-3xl">{title}</h3>
+            <h3 className="text-2xl md:text-3xl text-gray-900">{title}</h3>
             <div className="flex items-center justify-between">
-              <p className="mt-3 text-sm font-light text-gray-900 md:text-base">{subline}</p>
+              <p className="text-sm md:text-base mt-3 font-light text-gray-900">{subline}</p>
               {ctaLabel && ctaLink && (
                 <div className="flex items-center justify-end px-4 sm:px-6 lg:px-0">
                   <ReferenceLink
                     target={ctaLink}
-                    className="hidden text-base text-gray-700 underline underline-offset-2 lg:block"
+                    className="text-base hidden text-gray-700 underline underline-offset-2 lg:block"
                   >
                     {ctaLabel}
                   </ReferenceLink>
@@ -50,7 +50,7 @@ export default function ProductSlider({ products, title, subline, ctaLabel, ctaL
             </div>
             {ctaLabel && ctaLink && (
               <div className="mt-8 lg:hidden">
-                <ReferenceLink target={ctaLink} className="flex w-fit items-center gap-3 text-sm font-bold">
+                <ReferenceLink target={ctaLink} className="text-sm flex w-fit items-center gap-3 font-bold">
                   <span className="block text-dark-300">{ctaLabel}</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

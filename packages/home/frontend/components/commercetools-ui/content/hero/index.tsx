@@ -24,14 +24,14 @@ const Hero: React.FC<HeroProps> = ({ image, title, subtitle, ctaLabel, ctaRefere
         </>
       )}
       <div className="absolute top-1/2 left-1/2 w-fit -translate-x-1/2 -translate-y-1/2 text-center">
-        <h1 className="text-sm text-white lg:text-xl">
+        <h1 className="text-sm lg:text-xl text-white">
           <Typography>{subtitle}</Typography>
         </h1>
-        <h2 className="mt-2 text-2xl text-white md:text-4xl lg:mt-5 lg:text-6xl">
+        <h2 className="text-2xl md:text-4xl lg:text-6xl mt-2 text-white lg:mt-5">
           <Typography>{title}</Typography>
         </h2>
         <ReferenceLink target={ctaReference}>
-          <button className="mt-6 rounded bg-white px-9 py-3 text-xs font-medium duration-150 ease-out hover:bg-slate-100 md:px-12 md:text-base lg:mt-10">
+          <button className="text-xs md:text-base mt-6 rounded bg-white px-9 py-3 font-medium duration-150 ease-out hover:bg-slate-100 md:px-12 lg:mt-10">
             {ctaLabel}
           </button>
         </ReferenceLink>

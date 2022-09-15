@@ -18,17 +18,17 @@ export type ContentSliderProps = {
 const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
   return (
     <div className="w-full px-3 sm:px-5 lg:px-24">
-      {title && <h3 className="bold mb-3 text-3xl">{title}</h3>}
-      {subtitle && <p className="mb-6 text-base font-light">{subtitle}</p>}
+      {title && <h3 className="bold mb-3 font-libre-baskerville text-28">{title}</h3>}
+      {subtitle && <p className="mb-6 font-inter text-16 font-light">{subtitle}</p>}
 
       <div className="overflow-auto scrollbar-hide">
         <div className="flex min-w-min gap-1.5 md:gap-6">
           {slides.map(({ image, title, ctaReference, ctaLabel }, index) => (
             <div key={index} className="w-60 md:w-[400px] lg:grow">
               <Image {...image} className="mb-5 w-full rounded" />
-              <h4 className="mb-3.5 mt-3.5 text-lg font-normal">{title}</h4>
+              <h4 className="mb-3.5 mt-3.5 font-libre-baskerville text-18 font-normal">{title}</h4>
               <ReferenceLink target={ctaReference} className="flex gap-1.5">
-                <p className="text-base font-normal">{ctaLabel}</p>
+                <p className="font-inter text-16 font-normal">{ctaLabel}</p>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

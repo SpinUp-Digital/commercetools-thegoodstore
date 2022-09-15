@@ -6,7 +6,6 @@ import classNames from 'classnames';
 import Typography from 'components/commercetools-ui/typography';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { ReferenceLink } from 'helpers/reference';
-import { useDarkMode } from 'frontastic';
 import { Link } from './index';
 
 interface HeaderMenuProps {
@@ -17,9 +16,6 @@ interface HeaderMenuProps {
 }
 
 const HeaderMenu: React.FC<HeaderMenuProps> = ({ open, setOpen, navigation, links }) => {
-  //Darkmode
-  const { mode } = useDarkMode();
-
   //i18n messages
   const { formatMessage } = useFormat({ name: 'common' });
 
@@ -35,7 +31,7 @@ const HeaderMenu: React.FC<HeaderMenuProps> = ({ open, setOpen, navigation, link
 
   return (
     <Transition.Root show={open} as={Fragment}>
-      <Dialog className={`${mode} fixed inset-0 z-40 flex lg:hidden`} onClose={closeMenu}>
+      <Dialog className={`inset-0 fixed z-40 flex lg:hidden`} onClose={closeMenu}>
         <Transition.Child
           as={Fragment}
           enter="transition-opacity ease-linear duration-300"
@@ -45,7 +41,7 @@ const HeaderMenu: React.FC<HeaderMenuProps> = ({ open, setOpen, navigation, link
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Dialog.Overlay className="fixed inset-0 bg-black opacity-25" />
+          <Dialog.Overlay className="inset-0 bg-black fixed opacity-25" />
         </Transition.Child>
 
         <Transition.Child
@@ -57,11 +53,11 @@ const HeaderMenu: React.FC<HeaderMenuProps> = ({ open, setOpen, navigation, link
           leaveFrom="translate-x-0"
           leaveTo="-translate-x-full"
         >
-          <div className="relative flex w-full max-w-xs flex-col overflow-y-auto bg-white pb-12 shadow-xl dark:bg-primary-200">
-            <div className="flex px-4 pt-5 pb-2">
+          <div className="bg-white pb-12 shadow-xl dark:bg-primary-200 relative flex w-full max-w-xs flex-col overflow-y-auto">
+            <div className="pt-5 pb-2 flex px-4">
               <button
                 type="button"
-                className="-m-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400 dark:text-light-100"
+                className="-m-2 p-2 text-gray-400 dark:text-light-100 inline-flex items-center justify-center rounded-md"
                 onClick={() => setOpen(false)}
               >
                 <span className="sr-only">{formatMessage({ id: 'menu.close', defaultMessage: 'Close menu' })}</span>
@@ -71,7 +67,7 @@ const HeaderMenu: React.FC<HeaderMenuProps> = ({ open, setOpen, navigation, link
 
             {/* Links */}
             <Tab.Group>
-              <div className="mt-2 border-b border-gray-200">
+              <div className="mt-2 border-gray-200 border-b">
                 <Tab.List className="-mb-px flex space-x-8 px-4" onClick={closeMenu}>
                   {navigation.categories.map((category) => (
                     <Tab key={category.name} className={({ selected }) => tabClassName(selected)}>
@@ -82,9 +78,9 @@ const HeaderMenu: React.FC<HeaderMenuProps> = ({ open, setOpen, navigation, link
               </div>
               <Tab.Panels as={Fragment}>
                 {navigation.categories.map((category, categoryIdx) => (
-                  <Tab.Panel key={category.name} className="space-y-12 px-4 pt-10 pb-6">
-                    <div className="grid grid-cols-1 items-start gap-x-6 gap-y-10">
-                      <div className="grid grid-cols-1 gap-x-6 gap-y-10">
+                  <Tab.Panel key={category.name} className="space-y-12 pt-10 pb-6 px-4">
+                    <div className="gap-x-6 gap-y-10 grid grid-cols-1 items-start">
+                      <div className="gap-x-6 gap-y-10 grid grid-cols-1">
                         <div>
                           <p
                             id={`mobile-featured-heading-${categoryIdx}`}
@@ -125,7 +121,7 @@ const HeaderMenu: React.FC<HeaderMenuProps> = ({ open, setOpen, navigation, link
                           </ul>
                         </div>
                       </div>
-                      <div className="grid grid-cols-1 gap-x-6 gap-y-10">
+                      <div className="gap-x-6 gap-y-10 grid grid-cols-1">
                         <div>
                           <p id="mobile-collection-heading" className="font-medium text-gray-900 dark:text-light-100">
                             {formatMessage({ id: 'collection', defaultMessage: 'Collection' })}
@@ -166,12 +162,12 @@ const HeaderMenu: React.FC<HeaderMenuProps> = ({ open, setOpen, navigation, link
               </Tab.Panels>
             </Tab.Group>
 
-            <div className="space-y-6 border-t border-gray-200 py-6 px-4">
+            <div className="space-y-6 border-gray-200 py-6 border-t px-4">
               {links.map((link) => (
                 <div key={link.name} className="flow-root" onClick={closeMenu}>
                   <ReferenceLink
                     target={link.reference}
-                    className="-m-2 block p-2 font-medium text-gray-900 dark:text-light-100"
+                    className="-m-2 p-2 font-medium text-gray-900 dark:text-light-100 block"
                   >
                     <Typography>{link.name}</Typography>
                   </ReferenceLink>
