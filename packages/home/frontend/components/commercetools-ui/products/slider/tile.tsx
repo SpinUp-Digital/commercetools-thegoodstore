@@ -1,8 +1,8 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import classNames from 'classnames';
 import NextLink from 'next/link';
 import { Product } from '@Types/product/Product';
 import { Variant } from '@Types/product/Variant';
+import classNames from 'classnames';
 import Slider from 'components/commercetools-ui/slider';
 import HeartIcon from 'components/icons/heart';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
@@ -39,9 +39,9 @@ const Tile: React.FC<Product> = ({ variants, name, _url }) => {
         : 0,
     [discountedPrice, variantWithDiscount],
   );
-  
+
   //const selectedVariant = useMemo(() => variantWithDiscount ?? variants[0], [variantWithDiscount]);
-  const [selectedVariant, setSelectedVariant] = useState(variants[0])
+  const [selectedVariant, setSelectedVariant] = useState(variants[0]);
 
   const { addToWishlist, removeLineItem, data } = useWishlist();
 
@@ -65,7 +65,7 @@ const Tile: React.FC<Product> = ({ variants, name, _url }) => {
     [addToWishlist, selectedVariant, wishlistLineItem, processing],
   );
 
-  const [imageHovered, setImageHovered] = useState(false);  
+  const [imageHovered, setImageHovered] = useState(false);
 
   return (
     <div className="relative w-full">
@@ -128,18 +128,21 @@ const Tile: React.FC<Product> = ({ variants, name, _url }) => {
           </a>
         </NextLink>
         <div className="mt-2 flex items-center gap-1">
-          {variants            
-            .map((variant) => (
-              <span
-                key={variant.attributes.color}
-                className={classNames(
-                  "block rounded-full cursor-pointer p-[6px]",
-                  selectedVariant.attributes?.color === variant.attributes?.color ? "border border-black" : "border border-gray-300",
-                )}
-                onClick={() => { setSelectedVariant(variant) }}
-                style={{ backgroundColor: variant.attributes.color }}
-              ></span>
-            ))}
+          {variants.map((variant) => (
+            <span
+              key={variant.attributes.color}
+              className={classNames(
+                'block cursor-pointer rounded-full p-[6px]',
+                selectedVariant.attributes?.color === variant.attributes?.color
+                  ? 'border border-black'
+                  : 'border border-gray-300',
+              )}
+              onClick={() => {
+                setSelectedVariant(variant);
+              }}
+              style={{ backgroundColor: variant.attributes.color }}
+            ></span>
+          ))}
         </div>
         {variantWithDiscount ? (
           <div className="mt-2 flex items-end gap-2">

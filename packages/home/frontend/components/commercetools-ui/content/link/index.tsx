@@ -1,6 +1,6 @@
+import React from 'react';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { Reference, ReferenceLink } from 'helpers/reference';
-import React from 'react';
 
 export interface Props {
   target: Reference;

@@ -1,7 +1,7 @@
+import Button from 'components/commercetools-ui/button';
 import Typography from 'components/commercetools-ui/typography';
 import { Reference, ReferenceLink } from 'helpers/reference';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
-import Button from 'components/commercetools-ui/button';
 
 export interface HeroProps {
   image: NextFrontasticImage;

@@ -1,10 +1,10 @@
 import React from 'react';
-import Column, { Link } from './column';
-import Image, { NextFrontasticImage } from 'frontastic/lib/image';
-import { Reference, ReferenceLink } from 'helpers/reference';
-import useMediaQuery from 'helpers/hooks/useMediaQuery';
-import { tablet, mobile } from 'helpers/utils/screensizes';
 import Accordion from 'components/commercetools-ui/accordion';
+import useMediaQuery from 'helpers/hooks/useMediaQuery';
+import { Reference, ReferenceLink } from 'helpers/reference';
+import { tablet, mobile } from 'helpers/utils/screensizes';
+import Image, { NextFrontasticImage } from 'frontastic/lib/image';
+import Column, { Link } from './column';
 
 export interface FooterColumn {
   header?: string;

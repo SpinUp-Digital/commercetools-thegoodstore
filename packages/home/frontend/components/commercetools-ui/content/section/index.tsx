@@ -1,5 +1,5 @@
-import { Reference } from 'helpers/reference';
 import React from 'react';
+import { Reference } from 'helpers/reference';
 import Link from '../link';
 
 export interface Props {
