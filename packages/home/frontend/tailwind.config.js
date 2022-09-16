@@ -99,7 +99,7 @@ module.exports = {
         },
       },
       spacing: Object.fromEntries(
-        Array(100)
+        Array(200)
           .fill(0)
           .map((_, i) => [i + 1, `${i + 1}px`]),
       ),
