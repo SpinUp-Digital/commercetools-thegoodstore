@@ -10,7 +10,6 @@
 
 body {
   @apply font-body;
-  @apply leading-normal;
   @apply text-primary-black;
 }
 

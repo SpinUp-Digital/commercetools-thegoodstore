@@ -1,4 +1,4 @@
-import { Reference, ReferenceLink } from 'helpers/reference';
+import { Reference } from 'helpers/reference';
 import React from 'react';
 import Link from '../link';
 
@@ -18,13 +18,13 @@ const Section: React.FC<React.PropsWithChildren<Props>> = ({ children, title, su
           <p className="text-12 font-thin leading-loose md:text-14 lg:text-16">{subtitle}</p>
           <div className="hidden lg:block">
             <Link target={ctaTarget} underlined>
-              <span>{ctaText}</span>
+              <span className="leading-loose">{ctaText}</span>
             </Link>
           </div>
         </div>
         <div className="mt-20 block md:mt-16 lg:hidden">
           <Link target={ctaTarget} withArrow>
-            <span className="font-semibold text-secondary-black">{ctaText}</span>
+            <span className="font-semibold leading-[24px] text-secondary-black">{ctaText}</span>
           </Link>
         </div>
       </div>
