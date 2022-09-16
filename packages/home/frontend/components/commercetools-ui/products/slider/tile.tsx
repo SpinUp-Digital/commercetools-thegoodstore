@@ -1,4 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
+import classNames from 'classnames';
 import NextLink from 'next/link';
 import { Product } from '@Types/product/Product';
 import { Variant } from '@Types/product/Variant';
@@ -131,8 +132,11 @@ const Tile: React.FC<Product> = ({ variants, name, _url }) => {
             .map((variant) => (
               <span
                 key={variant.attributes.color}
-                className="block rounded-full border cursor-pointer border-gray-300 p-[6px]"
-                onMouseOver={() =>{ setSelectedVariant(variant) }}
+                className={classNames(
+                  "block rounded-full cursor-pointer p-[6px]",
+                  selectedVariant.attributes?.color === variant.attributes?.color ? "border border-black" : "border border-gray-300",
+                )}
+                onClick={() => { setSelectedVariant(variant) }}
                 style={{ backgroundColor: variant.attributes.color }}
               ></span>
             ))}
