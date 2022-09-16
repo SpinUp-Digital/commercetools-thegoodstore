@@ -127,7 +127,7 @@ const Tile: React.FC<Product> = ({ variants, name, _url }) => {
         </NextLink>
         <div className="mt-2 flex items-center gap-1">
           {variants
-            ?.map((variant) => variant.attributes?.colorFreeDefinition)
+            ?.map((variant) => variant.attributes?.color)
             .filter((variant, index, arr) => variant && arr.indexOf(variant) === index)
             .map((color) => (
               <span
