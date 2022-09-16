@@ -38,8 +38,9 @@ const Tile: React.FC<Product> = ({ variants, name, _url }) => {
         : 0,
     [discountedPrice, variantWithDiscount],
   );
-
-  const selectedVariant = useMemo(() => variantWithDiscount ?? variants[0], [variantWithDiscount]);
+  
+  //const selectedVariant = useMemo(() => variantWithDiscount ?? variants[0], [variantWithDiscount]);
+  const [selectedVariant, setSelectedVariant] = useState(variants[0])
 
   const { addToWishlist, removeLineItem, data } = useWishlist();
 
@@ -63,7 +64,7 @@ const Tile: React.FC<Product> = ({ variants, name, _url }) => {
     [addToWishlist, selectedVariant, wishlistLineItem, processing],
   );
 
-  const [imageHovered, setImageHovered] = useState(false);
+  const [imageHovered, setImageHovered] = useState(false);  
 
   return (
     <div className="relative w-full">
@@ -126,14 +127,13 @@ const Tile: React.FC<Product> = ({ variants, name, _url }) => {
           </a>
         </NextLink>
         <div className="mt-2 flex items-center gap-1">
-          {variants
-            ?.map((variant) => variant.attributes?.color)
-            .filter((variant, index, arr) => variant && arr.indexOf(variant) === index)
-            .map((color) => (
+          {variants            
+            .map((variant) => (
               <span
-                key={color}
-                className="block rounded-full border border-gray-300 p-[6px]"
-                style={{ backgroundColor: color }}
+                key={variant.attributes.color}
+                className="block rounded-full border cursor-pointer border-gray-300 p-[6px]"
+                onMouseOver={() =>{ setSelectedVariant(variant) }}
+                style={{ backgroundColor: variant.attributes.color }}
               ></span>
             ))}
         </div>
