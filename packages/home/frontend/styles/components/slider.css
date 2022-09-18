@@ -44,7 +44,7 @@
 .slider_arrow {
   border: solid #494949;
   border-width: 0 2px 2px 0;
-  padding: 12px;
+  padding: 10px;
   width: 0;
   height: 0;
   position: absolute;
@@ -54,12 +54,12 @@
 }
 
 .slider_arrow_prev {
-  left: -35px;
+  left: -40px;
   transform: translateY(-50%) rotateZ(135deg);
 }
 
 .slider_arrow_next {
-  right: -35px;
+  right: -40px;
   transform: translateY(-50%) rotateZ(-45deg);
 }
 
