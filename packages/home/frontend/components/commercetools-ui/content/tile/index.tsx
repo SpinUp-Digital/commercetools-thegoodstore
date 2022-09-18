@@ -34,7 +34,9 @@ const Tile: React.FC<TileProps> = ({ image, title, subtitle, ctaLabel, ctaRefere
         </h2>
         <ReferenceLink target={ctaReference}>
           <Button className="mt-18 md:mt-24">
-            <span className="text-12">{ctaLabel}</span>
+            <span className="text-12">
+              <Typography>{ctaLabel}</Typography>
+            </span>
           </Button>
         </ReferenceLink>
       </div>

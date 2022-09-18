@@ -7,7 +7,7 @@ export interface Props {
 
 const TilesGroup: React.FC<Props> = ({ tiles }) => {
   return (
-    <div className="flex flex-col bg-neutral-200 py-12 md:flex-row md:gap-16 md:py-24 lg:px-96">
+    <div className="flex flex-col bg-neutral-200 py-12 md:flex-row md:gap-16 lg:py-24 lg:px-96">
       {tiles.map((tile, index) => (
         <Tile key={index} {...tile} />
       ))}

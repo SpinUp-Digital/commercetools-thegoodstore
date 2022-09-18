@@ -1,6 +1,10 @@
 import React from 'react';
 import { Reference, ReferenceLink } from 'helpers/reference';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
+import Slider from '../slider';
+import Typography from '../typography';
+import useMediaQuery from 'helpers/hooks/useMediaQuery';
+import { desktop, tablet } from 'helpers/utils/screensizes';
 
 export interface Props {
   tiles: Array<{
@@ -11,21 +15,29 @@ export interface Props {
 }
 
 const CategorySlider: React.FC<Props> = ({ tiles = [] }) => {
+  const [isTabletSize] = useMediaQuery(tablet);
+  const [isDesktopSize] = useMediaQuery(desktop);
+
   return (
-    <div className="flex w-full snap-x snap-mandatory gap-1 overflow-x-auto scrollbar-hide lg:gap-3">
-      {tiles.map((tile, index) => (
-        <div
-          key={index}
-          className={`w-[40%] shrink-0 snap-center ${
-            [1, tiles.length - 2].includes(index) ? 'snap-normal' : 'snap-always'
-          } lg:shrink lg:grow`}
-        >
-          <ReferenceLink target={tile.target} className="block">
-            <Image {...tile.image} alt={tile.title} className="lg:w-full" />
-            <span className="block border-slate-300 py-2 text-center text-xs md:text-base lg:border">{tile.title}</span>
+    <div className="bg-neutral-200 py-12 lg:px-96 lg:py-16">
+      <Slider
+        slidesPerView={isDesktopSize ? 4 : 2.3}
+        dots={false}
+        spaceBetween={isDesktopSize ? 16 : isTabletSize ? 8 : 4}
+        arrows={isDesktopSize}
+        loop
+      >
+        {tiles.map((tile, index) => (
+          <ReferenceLink key={index} target={tile.target} className="block">
+            <div className="relative h-[160px] sm:h-[256px] md:h-[356px]">
+              <Image {...tile.image} alt={tile.title} layout="fill" objectFit="cover" />
+            </div>
+            <h6 className="mt-5 block rounded-b-sm border-neutral-300 py-5 text-center text-12 leading-normal md:text-16 lg:mt-0 lg:border lg:bg-white lg:py-10">
+              <Typography>{tile.title}</Typography>
+            </h6>
           </ReferenceLink>
-        </div>
-      ))}
+        ))}
+      </Slider>
     </div>
   );
 };
