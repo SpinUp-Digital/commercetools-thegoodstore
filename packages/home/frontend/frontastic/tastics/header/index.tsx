@@ -2,6 +2,7 @@ import React from 'react';
 import Header from 'components/commercetools-ui/header';
 import { calculateCartCount } from 'helpers/utils/calculateCartCount';
 import { useCart, useWishlist, useAccount } from 'frontastic/provider';
+import { links, linksMobile, market, tileButton, tileHeader, tileImage } from './constant';
 
 const HeaderTastic = ({ data }) => {
   const { data: cart } = useCart();
@@ -11,7 +12,9 @@ const HeaderTastic = ({ data }) => {
   return (
     <Header
       tagline={data.tagline}
-      links={data.links}
+      links={links}
+      linksMobile={linksMobile}
+      markets={market}
       cartItemCount={calculateCartCount(cart?.lineItems) || 0}
       wishlistItemCount={wishlist?.lineItems?.length || 0}
       logo={data.logo}
@@ -20,6 +23,9 @@ const HeaderTastic = ({ data }) => {
       accountLink={data.accountLink}
       wishlistLink={data.wishlistLink}
       cartLink={data.cartLink}
+      navTileImage={tileImage}
+      navTileHeader={tileHeader}
+      navTileButton={tileButton}
     />
   );
 };
