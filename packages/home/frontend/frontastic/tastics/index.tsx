@@ -33,6 +33,7 @@ import CategorySliderTastic from './category-slider';
 import HeroTastic from './content/hero';
 import AnnouncementBarTastic from './bar/announcment';
 import ContentSliderTastic from './content-slider';
+import TilesGroupTastic from './content/tiles-group';
 
 export const tastics = {
   // Doc Examples
@@ -69,5 +70,6 @@ export const tastics = {
   'commercetools/ui/category-slider': CategorySliderTastic,
   'commercetools/ui/content/announcement-bar': AnnouncementBarTastic,
   'commercetools/ui/content/content-slider': ContentSliderTastic,
+  'commercetools/ui/content/tiles-group': TilesGroupTastic,
   default: NotFound,
 };

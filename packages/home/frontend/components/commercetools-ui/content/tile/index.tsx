@@ -1,6 +1,8 @@
 import Typography from 'components/commercetools-ui/typography';
 import { Reference, ReferenceLink } from 'helpers/reference';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
+import Button from 'components/commercetools-ui/button';
+import useClassNames from 'helpers/hooks/useClassNames';
 
 export interface TileProps {
   image?: NextFrontasticImage;
@@ -12,20 +14,28 @@ export interface TileProps {
 }
 
 const Tile: React.FC<TileProps> = ({ image, title, subtitle, ctaLabel, ctaReference, roundedBorders = true }) => {
+  const { resolveClassNames } = useClassNames();
+
   return (
     <div className="relative w-full">
-      {image?.media && <Image {...image} alt={title} className={`brightness-75 ${roundedBorders ? 'rounded' : ''}`} />}
-      <div className="absolute top-1/2 left-1/2 w-fit -translate-x-1/2 -translate-y-1/2 text-center">
-        <h1 className="text-sm text-white lg:text-xl">
+      {image && (
+        <Image
+          {...image}
+          alt={title}
+          className={`brightness-75 ${resolveClassNames([roundedBorders && 'lg:rounded-md'])}`}
+        />
+      )}
+      <div className="absolute top-1/2 left-0 w-full -translate-y-1/2 text-center">
+        <p className="text-14 leading-loose text-white md:text-16 lg:font-medium">
           <Typography>{subtitle}</Typography>
-        </h1>
-        <h2 className="mt-2 text-2xl text-white md:text-4xl lg:mt-5 lg:text-6xl">
+        </p>
+        <h2 className="mt-24 text-22 leading-normal text-white lg:text-28 lg:font-bold">
           <Typography>{title}</Typography>
         </h2>
         <ReferenceLink target={ctaReference}>
-          <button className="mt-6 rounded bg-white px-9 py-3 text-xs font-medium duration-150 ease-out hover:bg-slate-100 md:px-12 md:text-base lg:mt-10">
-            {ctaLabel}
-          </button>
+          <Button className="mt-18 md:mt-24">
+            <span className="text-12">{ctaLabel}</span>
+          </Button>
         </ReferenceLink>
       </div>
     </div>
