@@ -40,8 +40,7 @@ const Tile: React.FC<Product> = ({ variants, name, _url }) => {
     [discountedPrice, variantWithDiscount],
   );
 
-  //const selectedVariant = useMemo(() => variantWithDiscount ?? variants[0], [variantWithDiscount]);
-  const [selectedVariant, setSelectedVariant] = useState(variants[0]);
+  const [selectedVariant, setSelectedVariant] = useState(() => variantWithDiscount ?? variants[0]);
 
   const { addToWishlist, removeLineItem, data } = useWishlist();
 
@@ -51,19 +50,16 @@ const Tile: React.FC<Product> = ({ variants, name, _url }) => {
     return data?.lineItems?.find((lineItem) => variants.find((variant) => variant.sku === lineItem.variant?.sku));
   }, [data, variants]);
 
-  const handleAddToWishlist = useCallback(
-    async (e: React.MouseEvent) => {
-      if (processing) return;
+  const handleAddToWishlist = useCallback(async () => {
+    if (processing) return;
 
-      setProcessing(true);
+    setProcessing(true);
 
-      if (wishlistLineItem) await removeLineItem(wishlistLineItem.lineItemId);
-      else await addToWishlist(selectedVariant.sku, 1);
+    if (wishlistLineItem) await removeLineItem(wishlistLineItem.lineItemId);
+    else await addToWishlist(selectedVariant.sku, 1);
 
-      setProcessing(false);
-    },
-    [addToWishlist, selectedVariant, wishlistLineItem, processing],
-  );
+    setProcessing(false);
+  }, [addToWishlist, selectedVariant, wishlistLineItem, processing]);
 
   const [imageHovered, setImageHovered] = useState(false);
 
@@ -90,28 +86,28 @@ const Tile: React.FC<Product> = ({ variants, name, _url }) => {
               key={index}
               src={image}
               alt={name}
-              className="aspect-[3/4] w-full rounded-sm group-hover:opacity-75"
+              className="aspect-[3/4] w-full rounded-sm bg-white p-8 group-hover:opacity-75 md:p-16"
             />
           ))}
         </Slider>
         <span onClick={handleAddToWishlist}>
           <HeartIcon
             className="absolute right-[16px] top-[16px] z-10 h-[6.5%] w-[8%] cursor-pointer"
-            pathClassName={`transition duration-150 ease-out hover:fill-accent-400 hover:stroke-accent-400 ${
-              wishlistLineItem ? 'fill-accent-400 stroke-accent-400' : ''
+            pathClassName={`transition duration-150 ease-out hover:fill-accent-red hover:stroke-accent-red ${
+              wishlistLineItem ? 'fill-accent-red stroke-accent-red' : ''
             }`}
           />
         </span>
         <div className="absolute left-0 bottom-0 z-10 w-full text-center">
           {variantWithDiscount && (
-            <span className="bg-danger-400 ml-[16px] mb-[16px] flex h-[25px] w-[45px] items-center justify-center text-xs text-white">
+            <span className="ml-[16px] mb-[16px] flex h-[25px] w-[45px] items-center justify-center bg-accent-red text-12 text-neutral-100">
               {Math.round(discountPercentage)}%
             </span>
           )}
           <NextLink href={_url}>
             <a>
               <button
-                className={`hover:border-dark-400 w-full border border-neutral-400 bg-white py-4 text-center text-sm capitalize transition duration-150 ease-out ${
+                className={`w-full border border-neutral-400 bg-white py-16 text-center text-12 capitalize leading-[16px] transition duration-150 ease-out hover:border-primary-black ${
                   imageHovered ? 'block' : 'hidden'
                 }`}
               >
@@ -123,38 +119,33 @@ const Tile: React.FC<Product> = ({ variants, name, _url }) => {
       </div>
       <div>
         <NextLink href={_url}>
-          <a className="mt-4 block overflow-hidden truncate text-xs font-normal uppercase text-gray-700 sm:text-sm">
+          <a className="mt-4 block max-w-[80%] overflow-hidden text-ellipsis whitespace-pre text-12 uppercase leading-loose md:mt-12 md:text-14">
             {name}
           </a>
         </NextLink>
-        <div className="mt-2 flex items-center gap-1">
+        <div className="my-8 flex items-center gap-4 md:my-12">
           {variants.map((variant) => (
             <span
               key={variant.attributes.color}
-              className={classNames(
-                'block cursor-pointer rounded-full p-[6px]',
-                selectedVariant.attributes?.color === variant.attributes?.color
-                  ? 'border border-black'
-                  : 'border border-gray-300',
-              )}
-              onClick={() => {
-                setSelectedVariant(variant);
-              }}
+              className={`block cursor-pointer rounded-full border p-[6px] ${
+                variant.sku !== selectedVariant.sku ? 'border-neutral-300' : 'border-secondary-grey'
+              }`}
               style={{ backgroundColor: variant.attributes.color }}
+              onClick={() => setSelectedVariant(variant)}
             ></span>
           ))}
         </div>
         {variantWithDiscount ? (
-          <div className="mt-2 flex items-end gap-2">
-            <span className="text-danger-400 block text-xs font-semibold sm:text-sm">
+          <div className="flex items-center gap-8">
+            <span className="block text-14 font-semibold leading-loose text-accent-red">
               {CurrencyHelpers.formatForCurrency(discountedPrice)}
             </span>
-            <span className="block text-xs text-gray-500 line-through">
+            <span className="block text-12 leading-loose text-gray-500 line-through">
               {CurrencyHelpers.formatForCurrency(variantWithDiscount.price)}
             </span>
           </div>
         ) : (
-          <span className="mt-2 block text-xs font-semibold text-gray-900 sm:text-sm">
+          <span className="block text-12 font-semibold leading-loose md:text-14">
             {CurrencyHelpers.formatForCurrency(variants[0].price)}
           </span>
         )}
