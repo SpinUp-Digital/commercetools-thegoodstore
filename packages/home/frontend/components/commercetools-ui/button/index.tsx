@@ -23,7 +23,7 @@ const Button: React.FC<React.PropsWithChildren<Props>> = ({
   return (
     <button
       {...props}
-      className={`${className} ${colorSchemes[colorScheme]} rounded-${rounded} py-8 px-24 text-12 font-medium leading-[16px] md:text-16 lg:py-12 lg:px-48`}
+      className={`${className} ${colorSchemes[colorScheme]} rounded-${rounded} py-8 px-24 font-medium leading-[16px]`}
     >
       {children}
     </button>
