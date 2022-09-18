@@ -32,10 +32,10 @@ const AnnouncementBar: React.FC<Props> = ({ text, highlightedSubstring, target }
   }, [processHighlighting]);
 
   return (
-    <div className="bg-dark-400 w-full p-3">
-      <p className="text-center text-xs text-white">
+    <div className="w-full bg-primary-dark py-16">
+      <p className="letter-[1%] text-center text-12 leading-loose text-white">
         {previewText.prefix}
-        <ReferenceLink target={target} className="underline underline-offset-1">
+        <ReferenceLink target={target} className="underline underline-offset-2">
           {previewText.middle}
         </ReferenceLink>
         {previewText.suffix}
