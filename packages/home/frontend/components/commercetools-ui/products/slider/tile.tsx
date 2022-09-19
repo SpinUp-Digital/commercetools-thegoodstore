@@ -73,26 +73,31 @@ const Tile: React.FC<Product> = ({ variants, name, _url }) => {
         <Slider
           key={`${isDesktopSize}`}
           slidesPerView={1}
-          arrows={imageHovered && isDesktopSize}
+          arrows={imageHovered && isDesktopSize && selectedVariant.images.length > 1}
           spaceBetween={0}
           prevButtonStyles={{ left: 25, padding: '7px', transform: 'translateY(-50%) rotateZ(135deg)' }}
           nextButtonStyles={{ right: 25, padding: '7px', transform: 'translateY(-50%) rotateZ(-45deg)' }}
           dots={false}
           loop
-          allowTouchMove={!isDesktopSize}
+          allowTouchMove={!isDesktopSize && selectedVariant.images.length > 1}
         >
           {selectedVariant.images.map((image, index) => (
-            <Image
-              key={index}
-              src={image}
-              alt={name}
-              className="aspect-[3/4] w-full rounded-sm bg-white p-8 group-hover:opacity-75 md:p-16"
-            />
+            <div key={index} className="relative bg-white p-8">
+              <NextLink href={_url}>
+                <a>
+                  <Image
+                    src={image}
+                    alt={name}
+                    className="h-[175px] w-full rounded-sm object-contain object-center group-hover:opacity-75 md:h-[360px] md:p-16"
+                  />
+                </a>
+              </NextLink>
+            </div>
           ))}
         </Slider>
         <span onClick={handleAddToWishlist}>
           <HeartIcon
-            className="absolute right-[16px] top-[16px] z-10 h-[6.5%] w-[8%] cursor-pointer"
+            className="absolute right-16 top-16 z-10 h-[6.5%] w-[8%] cursor-pointer"
             pathClassName={`transition duration-150 ease-out hover:fill-accent-red hover:stroke-accent-red ${
               wishlistLineItem ? 'fill-accent-red stroke-accent-red' : ''
             }`}
@@ -100,21 +105,17 @@ const Tile: React.FC<Product> = ({ variants, name, _url }) => {
         </span>
         <div className="absolute left-0 bottom-0 z-10 w-full text-center">
           {variantWithDiscount && (
-            <span className="ml-[16px] mb-[16px] flex h-[25px] w-[45px] items-center justify-center bg-accent-red text-12 text-neutral-100">
+            <span className="ml-8 mb-8 flex h-[25px] w-[45px] items-center justify-center bg-accent-red text-12 text-neutral-100">
               {Math.round(discountPercentage)}%
             </span>
           )}
-          <NextLink href={_url}>
-            <a>
-              <button
-                className={`w-full border border-neutral-400 bg-white py-16 text-center text-12 capitalize leading-[16px] transition duration-150 ease-out hover:border-primary-black ${
-                  imageHovered ? 'block' : 'hidden'
-                }`}
-              >
-                {formatProductMessage({ id: 'quick.view', defaultMessage: 'Quick view' })}
-              </button>
-            </a>
-          </NextLink>
+          <button
+            className={`w-full border border-neutral-400 bg-white py-16 text-center text-12 capitalize leading-[16px] transition duration-150 ease-out hover:border-primary-black ${
+              imageHovered ? 'block' : 'hidden'
+            }`}
+          >
+            {formatProductMessage({ id: 'quick.view', defaultMessage: 'Quick view' })}
+          </button>
         </div>
       </div>
       <div>
@@ -128,27 +129,31 @@ const Tile: React.FC<Product> = ({ variants, name, _url }) => {
             <span
               key={variant.attributes.color}
               className={`block cursor-pointer rounded-full border p-[6px] ${
-                variant.sku !== selectedVariant.sku ? 'border-neutral-300' : 'border-secondary-grey'
+                variant.sku !== selectedVariant.sku ? 'border-neutral-300' : 'border-neutral-500'
               }`}
-              style={{ backgroundColor: variant.attributes.color }}
+              style={{ backgroundColor: variant.attributes.color || variant.attributes.finish }}
               onClick={() => setSelectedVariant(variant)}
             ></span>
           ))}
         </div>
-        {variantWithDiscount ? (
-          <div className="flex items-center gap-8">
-            <span className="block text-14 font-semibold leading-loose text-accent-red">
-              {CurrencyHelpers.formatForCurrency(discountedPrice)}
-            </span>
-            <span className="block text-12 leading-loose text-gray-500 line-through">
-              {CurrencyHelpers.formatForCurrency(variantWithDiscount.price)}
-            </span>
-          </div>
-        ) : (
-          <span className="block text-12 font-semibold leading-loose md:text-14">
-            {CurrencyHelpers.formatForCurrency(variants[0].price)}
-          </span>
-        )}
+        <NextLink href={_url}>
+          <a>
+            {variantWithDiscount ? (
+              <div className="flex items-center gap-8">
+                <span className="block text-14 font-semibold leading-loose text-accent-red">
+                  {CurrencyHelpers.formatForCurrency(discountedPrice)}
+                </span>
+                <span className="block text-12 leading-loose text-gray-500 line-through">
+                  {CurrencyHelpers.formatForCurrency(variantWithDiscount.price)}
+                </span>
+              </div>
+            ) : (
+              <span className="block text-12 font-semibold leading-loose md:text-14">
+                {CurrencyHelpers.formatForCurrency(variants[0].price)}
+              </span>
+            )}
+          </a>
+        </NextLink>
       </div>
     </div>
   );

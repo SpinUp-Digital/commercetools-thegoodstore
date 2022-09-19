@@ -21,11 +21,11 @@ export default function ProductSlider({ products, title, subline, ctaLabel, ctaL
   const [isDesktopSize] = useMediaQuery(desktop);
 
   const sliderFixedMood: SliderProps = {
-    slidesPerView: isTabletSize ? 4 : 2.3,
+    slidesPerView: isDesktopSize ? 4 : 2.3,
     arrows: isDesktopSize,
     dots: false,
     spaceBetween: isMobileSize ? 25 : 8,
-    slidesPerGroup: isTabletSize ? 4 : 2,
+    slidesPerGroup: isDesktopSize ? 4 : 2,
   };
 
   const sliderConfiguration: SliderProps = sliderFixedMood;
