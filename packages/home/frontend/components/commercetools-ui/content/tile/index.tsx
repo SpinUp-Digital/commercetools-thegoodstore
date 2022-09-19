@@ -26,10 +26,10 @@ const Tile: React.FC<TileProps> = ({ image, title, subtitle, ctaLabel, ctaRefere
         />
       )}
       <div className="absolute top-1/2 left-0 w-full -translate-y-1/2 text-center">
-        <p className="text-14 leading-loose text-white md:text-16 lg:font-medium">
+        <p className="text-shadow text-14 leading-loose text-white md:text-16 lg:font-medium">
           <Typography>{subtitle}</Typography>
         </p>
-        <h2 className="mt-24 text-22 leading-normal text-white lg:text-28 lg:font-bold">
+        <h2 className="text-shadow mt-24 text-22 leading-normal text-white lg:text-28 lg:font-bold">
           <Typography>{title}</Typography>
         </h2>
         <ReferenceLink target={ctaReference}>

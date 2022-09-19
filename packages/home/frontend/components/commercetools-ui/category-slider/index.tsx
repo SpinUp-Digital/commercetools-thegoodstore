@@ -30,7 +30,7 @@ const CategorySlider: React.FC<Props> = ({ tiles = [] }) => {
         {tiles.map((tile, index) => (
           <ReferenceLink key={index} target={tile.target} className="block">
             <div className="relative h-[160px] sm:h-[256px] md:h-[356px]">
-              <Image {...tile.image} alt={tile.title} layout="fill" objectFit="cover" />
+              <Image {...tile.image} alt={tile.title} layout="fill" objectFit="cover" className="brightness-75" />
             </div>
             <h6 className="mt-5 block rounded-b-sm border-neutral-300 py-5 text-center text-12 leading-normal md:text-16 lg:mt-0 lg:border lg:bg-white lg:py-10">
               <Typography>{tile.title}</Typography>
