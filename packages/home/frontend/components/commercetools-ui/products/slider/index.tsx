@@ -2,13 +2,10 @@ import React from 'react';
 import { Product } from '@Types/product/Product';
 import Slider, { SliderProps } from 'components/commercetools-ui/slider';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
-import { Reference } from 'helpers/reference';
-import { mobile, desktop } from 'helpers/utils/screensizes';
+import { ReferenceLink, Reference } from 'helpers/reference';
+import { mobile, tablet, desktop } from 'helpers/utils/screensizes';
 import Tile from './tile';
-import Subtitle from 'components/commercetools-ui/subtitle';
-import Title from 'components/commercetools-ui/title';
-import Link from 'components/commercetools-ui/content/link';
-import Wrapper from 'components/commercetools-ui/content/wrapper';
+import Section from 'components/commercetools-ui/content/section';
 
 export interface Props {
   products: Product[];
@@ -20,6 +17,7 @@ export interface Props {
 
 export default function ProductSlider({ products, title, subline, ctaLabel, ctaLink }: Props) {
   const [isMobileSize] = useMediaQuery(mobile);
+  const [isTabletSize] = useMediaQuery(tablet);
   const [isDesktopSize] = useMediaQuery(desktop);
 
   const sliderFixedMood: SliderProps = {
@@ -33,24 +31,8 @@ export default function ProductSlider({ products, title, subline, ctaLabel, ctaL
   const sliderConfiguration: SliderProps = sliderFixedMood;
 
   return (
-    <Wrapper background="neutral" phonePadding>
-      <div className="text-start">
-        <Title title={title} />
-        <div className="flex items-center justify-between md:mt-16 lg:mt-14">
-          <Subtitle subtitle={subline} />
-          <div className="hidden lg:block">
-            <Link target={ctaLink} underlined>
-              <span className="leading-loose">{ctaLabel}</span>
-            </Link>
-          </div>
-        </div>
-        <div className="block md:mt-16 lg:hidden">
-          <Link target={ctaLink} withArrow>
-            <span className="font-semibold leading-[24px] text-secondary-black">{ctaLabel}</span>
-          </Link>
-        </div>
-      </div>
-      <div className="mt-20 md:mt-24 lg:mt-20">
+    <div className="bg-neutral-200 px-8 py-24 md:px-24 md:pb-52 lg:px-96 lg:pt-32">
+      <Section title={title} subtitle={subline} ctaTarget={ctaLink} ctaText={ctaLabel}>
         <div className="relative mt-6 w-full">
           <Slider
             {...sliderConfiguration}
@@ -62,7 +44,7 @@ export default function ProductSlider({ products, title, subline, ctaLabel, ctaL
             ))}
           </Slider>
         </div>
-      </div>
-    </Wrapper>
+      </Section>
+    </div>
   );
 }
