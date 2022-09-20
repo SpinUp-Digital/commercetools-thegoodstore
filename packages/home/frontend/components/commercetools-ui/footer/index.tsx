@@ -2,7 +2,7 @@ import React from 'react';
 import Accordion from 'components/commercetools-ui/accordion';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import { Reference, ReferenceLink } from 'helpers/reference';
-import { tablet, mobile } from 'helpers/utils/screensizes';
+import { mobile } from 'helpers/utils/screensizes';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
 import Column, { Link } from './column';
 
@@ -27,14 +27,14 @@ const Footer: React.FC<Props> = ({ columns, logo, socialMedia }) => {
   return (
     <footer aria-labelledby="footer-heading" className="w-full bg-primary-black">
       {isBiggerThanMobileSize ? (
-        <div className="w-full md:px-25 md:py-58 lg:px-175 lg:py-90 ">
-          <div className="grid md:grid-cols-4 md:gap-80 ">
+        <div className="w-full sm:px-25 sm:py-58 lg:px-175 lg:py-90 ">
+          <div className="grid sm:grid-cols-4 sm:gap-80 ">
             {columns?.map((column, index) => (
               <div key={index} className="lg:justify-left">
                 <Column
                   header={column.header}
                   links={column.links}
-                  className="flex flex-col md:items-center lg:items-start"
+                  className="flex flex-col sm:items-center lg:items-start"
                 />
               </div>
             ))}
@@ -57,7 +57,7 @@ const Footer: React.FC<Props> = ({ columns, logo, socialMedia }) => {
           ))}
         </ul>
       )}
-      <div className="lg:items-auto flex flex-col-reverse items-center gap-y-32 md:border-t md:border-secondary-grey lg:flex-row lg:flex-row lg:justify-between lg:gap-y-0 lg:px-165 lg:py-40">
+      <div className="lg:items-auto flex flex-col-reverse items-center gap-y-32 sm:border-t sm:border-secondary-grey lg:flex-row lg:flex-row lg:justify-between lg:gap-y-0 lg:px-165 lg:py-40">
         {logo && (
           <div className="mb-32 w-160 self-center lg:mb-0">
             <Image {...logo} alt="logo" />

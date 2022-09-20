@@ -23,10 +23,10 @@ const AccordionBtn: React.FC<AccordionProps> = ({
       <Disclosure>
         {({ open }) => (
           <>
-            <Disclosure.Button className="w-full py-14 px-12 text-14 font-medium text-neutral-200">
+            <Disclosure.Button className="w-full py-14 px-12 text-14 font-semibold text-neutral-200">
               <div className="flex justify-between">
                 <p className="self-center transition">{open ? openSectionTitle : closedSectionTitle}</p>
-                <ChevronDownIcon className={`${open ? 'rotate-180 transform' : ''} h-8 w-15 ${iconColor} transition`} />
+                <ChevronDownIcon className={`${open ? 'rotate-180 transform' : ''} w-20 ${iconColor} transition`} />
               </div>
             </Disclosure.Button>
             <Transition

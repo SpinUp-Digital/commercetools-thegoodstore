@@ -17,13 +17,13 @@ const Column: React.FC<Props> = ({ header, links, className }) => {
   return (
     <div className={className}>
       {header && (
-        <h3 className="font-body text-14 font-semibold text-neutral-200 md:self-center md:pb-20 lg:self-start lg:text-18">
+        <h3 className="font-body text-14 font-semibold text-neutral-200 sm:self-center sm:pb-20 lg:self-start lg:text-16">
           <Typography>{header}</Typography>
         </h3>
       )}
       <ul
         role="list"
-        className="flex flex-col gap-y-12 text-neutral-500 md:items-center md:self-center lg:items-start lg:self-start"
+        className="flex flex-col gap-y-12 text-neutral-500 sm:items-center sm:self-center lg:items-start lg:self-start"
       >
         {links.map((item, i) => (
           <li key={i} className="text-14 font-regular lg:text-16">

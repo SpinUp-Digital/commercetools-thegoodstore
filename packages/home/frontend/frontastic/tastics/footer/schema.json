@@ -176,6 +176,10 @@
               "type": "media"
             },
             {
+              "type": "description",
+              "text": "External links must include the hypertext transfer protocol (http://)"
+            },
+            {
               "label": "Link",
               "field": "reference",
               "type": "reference"
