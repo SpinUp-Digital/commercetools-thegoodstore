@@ -1,5 +1,6 @@
 import React from 'react';
 import Tile, { TileProps } from '../tile';
+import Wrapper from '../wrapper';
 
 export interface Props {
   tiles: TileProps[];
@@ -7,11 +8,13 @@ export interface Props {
 
 const TilesGroup: React.FC<Props> = ({ tiles }) => {
   return (
-    <div className="flex flex-col bg-neutral-200 py-12 md:flex-row md:gap-16 lg:py-24 lg:px-96">
-      {tiles.map((tile, index) => (
-        <Tile key={index} {...tile} />
-      ))}
-    </div>
+    <Wrapper background="neutral">
+      <div className="flex flex-col md:flex-row md:gap-16">
+        {tiles.map((tile, index) => (
+          <Tile key={index} {...tile} />
+        ))}
+      </div>
+    </Wrapper>
   );
 };
 

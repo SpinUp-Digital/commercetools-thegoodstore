@@ -1,0 +1,11 @@
+import { FC } from 'react';
+
+type TitleProps = {
+  title: string;
+};
+
+const Title: FC<TitleProps> = ({ title }) => {
+  return <h3 className="mb-13 text-16 font-bold md:text-22 lg:text-28">{title}</h3>;
+};
+
+export default Title;
