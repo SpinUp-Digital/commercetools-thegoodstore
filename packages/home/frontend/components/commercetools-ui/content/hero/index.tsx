@@ -23,7 +23,7 @@ const Hero: React.FC<HeroProps> = ({ image, title, subtitle, ctaLabel, ctaRefere
         <p className="text-14 leading-normal text-white md:text-20">
           <Typography>{subtitle}</Typography>
         </p>
-        <h1 className="mt-22 text-24 leading-normal text-white md:mt-32 md:text-36 lg:text-56 lg:font-bold">
+        <h1 className="mt-22 text-24 font-bold leading-normal text-white md:mt-32 md:text-36 lg:text-56">
           <Typography>{title}</Typography>
         </h1>
         <ReferenceLink target={ctaReference}>

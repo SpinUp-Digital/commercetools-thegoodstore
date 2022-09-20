@@ -36,7 +36,7 @@ export default function ProductSlider({ products, title, subline, ctaLabel, ctaL
     <Wrapper background="neutral-200" hasPhonePadding>
       <div className="text-start">
         <Title title={title} />
-        <div className="flex items-center justify-between md:mt-16 lg:mt-14">
+        <div className="mt-8 flex items-center justify-between md:mt-16 lg:mt-14">
           <Subtitle subtitle={subline} />
           <div className="hidden lg:block">
             <Link target={ctaLink} underlined>
@@ -44,7 +44,7 @@ export default function ProductSlider({ products, title, subline, ctaLabel, ctaL
             </Link>
           </div>
         </div>
-        <div className="block md:mt-16 lg:hidden">
+        <div className="mt-20 block md:mt-16 lg:hidden">
           <Link target={ctaLink} withArrow>
             <span className="font-semibold leading-[24px] text-secondary-black">{ctaLabel}</span>
           </Link>
