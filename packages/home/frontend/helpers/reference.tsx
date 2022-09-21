@@ -1,7 +1,7 @@
 import React from 'react';
 import NextLink from 'next/link';
 
-interface LinkReference {
+export interface LinkReference {
   type: 'link';
   link: string;
   target?: string;
@@ -52,6 +52,8 @@ interface Props {
 }
 
 export const ReferenceLink: React.FC<Props> = ({ target, className, children }) => {
+  // if (target && target.type === 'link') console.log('getReference target', getReferenceTarget(target));
+
   //no valid target for next/link
   if (!target)
     return (
