@@ -1,0 +1,25 @@
+import useMediaQuery from 'helpers/hooks/useMediaQuery';
+import * as screensizes from 'helpers/utils/screensizes';
+import React, { useCallback } from 'react';
+
+export interface Props {
+  backgroundColor: 'white' | 'neutral';
+  customMobile: number;
+  customTablet: number;
+  customDesktop: number;
+}
+
+const Spacer: React.FC<Props> = ({ customMobile, customTablet, customDesktop, backgroundColor = 'white' }) => {
+  const [isTablet] = useMediaQuery(screensizes.tablet);
+  const [isDesktop] = useMediaQuery(screensizes.desktop);
+
+  const getSpacing = useCallback(() => {
+    if (isDesktop) return customDesktop;
+    if (isTablet) return customTablet;
+    return customMobile;
+  }, [isTablet, isDesktop, customMobile, customTablet, customDesktop]);
+
+  return <div className={`bg-${backgroundColor}`} style={{ height: `${getSpacing() || 0}px` }}></div>;
+};
+
+export default Spacer;

@@ -16,7 +16,7 @@ import Cart from './cart';
 import Checkout from './checkout';
 import ThankYou from './checkout/thank-you';
 import Markdown from './content/markdown';
-import Spacer from './content/spacer';
+import SpacerTastic from './spacer';
 import Tile from './content/tile';
 import Footer from './footer';
 import Header from './header';
@@ -51,7 +51,7 @@ export const tastics = {
   'commercetools/ui/header': Header,
   'commercetools/ui/content/tile': Tile,
   'commercetools/ui/content/hero': HeroTastic,
-  'commercetools/ui/content/spacer': Spacer,
+  'commercetools/ui/content/spacer': SpacerTastic,
   'commercetools/ui/content/showcase': Showcase,
   'commercetools/ui/content/markdown': Markdown,
   'commercetools/ui/content/newsletter': Newsletter,

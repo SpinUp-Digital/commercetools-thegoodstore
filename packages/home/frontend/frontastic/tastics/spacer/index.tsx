@@ -1,9 +1,9 @@
 import React from 'react';
-import Spacer, { SpacerProps } from 'components/commercetools-ui/content/spacer';
+import Spacer, { Props as SpacerProps } from 'components/commercetools-ui/spacer';
 
-export type Props = {
+export interface Props {
   data: SpacerProps;
-};
+}
 
 const SpacerTastic: React.FC<Props> = ({ data }) => {
   return <Spacer {...data} />;

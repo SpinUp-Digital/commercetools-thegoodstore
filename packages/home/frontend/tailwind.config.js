@@ -7,6 +7,7 @@ module.exports = {
     './frontastic/**/*.{js,ts,jsx,tsx}',
     './stories/**/*.{js,ts,jsx,tsx}',
   ],
+  safelist: [{ pattern: /bg-(.+)/ }],
   theme: {
     extend: {
       fontFamily: {
