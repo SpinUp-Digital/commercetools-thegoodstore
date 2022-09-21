@@ -9,6 +9,7 @@ module.exports = withPWA({
   },
   i18n,
   localePath,
+  optimizeFonts: false,
   images: {
     // loader: 'cloudinary',
     loader: 'custom',
