@@ -20,7 +20,7 @@ const CategorySlider: React.FC<Props> = ({ tiles = [] }) => {
   const [isDesktopSize] = useMediaQuery(desktop);
 
   return (
-    <Wrapper background="neutral">
+    <Wrapper background="neutral-200">
       <Slider
         slidesPerView={isDesktopSize ? 4 : 2.3}
         dots={false}

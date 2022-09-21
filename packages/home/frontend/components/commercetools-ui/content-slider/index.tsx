@@ -20,7 +20,7 @@ export type ContentSliderProps = {
 
 const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
   return (
-    <Wrapper phonePadding>
+    <Wrapper hasPhonePadding>
       {title && <Title className="mb-13" title={title} />}
       {subtitle && <Subtitle className="mb-24" subtitle={subtitle} />}
       <div className="overflow-auto scrollbar-hide">
