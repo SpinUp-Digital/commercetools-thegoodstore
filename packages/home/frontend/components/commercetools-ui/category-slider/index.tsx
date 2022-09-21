@@ -5,6 +5,7 @@ import Slider from '../slider';
 import Typography from '../typography';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import { desktop, tablet } from 'helpers/utils/screensizes';
+import Wrapper from '../content/wrapper';
 
 export interface Props {
   tiles: Array<{
@@ -19,7 +20,7 @@ const CategorySlider: React.FC<Props> = ({ tiles = [] }) => {
   const [isDesktopSize] = useMediaQuery(desktop);
 
   return (
-    <div className="bg-neutral-200 py-12 lg:px-96 lg:py-16">
+    <Wrapper background="neutral-200">
       <Slider
         slidesPerView={isDesktopSize ? 4 : 2.3}
         dots={false}
@@ -38,7 +39,7 @@ const CategorySlider: React.FC<Props> = ({ tiles = [] }) => {
           </ReferenceLink>
         ))}
       </Slider>
-    </div>
+    </Wrapper>
   );
 };
 
