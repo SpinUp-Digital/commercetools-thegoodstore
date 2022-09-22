@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
+import { Category } from '@Types/product/Category';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Log } from 'helpers/errorLogger';
 import { createClient, FrontasticRenderer, Notifier } from 'frontastic';
@@ -64,10 +65,11 @@ export default function Preview({ data }: PreviewProps) {
 export const getServerSideProps: GetServerSideProps = async ({ params, locale, req, res }) => {
   const frontastic = createClient();
   const data = await frontastic.getPreview(params.previewId.toString(), locale, req, res);
+  const categories = await frontastic.getCategories(params, locale, {}, req, res);
 
   return {
     props: {
-      data,
+      data: { ...data, categories },
       ...(await serverSideTranslations(locale, ['common', 'cart', 'product', 'checkout'])),
     },
   };

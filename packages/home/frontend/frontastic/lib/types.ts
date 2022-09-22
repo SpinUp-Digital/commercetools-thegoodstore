@@ -1,3 +1,5 @@
+import { Category } from '@Types/product/Category';
+
 type ViewData = {
   _type: 'Frontastic\\Catwalk\\FrontendBundle\\Domain\\ViewData';
   dataSources: DataSources | null;
@@ -109,6 +111,7 @@ export type TasticWrapperProps = {
   dataSources: DataSources | null;
   tastics: TasticRegistry;
   data: TasticData;
+  categories: Category[];
   pageFolder: PageFolder;
   highlight?: boolean;
 };

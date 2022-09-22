@@ -30,16 +30,19 @@ import {
   getProjectSettings,
 } from '../../actions/cart';
 import { getWishlist, addToWishlist, removeLineItem, updateLineItem } from '../../actions/wishlist';
+import { queryCategories } from '../../actions/product';
 import { createSession, adyenCheckout } from '../../actions/adyen';
 import { UseAccount } from './UseAccount';
 import { UseCart } from './UseCart';
 import { UseWishlist } from './UseWishlist';
+import { UseProduct } from './UseProduct';
 import { UseAdyen } from './UseAdyen';
 
 export interface FrontasticState {
   useCart: UseCart;
   useAccount: UseAccount;
   useWishlist: UseWishlist;
+  useProduct: UseProduct;
   useAdyen: UseAdyen;
 }
 
@@ -81,6 +84,9 @@ export const getFrontasticState = (): FrontasticState => {
       addToWishlist,
       removeLineItem,
       updateLineItem,
+    },
+    useProduct: {
+      ...queryCategories(),
     },
     useAdyen: {
       createSession,

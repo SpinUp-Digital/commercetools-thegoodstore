@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { Dispatch } from 'react';
 import { Account } from '@Types/account/Account';
+import { Category } from '@Types/product/Category';
 import { Reference, ReferenceLink } from 'helpers/reference';
 import { NextFrontasticImage } from 'frontastic/lib/image';
-import { Market, Category, Link } from './interfaces';
+import { Market, Link } from './interfaces';
 import MarketButton from './market/market-button';
 import HeaderButton from './navigation/header-button';
+import HeaderButtonMenu from './navigation/header-button-menu';
 import HeaderMenuMobile from './navigation/header-menu-mobile';
 import UtilitySection from './navigation/utility-section';
 
@@ -13,6 +15,8 @@ export interface HeaderProps {
   links: Category[];
   linksMobile: Category[];
   markets: Market[];
+  currentMarket: Market;
+  setCurrentMarket: Dispatch<React.SetStateAction<Market>>;
   cartItemCount: number;
   wishlistItemCount?: number;
   logo: { media: NextFrontasticImage } | NextFrontasticImage;
@@ -30,6 +34,8 @@ const Header: React.FC<HeaderProps> = ({
   links,
   linksMobile,
   markets,
+  currentMarket,
+  setCurrentMarket,
   logoLink,
   account,
   accountLink,
@@ -39,8 +45,6 @@ const Header: React.FC<HeaderProps> = ({
   navTileHeader,
   navTileButton,
 }) => {
-  const [currentMarket, setCurrentMarket] = useState(markets[0]);
-
   return (
     <div className="h-fit border-b-2 border-neutral-400 bg-white">
       <nav aria-label="Top" className="mx-13 flex h-60 items-center justify-between md:mx-30 md:h-76 lg:mx-50">
@@ -63,17 +67,24 @@ const Header: React.FC<HeaderProps> = ({
         <UtilitySection account={account} accountLink={accountLink} cartLink={cartLink} wishlistLink={wishlistLink} />
       </nav>
 
-      <nav className="hidden h-64 items-center justify-center lg:flex">
-        {links.map((link, index) => (
-          <HeaderButton
-            key={index}
-            link={link}
-            navTileImage={navTileImage}
-            navTileHeader={navTileHeader}
-            navTileButton={navTileButton}
-          />
-        ))}
-      </nav>
+      {links && (
+        <nav className="hidden h-64 items-center justify-center lg:flex">
+          {links.map((link) => (
+            <div key={link?.categoryId}>
+              {link.subCategories.length > 0 ? (
+                <HeaderButtonMenu
+                  link={link}
+                  navTileImage={navTileImage}
+                  navTileHeader={navTileHeader}
+                  navTileButton={navTileButton}
+                />
+              ) : (
+                <HeaderButton link={link} />
+              )}
+            </div>
+          ))}
+        </nav>
+      )}
     </div>
   );
 };

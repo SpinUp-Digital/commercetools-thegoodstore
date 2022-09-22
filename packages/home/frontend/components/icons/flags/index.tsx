@@ -16,13 +16,13 @@ type Props = {
 const Icon: React.FC<Props> = ({ className, flagName }: Props) => {
   const flags = {
     ['france']: <France className={className} />,
-    ['germany']: <Germany className={className} />,
+    ['DE']: <Germany className={className} />,
     ['greece']: <Greece className={className} />,
     ['italy']: <Italy className={className} />,
     ['spain']: <Spain className={className} />,
     ['sweden']: <Sweden className={className} />,
     ['united-kingdom']: <UnitedKingdom className={className} />,
-    ['united-states']: <UnitedStates className={className} />,
+    ['US']: <UnitedStates className={className} />,
   };
   return <>{flags[flagName]}</>;
 };

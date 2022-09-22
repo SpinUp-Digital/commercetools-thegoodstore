@@ -1,8 +1,9 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/outline';
 import CheckIcon from 'components/icons/check-2';
 import CloseIcon from 'components/icons/close';
 import FlagIcons from 'components/icons/flags';
+import { useCart } from 'frontastic';
 import { Market } from '../interfaces';
 interface Props {
   currentMarket?: Market;
@@ -15,12 +16,14 @@ const MarketButton: React.FC<Props> = ({ currentMarket, markets, setCurrentMarke
 
   return (
     <div className="ml-12 hidden justify-center md:w-109 lg:flex lg:w-300">
-      <button onClick={() => setShowMarket(true)} className="flex items-center justify-center p-3">
-        <FlagIcons flagName={currentMarket.flag} className="mr-8 text-14" />
-        {currentMarket.region} | {currentMarket.currency}
-        <span dangerouslySetInnerHTML={{ __html: currentMarket.currencyCode }} className="ml-5 mr-20" />
-        <ChevronDownIcon className=" h-11 w-11"></ChevronDownIcon>
-      </button>
+      {currentMarket && (
+        <button onClick={() => setShowMarket(true)} className="flex items-center justify-center p-3">
+          <FlagIcons flagName={currentMarket?.flag} className="mr-8 text-14" />
+          {currentMarket?.region} | {currentMarket?.currency}
+          <span dangerouslySetInnerHTML={{ __html: currentMarket?.currencyCode }} className="ml-5 mr-20" />
+          <ChevronDownIcon className=" h-11 w-11"></ChevronDownIcon>
+        </button>
+      )}
 
       {showMarket && (
         <>
@@ -43,7 +46,7 @@ const MarketButton: React.FC<Props> = ({ currentMarket, markets, setCurrentMarke
                   }}
                   className="flex h-24 items-center justify-center p-26"
                 >
-                  {currentMarket.flag === market.flag && <CheckIcon className="mx-11" />}
+                  {currentMarket?.flag === market.flag && <CheckIcon className="mx-11" />}
                   <FlagIcons flagName={market.flag} className="mr-8 text-14" />
                   {market.region}
                 </button>
@@ -55,5 +58,4 @@ const MarketButton: React.FC<Props> = ({ currentMarket, markets, setCurrentMarke
     </div>
   );
 };
-
 export default MarketButton;

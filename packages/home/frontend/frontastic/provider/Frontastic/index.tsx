@@ -7,6 +7,7 @@ const initialState: FrontasticState = {
   useCart: {} as any,
   useAccount: {} as any,
   useWishlist: {} as any,
+  useProduct: {} as any,
   useAdyen: {} as any,
 };
 
@@ -43,6 +44,12 @@ export const useWishlist = () => {
   const context = React.useContext(FrontasticContext);
   checkContext(context);
   return context.useWishlist;
+};
+
+export const useProduct = () => {
+  const context = React.useContext(FrontasticContext);
+  checkContext(context);
+  return context.useProduct;
 };
 
 export const useAdyen = () => {

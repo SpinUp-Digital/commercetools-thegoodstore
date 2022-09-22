@@ -1,8 +1,8 @@
+import Button from 'components/commercetools-ui/button';
 import Typography from 'components/commercetools-ui/typography';
+import useClassNames from 'helpers/hooks/useClassNames';
 import { Reference, ReferenceLink } from 'helpers/reference';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
-import Button from 'components/commercetools-ui/button';
-import useClassNames from 'helpers/hooks/useClassNames';
 
 export interface TileProps {
   image?: NextFrontasticImage;

@@ -1,33 +1,20 @@
-import React, { FC, useState } from 'react';
-import { ReferenceLink } from 'helpers/reference';
-import { Category, Link } from '../interfaces';
-import HeaderMenuDesktop from './header-menu-desktop';
+import React, { FC } from 'react';
+import Link from 'next/link';
+import { Category } from '@Types/product/Category';
 
 export interface Props {
   link: Category;
-  navTileImage: string;
-  navTileHeader: string;
-  navTileButton: Link;
 }
 
-const HeaderButton: FC<Props> = ({ link, navTileImage, navTileHeader, navTileButton }) => {
-  const [show, setShow] = useState(false);
+const HeaderButton: FC<Props> = ({ link }) => {
   return (
-    <div aria-expanded={false} onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)} className="mx-20">
-      <ReferenceLink target={link.navLink.reference} className="py-25">
-        <span className={`border-black py-10 text-16 ${show && 'border-b-2'}`}> {link.navLink.name}</span>
-      </ReferenceLink>
-
-      {show && (
-        <HeaderMenuDesktop
-          onClick={() => setShow(false)}
-          navigation={link.subCategories}
-          tileImage={navTileImage}
-          tileHeader={navTileHeader}
-          tileButton={navTileButton}
-        />
-      )}
-    </div>
+    <Link href={link.slug ? link.slug : link.path} passHref>
+      <div className="mx-20">
+        <div className="cursor-pointer py-25">
+          <span className="border-black py-10 text-16 hover:border-b-2"> {link.name}</span>
+        </div>
+      </div>
+    </Link>
   );
 };
 export default HeaderButton;

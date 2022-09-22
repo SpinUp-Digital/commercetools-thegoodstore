@@ -1,4 +1,3 @@
-import { Currency } from '@adyen/adyen-web/dist/types/components/AmazonPay/types';
 import { Reference } from 'helpers/reference';
 
 export interface Link {
@@ -14,6 +13,6 @@ export interface Market {
   region: string;
   flag: string;
   locale: string;
-  currency: Currency;
+  currency: string;
   currencyCode: string;
 }

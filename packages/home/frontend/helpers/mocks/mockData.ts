@@ -1000,14 +1000,7 @@ export const products: Product[] = [
     version: '2635',
     name: 'Sneakers Serafini grau',
     slug: 'serafini-sneakers-LREP02-grau',
-    categories: [
-      {
-        categoryId: '73c57b5f-9267-473a-93b3-73507cbb0d35',
-      },
-      {
-        categoryId: '39d9fb1a-7f80-4283-acdb-af58c43f3a9a',
-      },
-    ],
+    categories: [],
     variants: [
       {
         id: '1',
@@ -2172,11 +2165,7 @@ export const products: Product[] = [
     version: '53',
     name: 'Schal Altea hellgrau',
     slug: 'altea-schal-1550732-hellgrau',
-    categories: [
-      {
-        categoryId: '984ff8f3-034c-40e6-ae57-8dbe33f6009a',
-      },
-    ],
+    categories: [],
     variants: [
       {
         id: '1',
@@ -2233,17 +2222,7 @@ export const products: Product[] = [
     version: '43',
     name: 'Tasche „Postina“ small Zanellato creme',
     slug: 'zanellato-tasche-postina-small-062389134-creme',
-    categories: [
-      {
-        categoryId: 'ed378cd1-172f-43aa-b4ec-4954b9961b17',
-      },
-      {
-        categoryId: '9c56920c-d158-4139-8b8b-8adb429033c9',
-      },
-      {
-        categoryId: 'd856d1ca-d90b-4f5c-87ff-1c859763a174',
-      },
-    ],
+    categories: [],
     variants: [
       {
         id: '1',
@@ -2300,14 +2279,7 @@ export const products: Product[] = [
     version: '786',
     name: 'Hemd „James“ Robert Friedman blau',
     slug: 'robertfriedman-hemd-james-RS9000-blau',
-    categories: [
-      {
-        categoryId: '74a89bd3-dc43-4496-a20c-fcb101dd00dd',
-      },
-      {
-        categoryId: '30ac2a21-91a0-4c31-b908-b9a85b53e44b',
-      },
-    ],
+    categories: [],
     variants: [
       {
         id: '1',
@@ -2685,14 +2657,7 @@ export const products: Product[] = [
     version: '1351',
     name: 'Jacke „Favola“ Peuterey schwarz',
     slug: 'peuterey-jacke-favola-BMATNER-schwarz',
-    categories: [
-      {
-        categoryId: '537e55cc-c6f8-4c22-8f09-64bbc2175bc3',
-      },
-      {
-        categoryId: '9acc95ed-0053-417e-b342-96da452f7eab',
-      },
-    ],
+    categories: [],
     variants: [
       {
         id: '1',
@@ -3302,14 +3267,7 @@ export const products: Product[] = [
     version: '2633',
     name: 'Sneakers Philippe Model silber',
     slug: 'philippemodel-sneakers-THLDET04-silber',
-    categories: [
-      {
-        categoryId: '73c57b5f-9267-473a-93b3-73507cbb0d35',
-      },
-      {
-        categoryId: '39d9fb1a-7f80-4283-acdb-af58c43f3a9a',
-      },
-    ],
+    categories: [],
     variants: [
       {
         id: '1',
@@ -4475,14 +4433,7 @@ export const products: Product[] = [
     version: '1355',
     name: 'Kleid Ki 6? Who are you? gold',
     slug: 'ki6-whoareyou-kleid-AB32129-gold',
-    categories: [
-      {
-        categoryId: '537e55cc-c6f8-4c22-8f09-64bbc2175bc3',
-      },
-      {
-        categoryId: 'c905031a-7254-4960-a10d-a45a62b6030a',
-      },
-    ],
+    categories: [],
     variants: [
       {
         id: '1',
@@ -5093,14 +5044,7 @@ export const products: Product[] = [
     version: '2643',
     name: 'Sneakers Philippe Model weiß',
     slug: 'philippemodel-sneakers-weiss-cielo',
-    categories: [
-      {
-        categoryId: 'a451fe7c-e9c2-4633-99ab-07c9b297dd03',
-      },
-      {
-        categoryId: 'c35cdb2a-7451-46bf-bfba-174af9146c1e',
-      },
-    ],
+    categories: [],
     variants: [
       {
         id: '1',
@@ -6260,11 +6204,7 @@ export const products: Product[] = [
     version: '40',
     name: 'Tasche „Greyson“ Guess',
     slug: 'guess-tasche-greyson-30230-hellrosa',
-    categories: [
-      {
-        categoryId: 'd856d1ca-d90b-4f5c-87ff-1c859763a174',
-      },
-    ],
+    categories: [],
     variants: [
       {
         id: '1',
@@ -6320,14 +6260,7 @@ export const products: Product[] = [
     version: '46',
     name: 'Brieftasche Mia Bag nude',
     slug: 'miabag-brieftasche-15106-beige',
-    categories: [
-      {
-        categoryId: '25e0bef5-6b8a-4a2b-b64f-bd35f4038b61',
-      },
-      {
-        categoryId: '9c56920c-d158-4139-8b8b-8adb429033c9',
-      },
-    ],
+    categories: [],
     variants: [
       {
         id: '1',
@@ -6384,14 +6317,7 @@ export const products: Product[] = [
     version: '804',
     name: 'T-Shirt Majestic Filatures grau',
     slug: 'majestic-filatures-tshirt-E151704-grau',
-    categories: [
-      {
-        categoryId: '5c1e2de3-3cf1-4b37-9364-2fd7db47b4c5',
-      },
-      {
-        categoryId: '537e55cc-c6f8-4c22-8f09-64bbc2175bc3',
-      },
-    ],
+    categories: [],
     variants: [
       {
         id: '1',
@@ -6773,14 +6699,7 @@ export const products: Product[] = [
     version: '1331',
     name: 'Blazer Pinko schwarz',
     slug: 'pinko-blazer-1B10ZP-schwarz',
-    categories: [
-      {
-        categoryId: '537e55cc-c6f8-4c22-8f09-64bbc2175bc3',
-      },
-      {
-        categoryId: '282ab8c2-16dd-4858-bf27-55caf1cd1327',
-      },
-    ],
+    categories: [],
     variants: [
       {
         id: '1',
@@ -7388,11 +7307,7 @@ export const products: Product[] = [
     version: '807',
     name: 'Pullover Kaos blau',
     slug: 'kaos-pullover-KR0123003-blau',
-    categories: [
-      {
-        categoryId: 'b4325c23-3c9f-4e2d-ab61-6bac036cbfe0',
-      },
-    ],
+    categories: [],
     variants: [
       {
         id: '1',
@@ -7771,11 +7686,7 @@ export const products: Product[] = [
     version: '2613',
     name: 'Flipflops „Slim Hardware” Havaianas grau',
     slug: 'havaianas-flipflops-slim-hardware-grau',
-    categories: [
-      {
-        categoryId: '2914a5d6-2c62-45f7-aad6-f6b521cbe54c',
-      },
-    ],
+    categories: [],
     variants: [
       {
         id: '1',
@@ -8938,11 +8849,7 @@ export const products: Product[] = [
     version: '37',
     name: 'Brieftasche „Rimini“ Gabs hellrot',
     slug: 'gabs-brieftasche-gmoney17-1507-rot',
-    categories: [
-      {
-        categoryId: '25e0bef5-6b8a-4a2b-b64f-bd35f4038b61',
-      },
-    ],
+    categories: [],
     variants: [
       {
         id: '1',
@@ -8999,14 +8906,7 @@ export const products: Product[] = [
     version: '2633',
     name: 'Slip-On Schuhe Tods silber-weiß',
     slug: 'tods-slip-on-tv0j9808-silber',
-    categories: [
-      {
-        categoryId: '73c57b5f-9267-473a-93b3-73507cbb0d35',
-      },
-      {
-        categoryId: '241b6c53-f800-47dc-a22f-4be8c52fcc10',
-      },
-    ],
+    categories: [],
     variants: [
       {
         id: '1',
@@ -10168,11 +10068,7 @@ export const products: Product[] = [
     version: '1337',
     name: 'blazer Harris Wharf blau',
     slug: 'harris-wharf-blazer-CFY8G2-blau',
-    categories: [
-      {
-        categoryId: 'e271b8ee-2d17-47d4-8eda-d21b924c686c',
-      },
-    ],
+    categories: [],
     variants: [
       {
         id: '1',
@@ -10782,14 +10678,7 @@ export const products: Product[] = [
     version: '1323',
     name: 'Jacke „Rivka“ Luis Trenker creme',
     slug: 'luistrenker-jacke-K245511299-creme',
-    categories: [
-      {
-        categoryId: '9c56920c-d158-4139-8b8b-8adb429033c9',
-      },
-      {
-        categoryId: '9acc95ed-0053-417e-b342-96da452f7eab',
-      },
-    ],
+    categories: [],
     variants: [
       {
         id: '1',
@@ -11398,11 +11287,7 @@ export const products: Product[] = [
     version: '2623',
     name: 'Flipflops „Brasil“ Havaianas braun',
     slug: 'havaianas-flipflops-brasil-braun',
-    categories: [
-      {
-        categoryId: '0d5a9bac-193a-4713-90eb-6aa800fb9b5d',
-      },
-    ],
+    categories: [],
     variants: [
       {
         id: '1',
@@ -12565,11 +12450,7 @@ export const products: Product[] = [
     version: '811',
     name: 'Polo Ralph Lauren grün',
     slug: 'poloralphlauren-polo-C8312A3ZHJ-gruen',
-    categories: [
-      {
-        categoryId: '9c0a1eb5-65a8-42ae-8b2e-591052b20c51',
-      },
-    ],
+    categories: [],
     variants: [
       {
         id: '1',
@@ -12949,14 +12830,7 @@ export const products: Product[] = [
     version: '799',
     name: 'Pullover Pinko weiß',
     slug: 'pinko-pullover-1G10XXY19KZ04-weiss',
-    categories: [
-      {
-        categoryId: '537e55cc-c6f8-4c22-8f09-64bbc2175bc3',
-      },
-      {
-        categoryId: '321c8666-8dde-4e44-876c-a3f28352b212',
-      },
-    ],
+    categories: [],
     variants: [
       {
         id: '1',
@@ -13336,11 +13210,7 @@ export const products: Product[] = [
     version: '804',
     name: 'Daniele Alessandrini – T-Shirt',
     slug: 'daniele-alessandrini-tshirt-M5618E6283506-schwarz',
-    categories: [
-      {
-        categoryId: '9c0a1eb5-65a8-42ae-8b2e-591052b20c51',
-      },
-    ],
+    categories: [],
     variants: [
       {
         id: '1',
@@ -13718,14 +13588,7 @@ export const products: Product[] = [
     version: '807',
     name: 'Jogginghose Paolo Pecora hellgrau',
     slug: 'paolo-pecora-jogginghose-B071T403-hellgrau',
-    categories: [
-      {
-        categoryId: '74a89bd3-dc43-4496-a20c-fcb101dd00dd',
-      },
-      {
-        categoryId: '7765da1a-8ed4-4267-a011-816f94b6e57a',
-      },
-    ],
+    categories: [],
     variants: [
       {
         id: '1',
@@ -14107,11 +13970,7 @@ export const products: Product[] = [
     version: '40',
     name: 'DKNY – Brieftasche',
     slug: 'dkny-brieftasche-R1522307-hellgrau',
-    categories: [
-      {
-        categoryId: '25e0bef5-6b8a-4a2b-b64f-bd35f4038b61',
-      },
-    ],
+    categories: [],
     variants: [
       {
         id: '1',
@@ -14168,14 +14027,7 @@ export const products: Product[] = [
     version: '1771',
     name: 'Hose Jacob Cohen grün',
     slug: 'jacob-cohen-hose-j622-697-gruen',
-    categories: [
-      {
-        categoryId: 'f37dc50b-fd0e-4afe-81c6-35e9b7900873',
-      },
-      {
-        categoryId: '7765da1a-8ed4-4267-a011-816f94b6e57a',
-      },
-    ],
+    categories: [],
     variants: [
       {
         id: '1',

@@ -1,3 +1,4 @@
+import { Category } from '@Types/product/Category';
 import React from 'react';
 import { Cell as LayoutElement } from './cell';
 import { highlightClassNames, TasticWrapper } from './component';
@@ -12,7 +13,7 @@ export function FrontasticRenderer({
   wrapperClassName,
   currentHighlight,
 }: {
-  data: PageDataResponse;
+  data: PageDataResponse & { categories: Category[] };
   tastics: TasticRegistry;
   gridClassName?: string;
   wrapperClassName?: string;
@@ -36,6 +37,7 @@ export function FrontasticRenderer({
                 tastics={tastics}
                 key={t.tasticId}
                 data={t}
+                categories={data.categories}
                 dataSources={data.data.dataSources}
                 pageFolder={data.pageFolder}
                 highlight={currentHighlight === t.tasticId}
@@ -59,6 +61,7 @@ export function FrontasticRenderer({
                 tastics={tastics}
                 key={t.tasticId}
                 data={t}
+                categories={data.categories}
                 dataSources={data.data.dataSources}
                 pageFolder={data.pageFolder}
                 highlight={currentHighlight === t.tasticId}
@@ -82,6 +85,7 @@ export function FrontasticRenderer({
                 tastics={tastics}
                 key={t.tasticId}
                 data={t}
+                categories={data.categories}
                 dataSources={data.data.dataSources}
                 pageFolder={data.pageFolder}
                 highlight={currentHighlight === t.tasticId}
