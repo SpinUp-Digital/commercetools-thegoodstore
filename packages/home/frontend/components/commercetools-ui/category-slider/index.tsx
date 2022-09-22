@@ -22,10 +22,12 @@ const CategorySlider: React.FC<Props> = ({ tiles = [] }) => {
   return (
     <Wrapper background="neutral-200">
       <Slider
+        key={`${isDesktopSize}`}
         slidesPerView={isDesktopSize ? 4 : 2.3}
         dots={false}
         spaceBetween={isDesktopSize ? 16 : isTabletSize ? 8 : 4}
-        arrows={isDesktopSize}
+        arrows={isDesktopSize && tiles.length > 4}
+        allowTouchMove={!isDesktopSize || (isDesktopSize && tiles.length > 4)}
         loop
       >
         {tiles.map((tile, index) => (

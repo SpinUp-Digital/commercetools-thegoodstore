@@ -75,11 +75,22 @@ const Tile: React.FC<Product> = ({ variants, name, _url }) => {
           slidesPerView={1}
           arrows={imageHovered && isDesktopSize && selectedVariant.images.length > 1}
           spaceBetween={0}
-          prevButtonStyles={{ left: 25, padding: '7px', transform: 'translateY(-50%) rotateZ(135deg)' }}
-          nextButtonStyles={{ right: 25, padding: '7px', transform: 'translateY(-50%) rotateZ(-45deg)' }}
+          prevButtonStyles={{
+            left: 25,
+            padding: '7px',
+            transform: 'translateY(-50%) rotateZ(135deg)',
+            borderWidth: '0 1.5px 1.5px 0',
+          }}
+          nextButtonStyles={{
+            right: 25,
+            padding: '7px',
+            transform: 'translateY(-50%) rotateZ(-45deg)',
+            borderWidth: '0 1.5px 1.5px 0',
+          }}
           dots={false}
           loop
-          allowTouchMove={!isDesktopSize && selectedVariant.images.length > 1}
+          // allowTouchMove={!isDesktopSize && selectedVariant.images.length > 1}
+          allowTouchMove={false}
         >
           {selectedVariant.images.map((image, index) => (
             <div key={index} className="relative bg-white p-8">
@@ -111,7 +122,7 @@ const Tile: React.FC<Product> = ({ variants, name, _url }) => {
           )}
           <button
             className={`w-full border border-neutral-400 bg-white py-16 text-center text-12 capitalize leading-[16px] transition duration-150 ease-out hover:border-primary-black ${
-              imageHovered ? 'block' : 'hidden'
+              imageHovered && isDesktopSize ? 'block' : 'hidden'
             }`}
           >
             {formatProductMessage({ id: 'quick.view', defaultMessage: 'Quick view' })}
