@@ -1,14 +1,14 @@
 import React from 'react';
 import { Product } from '@Types/product/Product';
+import Link from 'components/commercetools-ui/content/link';
+import Wrapper from 'components/commercetools-ui/content/wrapper';
 import Slider, { SliderProps } from 'components/commercetools-ui/slider';
+import Subtitle from 'components/commercetools-ui/subtitle';
+import Title from 'components/commercetools-ui/title';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import { Reference } from 'helpers/reference';
 import { mobile, desktop } from 'helpers/utils/screensizes';
 import Tile from './tile';
-import Subtitle from 'components/commercetools-ui/subtitle';
-import Title from 'components/commercetools-ui/title';
-import Link from 'components/commercetools-ui/content/link';
-import Wrapper from 'components/commercetools-ui/content/wrapper';
 
 export interface Props {
   products: Product[];

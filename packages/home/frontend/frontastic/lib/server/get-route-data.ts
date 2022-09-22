@@ -1,3 +1,4 @@
+import { Category } from '@Types/product/Category';
 import { IncomingMessage, ServerResponse } from 'http';
 import { fetchApiHubServerSide } from '../fetch-api-hub';
 import { PageDataResponse, PagePreviewDataResponse, RedirectResponse } from '../types';
@@ -74,5 +75,34 @@ export const getPreview =
       req: nextJsReq,
       res: nextJsRes,
     })) as PagePreviewDataResponse;
+    return data;
+  };
+
+export const getCategories =
+  () =>
+  async (
+    urlParams: UrlParams,
+    locale: string,
+    query: QueryParams,
+    nextJsReq: IncomingMessage,
+    nextJsRes: ServerResponse,
+  ): Promise<Category[]> => {
+    // Remove slug from query since it's not needed as part of the query.
+
+    const headers = {
+      'Frontastic-Locale': locale,
+    };
+
+    const endpoint = '/action/product/queryCategories?limit=10';
+
+    const data = (await fetchApiHubServerSide(
+      endpoint,
+      {
+        req: nextJsReq,
+        res: nextJsRes,
+      },
+      headers,
+    )) as Category[];
+
     return data;
   };

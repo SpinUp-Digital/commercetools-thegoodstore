@@ -5902,6 +5902,11 @@ cosmiconfig@^7.0.0, cosmiconfig@^7.0.1:
     path-type "^4.0.0"
     yaml "^1.10.0"
 
+country-to-currency@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/country-to-currency/-/country-to-currency-1.0.5.tgz#e8bedc9014bf35d2f624c6d794fc65dfb01c60c3"
+  integrity sha512-TrYOcrjBJZ5rNaj+kdm50PgDYOioh38XFrQfHBoEzvDGAHqXNjOtscc/fObdaD/8PNtm73oIsgiUpvbbY5einQ==
+
 cp-file@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/cp-file/-/cp-file-7.0.0.tgz#b9454cfd07fe3b974ab9ea0e5f29655791a9b8cd"

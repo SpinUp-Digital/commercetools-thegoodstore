@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import NextLink from 'next/link';
+import { Money } from '@Types/product/Money';
 import { Product } from '@Types/product/Product';
 import { Variant } from '@Types/product/Variant';
 import classNames from 'classnames';

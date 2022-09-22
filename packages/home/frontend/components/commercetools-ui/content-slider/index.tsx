@@ -2,8 +2,8 @@ import { FC } from 'react';
 import { Reference, ReferenceLink } from 'helpers/reference';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
 import Wrapper from '../content/wrapper';
-import Title from '../title';
 import Subtitle from '../subtitle';
+import Title from '../title';
 
 type ContentSliderSlide = {
   image: NextFrontasticImage;

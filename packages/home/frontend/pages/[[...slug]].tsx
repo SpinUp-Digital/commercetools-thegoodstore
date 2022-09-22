@@ -1,7 +1,7 @@
 import React from 'react';
 import { GetServerSideProps, Redirect } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { createClient, ResponseError, LocaleStorage } from 'frontastic';
+import { createClient, ResponseError, LocaleStorage, useProduct } from 'frontastic';
 import { FrontasticRenderer } from 'frontastic/lib/renderer';
 import { tastics } from 'frontastic/tastics';
 import { Log } from '../helpers/errorLogger';
@@ -44,6 +44,7 @@ export default function Slug({ data, locale }: SlugProps) {
 export const getServerSideProps: GetServerSideProps | Redirect = async ({ params, locale, query, req, res }) => {
   const frontastic = createClient();
   const data = await frontastic.getRouteData(params, locale, query, req, res);
+  const categories = await frontastic.getCategories(params, locale, query, req, res);
 
   if (data) {
     if (data instanceof ResponseError && data.getStatus() == 404) {
@@ -81,7 +82,7 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({ params
 
   return {
     props: {
-      data: data || null,
+      data: { ...data, categories } || null,
       locale: locale,
       ...(await serverSideTranslations(locale, [
         'common',

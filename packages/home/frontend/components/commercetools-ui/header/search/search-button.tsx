@@ -43,7 +43,7 @@ const SearchButton: React.FC = () => {
         <div className="dark:text-light-100 cursor-pointer" onClick={startSearch}>
           <span className="sr-only">Search</span>
           <SearchIcon
-            className="text-primary-400 dark:text-light-100 hover:text-primary-500 h-6 w-6"
+            className="text-primary-400 hover:text-primary-500 dark:text-light-100 h-6 w-6"
             aria-hidden="true"
           />
         </div>
