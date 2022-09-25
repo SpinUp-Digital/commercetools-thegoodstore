@@ -27,7 +27,7 @@ export default function ProductSlider({ products, title, subline, ctaLabel, ctaL
     arrows: isDesktopSize,
     dots: false,
     spaceBetween: isMobileSize ? 25 : 8,
-    slidesPerGroup: isDesktopSize ? 4 : 2,
+    slidesPerGroup: isDesktopSize ? 4 : 1,
   };
 
   const sliderConfiguration: SliderProps = sliderFixedMood;
