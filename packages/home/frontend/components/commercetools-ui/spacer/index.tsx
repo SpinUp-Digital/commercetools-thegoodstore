@@ -1,6 +1,6 @@
+import React, { useCallback } from 'react';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import * as screensizes from 'helpers/utils/screensizes';
-import React, { useCallback } from 'react';
 
 export interface Props {
   backgroundColor: 'white' | 'neutral';

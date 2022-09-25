@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from 'components/commercetools-ui/header';
 import { calculateCartCount } from 'helpers/utils/calculateCartCount';
-import { useCart, useWishlist, useAccount, useProduct } from 'frontastic/provider';
-import { tileButton, tileHeader, tileImage } from './constant';
+import { useCart, useWishlist, useAccount } from 'frontastic/provider';
 import countryToCurrency from 'country-to-currency';
 import { Market } from 'components/commercetools-ui/header/interfaces';
 
@@ -28,14 +27,16 @@ const HeaderTastic = ({ data, categories }) => {
     });
   }, []);
 
+  const handleCurrentMarket = (market: Market) => {
+    setCurrentMarket(market);
+  };
+
   return (
     <Header
-      tagline={data.tagline}
       links={(categories as any)?.items}
       linksMobile={(categories as any)?.items}
       markets={markets}
       currentMarket={currentMarket}
-      setCurrentMarket={setCurrentMarket}
       cartItemCount={calculateCartCount(cart?.lineItems) || 0}
       wishlistItemCount={wishlist?.lineItems?.length || 0}
       logo={data.logo}
@@ -44,9 +45,13 @@ const HeaderTastic = ({ data, categories }) => {
       accountLink={data.accountLink}
       wishlistLink={data.wishlistLink}
       cartLink={data.cartLink}
-      navTileImage={tileImage}
-      navTileHeader={tileHeader}
-      navTileButton={tileButton}
+      navTileImage={data.tileImage}
+      navTileHeader={data.tileHeaderText}
+      navTileButton={{
+        name: data.tileButtonLabel,
+        reference: data.tileButtonLink,
+      }}
+      handleCurrentMarket={handleCurrentMarket}
     />
   );
 };

@@ -1,21 +1,22 @@
 import React, { FC } from 'react';
 import Link from 'next/link';
 import { Category } from '@Types/product/Category';
-import Image, { NextFrontasticImage } from 'frontastic/lib/image';
-import { Link as TileLink } from '../../interfaces';
+import { NextFrontasticImage } from 'frontastic/lib/image';
+import { Link as TileLink, Market } from '../../interfaces';
 import HeaderMenuTileDesktop from './header-menu-tile-desktop';
 
 export interface Props {
   navigation: Category[];
-  tileImage: string;
+  tileImage: NextFrontasticImage;
   tileHeader: string;
   tileButton: TileLink;
+  currentMarket: Market;
   onClick?: () => void;
 }
 
-const HeaderMenuDesktop: FC<Props> = ({ navigation, tileImage, tileHeader, tileButton, onClick }) => {
+const HeaderMenuDesktop: FC<Props> = ({ navigation, tileImage, tileHeader, tileButton, currentMarket, onClick }) => {
   return (
-    <div className="absolute top-192 left-0 z-10 flex h-fit w-full justify-between bg-white px-96 py-34">
+    <div className="absolute bottom-0 left-0 z-10 flex h-fit w-full translate-y-full justify-between border-t-[1px] border-neutral-400 bg-white px-96 py-34">
       <div className="flex w-1/2 justify-between pr-25">
         {navigation.map((data) => (
           <div key={data.categoryId}>
@@ -43,12 +44,12 @@ const HeaderMenuDesktop: FC<Props> = ({ navigation, tileImage, tileHeader, tileB
           </div>
         ))}
       </div>
-
       <HeaderMenuTileDesktop
         title={tileHeader}
         image={tileImage}
         buttonLabel={tileButton.name}
         buttonLink={tileButton.reference}
+        currentMarket={currentMarket}
       />
     </div>
   );
