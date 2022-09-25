@@ -9,12 +9,12 @@ const SpainFlag: React.FC<Props> = ({ className }: Props) => (
     className={className}
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
-    height="20"
-    width="30"
-    viewBox="0 0 30 20"
+    height="500"
+    width="750"
+    viewBox="0 0 750 500"
   >
-    <rect width="30" height="20" fill="#c60b1e" />
-    <rect width="30" height="10" y="125" fill="#ffc400" />
+    <rect width="750" height="500" fill="#c60b1e" />
+    <rect width="750" height="250" y="125" fill="#ffc400" />
     <g id="coa" stroke="#000" strokeWidth="0.39">
       <g id="supporters">
         <g id="crown_left" strokeWidth="0.26">

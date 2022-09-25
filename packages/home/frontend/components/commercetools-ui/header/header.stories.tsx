@@ -1,6 +1,5 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
-import { headerButtonLink, headerAccountLink, headerLinks } from 'helpers/mocks/mockData';
 import Header, { HeaderProps } from './index';
 
 export default {
@@ -14,7 +13,3 @@ export default {
 const Template: Story<HeaderProps> = (args) => <Header {...args} />;
 
 export const Primary = Template.bind({});
-
-Primary.args = {
-  tagline: '',
-};
