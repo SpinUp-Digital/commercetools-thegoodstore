@@ -94,7 +94,7 @@ const Tile: React.FC<Product> = ({ variants, name, _url }) => {
           allowTouchMove={false}
         >
           {selectedVariant.images.map((image, index) => (
-            <div key={index} className="relative bg-white p-8">
+            <div key={index} className="relative bg-white p-36 md:p-16">
               <NextLink href={_url}>
                 <a>
                   <Image
@@ -107,9 +107,12 @@ const Tile: React.FC<Product> = ({ variants, name, _url }) => {
             </div>
           ))}
         </Slider>
-        <span onClick={handleAddToWishlist}>
+        <span
+          onClick={handleAddToWishlist}
+          className="absolute right-0 top-0 z-10 flex h-[32px] w-[32px] cursor-pointer items-center justify-center md:h-[48px] md:w-[48px]"
+        >
           <HeartIcon
-            className="absolute right-16 top-16 z-10 h-[6.5%] w-[8%] cursor-pointer"
+            className="h-[16px] w-[16px] md:h-[20px] md:w-[20px] lg:h-[24px] lg:w-[24px]"
             pathClassName={`transition duration-150 ease-out hover:fill-accent-red hover:stroke-accent-red ${
               wishlistLineItem ? 'fill-accent-red stroke-accent-red' : ''
             }`}
