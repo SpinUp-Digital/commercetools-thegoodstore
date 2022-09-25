@@ -9,9 +9,9 @@ export interface Props {
 const TilesGroup: React.FC<Props> = ({ tiles }) => {
   return (
     <Wrapper background="neutral-200">
-      <div className="flex flex-col bg-neutral-200 md:flex-row md:gap-16">
+      <div className="flex flex-col bg-neutral-200 md:flex-row lg:gap-16">
         {tiles.map((tile, index) => (
-          <Tile key={index} {...tile} />
+          <Tile key={index} {...tile} image={{ ...tile.image, layout: 'fill' }} className="h-[320px] lg:h-[475px]" />
         ))}
       </div>
     </Wrapper>
