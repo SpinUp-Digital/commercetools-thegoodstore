@@ -11,17 +11,27 @@ export interface TileProps {
   ctaLabel?: string;
   ctaReference?: Reference;
   roundedBorders?: boolean;
+  className?: string;
 }
 
-const Tile: React.FC<TileProps> = ({ image, title, subtitle, ctaLabel, ctaReference, roundedBorders = true }) => {
+const Tile: React.FC<TileProps> = ({
+  image,
+  title,
+  subtitle,
+  ctaLabel,
+  ctaReference,
+  roundedBorders = true,
+  className = '',
+}) => {
   const { resolveClassNames } = useClassNames();
 
   return (
-    <div className="relative w-full">
+    <div className={`relative w-full ${className}`}>
       {image && (
         <Image
           {...image}
           alt={title}
+          objectFit="cover"
           className={`brightness-75 ${resolveClassNames([roundedBorders && 'lg:rounded-md'])}`}
         />
       )}
