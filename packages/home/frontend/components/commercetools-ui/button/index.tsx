@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 export interface Props extends React.ComponentProps<'button'> {
-  colorScheme?: 'white' | 'blue';
+  colorScheme?: 'black' | 'white' | 'blue';
   rounded?: 'sm' | 'md' | 'lg';
 }
 
@@ -14,6 +14,7 @@ const Button: React.FC<React.PropsWithChildren<Props>> = ({
 }) => {
   const colorSchemes = useMemo(
     () => ({
+      black: 'bg-gray-700 text-white',
       white: 'bg-white text-primary-black',
       blue: 'bg-blue-500 text-white',
     }),
@@ -23,7 +24,9 @@ const Button: React.FC<React.PropsWithChildren<Props>> = ({
   return (
     <button
       {...props}
-      className={`${className} ${colorSchemes[colorScheme]} rounded-${rounded} py-8 px-24 font-medium leading-[16px]`}
+      className={`${
+        colorSchemes[colorScheme]
+      } rounded-${rounded} py-12 px-24 font-body text-14 font-bold leading-[16px] ${className ?? ''}`}
     >
       {children}
     </button>

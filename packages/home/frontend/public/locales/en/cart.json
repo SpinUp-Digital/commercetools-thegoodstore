@@ -33,5 +33,6 @@
   "ContinueAndPay": "Continue and pay",
   "includedVat": "Total amount {amount} incl.VAT",
   "codeNotValid": "Code not valid",
-  "codeAdded": "Discount code added"
+  "codeAdded": "Discount code added",
+  "cart.add": "Add to cart"
 }

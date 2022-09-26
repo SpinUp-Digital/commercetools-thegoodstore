@@ -1,6 +1,6 @@
 import React, { useState, FC, Children, CSSProperties, useRef } from 'react';
 import classnames from 'classnames';
-import { Navigation, Pagination, Thumbs } from 'swiper';
+import SwiperType, { Navigation, Pagination, Thumbs } from 'swiper';
 import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react'; // eslint-disable-line import/no-unresolved
 import 'swiper/css'; // eslint-disable-line import/no-unresolved
 import 'swiper/css/navigation'; // eslint-disable-line import/no-unresolved
@@ -31,6 +31,7 @@ const Slider: FC<SliderProps> = ({
   spaceBetween = 20,
   withThumbs,
   children,
+  onSwiper,
   prevButtonStyles = {},
   nextButtonStyles = {},
   ...props
@@ -39,6 +40,11 @@ const Slider: FC<SliderProps> = ({
   const navigationNextRef = useRef<HTMLDivElement>(null);
 
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
+  const handleOnSwiper = (swiper: SwiperType) => {
+    setThumbsSwiper(swiper);
+    onSwiper?.(swiper);
+  };
 
   const validToFit: boolean = Boolean(fitToSlides) && Boolean(slideWidth) && Boolean(slidesPerView);
   const sliderWidth: CSSProperties['width'] = validToFit
@@ -74,6 +80,7 @@ const Slider: FC<SliderProps> = ({
         prevEl: navigationPrevRef.current,
         nextEl: navigationNextRef.current,
       }}
+      onSwiper={onSwiper}
       onBeforeInit={(swiper) => {
         (swiper.params.navigation as NavigationOptions).prevEl = navigationPrevRef.current;
         (swiper.params.navigation as NavigationOptions).nextEl = navigationNextRef.current;
@@ -98,7 +105,7 @@ const Slider: FC<SliderProps> = ({
               slidesPerView={5}
               direction={'vertical'}
               watchSlidesProgress
-              onSwiper={setThumbsSwiper}
+              onSwiper={handleOnSwiper}
               navigation={{
                 prevEl: navigationPrevRef.current,
                 nextEl: navigationNextRef.current,

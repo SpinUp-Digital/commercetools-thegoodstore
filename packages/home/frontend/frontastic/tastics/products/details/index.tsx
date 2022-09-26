@@ -2,15 +2,16 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Product } from '@Types/product/Product';
 import { Variant } from '@Types/product/Variant';
-import ProductDetails, { UIProduct, UIColor, UISize } from 'components/commercetools-ui/products/product-details';
-import { useCart } from 'frontastic';
-import { addToWishlist } from 'frontastic/actions/wishlist';
+import ProductDetails from 'components/commercetools-ui/products/product-details';
+import { useCart, useWishlist } from 'frontastic';
+import { UIColor, UIProduct, UISize } from 'components/commercetools-ui/products/product-details/types';
 
 function ProductDetailsTastic({ data }) {
+  const wishlist = useWishlist();
   const router = useRouter();
   const { product }: { product: Product } = data.data.dataSource;
 
-  const [currentVariantIdx, setCurrentVariantIdx] = useState<number>();
+  const [currentVariantId, setCurrentVariantId] = useState<string>();
   const [variant, setVariant] = useState<Variant>(product.variants[0]);
   const [prod, setProd] = useState<UIProduct>();
   const { addItem } = useCart();
@@ -54,12 +55,15 @@ function ProductDetailsTastic({ data }) {
   // TODO: properly type
 
   useEffect(() => {
-    if (!currentVariantIdx) {
+    if (!currentVariantId) {
       const currentVariantSKU = router.asPath.split('/')[3];
       const currentVariantIndex = product?.variants.findIndex(({ sku }) => sku == currentVariantSKU);
       setVariant(product.variants[currentVariantIndex]);
+    } else {
+      const currentVariant = product?.variants.find(({ id }) => id == currentVariantId);
+      setVariant(currentVariant);
     }
-  }, [currentVariantIdx]);
+  }, [currentVariantId]);
 
   useEffect(() => {
     const currentProd: UIProduct = {
@@ -95,11 +99,16 @@ function ProductDetailsTastic({ data }) {
   }, [variant]);
 
   const handleAddToCart = (variant: Variant, quantity: number): Promise<void> => {
-    return addItem(variant, 1);
+    return addItem(variant, quantity);
   };
 
   const handleAddToWishList = () => {
-    addToWishlist(variant.sku, 1);
+    wishlist.addToWishlist(variant.sku, 1);
+  };
+
+  const handleRemoveFromWishlist = () => {
+    const item = wishlist.data.lineItems.find(({ variant: { sku } }) => sku === variant.sku);
+    wishlist.removeLineItem(item?.lineItemId);
   };
 
   return (
@@ -107,8 +116,9 @@ function ProductDetailsTastic({ data }) {
       product={prod}
       onAddToCart={handleAddToCart}
       variant={variant}
-      onChangeVariantIdx={setCurrentVariantIdx}
+      onChangeVariantId={setCurrentVariantId}
       onAddToWishlist={handleAddToWishList}
+      onRemoveFromWishlist={handleRemoveFromWishlist}
     />
   );
 }
