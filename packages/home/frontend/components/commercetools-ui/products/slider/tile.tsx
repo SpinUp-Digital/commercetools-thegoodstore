@@ -3,7 +3,6 @@ import NextLink from 'next/link';
 import { Money } from '@Types/product/Money';
 import { Product } from '@Types/product/Product';
 import { Variant } from '@Types/product/Variant';
-import classNames from 'classnames';
 import Slider from 'components/commercetools-ui/slider';
 import HeartIcon from 'components/icons/heart';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';

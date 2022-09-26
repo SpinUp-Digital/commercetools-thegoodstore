@@ -33,7 +33,7 @@ export default function ProductSlider({ products, title, subline, ctaLabel, ctaL
   const sliderConfiguration: SliderProps = sliderFixedMood;
 
   return (
-    <Wrapper background="neutral-200" hasPhonePadding>
+    <Wrapper background="neutral-200" phonePadding="left-padding-only">
       <div className="text-start">
         <Title title={title} />
         <div className="mt-8 flex items-center justify-between md:mt-16 lg:mt-14">

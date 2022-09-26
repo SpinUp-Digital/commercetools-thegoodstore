@@ -6,24 +6,30 @@ export interface AccordionProps {
   index?: number;
   accordionListLength?: number;
   className?: string;
-  openSectionTitle: string;
+  openSectionTitle?: string;
   closedSectionTitle: string;
   iconColor?: string;
+  buttonClassName?: string;
+  panelClassName?: string;
 }
 
 const AccordionBtn: React.FC<AccordionProps> = ({
-  openSectionTitle,
   closedSectionTitle,
+  openSectionTitle = closedSectionTitle,
   iconColor,
   children,
   className,
+  buttonClassName,
+  panelClassName,
 }) => {
   return (
-    <div className={`${className}`}>
+    <div className={className}>
       <Disclosure>
         {({ open }) => (
           <>
-            <Disclosure.Button className="w-full py-14 px-12 text-14 font-semibold text-neutral-200">
+            <Disclosure.Button
+              className={`w-full py-14 px-12 text-14 font-semibold text-neutral-200 ${buttonClassName}`}
+            >
               <div className="flex justify-between">
                 <p className="self-center transition">{open ? openSectionTitle : closedSectionTitle}</p>
                 <ChevronDownIcon className={`${open ? 'rotate-180 transform' : ''} w-20 ${iconColor} transition`} />
@@ -37,7 +43,9 @@ const AccordionBtn: React.FC<AccordionProps> = ({
               leaveFrom="transform scale-y-100 opacity-100"
               leaveTo="transform scale-y-95 opacity-0"
             >
-              <Disclosure.Panel className="mb-18 px-20 text-neutral-200 md:p-20">{children}</Disclosure.Panel>
+              <Disclosure.Panel className={`mb-18 px-20 text-neutral-200 md:p-20 ${panelClassName}`}>
+                {children}
+              </Disclosure.Panel>
             </Transition>
           </>
         )}

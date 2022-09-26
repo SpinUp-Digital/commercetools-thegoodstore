@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import Link from 'next/link';
 import { ChevronRightIcon } from '@heroicons/react/outline';
 import { Category } from '@Types/product/Category';
@@ -62,7 +62,7 @@ const HeaderMenuMobile: FC<Props> = ({ navigation, language, languages, handleCu
                   `${index < navigation.length - 1 && 'border-b-[1px]'}`,
                 ])}
               >
-                {link.subCategories.length > 0 ? (
+                {link?.subCategories?.length > 0 ? (
                   <div
                     onClick={() => setSelected((array) => [...array, link])}
                     className="mx-20 my-12 flex h-24 justify-between text-16 font-medium"
