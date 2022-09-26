@@ -1,3 +1,4 @@
+import useClassNames from 'helpers/hooks/useClassNames';
 import React, { FC, ReactNode } from 'react';
 
 type WrapperProps = {
@@ -7,11 +8,13 @@ type WrapperProps = {
 };
 
 const Wrapper: FC<WrapperProps> = ({ children, background = 'white', hasPhonePadding }) => {
+  const { resolveClassNames } = useClassNames();
+
+  const className = resolveClassNames([hasPhonePadding && 'pl-8 md:pl-25 lg:pl-72 lg:pr-72 xl:pl-0 xl:pr-0']);
+
   return (
     <div className={`bg-${background}`}>
-      <div className={`mx-auto max-w-[1248px] ${hasPhonePadding && 'pl-8 md:pl-25 lg:pr-25 xl:pl-0 xl:pr-0'}`}>
-        {children}
-      </div>
+      <div className={`mx-auto max-w-[1248px] ${className}`}>{children}</div>
     </div>
   );
 };

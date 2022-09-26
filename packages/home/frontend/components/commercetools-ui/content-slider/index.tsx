@@ -28,7 +28,7 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
   const slidesElement = useMemo(
     () =>
       slides.map(({ image, title, ctaReference, ctaLabel }, index) => (
-        <div key={index} className="lg:shrink-0 lg:grow lg:basis-0">
+        <div key={index} className="overflow-hidden lg:shrink-0 lg:grow lg:basis-0">
           <div className="relative h-[220px] md:h-[356px]">
             <Image {...image} className="mb-5 rounded" layout="fill" objectFit="cover" />
           </div>

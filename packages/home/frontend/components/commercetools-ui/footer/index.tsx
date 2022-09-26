@@ -2,7 +2,7 @@ import React from 'react';
 import Accordion from 'components/commercetools-ui/accordion';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import { Reference, ReferenceLink } from 'helpers/reference';
-import { mobile } from 'helpers/utils/screensizes';
+import * as screensizes from 'helpers/utils/screensizes';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
 import Column, { Link } from './column';
 
@@ -22,19 +22,19 @@ export interface SocialMedia {
 }
 
 const Footer: React.FC<Props> = ({ columns, logo, socialMedia }) => {
-  const [isBiggerThanMobileSize] = useMediaQuery(mobile);
+  const [isBiggerThanTabletSize] = useMediaQuery(screensizes.tablet);
 
   return (
     <footer aria-labelledby="footer-heading" className="w-full bg-primary-black">
-      {isBiggerThanMobileSize ? (
-        <div className="w-full sm:px-25 sm:py-58 lg:px-175 lg:py-90 ">
-          <div className="grid sm:grid-cols-4 sm:gap-80 ">
+      {isBiggerThanTabletSize ? (
+        <div className="mx-auto w-full max-w-[1248px] px-72 py-58 xl:px-0">
+          <div className="grid grid-cols-4 ">
             {columns?.map((column, index) => (
               <div key={index} className="lg:justify-left">
                 <Column
                   header={column.header}
                   links={column.links}
-                  className="flex flex-col sm:items-center lg:items-start"
+                  className="flex flex-col items-center lg:items-start"
                 />
               </div>
             ))}
@@ -57,7 +57,7 @@ const Footer: React.FC<Props> = ({ columns, logo, socialMedia }) => {
           ))}
         </ul>
       )}
-      <div className="lg:items-auto flex flex-col-reverse items-center gap-y-32 sm:border-t sm:border-secondary-grey lg:flex-row lg:flex-row lg:justify-between lg:gap-y-0 lg:px-165 lg:py-40">
+      <div className="lg:items-auto mx-auto flex max-w-[1248px] flex-col-reverse items-center gap-y-32 px-72 sm:border-t sm:border-secondary-grey lg:flex-row lg:flex-row lg:justify-between lg:gap-y-0 lg:py-40 xl:px-0">
         {logo && (
           <div className="mb-32 w-160 self-center lg:mb-0">
             <Image {...logo} alt="logo" />
