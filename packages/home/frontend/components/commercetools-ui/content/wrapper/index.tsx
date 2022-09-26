@@ -1,5 +1,5 @@
-import useClassNames from 'helpers/hooks/useClassNames';
 import React, { FC, ReactNode } from 'react';
+import useClassNames from 'helpers/hooks/useClassNames';
 
 type WrapperProps = {
   children: ReactNode;

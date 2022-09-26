@@ -1,12 +1,12 @@
 import { FC, useMemo } from 'react';
+import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import { Reference, ReferenceLink } from 'helpers/reference';
+import * as screensizes from 'helpers/utils/screensizes';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
 import Wrapper from '../content/wrapper';
+import Slider from '../slider';
 import Subtitle from '../subtitle';
 import Title from '../title';
-import Slider from '../slider';
-import useMediaQuery from 'helpers/hooks/useMediaQuery';
-import * as screensizes from 'helpers/utils/screensizes';
 
 type ContentSliderSlide = {
   image: NextFrontasticImage;
