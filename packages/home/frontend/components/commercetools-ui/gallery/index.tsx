@@ -4,12 +4,14 @@ import Image from 'frontastic/lib/image';
 import Swiper from 'swiper';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import { desktop, tablet } from 'helpers/utils/screensizes';
+import { ProductDetailsProps } from '../products/product-details';
 
 interface GalleryProps {
   images: Array<string>;
+  inModalVersion?: ProductDetailsProps['inModalVersion'];
 }
 
-const Gallery: FC<GalleryProps> = ({ images }) => {
+const Gallery: FC<GalleryProps> = ({ images, inModalVersion }) => {
   const swiperRef = useRef<Swiper>();
   const [activeSlide, setActiveSlide] = useState(0);
 
@@ -35,7 +37,7 @@ const Gallery: FC<GalleryProps> = ({ images }) => {
   }, [isDesktopSize]);
 
   return (
-    <div className="col-span-2 grid gap-y-34 md:mb-50">
+    <div className={`${inModalVersion ? 'col-span-1' : 'col-span-2'}  grid gap-y-34 md:mb-50`}>
       <Slider
         onSlideChange={handleSlide}
         onSwiper={(swiper) => {
@@ -44,24 +46,31 @@ const Gallery: FC<GalleryProps> = ({ images }) => {
         {...sliderFixedMood}
         prevButtonStyles={{ left: sliderArrowsPosition }}
         nextButtonStyles={{ right: sliderArrowsPosition }}
+        compactNavigation={inModalVersion}
       >
-        {images.map((image, index) => (
-          <Image key={index} src={image} className="h-[447px] w-full object-contain" />
-        ))}
-      </Slider>
-
-      <div className="hidden gap-x-18 md:flex">
-        {images.map((image, index) => (
+        {images?.map((image, index) => (
           <Image
             key={index}
             src={image}
-            className={`${
-              index == activeSlide ? 'border-neutral-800' : 'border-neutral-400'
-            } h-112 w-112 rounded-md border border-neutral-400 object-contain p-7 hover:cursor-pointer`}
-            onClick={() => slideTo(index)}
+            className={`${inModalVersion ? 'h-180' : 'h-[447px]'}  w-full object-contain`}
           />
         ))}
-      </div>
+      </Slider>
+
+      {!inModalVersion && (
+        <div className="hidden gap-x-18 md:flex">
+          {images?.map((image, index) => (
+            <Image
+              key={index}
+              src={image}
+              className={`${
+                index == activeSlide ? 'border-neutral-800' : 'border-neutral-400'
+              } h-112 w-112 rounded-md border border-neutral-400 object-contain p-7 hover:cursor-pointer`}
+              onClick={() => slideTo(index)}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

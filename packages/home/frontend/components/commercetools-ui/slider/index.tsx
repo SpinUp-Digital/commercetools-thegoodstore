@@ -7,6 +7,7 @@ import 'swiper/css/navigation'; // eslint-disable-line import/no-unresolved
 import 'swiper/css/pagination'; // eslint-disable-line import/no-unresolved
 import 'swiper/css/scrollbar'; // eslint-disable-line import/no-unresolved
 import { NavigationOptions } from 'swiper/types';
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/outline';
 
 export type SliderProps = {
   className?: string;
@@ -19,6 +20,7 @@ export type SliderProps = {
   withThumbs?: boolean;
   prevButtonStyles?: React.CSSProperties;
   nextButtonStyles?: React.CSSProperties;
+  compactNavigation?: boolean;
 } & SwiperProps;
 
 const Slider: FC<SliderProps> = ({
@@ -34,6 +36,7 @@ const Slider: FC<SliderProps> = ({
   onSwiper,
   prevButtonStyles = {},
   nextButtonStyles = {},
+  compactNavigation,
   ...props
 }) => {
   const navigationPrevRef = useRef<HTMLDivElement>(null);
@@ -41,9 +44,15 @@ const Slider: FC<SliderProps> = ({
 
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
+  const swiperRef = useRef<SwiperType>();
+
   const handleOnSwiper = (swiper: SwiperType) => {
-    setThumbsSwiper(swiper);
+    swiperRef.current = swiper;
     onSwiper?.(swiper);
+
+    if (withThumbs) {
+      setThumbsSwiper(swiper);
+    }
   };
 
   const validToFit: boolean = Boolean(fitToSlides) && Boolean(slideWidth) && Boolean(slidesPerView);
@@ -80,7 +89,7 @@ const Slider: FC<SliderProps> = ({
         prevEl: navigationPrevRef.current,
         nextEl: navigationNextRef.current,
       }}
-      onSwiper={onSwiper}
+      onSwiper={handleOnSwiper}
       onBeforeInit={(swiper) => {
         (swiper.params.navigation as NavigationOptions).prevEl = navigationPrevRef.current;
         (swiper.params.navigation as NavigationOptions).nextEl = navigationNextRef.current;
@@ -92,6 +101,12 @@ const Slider: FC<SliderProps> = ({
       {slides}
     </Swiper>
   );
+
+  const compactNavigationArrowsStyle = {
+    className: 'h-20 w-20 hover:cursor-pointer',
+    strokeWidth: 1,
+    color: '#959595',
+  };
 
   return (
     <div className={containerClassName}>
@@ -126,10 +141,23 @@ const Slider: FC<SliderProps> = ({
       ) : (
         mainSlider
       )}
-      <div style={{ display: arrows ? 'block' : 'none' }}>
-        <div ref={navigationPrevRef} className="slider_arrow slider_arrow_prev" style={prevButtonStyles} />
-        <div ref={navigationNextRef} className="slider_arrow slider_arrow_next" style={nextButtonStyles} />
-      </div>
+
+      {compactNavigation ? (
+        <div className="mt-10 flex justify-center gap-16">
+          <ChevronLeftIcon {...compactNavigationArrowsStyle} onClick={() => swiperRef.current?.slidePrev()} />
+          <div className="flex font-body text-14 font-regular leading-loose text-secondary-black">
+            <span>{swiperRef.current?.activeIndex + 1}</span>
+            <span>/</span>
+            <span>{slides?.length}</span>
+          </div>
+          <ChevronRightIcon {...compactNavigationArrowsStyle} onClick={() => swiperRef.current?.slideNext()} />
+        </div>
+      ) : (
+        <div style={{ display: arrows ? 'block' : 'none' }}>
+          <div ref={navigationPrevRef} className="slider_arrow slider_arrow_prev" style={prevButtonStyles} />
+          <div ref={navigationNextRef} className="slider_arrow slider_arrow_next" style={nextButtonStyles} />
+        </div>
+      )}
     </div>
   );
 };

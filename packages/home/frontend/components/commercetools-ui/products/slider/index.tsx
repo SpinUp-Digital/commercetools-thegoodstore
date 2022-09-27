@@ -58,7 +58,7 @@ export default function ProductSlider({ products, title, subline, ctaLabel, ctaL
             prevButtonStyles={{ transform: 'translateY(-160%) rotateZ(135deg)' }}
           >
             {products.slice(0, 15).map((product, index: number) => (
-              <Tile {...product} key={index} />
+              <Tile product={product} key={index} />
             ))}
           </Slider>
         </div>

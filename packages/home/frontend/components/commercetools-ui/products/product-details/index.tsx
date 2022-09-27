@@ -8,42 +8,49 @@ import Button from 'components/commercetools-ui/button';
 import { useFormat } from 'helpers/hooks/useFormat';
 import ProductInformation from './product-information';
 import AdditionalInfo from './additional-info';
+import { useCart } from 'frontastic';
+import NextLink from 'next/link';
 
 export interface ProductDetailsProps {
   product: UIProduct;
-  onAddToCart: (variant: Variant, quantity: number) => Promise<void>;
+  variant: Variant;
+  url?: string;
   onAddToWishlist: () => void;
   onRemoveFromWishlist: () => void;
-  variant: Variant;
   onChangeVariantId: (idx: string) => void;
+  inModalVersion?: boolean;
 }
 
 const ProductDetails: FC<ProductDetailsProps> = ({
   product,
   variant,
+  url,
   onChangeVariantId,
   onAddToWishlist,
-  onAddToCart,
   onRemoveFromWishlist,
+  inModalVersion,
 }) => {
+  console.log('🚀 ~ file: index.tsx ~ line 33 ~ product', product);
+  const { addItem } = useCart();
   const { formatMessage } = useFormat({ name: 'cart' });
 
   const [quantity, setQuantity] = useState<number>(1);
-
-  const handleAddToCart = () => {
-    onAddToCart(variant, quantity);
-  };
 
   const handleQuantityChange = (value: string) => {
     setQuantity(+value);
   };
 
+  const handleAddToCart = () => {
+    addItem(variant, quantity);
+  };
+
+  const wrapperClassName = inModalVersion
+    ? 'grid grid-cols-2 pt-70 pb-35 px-30 gap-50'
+    : 'py-50 md:grid md:grid-cols-3 md:items-start md:gap-x-26 lg:gap-x-96';
+
   return (
-    <Wrapper
-      phonePadding="full-padding"
-      className="py-50 md:grid md:grid-cols-3 md:items-start md:gap-x-26 lg:gap-x-96"
-    >
-      <Gallery images={variant?.images} />
+    <Wrapper phonePadding="full-padding" className={wrapperClassName} clearDefaultStyles={inModalVersion}>
+      <Gallery images={variant?.images} inModalVersion={inModalVersion} />
       <div className="mt-22 md:mt-0">
         <ProductInformation
           product={product}
@@ -71,9 +78,21 @@ const ProductDetails: FC<ProductDetailsProps> = ({
             {formatMessage({ id: 'cart.add', defaultMessage: 'Add to cart' })}
           </Button>
         </div>
+
+        {inModalVersion && (
+          <div className="flex justify-center pt-30">
+            <NextLink href={url}>
+              <a className=" font-body text-14 font-regular leading-loose text-secondary-black underline">
+                More details
+              </a>
+            </NextLink>
+          </div>
+        )}
       </div>
 
-      <AdditionalInfo productspec={variant?.attributes.productspec} description={product?.description} />
+      {!inModalVersion && (
+        <AdditionalInfo productspec={variant?.attributes.productspec} description={product?.description} />
+      )}
     </Wrapper>
   );
 };
