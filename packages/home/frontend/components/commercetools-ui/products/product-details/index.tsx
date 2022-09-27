@@ -30,7 +30,6 @@ const ProductDetails: FC<ProductDetailsProps> = ({
   onRemoveFromWishlist,
   inModalVersion,
 }) => {
-  console.log('🚀 ~ file: index.tsx ~ line 33 ~ product', product);
   const { addItem } = useCart();
   const { formatMessage } = useFormat({ name: 'cart' });
 

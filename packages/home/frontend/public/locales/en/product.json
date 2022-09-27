@@ -1,6 +1,7 @@
 {
   "color": "Color",
   "size": "Size",
+  "finish": "Finish",
   "quantity": "Quantity",
   "product.info": "Product information",
   "product.desc": "Product description",

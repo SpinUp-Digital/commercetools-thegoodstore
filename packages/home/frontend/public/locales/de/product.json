@@ -1,6 +1,7 @@
 {
   "color": "Farbe",
   "size": "Größe",
+  "finish": "Fertig",
   "quantity": "Menge",
   "product.info": "Produktinformation",
   "product.desc": "Beschreibung des Produkts",
