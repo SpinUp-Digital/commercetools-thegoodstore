@@ -31,14 +31,15 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
   const slidesElement = useMemo(
     () =>
       slides.map(({ image, title, ctaReference, ctaLabel }, index) => (
-        <div key={index} className="overflow-hidden lg:shrink-0 lg:grow lg:basis-0">
+        <ReferenceLink target={ctaReference} key={index} className="overflow-hidden lg:shrink-0 lg:grow lg:basis-0">
           <div className="relative h-[220px] md:h-[356px]">
-            <Image {...image} sizes={tileImageSizes} className="mb-5 rounded" layout="fill" objectFit="cover" />
+            <div className="absolute z-10 h-full w-full rounded-md bg-black opacity-20"></div>
+            <Image {...image} sizes={tileImageSizes} className="mb-5 rounded-md" layout="fill" objectFit="cover" />
           </div>
           <h4 className="my-3.5 max-w-[90%] overflow-hidden text-ellipsis whitespace-pre text-18 font-normal">
             {title}
           </h4>
-          <ReferenceLink target={ctaReference} className="flex gap-1.5">
+          <div className="flex gap-1.5">
             <p className="text-16 font-normal">{ctaLabel}</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -50,8 +51,8 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
             >
               <path d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
             </svg>
-          </ReferenceLink>
-        </div>
+          </div>
+        </ReferenceLink>
       )),
     [slides],
   );
