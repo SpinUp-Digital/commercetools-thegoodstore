@@ -7,6 +7,7 @@ import Wrapper from '../content/wrapper';
 import Slider from '../slider';
 import Subtitle from '../subtitle';
 import Title from '../title';
+import useImageSizes from 'helpers/hooks/useImageSizes';
 
 type ContentSliderSlide = {
   image: NextFrontasticImage;
@@ -25,12 +26,14 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
   const [isTablet] = useMediaQuery(screensizes.tablet);
   const [isDesktop] = useMediaQuery(screensizes.desktop);
 
+  const tileImageSizes = useImageSizes({ md: 1, lg: 0.33, defaultSize: 0.33 });
+
   const slidesElement = useMemo(
     () =>
       slides.map(({ image, title, ctaReference, ctaLabel }, index) => (
         <div key={index} className="overflow-hidden lg:shrink-0 lg:grow lg:basis-0">
           <div className="relative h-[220px] md:h-[356px]">
-            <Image {...image} className="mb-5 rounded" layout="fill" objectFit="cover" />
+            <Image {...image} sizes={tileImageSizes} className="mb-5 rounded" layout="fill" objectFit="cover" />
           </div>
           <h4 className="my-3.5 max-w-[90%] overflow-hidden text-ellipsis whitespace-pre text-18 font-normal">
             {title}

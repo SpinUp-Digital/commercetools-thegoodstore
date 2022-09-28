@@ -14,8 +14,17 @@ export default function Image({
   src = '',
   ...props
 }: NextFrontasticImage) {
-  // eslint-disable-next-line @next/next/no-img-element
-  if (!media?.mediaId) return <img src={src as string} alt={alt} loading={loading} {...props} />; //not a frontastic image
+  if (!media?.mediaId)
+    return (
+      <NextImage
+        {...props}
+        loader={(params) => params.src}
+        src={src}
+        layout={isNaN(+width) || isNaN(+baseHeight) ? 'fill' : layout}
+        alt={alt}
+        loading={loading}
+      />
+    );
 
   //paremeters to inject in the source to be used in loader
   const paremeters = {
