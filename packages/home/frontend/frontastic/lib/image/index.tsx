@@ -10,7 +10,7 @@ export default function Image({
   gravity,
   loading = 'lazy',
   layout = 'responsive',
-  alt = '',
+  alt = media?.name ?? '',
   src = '',
   ...props
 }: NextFrontasticImage) {
@@ -18,7 +18,7 @@ export default function Image({
     return (
       <NextImage
         {...props}
-        loader={(params) => params.src}
+        unoptimized
         src={src}
         layout={isNaN(+width) || isNaN(+baseHeight) ? 'fill' : layout}
         alt={alt}

@@ -65,15 +65,20 @@ const Header: React.FC<HeaderProps> = ({
           handleCurrentMarket={handleCurrentMarket}
         />
 
-        <div className="relative mb-10 flex h-fit w-fit flex-col items-center justify-center px-10 md:mt-0 md:h-76">
-          <ReferenceLink className="h-60 w-125 text-center text-16 font-bold md:w-214 md:text-28" target={logoLink}>
+        <div className="relative mb-10 px-10 md:mt-0">
+          <ReferenceLink
+            className="relative block h-95 w-125 text-center text-16 font-bold md:h-76 md:w-214 md:text-28"
+            target={logoLink}
+          >
             {logo ? (
               <Image media={logo.media} layout="fill" objectFit="contain" alt={logo.title[currentMarket?.locale]} />
             ) : (
               'The Good Home'
             )}
+            <div className="absolute left-1/2 bottom-0 mb-20 -translate-x-1/2 text-10 font-normal md:mb-0 md:text-14 ">
+              HOME
+            </div>
           </ReferenceLink>
-          <div className="mb-20 flex text-10 font-normal md:bottom-0 md:mb-0 md:text-14 ">HOME</div>
         </div>
 
         <UtilitySection account={account} accountLink={accountLink} cartLink={cartLink} wishlistLink={wishlistLink} />

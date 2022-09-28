@@ -8,6 +8,7 @@ import MenuIcon from 'components/icons/menu-icon';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { Market } from '../../interfaces';
 import MarketButtonMobile from '../../market/market-button-mobile';
+import { useFormat } from 'helpers/hooks/useFormat';
 
 export interface Props {
   navigation: Category[];
@@ -21,6 +22,8 @@ const HeaderMenuMobile: FC<Props> = ({ navigation, language, languages, handleCu
   const [showMenu, setShowMenu] = useState(false);
   const { resolveClassNames } = useClassNames();
 
+  const { formatMessage } = useFormat({ name: 'common' });
+
   const showHeaderMenu = () => {
     setShowMenu(true);
   };
@@ -30,7 +33,11 @@ const HeaderMenuMobile: FC<Props> = ({ navigation, language, languages, handleCu
   };
   return (
     <div className="flex md:w-109 lg:hidden">
-      <button onClick={showHeaderMenu} className="h-fit w-20">
+      <button
+        onClick={showHeaderMenu}
+        title={formatMessage({ id: 'header.menu.open', defaultMessage: 'Open side menu' })}
+        className="h-fit w-20"
+      >
         <MenuIcon />
       </button>
       {showMenu && <div className="fixed top-0 left-0 z-10 h-full w-full bg-black opacity-50" />}
@@ -48,7 +55,11 @@ const HeaderMenuMobile: FC<Props> = ({ navigation, language, languages, handleCu
               <BackIcon className="m-22" />
             </button>
           )}
-          <button onClick={hideHeaderMenu} className="flex h-full w-full items-center justify-end">
+          <button
+            onClick={hideHeaderMenu}
+            title={formatMessage({ id: 'close', defaultMessage: 'Close' })}
+            className="flex h-full w-full items-center justify-end"
+          >
             <CloseIcon className="m-22" />
           </button>
         </div>

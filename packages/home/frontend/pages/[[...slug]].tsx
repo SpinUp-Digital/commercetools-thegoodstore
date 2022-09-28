@@ -6,6 +6,8 @@ import { FrontasticRenderer } from 'frontastic/lib/renderer';
 import { tastics } from 'frontastic/tastics';
 import { Log } from '../helpers/errorLogger';
 import styles from './slug.module.css';
+import Head from 'next/head';
+import { useFormat } from 'helpers/hooks/useFormat';
 
 type SlugProps = {
   // This needs an overhaul. Can be too many things in my opinion (*Marcel)
@@ -17,6 +19,8 @@ type SlugProps = {
 
 export default function Slug({ data, locale }: SlugProps) {
   LocaleStorage.locale = locale;
+
+  const { formatMessage } = useFormat({ name: 'common' });
 
   if (!data || typeof data === 'string') {
     return (
@@ -38,7 +42,18 @@ export default function Slug({ data, locale }: SlugProps) {
     );
   }
 
-  return <FrontasticRenderer data={data} tastics={tastics} wrapperClassName={styles.gridWrapper} />;
+  return (
+    <>
+      <Head>
+        <title>{formatMessage({ id: 'meta.title', defaultMessage: 'The Good Store' })}</title>
+        <meta
+          name="description"
+          content={formatMessage({ id: 'meta.desc', defaultMessage: 'Find largest home collections here!' })}
+        />
+      </Head>
+      <FrontasticRenderer data={data} tastics={tastics} wrapperClassName={styles.gridWrapper} />
+    </>
+  );
 }
 
 export const getServerSideProps: GetServerSideProps | Redirect = async ({ params, locale, query, req, res }) => {

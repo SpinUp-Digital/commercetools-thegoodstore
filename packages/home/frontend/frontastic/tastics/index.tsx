@@ -1,39 +1,42 @@
-// Doc Examples
-import SimpleButton from './doc-examples/simple-button';
-import HelloWorld from './doc-examples/hello-world';
-import StarWarsOpeningCrawl from './doc-examples/star-wars/movies';
-import StarWarsCharacterSearch from './doc-examples/star-wars/character-search';
-import StarWarsCharacterFilter from './doc-examples/star-wars/character-filter';
-//import ContentfulBlog from './doc-examples/contentful/blog';
+import dynamic from 'next/dynamic';
 
-import AccountDetails from './account/details';
-import AccountLogin from './account/login';
-import AccountOrdersHistory from './account/orders';
-import AccountRegister from './account/register';
-import ResetPassword from './account/reset-password';
-import AccountTest from './account/test';
-import Cart from './cart';
-import Checkout from './checkout';
-import ThankYou from './checkout/thank-you';
-import Markdown from './content/markdown';
+import Header from './header';
+import Footer from './footer';
 import SpacerTastic from './spacer';
 import Tile from './content/tile';
-import Footer from './footer';
-import Header from './header';
+import Markdown from './content/markdown';
 import Newsletter from './newsletter';
 import NotFound from './not-found';
-import ProductDetails from './products/details';
-import ProductList from './products/product-list';
 import ProductSlider from './products/slider';
-import SimilarProducts from './products/similar-products';
-import Showcase from './showcase';
-import Wishlist from './wishlist';
-import ContentfulBlogTastic from './contentful-blog';
 import CategorySliderTastic from './category-slider';
-import HeroTastic from './content/hero';
+import TilesGroupTastic from './content/tiles-group';
 import AnnouncementBarTastic from './bar/announcment';
 import ContentSliderTastic from './content-slider';
-import TilesGroupTastic from './content/tiles-group';
+import HeroTastic from './content/hero';
+
+// Doc Examples
+const SimpleButton = dynamic(() => import('./doc-examples/simple-button'));
+const HelloWorld = dynamic(() => import('./doc-examples/hello-world'));
+const StarWarsOpeningCrawl = dynamic(() => import('./doc-examples/star-wars/movies'));
+const StarWarsCharacterSearch = dynamic(() => import('./doc-examples/star-wars/character-search'));
+const StarWarsCharacterFilter = dynamic(() => import('./doc-examples/star-wars/character-filter'));
+//const ContentfulBlog = dynamic(() => import('./doc-examples/contentful/blog'));
+
+const AccountDetails = dynamic(() => import('./account/details'));
+const AccountLogin = dynamic(() => import('./account/login'));
+const AccountOrdersHistory = dynamic(() => import('./account/orders'));
+const AccountRegister = dynamic(() => import('./account/register'));
+const ResetPassword = dynamic(() => import('./account/reset-password'));
+const AccountTest = dynamic(() => import('./account/test'));
+const Cart = dynamic(() => import('./cart'));
+const Checkout = dynamic(() => import('./checkout'));
+const ThankYou = dynamic(() => import('./checkout/thank-you'));
+const ProductDetails = dynamic(() => import('./products/details'));
+const ProductList = dynamic(() => import('./products/product-list'));
+const SimilarProducts = dynamic(() => import('./products/similar-products'));
+const Showcase = dynamic(() => import('./showcase'));
+const Wishlist = dynamic(() => import('./wishlist'));
+const ContentfulBlogTastic = dynamic(() => import('./contentful-blog'));
 
 export const tastics = {
   // Doc Examples

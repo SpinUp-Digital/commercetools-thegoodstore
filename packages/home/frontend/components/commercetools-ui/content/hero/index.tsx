@@ -15,8 +15,16 @@ const Hero: React.FC<HeroProps> = ({ image, title, subtitle, ctaLabel, ctaRefere
   return (
     <div className="relative w-full">
       {image && (
-        <div className="h-[296px] md:h-[532px] lg:h-[668px]">
-          <Image {...image} alt={title} layout="fill" objectFit="cover" className="brightness-75" />
+        <div className="relative h-[296px] md:h-[532px] lg:h-[668px]">
+          <Image
+            {...image}
+            priority
+            loading="eager"
+            alt={title}
+            layout="fill"
+            objectFit="cover"
+            className="brightness-75"
+          />
         </div>
       )}
       <div className="absolute top-1/2 left-0 w-full -translate-y-1/2 px-48 text-center">

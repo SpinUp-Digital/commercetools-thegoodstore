@@ -4,6 +4,7 @@ import CheckIcon from 'components/icons/check-2';
 import CloseIcon from 'components/icons/close';
 import FlagIcons from 'components/icons/flags';
 import { Market } from '../interfaces';
+import { useFormat } from 'helpers/hooks/useFormat';
 interface Props {
   currentMarket?: Market;
   markets?: Market[];
@@ -12,6 +13,8 @@ interface Props {
 
 const MarketButton: React.FC<Props> = ({ currentMarket, markets, handleCurrentMarket }) => {
   const [showMarket, setShowMarket] = useState(false);
+
+  const { formatMessage } = useFormat({ name: 'common' });
 
   const showMarketMenu = () => {
     setShowMarket(true);
@@ -46,7 +49,11 @@ const MarketButton: React.FC<Props> = ({ currentMarket, markets, handleCurrentMa
           showMarket ? 'left-0 translate-x-0' : '-translate-x-400'
         }`}
       >
-        <button onClick={hideMarketMenu} className="flex w-full justify-end ">
+        <button
+          onClick={hideMarketMenu}
+          title={formatMessage({ id: 'close', defaultMessage: 'Close' })}
+          className="flex w-full justify-end "
+        >
           <CloseIcon className="m-16" />
         </button>
         <h5 className="px-26 pb-24 text-22 font-normal">Select your market</h5>
