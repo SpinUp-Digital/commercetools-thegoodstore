@@ -96,13 +96,15 @@ const Tile: FC<TileProps> = ({ product }) => {
           allowTouchMove={false}
         >
           {selectedVariant.images.map((image, index) => (
-            <div key={index} className="relative bg-white p-36 md:p-16">
+            <div key={index} className="relative bg-white p-32 md:p-48">
               <NextLink href={product._url}>
-                <a>
+                <a className="relative block h-[175px] md:h-[360px]">
                   <Image
                     src={image}
                     alt={product.name}
-                    className="h-[175px] w-full rounded-sm object-contain object-center group-hover:opacity-75 md:h-[360px] md:p-16"
+                    objectFit="contain"
+                    objectPosition="center"
+                    className="w-full rounded-sm group-hover:opacity-75 md:p-16"
                   />
                 </a>
               </NextLink>
