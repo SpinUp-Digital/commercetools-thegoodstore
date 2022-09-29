@@ -1,8 +1,8 @@
+import { CSSProperties, FC, useState } from 'react';
 import { XIcon } from '@heroicons/react/outline';
 import { Product } from '@Types/product/Product';
-import { useFormat } from 'helpers/hooks/useFormat';
-import { CSSProperties, FC, useState } from 'react';
 import Modal from 'react-modal';
+import { useFormat } from 'helpers/hooks/useFormat';
 import ProductDetailsAdapter from '../product-details/adapter';
 
 type QuickViewProps = {

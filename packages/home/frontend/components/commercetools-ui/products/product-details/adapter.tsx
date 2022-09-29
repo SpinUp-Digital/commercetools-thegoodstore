@@ -2,12 +2,12 @@ import { useState, useEffect, FC } from 'react';
 import { useRouter } from 'next/router';
 import { Product } from '@Types/product/Product';
 import { Variant } from '@Types/product/Variant';
-import { useWishlist } from 'frontastic';
 import { UIProduct } from 'components/commercetools-ui/products/product-details/types';
-import ProductDetails, { ProductDetailsProps } from '.';
-import { toUIProduct } from 'helpers/mappers/toUIProduct';
 import { toUIColor } from 'helpers/mappers/toUIColor';
+import { toUIProduct } from 'helpers/mappers/toUIProduct';
 import { toUISize } from 'helpers/mappers/toUIsize';
+import { useWishlist } from 'frontastic';
+import ProductDetails, { ProductDetailsProps } from '.';
 
 type ProductDetailsAdapterProps = {
   product: Product;

@@ -1,9 +1,9 @@
-import Slider, { SliderProps } from 'components/commercetools-ui/slider';
 import { FC, useEffect, useRef, useState } from 'react';
-import Image from 'frontastic/lib/image';
 import Swiper from 'swiper';
+import Slider, { SliderProps } from 'components/commercetools-ui/slider';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import { desktop, tablet } from 'helpers/utils/screensizes';
+import Image from 'frontastic/lib/image';
 import { ProductDetailsProps } from '../products/product-details';
 
 interface GalleryProps {

@@ -1,15 +1,19 @@
-import React, { Dispatch, useState } from 'react';
+import React, { useState } from 'react';
 import { Account } from '@Types/account/Account';
 import { Category } from '@Types/product/Category';
 import { Reference, ReferenceLink } from 'helpers/reference';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
 import { Market, Link } from './interfaces';
 import MarketButton from './market/market-button';
-import HeaderButton from './navigation/header-button';
 import HeaderButtonMenu from './navigation/header-button-menu';
 import HeaderMenuMobile from './navigation/header-menu-mobile';
 import UtilitySection from './navigation/utility-section';
 
+export interface Tile {
+  tileImage: NextFrontasticImage;
+  tileHeader: string;
+  tileButton: Link;
+}
 export interface HeaderProps {
   links: Category[];
   linksMobile: Category[];
@@ -19,13 +23,12 @@ export interface HeaderProps {
   wishlistItemCount?: number;
   logo: NextFrontasticImage;
   logoLink: Reference;
+  secondaryLogo: NextFrontasticImage;
   account: Account;
   accountLink: Reference;
   wishlistLink?: Reference;
   cartLink: Reference;
-  navTileImage: NextFrontasticImage;
-  navTileHeader: string;
-  navTileButton: Link;
+  tileContent?: Tile;
   handleCurrentMarket: (market: Market) => void;
 }
 
@@ -36,13 +39,12 @@ const Header: React.FC<HeaderProps> = ({
   currentMarket,
   logo,
   logoLink,
+  secondaryLogo,
   account,
   accountLink,
   wishlistLink,
   cartLink,
-  navTileImage,
-  navTileHeader,
-  navTileButton,
+  tileContent,
   handleCurrentMarket,
 }) => {
   const [activeCategory, setActiveCategory] = useState<Category>(undefined);
@@ -59,7 +61,7 @@ const Header: React.FC<HeaderProps> = ({
         <MarketButton currentMarket={currentMarket} markets={markets} handleCurrentMarket={handleCurrentMarket} />
 
         <HeaderMenuMobile
-          navigation={linksMobile}
+          navLinks={linksMobile}
           language={currentMarket}
           languages={markets}
           handleCurrentMarket={handleCurrentMarket}
@@ -67,7 +69,7 @@ const Header: React.FC<HeaderProps> = ({
 
         <div className="relative mb-10 px-10 md:mt-0">
           <ReferenceLink
-            className="relative block h-95 w-125 text-center text-16 font-bold md:h-76 md:w-214 md:text-28"
+            className="flex h-95 w-125 justify-center text-center text-16 font-bold md:h-76 md:w-214 md:text-28"
             target={logoLink}
           >
             {logo ? (
@@ -75,10 +77,19 @@ const Header: React.FC<HeaderProps> = ({
             ) : (
               'The Good Home'
             )}
-            <div className="absolute left-1/2 bottom-0 mb-20 -translate-x-1/2 text-10 font-normal md:mb-0 md:text-14 ">
-              HOME
-            </div>
           </ReferenceLink>
+          <div className="absolute bottom-15 left-1/2 h-25 w-32 -translate-x-1/2 font-normal md:-bottom-5 md:w-44 md:text-14">
+            {secondaryLogo ? (
+              <Image
+                media={secondaryLogo.media}
+                layout="fill"
+                objectFit="contain"
+                alt={secondaryLogo.title[currentMarket?.locale]}
+              />
+            ) : (
+              'Home'
+            )}
+          </div>
         </div>
 
         <UtilitySection account={account} accountLink={accountLink} cartLink={cartLink} wishlistLink={wishlistLink} />
@@ -88,18 +99,14 @@ const Header: React.FC<HeaderProps> = ({
         <nav onMouseLeave={() => showSubMenu()} className="relative hidden h-64 items-center justify-center lg:flex">
           {links.map((link) => (
             <div onMouseEnter={() => showSubMenu(link)} key={link?.categoryId}>
-              {link.subCategories?.length > 0 ? (
+              {link.depth === 0 && (
                 <HeaderButtonMenu
                   show={link.categoryId === activeCategory?.categoryId}
                   link={link}
-                  navTileImage={navTileImage}
-                  navTileHeader={navTileHeader}
-                  navTileButton={navTileButton}
+                  tileContent={tileContent}
                   updateSubMenu={hideSubMenu}
                   currentMarket={currentMarket}
                 />
-              ) : (
-                <HeaderButton link={link} />
               )}
             </div>
           ))}

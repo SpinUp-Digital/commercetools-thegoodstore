@@ -1,7 +1,7 @@
+import { FC } from 'react';
 import AccordionBtn from 'components/commercetools-ui/accordion';
 import Markdown from 'components/commercetools-ui/content/markdown';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { FC } from 'react';
 
 type AdditionalInfoProps = {
   productspec: string;

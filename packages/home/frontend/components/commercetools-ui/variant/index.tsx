@@ -1,7 +1,7 @@
+import { FC, useEffect, useState } from 'react';
 import { Variant } from '@Types/product/Variant';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { discardRepeatedValues } from 'helpers/utils/discardRepeatedValues';
-import { FC, useEffect, useState } from 'react';
 
 type VariantProps = {
   className?: string;

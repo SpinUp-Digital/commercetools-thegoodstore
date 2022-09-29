@@ -1,5 +1,5 @@
-import useImageSizes from 'helpers/hooks/useImageSizes';
 import React from 'react';
+import useImageSizes from 'helpers/hooks/useImageSizes';
 import Tile, { TileProps } from '../tile';
 import Wrapper from '../wrapper';
 

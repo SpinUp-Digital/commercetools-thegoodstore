@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/outline';
 import CloseIcon from 'components/icons/close';
 import FlagIcons from 'components/icons/flags';
-import { Market } from '../interfaces';
 import { useFormat } from 'helpers/hooks/useFormat';
+import { Market } from '../interfaces';
 
 interface Props {
   currentMarket?: Market;
@@ -36,13 +36,13 @@ const MarketButtonMobile: React.FC<Props> = ({ currentMarket, markets, handleCur
         onClick={showMarketMenu}
         className="mx-10 flex h-40 w-11/12 cursor-pointer items-center justify-between border-[1px] border-neutral-400 bg-white text-16 font-medium"
       >
-        <div className="ml-10 flex w-fit justify-start">
+        <div className="ml-10 flex w-fit justify-start text-14">
           <FlagIcons flagName={currentMarket?.flag} className="mr-8 mt-3 text-14" />
           {currentMarket?.region} | {currentMarket?.currency}
-          <span dangerouslySetInnerHTML={{ __html: currentMarket?.currencyCode }} className="ml-5 mr-20" />
+          <span dangerouslySetInnerHTML={{ __html: currentMarket?.currencyCode }} className="ml-5 mr-20 text-14" />
         </div>
         <div className="mr-10 flex w-fit justify-end">
-          <ChevronDownIcon className=" h-11 w-11" />
+          <ChevronDownIcon className=" h-13 w-13" />
         </div>
       </div>
 
@@ -52,24 +52,17 @@ const MarketButtonMobile: React.FC<Props> = ({ currentMarket, markets, handleCur
         }`}
       >
         <div className="flex w-full items-center justify-between border-b-[1px] border-neutral-400 px-20 py-22">
-          <div className="flex w-3/4 justify-start text-12 font-normal ">Select shipping country</div>
-          <button
-            onClick={hideMarketMenu}
-            title={formatMessage({ id: 'close', defaultMessage: 'Close' })}
-            className="flex w-1/5 justify-end py-10"
-          >
+          <div className="flex w-3/4 justify-start text-12 font-normal">Select shipping country</div>
+          <button onClick={hideMarketMenu} className="flex w-1/5 justify-end py-10">
             <CloseIcon className="w-10" />
           </button>
         </div>
         <>
           {markets.map((market, index) => (
             <div key={index} className="overflow-y-scroll">
-              <button
-                onClick={() => handleMarketClick(market)}
-                className="flex h-24 items-center justify-center p-26 text-14"
-              >
+              <button onClick={() => handleMarketClick(market)} className="flex h-24 items-center justify-center p-26">
                 <FlagIcons flagName={market.flag} className="mr-8 mt-3" />
-                {market.region}
+                <span className="text-14">{market.region}</span>
               </button>
             </div>
           ))}

@@ -1,28 +1,18 @@
 import React, { FC } from 'react';
 import { Category } from '@Types/product/Category';
-import { NextFrontasticImage } from 'frontastic/lib/image';
-import { Link as TileLink, Market } from '../interfaces';
+import { Tile } from '..';
+import { Market } from '../interfaces';
 import HeaderMenuDesktop from './header-menu-desktop';
 
 export interface Props {
   show: boolean;
   link: Category;
-  navTileImage: NextFrontasticImage;
-  navTileHeader: string;
-  navTileButton: TileLink;
+  tileContent?: Tile;
   currentMarket: Market;
   updateSubMenu: () => void;
 }
 
-const HeaderButtonMenu: FC<Props> = ({
-  show,
-  link,
-  navTileImage,
-  navTileHeader,
-  navTileButton,
-  currentMarket,
-  updateSubMenu,
-}) => {
+const HeaderButtonMenu: FC<Props> = ({ show, link, tileContent, currentMarket, updateSubMenu }) => {
   return (
     <>
       <div className="mx-20 cursor-pointer py-20">
@@ -31,11 +21,9 @@ const HeaderButtonMenu: FC<Props> = ({
       {show && (
         <HeaderMenuDesktop
           onClick={updateSubMenu}
-          navigation={link.subCategories}
-          tileImage={navTileImage}
-          tileHeader={navTileHeader}
-          tileButton={navTileButton}
+          navLinks={link.subCategories}
           currentMarket={currentMarket}
+          tileContent={tileContent}
         />
       )}
     </>
