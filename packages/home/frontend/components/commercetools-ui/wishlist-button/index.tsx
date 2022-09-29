@@ -1,5 +1,5 @@
-import HeartIcon from 'components/icons/heart';
 import { FC } from 'react';
+import HeartIcon from 'components/icons/heart';
 
 interface wishlistButtonProps {
   onWishlist: boolean;

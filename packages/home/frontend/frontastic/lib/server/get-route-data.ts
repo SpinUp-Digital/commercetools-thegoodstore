@@ -93,7 +93,7 @@ export const getCategories =
       'Frontastic-Locale': locale,
     };
 
-    const endpoint = '/action/product/queryCategories?limit=10';
+    const endpoint = '/action/product/queryCategories?limit=100';
 
     const data = (await fetchApiHubServerSide(
       endpoint,

@@ -1,26 +1,28 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { ChevronRightIcon } from '@heroicons/react/outline';
 import { Category } from '@Types/product/Category';
 import BackIcon from 'components/icons/back';
 import CloseIcon from 'components/icons/close';
 import MenuIcon from 'components/icons/menu-icon';
-import useClassNames from 'helpers/hooks/useClassNames';
+import { useFormat } from 'helpers/hooks/useFormat';
 import { Market } from '../../interfaces';
 import MarketButtonMobile from '../../market/market-button-mobile';
-import { useFormat } from 'helpers/hooks/useFormat';
 
 export interface Props {
-  navigation: Category[];
+  navLinks: Category[];
   language: Market;
   languages: Market[];
   handleCurrentMarket: (market: Market) => void;
 }
 
-const HeaderMenuMobile: FC<Props> = ({ navigation, language, languages, handleCurrentMarket }) => {
+const HeaderMenuMobile: FC<Props> = ({ navLinks, language, languages, handleCurrentMarket }) => {
   const [selected, setSelected] = useState<Category[]>([]);
   const [showMenu, setShowMenu] = useState(false);
-  const { resolveClassNames } = useClassNames();
+
+  const depth = useMemo(() => {
+    return 0;
+  }, []);
 
   const { formatMessage } = useFormat({ name: 'common' });
 
@@ -46,7 +48,7 @@ const HeaderMenuMobile: FC<Props> = ({ navigation, language, languages, handleCu
           showMenu ? 'left-0 translate-x-0' : '-translate-x-[1000px]'
         }`}
       >
-        <div className="w-fill flex h-83 justify-between bg-neutral-400">
+        <div className="w-fill flex h-83 justify-between bg-neutral-300">
           {selected.length > 0 && (
             <button
               onClick={() => setSelected((array) => array.slice(0, -1))}
@@ -65,28 +67,24 @@ const HeaderMenuMobile: FC<Props> = ({ navigation, language, languages, handleCu
         </div>
         <>
           {selected.length <= 0 ? (
-            navigation.map((link, index) => (
-              <div
-                key={link.categoryId}
-                className={resolveClassNames([
-                  'cursor-pointer border-neutral-400',
-                  `${index < navigation.length - 1 && 'border-b-[1px]'}`,
-                ])}
-              >
-                {link?.subCategories?.length > 0 ? (
-                  <div
-                    onClick={() => setSelected((array) => [...array, link])}
-                    className="mx-20 my-12 flex h-24 justify-between text-16 font-medium"
-                  >
-                    {link.name} <ChevronRightIcon className="w-13" />
-                  </div>
-                ) : (
-                  <Link href={link.slug ? link.slug : link.path}>
-                    <div className="mx-20 my-12 flex h-24 justify-between text-16 font-medium">{link.name}</div>
-                  </Link>
-                )}
-              </div>
-            ))
+            navLinks
+              .filter((navLink) => navLink.depth === depth)
+              .map((navLink) => (
+                <div key={navLink.categoryId} className="cursor-pointer border-b-[1px] border-neutral-400">
+                  {navLink?.subCategories?.length > 0 ? (
+                    <div
+                      onClick={() => setSelected((array) => [...array, navLink])}
+                      className="mx-20 my-12 flex h-24 justify-between text-16 font-medium"
+                    >
+                      {navLink.name} <ChevronRightIcon className="w-15" />
+                    </div>
+                  ) : (
+                    <Link href={navLink.slug ? navLink.slug : navLink.path}>
+                      <div className="mx-20 my-12 flex h-24 justify-between text-16 font-medium">{navLink.name}</div>
+                    </Link>
+                  )}
+                </div>
+              ))
           ) : (
             <>
               <div className="mx-20 my-18 flex h-24 justify-start text-16 font-medium">
@@ -99,7 +97,7 @@ const HeaderMenuMobile: FC<Props> = ({ navigation, language, languages, handleCu
                       onClick={() => setSelected((array) => [...array, nav])}
                       className="mx-20 my-12 flex h-24 justify-between text-16 font-normal"
                     >
-                      {nav.name} <ChevronRightIcon className="w-13" />
+                      {nav.name} <ChevronRightIcon className="w-15" />
                     </div>
                   ) : (
                     <Link href={nav.slug ? nav.slug : nav.path}>

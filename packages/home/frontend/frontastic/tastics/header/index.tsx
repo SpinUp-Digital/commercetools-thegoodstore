@@ -41,15 +41,18 @@ const HeaderTastic = ({ data, categories }) => {
       wishlistItemCount={wishlist?.lineItems?.length || 0}
       logo={data.logo}
       logoLink={data.logoLink}
+      secondaryLogo={data.secondaryLogo}
       account={account}
       accountLink={data.accountLink}
       wishlistLink={data.wishlistLink}
       cartLink={data.cartLink}
-      navTileImage={data.tileImage}
-      navTileHeader={data.tileHeaderText}
-      navTileButton={{
-        name: data.tileButtonLabel,
-        reference: data.tileButtonLink,
+      tileContent={{
+        tileImage: data.tileImage,
+        tileHeader: data.tileHeaderText,
+        tileButton: {
+          name: data.tileButtonLabel,
+          reference: data.tileButtonLink,
+        },
       }}
       handleCurrentMarket={handleCurrentMarket}
     />

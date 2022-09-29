@@ -1,9 +1,9 @@
-import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { FC, useEffect, useState } from 'react';
-import { ProductDetailsProps } from '.';
-import { useWishlist } from 'frontastic';
 import Variant from 'components/commercetools-ui/variant';
 import WishlistButton from 'components/commercetools-ui/wishlist-button';
+import { CurrencyHelpers } from 'helpers/currencyHelpers';
+import { useWishlist } from 'frontastic';
+import { ProductDetailsProps } from '.';
 
 type ProductInformationProps = Omit<ProductDetailsProps, 'onAddToCart'>;
 

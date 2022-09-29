@@ -1,15 +1,15 @@
 import { FC, useState } from 'react';
-import { UIProduct } from './types';
-import Wrapper from 'components/commercetools-ui/content/wrapper';
-import { Variant } from '@Types/product/Variant';
-import Gallery from 'components/commercetools-ui/gallery';
-import Dropdown from 'components/commercetools-ui/dropdown';
-import Button from 'components/commercetools-ui/button';
-import { useFormat } from 'helpers/hooks/useFormat';
-import ProductInformation from './product-information';
-import AdditionalInfo from './additional-info';
-import { useCart } from 'frontastic';
 import NextLink from 'next/link';
+import { Variant } from '@Types/product/Variant';
+import Button from 'components/commercetools-ui/button';
+import Wrapper from 'components/commercetools-ui/content/wrapper';
+import Dropdown from 'components/commercetools-ui/dropdown';
+import Gallery from 'components/commercetools-ui/gallery';
+import { useFormat } from 'helpers/hooks/useFormat';
+import { useCart } from 'frontastic';
+import AdditionalInfo from './additional-info';
+import ProductInformation from './product-information';
+import { UIProduct } from './types';
 
 export interface ProductDetailsProps {
   product: UIProduct;

@@ -3,8 +3,8 @@ import { ChevronDownIcon } from '@heroicons/react/outline';
 import CheckIcon from 'components/icons/check-2';
 import CloseIcon from 'components/icons/close';
 import FlagIcons from 'components/icons/flags';
-import { Market } from '../interfaces';
 import { useFormat } from 'helpers/hooks/useFormat';
+import { Market } from '../interfaces';
 interface Props {
   currentMarket?: Market;
   markets?: Market[];
@@ -32,7 +32,7 @@ const MarketButton: React.FC<Props> = ({ currentMarket, markets, handleCurrentMa
   return (
     <div className="ml-12 hidden justify-center md:w-109 lg:flex lg:w-300">
       {currentMarket && (
-        <button onClick={showMarketMenu} className="flex items-center justify-center p-3">
+        <button onClick={showMarketMenu} className="flex items-center justify-center p-3 text-14">
           <FlagIcons flagName={currentMarket?.flag} className="mr-8 text-14" />
           {currentMarket?.region} | {currentMarket?.currency}
           <span dangerouslySetInnerHTML={{ __html: currentMarket?.currencyCode }} className="ml-5 mr-20" />

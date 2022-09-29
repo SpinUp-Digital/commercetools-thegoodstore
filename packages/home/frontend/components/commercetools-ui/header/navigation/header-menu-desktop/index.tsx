@@ -2,33 +2,37 @@ import React, { FC } from 'react';
 import Link from 'next/link';
 import { Category } from '@Types/product/Category';
 import { NextFrontasticImage } from 'frontastic/lib/image';
+import { Tile } from '../..';
 import { Link as TileLink, Market } from '../../interfaces';
 import HeaderMenuTileDesktop from './header-menu-tile-desktop';
 
 export interface Props {
-  navigation: Category[];
-  tileImage: NextFrontasticImage;
-  tileHeader: string;
-  tileButton: TileLink;
+  navLinks: Category[];
+
   currentMarket: Market;
+  tileContent?: Tile;
   onClick?: () => void;
 }
 
-const HeaderMenuDesktop: FC<Props> = ({ navigation, tileImage, tileHeader, tileButton, currentMarket, onClick }) => {
+const HeaderMenuDesktop: FC<Props> = ({ navLinks, tileContent, currentMarket, onClick }) => {
   return (
-    <div className="absolute bottom-0 left-0 z-10 flex h-fit w-full translate-y-full justify-between border-t-[1px] border-neutral-400 bg-white px-96 py-34">
-      <div className="flex w-1/2 justify-between pr-25">
-        {navigation.map((data) => (
-          <div key={data.categoryId}>
-            {data.subCategories.length > 0 ? (
-              <div key={data.categoryId}>
-                <div className="font-medium text-primary-black">{data.name}</div>
-                {data.subCategories.map((field) => (
-                  <div key={field.categoryId} onClick={onClick} className="cursor-pointer">
+    <div
+      className={`absolute bottom-0 left-0 z-10 flex h-fit w-full translate-y-full ${
+        tileContent ? 'justify-between' : 'justify-center'
+      } border-t-[1px] border-neutral-400 bg-white px-96 py-34`}
+    >
+      <div className={`flex w-1/2 justify-between ${tileContent ? 'pr-25' : ''}`}>
+        {navLinks.map((navLink) => (
+          <div key={navLink.categoryId}>
+            {navLink.depth === 1 ? (
+              <div key={navLink.categoryId}>
+                <div className="text-14 font-medium text-primary-black">{navLink.name}</div>
+                {navLink.subCategories.map((field) => (
+                  <div key={field.categoryId} onClick={onClick} className="my-4 cursor-pointer">
                     <Link href={field.slug ? field.slug : field.path} passHref>
                       <div
                         onClick={() => console.log(field.path)}
-                        className="w-fit border-secondary-black text-14 font-light text-secondary-black hover:border-b-[1px]"
+                        className="h-22 w-fit border-secondary-black text-14 font-light text-secondary-black hover:border-b-[1px]"
                       >
                         {field.name}
                       </div>
@@ -37,20 +41,22 @@ const HeaderMenuDesktop: FC<Props> = ({ navigation, tileImage, tileHeader, tileB
                 ))}
               </div>
             ) : (
-              <Link key={data.categoryId} href={data.slug ? data.slug : data.path} passHref>
-                <div className="cursor-pointer font-medium text-primary-black">{data.name}</div>
+              <Link key={navLink.categoryId} href={navLink.slug ? navLink.slug : navLink.path} passHref>
+                <div className="cursor-pointer text-14 font-medium text-primary-black">{navLink.name}</div>
               </Link>
             )}
           </div>
         ))}
       </div>
-      <HeaderMenuTileDesktop
-        title={tileHeader}
-        image={tileImage}
-        buttonLabel={tileButton.name}
-        buttonLink={tileButton.reference}
-        currentMarket={currentMarket}
-      />
+      {tileContent && (
+        <HeaderMenuTileDesktop
+          title={tileContent.tileHeader}
+          image={tileContent.tileImage}
+          buttonLabel={tileContent.tileButton.name}
+          buttonLink={tileContent.tileButton.reference}
+          currentMarket={currentMarket}
+        />
+      )}
     </div>
   );
 };

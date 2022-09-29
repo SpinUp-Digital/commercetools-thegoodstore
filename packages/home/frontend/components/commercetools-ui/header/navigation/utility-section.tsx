@@ -3,8 +3,8 @@ import { Account } from '@Types/account/Account';
 import AccountIcon from 'components/icons/account';
 import CartIcon from 'components/icons/cart';
 import WishlistIcon from 'components/icons/wishlist';
-import { Reference, ReferenceLink } from 'helpers/reference';
 import { useFormat } from 'helpers/hooks/useFormat';
+import { Reference, ReferenceLink } from 'helpers/reference';
 
 interface Props {
   accountLink: Reference;
