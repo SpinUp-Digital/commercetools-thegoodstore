@@ -25,4 +25,5 @@ module.exports = withPWA({
 
     return config;
   },
+  productionBrowserSourceMaps: true,
 });

@@ -3,6 +3,7 @@ import { ChevronDownIcon } from '@heroicons/react/outline';
 import CloseIcon from 'components/icons/close';
 import FlagIcons from 'components/icons/flags';
 import { Market } from '../interfaces';
+import { useFormat } from 'helpers/hooks/useFormat';
 
 interface Props {
   currentMarket?: Market;
@@ -12,6 +13,8 @@ interface Props {
 
 const MarketButtonMobile: React.FC<Props> = ({ currentMarket, markets, handleCurrentMarket }) => {
   const [show, setShow] = useState(false);
+
+  const { formatMessage } = useFormat({ name: 'common' });
 
   const showMarketMenu = () => {
     setShow(true);
@@ -50,7 +53,11 @@ const MarketButtonMobile: React.FC<Props> = ({ currentMarket, markets, handleCur
       >
         <div className="flex w-full items-center justify-between border-b-[1px] border-neutral-400 px-20 py-22">
           <div className="flex w-3/4 justify-start text-12 font-normal ">Select shipping country</div>
-          <button onClick={hideMarketMenu} className="flex w-1/5 justify-end py-10">
+          <button
+            onClick={hideMarketMenu}
+            title={formatMessage({ id: 'close', defaultMessage: 'Close' })}
+            className="flex w-1/5 justify-end py-10"
+          >
             <CloseIcon className="w-10" />
           </button>
         </div>

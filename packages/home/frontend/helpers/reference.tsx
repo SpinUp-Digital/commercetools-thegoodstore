@@ -49,22 +49,25 @@ export function getTargetProps(target: LinkReference | PageFolderReference) {
 interface Props {
   className?: string;
   target: Reference;
+  title?: string;
 }
 
-export const ReferenceLink: React.FC<Props> = ({ target, className, children }) => {
+export const ReferenceLink: React.FC<Props> = ({ target, className, children, title = '' }) => {
   // if (target && target.type === 'link') console.log('getReference target', getReferenceTarget(target));
 
   //no valid target for next/link
   if (!target)
     return (
       <NextLink href="#">
-        <a className={className}>{children}</a>
+        <a className={className} title={title}>
+          {children}
+        </a>
       </NextLink>
     );
 
   return (
     <NextLink href={getReferenceTarget(target)}>
-      <a className={className} {...getTargetProps(target)}>
+      <a className={className} {...getTargetProps(target)} title={title}>
         {children}
       </a>
     </NextLink>
