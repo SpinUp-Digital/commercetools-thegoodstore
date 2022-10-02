@@ -49,25 +49,25 @@ const Gallery: FC<GalleryProps> = ({ images, inModalVersion }) => {
         compactNavigation={inModalVersion}
       >
         {images?.map((image, index) => (
-          <Image
-            key={index}
-            src={image}
-            className={`${inModalVersion ? 'h-180' : 'h-[447px]'}  w-full object-contain`}
-          />
+          <div className={`${inModalVersion ? 'h-180' : 'h-[447px]'} relative`} key={index}>
+            <Image src={image} objectFit="contain" />
+          </div>
         ))}
       </Slider>
 
       {!inModalVersion && (
         <div className="hidden gap-x-18 md:flex">
           {images?.map((image, index) => (
-            <Image
-              key={index}
-              src={image}
-              className={`${
-                index == activeSlide ? 'border-neutral-800' : 'border-neutral-400'
-              } h-112 w-112 rounded-md border border-neutral-400 object-contain p-7 hover:cursor-pointer`}
-              onClick={() => slideTo(index)}
-            />
+            <div className="relative h-112 w-112" key={index}>
+              <Image
+                src={image}
+                className={`${
+                  index == activeSlide ? 'border-neutral-800' : 'border-neutral-400'
+                } rounded-md border p-7 hover:cursor-pointer`}
+                onClick={() => slideTo(index)}
+                objectFit="contain"
+              />
+            </div>
           ))}
         </div>
       )}
