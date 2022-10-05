@@ -8,57 +8,70 @@ import { useCart } from 'frontastic/provider';
 
 export interface Props {
   className?: string;
-  cart: Cart;
 }
 
-const DiscountForm: React.FC<Props> = ({ className, cart }) => {
+const DiscountForm: React.FC<Props> = ({ className }) => {
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
+
   const [code, setCode] = useState('');
   const [discounts, setDiscounts] = useState<Discount[]>([]);
-  const { redeemDiscountCode, removeDiscountCode } = useCart();
+  const { redeemDiscountCode, removeDiscountCode, data } = useCart();
+
+  const [processing, setProcessing] = useState(false);
 
   useEffect(() => {
-    setDiscounts(cart?.discountCodes);
-  }, [cart?.discountCodes]);
+    setDiscounts(data.discountCodes);
+  }, [data]);
 
   const onApplyDiscount = () => {
+    if (processing || !code) return;
+
+    setProcessing(true);
+
     redeemDiscountCode(code)
       .catch((e: Error) => {
         if ((e.message = '101')) {
           toast.error(formatCartMessage({ id: 'codeNotValid', defaultMessage: 'Code is not valid' }));
         }
       })
-      .finally(() => setCode(''));
+      .finally(() => {
+        setCode('');
+        setProcessing(false);
+      });
   };
 
   const handleRemove = (discount) => {
     removeDiscountCode(discount);
   };
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onApplyDiscount();
+  };
+
   return (
     <div className={`${className}`}>
-      <div className="w-full rounded border-b-2 bg-gray-200 py-4 px-6">
-        <div className="flex justify-between">
-          <p className={`font-medium transition`}>
-            {formatCartMessage({ id: 'cart.discount', defaultMessage: 'Discounts' })}
-          </p>
-        </div>
+      <div className="w-full">
+        <p className="text-16 font-semibold">
+          {formatCartMessage({ id: 'discount.apply', defaultMessage: 'Apply a discount' })}
+        </p>
       </div>
-      <div className="bg-gray-200 px-5 pb-5">
-        <div className="flex w-full justify-between">
-          <div className=" pr-3">
+      <div>
+        <div>
+          <form className="mt-16" onSubmit={handleSubmit}>
             <input
-              className=" focus:border-accent-400 w-full appearance-none rounded border-none py-3 px-4 leading-tight text-gray-700 shadow"
+              className="rounded-sm border-neutral-300 px-10 py-12 placeholder:text-secondary-black disabled:bg-neutral-300"
               type="text"
               value={code}
               placeholder={formatCartMessage({
-                id: 'cart.discount.code',
-                defaultMessage: 'code',
+                id: 'cart.discount.enter',
+                defaultMessage: 'Enter discount code',
               })}
               onChange={(e) => setCode(e.target.value)}
+              disabled={processing}
             />
-          </div>
-          <button
+          </form>
+          {/* <button
             type="button"
             onClick={onApplyDiscount}
             disabled={code === '' ? true : false}
@@ -68,15 +81,18 @@ const DiscountForm: React.FC<Props> = ({ className, cart }) => {
               id: 'cart.apply',
               defaultMessage: 'Apply',
             })}
-          </button>
+          </button> */}
         </div>
 
-        <div className={`flex flex-wrap justify-items-start ${discounts?.length === 0 ? 'pt-0' : 'pt-4'}`}>
+        <div className={`mt-8 flex flex-wrap justify-items-start ${discounts?.length === 0 ? 'pt-0' : 'pt-4'}`}>
           {discounts?.map((discount) => (
-            <div key={discount.discountId} className="mr-2 mt-3 flex w-fit justify-between rounded bg-gray-400">
-              <label className="px-4 py-1 text-white">{discount.code}</label>
-              <button type="button" onClick={() => handleRemove(discount)} className="py-1 pr-3">
-                <XIcon className="h-6 w-5 text-white" />
+            <div
+              key={discount.discountId}
+              className="mr-2 flex w-fit justify-between gap-8 rounded border border-neutral-400 bg-white px-8 py-4"
+            >
+              <label className="text-12 leading-[16px] text-secondary-black">{discount.code}</label>
+              <button type="button" onClick={() => handleRemove(discount)}>
+                <XIcon className="h-16 w-16 text-secondary-black" />
               </button>
             </div>
           ))}

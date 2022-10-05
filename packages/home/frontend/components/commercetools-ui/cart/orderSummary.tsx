@@ -133,7 +133,7 @@ const OrderSummary = ({
           </div>
         )}
       </dl>
-      {showDiscountsForm && <DiscountForm cart={cart} className="py-10" />}
+      {showDiscountsForm && <DiscountForm className="py-10" />}
       {showSubmitButton && (
         <div>
           <button type="submit" onClick={onSubmit} className={submitButtonClassName}>
