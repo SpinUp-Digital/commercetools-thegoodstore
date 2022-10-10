@@ -12,15 +12,15 @@ const AdditionalInfo: FC<AdditionalInfoProps> = ({ productspec, description }) =
   const { formatMessage } = useFormat({ name: 'product' });
 
   return (
-    <>
+    <div className="additional-info">
       <style>
         {`
-        ul {
+        .additional-info ul {
           padding: 0 !important;
           list-style: circle;
         }
 
-        li {
+        .additional-info li {
           --tw-text-opacity: 1;
           color: rgb(33 33 33 / var(--tw-text-opacity));
           line-height: 150%;
@@ -49,7 +49,7 @@ const AdditionalInfo: FC<AdditionalInfoProps> = ({ productspec, description }) =
       >
         <Markdown className="font-body text-14 font-regular leading-loose text-primary-black" text={productspec} />
       </AccordionBtn>
-    </>
+    </div>
   );
 };
 
