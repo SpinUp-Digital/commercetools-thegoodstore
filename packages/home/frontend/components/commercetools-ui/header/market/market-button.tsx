@@ -5,6 +5,7 @@ import CloseIcon from 'components/icons/close';
 import FlagIcons from 'components/icons/flags';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { Market } from '../interfaces';
+
 interface Props {
   currentMarket?: Market;
   markets?: Market[];
