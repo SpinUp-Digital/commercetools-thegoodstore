@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Header from 'components/commercetools-ui/header';
+import { useRouter } from 'next/router';
 import { calculateCartCount } from 'helpers/utils/calculateCartCount';
 import { useCart, useWishlist, useAccount } from 'frontastic/provider';
 import countryToCurrency from 'country-to-currency';
@@ -12,6 +13,8 @@ const HeaderTastic = ({ data, categories }) => {
   const [markets, setMarkets] = useState<Market[]>([]);
   const [currentMarket, setCurrentMarket] = useState<Market>(undefined);
 
+  const router = useRouter();
+
   useEffect(() => {
     getProjectSettings().then((data) => {
       const initialMarkets = data.countries.map((country, index) => ({
@@ -23,12 +26,22 @@ const HeaderTastic = ({ data, categories }) => {
           countryToCurrency[country] === 'EUR' ? '&#8364;' : countryToCurrency[country] === 'USD' ? '&#36;' : '&#163;',
       }));
       setMarkets(initialMarkets);
-      setCurrentMarket(initialMarkets[0]);
+      
+      const initialMarket = initialMarkets.find((market) => { return market.locale.substring(0, 2) === router.locale });
+      setCurrentMarket(initialMarket || initialMarkets[0]);
     });
   }, []);
 
+  useEffect(() => {
+    if (router.defaultLocale && markets.length > 0 && currentMarket === undefined) {
+      
+    }
+  }, [router.defaultLocale, markets]);
+
   const handleCurrentMarket = (market: Market) => {
     setCurrentMarket(market);
+    
+    router.push(router.asPath, router.asPath, { locale: market.locale.substring(0, 2) });
   };
 
   return (

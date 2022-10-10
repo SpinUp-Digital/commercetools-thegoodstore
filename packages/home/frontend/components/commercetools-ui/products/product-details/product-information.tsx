@@ -38,6 +38,8 @@ const ProductInformation: FC<ProductInformationProps> = ({
     }
   }, [wishlist?.data?.lineItems]);
 
+  console.log('variant: ', variant, product)
+
   return (
     <div>
       <div className="relative flex pr-40">

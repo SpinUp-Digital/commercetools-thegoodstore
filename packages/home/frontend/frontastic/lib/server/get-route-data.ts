@@ -2,6 +2,7 @@ import { Category } from '@Types/product/Category';
 import { IncomingMessage, ServerResponse } from 'http';
 import { fetchApiHubServerSide } from '../fetch-api-hub';
 import { PageDataResponse, PagePreviewDataResponse, RedirectResponse } from '../types';
+import { mapLanguage } from '../../../project.config';
 
 type UrlParams = {
   slug?: Array<string>;
@@ -41,13 +42,15 @@ export const getRouteData =
 
     const slug = urlParams.slug?.join('/') || '';
     query.path = `/${slug !== 'index' ? slug : ''}`;
-    query.locale = locale;
+    query.locale = mapLanguage(locale);
 
     const headers = {
       'Frontastic-Path': query.path,
-      'Frontastic-Locale': locale,
+      'Frontastic-Locale': mapLanguage(locale),
     };
     const endpoint = `/page?${encodeQueryParams(query).join('&')}`;
+
+    console.log('endpoint: ', headers, endpoint);
 
     const data: RedirectResponse | PageDataResponse = (await fetchApiHubServerSide(
       endpoint,
@@ -58,6 +61,8 @@ export const getRouteData =
       headers,
     )) as RedirectResponse | PageDataResponse;
 
+    console.log('response: ', data);
+    
     return data;
   };
 
@@ -90,10 +95,10 @@ export const getCategories =
     // Remove slug from query since it's not needed as part of the query.
 
     const headers = {
-      'Frontastic-Locale': locale,
+      'Frontastic-Locale': mapLanguage(locale),
     };
 
-    const endpoint = '/action/product/queryCategories?limit=100';
+    const endpoint = `/action/product/queryCategories?limit=100`;
 
     const data = (await fetchApiHubServerSide(
       endpoint,
@@ -102,7 +107,7 @@ export const getCategories =
         res: nextJsRes,
       },
       headers,
-    )) as Category[];
+    )) as Category[];    
 
     return data;
   };

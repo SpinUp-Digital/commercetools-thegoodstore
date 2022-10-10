@@ -25,7 +25,7 @@ const Icon: React.FC<Props> = ({ className, flagName }: Props) => {
     portugal: <Portugal className={`${className} h-20 w-30`} />,
     spain: <Spain className={`${className} h-20 w-30`} />,
     sweden: <Sweden className={className} />,
-    UK: <UnitedKingdom className={className} />,
+    GB: <UnitedKingdom className={className} />,
     US: <UnitedStates className={className} />,
   };
   return <>{flags[flagName]}</>;
