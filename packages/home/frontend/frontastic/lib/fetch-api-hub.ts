@@ -81,7 +81,7 @@ const performFetchApiHub = async (
       Accept: 'application/json',
       ...(init.headers || {}),
       'X-Frontastic-Access-Token': 'APIKEY',
-      ...frontasticSessionHeaders,      
+      ...frontasticSessionHeaders,
       'Frontastic-Locale': mapLanguage(LocaleStorage.locale),
     },
   };

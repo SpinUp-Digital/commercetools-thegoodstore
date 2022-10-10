@@ -38,7 +38,7 @@ const ProductInformation: FC<ProductInformationProps> = ({
     }
   }, [wishlist?.data?.lineItems]);
 
-  console.log('variant: ', variant, product)
+  console.log('variant: ', variant, product);
 
   return (
     <div>

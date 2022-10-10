@@ -1,11 +1,11 @@
+import React, { useCallback, useState } from 'react';
 import { TrashIcon } from '@heroicons/react/outline';
 import { LineItem } from '@Types/cart/LineItem';
-import { useCart, useWishlist } from 'frontastic';
-import Image from 'frontastic/lib/image';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
-import React, { useCallback, useState } from 'react';
+import { useCart, useWishlist } from 'frontastic';
+import Image from 'frontastic/lib/image';
 
 export interface Props {
   item: LineItem;

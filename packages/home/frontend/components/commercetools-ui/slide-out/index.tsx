@@ -1,13 +1,13 @@
-import { useFormat } from 'helpers/hooks/useFormat';
 import React, { useCallback, useMemo, useState } from 'react';
-import HeartIcon from 'components/icons/heart';
 import CartIcon from 'components/icons/cart';
 import CloseIcon from 'components/icons/close';
-import useClickOutside from 'helpers/hooks/useClickOutside';
-import { useCart, useWishlist } from 'frontastic';
-import CartItem from './cart-item';
-import DiscountForm from '../discount-form';
+import HeartIcon from 'components/icons/heart';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
+import useClickOutside from 'helpers/hooks/useClickOutside';
+import { useFormat } from 'helpers/hooks/useFormat';
+import { useCart, useWishlist } from 'frontastic';
+import DiscountForm from '../discount-form';
+import CartItem from './cart-item';
 
 export type State = 'wishlist' | 'cart';
 

@@ -62,7 +62,7 @@ export const getRouteData =
     )) as RedirectResponse | PageDataResponse;
 
     console.log('response: ', data);
-    
+
     return data;
   };
 
@@ -107,7 +107,7 @@ export const getCategories =
         res: nextJsRes,
       },
       headers,
-    )) as Category[];    
+    )) as Category[];
 
     return data;
   };
