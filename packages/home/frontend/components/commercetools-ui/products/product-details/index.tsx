@@ -17,7 +17,6 @@ export interface ProductDetailsProps {
   url?: string;
   onAddToWishlist: () => void;
   onRemoveFromWishlist: () => void;
-  onChangeVariantId: (idx: string) => void;
   inModalVersion?: boolean;
 }
 
@@ -25,7 +24,6 @@ const ProductDetails: FC<ProductDetailsProps> = ({
   product,
   variant,
   url,
-  onChangeVariantId,
   onAddToWishlist,
   onRemoveFromWishlist,
   inModalVersion,
@@ -54,7 +52,6 @@ const ProductDetails: FC<ProductDetailsProps> = ({
         <ProductInformation
           product={product}
           variant={variant}
-          onChangeVariantId={onChangeVariantId}
           onAddToWishlist={onAddToWishlist}
           onRemoveFromWishlist={onRemoveFromWishlist}
         />

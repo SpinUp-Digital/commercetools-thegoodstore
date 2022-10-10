@@ -4,24 +4,22 @@ import WishlistButton from 'components/commercetools-ui/wishlist-button';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useWishlist } from 'frontastic';
 import { ProductDetailsProps } from '.';
+import { useRouter } from 'next/router';
 
 type ProductInformationProps = Omit<ProductDetailsProps, 'onAddToCart'>;
 
 const ProductInformation: FC<ProductInformationProps> = ({
   product,
   variant,
-  onChangeVariantId,
   onAddToWishlist,
   onRemoveFromWishlist,
 }) => {
+  const router = useRouter();
+
   const wishlist = useWishlist();
   const [onWishlist, setOnWishlist] = useState<boolean>(false);
 
   const attributesToDisplay = ['color', 'finish'];
-
-  const updateVariantId = (id: string) => {
-    onChangeVariantId(id);
-  };
 
   const handleWishlistButtonClick = () => {
     if (onWishlist) {
@@ -31,14 +29,18 @@ const ProductInformation: FC<ProductInformationProps> = ({
     }
   };
 
+  const updateVariantSKU = (sku: string) => {
+    router.replace(`${router.asPath.split('/').slice(0, -1).join('/')}/${sku}`, undefined, {
+      shallow: true,
+    });
+  };
+
   useEffect(() => {
     if (wishlist?.data?.lineItems) {
       const item = wishlist.data.lineItems.find(({ variant: { sku } }) => sku === variant.sku);
       setOnWishlist(!!item);
     }
   }, [wishlist?.data?.lineItems]);
-
-  console.log('variant: ', variant, product);
 
   return (
     <div>
@@ -60,7 +62,7 @@ const ProductInformation: FC<ProductInformationProps> = ({
               variants={product?.variants}
               currentVariant={variant}
               attribute={attribute}
-              onClick={updateVariantId}
+              onClick={updateVariantSKU}
             />
           );
         }

@@ -18,7 +18,6 @@ const ProductDetailsAdapter: FC<ProductDetailsAdapterProps> = ({ product, inModa
   const router = useRouter();
   const wishlist = useWishlist();
 
-  const [currentVariantId, setCurrentVariantId] = useState<string>();
   const [variant, setVariant] = useState<Variant>();
   const [mappedProduct, setMappedProduct] = useState<UIProduct>();
 
@@ -34,19 +33,22 @@ const ProductDetailsAdapter: FC<ProductDetailsAdapterProps> = ({ product, inModa
   useEffect(() => {
     if (!product) return;
 
-    if (!currentVariantId) {
-      if (inModalVersion) {
-        setVariant(product?.variants[0]);
-      } else {
-        const currentVariantSKU = router.asPath.split('/')[3];
-        const currentVariantIndex = product?.variants.findIndex(({ sku }) => sku == currentVariantSKU);
-        setVariant(product.variants[currentVariantIndex]);
-      }
+    if (inModalVersion) {
+      setVariant(product?.variants[0]);
     } else {
-      const currentVariant = product?.variants.find(({ id }) => id == currentVariantId);
-      setVariant(currentVariant);
+      const currentVariantPath = router.asPath.split('/');
+      const currentVariantSKU = currentVariantPath[3];
+      const currentVariantIndex = product?.variants.findIndex(({ sku }) => sku == currentVariantSKU);
+      setVariant(product.variants[currentVariantIndex]);
     }
-  }, [currentVariantId, inModalVersion, router]);
+  }, [inModalVersion, product, router.asPath]);
+
+  useEffect(() => {
+    router.beforePopState(({ as }) => {
+      router.replace(as);
+      return false;
+    });
+  }, []);
 
   const handleAddToWishList = () => {
     wishlist.addToWishlist(variant.sku, 1);
@@ -64,7 +66,6 @@ const ProductDetailsAdapter: FC<ProductDetailsAdapterProps> = ({ product, inModa
       product={mappedProduct}
       variant={variant}
       url={product._url}
-      onChangeVariantId={setCurrentVariantId}
       onAddToWishlist={handleAddToWishList}
       onRemoveFromWishlist={handleRemoveFromWishlist}
       inModalVersion={inModalVersion}

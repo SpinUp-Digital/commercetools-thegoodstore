@@ -35,14 +35,14 @@ const Variant: FC<VariantProps> = ({ className, currentVariant, variants, attrib
       </div>
 
       <div className="mt-15 flex gap-24">
-        {variantsToUse?.map(({ attributes, id }, index) => (
+        {variantsToUse?.map(({ attributes, id, sku }, index) => (
           <div
             key={index}
             className={`h-20 w-20 rounded-full ${
               id == currentVariant.id ? 'border-2 border-neutral-800' : 'border border-neutral-300'
             } border border-neutral-300 ${variantsToUse.length > 1 ? 'hover:cursor-pointer' : 'pointer-events-none'} `}
             style={{ backgroundColor: attributes[attribute] }}
-            onClick={() => onClick?.(id)}
+            onClick={() => onClick?.(sku)}
           />
         ))}
       </div>
