@@ -23,13 +23,17 @@ const ProductDetailsAdapter: FC<ProductDetailsAdapterProps> = ({ product, inModa
   const [mappedProduct, setMappedProduct] = useState<UIProduct>();
 
   useEffect(() => {
-    const colors = toUIColor(product);
-    const sizes = toUISize(product);
-    const productToUse = toUIProduct(product, variant, colors, sizes);
-    setMappedProduct(productToUse);
+    if (product && variant) {
+      const colors = toUIColor(product);
+      const sizes = toUISize(product);
+      const productToUse = toUIProduct(product, variant, colors, sizes);
+      setMappedProduct(productToUse);
+    }
   }, [product, variant]);
 
   useEffect(() => {
+    if (!product) return;
+
     if (!currentVariantId) {
       if (inModalVersion) {
         setVariant(product?.variants[0]);
@@ -52,6 +56,8 @@ const ProductDetailsAdapter: FC<ProductDetailsAdapterProps> = ({ product, inModa
     const item = wishlist.data.lineItems.find(({ variant: { sku } }) => sku === variant.sku);
     wishlist.removeLineItem(item?.lineItemId);
   };
+
+  if (!product || !variant) return <></>;
 
   return (
     <ProductDetails
