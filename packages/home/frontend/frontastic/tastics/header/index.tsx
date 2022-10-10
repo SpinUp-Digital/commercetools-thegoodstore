@@ -27,8 +27,12 @@ const HeaderTastic = ({ data, categories }) => {
       }));
       setMarkets(initialMarkets);
       
-      const initialMarket = initialMarkets.find((market) => { return market.locale.substring(0, 2) === router.locale });
-      setCurrentMarket(initialMarket || initialMarkets[0]);
+      let initialMarket = initialMarkets.find((market) => market.locale.substring(0, 2) === router.locale);
+      if (!initialMarket) {
+        initialMarket = initialMarkets.find((market) => market.locale.substring(0, 2) === router.defaultLocale);
+      }
+
+      setCurrentMarket(initialMarket);
     });
   }, []);
 

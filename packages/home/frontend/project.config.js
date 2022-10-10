@@ -1,7 +1,6 @@
 export const languageMapper = {
-    en: 'en_GB@USD',
-    //en: 'en_US@USD',
     de: 'de_DE@EUR',
+    en: 'en_GB@USD'    
   };
   
   export const mapLanguage = (lang) => {
