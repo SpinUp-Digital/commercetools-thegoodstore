@@ -26,7 +26,7 @@ const Button: React.FC<React.PropsWithChildren<Props>> = ({
       {...props}
       className={`${
         colorSchemes[colorScheme]
-      } rounded-${rounded} py-12 px-24 font-body text-14 font-bold leading-[16px] ${className ?? ''}`}
+      } rounded-${rounded} py-12 px-24 font-body text-14 font-medium leading-[16px] ${className ?? ''}`}
     >
       {children}
     </button>
