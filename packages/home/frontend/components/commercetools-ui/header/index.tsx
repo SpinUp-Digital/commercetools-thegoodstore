@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Account } from '@Types/account/Account';
 import { Category } from '@Types/product/Category';
 import { Reference, ReferenceLink } from 'helpers/reference';
@@ -55,6 +55,22 @@ const Header: React.FC<HeaderProps> = ({
   const hideSubMenu = () => {
     setActiveCategory(undefined);
   };
+
+  const showTimeout = useRef<NodeJS.Timer>(null);
+
+  const handleMouseIn = (category: Category) => {
+    if (activeCategory) showSubMenu(category); //Already opened do not delay
+    else showTimeout.current = setTimeout(() => showSubMenu(category), 300);
+  };
+
+  const handleMouseOut = () => {
+    if (showTimeout.current) {
+      clearTimeout(showTimeout.current);
+      showTimeout.current = null;
+    }
+    showSubMenu();
+  };
+
   return (
     <header className="h-fit border-b-2 border-neutral-400 bg-white">
       <nav aria-label="Top" className="mx-13 flex h-60 items-center justify-between md:mx-30 md:h-76 lg:mx-50">
@@ -96,9 +112,9 @@ const Header: React.FC<HeaderProps> = ({
       </nav>
 
       {links && (
-        <nav onMouseLeave={() => showSubMenu()} className="relative hidden h-64 items-center justify-center lg:flex">
+        <nav onMouseLeave={handleMouseOut} className="relative hidden h-64 items-center justify-center lg:flex">
           {links.map((link) => (
-            <div onMouseEnter={() => showSubMenu(link)} key={link?.categoryId}>
+            <div onMouseEnter={() => handleMouseIn(link)} key={link?.categoryId}>
               {link.depth === 0 && (
                 <HeaderButtonMenu
                   show={link.categoryId === activeCategory?.categoryId}
