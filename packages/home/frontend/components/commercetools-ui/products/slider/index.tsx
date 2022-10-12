@@ -39,8 +39,8 @@ export default function ProductSlider({ products, title, subline, ctaLabel, ctaL
         <div className="mt-8 flex items-center justify-between md:mt-16 lg:mt-14">
           <Subtitle subtitle={subline} />
           <div className="hidden lg:block">
-            <Link target={ctaLink} underlined>
-              <span className="leading-loose">{ctaLabel}</span>
+            <Link target={ctaLink} withArrow>
+              <span className="font-semibold leading-[24px] text-secondary-black">{ctaLabel}</span>
             </Link>
           </div>
         </div>

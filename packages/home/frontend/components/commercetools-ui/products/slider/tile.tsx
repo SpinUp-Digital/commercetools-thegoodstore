@@ -74,7 +74,6 @@ const Tile: FC<TileProps> = ({ product }) => {
         onMouseLeave={() => setImageHovered(false)}
       >
         <Slider
-          key={`${isDesktopSize}`}
           slidesPerView={1}
           arrows={imageHovered && isDesktopSize && selectedVariant.images.length > 1}
           spaceBetween={0}
@@ -96,7 +95,7 @@ const Tile: FC<TileProps> = ({ product }) => {
           allowTouchMove={false}
         >
           {selectedVariant.images.map((image, index) => (
-            <div key={index} className="relative bg-white p-32 md:p-48">
+            <div key={index} className="relative bg-white p-8 md:p-16">
               <NextLink href={product._url}>
                 <a className="relative block h-[175px] md:h-[360px]">
                   <Image
@@ -118,7 +117,7 @@ const Tile: FC<TileProps> = ({ product }) => {
           <HeartIcon
             className="h-[16px] w-[16px] md:h-[20px] md:w-[20px] lg:h-[24px] lg:w-[24px]"
             pathClassName={`transition duration-150 ease-out hover:fill-accent-red hover:stroke-accent-red ${
-              wishlistLineItem ? 'fill-accent-red stroke-accent-red' : 'fill-transparent stroke-secondary-black'
+              wishlistLineItem ? 'fill-accent-red stroke-accent-red' : 'fill-white stroke-secondary-black'
             }`}
           />
         </span>
