@@ -23,7 +23,7 @@ const Column: React.FC<Props> = ({ header, links, className }) => {
       )}
       <ul
         role="list"
-        className="flex flex-col gap-y-12 text-neutral-500 sm:items-center sm:self-center lg:items-start lg:self-start"
+        className="flex flex-col gap-y-12 text-neutral-500 sm:self-center md:items-center lg:items-start lg:self-start"
       >
         {links.map((item, i) => (
           <li key={i} className="text-14 font-regular lg:text-16">
