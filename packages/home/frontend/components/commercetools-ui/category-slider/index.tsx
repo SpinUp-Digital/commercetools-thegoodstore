@@ -25,7 +25,6 @@ const CategorySlider: React.FC<Props> = ({ tiles = [] }) => {
   return (
     <Wrapper background="neutral-200">
       <Slider
-        key={`${isDesktopSize}`}
         slidesPerView={isDesktopSize ? 4 : 2.3}
         dots={false}
         spaceBetween={isDesktopSize ? 16 : isTabletSize ? 8 : 4}
@@ -43,6 +42,7 @@ const CategorySlider: React.FC<Props> = ({ tiles = [] }) => {
                 layout="fill"
                 objectFit="cover"
                 className="brightness-75"
+                loading="eager"
               />
             </div>
             <h6 className="mt-5 block rounded-b-sm border-neutral-300 py-5 text-center text-12 leading-normal md:text-16 lg:mt-0 lg:border lg:bg-white lg:py-10">
