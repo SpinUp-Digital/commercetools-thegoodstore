@@ -1,10 +1,10 @@
 import { FC, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import Variant from 'components/commercetools-ui/variant';
 import WishlistButton from 'components/commercetools-ui/wishlist-button';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useWishlist } from 'frontastic';
 import { ProductDetailsProps } from '.';
-import { useRouter } from 'next/router';
 
 type ProductInformationProps = Omit<ProductDetailsProps, 'onAddToCart'>;
 

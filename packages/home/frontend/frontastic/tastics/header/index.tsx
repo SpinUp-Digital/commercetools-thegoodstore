@@ -21,7 +21,7 @@ const HeaderTastic = ({ data, categories }) => {
         region: country,
         flag: country,
         locale: data.languages[index],
-        currency: countryToCurrency[country],
+        currency: countryToCurrency[country] === 'GBP' ? 'EUR' : countryToCurrency[country],
         currencyCode:
           countryToCurrency[country] === 'EUR' ? '&#8364;' : countryToCurrency[country] === 'USD' ? '&#36;' : '&#163;',
       }));
