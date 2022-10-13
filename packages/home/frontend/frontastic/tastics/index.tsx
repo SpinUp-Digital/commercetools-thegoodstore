@@ -34,6 +34,7 @@ const ThankYou = dynamic(() => import('./checkout/thank-you'));
 const ProductDetails = dynamic(() => import('./products/details'));
 const ProductList = dynamic(() => import('./products/product-list'));
 const SimilarProducts = dynamic(() => import('./products/similar-products'));
+const OtherProducts = dynamic(() => import('./products/other-products'));
 const Showcase = dynamic(() => import('./showcase'));
 const Wishlist = dynamic(() => import('./wishlist'));
 const ContentfulBlogTastic = dynamic(() => import('./contentful-blog'));
@@ -62,6 +63,7 @@ export const tastics = {
   'commercetools/ui/products/product-list': ProductList,
   'commercetools/ui/products/slider': ProductSlider,
   'commercetools/ui/products/similar-products': SimilarProducts,
+  'commercetools/ui/products/other-products': OtherProducts,
   'commercetools/ui/wishlist': Wishlist,
   'commercetools/ui/account/test': AccountTest,
   'commercetools/ui/account/details': AccountDetails,
