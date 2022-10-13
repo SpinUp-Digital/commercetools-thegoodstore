@@ -43,7 +43,7 @@
 
 .slider_arrow {
   border: solid #494949;
-  border-width: 0 2px 2px 0;
+  border-width: 0 1.5px 1.5px 0;
   padding: 10px;
   width: 0;
   height: 0;
@@ -68,6 +68,6 @@
 }
 
 .swiper-slide {
-  -webkit-backface-visibility: hidden; 
+  -webkit-backface-visibility: hidden;
   -webkit-transform: translate3d(0, 0, 0);
 }
