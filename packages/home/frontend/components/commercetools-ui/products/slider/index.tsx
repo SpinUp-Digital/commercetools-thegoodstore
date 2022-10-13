@@ -40,13 +40,13 @@ export default function ProductSlider({ products, title, subline, ctaLabel, ctaL
           <Subtitle subtitle={subline} />
           <div className="hidden lg:block">
             <Link target={ctaLink} withArrow>
-              <span className="font-semibold leading-[24px] text-secondary-black">{ctaLabel}</span>
+              <span className="font-medium leading-[24px] text-secondary-black">{ctaLabel}</span>
             </Link>
           </div>
         </div>
         <div className="mt-20 block md:mt-16 lg:hidden">
           <Link target={ctaLink} withArrow>
-            <span className="font-semibold leading-[24px] text-secondary-black">{ctaLabel}</span>
+            <span className="font-medium leading-[24px] text-secondary-black">{ctaLabel}</span>
           </Link>
         </div>
       </div>
