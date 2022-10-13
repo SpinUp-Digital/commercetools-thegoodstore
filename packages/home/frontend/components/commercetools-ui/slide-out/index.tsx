@@ -59,20 +59,20 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
 
     return {
       subtotal: {
-        centAmount: cartData.lineItems.reduce((acc, curr) => acc + curr.totalPrice.centAmount, 0),
+        centAmount: cartData.lineItems.reduce((acc, curr) => acc + curr.totalPrice?.centAmount, 0),
         currencyCode,
         fractionDigits,
       },
       discount: {
         centAmount: cartData.discountCodes
-          ? cartData.discountCodes.reduce((acc, curr) => acc + curr.discountedAmount.centAmount, 0)
+          ? cartData.discountCodes.reduce((acc, curr) => acc + curr.discountedAmount?.centAmount, 0)
           : 0,
         currencyCode,
         fractionDigits,
       },
       shipping: cartData.shippingInfo?.price ?? {},
       tax: {
-        centAmount: cartData.taxed?.taxPortions?.reduce((acc, curr) => acc + curr.amount.centAmount, 0) ?? 0,
+        centAmount: cartData.taxed?.taxPortions?.reduce((acc, curr) => acc + curr.amount?.centAmount, 0) ?? 0,
         currencyCode,
         fractionDigits,
       },
