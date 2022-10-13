@@ -144,9 +144,36 @@ export default {
       });
     },
 
+    'frontastic/other-products': async (config: DataSourceConfiguration, context: DataSourceContext) => {
+      if (!context.hasOwnProperty('request')) {
+        throw new Error(`Request is not defined in context ${context}`);
+      }
+
+      const productApi = new ProductApi(context.frontasticContext, getLocale(context.request));
+      const productQuery = ProductQueryFactory.queryFromParams(context.request, config);
+
+      const shuffleArray = (array: any) => {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          const temp = array[i];
+          array[i] = array[j];
+          array[j] = temp;
+        }
+        return array;
+      }
+
+      return await productApi.query(productQuery).then((queryResult) => {
+        return {          
+          dataSourcePayload: {
+            ...queryResult,            
+            items: shuffleArray(queryResult.items)
+          }
+        };
+      });
+    },
+
     'frontastic/product': async (config: DataSourceConfiguration, context: DataSourceContext) => {
       const productApi = new ProductApi(context.frontasticContext, context.request ? getLocale(context.request) : null);
-
       const productQuery = ProductQueryFactory.queryFromParams(context?.request, config);
 
       return await productApi.getProduct(productQuery).then((queryResult) => {
