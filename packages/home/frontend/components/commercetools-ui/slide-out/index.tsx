@@ -142,7 +142,7 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
     >
       <div className="flex items-center justify-between border-b border-neutral-400 px-12 pt-24 md:px-22 md:pt-32">
         <h3 className="pb-24 text-18 font-bold leading-normal md:pb-32 md:text-24">{title}</h3>
-        <div className="flex items-center gap-32">
+        <div className="flex h-32 items-center gap-32">
           <div
             className={`relative cursor-pointer border-b-2 pb-24 md:pb-32 ${
               state === 'wishlist' ? 'border-primary-black' : 'border-transparent'
@@ -152,7 +152,7 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
             {wishlistItems?.length > 0 && (
               <span className="absolute top-[-7px] right-[-7px] h-8 w-8 rounded-full bg-green-500" />
             )}
-            <HeartIcon className="h-28 w-28 cursor-pointer" pathClassName="stroke-secondary-black stroke-2" />
+            <HeartIcon className="h-28 w-28" pathClassName="stroke-secondary-black stroke-2" />
           </div>
           <div
             className={`relative cursor-pointer border-b-2 pb-24 md:pb-32 ${
@@ -162,7 +162,7 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
           >
             {cartItems?.length > 0 && (
               <>
-                <span className="absolute top-[-3px] right-[-3px] h-8 w-8 rounded-full bg-green-500" />
+                <span className="absolute top-[-4px] right-[-3px] h-8 w-8 rounded-full bg-green-500" />
                 <span className="absolute top-[15px] left-1/2 -translate-x-1/2 text-10">
                   {cartItems.length > 9 ? '9+' : cartItems.length}
                 </span>
