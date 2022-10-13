@@ -73,43 +73,58 @@ const Tile: FC<TileProps> = ({ product }) => {
         onMouseEnter={() => setImageHovered(true)}
         onMouseLeave={() => setImageHovered(false)}
       >
-        <Slider
-          slidesPerView={1}
-          arrows={imageHovered && isDesktopSize && selectedVariant.images.length > 1}
-          spaceBetween={0}
-          prevButtonStyles={{
-            left: 25,
-            padding: '7px',
-            transform: 'translateY(-50%) rotateZ(135deg)',
-            borderWidth: '0 1.5px 1.5px 0',
-          }}
-          nextButtonStyles={{
-            right: 25,
-            padding: '7px',
-            transform: 'translateY(-50%) rotateZ(-45deg)',
-            borderWidth: '0 1.5px 1.5px 0',
-          }}
-          dots={false}
-          loop
-          // allowTouchMove={!isDesktopSize && selectedVariant.images.length > 1}
-          allowTouchMove={false}
-        >
-          {selectedVariant.images.map((image, index) => (
-            <div key={index} className="relative bg-white p-8 md:p-16">
-              <NextLink href={product._url}>
-                <a className="relative block h-[175px] md:h-[360px]">
-                  <Image
-                    src={image}
-                    alt={product.name}
-                    objectFit="contain"
-                    objectPosition="center"
-                    className="w-full rounded-sm group-hover:opacity-75 md:p-16"
-                  />
-                </a>
-              </NextLink>
-            </div>
-          ))}
-        </Slider>
+        {isDesktopSize ? (
+          <Slider
+            slidesPerView={1}
+            arrows={imageHovered && selectedVariant.images.length > 1}
+            spaceBetween={0}
+            prevButtonStyles={{
+              left: 25,
+              padding: '7px',
+              transform: 'translateY(-50%) rotateZ(135deg)',
+              borderWidth: '0 1.5px 1.5px 0',
+            }}
+            nextButtonStyles={{
+              right: 25,
+              padding: '7px',
+              transform: 'translateY(-50%) rotateZ(-45deg)',
+              borderWidth: '0 1.5px 1.5px 0',
+            }}
+            dots={false}
+            loop
+            allowTouchMove={false}
+          >
+            {selectedVariant.images.map((image, index) => (
+              <div key={index} className="relative bg-white p-8 md:p-16">
+                <NextLink href={product._url}>
+                  <a className="relative block h-[175px] md:h-[360px]">
+                    <Image
+                      src={image}
+                      alt={product.name}
+                      objectFit="contain"
+                      objectPosition="center"
+                      className="w-full rounded-sm group-hover:opacity-75 md:p-16"
+                    />
+                  </a>
+                </NextLink>
+              </div>
+            ))}
+          </Slider>
+        ) : (
+          <div className="relative bg-white p-8 md:p-16">
+            <NextLink href={product._url}>
+              <a className="relative block h-[175px] md:h-[360px]">
+                <Image
+                  src={selectedVariant.images[0]}
+                  alt={product.name}
+                  objectFit="contain"
+                  objectPosition="center"
+                  className="w-full rounded-sm group-hover:opacity-75 md:p-16"
+                />
+              </a>
+            </NextLink>
+          </div>
+        )}
         <span
           onClick={handleAddToWishlist}
           className="absolute right-0 top-0 z-10 flex h-[32px] w-[32px] cursor-pointer items-center justify-center md:h-[48px] md:w-[48px]"
