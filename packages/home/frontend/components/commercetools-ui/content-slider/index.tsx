@@ -31,8 +31,12 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
   const slidesElement = useMemo(
     () =>
       slides.map(({ image, title, ctaReference, ctaLabel }, index) => (
-        <ReferenceLink target={ctaReference} key={index} className="overflow-hidden lg:shrink-0 lg:grow lg:basis-0">
-          <div className="relative h-[220px] md:h-[356px]">
+        <ReferenceLink
+          target={ctaReference}
+          key={index}
+          className="shrink overflow-hidden lg:shrink-0 lg:grow lg:basis-0"
+        >
+          <div className="relative h-[220px] w-[220px] md:h-[356px] md:w-[356px]">
             <div className="absolute z-10 h-full w-full rounded-md bg-black opacity-20"></div>
             <Image {...image} sizes={tileImageSizes} className="mb-5 rounded-md" layout="fill" objectFit="cover" />
           </div>
@@ -64,7 +68,7 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
       {isDesktop ? (
         <div className="justify-stretch flex w-full gap-24">{slidesElement}</div>
       ) : (
-        <Slider arrows={false} dots={false} slidesPerView={1.3} spaceBetween={isTablet ? 24 : 8}>
+        <Slider arrows={false} dots={false} slidesPerView={2} spaceBetween={isTablet ? 24 : 12}>
           {slidesElement}
         </Slider>
       )}
