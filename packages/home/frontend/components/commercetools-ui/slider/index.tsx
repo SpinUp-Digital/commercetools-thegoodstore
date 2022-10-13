@@ -96,6 +96,7 @@ const Slider: FC<SliderProps> = ({
       }}
       observer
       observeParents
+      cssMode
       {...props}
     >
       {slides}
@@ -131,6 +132,7 @@ const Slider: FC<SliderProps> = ({
               }}
               observer
               observeParents
+              cssMode
               {...props}
             >
               {thumbs}
