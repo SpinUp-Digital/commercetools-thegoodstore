@@ -10,6 +10,7 @@ import { desktop } from 'helpers/utils/screensizes';
 import { useWishlist } from 'frontastic';
 import Image from 'frontastic/lib/image';
 import QuickView from '../product-quick-view';
+import usePreloadImages from 'helpers/hooks/usePreloadImages';
 
 interface TileProps {
   product: Product;
@@ -17,6 +18,8 @@ interface TileProps {
 
 const Tile: FC<TileProps> = ({ product }) => {
   const [isDesktopSize] = useMediaQuery(desktop);
+
+  usePreloadImages(product.variants.map((variant) => variant.images[0]));
 
   const variantWithDiscount = useMemo(() => {
     let variantReturned: Variant;
