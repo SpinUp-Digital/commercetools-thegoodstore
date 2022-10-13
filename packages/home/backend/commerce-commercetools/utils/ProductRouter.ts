@@ -13,7 +13,9 @@ export class ProductRouter {
 
   static generateUrlFor(item: Product | LineItem | WishlistItem) {
     if (ProductRouter.isProduct(item)) {
-      return `/${item.slug}/p/${item.variants[0].sku}`;
+      const slug = item.name.toLowerCase().replace(/\s/g, '-');
+
+      return `/${slug}/p/${item.variants[0].sku}`;
     }
     return `/slug/p/${item.variant.sku}`;
   }
