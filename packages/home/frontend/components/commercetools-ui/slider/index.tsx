@@ -61,7 +61,7 @@ const Slider: FC<SliderProps> = ({
     : '';
 
   const slides = Children.map(children, (child) => (
-    <SwiperSlide style={slideWidth ? { width: `${slideWidth}px` } : {}}>{child}</SwiperSlide>
+    <SwiperSlide style={slideWidth ? { width: `${slideWidth}px` } : { width: '416px' }}>{child}</SwiperSlide>
   ));
   const thumbs = Children.map(children, (child) => (
     <SwiperSlide className="slider__thumb" style={{ height: '80px', overflow: 'hidden' }}>
