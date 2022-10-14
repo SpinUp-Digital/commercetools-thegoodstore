@@ -45,7 +45,7 @@ const ProductInformation: FC<ProductInformationProps> = ({
   return (
     <div>
       <div className="relative flex pr-40">
-        <h3 className="break-all font-body text-18 font-bold leading-loose">{product?.name}</h3>
+        <h3 className="break-normal font-body text-18 font-bold leading-loose">{product?.name}</h3>
         <WishlistButton onWishlist={onWishlist} onClick={handleWishlistButtonClick} />
       </div>
 

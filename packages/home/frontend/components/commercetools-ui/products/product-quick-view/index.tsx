@@ -32,7 +32,7 @@ const QuickView: FC<QuickViewProps> = ({ imageHovered, isDesktopSize, product })
       bottom: 'auto',
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
-      maxWidth: 667,
+      maxWidth: isDesktopSize ? 800 : 650,
       position: 'relative',
       padding: 0,
     },
@@ -71,7 +71,7 @@ const QuickView: FC<QuickViewProps> = ({ imageHovered, isDesktopSize, product })
             color="#494949"
             onClick={closeModal}
           />
-          <ProductDetailsAdapter product={product} inModalVersion />
+          <ProductDetailsAdapter product={product} inModalVersion={true} />
         </>
       </Modal>
     </>

@@ -29,7 +29,7 @@ const ProductDetailsAdapter: FC<ProductDetailsAdapterProps> = ({ product, inModa
       const colors = toUIColor(product);
       const sizes = toUISize(product);
       const productToUse = toUIProduct(product, variant, colors, sizes);
-      setMappedProduct(productToUse);
+      setMappedProduct({ ...productToUse, images: [productToUse.images[0]] });
     }
   }, [product, variant]);
 

@@ -23,6 +23,7 @@ export type ContentSliderProps = {
 };
 
 const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
+  const [isMobile] = useMediaQuery(screensizes.mobile);
   const [isTablet] = useMediaQuery(screensizes.tablet);
   const [isDesktop] = useMediaQuery(screensizes.desktop);
 
@@ -68,7 +69,13 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
       {isDesktop ? (
         <div className="justify-stretch flex w-full gap-24">{slidesElement}</div>
       ) : (
-        <Slider arrows={false} dots={false} slidesPerView={2} spaceBetween={isTablet ? 24 : 12}>
+        <Slider
+          arrows={false}
+          dots={false}
+          slidesPerView={isMobile ? 2 : 1}
+          slideWidth={416}
+          spaceBetween={isTablet ? 24 : 12}
+        >
           {slidesElement}
         </Slider>
       )}
