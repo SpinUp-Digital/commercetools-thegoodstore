@@ -12,7 +12,7 @@ const AdditionalInfo: FC<AdditionalInfoProps> = ({ productspec, description }) =
   const { formatMessage } = useFormat({ name: 'product' });
 
   return (
-    <div className="additional-info">
+    <div className="additional-info col-span-2">
       <style>
         {`
         .additional-info ul {

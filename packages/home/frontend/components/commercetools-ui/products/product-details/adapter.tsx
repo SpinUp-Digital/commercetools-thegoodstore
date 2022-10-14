@@ -8,6 +8,7 @@ import { toUIProduct } from 'helpers/mappers/toUIProduct';
 import { toUISize } from 'helpers/mappers/toUIsize';
 import { useWishlist } from 'frontastic';
 import ProductDetails, { ProductDetailsProps } from '.';
+import usePreloadImages from 'helpers/hooks/usePreloadImages';
 
 type ProductDetailsAdapterProps = {
   product: Product;
@@ -20,6 +21,8 @@ const ProductDetailsAdapter: FC<ProductDetailsAdapterProps> = ({ product, inModa
 
   const [variant, setVariant] = useState<Variant>();
   const [mappedProduct, setMappedProduct] = useState<UIProduct>();
+
+  usePreloadImages(product.variants.map((variant) => variant.images).flat());
 
   useEffect(() => {
     if (product && variant) {
@@ -62,14 +65,16 @@ const ProductDetailsAdapter: FC<ProductDetailsAdapterProps> = ({ product, inModa
   if (!product || !variant) return <></>;
 
   return (
-    <ProductDetails
-      product={mappedProduct}
-      variant={variant}
-      url={product._url}
-      onAddToWishlist={handleAddToWishList}
-      onRemoveFromWishlist={handleRemoveFromWishlist}
-      inModalVersion={inModalVersion}
-    />
+    <>
+      <ProductDetails
+        product={mappedProduct}
+        variant={variant}
+        url={product._url}
+        onAddToWishlist={handleAddToWishList}
+        onRemoveFromWishlist={handleRemoveFromWishlist}
+        inModalVersion={inModalVersion}
+      />
+    </>
   );
 };
 
