@@ -29,6 +29,7 @@ const Gallery: FC<GalleryProps> = ({ images, inModalVersion }) => {
   return (
     <div className={`${inModalVersion ? 'col-span-1' : 'col-span-2'} gap-y-34 md:mb-50`}>
       <Slider
+        className={inModalVersion ? 'w-[300px]' : ''}
         onSlideChange={handleSlide}
         onSwiper={(swiper) => {
           swiperRef.current = swiper;
@@ -44,7 +45,7 @@ const Gallery: FC<GalleryProps> = ({ images, inModalVersion }) => {
         initialSlide={0}
       >
         {images?.map((image, index) => (
-          <div className={`${inModalVersion ? 'h-180' : 'h-[447px]'} relative`} key={index}>
+          <div className={`${inModalVersion ? 'h-[250px] max-w-[300px]' : 'h-[447px]'} relative`} key={index}>
             <Image src={image} objectFit="contain" />
           </div>
         ))}
