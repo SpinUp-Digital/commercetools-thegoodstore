@@ -1,8 +1,9 @@
 import React, { FC, useMemo, useState } from 'react';
 import Link from 'next/link';
-import { ChevronRightIcon } from '@heroicons/react/outline';
+import { Menu, Transition } from '@headlessui/react';
 import { Category } from '@Types/product/Category';
 import BackIcon from 'components/icons/back';
+import ChevronRightIcon from 'components/icons/chevron-right';
 import CloseIcon from 'components/icons/close';
 import MenuIcon from 'components/icons/menu-icon';
 import { useFormat } from 'helpers/hooks/useFormat';
@@ -54,7 +55,7 @@ const HeaderMenuMobile: FC<Props> = ({ navLinks, language, languages, handleCurr
               onClick={() => setSelected((array) => array.slice(0, -1))}
               className="flex h-full w-full items-center justify-start"
             >
-              <BackIcon className="m-22" />
+              <BackIcon className="h-7.5 m-22 w-18" />
             </button>
           )}
           <button
@@ -62,7 +63,7 @@ const HeaderMenuMobile: FC<Props> = ({ navLinks, language, languages, handleCurr
             title={formatMessage({ id: 'close', defaultMessage: 'Close' })}
             className="flex h-full w-full items-center justify-end"
           >
-            <CloseIcon className="m-22" />
+            <CloseIcon className="my-22 mx-25 h-12 w-12" />
           </button>
         </div>
         <>
@@ -76,7 +77,7 @@ const HeaderMenuMobile: FC<Props> = ({ navLinks, language, languages, handleCurr
                       onClick={() => setSelected((array) => [...array, navLink])}
                       className="mx-20 my-12 flex h-24 justify-between text-16 font-medium"
                     >
-                      {navLink.name} <ChevronRightIcon className="w-15" />
+                      {navLink.name} <ChevronRightIcon className="w-20" />
                     </div>
                   ) : (
                     <Link href={navLink.slug ? navLink.slug : navLink.path}>

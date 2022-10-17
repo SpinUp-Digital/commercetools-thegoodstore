@@ -5,7 +5,7 @@ type Props = {
 };
 
 const France: React.FC<Props> = ({ className }: Props) => (
-  <svg className={className} xmlns="http://www.w3.org/2000/svg" width="30" height="20" viewBox="-10 -10 3020 2020">
+  <svg className={className} xmlns="http://www.w3.org/2000/svg" width="21" height="14" viewBox="-10 -10 3020 2020">
     <g id="French_Flag_by_Adam_Stanislav">
       <title>Flag of France, by Adam Stanislav</title>
       <rect fill="rgb(0%,14%,58%)" x="0" y="0" width="1010" height="2000" />

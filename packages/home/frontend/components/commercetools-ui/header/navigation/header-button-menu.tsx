@@ -16,7 +16,7 @@ const HeaderButtonMenu: FC<Props> = ({ show, link, tileContent, currentMarket, u
   return (
     <>
       <div className="mx-20 cursor-pointer py-20">
-        <span className={`border-black py-8 text-16 ${show ? 'border-b-2' : ''}`}>{link.name}</span>
+        <span className={`border-secondary-grey py-8 text-16 ${show ? 'border-b-2' : ''}`}>{link.name}</span>
       </div>
       {show && (
         <HeaderMenuDesktop

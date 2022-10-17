@@ -37,6 +37,8 @@ const Header: React.FC<HeaderProps> = ({
   linksMobile,
   markets,
   currentMarket,
+  cartItemCount,
+  wishlistItemCount,
   logo,
   logoLink,
   secondaryLogo,
@@ -72,8 +74,11 @@ const Header: React.FC<HeaderProps> = ({
   };
 
   return (
-    <header className="h-fit border-b-2 border-neutral-400 bg-white">
-      <nav aria-label="Top" className="mx-13 flex h-60 items-center justify-between md:mx-30 md:h-76 lg:mx-50">
+    <header className="h-fit border-b-[1.5px] border-neutral-400 bg-white">
+      <nav
+        aria-label="Top"
+        className="mx-13 flex h-60 items-center justify-between md:mx-30 md:h-76 lg:mx-10 xl:mx-50 "
+      >
         <MarketButton currentMarket={currentMarket} markets={markets} handleCurrentMarket={handleCurrentMarket} />
 
         <HeaderMenuMobile
@@ -108,7 +113,14 @@ const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
 
-        <UtilitySection account={account} accountLink={accountLink} cartLink={cartLink} wishlistLink={wishlistLink} />
+        <UtilitySection
+          account={account}
+          accountLink={accountLink}
+          cartLink={cartLink}
+          wishlistLink={wishlistLink}
+          cartItemCount={cartItemCount}
+          wishlistItemCount={wishlistItemCount}
+        />
       </nav>
 
       {links && (

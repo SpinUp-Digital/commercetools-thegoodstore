@@ -1,14 +1,12 @@
 import React, { FC } from 'react';
 import Link from 'next/link';
 import { Category } from '@Types/product/Category';
-import { NextFrontasticImage } from 'frontastic/lib/image';
 import { Tile } from '../..';
-import { Link as TileLink, Market } from '../../interfaces';
+import { Market } from '../../interfaces';
 import HeaderMenuTileDesktop from './header-menu-tile-desktop';
 
 export interface Props {
   navLinks: Category[];
-
   currentMarket: Market;
   tileContent?: Tile;
   onClick?: () => void;
@@ -17,16 +15,20 @@ export interface Props {
 const HeaderMenuDesktop: FC<Props> = ({ navLinks, tileContent, currentMarket, onClick }) => {
   return (
     <div
-      className={`absolute bottom-0 left-0 z-20 flex h-fit w-full translate-y-full shadow-sm ${
+      className={`absolute bottom-0 left-0 z-10 flex h-fit w-full translate-y-full ${
         tileContent ? 'justify-between' : 'justify-center'
-      } border-t-[1px] border-neutral-400 bg-white px-96 py-34`}
+      } border-b-[1.5px] border-t-[1.5px] border-b-secondary-grey border-t-neutral-400 bg-white px-50 py-34 xl:px-96`}
     >
-      <div className={`flex w-1/2 justify-between ${tileContent ? 'pr-25' : ''}`}>
+      <div className={`w-1/2 justify-between lg:grid lg:grid-cols-2 xl:flex ${tileContent ? 'pr-25' : ''}`}>
         {navLinks.map((navLink) => (
-          <div key={navLink.categoryId}>
+          <div className="w-200" key={navLink.categoryId}>
             {navLink.depth === 1 ? (
               <div key={navLink.categoryId}>
-                <div className="text-14 font-medium text-primary-black">{navLink.name}</div>
+                <div className="w-3/4 overflow-visible text-14 font-medium text-primary-black xl:w-full">
+                  <Link href={navLink.slug ? navLink.slug : navLink.path} passHref>
+                    {navLink.name}
+                  </Link>
+                </div>
                 {navLink.subCategories.map((field) => (
                   <div key={field.categoryId} onClick={onClick} className="my-4 cursor-pointer">
                     <Link href={field.slug ? field.slug : field.path} passHref>

@@ -31,7 +31,7 @@ const MarketButton: React.FC<Props> = ({ currentMarket, markets, handleCurrentMa
   };
 
   return (
-    <div className="ml-12 hidden justify-center md:w-109 lg:flex lg:w-300">
+    <div className="ml-10 hidden justify-center md:w-109 lg:flex lg:w-200 xl:w-300">
       {currentMarket && (
         <button onClick={showMarketMenu} className="flex items-center justify-center p-3 text-14">
           <FlagIcons flagName={currentMarket?.flag} className="mr-8 text-14" />

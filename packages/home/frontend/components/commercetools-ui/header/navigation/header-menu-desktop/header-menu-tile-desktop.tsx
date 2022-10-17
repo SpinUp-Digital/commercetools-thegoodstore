@@ -13,9 +13,9 @@ export interface Props {
 
 const HeaderMenuTileDesktop: FC<Props> = ({ title, image, buttonLabel, buttonLink, currentMarket }) => {
   return (
-    <div className="relative h-[265px] w-[506px] pl-25">
+    <div className="relative h-[265px] w-[506px] xl:pl-25">
       <Image media={image.media} layout="fill" objectFit="contain" alt={image.title[currentMarket?.locale]} />
-      <h3 className="absolute top-83 left-1/2 h-35 w-full -translate-x-1/2 -translate-y-1/2 text-center  text-28 font-bold text-white">
+      <h3 className="absolute top-83 left-1/2 h-35 w-full -translate-x-1/2 -translate-y-1/2 text-center text-28 font-bold text-white">
         {title}
       </h3>
       <ReferenceLink
