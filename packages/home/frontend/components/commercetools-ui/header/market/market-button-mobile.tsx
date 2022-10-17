@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/outline';
 import CloseIcon from 'components/icons/close';
@@ -21,7 +21,7 @@ const MarketButtonMobile: React.FC<Props> = ({ currentMarket, markets, handleCur
 
   return (
     <div className="mt-58">
-      <div className="m-10 text-12 ">Select your country</div>
+      <div className="my-10 mx-15 text-12 ">Select your country</div>
       <Menu as="div" className="relative px-15">
         {({ open }) => (
           <div w-full>
@@ -49,19 +49,10 @@ const MarketButtonMobile: React.FC<Props> = ({ currentMarket, markets, handleCur
               leaveFrom="transform opacity-100 scale-100"
               leaveTo="transform opacity-0 scale-95"
             >
-              <Menu.Items className="absolute bottom-50 left-0 mt-2 w-full px-15">
-                <div className="max-h-300 overflow-scroll bg-white shadow-lg ring-1 ring-black ring-opacity-5">
-                  <div className="flex h-50 w-full items-center justify-between border-b-[1px] border-neutral-400 px-11 ">
-                    <div className="flex w-3/4 justify-start text-12 font-normal">Select shipping country</div>
-                    <Menu.Button
-                      onClick={() => {
-                        open = false;
-                      }}
-                      className="flex w-1/5 justify-end py-10"
-                    >
-                      <CloseIcon className="w-10" />
-                    </Menu.Button>
-                  </div>
+              <Menu.Items
+                className={`absolute left-0 ${markets.length > 6 ? 'bottom-45' : 'top-45'} mt-2 w-full px-15`}
+              >
+                <div className="max-h-300 overflow-scroll border-[1px] border-neutral-400 bg-white shadow-lg">
                   <>
                     {markets.map((market, index) => (
                       <Menu.Item key={index}>
