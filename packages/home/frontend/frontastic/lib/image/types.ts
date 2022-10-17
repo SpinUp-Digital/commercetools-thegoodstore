@@ -17,7 +17,7 @@ export type FrontasticImage = {
     resourceType?: string;
     size?: number;
     tags?: string[];
-    _type?: string;    
+    _type?: string;
   };
   ratio?: string;
   gravity?: Gravity;

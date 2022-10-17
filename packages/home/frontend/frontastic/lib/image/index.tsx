@@ -8,7 +8,7 @@ export default function Image({
   ratio,
   media,
   gravity,
-  suffix, 
+  suffix,
   loading = 'lazy',
   layout = 'responsive',
   alt = media?.name ?? '',

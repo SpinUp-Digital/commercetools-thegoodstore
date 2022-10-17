@@ -44,11 +44,7 @@ const CartItem: React.FC<Props> = ({ item }) => {
     <div className="gap:10 flex max-w-full items-stretch justify-start py-18 md:gap-15">
       <div className="w-[125px] shrink-0 bg-white p-12">
         <div className="relative h-full w-full">
-          <Image 
-            src={item.variant?.images?.[0]} 
-            suffix="small"
-            objectFit="contain" 
-          />
+          <Image src={item.variant?.images?.[0]} suffix="small" objectFit="contain" />
         </div>
       </div>
       <div className="grow">

@@ -46,11 +46,7 @@ const Gallery: FC<GalleryProps> = ({ images, inModalVersion }) => {
       >
         {images?.map((image, index) => (
           <div className={`${inModalVersion ? 'h-[250px] max-w-[300px]' : 'h-[447px]'} relative`} key={index}>
-            <Image 
-              src={image} 
-              suffix="zoom" 
-              objectFit="contain" 
-            />
+            <Image src={image} suffix="zoom" objectFit="contain" />
           </div>
         ))}
       </Slider>

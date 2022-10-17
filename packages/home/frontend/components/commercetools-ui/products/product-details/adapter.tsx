@@ -3,12 +3,12 @@ import { useRouter } from 'next/router';
 import { Product } from '@Types/product/Product';
 import { Variant } from '@Types/product/Variant';
 import { UIProduct } from 'components/commercetools-ui/products/product-details/types';
+import usePreloadImages from 'helpers/hooks/usePreloadImages';
 import { toUIColor } from 'helpers/mappers/toUIColor';
 import { toUIProduct } from 'helpers/mappers/toUIProduct';
 import { toUISize } from 'helpers/mappers/toUIsize';
 import { useWishlist } from 'frontastic';
 import ProductDetails, { ProductDetailsProps } from '.';
-import usePreloadImages from 'helpers/hooks/usePreloadImages';
 
 type ProductDetailsAdapterProps = {
   product: Product;

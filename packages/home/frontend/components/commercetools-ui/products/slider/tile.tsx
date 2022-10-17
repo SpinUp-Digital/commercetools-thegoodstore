@@ -6,11 +6,11 @@ import Slider from 'components/commercetools-ui/slider';
 import HeartIcon from 'components/icons/heart';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
+import usePreloadImages from 'helpers/hooks/usePreloadImages';
 import { desktop } from 'helpers/utils/screensizes';
 import { useWishlist } from 'frontastic';
 import Image from 'frontastic/lib/image';
 import QuickView from '../product-quick-view';
-import usePreloadImages from 'helpers/hooks/usePreloadImages';
 
 interface TileProps {
   product: Product;
