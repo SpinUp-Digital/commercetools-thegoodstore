@@ -6,7 +6,6 @@ import CartIcon from 'components/icons/cart';
 import WishlistIcon from 'components/icons/wishlist';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { Reference, ReferenceLink } from 'helpers/reference';
-import { useCart, useWishlist } from 'frontastic';
 
 interface Props {
   accountLink: Reference;
