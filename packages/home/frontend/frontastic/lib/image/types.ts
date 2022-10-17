@@ -17,10 +17,11 @@ export type FrontasticImage = {
     resourceType?: string;
     size?: number;
     tags?: string[];
-    _type?: string;
+    _type?: string;    
   };
   ratio?: string;
   gravity?: Gravity;
+  suffix?: string;
 };
 
 export type NextFrontasticImage = FrontasticImage & Partial<Pick<NextImageProps, 'src'>> & Omit<NextImageProps, 'src'>;

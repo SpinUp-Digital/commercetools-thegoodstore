@@ -103,6 +103,7 @@ const Tile: FC<TileProps> = ({ product }) => {
                   <a className="relative block h-[175px] md:h-[360px]">
                     <Image
                       src={image}
+                      suffix="medium"
                       alt={product.name}
                       objectFit="contain"
                       objectPosition="center"
@@ -119,6 +120,7 @@ const Tile: FC<TileProps> = ({ product }) => {
               <a className="relative block h-[175px] md:h-[360px]">
                 <Image
                   src={selectedVariant.images[0]}
+                  suffix="medium"
                   alt={product.name}
                   objectFit="contain"
                   objectPosition="center"

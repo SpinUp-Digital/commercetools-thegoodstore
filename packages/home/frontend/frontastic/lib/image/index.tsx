@@ -8,12 +8,21 @@ export default function Image({
   ratio,
   media,
   gravity,
+  suffix, 
   loading = 'lazy',
   layout = 'responsive',
   alt = media?.name ?? '',
   src = '',
   ...props
 }: NextFrontasticImage) {
+  if (suffix) {
+    if (typeof src === 'string' || src instanceof String) {
+      const dotIndex = src.lastIndexOf('.');
+
+      src = src.substring(0, dotIndex) + '-' + suffix + src.substring(dotIndex, src.length);
+    }
+  }
+
   if (!media?.mediaId)
     return (
       <NextImage
