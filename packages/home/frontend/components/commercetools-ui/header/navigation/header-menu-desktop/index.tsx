@@ -15,7 +15,7 @@ export interface Props {
 const HeaderMenuDesktop: FC<Props> = ({ navLinks, tileContent, currentMarket, onClick }) => {
   return (
     <div
-      className={`absolute bottom-0 left-0 z-10 flex h-fit w-full translate-y-full ${
+      className={`absolute bottom-0 left-0 z-20 flex h-fit w-full translate-y-full ${
         tileContent ? 'justify-between' : 'justify-center'
       } border-b-[1.5px] border-t-[1.5px] border-b-secondary-grey border-t-neutral-400 bg-white px-50 py-34 xl:px-96`}
     >

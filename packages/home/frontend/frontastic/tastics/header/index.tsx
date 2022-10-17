@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Header from 'components/commercetools-ui/header';
 import { useRouter } from 'next/router';
-import { calculateCartCount } from 'helpers/utils/calculateCartCount';
 import { useCart, useWishlist, useAccount } from 'frontastic/provider';
 import countryToCurrency from 'country-to-currency';
 import { Market } from 'components/commercetools-ui/header/interfaces';
 
 const HeaderTastic = ({ data, categories }) => {
-  const { data: cart, getProjectSettings } = useCart();
+  const { getProjectSettings, totalItems: totalCartItems } = useCart();
   const { data: wishlist } = useWishlist();
   const { account } = useAccount();
   const [markets, setMarkets] = useState<Market[]>([]);
@@ -53,7 +52,7 @@ const HeaderTastic = ({ data, categories }) => {
       linksMobile={(categories as any)?.items}
       markets={markets}
       currentMarket={currentMarket}
-      cartItemCount={calculateCartCount(cart?.lineItems) || 0}
+      cartItemCount={totalCartItems}
       wishlistItemCount={wishlist?.lineItems?.length || 0}
       logo={data.logo}
       logoLink={data.logoLink}

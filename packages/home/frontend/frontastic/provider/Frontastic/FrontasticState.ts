@@ -37,6 +37,7 @@ import { UseCart } from './UseCart';
 import { UseWishlist } from './UseWishlist';
 import { UseProduct } from './UseProduct';
 import { UseAdyen } from './UseAdyen';
+import { Cart } from '@Types/cart/Cart';
 
 export interface FrontasticState {
   useCart: UseCart;
@@ -47,9 +48,19 @@ export interface FrontasticState {
 }
 
 export const getFrontasticState = (): FrontasticState => {
+  const cartData = cartItems();
+  const totalCartItems = (cartData.data as Cart)?.lineItems?.reduce((acc, curr) => acc + curr.count, 0) ?? 0;
+
+  const accountData = getAccount();
+
+  const wishlistData = getWishlist();
+
+  const categoriesData = queryCategories();
+
   return {
     useCart: {
-      ...cartItems(),
+      ...cartData,
+      totalItems: totalCartItems,
       addItem,
       updateCart,
       setShippingMethod,
@@ -63,7 +74,7 @@ export const getFrontasticState = (): FrontasticState => {
       removeDiscountCode,
     },
     useAccount: {
-      ...getAccount(),
+      ...accountData,
       login,
       logout,
       register,
@@ -80,13 +91,13 @@ export const getFrontasticState = (): FrontasticState => {
       setDefaultShippingAddress,
     },
     useWishlist: {
-      ...getWishlist(),
+      ...wishlistData,
       addToWishlist,
       removeLineItem,
       updateLineItem,
     },
     useProduct: {
-      ...queryCategories(),
+      ...categoriesData,
     },
     useAdyen: {
       createSession,

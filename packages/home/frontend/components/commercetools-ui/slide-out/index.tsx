@@ -21,7 +21,7 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
   const { formatMessage: formatWishlistMessage } = useFormat({ name: 'wishlist' });
 
-  const { data: cartData } = useCart();
+  const { data: cartData, totalItems: totalCartItems } = useCart();
 
   const { data: wishlistData } = useWishlist();
 
@@ -172,7 +172,7 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
               <>
                 <span className="absolute top-[-4px] right-[-3px] h-8 w-8 rounded-full bg-green-500" />
                 <span className="absolute top-[15px] left-1/2 -translate-x-1/2 text-10">
-                  {cartItems.length > 9 ? '9+' : cartItems.length}
+                  {totalCartItems > 9 ? '9+' : totalCartItems}
                 </span>
               </>
             )}
