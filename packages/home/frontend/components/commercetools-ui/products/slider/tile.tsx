@@ -19,7 +19,10 @@ interface TileProps {
 const Tile: FC<TileProps> = ({ product }) => {
   const [isDesktopSize] = useMediaQuery(desktop);
 
-  usePreloadImages(product.variants.map((variant) => variant.images[0]));
+  usePreloadImages(
+    product.variants.map((variant) => variant.images[0]),
+    'medium',
+  );
 
   const variantWithDiscount = useMemo(() => {
     let variantReturned: Variant;
