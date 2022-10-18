@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { Menu, Transition } from '@headlessui/react';
 import { Category } from '@Types/product/Category';
 import BackIcon from 'components/icons/back';
-import ChevronRightIcon from 'components/icons/chevron-right';
 import CloseIcon from 'components/icons/close';
+import ChevronRightIcon from 'components/icons/home-chevron-right';
 import MenuIcon from 'components/icons/menu-icon';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { Market } from '../../interfaces';
@@ -77,7 +77,7 @@ const HeaderMenuMobile: FC<Props> = ({ navLinks, language, languages, handleCurr
                       onClick={() => setSelected((array) => [...array, navLink])}
                       className="mx-20 my-12 flex h-24 justify-between text-16 font-medium"
                     >
-                      {navLink.name} <ChevronRightIcon className="w-20" />
+                      {navLink.name} <ChevronRightIcon className="mt-7 mr-6 w-10" />
                     </div>
                   ) : (
                     <Link href={navLink.slug ? navLink.slug : navLink.path}>
@@ -98,7 +98,7 @@ const HeaderMenuMobile: FC<Props> = ({ navLinks, language, languages, handleCurr
                       onClick={() => setSelected((array) => [...array, nav])}
                       className="mx-20 my-12 flex h-24 justify-between text-16 font-normal"
                     >
-                      {nav.name} <ChevronRightIcon className="w-15" />
+                      {nav.name} <ChevronRightIcon className="mt-7 mr-6 w-10" />
                     </div>
                   ) : (
                     <Link href={nav.slug ? nav.slug : nav.path}>
