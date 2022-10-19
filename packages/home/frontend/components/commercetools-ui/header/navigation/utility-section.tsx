@@ -34,7 +34,7 @@ const UtilitySection: React.FC<Props> = ({ accountLink, wishlistItemCount, cartI
           <AccountIcon />
         </ReferenceLink>
 
-        <i
+        <div
           title={formatWishlistMessage({ id: 'wishlist', defaultMessage: 'Wishlist' })}
           className="relative mx-17 mt-2 h-fit w-15 cursor-pointer"
           onClick={() => setMenuState('wishlist')}
@@ -43,9 +43,9 @@ const UtilitySection: React.FC<Props> = ({ accountLink, wishlistItemCount, cartI
             <span className="absolute top-[-8px] right-[-15px] h-8 w-8 rounded-full bg-green-500" />
           )}
           <WishlistIcon />
-        </i>
+        </div>
 
-        <i
+        <div
           title={formatCartMessage({ id: 'myCart', defaultMessage: 'My Cart' })}
           className="relative mx-17 h-fit w-15 cursor-pointer"
           onClick={() => setMenuState('cart')}
@@ -54,9 +54,9 @@ const UtilitySection: React.FC<Props> = ({ accountLink, wishlistItemCount, cartI
             <span className="absolute top-[-5px] right-[-15px] h-8 w-8 rounded-full bg-green-500" />
           )}
 
-          {cartItemCount > 0 && <span className="absolute top-9 left-8 h-8 w-8 text-10">{cartItemCount}</span>}
+          {cartItemCount > 0 && <span className="absolute top-9 left-9 h-8 w-8 text-10">{cartItemCount}</span>}
           <CartIcon />
-        </i>
+        </div>
       </div>
 
       {menuState && <div className="fixed top-0 left-0 z-10 h-full w-full bg-black opacity-50" />}
