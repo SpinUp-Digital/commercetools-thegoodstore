@@ -1,6 +1,5 @@
 import React, { FC, useMemo, useState } from 'react';
 import Link from 'next/link';
-import { Menu, Transition } from '@headlessui/react';
 import { Category } from '@Types/product/Category';
 import BackIcon from 'components/icons/back';
 import CloseIcon from 'components/icons/close';
@@ -33,6 +32,7 @@ const HeaderMenuMobile: FC<Props> = ({ navLinks, language, languages, handleCurr
 
   const hideHeaderMenu = () => {
     setShowMenu(false);
+    setSelected([]);
   };
   return (
     <div className="flex md:w-109 lg:hidden">
@@ -43,7 +43,9 @@ const HeaderMenuMobile: FC<Props> = ({ navLinks, language, languages, handleCurr
       >
         <MenuIcon />
       </button>
-      {showMenu && <div className="fixed top-0 left-0 z-10 h-full w-full bg-black opacity-50" />}
+      {showMenu && (
+        <div onClick={hideHeaderMenu} className="fixed top-0 left-0 z-10 h-full w-full bg-black opacity-50" />
+      )}
       <div
         className={`delay-50 fixed top-0 z-20 h-full w-4/5 bg-neutral-200 opacity-100 transition ease-in-out ${
           showMenu ? 'left-0 translate-x-0' : '-translate-x-[1000px]'
