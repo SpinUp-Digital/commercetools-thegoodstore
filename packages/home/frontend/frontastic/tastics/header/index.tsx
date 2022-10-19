@@ -46,9 +46,11 @@ const HeaderTastic = ({ data, categories }) => {
     router.push(router.asPath, router.asPath, { locale: market.locale.substring(0, 2) });
   };
 
+  const flattenedCategories = categories?.items?.filter((category) => category.depth === 0);
+
   return (
     <Header
-      links={(categories as any)?.items}
+      links={flattenedCategories}
       linksMobile={(categories as any)?.items}
       markets={markets}
       currentMarket={currentMarket}
@@ -61,14 +63,7 @@ const HeaderTastic = ({ data, categories }) => {
       accountLink={data.accountLink}
       wishlistLink={data.wishlistLink}
       cartLink={data.cartLink}
-      tileContent={{
-        tileImage: data.tileImage,
-        tileHeader: data.tileHeaderText,
-        tileButton: {
-          name: data.tileButtonLabel,
-          reference: data.tileButtonLink,
-        },
-      }}
+      tiles={data.tiles}
       handleCurrentMarket={handleCurrentMarket}
     />
   );

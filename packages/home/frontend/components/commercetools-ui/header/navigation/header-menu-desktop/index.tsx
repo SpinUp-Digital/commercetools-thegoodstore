@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import Link from 'next/link';
 import { Category } from '@Types/product/Category';
-import { Tile } from '../..';
 import { Market } from '../../interfaces';
+import { Tile } from '../../types';
 import HeaderMenuTileDesktop from './header-menu-tile-desktop';
 
 export interface Props {
@@ -20,7 +20,7 @@ const HeaderMenuDesktop: FC<Props> = ({ navLinks, tileContent, currentMarket, on
       } border-b-[1.5px] border-t-[1.5px] border-b-neutral-500 border-t-neutral-400 bg-white px-50 py-34 xl:pl-140 xl:pr-186`}
     >
       <div className={`w-1/2 justify-between lg:grid lg:grid-cols-2 xl:flex ${tileContent ? 'pr-25' : ''}`}>
-        {navLinks.map((navLink) => (
+        {navLinks?.map((navLink) => (
           <div className="w-200" key={navLink.categoryId}>
             {navLink.depth === 1 ? (
               <div key={navLink.categoryId}>
@@ -52,10 +52,10 @@ const HeaderMenuDesktop: FC<Props> = ({ navLinks, tileContent, currentMarket, on
       </div>
       {tileContent && (
         <HeaderMenuTileDesktop
-          title={tileContent.tileHeader}
+          title={tileContent.tileHeaderText}
           image={tileContent.tileImage}
-          buttonLabel={tileContent.tileButton.name}
-          buttonLink={tileContent.tileButton.reference}
+          buttonLabel={tileContent.tileButtonLabel}
+          buttonLink={tileContent.tileButtonLink}
           currentMarket={currentMarket}
         />
       )}
