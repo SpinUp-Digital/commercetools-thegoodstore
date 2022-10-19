@@ -1,6 +1,6 @@
 import React from 'react';
 import { Disclosure, Transition } from '@headlessui/react';
-import { ChevronDownIcon } from '@heroicons/react/solid';
+import { ChevronDownIcon } from '@heroicons/react/outline';
 
 export interface AccordionProps {
   index?: number;
@@ -32,7 +32,11 @@ const AccordionBtn: React.FC<AccordionProps> = ({
             >
               <div className="flex justify-between">
                 <p className="self-center transition">{open ? openSectionTitle : closedSectionTitle}</p>
-                <ChevronDownIcon className={`${open ? 'rotate-180 transform' : ''} w-20 ${iconColor} transition`} />
+                <ChevronDownIcon
+                  width={17.5}
+                  strokeWidth={1}
+                  className={`${open ? 'rotate-180 transform' : ''} ${iconColor} transition`}
+                />
               </div>
             </Disclosure.Button>
             <Transition
