@@ -1,36 +1,12 @@
 import React, { useState, useRef } from 'react';
-import { Account } from '@Types/account/Account';
 import { Category } from '@Types/product/Category';
-import { Reference, ReferenceLink } from 'helpers/reference';
-import Image, { NextFrontasticImage } from 'frontastic/lib/image';
-import { Market, Link } from './interfaces';
+import { ReferenceLink } from 'helpers/reference';
+import Image from 'frontastic/lib/image';
 import MarketButton from './market/market-button';
 import HeaderButtonMenu from './navigation/header-button-menu';
 import HeaderMenuMobile from './navigation/header-menu-mobile';
 import UtilitySection from './navigation/utility-section';
-
-export interface Tile {
-  tileImage: NextFrontasticImage;
-  tileHeader: string;
-  tileButton: Link;
-}
-export interface HeaderProps {
-  links: Category[];
-  linksMobile: Category[];
-  markets: Market[];
-  currentMarket: Market;
-  cartItemCount: number;
-  wishlistItemCount?: number;
-  logo: NextFrontasticImage;
-  logoLink: Reference;
-  secondaryLogo: NextFrontasticImage;
-  account: Account;
-  accountLink: Reference;
-  wishlistLink?: Reference;
-  cartLink: Reference;
-  tileContent?: Tile;
-  handleCurrentMarket: (market: Market) => void;
-}
+import { HeaderProps } from './types';
 
 const Header: React.FC<HeaderProps> = ({
   links,
@@ -46,7 +22,7 @@ const Header: React.FC<HeaderProps> = ({
   accountLink,
   wishlistLink,
   cartLink,
-  tileContent,
+  tiles,
   handleCurrentMarket,
 }) => {
   const [activeCategory, setActiveCategory] = useState<Category>(undefined);
@@ -70,7 +46,7 @@ const Header: React.FC<HeaderProps> = ({
       clearTimeout(showTimeout.current);
       showTimeout.current = null;
     }
-    showSubMenu();
+    hideSubMenu();
   };
 
   return (
@@ -125,17 +101,15 @@ const Header: React.FC<HeaderProps> = ({
 
       {links && (
         <nav onMouseLeave={handleMouseOut} className="relative hidden h-64 items-center justify-center lg:flex">
-          {links.map((link) => (
-            <div onMouseEnter={() => handleMouseIn(link)} key={link?.categoryId}>
-              {link.depth === 0 && (
-                <HeaderButtonMenu
-                  show={link.categoryId === activeCategory?.categoryId}
-                  link={link}
-                  tileContent={tileContent}
-                  updateSubMenu={hideSubMenu}
-                  currentMarket={currentMarket}
-                />
-              )}
+          {links.map((link, index) => (
+            <div key={link?.categoryId} onMouseEnter={() => handleMouseIn(link)}>
+              <HeaderButtonMenu
+                show={link.categoryId === activeCategory?.categoryId}
+                link={link}
+                tileContent={tiles[index]}
+                updateSubMenu={hideSubMenu}
+                currentMarket={currentMarket}
+              />
             </div>
           ))}
         </nav>

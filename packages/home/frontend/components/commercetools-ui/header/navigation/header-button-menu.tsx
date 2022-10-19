@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Category } from '@Types/product/Category';
-import { Tile } from '..';
 import { Market } from '../interfaces';
+import { Tile } from '../types';
 import HeaderMenuDesktop from './header-menu-desktop';
 
 export interface Props {
@@ -16,12 +16,12 @@ const HeaderButtonMenu: FC<Props> = ({ show, link, tileContent, currentMarket, u
   return (
     <>
       <div className="mx-20 cursor-pointer py-20">
-        <span className={`border-secondary-grey py-8 text-16 ${show ? 'border-b-2' : ''}`}>{link.name}</span>
+        <span className={`border-secondary-grey py-8 text-16 ${show ? 'border-b-2' : ''}`}>{link?.name}</span>
       </div>
       {show && (
         <HeaderMenuDesktop
           onClick={updateSubMenu}
-          navLinks={link.subCategories}
+          navLinks={link?.subCategories}
           currentMarket={currentMarket}
           tileContent={tileContent}
         />
