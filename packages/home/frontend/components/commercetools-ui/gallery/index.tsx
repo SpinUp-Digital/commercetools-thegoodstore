@@ -52,21 +52,23 @@ const Gallery: FC<GalleryProps> = ({ images, inModalVersion }) => {
       </Slider>
 
       {!inModalVersion && (
-        <div className="mt-12 hidden gap-x-18 md:flex">
+        <div className="mt-16 hidden gap-x-18 md:flex">
           {images?.map((image, index) => (
             <div
               key={index}
               className={`
             ${index == activeSlide % images.length ? 'border-neutral-500' : 'border-neutral-400'}
-            relative h-112 w-112 rounded-md border`}
+            relative h-112 w-112 rounded-md border p-7`}
             >
-              <Image
-                src={image}
-                suffix="small"
-                className={`rounded-md p-7 hover:cursor-pointer`}
-                onClick={() => slideTo(index)}
-                objectFit="contain"
-              />
+              <div className="relative h-full w-full">
+                <Image
+                  src={image}
+                  suffix="small"
+                  className={`rounded-md p-7 hover:cursor-pointer`}
+                  onClick={() => slideTo(index)}
+                  objectFit="contain"
+                />
+              </div>
             </div>
           ))}
         </div>
