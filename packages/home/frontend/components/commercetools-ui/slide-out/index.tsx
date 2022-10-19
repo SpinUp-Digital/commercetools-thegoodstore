@@ -92,12 +92,12 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
     if (state === 'cart') {
       return (
         <>
-          <div className="grow divide-y-2 divide-neutral-400 overflow-auto px-12 md:px-22">
+          <div className="grow divide-y divide-neutral-400 overflow-auto px-12 md:px-22">
             {cartData.lineItems?.map((lineItem) => (
               <CartItem key={lineItem.lineItemId} item={lineItem} />
             ))}
           </div>
-          <div className="mt-20 border-t border-neutral-400 px-12 pt-16 pb-32 md:px-22">
+          <div className="border-t border-neutral-400 px-12 pt-16 pb-24 md:px-22">
             <DiscountForm />
           </div>
           <div className="border-t border-neutral-400 bg-white px-12 pt-16 pb-18 md:px-22">
@@ -149,23 +149,24 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
       className={`fixed right-0 top-0 z-50 flex h-screen w-[90%] max-w-[380px] flex-col items-stretch bg-neutral-200 shadow-lg transition duration-300 ease-out ${getStateStyles()}`}
     >
       <div className="flex items-center justify-between border-b border-neutral-400 px-12 pt-24 md:px-22 md:pt-32">
-        <h3 className="pb-24 text-18 font-bold leading-normal md:pb-32 md:text-24">{title}</h3>
-        <div className="flex h-32 items-center gap-32">
+        <h3 className="pb-24 text-18 font-bold leading-normal md:pb-32 md:text-20">{title}</h3>
+        <div className=" flex h-full items-center gap-24 sm:gap-36">
           <div
-            className={`relative cursor-pointer border-b-2 pb-24 md:pb-32 ${
-              state === 'wishlist' ? 'border-primary-black' : 'border-transparent'
-            }`}
+            className="relative h-full cursor-pointer hover:opacity-80 md:pb-32"
             onClick={() => changeState?.('wishlist')}
           >
+            <div
+              className={`absolute -bottom-1 h-2 w-full transition duration-200 ${
+                state === 'wishlist' ? 'bg-secondary-grey ease-out' : 'bg-transparent ease-in'
+              }`}
+            />
             {wishlistItems?.length > 0 && (
               <span className="absolute top-[-7px] right-[-7px] h-8 w-8 rounded-full bg-green-500" />
             )}
-            <HeartIcon className="h-28 w-28" pathClassName="stroke-secondary-black stroke-2" />
+            <HeartIcon className="mt-2 h-20 w-20 md:h-24 md:w-24" pathClassName="stroke-secondary-black stroke-2" />
           </div>
           <div
-            className={`relative cursor-pointer border-b-2 pb-24 md:pb-32 ${
-              state === 'cart' ? 'border-primary-black' : 'border-transparent'
-            }`}
+            className="relative h-full cursor-pointer hover:opacity-80 md:pb-32"
             onClick={() => changeState?.('cart')}
           >
             {cartItems?.length > 0 && (
@@ -176,7 +177,12 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
                 </span>
               </>
             )}
-            <CartIcon className="h-32 w-32" />
+            <div
+              className={`absolute -bottom-1 h-2 w-full transition duration-200  ${
+                state === 'cart' ? 'bg-secondary-grey ease-out' : 'bg-transparent ease-in'
+              }`}
+            />
+            <CartIcon className="h-24 w-24 md:h-26 md:w-26" />
           </div>
           <div onClick={onClose} className="cursor-pointer pb-24 md:pb-32">
             <CloseIcon className="h-18 w-18" />

@@ -49,7 +49,7 @@ const CartItem: React.FC<Props> = ({ item }) => {
       </div>
       <div className="grow">
         <div className="flex max-w-full items-center justify-between">
-          <p className="max-w-[150px] overflow-hidden text-ellipsis whitespace-pre text-14 leading-loose">
+          <p className="max-w-[150px] overflow-hidden text-ellipsis whitespace-pre text-14 capitalize leading-loose">
             {item.name}
           </p>
           <i onClick={() => removeItem(item.lineItemId)} className="block h-15 w-15 cursor-pointer">
