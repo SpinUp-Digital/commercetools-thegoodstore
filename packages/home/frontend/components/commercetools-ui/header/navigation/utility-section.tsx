@@ -59,6 +59,8 @@ const UtilitySection: React.FC<Props> = ({ accountLink, wishlistItemCount, cartI
         </i>
       </div>
 
+      {menuState && <div className="fixed top-0 left-0 z-10 h-full w-full bg-black opacity-50" />}
+
       <Slideout
         state={menuState}
         onClose={() => setMenuState(null)}
