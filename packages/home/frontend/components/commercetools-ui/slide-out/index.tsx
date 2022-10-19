@@ -172,7 +172,7 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
             {cartItems?.length > 0 && (
               <>
                 <span className="absolute top-[-4px] right-[-3px] h-8 w-8 rounded-full bg-green-500" />
-                <span className="absolute top-[15px] left-1/2 -translate-x-1/2 text-10">
+                <span className="absolute top-[11px] left-1/2 -translate-x-1/2 text-10">
                   {totalCartItems > 9 ? '9+' : totalCartItems}
                 </span>
               </>
