@@ -23,11 +23,18 @@ export type ContentSliderProps = {
 };
 
 const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
+  const [isSmallMobile] = useMediaQuery(screensizes.smallMobile);
   const [isMobile] = useMediaQuery(screensizes.mobile);
   const [isTablet] = useMediaQuery(screensizes.tablet);
   const [isDesktop] = useMediaQuery(screensizes.desktop);
 
   const tileImageSizes = useImageSizes({ md: 1, lg: 0.33, defaultSize: 0.33 });
+
+  const slidesPerView = () => {
+    if (isMobile) return 2;
+    if (isSmallMobile) return 1.3;
+    else return 1;
+  };
 
   const slidesElement = useMemo(
     () =>
@@ -72,9 +79,9 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
         <Slider
           arrows={false}
           dots={false}
-          slidesPerView={isMobile ? 2 : 1}
+          slidesPerView={slidesPerView()}
           slideWidth={416}
-          spaceBetween={isTablet ? 24 : 12}
+          spaceBetween={isTablet ? 24 : isMobile ? 18 : 12}
         >
           {slidesElement}
         </Slider>
