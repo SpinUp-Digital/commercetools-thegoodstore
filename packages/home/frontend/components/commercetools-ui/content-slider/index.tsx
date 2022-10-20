@@ -8,6 +8,8 @@ import Wrapper from '../content/wrapper';
 import Slider from '../slider';
 import Subtitle from '../subtitle';
 import Title from '../title';
+import useCurrentBreakpoint from 'helpers/hooks/useCurrentBreakpoint';
+import { CurrentBreakpoint } from 'helpers/utils/breakpoints';
 
 type ContentSliderSlide = {
   image: NextFrontasticImage;
@@ -23,11 +25,19 @@ export type ContentSliderProps = {
 };
 
 const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
-  const [isMobile] = useMediaQuery(screensizes.mobile);
-  const [isTablet] = useMediaQuery(screensizes.tablet);
   const [isDesktop] = useMediaQuery(screensizes.desktop);
-
+  const [isTablet] = useMediaQuery(screensizes.tablet);
+  const currentBreakPoint = useCurrentBreakpoint();
   const tileImageSizes = useImageSizes({ md: 1, lg: 0.33, defaultSize: 0.33 });
+
+  type BreakpointsRef = {
+    [key in CurrentBreakpoint]?: any;
+  };
+
+  const spaceBetweenRef: BreakpointsRef = {
+    tablet: 24,
+    mobile: 18,
+  };
 
   const slidesElement = useMemo(
     () =>
@@ -37,7 +47,7 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
           key={index}
           className="shrink overflow-hidden lg:shrink-0 lg:grow lg:basis-0"
         >
-          <div className="relative h-[220px] w-[220px] md:h-[356px] md:w-[356px]">
+          <div className="relative h-[220px] w-[246px] md:h-[356px] md:w-[400px]">
             <div className="absolute z-10 h-full w-full rounded-md bg-black opacity-20"></div>
             <Image {...image} sizes={tileImageSizes} className="mb-5 rounded-md" layout="fill" objectFit="cover" />
           </div>
@@ -72,9 +82,8 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
         <Slider
           arrows={false}
           dots={false}
-          slidesPerView={isMobile ? 2 : 1}
-          slideWidth={416}
-          spaceBetween={isTablet ? 24 : 12}
+          slideWidth={isTablet ? 400 : 246}
+          spaceBetween={spaceBetweenRef[currentBreakPoint] ?? 12}
         >
           {slidesElement}
         </Slider>
