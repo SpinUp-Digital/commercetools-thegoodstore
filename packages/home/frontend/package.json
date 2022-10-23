@@ -24,6 +24,7 @@
     "@headlessui/react": "^1.4.3",
     "@heroicons/react": "^1.0.5",
     "@hookform/error-message": "^2.0.0",
+    "@types/react-modal": "^3.13.1",
     "cookie-cutter": "^0.2.0",
     "cookies": "^0.8.0",
     "country-to-currency": "^1.0.5",

@@ -13,6 +13,8 @@ const ProductInformation: FC<ProductInformationProps> = ({
   variant,
   onAddToWishlist,
   onRemoveFromWishlist,
+  onChangeVariant,
+  inModalVersion,
 }) => {
   const router = useRouter();
 
@@ -62,7 +64,7 @@ const ProductInformation: FC<ProductInformationProps> = ({
               variants={product?.variants}
               currentVariant={variant}
               attribute={attribute}
-              onClick={updateVariantSKU}
+              onClick={inModalVersion ? onChangeVariant : updateVariantSKU}
             />
           );
         }

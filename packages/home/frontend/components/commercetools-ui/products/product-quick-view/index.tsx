@@ -1,9 +1,10 @@
-import { CSSProperties, FC, useState } from 'react';
+import { FC, useState } from 'react';
 import { XIcon } from '@heroicons/react/outline';
 import { Product } from '@Types/product/Product';
-import Modal from 'react-modal';
 import { useFormat } from 'helpers/hooks/useFormat';
 import ProductDetailsAdapter from '../product-details/adapter';
+import Modal from 'components/commercetools-ui/modal';
+import useClassNames from 'helpers/hooks/useClassNames';
 
 type QuickViewProps = {
   imageHovered: boolean;
@@ -12,31 +13,9 @@ type QuickViewProps = {
 };
 
 const QuickView: FC<QuickViewProps> = ({ imageHovered, isDesktopSize, product }) => {
+  const { resolveClassNames } = useClassNames();
   const { formatMessage } = useFormat({ name: 'product' });
-
   const [modalIsOpen, setIsOpen] = useState(false);
-
-  type ModalStylesProps = {
-    overlay: CSSProperties;
-    content: CSSProperties;
-  };
-
-  const modalStyle: ModalStylesProps = {
-    overlay: {
-      zIndex: 12,
-    },
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      maxWidth: isDesktopSize ? 800 : 650,
-      position: 'relative',
-      padding: 0,
-    },
-  };
 
   const openModal = () => {
     setIsOpen(true);
@@ -46,21 +25,20 @@ const QuickView: FC<QuickViewProps> = ({ imageHovered, isDesktopSize, product })
     setIsOpen(false);
   };
 
+  const buttonClassName = resolveClassNames([
+    'w-full border border-neutral-400 bg-white py-16 text-center text-12 capitalize leading-[16px] transition duration-150 ease-out hover:border-primary-black',
+    imageHovered && isDesktopSize ? 'block' : 'hidden',
+  ]);
+
   return (
     <>
-      <button
-        className={`w-full border border-neutral-400 bg-white py-16 text-center text-12 capitalize leading-[16px] transition duration-150 ease-out hover:border-primary-black ${
-          imageHovered && isDesktopSize ? 'block' : 'hidden'
-        }`}
-        onClick={openModal}
-      >
+      <button className={buttonClassName} onClick={openModal}>
         {formatMessage({ id: 'quick.view', defaultMessage: 'Quick view' })}
       </button>
 
       <Modal
         shouldCloseOnOverlayClick
         isOpen={modalIsOpen}
-        style={modalStyle}
         contentLabel={formatMessage({ id: 'quick.view', defaultMessage: 'Quick view' })}
         onRequestClose={closeModal}
       >
@@ -71,7 +49,7 @@ const QuickView: FC<QuickViewProps> = ({ imageHovered, isDesktopSize, product })
             color="#494949"
             onClick={closeModal}
           />
-          <ProductDetailsAdapter product={product} inModalVersion={true} />
+          <ProductDetailsAdapter product={product} inModalVersion />
         </>
       </Modal>
     </>
