@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Category } from '@Types/product/Category';
-import { ReferenceLink } from 'helpers/reference';
+import Link from '../link';
 import Image from 'frontastic/lib/image';
 import MarketButton from './market/market-button';
 import HeaderButtonMenu from './navigation/header-button-menu';
@@ -65,16 +65,16 @@ const Header: React.FC<HeaderProps> = ({
         />
 
         <div className="relative mb-10 px-10 md:mt-0">
-          <ReferenceLink
+          <Link
             className="flex h-95 w-125 justify-center text-center text-16 font-bold md:h-76 md:w-214 md:text-28"
-            target={logoLink}
+            link={logoLink}
           >
             {logo ? (
               <Image media={logo.media} layout="fill" objectFit="contain" alt={logo.title[currentMarket?.locale]} />
             ) : (
               'The Good Home'
             )}
-          </ReferenceLink>
+          </Link>
           <div className="absolute bottom-15 left-1/2 h-25 w-32 -translate-x-1/2 font-normal md:-bottom-5 md:w-44 md:text-14">
             {secondaryLogo ? (
               <Image

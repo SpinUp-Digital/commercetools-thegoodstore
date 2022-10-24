@@ -4,8 +4,9 @@ import Slideout, { State as MenuState } from 'components/commercetools-ui/slide-
 import AccountIcon from 'components/icons/account';
 import CartIcon from 'components/icons/cart';
 import WishlistIcon from 'components/icons/wishlist';
+import { Reference } from 'types/reference';
+import Link from 'components/commercetools-ui/link';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { Reference, ReferenceLink } from 'helpers/reference';
 
 interface Props {
   accountLink: Reference;
@@ -26,13 +27,13 @@ const UtilitySection: React.FC<Props> = ({ accountLink, wishlistItemCount, cartI
   return (
     <div className="mr-15 flex w-109 items-center justify-between lg:mr-12 lg:w-200 xl:w-300">
       <div className="flex w-full justify-center lg:w-210">
-        <ReferenceLink
+        <Link
           title={formatAccountMessage({ id: 'account', defaultMessage: 'Account' })}
-          target={accountLink}
+          link={accountLink}
           className="mx-17 h-fit w-15"
         >
           <AccountIcon />
-        </ReferenceLink>
+        </Link>
 
         <div
           title={formatWishlistMessage({ id: 'wishlist', defaultMessage: 'Wishlist' })}

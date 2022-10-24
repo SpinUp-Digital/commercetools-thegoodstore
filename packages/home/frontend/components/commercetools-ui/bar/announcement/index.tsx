@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Reference, ReferenceLink } from 'helpers/reference';
+import { Reference } from 'types/reference';
+import Link from 'components/commercetools-ui/link';
 
 export interface Props {
   text: string;
@@ -35,9 +36,9 @@ const AnnouncementBar: React.FC<Props> = ({ text, highlightedSubstring, target }
     <div className="w-full bg-primary-dark py-16">
       <p className="letter-[1%] text-center text-12 leading-loose text-white">
         {previewText.prefix}
-        <ReferenceLink target={target} className="underline underline-offset-2">
+        <Link link={target} className="underline underline-offset-2">
           {previewText.middle}
-        </ReferenceLink>
+        </Link>
         {previewText.suffix}
       </p>
     </div>

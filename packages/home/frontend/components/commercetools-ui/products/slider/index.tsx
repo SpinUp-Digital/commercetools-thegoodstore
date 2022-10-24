@@ -6,7 +6,7 @@ import Slider from 'components/commercetools-ui/slider';
 import Subtitle from 'components/commercetools-ui/subtitle';
 import Title from 'components/commercetools-ui/title';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
-import { Reference } from 'helpers/reference';
+import { Reference } from 'types/reference';
 import { desktop, tablet } from 'helpers/utils/screensizes';
 import Tile from './tile';
 

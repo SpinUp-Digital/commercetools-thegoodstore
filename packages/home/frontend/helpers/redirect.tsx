@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { getReferenceTarget, Reference } from './reference';
+import { Reference } from 'types/reference';
+import { resolveReferenceTarget } from './reference';
 
 export interface RedirectProps {
   target?: string | Reference;
@@ -13,7 +14,7 @@ const Redirect: React.FC<RedirectProps> = ({ target }) => {
   useEffect(() => {
     if (!target) return;
     //resolve href
-    const resolvedTarget = typeof target === 'string' ? target : getReferenceTarget(target);
+    const resolvedTarget = typeof target === 'string' ? target : resolveReferenceTarget(target);
     //redirect upon mounting
     router.push(resolvedTarget);
   }, [target]);

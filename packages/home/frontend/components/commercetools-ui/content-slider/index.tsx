@@ -1,7 +1,8 @@
 import { FC, useMemo } from 'react';
 import useImageSizes from 'helpers/hooks/useImageSizes';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
-import { Reference, ReferenceLink } from 'helpers/reference';
+import { Reference } from 'types/reference';
+import Link from '../link';
 import * as screensizes from 'helpers/utils/screensizes';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
 import Wrapper from '../content/wrapper';
@@ -42,11 +43,7 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
   const slidesElement = useMemo(
     () =>
       slides.map(({ image, title, ctaReference, ctaLabel }, index) => (
-        <ReferenceLink
-          target={ctaReference}
-          key={index}
-          className="shrink overflow-hidden lg:shrink-0 lg:grow lg:basis-0"
-        >
+        <Link link={ctaReference} key={index} className="shrink overflow-hidden lg:shrink-0 lg:grow lg:basis-0">
           <div className="relative h-[220px] w-[246px] md:h-[356px] md:w-[400px]">
             <div className="absolute z-10 h-full w-full rounded-md bg-black opacity-20"></div>
             <Image {...image} sizes={tileImageSizes} className="mb-5 rounded-md" layout="fill" objectFit="cover" />
@@ -67,7 +64,7 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
               <path d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
             </svg>
           </div>
-        </ReferenceLink>
+        </Link>
       )),
     [slides],
   );

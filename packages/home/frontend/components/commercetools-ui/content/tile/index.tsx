@@ -1,7 +1,8 @@
 import Button from 'components/commercetools-ui/button';
 import Typography from 'components/commercetools-ui/typography';
 import useClassNames from 'helpers/hooks/useClassNames';
-import { Reference, ReferenceLink } from 'helpers/reference';
+import { Reference } from 'types/reference';
+import Link from 'components/commercetools-ui/link';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
 
 export interface TileProps {
@@ -42,13 +43,13 @@ const Tile: React.FC<TileProps> = ({
         <h2 className="text-shadow mt-18 text-24 font-bold leading-normal text-white lg:text-28">
           <Typography>{title}</Typography>
         </h2>
-        <ReferenceLink target={ctaReference}>
+        <Link link={ctaReference}>
           <Button className="mt-24">
             <span className="text-12">
               <Typography>{ctaLabel}</Typography>
             </span>
           </Button>
-        </ReferenceLink>
+        </Link>
       </div>
     </div>
   );

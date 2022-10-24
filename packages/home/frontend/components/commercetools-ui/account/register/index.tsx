@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useFormat } from 'helpers/hooks/useFormat';
 import Redirect from 'helpers/redirect';
-import { Reference, ReferenceLink } from 'helpers/reference';
+import { Reference } from 'types/reference';
+import Link from 'components/commercetools-ui/link';
 import { useAccount } from 'frontastic';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
 
@@ -97,9 +98,9 @@ const Register: React.FC<RegisterProps> = ({ logo, loginLink }) => {
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             {formatAccountMessage({ id: 'account.alreadyHave', defaultMessage: 'Already have an account?' })}{' '}
-            <ReferenceLink target={loginLink} className="text-accent-400 hover:text-accent-500 font-medium underline">
+            <Link link={loginLink} className="text-accent-400 hover:text-accent-500 font-medium underline">
               {formatAccountMessage({ id: 'account.login.here', defaultMessage: 'Login here' })}
-            </ReferenceLink>
+            </Link>
           </p>
         </div>
 

@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { ArrowLeftIcon } from '@heroicons/react/solid';
 import { useFormat } from 'helpers/hooks/useFormat';
 import Redirect from 'helpers/redirect';
-import { Reference, ReferenceLink } from 'helpers/reference';
+import { Reference } from 'types/reference';
+import Link from 'components/commercetools-ui/link';
 import { useAccount } from 'frontastic';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
 
@@ -142,12 +143,9 @@ const Login: React.FC<LoginProps> = ({ logo, registerLink, accountLink }) => {
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             {formatAccountMessage({ id: 'account.doNotHave', defaultMessage: "Don't have an account?" })}{' '}
-            <ReferenceLink
-              target={registerLink}
-              className="text-accent-400 hover:text-accent-500 font-medium underline"
-            >
+            <Link link={registerLink} className="text-accent-400 hover:text-accent-500 font-medium underline">
               {formatAccountMessage({ id: 'account.register.here', defaultMessage: 'Register here' })}
-            </ReferenceLink>
+            </Link>
           </p>
         </div>
 

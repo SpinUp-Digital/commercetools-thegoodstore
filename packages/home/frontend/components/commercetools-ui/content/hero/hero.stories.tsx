@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
 import { headerButtonLink } from 'helpers/mocks/mockData';
-import { Reference } from 'helpers/reference';
+import { Reference } from 'types/reference';
 import Hero, { HeroProps } from './index';
 
 export default {

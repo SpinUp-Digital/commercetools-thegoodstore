@@ -1,7 +1,8 @@
 import React from 'react';
 import Accordion from 'components/commercetools-ui/accordion';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
-import { Reference, ReferenceLink } from 'helpers/reference';
+import { Reference } from 'types/reference';
+import ReferenceLink from '../link';
 import * as screensizes from 'helpers/utils/screensizes';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
 import Column, { Link } from './column';
@@ -67,7 +68,7 @@ const Footer: React.FC<Props> = ({ columns, logo, socialMedia }) => {
         <ul className="mt-40 flex flex-row gap-20 self-center lg:mt-0">
           {socialMedia?.map((item, i) => (
             <li key={i} className="w-22">
-              <ReferenceLink target={item.reference}>
+              <ReferenceLink link={item.reference}>
                 <Image {...item.logo} className="mb-20" />
               </ReferenceLink>
             </li>

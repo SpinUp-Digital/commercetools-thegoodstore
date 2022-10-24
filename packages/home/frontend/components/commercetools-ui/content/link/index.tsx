@@ -1,6 +1,7 @@
 import React from 'react';
+import { Reference } from 'types/reference';
+import ReferenceLink from 'components/commercetools-ui/link';
 import useClassNames from 'helpers/hooks/useClassNames';
-import { Reference, ReferenceLink } from 'helpers/reference';
 
 export interface Props {
   target: Reference;
@@ -16,7 +17,7 @@ const Link: React.FC<React.PropsWithChildren<Props>> = ({ children, target, unde
 
   return (
     <ReferenceLink
-      target={target}
+      link={target}
       className={`flex w-fit items-center gap-12 text-12 font-regular underline-offset-4 md:text-16 ${classNames}`}
     >
       <span>{children}</span>

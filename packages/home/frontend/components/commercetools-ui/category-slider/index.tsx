@@ -1,12 +1,13 @@
 import React from 'react';
 import useImageSizes from 'helpers/hooks/useImageSizes';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
-import { Reference, ReferenceLink } from 'helpers/reference';
 import { desktop, tablet } from 'helpers/utils/screensizes';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
 import Wrapper from '../content/wrapper';
 import Slider from '../slider';
 import Typography from '../typography';
+import { Reference } from 'types/reference';
+import Link from '../link';
 
 export interface Props {
   tiles: Array<{
@@ -33,7 +34,7 @@ const CategorySlider: React.FC<Props> = ({ tiles = [] }) => {
         loop
       >
         {tiles.map((tile, index) => (
-          <ReferenceLink key={index} target={tile.target} className="block">
+          <Link key={index} link={tile.target} className="block">
             <div className="relative h-[160px] sm:h-[256px] md:h-[356px]">
               <Image
                 {...tile.image}
@@ -48,7 +49,7 @@ const CategorySlider: React.FC<Props> = ({ tiles = [] }) => {
             <h6 className="mt-5 block rounded-b-sm border-neutral-300 py-5 text-center text-12 leading-normal md:text-16 lg:mt-0 lg:border lg:bg-white lg:py-10">
               <Typography>{tile.title}</Typography>
             </h6>
-          </ReferenceLink>
+          </Link>
         ))}
       </Slider>
     </Wrapper>
