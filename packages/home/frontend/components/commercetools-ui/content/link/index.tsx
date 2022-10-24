@@ -11,9 +11,7 @@ export interface Props {
 }
 
 const Link: React.FC<React.PropsWithChildren<Props>> = ({ children, target, underlined, withArrow, className }) => {
-  const { resolveClassNames } = useClassNames();
-
-  const classNames = resolveClassNames([underlined && 'underline', className]);
+  const classNames = useClassNames([underlined && 'underline', className]);
 
   return (
     <ReferenceLink

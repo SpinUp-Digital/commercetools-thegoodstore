@@ -55,14 +55,12 @@ const Input: React.FC<Props> = ({
 
   const isInActiveState = useMemo(() => isFocused || !!localValue, [isFocused, localValue]);
 
-  const { resolveClassNames } = useClassNames();
-
-  const labelClassName = resolveClassNames([
+  const labelClassName = useClassNames([
     'absolute top-[6px] left-[12px] block text-10 font-semibold transition duration-150 ease-out',
     isInActiveState ? 'opacity-1 scale-100' : 'scale-0 opacity-0',
   ]);
 
-  const inputClassName = resolveClassNames([
+  const inputClassName = useClassNames([
     'w-full rounded-l-sm border border-neutral-300 px-12 text-primary-black placeholder:text-14 placeholder:leading-normal placeholder:text-primary-black focus:outline-none disabled:cursor-not-allowed disabled:bg-neutral-400',
     className,
     bgClassName,

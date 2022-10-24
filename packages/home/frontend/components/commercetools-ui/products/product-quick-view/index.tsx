@@ -13,7 +13,10 @@ type QuickViewProps = {
 };
 
 const QuickView: FC<QuickViewProps> = ({ imageHovered, isDesktopSize, product }) => {
-  const { resolveClassNames } = useClassNames();
+  const buttonClassName = useClassNames([
+    'w-full border border-neutral-400 bg-white py-16 text-center text-12 capitalize leading-[16px] transition duration-150 ease-out hover:border-primary-black',
+    imageHovered && isDesktopSize ? 'block' : 'hidden',
+  ]);
   const { formatMessage } = useFormat({ name: 'product' });
   const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -24,12 +27,6 @@ const QuickView: FC<QuickViewProps> = ({ imageHovered, isDesktopSize, product })
   const closeModal = () => {
     setIsOpen(false);
   };
-
-  const buttonClassName = resolveClassNames([
-    'w-full border border-neutral-400 bg-white py-16 text-center text-12 capitalize leading-[16px] transition duration-150 ease-out hover:border-primary-black',
-    imageHovered && isDesktopSize ? 'block' : 'hidden',
-  ]);
-
   return (
     <>
       <button className={buttonClassName} onClick={openModal}>
