@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Category } from '@Types/product/Category';
 import Image from 'frontastic/lib/image';
 import Link from '../../atoms/link';
@@ -50,7 +50,7 @@ const Header: React.FC<HeaderProps> = ({
   };
 
   return (
-    <header className="h-fit border-b-[1.5px] border-neutral-400 bg-white">
+    <header className={`h-fit w-full border-b-[1.5px] border-neutral-400 bg-white`}>
       <nav
         aria-label="Top"
         className="mx-13 flex h-60 items-center justify-between md:mx-30 md:h-76 lg:mx-10 xl:mx-50 "

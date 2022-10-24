@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Header from 'components/commercetools-ui/organisms/header';
 import { useRouter } from 'next/router';
 import { useCart, useWishlist, useAccount } from 'frontastic/provider';
-import countryToCurrency from 'country-to-currency';
-import { Market } from 'components/commercetools-ui/organisms/header/interfaces';
+import { Market } from 'components/commercetools-ui/header/interfaces';
+import useScrollDirection from 'helpers/hooks/useScrollDirection';
+import AnnouncementBar from 'components/commercetools-ui/bar/announcement';
 
 const HeaderTastic = ({ data, categories }) => {
   const { getProjectSettings, totalItems: totalCartItems } = useCart();
@@ -11,6 +12,7 @@ const HeaderTastic = ({ data, categories }) => {
   const { account } = useAccount();
   const [markets, setMarkets] = useState<Market[]>([]);
   const [currentMarket, setCurrentMarket] = useState<Market>(undefined);
+  const scrollDirection = useScrollDirection();
 
   const router = useRouter();
 
@@ -20,9 +22,8 @@ const HeaderTastic = ({ data, categories }) => {
         region: country,
         flag: country,
         locale: data.languages[index],
-        currency: countryToCurrency[country] === 'GBP' ? 'EUR' : countryToCurrency[country],
-        currencyCode:
-          countryToCurrency[country] === 'EUR' ? '&#8364;' : countryToCurrency[country] === 'USD' ? '&#36;' : '&#163;',
+        currency: 'EUR',
+        currencyCode: '&#8364;',
       }));
       setMarkets(initialMarkets);
 
@@ -48,24 +49,35 @@ const HeaderTastic = ({ data, categories }) => {
 
   const flattenedCategories = categories?.items?.filter((category) => category.depth === 0);
 
+  const announcementBarData = {
+    text: data.text,
+    highlightedSubstring: data.highlightedSubstring,
+    target: data.target,
+  };
+
   return (
-    <Header
-      links={flattenedCategories}
-      linksMobile={(categories as any)?.items}
-      markets={markets}
-      currentMarket={currentMarket}
-      cartItemCount={totalCartItems}
-      wishlistItemCount={wishlist?.lineItems?.length || 0}
-      logo={data.logo}
-      logoLink={data.logoLink}
-      secondaryLogo={data.secondaryLogo}
-      account={account}
-      accountLink={data.accountLink}
-      wishlistLink={data.wishlistLink}
-      cartLink={data.cartLink}
-      tiles={data.tiles}
-      handleCurrentMarket={handleCurrentMarket}
-    />
+    <div
+      className={`fixed w-full ${scrollDirection === 'down' ? '-top-200' : 'top-0'} z-50 transition-all duration-500`}
+    >
+      {announcementBarData && <AnnouncementBar {...data} />}
+      <Header
+        links={flattenedCategories}
+        linksMobile={(categories as any)?.items}
+        markets={markets}
+        currentMarket={currentMarket}
+        cartItemCount={totalCartItems}
+        wishlistItemCount={wishlist?.lineItems?.length || 0}
+        logo={data.logo}
+        logoLink={data.logoLink}
+        secondaryLogo={data.secondaryLogo}
+        account={account}
+        accountLink={data.accountLink}
+        wishlistLink={data.wishlistLink}
+        cartLink={data.cartLink}
+        tiles={data.tiles}
+        handleCurrentMarket={handleCurrentMarket}
+      />
+    </div>
   );
 };
 export default HeaderTastic;

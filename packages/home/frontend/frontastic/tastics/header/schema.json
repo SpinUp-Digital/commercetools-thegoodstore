@@ -4,6 +4,26 @@
 	"category": "Header and footer",
 	"schema": [
 		{
+			"name": "Announcement Bar Content",
+			"fields": [
+				{
+					"label": "Text",
+					"field": "text",
+					"type": "string"
+				},
+				{
+					"label": "Highlighted Substring",
+					"field": "highlightedSubstring",
+					"type": "string"
+				},
+				{
+					"label": "Target",
+					"field": "target",
+					"type": "reference"
+				}
+			]
+		},
+		{
 			"name": "Header Menu",
 			"fields": [
 				{
@@ -18,6 +38,13 @@
 					"field": "logoLink",
 					"type": "reference",
 					"required": true
+				},
+				{
+					"label": "Secondary Logo",
+					"field": "secondaryLogo",
+					"type": "media",
+					"required": false,
+					"options": {}
 				}
 			]
 		},
@@ -45,34 +72,42 @@
 			]
 		},
 		{
-			"name": "Navigation Tile",
+			"name": "Navigation Tiles",
 			"fields": [
 				{
-					"label": "Tile Image",
-					"field": "tileImage",
-					"type": "media",
-					"required": true,
-					"options": {}
-				},
-				{
-					"label": "Tile Header Text",
-					"field": "tileHeaderText",
-					"translatable": true,
-					"required": true,
-					"type": "string"
-				},
-				{
-					"label": "Tile Button Label",
-					"field": "tileButtonLabel",
-					"translatable": true,
-					"required": true,
-					"type": "string"
-				},
-				{
-					"label": "Tile Button link",
-					"field": "tileButtonLink",
-					"type": "reference",
-					"required": true
+					"label": "Tile",
+					"field": "tiles",
+					"type": "group",
+					"min": 1,
+					"fields": [
+						{
+							"label": "Tile Image",
+							"field": "tileImage",
+							"type": "media",
+							"required": true,
+							"options": {}
+						},
+						{
+							"label": "Tile Header Text",
+							"field": "tileHeaderText",
+							"translatable": true,
+							"required": true,
+							"type": "string"
+						},
+						{
+							"label": "Tile Button Label",
+							"field": "tileButtonLabel",
+							"translatable": true,
+							"required": true,
+							"type": "string"
+						},
+						{
+							"label": "Tile Button link",
+							"field": "tileButtonLink",
+							"type": "reference",
+							"required": true
+						}
+					]
 				}
 			]
 		}
