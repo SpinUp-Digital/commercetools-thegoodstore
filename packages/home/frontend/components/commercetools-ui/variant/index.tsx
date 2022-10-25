@@ -1,25 +1,25 @@
 import { FC, useEffect, useState } from 'react';
-import { Variant } from '@Types/product/Variant';
+import { Variant as VariantShape } from '@Types/product/Variant';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { discardRepeatedValues } from 'helpers/utils/discardRepeatedValues';
 
 type VariantProps = {
   className?: string;
-  currentVariant: Variant;
-  variants: Variant[];
-  attribute: keyof Variant['attributes'];
+  currentVariant: VariantShape;
+  variants: VariantShape[];
+  attribute: keyof VariantShape['attributes'];
   onClick?: (id: string) => void;
 };
 
 const Variant: FC<VariantProps> = ({ className, currentVariant, variants, attribute, onClick }) => {
   const { formatMessage } = useFormat({ name: 'product' });
 
-  const [variantsToUse, setVariantsToUse] = useState<Variant[]>();
+  const [variantsToUse, setVariantsToUse] = useState<VariantShape[]>();
 
   const attributeString = attribute.toString();
 
   useEffect(() => {
-    const filteredVariants: Variant[] = discardRepeatedValues(variants, attribute.toString());
+    const filteredVariants: VariantShape[] = discardRepeatedValues(variants, attribute.toString());
     setVariantsToUse(filteredVariants);
   }, [variants]);
 

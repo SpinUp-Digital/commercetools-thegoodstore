@@ -39,6 +39,20 @@ module.exports = {
       crypto: false,
       path: require.resolve('path-browserify'),
     };
+    config.module.rules.find((rule) => rule.test.toString() === '/\\.css$/').exclude = /\.module\.css$/;
+
+    config.module.rules.push({
+      test: /\.module\.css$/,
+      use: [
+        'style-loader',
+        {
+          loader: 'css-loader',
+          options: {
+            modules: true,
+          },
+        },
+      ],
+    });
 
     return config;
   },
