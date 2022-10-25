@@ -1,7 +1,8 @@
 import Button from 'components/commercetools-ui/button';
 import Typography from 'components/commercetools-ui/typography';
-import { Reference, ReferenceLink } from 'helpers/reference';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
+import Link from 'components/commercetools-ui/link';
+import { Reference } from 'types/reference';
 
 export interface HeroProps {
   image: NextFrontasticImage;
@@ -34,13 +35,13 @@ const Hero: React.FC<HeroProps> = ({ image, title, subtitle, ctaLabel, ctaRefere
         <h1 className="mt-22 text-24 font-bold leading-normal text-white md:mt-32 md:text-36 lg:text-56">
           <Typography>{title}</Typography>
         </h1>
-        <ReferenceLink target={ctaReference}>
+        <Link link={ctaReference}>
           <Button className="mt-22 md:mt-36 md:py-12 md:px-48 lg:mt-32">
             <span className="text-12 md:text-16 lg:text-14">
               <Typography>{ctaLabel}</Typography>
             </span>
           </Button>
-        </ReferenceLink>
+        </Link>
       </div>
     </div>
   );

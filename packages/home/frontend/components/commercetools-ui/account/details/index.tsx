@@ -2,9 +2,9 @@ import React from 'react';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useHash from 'helpers/hooks/useHash';
 import Redirect from 'helpers/redirect';
-import { Reference } from 'helpers/reference';
 import { useAccount } from 'frontastic';
 import { AddressesSection, GeneralSection, SecuritySection, OrdersHistorySection } from './sections/exporter';
+import { Reference } from 'types/reference';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');

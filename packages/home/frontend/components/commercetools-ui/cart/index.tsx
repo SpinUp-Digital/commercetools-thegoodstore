@@ -3,12 +3,12 @@ import { useRouter } from 'next/router';
 import { Cart as CartType } from '@Types/cart/Cart';
 import { ShippingMethod } from '@Types/cart/ShippingMethod';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { Reference } from 'helpers/reference';
 import { NextFrontasticImage } from 'frontastic/lib/image';
 import Spinner from '../spinner';
 import EmptyCart from './emptyCart';
 import ItemList from './itemList';
 import OrderSummary from './orderSummary';
+import { Reference } from 'types/reference';
 
 export interface Props {
   pageTitle?: string;

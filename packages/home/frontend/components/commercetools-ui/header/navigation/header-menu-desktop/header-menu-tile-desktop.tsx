@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
-import { Reference, ReferenceLink } from 'helpers/reference';
+import { Reference } from 'types/reference';
+import Link from 'components/commercetools-ui/link';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
 import { Market } from '../../interfaces';
 
@@ -20,12 +21,12 @@ const HeaderMenuTileDesktop: FC<Props> = ({ title, image, buttonLabel, buttonLin
       <h3 className="absolute top-83 left-1/2 h-35 w-full -translate-x-1/2 -translate-y-1/2 text-center text-28 font-bold text-white">
         {title}
       </h3>
-      <ReferenceLink
-        target={buttonLink}
+      <Link
+        link={buttonLink}
         className="absolute top-144 left-1/2 -translate-x-1/2 -translate-y-1/2 border-b-2 text-24 text-white"
       >
         {buttonLabel}
-      </ReferenceLink>
+      </Link>
     </div>
   );
 };

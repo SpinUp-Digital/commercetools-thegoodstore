@@ -7,12 +7,12 @@ import EmptyCart from 'components/commercetools-ui/cart/emptyCart';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useI18n from 'helpers/hooks/useI18n';
-import { Reference } from 'helpers/reference';
 import { useAccount, useCart } from 'frontastic';
 import CheckoutForm, { ShippingCountryItem } from './checkout-form';
 import GuestCheckoutForm from './checkout-form/guest';
 import DesktopOrderSummary from './order-summary/order-summary-desktop';
 import MobileOrderSummary from './order-summary/order-summary-mobile';
+import { Reference } from 'types/reference';
 
 interface Props {
   loginLink?: Reference;

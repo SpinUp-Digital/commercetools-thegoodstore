@@ -1,5 +1,6 @@
 import React from 'react';
-import { Reference, ReferenceLink } from 'helpers/reference';
+import { Reference } from 'types/reference';
+import Link from '../link';
 import Image from 'frontastic/lib/image';
 
 type Props = {
@@ -55,11 +56,11 @@ export const EmptyState: React.FC<Props> = ({
       )}
       {callToActionLink && (
         <div className="mt-8 mb-24 text-center">
-          <ReferenceLink target={callToActionLink}>
+          <Link link={callToActionLink}>
             <button className="bg-accent-400 hover:bg-accent-500 w-56 rounded py-3 px-4 font-bold text-white">
               {callToAction}
             </button>
-          </ReferenceLink>
+          </Link>
         </div>
       )}
     </div>

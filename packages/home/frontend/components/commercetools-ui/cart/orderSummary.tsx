@@ -4,7 +4,8 @@ import { LineItem } from '@Types/cart/LineItem';
 import { useTranslation, Trans } from 'react-i18next';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { Reference, ReferenceLink } from 'helpers/reference';
+import { Reference } from 'types/reference';
+import Link from '../link';
 import DiscountForm from '../discount-form';
 
 interface Props {
@@ -40,17 +41,9 @@ const OrderSummary = ({
   } w-full rounded-md border border-transparent py-3 px-4 text-base shadow-sm font-medium text-white bg-accent-400 hover:bg-accent-500 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 focus:ring-offset-gray-50`;
 
   const interpolatedComponents = [
-    <ReferenceLink key={0} className="text-accent-500 cursor-pointer font-medium hover:underline" target={termsLink} />,
-    <ReferenceLink
-      key={1}
-      className="text-accent-500 cursor-pointer font-medium hover:underline"
-      target={cancellationLink}
-    />,
-    <ReferenceLink
-      key={2}
-      className="text-accent-500 cursor-pointer font-medium hover:underline"
-      target={privacyLink}
-    />,
+    <Link key={0} className="text-accent-500 cursor-pointer font-medium hover:underline" link={termsLink} />,
+    <Link key={1} className="text-accent-500 cursor-pointer font-medium hover:underline" link={cancellationLink} />,
+    <Link key={2} className="text-accent-500 cursor-pointer font-medium hover:underline" link={privacyLink} />,
   ];
 
   const totalTaxes = cart?.taxed?.taxPortions?.reduce((a, b) => a + b.amount.centAmount, 0);

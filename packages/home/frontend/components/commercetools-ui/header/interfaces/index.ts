@@ -1,4 +1,4 @@
-import { Reference } from 'helpers/reference';
+import { Reference } from 'types/reference';
 
 export interface Link {
   name: string;

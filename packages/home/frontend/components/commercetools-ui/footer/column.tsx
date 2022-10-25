@@ -1,6 +1,7 @@
 import React from 'react';
+import { Reference } from 'types/reference';
+import Link from '../link';
 import Typography from 'components/commercetools-ui/typography';
-import { Reference, ReferenceLink } from 'helpers/reference';
 
 export interface Link {
   name: string;
@@ -27,9 +28,9 @@ const Column: React.FC<Props> = ({ header, links, className }) => {
       >
         {links.map((item, i) => (
           <li key={i} className="text-14 font-regular lg:text-16">
-            <ReferenceLink target={item.reference}>
+            <Link link={item.reference}>
               <Typography>{item.name}</Typography>
-            </ReferenceLink>
+            </Link>
           </li>
         ))}
       </ul>
