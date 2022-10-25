@@ -17,6 +17,7 @@ export interface ProductDetailsProps {
   url?: string;
   onAddToWishlist: () => void;
   onRemoveFromWishlist: () => void;
+  onChangeVariant: (sku: string) => void;
   inModalVersion?: boolean;
 }
 
@@ -26,6 +27,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({
   url,
   onAddToWishlist,
   onRemoveFromWishlist,
+  onChangeVariant,
   inModalVersion,
 }) => {
   const { addItem } = useCart();
@@ -54,6 +56,8 @@ const ProductDetails: FC<ProductDetailsProps> = ({
           variant={variant}
           onAddToWishlist={onAddToWishlist}
           onRemoveFromWishlist={onRemoveFromWishlist}
+          onChangeVariant={onChangeVariant}
+          inModalVersion={inModalVersion}
         />
 
         <div className="flex gap-8 pt-25">
@@ -78,7 +82,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({
         {inModalVersion && (
           <div className="flex justify-center pt-30">
             <NextLink href={url}>
-              <a className=" font-body text-14 font-regular leading-loose text-secondary-black underline">
+              <a className="font-body text-14 font-regular leading-loose text-secondary-black underline">
                 More details
               </a>
             </NextLink>

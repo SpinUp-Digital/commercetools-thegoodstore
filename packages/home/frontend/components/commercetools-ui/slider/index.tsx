@@ -146,7 +146,7 @@ const Slider: FC<SliderProps> = ({
         <div className="mt-10 flex justify-center gap-16">
           <ChevronLeftIcon {...compactNavigationArrowsStyle} onClick={() => swiperRef.current?.slidePrev()} />
           <div className="flex font-body text-14 font-regular leading-loose text-secondary-black">
-            <span>{swiperRef.current?.activeIndex + 1}</span>
+            <span>{swiperRef.current?.realIndex + 1}</span>
             <span>/</span>
             <span>{slides?.length}</span>
           </div>

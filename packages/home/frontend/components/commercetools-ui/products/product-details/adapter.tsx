@@ -62,6 +62,11 @@ const ProductDetailsAdapter: FC<ProductDetailsAdapterProps> = ({ product, inModa
     wishlist.removeLineItem(item?.lineItemId);
   };
 
+  const handleChangeVariant = (sku: string) => {
+    const variantsToUse = product.variants.find((variant) => variant.sku === sku);
+    setVariant(variantsToUse);
+  };
+
   if (!product || !variant) return <></>;
 
   return (
@@ -73,6 +78,7 @@ const ProductDetailsAdapter: FC<ProductDetailsAdapterProps> = ({ product, inModa
         onAddToWishlist={handleAddToWishList}
         onRemoveFromWishlist={handleRemoveFromWishlist}
         inModalVersion={inModalVersion}
+        onChangeVariant={handleChangeVariant}
       />
     </>
   );
