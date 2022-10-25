@@ -53,8 +53,8 @@ export default function ProductSlider({ products, title, subline, ctaLabel, ctaL
             cssMode
             dots={false}
             arrows={isDesktopSize}
-            nextButtonStyles={{ transform: 'translateY(-160%) rotateZ(-45deg)' }}
-            prevButtonStyles={{ transform: 'translateY(-160%) rotateZ(135deg)' }}
+            nextButtonStyles={{ transform: 'translateY(-250%) rotateZ(-45deg)' }}
+            prevButtonStyles={{ transform: 'translateY(-250%) rotateZ(135deg)' }}
             spaceBetween={8}
             breakpoints={{
               [tablet]: {

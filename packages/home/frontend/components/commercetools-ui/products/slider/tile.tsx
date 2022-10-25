@@ -103,7 +103,7 @@ const Tile: FC<TileProps> = ({ product }) => {
             {selectedVariant.images.map((image, index) => (
               <div key={index} className="relative bg-white p-8 md:p-16">
                 <NextLink href={product._url}>
-                  <a className="relative block h-[175px] md:h-[360px]">
+                  <a className="relative block w-full pb-[100%]">
                     <Image
                       src={image}
                       suffix="medium"
@@ -120,7 +120,7 @@ const Tile: FC<TileProps> = ({ product }) => {
         ) : (
           <div className="relative bg-white p-8 md:p-16">
             <NextLink href={product._url}>
-              <a className="relative block h-[175px] md:h-[360px]">
+              <a className="relative block w-full pb-[100%]">
                 <Image
                   src={selectedVariant.images[0]}
                   suffix="medium"
