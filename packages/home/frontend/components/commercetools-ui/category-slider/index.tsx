@@ -46,9 +46,14 @@ const CategorySlider: React.FC<Props> = ({ tiles = [] }) => {
                 loading="eager"
               />
             </div>
-            <h6 className="mt-5 block rounded-b-sm border-neutral-300 py-5 text-center text-12 leading-normal md:text-16 lg:mt-0 lg:border lg:bg-white lg:py-10">
-              <Typography>{tile.title}</Typography>
-            </h6>
+            <Typography
+              as="h6"
+              fontSize={12}
+              align="center"
+              className="mt-5 block rounded-b-sm border-neutral-300 py-5 md:text-16 lg:mt-0 lg:border lg:bg-white lg:py-10"
+            >
+              {tile.title}
+            </Typography>
           </Link>
         ))}
       </Slider>

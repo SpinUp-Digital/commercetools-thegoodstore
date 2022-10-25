@@ -20,7 +20,10 @@ const CartItem: React.FC<Props> = ({ item }) => {
 
   const [processing, setProcessing] = useState(false);
 
-  const { resolveClassNames } = useClassNames();
+  const counterClassName = useClassNames([
+    'flex w-fit items-center gap-12 rounded-sm border border-neutral-300',
+    processing ? 'cursor-not-allowed bg-neutral-300' : 'cursor-pointer bg-white',
+  ]);
 
   const updateCartItem = useCallback(
     async (newQuantity: number) => {
@@ -71,12 +74,7 @@ const CartItem: React.FC<Props> = ({ item }) => {
           )}
         </div>
         <div className="mt-16">
-          <div
-            className={resolveClassNames([
-              'flex w-fit items-center gap-12 rounded-sm border border-neutral-300',
-              processing ? 'cursor-not-allowed bg-neutral-300' : 'cursor-pointer bg-white',
-            ])}
-          >
+          <div className={counterClassName}>
             <button onClick={() => updateCartItem(item.count - 1)} className="cursor-[inherit] py-8 pl-12">
               -
             </button>

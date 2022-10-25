@@ -29,17 +29,17 @@ const Hero: React.FC<HeroProps> = ({ image, title, subtitle, ctaLabel, ctaRefere
         </div>
       )}
       <div className="absolute top-1/2 left-0 w-full -translate-y-1/2 px-48 text-center">
-        <p className="text-14 leading-normal text-white md:text-20">
-          <Typography>{subtitle}</Typography>
-        </p>
-        <h1 className="mt-22 text-24 font-bold leading-normal text-white md:mt-32 md:text-36 lg:text-56">
-          <Typography>{title}</Typography>
-        </h1>
+        <Typography as="p" fontSize={14} lineHeight="normal" className="text-white md:text-20">
+          {subtitle}
+        </Typography>
+        <Typography as="h1" fontSize={24} className="mt-22 font-bold text-white md:mt-32 md:text-36 lg:text-56">
+          {title}
+        </Typography>
         <Link link={ctaReference}>
           <Button className="mt-22 md:mt-36 md:py-12 md:px-48 lg:mt-32">
-            <span className="text-12 md:text-16 lg:text-14">
-              <Typography>{ctaLabel}</Typography>
-            </span>
+            <Typography as="span" fontSize={12} className="md:text-16 lg:text-14">
+              {ctaLabel}
+            </Typography>
           </Button>
         </Link>
       </div>

@@ -17,9 +17,7 @@ const Title: FC<TitleProps> = ({ title, className = '', variant = 'lg' }) => {
     [variant],
   );
 
-  const { resolveClassNames } = useClassNames();
-
-  const classNames = resolveClassNames([className, fontClassName, 'font-bold']);
+  const classNames = useClassNames([className, fontClassName, 'font-bold']);
 
   return <h3 className={classNames}>{title}</h3>;
 };
