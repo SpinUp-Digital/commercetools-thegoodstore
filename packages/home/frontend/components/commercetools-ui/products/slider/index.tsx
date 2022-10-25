@@ -3,8 +3,8 @@ import { Product } from '@Types/product/Product';
 import Link from 'components/commercetools-ui/content/link';
 import Wrapper from 'components/commercetools-ui/content/wrapper';
 import Slider from 'components/commercetools-ui/slider';
-import Subtitle from 'components/commercetools-ui/subtitle';
-import Title from 'components/commercetools-ui/title';
+import Subtitle, { SubtitleProps } from 'components/commercetools-ui/subtitle';
+import Title, { TitleProps } from 'components/commercetools-ui/title';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import { Reference } from 'types/reference';
 import { desktop, tablet } from 'helpers/utils/screensizes';
@@ -14,20 +14,30 @@ export interface Props {
   products: Product[];
   title: string;
   subline?: string;
+  titleVariant?: TitleProps['variant'];
+  subtitleVariant?: SubtitleProps['variant'];
   ctaLabel: string;
   ctaLink: Reference;
 }
 
-export default function ProductSlider({ products, title, subline, ctaLabel, ctaLink }: Props) {
+export default function ProductSlider({
+  products,
+  title,
+  subline,
+  ctaLabel,
+  ctaLink,
+  titleVariant = 'lg',
+  subtitleVariant = 'lg',
+}: Props) {
   const [isDesktopSize] = useMediaQuery(desktop);
 
   return (
     <Wrapper background="neutral-200" phonePadding="left-padding-only">
       <div className="text-start">
-        <Title title={title} />
+        <Title title={title} variant={titleVariant} />
         {(subline || ctaLink) && (
           <div className="mt-8 flex items-center justify-between md:mt-16 lg:mt-14">
-            {subline && <Subtitle subtitle={subline} />}
+            {subline && <Subtitle subtitle={subline} variant={subtitleVariant} />}
             {ctaLink && (
               <div className="hidden lg:block">
                 <Link target={ctaLink} withArrow>
