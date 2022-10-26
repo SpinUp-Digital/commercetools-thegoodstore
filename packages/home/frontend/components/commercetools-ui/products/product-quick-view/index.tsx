@@ -1,10 +1,10 @@
 import { FC, useState } from 'react';
 import { XIcon } from '@heroicons/react/outline';
 import { Product } from '@Types/product/Product';
-import { useFormat } from 'helpers/hooks/useFormat';
-import useClassNames from 'helpers/hooks/useClassNames';
-import ProductDetailsAdapter from '../product-details/adapter';
 import Modal from 'components/commercetools-ui/modal';
+import useClassNames from 'helpers/hooks/useClassNames';
+import { useFormat } from 'helpers/hooks/useFormat';
+import ProductDetailsAdapter from '../product-details/adapter';
 
 type QuickViewProps = {
   imageHovered: boolean;

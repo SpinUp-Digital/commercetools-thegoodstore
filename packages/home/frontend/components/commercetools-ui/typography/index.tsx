@@ -1,8 +1,8 @@
 import React, { createElement, Fragment, ReactElement, useState } from 'react';
 import { useRouter } from 'next/router';
+import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { TypographyProps } from './types';
-import useClassNames from 'helpers/hooks/useClassNames';
 
 const Typography: React.FC<TypographyProps> = ({
   children,

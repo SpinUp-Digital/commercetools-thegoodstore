@@ -1,6 +1,6 @@
 import { EmptyState } from 'components/commercetools-ui/empty-state';
-import { Reference } from 'types/reference';
 import { useFormat } from 'helpers/hooks/useFormat';
+import { Reference } from 'types/reference';
 
 interface Props {
   pageTitle?: string;

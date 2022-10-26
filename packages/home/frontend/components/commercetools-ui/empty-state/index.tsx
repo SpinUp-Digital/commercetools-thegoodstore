@@ -1,7 +1,7 @@
 import React from 'react';
 import { Reference } from 'types/reference';
-import Link from '../link';
 import Image from 'frontastic/lib/image';
+import Link from '../link';
 
 type Props = {
   pageTitle?: string;

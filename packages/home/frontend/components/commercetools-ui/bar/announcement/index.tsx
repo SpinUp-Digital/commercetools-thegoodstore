@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Reference } from 'types/reference';
 import Link from 'components/commercetools-ui/link';
+import { Reference } from 'types/reference';
 
 export interface Props {
   text: string;

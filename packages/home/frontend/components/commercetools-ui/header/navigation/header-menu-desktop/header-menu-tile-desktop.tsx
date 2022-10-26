@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { Reference } from 'types/reference';
 import Link from 'components/commercetools-ui/link';
+import { Reference } from 'types/reference';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
 import { Market } from '../../interfaces';
 

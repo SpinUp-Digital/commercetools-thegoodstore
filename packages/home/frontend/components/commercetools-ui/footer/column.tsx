@@ -1,7 +1,7 @@
 import React from 'react';
+import Typography from 'components/commercetools-ui/typography';
 import { Reference } from 'types/reference';
 import Link from '../link';
-import Typography from 'components/commercetools-ui/typography';
 
 export interface Link {
   name: string;

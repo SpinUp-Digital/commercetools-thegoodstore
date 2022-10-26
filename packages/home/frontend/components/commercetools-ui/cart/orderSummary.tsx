@@ -5,8 +5,8 @@ import { useTranslation, Trans } from 'react-i18next';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { Reference } from 'types/reference';
-import Link from '../link';
 import DiscountForm from '../discount-form';
+import Link from '../link';
 
 interface Props {
   readonly cart: Cart;

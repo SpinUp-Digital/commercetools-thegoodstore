@@ -1,8 +1,8 @@
 import { Account } from '@Types/account/Account';
 import { Category } from '@Types/product/Category';
+import { Reference } from 'types/reference';
 import { NextFrontasticImage } from 'frontastic/lib/image';
 import { Market } from './interfaces';
-import { Reference } from 'types/reference';
 
 export interface Tile {
   tileImage: NextFrontasticImage;

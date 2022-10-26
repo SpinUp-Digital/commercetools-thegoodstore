@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Category } from '@Types/product/Category';
-import Link from '../link';
 import Image from 'frontastic/lib/image';
+import Link from '../link';
 import MarketButton from './market/market-button';
 import HeaderButtonMenu from './navigation/header-button-menu';
 import HeaderMenuMobile from './navigation/header-menu-mobile';

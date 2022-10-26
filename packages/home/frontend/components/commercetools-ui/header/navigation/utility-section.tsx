@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Account } from '@Types/account/Account';
+import Link from 'components/commercetools-ui/link';
 import Slideout, { State as MenuState } from 'components/commercetools-ui/slide-out';
 import AccountIcon from 'components/icons/account';
 import CartIcon from 'components/icons/cart';
 import WishlistIcon from 'components/icons/wishlist';
-import { Reference } from 'types/reference';
-import Link from 'components/commercetools-ui/link';
 import { useFormat } from 'helpers/hooks/useFormat';
+import { Reference } from 'types/reference';
 
 interface Props {
   accountLink: Reference;

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { Reference } from 'types/reference';
 import { resolveReferenceTarget } from 'helpers/reference';
+import { Reference } from 'types/reference';
 import { useAccount } from 'frontastic';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
 

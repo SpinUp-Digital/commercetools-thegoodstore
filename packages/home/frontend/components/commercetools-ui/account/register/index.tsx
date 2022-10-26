@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import Link from 'components/commercetools-ui/link';
 import { useFormat } from 'helpers/hooks/useFormat';
 import Redirect from 'helpers/redirect';
 import { Reference } from 'types/reference';
-import Link from 'components/commercetools-ui/link';
 import { useAccount } from 'frontastic';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
 

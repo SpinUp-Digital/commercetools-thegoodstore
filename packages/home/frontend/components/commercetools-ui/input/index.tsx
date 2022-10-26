@@ -1,5 +1,5 @@
-import useClassNames from 'helpers/hooks/useClassNames';
 import React, { useCallback, useMemo, useState } from 'react';
+import useClassNames from 'helpers/hooks/useClassNames';
 
 export interface Props extends Omit<React.ComponentProps<'input'>, 'onChange'> {
   label?: string;

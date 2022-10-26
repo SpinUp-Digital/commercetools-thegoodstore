@@ -2,12 +2,12 @@ import React from 'react';
 import useImageSizes from 'helpers/hooks/useImageSizes';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import { desktop, tablet } from 'helpers/utils/screensizes';
+import { Reference } from 'types/reference';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
 import Wrapper from '../content/wrapper';
+import Link from '../link';
 import Slider from '../slider';
 import Typography from '../typography';
-import { Reference } from 'types/reference';
-import Link from '../link';
 
 export interface Props {
   tiles: Array<{

@@ -1,7 +1,7 @@
-import useMediaQuery from 'helpers/hooks/useMediaQuery';
-import { desktop } from 'helpers/utils/screensizes';
 import { FC } from 'react';
 import ReactModal, { Props as ReactModalProps } from 'react-modal';
+import useMediaQuery from 'helpers/hooks/useMediaQuery';
+import { desktop } from 'helpers/utils/screensizes';
 
 const Modal: FC<ReactModalProps> = ({ children, ...props }) => {
   const [isDesktopSize] = useMediaQuery(desktop);

@@ -1,5 +1,5 @@
-import useClassNames from 'helpers/hooks/useClassNames';
 import { FC, useMemo } from 'react';
+import useClassNames from 'helpers/hooks/useClassNames';
 
 export type TitleProps = {
   title: string;

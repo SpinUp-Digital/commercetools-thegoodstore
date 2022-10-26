@@ -1,16 +1,16 @@
 import { FC, useMemo } from 'react';
+import useCurrentBreakpoint from 'helpers/hooks/useCurrentBreakpoint';
 import useImageSizes from 'helpers/hooks/useImageSizes';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
-import { Reference } from 'types/reference';
-import Link from '../link';
+import { CurrentBreakpoint } from 'helpers/utils/breakpoints';
 import * as screensizes from 'helpers/utils/screensizes';
+import { Reference } from 'types/reference';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
 import Wrapper from '../content/wrapper';
+import Link from '../link';
 import Slider from '../slider';
 import Subtitle from '../subtitle';
 import Title from '../title';
-import useCurrentBreakpoint from 'helpers/hooks/useCurrentBreakpoint';
-import { CurrentBreakpoint } from 'helpers/utils/breakpoints';
 
 type ContentSliderSlide = {
   image: NextFrontasticImage;

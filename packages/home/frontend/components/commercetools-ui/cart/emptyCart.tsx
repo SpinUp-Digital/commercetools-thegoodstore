@@ -1,7 +1,7 @@
 import { EmptyState } from 'components/commercetools-ui/empty-state';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { NextFrontasticImage } from 'frontastic/lib/image';
 import { Reference } from 'types/reference';
+import { NextFrontasticImage } from 'frontastic/lib/image';
 
 interface Props {
   pageTitle?: string;

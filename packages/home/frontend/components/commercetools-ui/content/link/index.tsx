@@ -1,7 +1,7 @@
 import React from 'react';
-import { Reference } from 'types/reference';
 import ReferenceLink from 'components/commercetools-ui/link';
 import useClassNames from 'helpers/hooks/useClassNames';
+import { Reference } from 'types/reference';
 
 export interface Props {
   target: Reference;

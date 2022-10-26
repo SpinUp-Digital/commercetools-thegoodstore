@@ -6,8 +6,8 @@ import Slider from 'components/commercetools-ui/slider';
 import Subtitle, { SubtitleProps } from 'components/commercetools-ui/subtitle';
 import Title, { TitleProps } from 'components/commercetools-ui/title';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
-import { Reference } from 'types/reference';
 import { desktop, tablet } from 'helpers/utils/screensizes';
+import { Reference } from 'types/reference';
 import Tile from './tile';
 
 export interface Props {
