@@ -55,7 +55,7 @@ const UtilitySection: React.FC<Props> = ({ accountLink, wishlistItemCount, cartI
             <span className="absolute top-[-5px] right-[-15px] h-8 w-8 rounded-full bg-green-500" />
           )}
 
-          {cartItemCount > 0 && <span className="absolute top-9 left-9 h-8 w-8 text-10">{cartItemCount}</span>}
+          {cartItemCount > 0 && <span className="absolute top-10 left-6 h-8 w-8 text-10">{cartItemCount}</span>}
           <CartIcon />
         </div>
       </div>
