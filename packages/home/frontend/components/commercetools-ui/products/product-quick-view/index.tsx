@@ -2,9 +2,9 @@ import { FC, useState } from 'react';
 import { XIcon } from '@heroicons/react/outline';
 import { Product } from '@Types/product/Product';
 import { useFormat } from 'helpers/hooks/useFormat';
+import useClassNames from 'helpers/hooks/useClassNames';
 import ProductDetailsAdapter from '../product-details/adapter';
 import Modal from 'components/commercetools-ui/modal';
-import useClassNames from 'helpers/hooks/useClassNames';
 
 type QuickViewProps = {
   imageHovered: boolean;
@@ -13,12 +13,13 @@ type QuickViewProps = {
 };
 
 const QuickView: FC<QuickViewProps> = ({ imageHovered, isDesktopSize, product }) => {
-  const buttonClassName = useClassNames([
-    'w-full border border-neutral-400 bg-white py-16 text-center text-12 capitalize leading-[16px] transition duration-150 ease-out hover:border-primary-black',
-    imageHovered && isDesktopSize ? 'block' : 'hidden',
-  ]);
-  const { formatMessage } = useFormat({ name: 'product' });
   const [modalIsOpen, setIsOpen] = useState(false);
+
+  const { formatMessage } = useFormat({ name: 'product' });
+  const classNames = useClassNames([
+    imageHovered && isDesktopSize ? 'block' : 'hidden',
+    'w-full border border-neutral-400 bg-white py-16 text-center text-12 capitalize leading-[16px] transition duration-150 ease-out hover:border-primary-black',
+  ]);
 
   const openModal = () => {
     setIsOpen(true);
@@ -29,9 +30,11 @@ const QuickView: FC<QuickViewProps> = ({ imageHovered, isDesktopSize, product })
   };
   return (
     <>
-      <button className={buttonClassName} onClick={openModal}>
-        {formatMessage({ id: 'quick.view', defaultMessage: 'Quick view' })}
-      </button>
+      {!modalIsOpen && (
+        <button className={classNames} onClick={openModal}>
+          {formatMessage({ id: 'quick.view', defaultMessage: 'Quick view' })}
+        </button>
+      )}
 
       <Modal
         shouldCloseOnOverlayClick
@@ -46,7 +49,7 @@ const QuickView: FC<QuickViewProps> = ({ imageHovered, isDesktopSize, product })
             color="#494949"
             onClick={closeModal}
           />
-          <ProductDetailsAdapter product={product} inModalVersion />
+          <ProductDetailsAdapter product={product} inModalVersion={true} setIsOpen={setIsOpen} />
         </>
       </Modal>
     </>

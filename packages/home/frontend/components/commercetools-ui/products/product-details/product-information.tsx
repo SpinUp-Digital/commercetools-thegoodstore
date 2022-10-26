@@ -31,6 +31,10 @@ const ProductInformation: FC<ProductInformationProps> = ({
     }
   };
 
+  const discountPercentage =
+    variant.discountedPrice &&
+    ((variant.price.centAmount - variant.discountedPrice.centAmount) / variant.price.centAmount) * 100;
+
   const updateVariantSKU = (sku: string) => {
     router.replace(`${router.asPath.split('/').slice(0, -1).join('/')}/${sku}`, undefined, {
       shallow: true,
@@ -50,10 +54,28 @@ const ProductInformation: FC<ProductInformationProps> = ({
         <h3 className="break-normal font-body text-18 font-bold leading-loose">{product?.name}</h3>
         <WishlistButton onWishlist={onWishlist} onClick={handleWishlistButtonClick} />
       </div>
+      {variant.discountedPrice ? (
+        <div className="flex flex-row justify-between">
+          <div className="mt-10 flex items-center gap-8">
+            <span className="block text-16 font-regular leading-loose text-accent-red">
+              {CurrencyHelpers.formatForCurrency(variant.discountedPrice)}
+            </span>
+            <span className="block text-12 leading-loose text-gray-500 line-through">
+              {CurrencyHelpers.formatForCurrency(variant.price)}
+            </span>
+          </div>
 
-      <p className="mt-10 font-body text-16 font-regular leading-loose">
-        {CurrencyHelpers.formatForCurrency(variant?.price)}
-      </p>
+          {
+            <span className="ml-8 mt-10 mb-8 flex h-[25px] w-[45px] items-center justify-center bg-accent-red text-12 text-neutral-100">
+              {Math.round(discountPercentage)}%
+            </span>
+          }
+        </div>
+      ) : (
+        <span className="mt-10 block font-body text-16 font-regular leading-loose">
+          {CurrencyHelpers.formatForCurrency(variant.price)}
+        </span>
+      )}
 
       {attributesToDisplay.map((attribute, index) => {
         if (variant?.attributes?.[attribute]) {

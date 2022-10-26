@@ -19,6 +19,7 @@ export interface ProductDetailsProps {
   onRemoveFromWishlist: () => void;
   onChangeVariant: (sku: string) => void;
   inModalVersion?: boolean;
+  setIsOpen?: (value: boolean) => void;
 }
 
 const ProductDetails: FC<ProductDetailsProps> = ({
@@ -29,6 +30,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({
   onRemoveFromWishlist,
   onChangeVariant,
   inModalVersion,
+  setIsOpen,
 }) => {
   const { addItem } = useCart();
   const { formatMessage } = useFormat({ name: 'cart' });
@@ -44,7 +46,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({
   };
 
   const wrapperClassName = inModalVersion
-    ? 'grid grid-cols-2 pt-70 pb-35 px-30 gap-50'
+    ? 'grid grid-cols-2 pt-70 pb-35 px-20 gap-58 md:pr-40'
     : 'py-50 md:grid md:grid-cols-3 md:items-start md:gap-x-26 lg:gap-x-96';
 
   return (
@@ -80,7 +82,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({
         </div>
 
         {inModalVersion && (
-          <div className="flex justify-center pt-30">
+          <div className="flex justify-center pt-30" onClick={() => setIsOpen(false)}>
             <NextLink href={url}>
               <a className="font-body text-14 font-regular leading-loose text-secondary-black underline">
                 More details

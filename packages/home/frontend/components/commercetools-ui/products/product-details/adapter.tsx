@@ -13,9 +13,10 @@ import ProductDetails, { ProductDetailsProps } from '.';
 type ProductDetailsAdapterProps = {
   product: Product;
   inModalVersion?: ProductDetailsProps['inModalVersion'];
+  setIsOpen?: (value: boolean) => void;
 };
 
-const ProductDetailsAdapter: FC<ProductDetailsAdapterProps> = ({ product, inModalVersion }) => {
+const ProductDetailsAdapter: FC<ProductDetailsAdapterProps> = ({ product, inModalVersion, setIsOpen }) => {
   const router = useRouter();
   const wishlist = useWishlist();
 
@@ -79,6 +80,7 @@ const ProductDetailsAdapter: FC<ProductDetailsAdapterProps> = ({ product, inModa
         onRemoveFromWishlist={handleRemoveFromWishlist}
         inModalVersion={inModalVersion}
         onChangeVariant={handleChangeVariant}
+        setIsOpen={setIsOpen}
       />
     </>
   );
