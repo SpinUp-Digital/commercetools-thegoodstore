@@ -23,7 +23,7 @@ const Gallery: FC<GalleryProps> = ({ images, inModalVersion }) => {
   };
 
   const handleSlide = (swiper: Swiper) => {
-    setActiveSlide(swiper.activeIndex);
+    setActiveSlide(swiper.realIndex);
   };
 
   return (
