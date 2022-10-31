@@ -1,6 +1,6 @@
 import { Product } from '@Types/product/Product';
 import { Variant } from '@Types/product/Variant';
-import { UISize } from 'components/commercetools-ui/products/product-details/types';
+import { UISize } from 'components/commercetools-ui/organisms/products/product-details/types';
 
 export const toUISize = (product: Product) => {
   const mappedSizes: UISize[] = [

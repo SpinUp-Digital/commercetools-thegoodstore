@@ -1,5 +1,5 @@
 import React from 'react';
-import Spacer, { Props as SpacerProps } from 'components/commercetools-ui/spacer';
+import Spacer, { Props as SpacerProps } from 'components/commercetools-ui/organisms/spacer';
 
 export interface Props {
   data: SpacerProps;

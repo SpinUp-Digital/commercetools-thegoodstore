@@ -1,5 +1,5 @@
 import React from 'react';
-import Footer from 'components/commercetools-ui/footer';
+import Footer from 'components/commercetools-ui/organisms/footer';
 
 const FooterTastic = ({ data }) => {
   const columns = [

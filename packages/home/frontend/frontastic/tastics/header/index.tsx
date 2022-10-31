@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Header from 'components/commercetools-ui/header';
+import Header from 'components/commercetools-ui/organisms/header';
 import { useRouter } from 'next/router';
 import { useCart, useWishlist, useAccount } from 'frontastic/provider';
 import countryToCurrency from 'country-to-currency';
-import { Market } from 'components/commercetools-ui/header/interfaces';
+import { Market } from 'components/commercetools-ui/organisms/header/interfaces';
 
 const HeaderTastic = ({ data, categories }) => {
   const { getProjectSettings, totalItems: totalCartItems } = useCart();

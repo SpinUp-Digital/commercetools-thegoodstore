@@ -1,6 +1,6 @@
 import { Product } from '@Types/product/Product';
 import { Variant } from '@Types/product/Variant';
-import { UIColor, UIProduct, UISize } from 'components/commercetools-ui/products/product-details/types';
+import { UIColor, UIProduct, UISize } from 'components/commercetools-ui/organisms/products/product-details/types';
 
 export const toUIProduct = (product: Product, variant: Variant, colors: UIColor[], sizes: UISize[]) => {
   const mappedProduct: UIProduct = {

@@ -1,5 +1,5 @@
 import React from 'react';
-import AccountDetails, { AccountDetailsProps } from 'components/commercetools-ui/account/details';
+import AccountDetails, { AccountDetailsProps } from 'components/commercetools-ui/organisms/account/details';
 
 export interface Props {
   data: AccountDetailsProps;

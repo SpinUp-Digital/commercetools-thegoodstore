@@ -1,5 +1,5 @@
 import { Product } from '@Types/product/Product';
-import ProductDetailsAdapter from 'components/commercetools-ui/products/product-details/adapter';
+import ProductDetailsAdapter from 'components/commercetools-ui/organisms/products/product-details/adapter';
 import { FC } from 'react';
 import { Tastic } from 'types/tastic';
 
