@@ -1,10 +1,9 @@
 import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/outline';
-import CloseIcon from 'components/icons/close';
 import FlagIcons from 'components/icons/flags';
-import { useFormat } from 'helpers/hooks/useFormat';
-import { Market } from '../interfaces';
+import useClassNames from 'helpers/hooks/useClassNames';
+import { Market } from '../header-types';
 
 interface Props {
   currentMarket?: Market;
@@ -13,7 +12,10 @@ interface Props {
 }
 
 const MarketButtonMobile: React.FC<Props> = ({ currentMarket, markets, handleCurrentMarket }) => {
-  const { formatMessage } = useFormat({ name: 'common' });
+  const marketItemsClassNames = useClassNames([
+    markets.length > 6 ? 'bottom-45' : 'top-45',
+    'absolute left-0 mt-2 w-full px-15',
+  ]);
 
   const handleMarketClick = (market: Market) => {
     handleCurrentMarket(market);
@@ -49,9 +51,7 @@ const MarketButtonMobile: React.FC<Props> = ({ currentMarket, markets, handleCur
               leaveFrom="transform opacity-100 scale-100"
               leaveTo="transform opacity-0 scale-95"
             >
-              <Menu.Items
-                className={`absolute left-0 ${markets.length > 6 ? 'bottom-45' : 'top-45'} mt-2 w-full px-15`}
-              >
+              <Menu.Items className={marketItemsClassNames}>
                 <div className="max-h-300 overflow-scroll border-[1px] border-neutral-400 bg-white shadow-lg">
                   <>
                     {markets.map((market, index) => (

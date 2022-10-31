@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Header from 'components/commercetools-ui/organisms/header';
 import { useRouter } from 'next/router';
 import { useCart, useWishlist, useAccount } from 'frontastic/provider';
-import { Market } from 'components/commercetools-ui/header/interfaces';
+import { Market } from 'components/commercetools-ui/organisms/header/header-types';
 import useScrollDirection from 'helpers/hooks/useScrollDirection';
-import AnnouncementBar from 'components/commercetools-ui/bar/announcement';
+import AnnouncementBar from 'components/commercetools-ui/organisms/bar/announcement';
+import useClassNames from 'helpers/hooks/useClassNames';
 
 const HeaderTastic = ({ data, categories }) => {
   const { getProjectSettings, totalItems: totalCartItems } = useCart();
@@ -12,9 +13,12 @@ const HeaderTastic = ({ data, categories }) => {
   const { account } = useAccount();
   const [markets, setMarkets] = useState<Market[]>([]);
   const [currentMarket, setCurrentMarket] = useState<Market>(undefined);
-  const scrollDirection = useScrollDirection();
-
+  const scrollDirection = useScrollDirection(15, -5);
   const router = useRouter();
+  const headerClassName = useClassNames([
+    scrollDirection === 'down' ? '-top-200' : 'top-0',
+    'fixed w-full z-50 transition-all duration-500',
+  ]);
 
   useEffect(() => {
     getProjectSettings().then((data) => {
@@ -56,13 +60,11 @@ const HeaderTastic = ({ data, categories }) => {
   };
 
   return (
-    <div
-      className={`fixed w-full ${scrollDirection === 'down' ? '-top-200' : 'top-0'} z-50 transition-all duration-500`}
-    >
+    <div className={headerClassName}>
       {announcementBarData && <AnnouncementBar {...data} />}
       <Header
         links={flattenedCategories}
-        linksMobile={(categories as any)?.items}
+        linksMobile={categories?.items}
         markets={markets}
         currentMarket={currentMarket}
         cartItemCount={totalCartItems}

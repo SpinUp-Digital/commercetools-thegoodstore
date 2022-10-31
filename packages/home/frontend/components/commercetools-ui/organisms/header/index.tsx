@@ -1,12 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { Category } from '@Types/product/Category';
 import Image from 'frontastic/lib/image';
 import Link from '../../atoms/link';
+import HeaderButtonMenu from './header-menu/header-button-menu';
+import HeaderMenuMobile from './header-menu/header-menu-mobile';
+import UtilitySection from './header-menu/utility-section';
+import { HeaderProps } from './header-types';
 import MarketButton from './market/market-button';
-import HeaderButtonMenu from './navigation/header-button-menu';
-import HeaderMenuMobile from './navigation/header-menu-mobile';
-import UtilitySection from './navigation/utility-section';
-import { HeaderProps } from './types';
 
 const Header: React.FC<HeaderProps> = ({
   links,
@@ -50,15 +50,12 @@ const Header: React.FC<HeaderProps> = ({
   };
 
   return (
-    <header className={`h-fit w-full border-b-[1.5px] border-neutral-400 bg-white`}>
-      <nav
-        aria-label="Top"
-        className="mx-13 flex h-60 items-center justify-between md:mx-30 md:h-76 lg:mx-10 xl:mx-50 "
-      >
+    <header className="h-fit w-full border-b-[1.5px] border-neutral-400 bg-white">
+      <nav aria-label="Top" className="mx-13 flex h-60 items-center justify-between md:mx-30 md:h-76 lg:mx-10 xl:mx-50">
         <MarketButton currentMarket={currentMarket} markets={markets} handleCurrentMarket={handleCurrentMarket} />
 
         <HeaderMenuMobile
-          navLinks={linksMobile}
+          links={linksMobile}
           language={currentMarket}
           languages={markets}
           handleCurrentMarket={handleCurrentMarket}

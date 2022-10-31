@@ -4,10 +4,10 @@ import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import { desktop, tablet } from 'helpers/utils/screensizes';
 import { Reference } from 'types/reference';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
-import Wrapper from '../content/wrapper';
 import Link from '../../atoms/link';
 import Slider from '../../atoms/slider';
 import Typography from '../../atoms/typography';
+import Wrapper from '../content/wrapper';
 
 export interface Props {
   tiles: Array<{

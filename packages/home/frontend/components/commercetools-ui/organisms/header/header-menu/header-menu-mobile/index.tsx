@@ -1,22 +1,24 @@
 import React, { FC, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { Category } from '@Types/product/Category';
+import Button from 'components/commercetools-ui/atoms/button';
+import Typography from 'components/commercetools-ui/atoms/typography';
 import BackIcon from 'components/icons/back';
 import CloseIcon from 'components/icons/close';
 import ChevronRightIcon from 'components/icons/home-chevron-right';
 import MenuIcon from 'components/icons/menu-icon';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { Market } from '../../interfaces';
+import { Market } from '../../header-types';
 import MarketButtonMobile from '../../market/market-button-mobile';
 
 export interface Props {
-  navLinks: Category[];
+  links: Category[];
   language: Market;
   languages: Market[];
   handleCurrentMarket: (market: Market) => void;
 }
 
-const HeaderMenuMobile: FC<Props> = ({ navLinks, language, languages, handleCurrentMarket }) => {
+const HeaderMenuMobile: FC<Props> = ({ links, language, languages, handleCurrentMarket }) => {
   const [selected, setSelected] = useState<Category[]>([]);
   const [showMenu, setShowMenu] = useState(false);
 
@@ -34,15 +36,16 @@ const HeaderMenuMobile: FC<Props> = ({ navLinks, language, languages, handleCurr
     setShowMenu(false);
     setSelected([]);
   };
+
   return (
     <div className="flex md:w-109 lg:hidden">
-      <button
+      <Button
         onClick={showHeaderMenu}
         title={formatMessage({ id: 'header.menu.open', defaultMessage: 'Open side menu' })}
-        className="h-fit w-20"
+        className="h-fit w-fit"
       >
-        <MenuIcon />
-      </button>
+        <MenuIcon className="" />
+      </Button>
       {showMenu && (
         <div onClick={hideHeaderMenu} className="fixed top-0 left-0 z-10 h-full w-full bg-black opacity-50" />
       )}
@@ -70,20 +73,27 @@ const HeaderMenuMobile: FC<Props> = ({ navLinks, language, languages, handleCurr
         </div>
         <>
           {selected.length <= 0 ? (
-            navLinks
-              .filter((navLink) => navLink.depth === depth)
-              .map((navLink) => (
-                <div key={navLink.categoryId} className="cursor-pointer border-b-[1px] border-neutral-400">
-                  {navLink?.subCategories?.length > 0 ? (
+            links
+              .filter((link) => link.depth === depth)
+              .map((link) => (
+                <div key={link.categoryId} className="cursor-pointer border-b-[1px] border-neutral-400">
+                  {link?.subCategories?.length > 0 ? (
                     <div
-                      onClick={() => setSelected((array) => [...array, navLink])}
+                      onClick={() => setSelected((array) => [...array, link])}
                       className="mx-20 my-12 flex h-24 justify-between text-16 font-medium"
                     >
-                      {navLink.name} <ChevronRightIcon className="mt-7 mr-6 w-10" />
+                      {link.name} <ChevronRightIcon className="mt-7 mr-6 w-10" />
                     </div>
                   ) : (
-                    <Link href={navLink.slug ? navLink.slug : navLink.path}>
-                      <div className="mx-20 my-12 flex h-24 justify-between text-16 font-medium">{navLink.name}</div>
+                    <Link href={link.slug ?? link.path}>
+                      <Typography
+                        as="p"
+                        fontSize={16}
+                        fontWeight="medium"
+                        className="mx-20 my-12 flex h-24 justify-between"
+                      >
+                        {link.name}
+                      </Typography>
                     </Link>
                   )}
                 </div>
@@ -103,7 +113,7 @@ const HeaderMenuMobile: FC<Props> = ({ navLinks, language, languages, handleCurr
                       {nav.name} <ChevronRightIcon className="mt-7 mr-6 w-10" />
                     </div>
                   ) : (
-                    <Link href={nav.slug ? nav.slug : nav.path}>
+                    <Link href={nav.slug ?? nav.path}>
                       <div className="mx-20 my-12 flex h-24 justify-between text-16  font-normal">{nav.name}</div>
                     </Link>
                   )}
