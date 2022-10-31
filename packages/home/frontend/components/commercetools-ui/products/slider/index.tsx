@@ -78,7 +78,7 @@ export default function ProductSlider({
               },
             }}
           >
-            {products.slice(0, 15).map((product) => (
+            {products.map((product) => (
               <Tile product={product} key={product.productId} />
             ))}
           </Slider>
