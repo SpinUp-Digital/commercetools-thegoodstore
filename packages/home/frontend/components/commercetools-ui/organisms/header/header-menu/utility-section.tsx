@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Account } from '@Types/account/Account';
 import Link from 'components/commercetools-ui/atoms/link';
 import Slideout, { State as MenuState } from 'components/commercetools-ui/atoms/slide-out';
+import Typography from 'components/commercetools-ui/atoms/typography';
 import AccountIcon from 'components/icons/account';
 import CartIcon from 'components/icons/cart';
 import WishlistIcon from 'components/icons/wishlist';
@@ -55,7 +56,11 @@ const UtilitySection: React.FC<Props> = ({ accountLink, wishlistItemCount, cartI
             <span className="absolute top-[-5px] right-[-15px] h-8 w-8 rounded-full bg-green-500" />
           )}
 
-          {cartItemCount > 0 && <span className="absolute top-10 left-6 h-8 w-8 text-10">{cartItemCount}</span>}
+          {cartItemCount > 0 && (
+            <Typography as="span" fontSize={10} className="absolute top-10 left-9 h-8 w-8">
+              {cartItemCount.toString()}
+            </Typography>
+          )}
           <CartIcon />
         </div>
       </div>

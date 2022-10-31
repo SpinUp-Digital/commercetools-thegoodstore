@@ -2,7 +2,18 @@ import { Account } from '@Types/account/Account';
 import { Category } from '@Types/product/Category';
 import { Reference } from 'types/reference';
 import { NextFrontasticImage } from 'frontastic/lib/image';
-import { Market } from './interfaces';
+
+export interface Link {
+  name: string;
+  reference: Reference;
+}
+export interface Market {
+  region: string;
+  flag: string;
+  locale: string;
+  currency: string;
+  currencyCode: string;
+}
 
 export interface Tile {
   tileImage: NextFrontasticImage;
@@ -10,6 +21,7 @@ export interface Tile {
   tileButtonLabel: string;
   tileButtonLink: Reference;
 }
+
 export interface HeaderProps {
   links: Category[];
   linksMobile: Category[];

@@ -1,10 +1,10 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/outline';
 import CheckIcon from 'components/icons/check-2';
 import CloseIcon from 'components/icons/close';
 import FlagIcons from 'components/icons/flags';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { Market } from '../interfaces';
+import { Market } from '../header-types';
 
 interface Props {
   currentMarket?: Market;
@@ -53,7 +53,7 @@ const MarketButton: React.FC<Props> = ({ currentMarket, markets, handleCurrentMa
         <button
           onClick={hideMarketMenu}
           title={formatMessage({ id: 'close', defaultMessage: 'Close' })}
-          className="flex w-full justify-end "
+          className="flex w-full justify-end"
         >
           <CloseIcon className="m-16" />
         </button>

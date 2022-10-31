@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
+import { HeaderProps } from './header-types';
 import Header from './index';
-import { HeaderProps } from './types';
 
 export default {
   title: 'Frontastic/Header',
