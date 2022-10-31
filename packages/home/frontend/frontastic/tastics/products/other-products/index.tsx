@@ -1,4 +1,4 @@
-import ProductSlider from 'components/commercetools-ui/products/slider';
+import ProductSlider from 'components/commercetools-ui/organisms/products/slider';
 
 function OtherProductsTastic({ data }) {
   if (!data?.data?.dataSource?.items) return <p>No products found.</p>;

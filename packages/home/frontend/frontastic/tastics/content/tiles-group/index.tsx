@@ -1,5 +1,5 @@
 import React from 'react';
-import TilesGroup, { Props as TilesGroupProps } from 'components/commercetools-ui/content/tiles-group';
+import TilesGroup, { Props as TilesGroupProps } from 'components/commercetools-ui/organisms/content/tiles-group';
 
 export interface Props {
   data: TilesGroupProps;

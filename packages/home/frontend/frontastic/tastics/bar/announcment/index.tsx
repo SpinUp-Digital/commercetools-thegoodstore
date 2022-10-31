@@ -1,5 +1,5 @@
 import React from 'react';
-import AnnouncementBar, { Props as AnnouncementBarProps } from 'components/commercetools-ui/bar/announcement';
+import AnnouncementBar, { Props as AnnouncementBarProps } from 'components/commercetools-ui/organisms/bar/announcement';
 
 interface Props {
   data: AnnouncementBarProps;

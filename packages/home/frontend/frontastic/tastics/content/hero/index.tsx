@@ -1,5 +1,5 @@
 import React from 'react';
-import Hero from 'components/commercetools-ui/content/hero';
+import Hero from 'components/commercetools-ui/organisms/content/hero';
 
 const HeroTastic = ({ data }) => {
   return (
