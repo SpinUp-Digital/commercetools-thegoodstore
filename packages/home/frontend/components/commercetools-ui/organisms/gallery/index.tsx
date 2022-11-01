@@ -1,10 +1,11 @@
 import { FC, useRef, useState } from 'react';
 import Swiper from 'swiper';
-import Slider, { SliderProps } from 'components/commercetools-ui/atoms/slider';
+import Slider from 'components/commercetools-ui/atoms/slider';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import { desktop, tablet } from 'helpers/utils/screensizes';
 import Image from 'frontastic/lib/image';
 import { ProductDetailsProps } from '../products/product-details';
+import useClassNames from 'helpers/hooks/useClassNames';
 
 interface GalleryProps {
   images: Array<string>;
@@ -26,6 +27,11 @@ const Gallery: FC<GalleryProps> = ({ images, inModalVersion }) => {
     setActiveSlide(swiper.realIndex);
   };
 
+  const imagesContainerClassName = useClassNames([
+    'relative',
+    inModalVersion ? 'h-[250px] max-w-[300px]' : 'h-[447px]',
+  ]);
+
   return (
     <div className={`${inModalVersion ? 'col-span-1' : 'col-span-2'} gap-y-34 md:mb-50`}>
       <Slider
@@ -40,12 +46,11 @@ const Gallery: FC<GalleryProps> = ({ images, inModalVersion }) => {
         nextButtonStyles={{ right: isDesktopSize ? -10 : 10 }}
         compactNavigation={inModalVersion}
         slidesPerView={1}
-        loop={isDesktopSize}
+        loop
         loopedSlides={images.length}
-        initialSlide={0}
       >
         {images?.map((image, index) => (
-          <div className={`${inModalVersion ? 'h-[250px] max-w-[300px]' : 'h-[447px]'} relative`} key={index}>
+          <div className={imagesContainerClassName} key={index}>
             <Image src={image} suffix="large" objectFit="contain" />
           </div>
         ))}
@@ -56,9 +61,9 @@ const Gallery: FC<GalleryProps> = ({ images, inModalVersion }) => {
           {images?.map((image, index) => (
             <div
               key={index}
-              className={`
-            ${index == activeSlide % images.length ? 'border-neutral-500' : 'border-neutral-400'}
-            relative h-112 w-112 rounded-md border p-7`}
+              className={`relative h-112 w-112 rounded-md border p-7 ${
+                index == activeSlide % images.length ? 'border-neutral-500' : 'border-neutral-400'
+              }`}
             >
               <div className="relative h-full w-full">
                 <Image

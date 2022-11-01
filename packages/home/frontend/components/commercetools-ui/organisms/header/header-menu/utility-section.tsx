@@ -31,14 +31,14 @@ const UtilitySection: React.FC<Props> = ({ accountLink, wishlistItemCount, cartI
         <Link
           title={formatAccountMessage({ id: 'account', defaultMessage: 'Account' })}
           link={accountLink}
-          className="mx-17 h-fit w-15"
+          className="mx-10 h-fit w-15 sm:mx-17"
         >
           <AccountIcon />
         </Link>
 
         <div
           title={formatWishlistMessage({ id: 'wishlist', defaultMessage: 'Wishlist' })}
-          className="relative mx-17 mt-2 h-fit w-15 cursor-pointer"
+          className="relative mx-10 mt-2 h-fit w-15 cursor-pointer sm:mx-17"
           onClick={() => setMenuState('wishlist')}
         >
           {wishlistItemCount > 0 && (
@@ -49,7 +49,7 @@ const UtilitySection: React.FC<Props> = ({ accountLink, wishlistItemCount, cartI
 
         <div
           title={formatCartMessage({ id: 'myCart', defaultMessage: 'My Cart' })}
-          className="relative mx-17 h-fit w-15 cursor-pointer"
+          className="relative mx-10 h-fit w-15 cursor-pointer sm:mx-17"
           onClick={() => setMenuState('cart')}
         >
           {cartItemCount > 0 && (
@@ -57,7 +57,7 @@ const UtilitySection: React.FC<Props> = ({ accountLink, wishlistItemCount, cartI
           )}
 
           {cartItemCount > 0 && (
-            <Typography as="span" fontSize={10} className="absolute top-10 left-9 h-8 w-8">
+            <Typography as="span" fontSize={10} className="absolute top-11 left-6 h-8 w-8">
               {cartItemCount.toString()}
             </Typography>
           )}
