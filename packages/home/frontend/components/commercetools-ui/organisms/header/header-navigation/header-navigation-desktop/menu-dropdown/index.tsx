@@ -21,7 +21,7 @@ const MenuDropdown: FC<Props> = ({ links, tileContent, market, onClick }) => {
   ]);
   const linksClassNames = useClassNames([
     'w-[65%] justify-between lg:grid lg:grid-cols-2 xl:flex',
-    links.length > 4 ? 'xl:grid xl:grid-cols-2' : '',
+    links?.length > 4 ? 'xl:grid xl:grid-cols-2' : '',
     tileContent ? 'pr-25' : '',
   ]);
   return (
