@@ -1,24 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Header from 'components/commercetools-ui/organisms/header';
 import { useRouter } from 'next/router';
 import { useCart, useWishlist, useAccount } from 'frontastic/provider';
-import { Market } from 'components/commercetools-ui/organisms/header/header-types';
-import useScrollDirection from 'helpers/hooks/useScrollDirection';
+import { Market } from 'components/commercetools-ui/organisms/header/types';
 import AnnouncementBar from 'components/commercetools-ui/organisms/bar/announcement';
-import useClassNames from 'helpers/hooks/useClassNames';
+import useMediaQuery from 'helpers/hooks/useMediaQuery';
 
 const HeaderTastic = ({ data, categories }) => {
-  const { getProjectSettings, totalItems: totalCartItems } = useCart();
+  const headerRef = useRef(null);
+  const { getProjectSettings } = useCart();
   const { data: wishlist } = useWishlist();
   const { account } = useAccount();
   const [markets, setMarkets] = useState<Market[]>([]);
-  const [currentMarket, setCurrentMarket] = useState<Market>(undefined);
-  const scrollDirection = useScrollDirection(15, -5);
+  const [market, setMarket] = useState<Market>(undefined);
   const router = useRouter();
-  const headerClassName = useClassNames([
-    scrollDirection === 'down' ? '-top-200' : 'top-0',
-    'fixed w-full z-50 transition-all duration-500',
-  ]);
+  const [screenWidth] = useMediaQuery();
+
+  useEffect(() => {
+    if (headerRef.current) {
+      document.body.style.paddingTop = `${headerRef.current.clientHeight}px`;
+    }
+  }, [screenWidth]);
 
   useEffect(() => {
     getProjectSettings().then((data) => {
@@ -36,17 +38,12 @@ const HeaderTastic = ({ data, categories }) => {
         initialMarket = initialMarkets.find((market) => market.locale.substring(0, 2) === router.defaultLocale);
       }
 
-      setCurrentMarket(initialMarket);
+      setMarket(initialMarket);
     });
   }, []);
 
-  useEffect(() => {
-    if (router.defaultLocale && markets.length > 0 && currentMarket === undefined) {
-    }
-  }, [router.defaultLocale, markets]);
-
-  const handleCurrentMarket = (market: Market) => {
-    setCurrentMarket(market);
+  const handleMarket = (market: Market) => {
+    setMarket(market);
 
     router.push(router.asPath, router.asPath, { locale: market.locale.substring(0, 2) });
   };
@@ -60,24 +57,19 @@ const HeaderTastic = ({ data, categories }) => {
   };
 
   return (
-    <div className={headerClassName}>
+    <div className="fixed top-0 z-50 w-full" ref={headerRef}>
       {announcementBarData && <AnnouncementBar {...data} />}
       <Header
         links={flattenedCategories}
-        linksMobile={categories?.items}
         markets={markets}
-        currentMarket={currentMarket}
-        cartItemCount={totalCartItems}
+        market={market}
         wishlistItemCount={wishlist?.lineItems?.length || 0}
         logo={data.logo}
         logoLink={data.logoLink}
-        secondaryLogo={data.secondaryLogo}
         account={account}
         accountLink={data.accountLink}
-        wishlistLink={data.wishlistLink}
-        cartLink={data.cartLink}
         tiles={data.tiles}
-        handleCurrentMarket={handleCurrentMarket}
+        handleMarket={handleMarket}
       />
     </div>
   );

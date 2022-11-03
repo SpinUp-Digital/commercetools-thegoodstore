@@ -1,6 +1,6 @@
 import React, { CSSProperties, FC, LegacyRef } from 'react';
-import SwiperType from 'swiper';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/outline';
+import SwiperType from 'swiper';
 
 export type SliderNavigation = {
   compactNavigation?: boolean;

@@ -1,21 +1,20 @@
 import { useState } from 'react';
-import { ChevronDownIcon } from '@heroicons/react/outline';
-import CheckIcon from 'components/icons/check-2';
-import CloseIcon from 'components/icons/close';
+import { ChevronDownIcon, CheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import Typography from 'components/commercetools-ui/atoms/typography';
+import { Market } from 'components/commercetools-ui/organisms/header/types';
 import FlagIcons from 'components/icons/flags';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { Market } from '../header-types';
 
 interface Props {
-  currentMarket?: Market;
+  market?: Market;
   markets?: Market[];
-  handleCurrentMarket: (market: Market) => void;
+  handleMarket: (market: Market) => void;
 }
 
-const MarketButton: React.FC<Props> = ({ currentMarket, markets, handleCurrentMarket }) => {
+const MarketButton: React.FC<Props> = ({ market: selectedMarket, markets, handleMarket: handleMarket }) => {
   const [showMarket, setShowMarket] = useState(false);
 
-  const { formatMessage } = useFormat({ name: 'common' });
+  const { formatMessage: formatMarketMessage } = useFormat({ name: 'common' });
 
   const showMarketMenu = () => {
     setShowMarket(true);
@@ -26,18 +25,18 @@ const MarketButton: React.FC<Props> = ({ currentMarket, markets, handleCurrentMa
   };
 
   const handleMarketClick = (market: Market) => {
-    handleCurrentMarket(market);
+    handleMarket(market);
     setShowMarket(false);
   };
 
   return (
     <div className="ml-10 hidden justify-center md:w-109 lg:flex lg:w-200 xl:w-300">
-      {currentMarket && (
+      {selectedMarket && (
         <button onClick={showMarketMenu} className="flex items-center justify-center p-3 text-14">
-          <FlagIcons flagName={currentMarket?.flag} className="mr-8 text-14" />
-          {currentMarket?.region} | {currentMarket?.currency}
-          <span dangerouslySetInnerHTML={{ __html: currentMarket?.currencyCode }} className="ml-5 mr-20" />
-          <ChevronDownIcon className=" h-11 w-11"></ChevronDownIcon>
+          <FlagIcons flagName={selectedMarket?.flag} className="mr-8 text-14" />
+          {selectedMarket?.region} | {selectedMarket?.currency}
+          <span dangerouslySetInnerHTML={{ __html: selectedMarket?.currencyCode }} className="ml-5 mr-20" />
+          <ChevronDownIcon className=" h-11 w-11" />
         </button>
       )}
       {showMarket && (
@@ -52,20 +51,22 @@ const MarketButton: React.FC<Props> = ({ currentMarket, markets, handleCurrentMa
       >
         <button
           onClick={hideMarketMenu}
-          title={formatMessage({ id: 'close', defaultMessage: 'Close' })}
+          title={formatMarketMessage({ id: 'close', defaultMessage: 'Close' })}
           className="flex w-full justify-end"
         >
-          <CloseIcon className="m-16" />
+          <XMarkIcon className="m-16 w-20" />
         </button>
-        <h5 className="px-26 pb-24 text-22 font-normal">Select your market</h5>
+        <Typography as="h5" fontSize={22} fontWeight="regular" className="px-26 pb-24 text-secondary-black">
+          {formatMarketMessage({ id: 'select.market', defaultMessage: 'Select your market' })}
+        </Typography>
         <>
           {markets.map((market) => (
             <button
               key={market.flag}
               onClick={() => handleMarketClick(market)}
-              className="flex h-24 items-center justify-center p-26"
+              className="flex h-24 w-full items-center justify-start p-26"
             >
-              {currentMarket?.flag === market.flag && <CheckIcon className="mx-11" />}
+              {selectedMarket?.region === market?.region && <CheckIcon className="mr-11 w-20" />}
               <FlagIcons flagName={market.flag} className="mr-8 text-14" />
               {market.region}
             </button>
