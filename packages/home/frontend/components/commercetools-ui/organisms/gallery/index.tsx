@@ -1,11 +1,11 @@
 import { FC, useRef, useState } from 'react';
 import Swiper from 'swiper';
 import Slider from 'components/commercetools-ui/atoms/slider';
+import useClassNames from 'helpers/hooks/useClassNames';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import { desktop, tablet } from 'helpers/utils/screensizes';
 import Image from 'frontastic/lib/image';
 import { ProductDetailsProps } from '../products/product-details';
-import useClassNames from 'helpers/hooks/useClassNames';
 
 interface GalleryProps {
   images: Array<string>;

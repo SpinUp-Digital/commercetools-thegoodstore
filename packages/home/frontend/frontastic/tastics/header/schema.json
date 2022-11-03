@@ -38,13 +38,6 @@
 					"field": "logoLink",
 					"type": "reference",
 					"required": true
-				},
-				{
-					"label": "Secondary Logo",
-					"field": "secondaryLogo",
-					"type": "media",
-					"required": false,
-					"options": {}
 				}
 			]
 		},

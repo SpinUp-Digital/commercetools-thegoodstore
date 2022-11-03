@@ -52,5 +52,7 @@
   "privacy.policy": "Datenschutz-Bestimmungen",
   "terms.conditions": "Geschäftsbedingungen",
   "rememberMe": "Erinnere dich an mich",
-  "search": "Suche"
+  "search": "Suche",
+  "select.country": "Wähle dein Land",
+  "select.market":"Wählen Sie Ihren Markt aus"
 }

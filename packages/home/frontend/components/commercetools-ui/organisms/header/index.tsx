@@ -1,29 +1,23 @@
 import React, { useState, useRef } from 'react';
 import { Category } from '@Types/product/Category';
-import Image from 'frontastic/lib/image';
-import Link from '../../atoms/link';
-import HeaderButtonMenu from './header-menu/header-button-menu';
-import HeaderMenuMobile from './header-menu/header-menu-mobile';
-import UtilitySection from './header-menu/utility-section';
-import { HeaderProps } from './header-types';
-import MarketButton from './market/market-button';
+import HeaderLogo from 'components/commercetools-ui/organisms/header/header-logo';
+import HeaderNavigationDesktop from 'components/commercetools-ui/organisms/header/header-navigation/header-navigation-desktop';
+import HeaderNavigationMobile from 'components/commercetools-ui/organisms/header/header-navigation/header-navigation-mobile';
+import { HeaderProps } from 'components/commercetools-ui/organisms/header/types';
+import UtilitySection from 'components/commercetools-ui/organisms/header/utility-section';
+import MarketButton from '../../organisms/market-button/market-button';
 
 const Header: React.FC<HeaderProps> = ({
   links,
-  linksMobile,
   markets,
-  currentMarket,
-  cartItemCount,
+  market,
   wishlistItemCount,
   logo,
   logoLink,
-  secondaryLogo,
   account,
   accountLink,
-  wishlistLink,
-  cartLink,
   tiles,
-  handleCurrentMarket,
+  handleMarket,
 }) => {
   const [activeCategory, setActiveCategory] = useState<Category>(undefined);
 
@@ -51,66 +45,25 @@ const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="h-fit w-full border-b-[1.5px] border-neutral-400 bg-white">
-      <nav aria-label="Top" className="mx-13 flex h-60 items-center justify-between md:mx-30 md:h-76 lg:mx-10 xl:mx-50">
-        <MarketButton currentMarket={currentMarket} markets={markets} handleCurrentMarket={handleCurrentMarket} />
+      <div aria-label="Top" className="mx-5 flex h-60 items-center justify-between md:mx-22 md:h-80 lg:mx-10 xl:mx-50">
+        <MarketButton market={market} markets={markets} handleMarket={handleMarket} />
 
-        <HeaderMenuMobile
-          links={linksMobile}
-          language={currentMarket}
-          languages={markets}
-          handleCurrentMarket={handleCurrentMarket}
-        />
+        <HeaderNavigationMobile links={links} market={market} markets={markets} handleMarket={handleMarket} />
 
-        <div className="relative mb-10 px-10 md:mt-0">
-          <Link
-            className="flex h-95 w-125 justify-center text-center text-16 font-bold md:h-76 md:w-214 md:text-28"
-            link={logoLink}
-          >
-            {logo ? (
-              <Image media={logo.media} layout="fill" objectFit="contain" alt={logo.title[currentMarket?.locale]} />
-            ) : (
-              'The Good Home'
-            )}
-          </Link>
-          <div className="absolute bottom-15 left-1/2 h-25 w-32 -translate-x-1/2 font-normal md:-bottom-5 md:w-44 md:text-14">
-            {secondaryLogo ? (
-              <Image
-                media={secondaryLogo.media}
-                layout="fill"
-                objectFit="contain"
-                alt={secondaryLogo.title[currentMarket?.locale]}
-              />
-            ) : (
-              'Home'
-            )}
-          </div>
-        </div>
+        <HeaderLogo market={market} logo={logo} logoLink={logoLink} />
 
-        <UtilitySection
-          account={account}
-          accountLink={accountLink}
-          cartLink={cartLink}
-          wishlistLink={wishlistLink}
-          cartItemCount={cartItemCount}
-          wishlistItemCount={wishlistItemCount}
-        />
-      </nav>
+        <UtilitySection account={account} accountLink={accountLink} wishlistItemCount={wishlistItemCount} />
+      </div>
 
-      {links && (
-        <nav onMouseLeave={handleMouseOut} className="relative hidden h-64 items-center justify-center lg:flex">
-          {links.map((link, index) => (
-            <div key={link?.categoryId} onMouseEnter={() => handleMouseIn(link)}>
-              <HeaderButtonMenu
-                show={link.categoryId === activeCategory?.categoryId}
-                link={link}
-                tileContent={tiles[index]}
-                updateSubMenu={hideSubMenu}
-                currentMarket={currentMarket}
-              />
-            </div>
-          ))}
-        </nav>
-      )}
+      <HeaderNavigationDesktop
+        links={links}
+        tiles={tiles}
+        market={market}
+        activeCategory={activeCategory}
+        handleMouseIn={handleMouseIn}
+        handleMouseOut={handleMouseOut}
+        hideSubMenu={hideSubMenu}
+      />
     </header>
   );
 };

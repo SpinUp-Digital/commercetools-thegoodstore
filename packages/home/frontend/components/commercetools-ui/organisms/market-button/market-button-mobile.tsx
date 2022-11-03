@@ -1,43 +1,54 @@
 import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
-import { ChevronDownIcon } from '@heroicons/react/outline';
+import { ChevronDownIcon } from '@heroicons/react/24/outline';
+import Typography from 'components/commercetools-ui/atoms/typography';
 import FlagIcons from 'components/icons/flags';
 import useClassNames from 'helpers/hooks/useClassNames';
-import { Market } from '../header-types';
+import { useFormat } from 'helpers/hooks/useFormat';
+import { Market } from '../header/types';
 
 interface Props {
-  currentMarket?: Market;
+  market?: Market;
   markets?: Market[];
-  handleCurrentMarket: (market: Market) => void;
+  handleMarket: (market: Market) => void;
 }
 
-const MarketButtonMobile: React.FC<Props> = ({ currentMarket, markets, handleCurrentMarket }) => {
+const MarketButtonMobile: React.FC<Props> = ({ market: selectedMarket, markets, handleMarket }) => {
+  const { formatMessage: formatMarketMessage } = useFormat({ name: 'common' });
+
   const marketItemsClassNames = useClassNames([
     markets.length > 6 ? 'bottom-45' : 'top-45',
     'absolute left-0 mt-2 w-full px-15',
   ]);
 
   const handleMarketClick = (market: Market) => {
-    handleCurrentMarket(market);
+    handleMarket(market);
   };
 
   return (
     <div className="mt-58">
-      <div className="my-10 mx-15 text-12 ">Select your country</div>
+      <div className="my-10 mx-15">
+        <Typography fontSize={12}>
+          {formatMarketMessage({ id: 'select.country', defaultMessage: 'Select your country' })}
+        </Typography>
+      </div>
       <Menu as="div" className="relative px-15">
         {({ open }) => (
           <div w-full>
-            <Menu.Button className="flex h-40 w-full items-center justify-between border-[1px] border-neutral-400 bg-white font-medium">
-              <div className="ml-10 flex w-fit justify-start text-14">
-                <FlagIcons flagName={currentMarket?.flag} className="mr-8 mt-3 text-14" />
-                {currentMarket?.region} | {currentMarket?.currency}
+            <Menu.Button className="flex h-40 w-full items-center justify-between border-[1px] border-neutral-400 bg-white">
+              <div className="ml-10 flex w-fit justify-start">
+                <FlagIcons flagName={selectedMarket?.flag} className="my-auto mr-8" />
+                <span className="mb-1 text-14 font-medium text-secondary-black">
+                  {' '}
+                  {selectedMarket?.region} | {selectedMarket?.currency}{' '}
+                </span>
                 <span
-                  dangerouslySetInnerHTML={{ __html: currentMarket?.currencyCode }}
-                  className="ml-5 mr-20 text-14"
+                  dangerouslySetInnerHTML={{ __html: selectedMarket?.currencyCode }}
+                  className="ml-5 mr-20 text-14 font-medium text-secondary-black"
                 />
               </div>
-              <div className="mr-10 flex w-fit justify-end">
-                <ChevronDownIcon className=" h-13 w-13" />
+              <div className="mr-12 flex w-fit justify-end">
+                <ChevronDownIcon className="h-13 w-13" />
               </div>
             </Menu.Button>
 
@@ -59,10 +70,10 @@ const MarketButtonMobile: React.FC<Props> = ({ currentMarket, markets, handleCur
                         <div className="overflow-y-scroll">
                           <button
                             onClick={() => handleMarketClick(market)}
-                            className="flex h-24 items-center justify-center py-26 px-11"
+                            className="flex h-24 w-full items-center justify-start p-26"
                           >
-                            <FlagIcons flagName={market.flag} className="mr-8 mt-3" />
-                            <span className="text-14">{market.region}</span>
+                            <FlagIcons flagName={market.flag} className="mr-8" />
+                            <span className="mb-1 text-14 font-medium text-secondary-black">{market.region}</span>
                           </button>
                         </div>
                       </Menu.Item>

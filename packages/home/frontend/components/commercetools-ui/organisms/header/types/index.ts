@@ -24,18 +24,13 @@ export interface Tile {
 
 export interface HeaderProps {
   links: Category[];
-  linksMobile: Category[];
   markets: Market[];
-  currentMarket: Market;
-  cartItemCount: number;
+  market: Market;
   wishlistItemCount?: number;
   logo: NextFrontasticImage;
   logoLink: Reference;
-  secondaryLogo: NextFrontasticImage;
   account: Account;
   accountLink: Reference;
-  wishlistLink?: Reference;
-  cartLink: Reference;
   tiles?: Tile[];
-  handleCurrentMarket: (market: Market) => void;
+  handleMarket: (market: Market) => void;
 }

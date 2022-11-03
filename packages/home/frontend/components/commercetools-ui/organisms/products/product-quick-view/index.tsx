@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { XIcon } from '@heroicons/react/outline';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 import { Product } from '@Types/product/Product';
 import Modal from 'components/commercetools-ui/atoms/modal';
 import useClassNames from 'helpers/hooks/useClassNames';
@@ -43,7 +43,7 @@ const QuickView: FC<QuickViewProps> = ({ imageHovered, isDesktopSize, product })
         onRequestClose={closeModal}
       >
         <>
-          <XIcon
+          <XMarkIcon
             className="absolute top-15 right-15 h-24 w-24 hover:cursor-pointer"
             strokeWidth={1}
             color="#494949"

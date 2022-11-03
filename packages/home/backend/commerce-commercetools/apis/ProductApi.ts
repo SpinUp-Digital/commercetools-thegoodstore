@@ -230,6 +230,13 @@ export class ProductApi extends BaseApi {
                             nodes[categories[i].parent.id].subCategories.push(categories[i])
                         }
                     }
+                    const nodesQueue = [categories];
+
+                    while (nodesQueue.length > 0) {
+                        const currentCategories = nodesQueue.pop();
+                        currentCategories.sort((a, b) => +b.orderHint - +a.orderHint)
+                        currentCategories.forEach(category => nodesQueue.push(nodes[category.id].subCategories))
+                    }
 
                     const items = categories.map((category) =>
                         ProductMapper.commercetoolsCategoryToCategory(category, locale),
