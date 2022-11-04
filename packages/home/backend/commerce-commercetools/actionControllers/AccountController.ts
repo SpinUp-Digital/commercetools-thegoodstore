@@ -5,7 +5,8 @@ import { Account } from '../../../types/account/Account';
 import { Address } from '../../../types/account/Address';
 import { CartFetcher } from '../utils/CartFetcher';
 import { getLocale } from '../utils/Request';
-import { EmailApi } from '../apis/EmailApi';
+import { EmailApiFactory } from '../utils/EmailApiFactory';
+import { AccountAuthenticationError } from '../errors/AccountAuthenticationError';
 
 type ActionHook = (request: Request, actionContext: ActionContext) => Promise<Response>;
 
@@ -32,19 +33,62 @@ type AccountChangePasswordBody = {
   newPassword: string;
 };
 
-async function loginAccount(request: Request, actionContext: ActionContext, account: Account, reverify = false) {
+async function loginAccount(request: Request, actionContext: ActionContext, account: Account): Promise<Response> {
   const accountApi = new AccountApi(actionContext.frontasticContext, getLocale(request));
 
   const cart = await CartFetcher.fetchCart(request, actionContext);
 
-  return await accountApi.login(account, cart, reverify);
+  try {
+    account = await accountApi.login(account, cart);
+  } catch (error) {
+    if (error instanceof AccountAuthenticationError) {
+      const response: Response = {
+        statusCode: 401,
+        body: JSON.stringify(error.message),
+        sessionData: {
+          ...request.sessionData,
+          account: account,
+        },
+      };
+
+      return response;
+    }
+
+    throw error;
+  }
+
+  if (!account.confirmed) {
+    // If needed, the account confirmation email can be requested using
+    // the endpoint action/account/requestConfirmationEmail.
+    const response: Response = {
+      statusCode: 401,
+      body: JSON.stringify(`Your email address "${account.email}" was not yet verified.`),
+      sessionData: {
+        ...request.sessionData,
+        account: account,
+      },
+    };
+
+    return response;
+  }
+
+  const response: Response = {
+    statusCode: 200,
+    body: JSON.stringify(account),
+    sessionData: {
+      ...request.sessionData,
+      account: account,
+    },
+  };
+
+  return response;
 }
 
 function assertIsAuthenticated(request: Request) {
   const account = fetchAccountFromSession(request);
 
   if (account === undefined) {
-    throw new Error('Not logged in.');
+    throw new AccountAuthenticationError({ message: 'Not logged in.' });
   }
 }
 
@@ -126,21 +170,24 @@ export const getAccount: ActionHook = async (request: Request, actionContext: Ac
 };
 
 export const register: ActionHook = async (request: Request, actionContext: ActionContext) => {
-  const accountApi = new AccountApi(actionContext.frontasticContext, getLocale(request));
-  const emailApi = new EmailApi(actionContext.frontasticContext.project.configuration.smtp);
+  const locale = getLocale(request);
 
+  const accountApi = new AccountApi(actionContext.frontasticContext, locale);
   const accountData = mapRequestToAccount(request);
-  const host = JSON.parse(request.body).host;
 
-  const cart = await CartFetcher.fetchCart(request, actionContext).catch(() => undefined);
+  const cart = await CartFetcher.fetchCart(request, actionContext);
 
   const account = await accountApi.create(accountData, cart);
 
-  if (!account.confirmed) await emailApi.sendVerificationEmail(account, host);
+  const emailApi = EmailApiFactory.getDefaultApi(actionContext.frontasticContext, locale);
+
+  emailApi.sendWelcomeCustomerEmail(account);
+
+  emailApi.sendAccountVerificationEmail(account);
 
   const response: Response = {
     statusCode: 200,
-    body: JSON.stringify({ accountId: account.accountId }),
+    body: JSON.stringify(account),
     sessionData: {
       ...request.sessionData,
     },
@@ -149,20 +196,44 @@ export const register: ActionHook = async (request: Request, actionContext: Acti
   return response;
 };
 
-export const resendVerificationEmail: ActionHook = async (request: Request, actionContext: ActionContext) => {
-  const data = JSON.parse(request.body) as Account;
-  const host = JSON.parse(request.body).host;
+export const requestConfirmationEmail: ActionHook = async (request: Request, actionContext: ActionContext) => {
+  const locale = getLocale(request);
 
-  const emailApi = new EmailApi(actionContext.frontasticContext.project.configuration.smtp);
+  const accountApi = new AccountApi(actionContext.frontasticContext, locale);
 
-  const reverify = true; //Will not login the account instead will send a reverification email..
+  const accountLoginBody: AccountLoginBody = JSON.parse(request.body);
 
-  const account = await loginAccount(request, actionContext, data, reverify);
+  let account = {
+    email: accountLoginBody.email,
+    password: accountLoginBody.password,
+  } as Account;
 
-  await emailApi.sendVerificationEmail(account, host);
+  const cart = await CartFetcher.fetchCart(request, actionContext);
+
+  account = await accountApi.login(account, cart);
+
+  if (account.confirmed) {
+    const response: Response = {
+      statusCode: 405,
+      body: JSON.stringify(`Your email address "${account.email}" was verified already.`),
+      sessionData: {
+        ...request.sessionData,
+        account: account,
+      },
+    };
+
+    return response;
+  }
+
+  const emailApi = EmailApiFactory.getDefaultApi(actionContext.frontasticContext, locale);
+  emailApi.sendAccountVerificationEmail(account);
 
   const response: Response = {
     statusCode: 200,
+    body: JSON.stringify({}),
+    sessionData: {
+      ...request.sessionData,
+    },
   };
 
   return response;
@@ -194,23 +265,12 @@ export const confirm: ActionHook = async (request: Request, actionContext: Actio
 export const login: ActionHook = async (request: Request, actionContext: ActionContext) => {
   const accountLoginBody: AccountLoginBody = JSON.parse(request.body);
 
-  let account = {
+  const account = {
     email: accountLoginBody.email,
     password: accountLoginBody.password,
   } as Account;
 
-  account = await loginAccount(request, actionContext, account);
-
-  const response: Response = {
-    statusCode: 200,
-    body: JSON.stringify(account),
-    sessionData: {
-      ...request.sessionData,
-      account: account,
-    },
-  };
-
-  return response;
+  return await loginAccount(request, actionContext, account);
 };
 
 export const logout: ActionHook = async (request: Request, actionContext: ActionContext) => {
@@ -256,23 +316,20 @@ export const password: ActionHook = async (request: Request, actionContext: Acti
  * Request new reset token
  */
 export const requestReset: ActionHook = async (request: Request, actionContext: ActionContext) => {
+  const locale = getLocale(request);
+
   type AccountRequestResetBody = {
     email?: string;
-    host?: string;
   };
-    
-  const accountApi = new AccountApi(actionContext.frontasticContext, getLocale(request));
-  const emailApi = new EmailApi(actionContext.frontasticContext.project.configuration.smtp);
+
+  const accountApi = new AccountApi(actionContext.frontasticContext, locale);
+  const emailApi = EmailApiFactory.getDefaultApi(actionContext.frontasticContext, locale);
 
   const accountRequestResetBody: AccountRequestResetBody = JSON.parse(request.body);
 
   const passwordResetToken = await accountApi.generatePasswordResetToken(accountRequestResetBody.email);
 
-  await emailApi.sendPasswordResetEmail(
-    passwordResetToken.confirmationToken,
-    accountRequestResetBody.email,
-    accountRequestResetBody.host,
-  );
+  emailApi.sendPasswordResetEmail(accountRequestResetBody as Account, passwordResetToken.token);
 
   return {
     statusCode: 200,
@@ -298,21 +355,10 @@ export const reset: ActionHook = async (request: Request, actionContext: ActionC
 
   const accountApi = new AccountApi(actionContext.frontasticContext, getLocale(request));
 
-  let account = await accountApi.resetPassword(accountResetBody.token, accountResetBody.newPassword);
+  const account = await accountApi.resetPassword(accountResetBody.token, accountResetBody.newPassword);
   account.password = accountResetBody.newPassword;
 
-  // TODO: do we need to log in the account after creation?
-  // TODO: handle exception when customer can't login if email is not confirmed
-  account = await loginAccount(request, actionContext, account);
-
-  return {
-    statusCode: 200,
-    body: JSON.stringify(account),
-    sessionData: {
-      ...request.sessionData,
-      account: account,
-    },
-  } as Response;
+  return await loginAccount(request, actionContext, account);
 };
 
 export const update: ActionHook = async (request: Request, actionContext: ActionContext) => {

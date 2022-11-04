@@ -49,6 +49,8 @@ export const login = async (email: string, password: string, remember?: boolean)
   if (remember) window.localStorage.setItem(REMEMBER_ME, '1');
   const res = await fetchApiHub('/action/account/login', { method: 'POST' }, payload);
   await mutate('/action/account/getAccount', res);
+  await mutate('/action/cart/getCart');
+  await mutate('/action/wishlist/getWishlist');
   return res;
 };
 
@@ -56,12 +58,14 @@ export const logout = async () => {
   window.localStorage.removeItem(REMEMBER_ME);
   const res = await fetchApiHub('/action/account/logout', { method: 'POST' });
   await mutate('/action/account/getAccount', res);
+  await mutate('/action/cart/getCart');
+  await mutate('/action/wishlist/getWishlist');
+  return res;
 };
 
 export const register = async (account: RegisterAccount): Promise<Account> => {
-  const host = typeof window !== 'undefined' ? window.location.origin : '';
-  const acc = { ...account, host };
-  return await fetchApiHub('/action/account/register', { method: 'POST' }, acc);
+  const response = await fetchApiHub('/action/account/register', { method: 'POST' }, account);
+  return response;
 };
 
 export const confirm = async (token: string): Promise<Account> => {
@@ -70,15 +74,12 @@ export const confirm = async (token: string): Promise<Account> => {
   return res;
 };
 
-export const resendVerificationEmail = async (email: string, password: string): Promise<void> => {
-  const host = typeof window !== 'undefined' ? window.location.origin : '';
-
+export const requestConfirmationEmail = async (email: string, password: string): Promise<void> => {
   const payload = {
     email,
     password,
-    host,
   };
-  const res = await fetchApiHub('/action/account/resendVerificationEmail', { method: 'POST' }, payload);
+  const res = await fetchApiHub('/action/account/requestConfirmationEmail', { method: 'POST' }, payload);
   return res;
 };
 
@@ -87,11 +88,8 @@ export const changePassword = async (oldPassword: string, newPassword: string): 
 };
 
 export const requestPasswordReset = async (email: string): Promise<void> => {
-  const host = typeof window !== 'undefined' ? window.location.origin : '';
-
   const payload = {
     email,
-    host,
   };
 
   return await fetchApiHub('/action/account/requestReset', { method: 'POST' }, payload);

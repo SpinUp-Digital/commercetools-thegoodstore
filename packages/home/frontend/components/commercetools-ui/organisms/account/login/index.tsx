@@ -20,7 +20,7 @@ const Login: React.FC<LoginProps> = ({ logo, registerLink, accountLink }) => {
   const { formatMessage } = useFormat({ name: 'common' });
 
   //account actions
-  const { login, loggedIn, resendVerificationEmail, requestPasswordReset } = useAccount();
+  const { login, loggedIn, requestConfirmationEmail, requestPasswordReset } = useAccount();
 
   //login data
   const [data, setData] = useState({ email: '', password: '', rememberMe: false });
@@ -85,7 +85,7 @@ const Login: React.FC<LoginProps> = ({ logo, registerLink, accountLink }) => {
   //resend verification email for user
   const resendVerificationEmailForUser = async () => {
     try {
-      await resendVerificationEmail(data.email, data.password);
+      await requestConfirmationEmail(data.email, data.password);
       setSuccess(
         formatAccountMessage({
           id: 'verification.resent',
