@@ -1,7 +1,8 @@
-import { Variant } from './Variant';
+import { Variant } from '../product/Variant';
 
 export interface LineItem {
   lineItemId: string;
+  productId?: string;
   name?: string;
   type?: string;
   addedAt?: Date;

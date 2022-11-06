@@ -1,47 +1,38 @@
 {
-    "compilerOptions": {
-        "module": "esnext",
-        "target": "es2019",
-        "lib": [
-            "es2019",
-        ],
-        "baseUrl": "./",
-        "paths": {
-            "@Types/*": ["../types/*"],
-        },
-        "sourceMap": true,
-        "allowJs": true,
-        "moduleResolution": "node",
-        "outDir": "./",
-        "forceConsistentCasingInFileNames": true,
-        "noImplicitReturns": true,
-        "noImplicitThis": true,
-        "noImplicitAny": true,
-        "strictNullChecks": false,
-        "suppressImplicitAnyIndexErrors": true,
-        "removeComments": true,
-        "skipLibCheck": true,
-        "typeRoots": [
-            "node_modules/@types",
-            "node_modules/@commercetools/platform-sdk/dist/declarations/src/index.d.ts"
-        ],
-        "types": [
-            "node",
-            "jest"
-        ],
-        "noUnusedLocals": false,
-        "resolveJsonModule": true,
-        "allowSyntheticDefaultImports": true,
-        "strict": true,
-        "isolatedModules": true,
-        "noEmit": false,
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "es2019",
+    "lib": ["es2019"],
+    "baseUrl": "./",
+    "paths": {
+      "@commercetools/sdk": ["../../sdk/sdk-release/sdk/lib"],
+      "@commercetools/sdk/*": ["../../sdk/sdk-release/sdk/lib/*"],
+      "@commercetools/composable-commerce": ["../../sdk/sdk-release/extensions/composable-commerce/lib"],
+      "@commercetools/composable-commerce/*": ["../../sdk/sdk-release/extensions/composable-commerce/lib/*"],
+      "@commercetools/domain-types": ["../../sdk/sdk-release/domain-types/lib"],
+      "@commercetools/domain-types/*": ["../../sdk/sdk-release/domain-types/lib/*"]
     },
-    "include": [
-        "./*"
-    ],
-    "exclude": [
-        "node_modules/*",
-        "build",
-        "webpack",
-    ]
+    "sourceMap": true,
+    "allowJs": true,
+    "moduleResolution": "node",
+    "outDir": "./",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "removeComments": true,
+    "skipLibCheck": true,
+    "typeRoots": ["node_modules/@types", "node_modules/@commercetools/platform-sdk/dist/declarations/src/index.d.ts"],
+    "types": ["node", "jest"],
+    "noUnusedLocals": false,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "isolatedModules": true,
+    "noEmit": false
+  },
+  "include": ["./*"],
+  "exclude": ["node_modules/*", "build", "webpack"]
 }

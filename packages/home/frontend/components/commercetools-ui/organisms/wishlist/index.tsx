@@ -1,6 +1,6 @@
 import React from 'react';
-import { LineItem } from '@Types/wishlist/LineItem';
-import { Wishlist } from '@Types/wishlist/Wishlist';
+import { LineItem } from '@commercetools/domain-types/wishlist/LineItem';
+import { Wishlist } from '@commercetools/domain-types/wishlist/Wishlist';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { Reference } from 'types/reference';
 import EmptyWishlist from './empty_wishlist';

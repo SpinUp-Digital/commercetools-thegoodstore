@@ -1,7 +1,7 @@
 import { useState, useEffect, FormEvent } from 'react';
 import { useRouter } from 'next/router';
-import { Cart as CartType } from '@Types/cart/Cart';
-import { ShippingMethod } from '@Types/cart/ShippingMethod';
+import { Cart as CartType } from '@commercetools/domain-types/cart/Cart';
+import { ShippingMethod } from '@commercetools/domain-types/cart/ShippingMethod';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { Reference } from 'types/reference';
 import { NextFrontasticImage } from 'frontastic/lib/image';

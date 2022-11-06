@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState, useEffect } from 'react';
-import { ShippingMethod } from '@Types/cart/ShippingMethod';
-import { ProjectSettings } from '@Types/ProjectSettings';
+import { ShippingMethod } from '@commercetools/domain-types/cart/ShippingMethod';
+import { ProjectSettings } from '@commercetools/domain-types/ProjectSettings';
 import { countryOptions, CountryOption } from 'helpers/countryOptions';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { getTaxedCountries } from 'helpers/utils/getTaxedCountries';

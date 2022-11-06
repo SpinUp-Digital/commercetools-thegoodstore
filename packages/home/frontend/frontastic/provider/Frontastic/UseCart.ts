@@ -1,10 +1,10 @@
-import { Cart } from '@Types/cart/Cart';
-import { Discount } from '@Types/cart/Discount';
-import { Order } from '@Types/cart/Order';
-import { ShippingMethod } from '@Types/cart/ShippingMethod';
-import { Variant } from '@Types/product/Variant';
+import { Cart } from '@commercetools/domain-types/cart/Cart';
+import { Discount } from '@commercetools/domain-types/cart/Discount';
+import { Order } from '@commercetools/domain-types/cart/Order';
+import { ShippingMethod } from '@commercetools/domain-types/cart/ShippingMethod';
+import { Variant } from '@commercetools/domain-types/product/Variant';
 import { CartDetails } from 'frontastic/actions/cart';
-import { ProjectSettings } from '@Types/ProjectSettings';
+import { ProjectSettings } from '@commercetools/domain-types/ProjectSettings';
 
 export interface UseCart {
   data?: Cart;

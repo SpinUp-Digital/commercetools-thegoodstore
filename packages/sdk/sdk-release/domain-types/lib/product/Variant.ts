@@ -5,7 +5,7 @@ export interface Variant {
   id?: string;
   sku: string;
   groupId?: string;
-  price: Money;
+  price?: Money;
   discountedPrice?: Money; // Discounted price
   discounts?: string[]; // Discount descriptions
   attributes?: Attributes;

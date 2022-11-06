@@ -1,5 +1,5 @@
 import { BaseApi } from './BaseApi';
-import { Account } from '../../../types/account/Account';
+import { Account } from '@commercetools/domain-types/account/Account';
 import {
   CustomerDraft,
   CustomerUpdate,
@@ -8,11 +8,11 @@ import {
 } from '@commercetools/platform-sdk/dist/declarations/src/generated/models/customer';
 import { AccountMapper } from '../mappers/AccontMapper';
 import { BaseAddress } from '@commercetools/platform-sdk/dist/declarations/src/generated/models/common';
-import { Cart } from '../../../types/cart/Cart';
+import { Cart } from '@commercetools/domain-types/cart/Cart';
 import { CartResourceIdentifier } from '@commercetools/platform-sdk/dist/declarations/src/generated/models/cart';
-import { Address } from '../../../types/account/Address';
+import { Address } from '@commercetools/domain-types/account/Address';
 import { Guid } from '../utils/Guid';
-import { PasswordResetToken } from '../../../types/account/PasswordResetToken';
+import { PasswordResetToken } from '@commercetools/domain-types/account/PasswordResetToken';
 
 export class AccountApi extends BaseApi {
   create: (account: Account, cart: Cart | undefined) => Promise<Account> = async (
@@ -82,10 +82,7 @@ export class AccountApi extends BaseApi {
 
       const token = await this.generateToken(account);
 
-      if (token) {
-        account.confirmationToken = token.value;
-        account.tokenValidUntil = new Date(token.expiresAt);
-      }
+      if (token) account.confirmationToken = AccountMapper.commercetoolsCustomerTokenToToken(token, account);
 
       return account;
     } catch (error) {
@@ -180,8 +177,7 @@ export class AccountApi extends BaseApi {
 
       if (reverify) {
         const token = await this.generateToken(account);
-        account.confirmationToken = token.value;
-        account.tokenValidUntil = new Date(token.expiresAt);
+        account.confirmationToken = AccountMapper.commercetoolsCustomerTokenToToken(token, account);
       } else if (!account.confirmed) {
         throw new Error(`Your account ${account.email} is not activated yet!`);
       }

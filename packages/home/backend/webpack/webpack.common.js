@@ -1,9 +1,10 @@
-var path = require('path');
+const path = require('path');
+const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
   target: 'node',
   externals: {
-    'node-fetch': 'commonjs2 node-fetch'
+    'node-fetch': 'commonjs2 node-fetch',
   },
   entry: {
     app: './index.ts',
@@ -36,11 +37,12 @@ module.exports = {
   },
   resolve: {
     extensions: ['.json', '.ts', '.js'],
+    plugins: [new TsconfigPathsPlugin({ configFile: path.resolve(__dirname, '..', 'tsconfig.json') })],
   },
   output: {
     filename: 'bundle.min.js',
     path: path.resolve(__dirname, '../build'),
-    library: "extensions",
-    libraryTarget: "umd"
+    library: 'extensions',
+    libraryTarget: 'umd',
   },
 };

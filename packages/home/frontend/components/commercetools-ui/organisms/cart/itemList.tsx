@@ -1,4 +1,4 @@
-import { Cart } from '@Types/cart/Cart';
+import { Cart } from '@commercetools/domain-types/cart/Cart';
 import { useFormat } from 'helpers/hooks/useFormat';
 import Item from './item';
 

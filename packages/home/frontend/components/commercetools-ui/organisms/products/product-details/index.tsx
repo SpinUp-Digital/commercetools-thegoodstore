@@ -1,10 +1,10 @@
 import { FC, useState } from 'react';
 import NextLink from 'next/link';
-import { Variant } from '@Types/product/Variant';
 import Button from 'components/commercetools-ui/atoms/button';
 import Dropdown from 'components/commercetools-ui/atoms/dropdown';
 import Wrapper from 'components/commercetools-ui/organisms/content/wrapper';
 import Gallery from 'components/commercetools-ui/organisms/gallery';
+import { Variant } from '@commercetools/domain-types/product/Variant';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart } from 'frontastic';
 import AdditionalInfo from './additional-info';

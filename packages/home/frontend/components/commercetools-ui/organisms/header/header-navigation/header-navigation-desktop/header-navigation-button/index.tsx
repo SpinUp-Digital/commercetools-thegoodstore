@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
-import { Category } from '@Types/product/Category';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import MenuDropdown from 'components/commercetools-ui/organisms/header/header-navigation/header-navigation-desktop/menu-dropdown';
 import { Market, Tile } from 'components/commercetools-ui/organisms/header/types';
 import useClassNames from 'helpers/hooks/useClassNames';
+import { Category } from '@commercetools/domain-types/product/Category';
 
 export interface Props {
   show: boolean;

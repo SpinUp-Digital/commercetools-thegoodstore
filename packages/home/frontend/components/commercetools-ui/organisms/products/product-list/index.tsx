@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import NextLink from 'next/link';
-import { Product } from '@Types/product/Product';
-import { Facet } from '@Types/result/Facet';
 import Breadcrumb from 'components/commercetools-ui/organisms/breadcrumb';
 import Filters from 'components/commercetools-ui/organisms/filters';
+import { Product } from '@commercetools/domain-types/product/Product';
+import { Facet } from '@commercetools/domain-types/result/Facet';
 import FilterIcon from 'components/icons/filter';
 import CloseIcon from 'components/icons/icon-x';
 import { useFormat } from 'helpers/hooks/useFormat';

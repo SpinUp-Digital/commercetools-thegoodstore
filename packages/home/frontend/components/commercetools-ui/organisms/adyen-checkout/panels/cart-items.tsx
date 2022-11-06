@@ -1,5 +1,5 @@
 import React from 'react';
-import { Cart } from '@Types/cart/Cart';
+import { Cart } from '@commercetools/domain-types/cart/Cart';
 import { StringHelpers } from 'helpers/stringHelpers';
 import Image from 'frontastic/lib/image';
 

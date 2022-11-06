@@ -1,14 +1,14 @@
 import { Request, Response } from '@frontastic/extension-types';
 import { ActionContext } from '@frontastic/extension-types';
-import { Cart } from '../../../types/cart/Cart';
-import { LineItem } from '../../../types/cart/LineItem';
-import { Address } from '../../../types/account/Address';
+import { Cart } from '@commercetools/domain-types/cart/Cart';
+import { LineItem } from '@commercetools/domain-types/cart/LineItem';
+import { Address } from '@commercetools/domain-types/account/Address';
 import { CartFetcher } from '../utils/CartFetcher';
-import { ShippingMethod } from '../../../types/cart/ShippingMethod';
-import { Payment, PaymentStatuses } from '../../../types/cart/Payment';
+import { ShippingMethod } from '@commercetools/domain-types/cart/ShippingMethod';
+import { Payment, PaymentStatuses } from '@commercetools/domain-types/cart/Payment';
 import { CartApi } from '../apis/CartApi';
 import { getLocale } from '../utils/Request';
-import { Discount } from '../../../types/cart/Discount';
+import { Discount } from '@commercetools/domain-types/cart/Discount';
 import { EmailApi } from '../apis/EmailApi';
 
 type ControllerResponse = Response & {

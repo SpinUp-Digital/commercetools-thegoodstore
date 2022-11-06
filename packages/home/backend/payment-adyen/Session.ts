@@ -1,4 +1,4 @@
-import { Money } from "../../types/product/Money";
+import { Money } from '@commercetools/domain-types/product/Money';
 
 export interface CreateSessionDTO {
   amount: Money;
@@ -29,7 +29,7 @@ export interface SessionResponse {
 export interface PaymentDetails {
   details: {
     redirectResult: string;
-  }
+  };
 }
 
 export interface PaymentDetailsResponse {

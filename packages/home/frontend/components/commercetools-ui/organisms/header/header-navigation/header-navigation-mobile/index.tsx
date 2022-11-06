@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { Bars3Icon } from '@heroicons/react/24/outline';
-import { Category } from '@Types/product/Category';
+import { Category } from '@commercetools/domain-types/product/Category';
 import MobileMenu from 'components/commercetools-ui/organisms/header/header-navigation/header-navigation-mobile/menu-mobile';
 import { Market } from 'components/commercetools-ui/organisms/header/types';
 import MarketButtonMobile from 'components/commercetools-ui/organisms/market-button/market-button-mobile';

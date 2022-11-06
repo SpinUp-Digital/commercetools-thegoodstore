@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Category } from '@Types/product/Category';
+import { Category } from '@commercetools/domain-types/product/Category';
 import Link from 'components/commercetools-ui/atoms/link';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import useClassNames from 'helpers/hooks/useClassNames';

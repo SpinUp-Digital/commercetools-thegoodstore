@@ -4,6 +4,7 @@ import { Money } from '../product/Money';
 
 export interface LineItem {
   lineItemId?: string;
+  productId?: string;
   name?: string;
   type?: string;
   count?: number;
