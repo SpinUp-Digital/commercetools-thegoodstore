@@ -16,7 +16,12 @@
     "strictBindCallApply": true,
     "baseUrl": ".",
     "paths": {
-      "@Types/*": ["../types/*"]
+      "@commercetools/sdk": ["../../sdk/sdk-release/sdk/lib"],
+      "@commercetools/sdk/*": ["../../sdk/sdk-release/sdk/lib/*"],
+      "@commercetools/composable-commerce": ["../../sdk/sdk-release/composable-commerce/lib"],
+      "@commercetools/composable-commerce/*": ["../../sdk/sdk-release/composable-commerce/lib/*"],
+      "@commercetools/domain-types": ["../../sdk/sdk-release/domain-types/lib"],
+      "@commercetools/domain-types/*": ["../../sdk/sdk-release/domain-types/lib/*"]
     },
     "incremental": true,
     "typeRoots": ["./node_modules/@types", "./node_modules/@headlessui/react/dist/index.d.ts"]

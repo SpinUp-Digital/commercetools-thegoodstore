@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { XIcon } from '@heroicons/react/outline';
-import { Discount } from '@Types/cart/Discount';
+import { Discount } from '@commercetools/domain-types/cart/Discount';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart } from 'frontastic/provider';
 

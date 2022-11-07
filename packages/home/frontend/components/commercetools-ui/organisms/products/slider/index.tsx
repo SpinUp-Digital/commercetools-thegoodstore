@@ -1,10 +1,10 @@
 import React from 'react';
-import { Product } from '@Types/product/Product';
 import Slider from 'components/commercetools-ui/atoms/slider';
 import Subtitle, { SubtitleProps } from 'components/commercetools-ui/atoms/subtitle';
 import Title, { TitleProps } from 'components/commercetools-ui/atoms/title';
 import Link from 'components/commercetools-ui/organisms/content/link';
 import Wrapper from 'components/commercetools-ui/organisms/content/wrapper';
+import { Product } from '@commercetools/domain-types/product/Product';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import { desktop, tablet } from 'helpers/utils/screensizes';
 import { Reference } from 'types/reference';

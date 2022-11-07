@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { UserIcon, HeartIcon, ShoppingBagIcon } from '@heroicons/react/24/outline';
-import { Account } from '@Types/account/Account';
+import { Account } from '@commercetools/domain-types/account/Account';
 import Link from 'components/commercetools-ui/atoms/link';
 import Slideout, { State as MenuState } from 'components/commercetools-ui/atoms/slide-out';
 import { useFormat } from 'helpers/hooks/useFormat';

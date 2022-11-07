@@ -1,5 +1,5 @@
 import { ActionContext, Request } from '@frontastic/extension-types';
-import { Cart } from '../../../types/cart/Cart';
+import { Cart } from '@commercetools/domain-types/cart/Cart';
 import { CartApi } from '../../commerce-commercetools/apis/CartApi';
 import { Guid } from './Guid';
 import { getLocale } from './Request';

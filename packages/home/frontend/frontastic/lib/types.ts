@@ -1,4 +1,4 @@
-import { Category } from '@Types/product/Category';
+import { Category } from '@commercetools/domain-types/product/Category';
 
 type ViewData = {
   _type: 'Frontastic\\Catwalk\\FrontendBundle\\Domain\\ViewData';

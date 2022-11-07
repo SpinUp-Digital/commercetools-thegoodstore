@@ -1,8 +1,8 @@
 import { Request, Response } from '@frontastic/extension-types';
 import { ActionContext } from '@frontastic/extension-types';
 import { AccountApi } from '../apis/AccountApi';
-import { Account } from '../../../types/account/Account';
-import { Address } from '../../../types/account/Address';
+import { Account } from '@commercetools/domain-types/account/Account';
+import { Address } from '@commercetools/domain-types/account/Address';
 import { CartFetcher } from '../utils/CartFetcher';
 import { getLocale } from '../utils/Request';
 import { EmailApi } from '../apis/EmailApi';
@@ -260,7 +260,7 @@ export const requestReset: ActionHook = async (request: Request, actionContext: 
     email?: string;
     host?: string;
   };
-    
+
   const accountApi = new AccountApi(actionContext.frontasticContext, getLocale(request));
   const emailApi = new EmailApi(actionContext.frontasticContext.project.configuration.smtp);
 

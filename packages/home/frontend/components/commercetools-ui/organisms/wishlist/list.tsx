@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { LineItem } from '@Types/wishlist/LineItem';
+import { LineItem } from '@commercetools/domain-types/wishlist/LineItem';
 import { DateHelpers } from 'helpers/dateHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
