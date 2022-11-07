@@ -24,9 +24,9 @@ const HeaderNavigationDesktop = ({
   hideSubMenu,
   market,
 }) => {
-  const scrollDirection = useScrollDirection(5, -5);
+  const scrollDirection = useScrollDirection(5, -3);
   const navigationClassNames = useClassNames([
-    'relative hidden items-center justify-center lg:flex transition-all duration-500',
+    'relative hidden items-center justify-center lg:flex transition-all duration-400',
     scrollDirection === 'down' ? 'h-0 opacity-0 pointer-events-none' : 'h-64 opacity-1 pointer-events-auto',
   ]);
 
@@ -34,7 +34,7 @@ const HeaderNavigationDesktop = ({
     <>
       {links && (
         <div onMouseLeave={handleMouseOut} className={navigationClassNames}>
-          {links.map((link, index) => (
+          {links.map((link) => (
             <div
               key={link?.categoryId}
               onMouseEnter={() => {
@@ -46,7 +46,7 @@ const HeaderNavigationDesktop = ({
                 link={link}
                 market={market}
                 updateSubMenu={hideSubMenu}
-                tileContent={tiles[index]}
+                tiles={tiles}
               />
             </div>
           ))}

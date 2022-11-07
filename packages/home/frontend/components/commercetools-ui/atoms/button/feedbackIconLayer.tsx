@@ -1,6 +1,6 @@
+import { FC } from 'react';
 import { CheckIcon } from '@heroicons/react/24/outline';
 import useClassNames from 'helpers/hooks/useClassNames';
-import { FC } from 'react';
 import { ButtonProps } from '.';
 import LoadingIcon from './loadingIcon';
 

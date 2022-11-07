@@ -1,8 +1,8 @@
 import React, { FC, useCallback, useMemo, useState } from 'react';
 import NextLink from 'next/link';
-import Slider from 'components/commercetools-ui/atoms/slider';
 import { Product } from '@commercetools/domain-types/product/Product';
 import { Variant } from '@commercetools/domain-types/product/Variant';
+import Slider from 'components/commercetools-ui/atoms/slider';
 import HeartIcon from 'components/icons/heart';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';

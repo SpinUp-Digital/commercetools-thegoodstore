@@ -1,6 +1,6 @@
 import { useState, Fragment } from 'react';
-import { Dialog, Transition } from '@headlessui/react';
 import { Address } from '@commercetools/domain-types/account/Address';
+import { Dialog, Transition } from '@headlessui/react';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useI18n from 'helpers/hooks/useI18n';
 import { useAccount } from 'frontastic';

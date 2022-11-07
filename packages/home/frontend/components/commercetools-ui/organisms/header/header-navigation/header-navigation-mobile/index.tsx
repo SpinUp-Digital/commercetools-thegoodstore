@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
-import { Bars3Icon } from '@heroicons/react/24/outline';
 import { Category } from '@commercetools/domain-types/product/Category';
+import { Bars3Icon } from '@heroicons/react/24/outline';
 import MobileMenu from 'components/commercetools-ui/organisms/header/header-navigation/header-navigation-mobile/menu-mobile';
 import { Market } from 'components/commercetools-ui/organisms/header/types';
 import MarketButtonMobile from 'components/commercetools-ui/organisms/market-button/market-button-mobile';
@@ -30,7 +30,7 @@ const HeaderNavigationMobile: FC<Props> = ({ links, market, markets, handleMarke
   };
 
   const menuClassNames = useClassNames([
-    'delay-50 fixed top-0 z-20 h-full w-4/5 bg-neutral-200 opacity-100 transition ease-in-out',
+    'delay-50 fixed top-0 z-20 h-full w-4/5 bg-neutral-200 opacity-100 transition duration-500 ease-in-out',
     showMenu ? 'left-0 translate-x-0' : '-translate-x-[1000px]',
   ]);
 

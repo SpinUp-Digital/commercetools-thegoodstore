@@ -1,15 +1,15 @@
 import React, { FC, useMemo, useState } from 'react';
 import Link from 'next/link';
+import { Category } from '@commercetools/domain-types/product/Category';
 import Button from 'components/commercetools-ui/atoms/button';
 import Typography from 'components/commercetools-ui/atoms/typography';
-import { Category } from '@commercetools/domain-types/product/Category';
+import MarketButtonMobile from 'components/commercetools-ui/organisms/market-button/market-button-mobile';
 import BackIcon from 'components/icons/back';
 import CloseIcon from 'components/icons/close';
 import ChevronRightIcon from 'components/icons/home-chevron-right';
 import MenuIcon from 'components/icons/menu-icon';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { Market } from '../../types';
-import MarketButtonMobile from 'components/commercetools-ui/organisms/market-button/market-button-mobile';
 
 export interface Props {
   links: Category[];
