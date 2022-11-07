@@ -1,21 +1,23 @@
-"use strict";
+'use strict';
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
+  for (var name in all) __defProp(target, name, { get: all[name], enumerable: true });
 };
 var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
+  if ((from && typeof from === 'object') || typeof from === 'function') {
     for (let key of __getOwnPropNames(from))
       if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+        __defProp(to, key, {
+          get: () => from[key],
+          enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable,
+        });
   }
   return to;
 };
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var __toCommonJS = (mod) => __copyProps(__defProp({}, '__esModule', { value: true }), mod);
 
 // src/index.ts
 var src_exports = {};
@@ -23,7 +25,7 @@ __export(src_exports, {
   Extension: () => Extension,
   REMEMBER_ME: () => REMEMBER_ME,
   SDK: () => SDK,
-  sdk: () => sdk
+  sdk: () => sdk,
 });
 module.exports = __toCommonJS(src_exports);
 
@@ -46,62 +48,60 @@ function assign(target) {
   return target;
 }
 var defaultConverter = {
-  read: function(value) {
+  read: function (value) {
     if (value[0] === '"') {
       value = value.slice(1, -1);
     }
     return value.replace(/(%[\dA-F]{2})+/gi, decodeURIComponent);
   },
-  write: function(value) {
-    return encodeURIComponent(value).replace(
-      /%(2[346BF]|3[AC-F]|40|5[BDE]|60|7[BCD])/g,
-      decodeURIComponent
-    );
-  }
+  write: function (value) {
+    return encodeURIComponent(value).replace(/%(2[346BF]|3[AC-F]|40|5[BDE]|60|7[BCD])/g, decodeURIComponent);
+  },
 };
 function init(converter, defaultAttributes) {
   function set(key, value, attributes) {
-    if (typeof document === "undefined") {
+    if (typeof document === 'undefined') {
       return;
     }
     attributes = assign({}, defaultAttributes, attributes);
-    if (typeof attributes.expires === "number") {
+    if (typeof attributes.expires === 'number') {
       attributes.expires = new Date(Date.now() + attributes.expires * 864e5);
     }
     if (attributes.expires) {
       attributes.expires = attributes.expires.toUTCString();
     }
-    key = encodeURIComponent(key).replace(/%(2[346B]|5E|60|7C)/g, decodeURIComponent).replace(/[()]/g, escape);
-    var stringifiedAttributes = "";
+    key = encodeURIComponent(key)
+      .replace(/%(2[346B]|5E|60|7C)/g, decodeURIComponent)
+      .replace(/[()]/g, escape);
+    var stringifiedAttributes = '';
     for (var attributeName in attributes) {
       if (!attributes[attributeName]) {
         continue;
       }
-      stringifiedAttributes += "; " + attributeName;
+      stringifiedAttributes += '; ' + attributeName;
       if (attributes[attributeName] === true) {
         continue;
       }
-      stringifiedAttributes += "=" + attributes[attributeName].split(";")[0];
+      stringifiedAttributes += '=' + attributes[attributeName].split(';')[0];
     }
-    return document.cookie = key + "=" + converter.write(value, key) + stringifiedAttributes;
+    return (document.cookie = key + '=' + converter.write(value, key) + stringifiedAttributes);
   }
   function get(key) {
-    if (typeof document === "undefined" || arguments.length && !key) {
+    if (typeof document === 'undefined' || (arguments.length && !key)) {
       return;
     }
-    var cookies = document.cookie ? document.cookie.split("; ") : [];
+    var cookies = document.cookie ? document.cookie.split('; ') : [];
     var jar = {};
     for (var i = 0; i < cookies.length; i++) {
-      var parts = cookies[i].split("=");
-      var value = parts.slice(1).join("=");
+      var parts = cookies[i].split('=');
+      var value = parts.slice(1).join('=');
       try {
         var foundKey = decodeURIComponent(parts[0]);
         jar[foundKey] = converter.read(value, foundKey);
         if (key === foundKey) {
           break;
         }
-      } catch (e) {
-      }
+      } catch (e) {}
     }
     return key ? jar[key] : jar;
   }
@@ -109,58 +109,54 @@ function init(converter, defaultAttributes) {
     {
       set,
       get,
-      remove: function(key, attributes) {
+      remove: function (key, attributes) {
         set(
           key,
-          "",
+          '',
           assign({}, attributes, {
-            expires: -1
-          })
+            expires: -1,
+          }),
         );
       },
-      withAttributes: function(attributes) {
+      withAttributes: function (attributes) {
         return init(this.converter, assign({}, this.attributes, attributes));
       },
-      withConverter: function(converter2) {
+      withConverter: function (converter2) {
         return init(assign({}, this.converter, converter2), this.attributes);
-      }
+      },
     },
     {
       attributes: { value: Object.freeze(defaultAttributes) },
-      converter: { value: Object.freeze(converter) }
-    }
+      converter: { value: Object.freeze(converter) },
+    },
   );
 }
-var api = init(defaultConverter, { path: "/" });
+var api = init(defaultConverter, { path: '/' });
 var js_cookie_default = api;
 
 // src/library/types.ts
-var REMEMBER_ME = "__rememberMe";
+var REMEMBER_ME = '__rememberMe';
 
 // src/helpers/fetcher.ts
-var cookiesApi = js_cookie_default.withAttributes({ path: "/" });
+var cookiesApi = js_cookie_default.withAttributes({ path: '/' });
 var fetcher = async (url, options = {}) => {
-  url = url.replaceAll("//", "/");
-  const sessionCookie = cookiesApi.get("frontastic-session");
+  // url = url.replaceAll("//", "/");
+  const sessionCookie = cookiesApi.get('frontastic-session');
   options.headers = {
-    "Content-Type": "application/json",
-    Accept: "application/json",
-    "X-Frontastic-Access-Token": "APIKEY",
-    ...options.headers || {},
-    ...sessionCookie ? { "Frontastic-Session": sessionCookie } : {}
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+    'X-Frontastic-Access-Token': 'APIKEY',
+    ...(options.headers || {}),
+    ...(sessionCookie ? { 'Frontastic-Session': sessionCookie } : {}),
   };
   const response = await fetch(url, options);
-  if (typeof window !== "undefined" && response.ok && response.headers.has("Frontastic-Session")) {
+  if (typeof window !== 'undefined' && response.ok && response.headers.has('Frontastic-Session')) {
     let rememberMe = window.localStorage.getItem(REMEMBER_ME);
     let expiryDate;
     if (rememberMe) {
       expiryDate = new Date(Date.now() + 1e3 * 60 * 60 * 24 * 30 * 3);
     }
-    cookiesApi.set(
-      "frontastic-session",
-      response.headers.get("Frontastic-Session"),
-      { expires: expiryDate }
-    );
+    cookiesApi.set('frontastic-session', response.headers.get('Frontastic-Session'), { expires: expiryDate });
   }
   if (response.ok) {
     return response.json();
@@ -310,7 +306,7 @@ var Queue = class {
       this.#queue.push({
         promise,
         resolve,
-        reject
+        reject,
       });
       this.#handle();
     });
@@ -332,7 +328,10 @@ var Queue = class {
     }
     try {
       this.#promisePending = true;
-      item.promise().then((value) => this.#resolve(() => item.resolve(value))).catch((err) => this.#resolve(() => item.reject(err)));
+      item
+        .promise()
+        .then((value) => this.#resolve(() => item.resolve(value)))
+        .catch((err) => this.#resolve(() => item.reject(err)));
     } catch (err) {
       this.#resolve(() => item.reject(err));
     }
@@ -359,7 +358,7 @@ var SDK = class extends EnhancedEmitter {
     return this.#endpoint;
   }
   set locale(locale) {
-    if (typeof locale === "string") {
+    if (typeof locale === 'string') {
       this.#locale = new Intl.Locale(locale);
     } else {
       this.#locale = locale;
@@ -369,7 +368,7 @@ var SDK = class extends EnhancedEmitter {
     return this.#locale;
   }
   get APILocale() {
-    const apiFormattedLocale = this.locale.baseName.slice(0, 5).replace("-", "_");
+    const apiFormattedLocale = this.locale.baseName.slice(0, 5).replace('-', '_');
     if (this.#useCurrencyInLocale) {
       return `${apiFormattedLocale}@${this.currency}`;
     } else {
@@ -389,9 +388,7 @@ var SDK = class extends EnhancedEmitter {
   }
   #throwIfNotConfigured() {
     if (!this.#hasBeenConfigured) {
-      throw new Error(
-        "The SDK has not been configured.\nPlease call .configure before you call any other methods."
-      );
+      throw new Error('The SDK has not been configured.\nPlease call .configure before you call any other methods.');
     }
   }
   configure(config) {
@@ -403,34 +400,30 @@ var SDK = class extends EnhancedEmitter {
   }
   async callAction(actionName, payload, query) {
     this.#throwIfNotConfigured();
-    let params = "";
+    let params = '';
     if (query) {
-      params = Object.keys(query).reduce((prev, key) => prev + `${key}=${query[key]}&`, "?").slice(0, params.length - 1);
+      params = Object.keys(query)
+        .reduce((prev, key) => prev + `${key}=${query[key]}&`, '?')
+        .slice(0, params.length - 1);
     }
     return await this.#actionQueue.add(() => {
-      return fetcher(
-        `${this.#endpoint}/frontastic/action/${actionName}${params}`,
-        {
-          method: "POST",
-          body: JSON.stringify(payload),
-          headers: {
-            "Frontastic-Locale": this.APILocale
-          }
-        }
-      );
+      return fetcher(`${this.#endpoint}/frontastic/action/${actionName}${params}`, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {
+          'Frontastic-Locale': this.APILocale,
+        },
+      });
     });
   }
   async getPage(path) {
     const options = {
       headers: {
-        "Frontastic-Path": path,
-        "Frontastic-Locale": this.APILocale
-      }
+        'Frontastic-Path': path,
+        'Frontastic-Locale': this.APILocale,
+      },
     };
-    return fetcher(
-      `${this.#endpoint}/page`,
-      options
-    );
+    return fetcher(`${this.#endpoint}/page`, options);
   }
 };
 
