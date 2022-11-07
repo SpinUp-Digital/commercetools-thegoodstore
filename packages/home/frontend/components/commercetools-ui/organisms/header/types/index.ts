@@ -16,6 +16,7 @@ export interface Market {
 }
 
 export interface Tile {
+  tileCategory: string;
   tileImage: NextFrontasticImage;
   tileHeaderText: string;
   tileButtonLabel: string;

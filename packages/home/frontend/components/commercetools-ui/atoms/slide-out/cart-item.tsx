@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
-import { TrashIcon } from '@heroicons/react/24/outline';
 import { LineItem } from '@commercetools/domain-types/cart/LineItem';
+import { TrashIcon } from '@heroicons/react/24/outline';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';

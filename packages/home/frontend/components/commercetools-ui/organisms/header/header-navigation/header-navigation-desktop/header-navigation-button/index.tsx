@@ -1,20 +1,22 @@
 import React, { FC } from 'react';
+import { Category } from '@commercetools/domain-types/product/Category';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import MenuDropdown from 'components/commercetools-ui/organisms/header/header-navigation/header-navigation-desktop/menu-dropdown';
 import { Market, Tile } from 'components/commercetools-ui/organisms/header/types';
 import useClassNames from 'helpers/hooks/useClassNames';
-import { Category } from '@commercetools/domain-types/product/Category';
 
 export interface Props {
   show: boolean;
   link: Category;
-  tileContent: Tile;
+  tiles: Tile[];
   market: Market;
   updateSubMenu: () => void;
 }
 
-const HeaderNavigationButtonDesktop: FC<Props> = ({ show, link, tileContent, market, updateSubMenu }) => {
+const HeaderNavigationButtonDesktop: FC<Props> = ({ show, link, tiles, market, updateSubMenu }) => {
   const linkClassNames = useClassNames(['border-secondary-grey py-8', show ? 'border-b-[1.5px]' : '']);
+  const tileContent = tiles.filter((tile) => tile.tileCategory === link.name);
+
   return (
     <>
       <div className="mx-20 cursor-pointer py-20">
@@ -23,7 +25,12 @@ const HeaderNavigationButtonDesktop: FC<Props> = ({ show, link, tileContent, mar
         </Typography>
       </div>
       {show && (
-        <MenuDropdown onClick={updateSubMenu} links={link?.subCategories} market={market} tileContent={tileContent} />
+        <MenuDropdown
+          onClick={updateSubMenu}
+          links={link?.subCategories}
+          market={market}
+          tileContent={tileContent[0]}
+        />
       )}
     </>
   );

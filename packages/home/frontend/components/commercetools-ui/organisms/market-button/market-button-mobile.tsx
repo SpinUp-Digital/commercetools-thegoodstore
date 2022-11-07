@@ -47,8 +47,8 @@ const MarketButtonMobile: React.FC<Props> = ({ market: selectedMarket, markets, 
                   className="ml-5 mr-20 text-14 font-medium text-secondary-black"
                 />
               </div>
-              <div className="mr-12 flex w-fit justify-end">
-                <ChevronDownIcon className="h-13 w-13" />
+              <div className="mr-16 flex justify-end">
+                <ChevronDownIcon className="w-15" />
               </div>
             </Menu.Button>
 

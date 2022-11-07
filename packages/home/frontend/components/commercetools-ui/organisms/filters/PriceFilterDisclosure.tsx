@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Disclosure } from '@headlessui/react';
-import { MinusSmIcon, PlusSmIcon } from '@heroicons/react/solid';
+import { MinusSmallIcon, PlusSmallIcon } from '@heroicons/react/24/solid';
 import PriceRange, { PriceRangeProps } from 'components/commercetools-ui/organisms/price-range';
 import { useFormat } from 'helpers/hooks/useFormat';
 
@@ -20,9 +20,9 @@ const PriceFilterDisclosure: FC<PriceFilterDisclosureProps> = ({ products, facet
               </span>
               <span className="ml-6 flex items-center">
                 {open ? (
-                  <MinusSmIcon className="h-5 w-5" aria-hidden="true" />
+                  <MinusSmallIcon className="h-5 w-5" aria-hidden="true" />
                 ) : (
-                  <PlusSmIcon className="h-5 w-5" aria-hidden="true" />
+                  <PlusSmallIcon className="h-5 w-5" aria-hidden="true" />
                 )}
               </span>
             </Disclosure.Button>

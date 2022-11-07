@@ -1,6 +1,6 @@
 import React from 'react';
-import { XIcon as XIconSolid } from '@heroicons/react/solid';
 import { LineItem } from '@commercetools/domain-types/cart/LineItem';
+import { XIcon as XIconSolid } from '@heroicons/react/solid';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { StringHelpers } from 'helpers/stringHelpers';

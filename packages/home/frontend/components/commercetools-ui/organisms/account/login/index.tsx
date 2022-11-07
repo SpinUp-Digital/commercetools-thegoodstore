@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeftIcon } from '@heroicons/react/solid';
+import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 import Link from 'components/commercetools-ui/atoms/link';
 import { useFormat } from 'helpers/hooks/useFormat';
 import Redirect from 'helpers/redirect';

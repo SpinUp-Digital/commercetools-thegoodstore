@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { XIcon } from '@heroicons/react/outline';
 import { Discount } from '@commercetools/domain-types/cart/Discount';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart } from 'frontastic/provider';
 
@@ -105,7 +105,7 @@ const DiscountForm: React.FC<Props> = ({ className }) => {
               >
                 <label className="text-12 uppercase leading-[16px] text-secondary-black">{discount.code}</label>
                 <button type="button" onClick={() => handleRemove(discount)}>
-                  <XIcon className="h-16 w-16 text-secondary-black" />
+                  <XMarkIcon className="h-16 w-16 text-secondary-black" />
                 </button>
               </div>
             ))}

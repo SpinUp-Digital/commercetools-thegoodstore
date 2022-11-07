@@ -1,7 +1,7 @@
 import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Disclosure } from '@headlessui/react';
-import { MinusSmIcon, PlusSmIcon } from '@heroicons/react/solid';
+import { MinusSmallIcon, PlusSmallIcon } from '@heroicons/react/24/solid';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { URLParam } from 'helpers/utils/updateURLParams';
 
@@ -50,9 +50,9 @@ const SortingDisclosure: FC<SortingDisclosureProps> = ({ updateSortingParams }) 
               </span>
               <span className="ml-6 flex items-center">
                 {open ? (
-                  <MinusSmIcon className="h-5 w-5" aria-hidden="true" />
+                  <MinusSmallIcon className="h-5 w-5" aria-hidden="true" />
                 ) : (
-                  <PlusSmIcon className="h-5 w-5" aria-hidden="true" />
+                  <PlusSmallIcon className="h-5 w-5" aria-hidden="true" />
                 )}
               </span>
             </Disclosure.Button>

@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import NextLink from 'next/link';
-import Spinner from 'components/commercetools-ui/atoms/spinner';
 import { Order } from '@commercetools/domain-types/cart/Order';
+import Spinner from 'components/commercetools-ui/atoms/spinner';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart } from 'frontastic';
 import Image from 'frontastic/lib/image';

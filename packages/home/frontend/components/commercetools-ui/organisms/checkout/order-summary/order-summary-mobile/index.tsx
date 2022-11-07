@@ -1,7 +1,7 @@
-import { Disclosure } from '@headlessui/react';
-import { ExclamationCircleIcon } from '@heroicons/react/outline';
 import { Cart } from '@commercetools/domain-types/cart/Cart';
 import { ShippingMethod } from '@commercetools/domain-types/cart/ShippingMethod';
+import { Disclosure } from '@headlessui/react';
+import { ExclamationCircleIcon } from '@heroicons/react/outline';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { StringHelpers } from 'helpers/stringHelpers';
