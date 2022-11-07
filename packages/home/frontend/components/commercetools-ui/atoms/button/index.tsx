@@ -1,34 +1,35 @@
-import React, { useMemo } from 'react';
+import { ComponentProps, FC, ReactElement } from 'react';
+import FeedbackIconLayer from './feedbackIconLayer';
+import useButtonClassNames from './useButtonClassNames';
 
-export interface Props extends React.ComponentProps<'button'> {
-  colorScheme?: 'black' | 'white' | 'blue';
-  rounded?: 'sm' | 'md' | 'lg';
+export interface ButtonProps extends ComponentProps<'button'> {
+  variant?: 'primary' | 'secondary' | 'underlined' | 'ghost';
+  size?: 'xs' | 's' | 'm' | 'l' | 'full' | 'icon';
+  iconPosition?: 'left' | 'middle' | 'right';
+  icon?: ReactElement;
+  loading?: boolean;
+  added?: boolean;
 }
 
-const Button: React.FC<React.PropsWithChildren<Props>> = ({
+const Button: FC<ButtonProps> = ({
+  icon,
+  added,
+  loading,
   children,
   className,
-  colorScheme = 'white',
-  rounded = 'md',
+  variant = 'primary',
+  iconPosition = 'middle',
+  size = children ? 's' : 'icon',
   ...props
 }) => {
-  const colorSchemes = useMemo(
-    () => ({
-      black: 'bg-gray-700 text-white',
-      white: 'bg-white text-primary-black',
-      blue: 'bg-blue-500 text-white',
-    }),
-    [],
-  );
+  const buttonClassName = useButtonClassNames({ variant, size, className, includesIcon: !!icon && !!children });
 
   return (
-    <button
-      {...props}
-      className={`${
-        colorSchemes[colorScheme]
-      } rounded-${rounded} py-12 px-24 font-body text-14 font-medium leading-[16px] ${className ?? ''}`}
-    >
+    <button {...props} className={buttonClassName}>
+      {(loading || added) && <FeedbackIconLayer loading={loading} variant={variant} />}
+      {icon && iconPosition !== 'right' && icon}
       {children}
+      {icon && iconPosition == 'right' && icon}
     </button>
   );
 };
