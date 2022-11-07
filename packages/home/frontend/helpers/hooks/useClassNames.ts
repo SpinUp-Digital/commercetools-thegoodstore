@@ -4,19 +4,26 @@ import { useCallback } from 'react';
 // example: ['firstClassName', {'secondClassName': BooleanToCheck}]
 // Only if Boolean is true in the example above the className will be added
 type ClassNames = Array<string | { [key: string]: Boolean }>;
-type UseClassNames = (classNames: ClassNames) => string;
 
-const useClassNames: UseClassNames = (classNames) => {
+// Should be extended with any further options
+type UseClassNamesOptions = { prefix?: string };
+type UseClassNames = (classNames: ClassNames, options?: UseClassNamesOptions) => string;
+
+const useClassNames: UseClassNames = (classNames, options) => {
+  const stringifiedClassNames: Array<string> = [];
+
+  const addClassName = (className: string) => {
+    stringifiedClassNames.push(`${options?.prefix ?? ''}${className}`);
+  };
+
   const resolveClassNames = useCallback(
     (classNames) => {
-      const stringifiedClassNames: Array<string> = [];
-
       classNames.map((className) => {
         if (typeof className == 'object') {
           const value = Object.keys(className)[0];
           const condition = Object.values(className)[0];
-          if (condition) stringifiedClassNames.push(value);
-        } else stringifiedClassNames.push(className);
+          if (condition) addClassName(value);
+        } else if (className) addClassName(className);
       });
 
       return stringifiedClassNames.join(' ');
