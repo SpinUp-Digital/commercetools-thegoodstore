@@ -1,6 +1,6 @@
 import React from 'react';
 import NextLink from 'next/link';
-import { HomeIcon } from '@heroicons/react/solid';
+import { HomeIcon } from '@heroicons/react/24/solid';
 
 export type BreadcrumbProps = {
   Separator?: React.ReactNode;
