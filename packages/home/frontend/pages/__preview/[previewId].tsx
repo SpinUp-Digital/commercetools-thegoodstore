@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
-import { Category } from '@Types/product/Category';
+import { Category } from '@commercetools/domain-types/product/Category';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Log } from 'helpers/errorLogger';
 import { createClient, FrontasticRenderer, Notifier } from 'frontastic';

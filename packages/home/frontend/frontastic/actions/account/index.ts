@@ -1,9 +1,9 @@
 import useSWR, { mutate } from 'swr';
-import { Account } from '@Types/account/Account';
-import { Address } from '@Types/account/Address';
+import { Account } from '@commercetools/domain-types/account/Account';
+import { Address } from '@commercetools/domain-types/account/Address';
 import { REMEMBER_ME } from 'helpers/constants/localStorage';
 import { revalidateOptions } from 'frontastic';
-import { fetchApiHub, ResponseError } from 'frontastic/lib/fetch-api-hub';
+import { fetchApiHub, getExtensions, ResponseError } from 'frontastic/lib/fetch-api-hub';
 
 export interface GetAccountResult {
   loggedIn: boolean;
@@ -28,7 +28,9 @@ export interface RegisterAccount extends UpdateAccount {
 }
 
 export const getAccount = (): GetAccountResult => {
-  const result = useSWR<Account | GetAccountResult>('/action/account/getAccount', fetchApiHub, revalidateOptions);
+  const extensions = getExtensions();
+
+  const result = useSWR<unknown>('/action/account/getAccount', extensions.getAccount, revalidateOptions);
 
   const account = (result.data as GetAccountResult)?.account || (result.data as Account);
 
@@ -42,12 +44,14 @@ export const getAccount = (): GetAccountResult => {
 };
 
 export const login = async (email: string, password: string, remember?: boolean): Promise<Account> => {
+  const extensions = getExtensions();
+
   const payload = {
     email,
     password,
   };
   if (remember) window.localStorage.setItem(REMEMBER_ME, '1');
-  const res = await fetchApiHub('/action/account/login', { method: 'POST' }, payload);
+  const res = await extensions.login(payload);
   await mutate('/action/account/getAccount', res);
   await mutate('/action/cart/getCart');
   await mutate('/action/wishlist/getWishlist');
@@ -55,8 +59,10 @@ export const login = async (email: string, password: string, remember?: boolean)
 };
 
 export const logout = async () => {
+  const extensions = getExtensions();
+
   window.localStorage.removeItem(REMEMBER_ME);
-  const res = await fetchApiHub('/action/account/logout', { method: 'POST' });
+  const res = await extensions.logout();
   await mutate('/action/account/getAccount', res);
   await mutate('/action/cart/getCart');
   await mutate('/action/wishlist/getWishlist');
@@ -64,75 +70,97 @@ export const logout = async () => {
 };
 
 export const register = async (account: RegisterAccount): Promise<Account> => {
-  const response = await fetchApiHub('/action/account/register', { method: 'POST' }, account);
-  return response;
+  const extensions = getExtensions();
+
+  return await extensions.registerAccount({ account: account });
 };
 
 export const confirm = async (token: string): Promise<Account> => {
-  const res = await fetchApiHub('/action/account/confirm', { method: 'POST' }, { token });
+  const extensions = getExtensions();
+
+  const res = await extensions.confirmAccount({ token });
   await mutate('/action/account/getAccount', res);
   return res;
 };
 
 export const requestConfirmationEmail = async (email: string, password: string): Promise<void> => {
+  const extensions = getExtensions();
+
   const payload = {
     email,
     password,
   };
-  const res = await fetchApiHub('/action/account/requestConfirmationEmail', { method: 'POST' }, payload);
-  return res;
+  return await extensions.requestAccountConfirmationEmail(payload);
 };
 
-export const changePassword = async (oldPassword: string, newPassword: string): Promise<Account> => {
-  return await fetchApiHub('/action/account/password', { method: 'POST' }, { oldPassword, newPassword });
+export const changePassword = async (token: string, newPassword: string): Promise<Account> => {
+  const extensions = getExtensions();
+
+  return await extensions.resetAccountPassword({ token, newPassword });
 };
 
 export const requestPasswordReset = async (email: string): Promise<void> => {
+  const extensions = getExtensions();
+
   const payload = {
     email,
   };
 
-  return await fetchApiHub('/action/account/requestReset', { method: 'POST' }, payload);
+  return await extensions.requestResetAccountPassword(payload);
 };
 
 export const resetPassword = async (token: string, newPassword: string): Promise<Account> => {
-  const res = await fetchApiHub('/action/account/reset', { method: 'POST' }, { token, newPassword });
+  const extensions = getExtensions();
+
+  const res = await extensions.resetAccountPassword({ token, newPassword });
   await mutate('/action/account/getAccount', res);
   return res;
 };
 
 export const update = async (account: UpdateAccount): Promise<Account> => {
-  const res = await fetchApiHub('/action/account/update', { method: 'POST' }, account);
+  const extensions = getExtensions();
+
+  const res = await extensions.updateAccount(account);
   await mutate('/action/account/getAccount', res);
   return res;
 };
 
 export const addAddress = async (address: Omit<Address, 'addressId'>): Promise<Account> => {
-  const res = await fetchApiHub('/action/account/addAddress', { method: 'POST' }, address);
+  const extensions = getExtensions();
+
+  const res = await extensions.addAccountAddress({ address });
   await mutate('/action/account/getAccount', res);
   return res;
 };
 
 export const updateAddress = async (address: Address): Promise<Account> => {
-  const res = await fetchApiHub('/action/account/updateAddress', { method: 'POST' }, address);
+  const extensions = getExtensions();
+
+  const res = await extensions.updateAccountAddress({ address });
   await mutate('/action/account/getAccount', res);
   return res;
 };
 
 export const removeAddress = async (addressId: string): Promise<Account> => {
-  const res = await fetchApiHub('/action/account/removeAddress', { method: 'POST' }, { addressId });
+  const extensions = getExtensions();
+
+  const res = await extensions.removeAccountAddress({ addressId });
   await mutate('/action/account/getAccount', res);
   return res;
 };
 
 export const setDefaultBillingAddress = async (addressId: string): Promise<Account> => {
-  const res = await fetchApiHub('/action/account/setDefaultBillingAddress', { method: 'POST' }, { addressId });
+  const extensions = getExtensions();
+
+  const res = await extensions.setDefaultBillingAddress({ addressId });
   await mutate('/action/account/getAccount', res);
   return res;
 };
 
 export const setDefaultShippingAddress = async (addressId: string): Promise<Account> => {
-  const res = await fetchApiHub('/action/account/setDefaultShippingAddress', { method: 'POST' }, { addressId });
+  const extensions = getExtensions();
+
+  const res = await extensions.setDefaultShippingAddress({ addressId });
   await mutate('/action/account/getAccount', res);
   return res;
 };

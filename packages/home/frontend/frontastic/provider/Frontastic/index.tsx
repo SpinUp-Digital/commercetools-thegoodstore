@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { SWRConfig } from 'swr';
-import { fetchApiHub } from '../../lib/fetch-api-hub';
 import { FrontasticState, getFrontasticState } from './FrontasticState';
 
 const initialState: FrontasticState = {
@@ -16,7 +15,7 @@ const FrontasticContext = React.createContext<FrontasticState>(initialState);
 export const FrontasticProvider: React.FC = ({ children }) => {
   const state: FrontasticState = getFrontasticState();
   return (
-    <SWRConfig value={{ fetcher: fetchApiHub }}>
+    <SWRConfig>
       <FrontasticContext.Provider value={state}>{children}</FrontasticContext.Provider>
     </SWRConfig>
   );

@@ -50,6 +50,8 @@ module.exports = {
         300: '0px 8px 8px rgba(25, 40, 81, 0.05)',
         400: '0px 16px 16px rgba(25, 40, 81, 0.05)',
         dark: '0px 1px 6px rgba(0, 0, 0, 0.25)',
+        button: '1px 1px 1px rgba(0, 0, 0, 0.15), -1px -1px 1px rgba(25, 40, 81, 0.15)',
+        inset:  'inset 0px 30px 16px rgba(127, 127, 127, 0.2)',
       },
       colors: {
         primary: {

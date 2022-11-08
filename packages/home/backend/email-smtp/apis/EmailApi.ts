@@ -4,8 +4,8 @@ import { Context, Project } from '@frontastic/extension-types';
 import { SmtpConfig } from '../interfaces/SmtpConfig';
 import { SmtpConfigurationError } from '../errors/SmtpConfigurationError';
 import { BaseEmailApi } from '../../interfaces/BaseEmailApi';
-import { Account } from '@Types/account/Account';
-import { Order } from '@Types/cart/Order';
+import { Account } from '@commercetools/domain-types/account/Account';
+import { Order } from '@commercetools/domain-types/cart/Order';
 
 export class EmailApi implements BaseEmailApi {
   // Email transporter

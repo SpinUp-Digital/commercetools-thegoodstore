@@ -1,8 +1,8 @@
 import { Context } from '@frontastic/extension-types';
 import { BaseEmailApi } from '../../interfaces/BaseEmailApi';
 import SendgridClient from '@sendgrid/mail';
-import { Account } from '@Types/account/Account';
-import { Order } from '@Types/cart/Order';
+import { Account } from '@commercetools/domain-types/account/Account';
+import { Order } from '@commercetools/domain-types/cart/Order';
 import { formatPrice } from '../utils/Price';
 
 export class EmailApi implements BaseEmailApi {

@@ -1,5 +1,5 @@
-import { Account } from '@Types/account/Account';
-import { Order } from '@Types/cart/Order';
+import { Account } from '@commercetools/domain-types/account/Account';
+import { Order } from '@commercetools/domain-types/cart/Order';
 
 export interface BaseEmailApi {
   sendWelcomeCustomerEmail: (customer: Account) => Promise<void>;

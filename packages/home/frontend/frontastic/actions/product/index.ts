@@ -1,6 +1,8 @@
 import useSWR from 'swr';
-import { fetchApiHub, revalidateOptions } from 'frontastic';
+import { fetchApiHub, revalidateOptions, getExtensions } from 'frontastic';
 
 export const queryCategories = () => {
-  return useSWR('/action/product/queryCategories?limit=10', fetchApiHub, revalidateOptions);
+  const extensions = getExtensions();
+
+  return useSWR('/action/product/queryCategories?limit=10', extensions.queryProductCategories, revalidateOptions);
 };

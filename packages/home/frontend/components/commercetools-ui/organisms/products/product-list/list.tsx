@@ -1,6 +1,6 @@
 import React from 'react';
 import NextLink from 'next/link';
-import { Product } from '@Types/product/Product';
+import { Product } from '@commercetools/domain-types/product/Product';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
 import Image from 'frontastic/lib/image';

@@ -1,4 +1,4 @@
-import { Wishlist } from '@Types/wishlist/Wishlist';
+import { Wishlist } from '@commercetools/domain-types/wishlist/Wishlist';
 
 export interface UseWishlist {
   data?: Wishlist;

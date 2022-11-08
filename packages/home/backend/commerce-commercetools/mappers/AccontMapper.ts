@@ -1,8 +1,9 @@
-import { Customer as commercetoolsCustomer } from '@commercetools/platform-sdk';
+import { Customer as commercetoolsCustomer, CustomerToken } from '@commercetools/platform-sdk';
 import { Locale } from '../Locale';
-import { Account } from '../../../types/account/Account';
-import { Address } from '../../../types/account/Address';
+import { Account } from '@commercetools/domain-types/account/Account';
+import { Address } from '@commercetools/domain-types/account/Address';
 import { BaseAddress } from '@commercetools/platform-sdk/dist/declarations/src/generated/models/common';
+import { AccountToken } from '@commercetools/domain-types/account/AccountToken';
 
 export class AccountMapper {
   static commercetoolsCustomerToAccount: (commercetoolsCustomer: commercetoolsCustomer, locale: Locale) => Account = (
@@ -19,6 +20,17 @@ export class AccountMapper {
       confirmed: commercetoolsCustomer.isEmailVerified,
       addresses: AccountMapper.commercetoolsCustomerToAddresses(commercetoolsCustomer, locale),
     } as Account;
+  };
+
+  static commercetoolsCustomerTokenToToken: (
+    commercetoolsCustomerToken: CustomerToken,
+    account: Account,
+  ) => AccountToken = (commercetoolsCustomerToken: CustomerToken, account: Account) => {
+    return {
+      tokenValidUntil: new Date(commercetoolsCustomerToken.expiresAt),
+      token: commercetoolsCustomerToken.value,
+      email: account.email,
+    };
   };
 
   static commercetoolsCustomerToAddresses: (commercetoolsCustomer: commercetoolsCustomer, locale: Locale) => Address[] =

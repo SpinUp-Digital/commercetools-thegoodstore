@@ -11,7 +11,7 @@ interface Props {
   handleMarket: (market: Market) => void;
 }
 
-const MarketButton: React.FC<Props> = ({ market: selectedMarket, markets, handleMarket: handleMarket }) => {
+const MarketButton: React.FC<Props> = ({ market: selectedMarket, markets, handleMarket }) => {
   const [showMarket, setShowMarket] = useState(false);
 
   const { formatMessage: formatMarketMessage } = useFormat({ name: 'common' });

@@ -4,10 +4,24 @@ import ServerCookies from 'cookies';
 import { SESSION_PERSISTENCE } from 'helpers/constants/auth';
 import { REMEMBER_ME } from 'helpers/constants/localStorage';
 import { Log } from 'helpers/errorLogger';
-import { mapLanguage } from '../../project.config';
+import { mapLanguage, mapSDKLanguage } from '../../project.config';
+import { sdk } from '@commercetools/sdk';
+import { ComposableCommerce } from '@commercetools/composable-commerce';
 
 export class LocaleStorage {
   static locale: string = '';
+}
+
+export function getExtensions() {
+  sdk.configure({
+    locale: mapSDKLanguage(LocaleStorage.locale),
+    currency: 'EUR',
+    endpoint: resolveApiHubUrl().split('/frontastic')[0],
+  });
+
+  const extensions = new ComposableCommerce(sdk);
+
+  return extensions;
 }
 
 function resolveApiHubUrl(): string {

@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import NextLink from 'next/link';
-import { Order } from '@Types/cart/Order';
+import { Order } from '@commercetools/domain-types/cart/Order';
 import Spinner from 'components/commercetools-ui/atoms/spinner';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart } from 'frontastic';

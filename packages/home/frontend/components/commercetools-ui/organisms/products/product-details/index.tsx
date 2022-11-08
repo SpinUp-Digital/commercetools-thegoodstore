@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import NextLink from 'next/link';
-import { Variant } from '@Types/product/Variant';
+import { Variant } from '@commercetools/domain-types/product/Variant';
 import Button from 'components/commercetools-ui/atoms/button';
 import Dropdown from 'components/commercetools-ui/atoms/dropdown';
 import Wrapper from 'components/commercetools-ui/organisms/content/wrapper';
@@ -36,13 +36,23 @@ const ProductDetails: FC<ProductDetailsProps> = ({
   const { formatMessage } = useFormat({ name: 'cart' });
 
   const [quantity, setQuantity] = useState<number>(1);
+  const [loading, setLoading] = useState(false);
+  const [added, setAdded] = useState(false);
 
   const handleQuantityChange = (value: string) => {
     setQuantity(+value);
   };
 
   const handleAddToCart = () => {
-    addItem(variant, quantity);
+    setLoading(true);
+    addItem(variant, quantity).then(() => {
+      setLoading(false);
+      setAdded(true);
+
+      setTimeout(() => {
+        setAdded(false);
+      }, 1000);
+    });
   };
 
   const wrapperClassName = inModalVersion
@@ -76,7 +86,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({
               })}
             onChange={handleQuantityChange}
           />
-          <Button className="w-full" colorScheme="black" rounded="sm" onClick={handleAddToCart}>
+          <Button className="w-full" variant="primary" onClick={handleAddToCart} loading={loading} added={added}>
             {formatMessage({ id: 'cart.add', defaultMessage: 'Add to cart' })}
           </Button>
         </div>

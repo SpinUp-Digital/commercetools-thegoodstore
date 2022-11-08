@@ -37,7 +37,7 @@ import { UseCart } from './UseCart';
 import { UseWishlist } from './UseWishlist';
 import { UseProduct } from './UseProduct';
 import { UseAdyen } from './UseAdyen';
-import { Cart } from '@Types/cart/Cart';
+import { Cart } from '@commercetools/domain-types/cart/Cart';
 
 export interface FrontasticState {
   useCart: UseCart;
@@ -97,7 +97,7 @@ export const getFrontasticState = (): FrontasticState => {
       updateLineItem,
     },
     useProduct: {
-      ...categoriesData,
+      ...(categoriesData as unknown as UseProduct),
     },
     useAdyen: {
       createSession,

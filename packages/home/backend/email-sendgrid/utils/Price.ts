@@ -1,4 +1,4 @@
-import { Money } from '@Types/product/Money';
+import { Money } from '@commercetools/domain-types/product/Money';
 
 export const formatPrice = (money: Money, locale: string) => {
   return new Intl.NumberFormat(locale, {

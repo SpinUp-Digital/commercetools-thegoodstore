@@ -1,6 +1,6 @@
 import { MouseEvent } from 'react';
-import { Cart } from '@Types/cart/Cart';
-import { LineItem } from '@Types/cart/LineItem';
+import { Cart } from '@commercetools/domain-types/cart/Cart';
+import { LineItem } from '@commercetools/domain-types/cart/LineItem';
 import { useTranslation, Trans } from 'react-i18next';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';

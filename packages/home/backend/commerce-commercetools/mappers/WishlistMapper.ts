@@ -1,8 +1,8 @@
-import { Wishlist } from '../../../types/wishlist/Wishlist';
+import { Wishlist } from '@commercetools/domain-types/wishlist/Wishlist';
 import { ShoppingList, ShoppingListLineItem } from '@commercetools/platform-sdk';
 import { ShoppingListDraft } from '@commercetools/platform-sdk/dist/declarations/src/generated/models/shopping-list';
 import { Locale } from '../Locale';
-import { LineItem } from '../../../types/wishlist/LineItem';
+import { LineItem } from '@commercetools/domain-types/wishlist/LineItem';
 import { ProductRouter } from '../utils/ProductRouter';
 
 export class WishlistMapper {

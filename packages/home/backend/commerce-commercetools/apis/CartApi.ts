@@ -1,4 +1,4 @@
-import { Cart } from '../../../types/cart/Cart';
+import { Cart } from '@commercetools/domain-types/cart/Cart';
 import {
   CartAddPaymentAction,
   CartDraft,
@@ -9,8 +9,6 @@ import {
   CartSetShippingMethodAction,
 } from '@commercetools/platform-sdk';
 import { CartMapper } from '../mappers/CartMapper';
-import { Money } from '../../../types/product/Money';
-import { LineItem } from '../../../types/cart/LineItem';
 import { Cart as CommercetoolsCart } from '@commercetools/platform-sdk';
 import {
   CartAddDiscountCodeAction,
@@ -21,21 +19,22 @@ import {
   CartSetCustomerEmailAction,
   CartUpdate,
 } from '@commercetools/platform-sdk/dist/declarations/src/generated/models/cart';
-import { Address } from '../../../types/account/Address';
-import { Order } from '../../../types/cart/Order';
+import { Address } from '@commercetools/domain-types/account/Address';
+import { Order } from '@commercetools/domain-types/cart/Order';
 import { OrderFromCartDraft } from '@commercetools/platform-sdk/dist/declarations/src/generated/models/order';
 import { Guid } from '../utils/Guid';
 import { BaseApi } from './BaseApi';
-import { ShippingMethod } from '../../../types/cart/ShippingMethod';
+import { ShippingMethod } from '@commercetools/domain-types/cart/ShippingMethod';
+import { LineItem } from '@commercetools/domain-types/cart/LineItem';
+import { Discount } from '@commercetools/domain-types/cart/Discount';
 import { Locale } from '../Locale';
-import { Payment } from '../../../types/cart/Payment';
+import { Payment } from '@commercetools/domain-types/cart/Payment';
 import {
   PaymentDraft,
   PaymentUpdateAction,
 } from '@commercetools/platform-sdk/dist/declarations/src/generated/models/payment';
-import { Account } from '../../../types/account/Account';
+import { Account } from '@commercetools/domain-types/account/Account';
 import { isReadyForCheckout } from '../utils/Cart';
-import { Discount } from '../../../types/cart/Discount';
 import { ExternalError } from '../utils/Errors';
 import { CartNotCompleteError } from '../errors/CartNotCompleteError';
 import { CartPaymentNotFoundError } from '../errors/CartPaymentNotFoundError';

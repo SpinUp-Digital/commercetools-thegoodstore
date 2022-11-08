@@ -1,4 +1,4 @@
-import { Cart } from '../../../types/cart/Cart';
+import { Cart } from '@commercetools/domain-types/cart/Cart';
 import {
   BaseAddress as CommercetoolsAddress,
   Cart as CommercetoolsCart,
@@ -14,20 +14,20 @@ import {
   TaxedPrice as CommercetoolsTaxedPrice,
   ZoneRate as CommercetoolsZoneRate,
 } from '@commercetools/platform-sdk';
-import { LineItem } from '../../../types/cart/LineItem';
-import { Address } from '../../../types/account/Address';
-import { Order } from '../../../types/cart/Order';
+import { LineItem } from '@commercetools/domain-types/cart/LineItem';
+import { Address } from '@commercetools/domain-types/account/Address';
+import { Order } from '@commercetools/domain-types/cart/Order';
 import { Locale } from '../Locale';
-import { ShippingMethod } from '../../../types/cart/ShippingMethod';
-import { ShippingRate } from '../../../types/cart/ShippingRate';
-import { ShippingLocation } from '../../../types/cart/ShippingLocation';
+import { ShippingMethod } from '@commercetools/domain-types/cart/ShippingMethod';
+import { ShippingRate } from '@commercetools/domain-types/cart/ShippingRate';
+import { ShippingLocation } from '@commercetools/domain-types/cart/ShippingLocation';
 import { ProductRouter } from '../utils/ProductRouter';
 import { ProductMapper } from './ProductMapper';
-import { ShippingInfo } from '../../../types/cart/ShippingInfo';
-import { Payment } from '../../../types/cart/Payment';
-import { Tax } from '../../../types/cart/Tax';
-import { TaxPortion } from '../../../types/cart/TaxPortion';
-import { Discount } from '../../../types/cart/Discount';
+import { ShippingInfo } from '@commercetools/domain-types/cart/ShippingInfo';
+import { Payment } from '@commercetools/domain-types/cart/Payment';
+import { Tax } from '@commercetools/domain-types/cart/Tax';
+import { TaxPortion } from '@commercetools/domain-types/cart/TaxPortion';
+import { Discount } from '@commercetools/domain-types/cart/Discount';
 
 export class CartMapper {
   static commercetoolsCartToCart: (commercetoolsCart: CommercetoolsCart, locale: Locale) => Cart = (

@@ -1,5 +1,5 @@
-import { FlattenedShippingMethod } from '@Types/cart/FlattenedShippingMethod';
-import { ShippingMethod } from '@Types/cart/ShippingMethod';
+import { FlattenedShippingMethod } from '@commercetools/domain-types/cart/FlattenedShippingMethod';
+import { ShippingMethod } from '@commercetools/domain-types/cart/ShippingMethod';
 
 export const countryBasedShippingRateIndex = {
   SI: 0,

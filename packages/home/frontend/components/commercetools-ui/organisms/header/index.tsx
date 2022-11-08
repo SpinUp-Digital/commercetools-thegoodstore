@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Category } from '@Types/product/Category';
+import { Category } from '@commercetools/domain-types/product/Category';
 import HeaderLogo from 'components/commercetools-ui/organisms/header/header-logo';
 import HeaderNavigationDesktop from 'components/commercetools-ui/organisms/header/header-navigation/header-navigation-desktop';
 import HeaderNavigationMobile from 'components/commercetools-ui/organisms/header/header-navigation/header-navigation-mobile';

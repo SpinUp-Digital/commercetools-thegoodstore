@@ -3,7 +3,7 @@ import { GetServerSideProps, Redirect } from 'next';
 import Head from 'next/head';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { createClient, ResponseError, LocaleStorage } from 'frontastic';
+import { createClient, ResponseError, LocaleStorage, getExtensions } from 'frontastic';
 import { FrontasticRenderer } from 'frontastic/lib/renderer';
 import { tastics } from 'frontastic/tastics';
 import { Log } from '../helpers/errorLogger';
@@ -59,9 +59,11 @@ export default function Slug({ data, locale }: SlugProps) {
 export const getServerSideProps: GetServerSideProps | Redirect = async ({ params, locale, query, req, res }) => {
   LocaleStorage.locale = locale;
 
+  const extensions = getExtensions();
+
   const frontastic = createClient();
   const data = await frontastic.getRouteData(params, locale, query, req, res);
-  const categories = await frontastic.getCategories(params, locale, query, req, res);
+  const categories = await extensions.queryProductCategories({ query: { limit: 99 } });
 
   if (data) {
     if (data instanceof ResponseError && data.getStatus() == 404) {

@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { Variant as VariantType } from '@Types/product/Variant';
+import { Variant as VariantType } from '@commercetools/domain-types/product/Variant';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { discardRepeatedValues } from 'helpers/utils/discardRepeatedValues';
 

@@ -15,9 +15,9 @@ import {
 } from '@frontastic/extension-types';
 import { getLocale, getPath } from './utils/Request';
 import { ProductRouter } from './utils/ProductRouter';
-import { Product } from '../../types/product/Product';
+import { Product } from '@commercetools/domain-types/product/Product';
 import { SearchRouter } from './utils/SearchRouter';
-import { Result } from '../../types/product/Result';
+import { Result } from '@commercetools/domain-types/product/Result';
 import { CategoryRouter } from './utils/CategoryRouter';
 import { ProductApi } from './apis/ProductApi';
 import { ProductQueryFactory } from './utils/ProductQueryFactory';
@@ -28,16 +28,14 @@ export default {
     context: DynamicPageContext,
   ): Promise<DynamicPageSuccessResult | DynamicPageRedirectResult | null> => {
     // Identify static page
-    const staticPageMatch = getPath(request)?.match(/^\/(cart|checkout|wishlist|account|login|register|reset-password|thank-you)/);
+    const staticPageMatch = getPath(request)?.match(
+      /^\/(cart|checkout|wishlist|account|login|register|reset-password|thank-you)/,
+    );
     if (staticPageMatch) {
       return {
         dynamicPageType: `frontastic${staticPageMatch[0]}`,
-        dataSourcePayload: {
-
-        },
-        pageMatchingPayload: {
-
-        },
+        dataSourcePayload: {},
+        pageMatchingPayload: {},
       } as DynamicPageSuccessResult;
     }
 
@@ -160,14 +158,14 @@ export default {
           array[j] = temp;
         }
         return array;
-      }
+      };
 
       return await productApi.query(productQuery).then((queryResult) => {
-        return {          
+        return {
           dataSourcePayload: {
             ...queryResult,            
-            items: shuffleArray(queryResult.items)
-          }
+            items: shuffleArray(queryResult.items),
+          },
         };
       });
     },

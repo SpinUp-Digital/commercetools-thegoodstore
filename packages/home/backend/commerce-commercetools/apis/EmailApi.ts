@@ -1,5 +1,5 @@
 import * as nodemailer from 'nodemailer';
-import { Account } from '../../../types/account/Account';
+import { Account } from '@commercetools/domain-types/account/Account';
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
 
 export class EmailApi {
@@ -70,7 +70,7 @@ export class EmailApi {
   async sendVerificationEmail(account: Account, host: string) {
     if (!account.confirmationToken) return; //no valid confirmation token
     //Verification url
-    const url = this.getUrl(account.confirmationToken, 'verify', host);
+    const url = this.getUrl(account.confirmationToken.token, 'verify', host);
 
     //message content
     const html = `
