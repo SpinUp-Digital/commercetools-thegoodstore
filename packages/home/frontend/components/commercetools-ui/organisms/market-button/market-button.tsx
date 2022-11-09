@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ChevronDownIcon, CheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import Button from 'components/commercetools-ui/atoms/button';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { Market } from 'components/commercetools-ui/organisms/header/types';
 import FlagIcons from 'components/icons/flags';
@@ -32,12 +33,12 @@ const MarketButton: React.FC<Props> = ({ market: selectedMarket, markets, handle
   return (
     <div className="ml-10 hidden justify-center md:w-109 lg:flex lg:w-200 xl:w-300">
       {selectedMarket && (
-        <button onClick={showMarketMenu} className="flex items-center justify-center p-3 text-14">
+        <Button variant="ghost" onClick={showMarketMenu} className="flex items-center justify-center p-3 text-14">
           <FlagIcons flagName={selectedMarket?.flag} className="mr-8 text-14" />
           {selectedMarket?.region} | {selectedMarket?.currency}
           <span dangerouslySetInnerHTML={{ __html: selectedMarket?.currencyCode }} className="ml-5 mr-20" />
-          <ChevronDownIcon className=" h-11 w-11" />
-        </button>
+          <ChevronDownIcon className="h-11 w-11" />
+        </Button>
       )}
       {showMarket && (
         <div onClick={hideMarketMenu} className="fixed top-0 left-0 z-10 h-full w-full bg-black opacity-50" />
@@ -49,27 +50,30 @@ const MarketButton: React.FC<Props> = ({ market: selectedMarket, markets, handle
           showMarket ? 'left-0 translate-x-0' : '-translate-x-400'
         }`}
       >
-        <button
-          onClick={hideMarketMenu}
-          title={formatMarketMessage({ id: 'close', defaultMessage: 'Close' })}
-          className="flex w-full justify-end"
-        >
-          <XMarkIcon className="m-16 w-20" />
-        </button>
+        <div className="flex w-full justify-end">
+          <Button
+            variant="ghost"
+            onClick={hideMarketMenu}
+            title={formatMarketMessage({ id: 'close', defaultMessage: 'Close' })}
+          >
+            <XMarkIcon className="m-16 w-20" />
+          </Button>
+        </div>
         <Typography as="h5" fontSize={22} fontWeight="regular" className="px-26 pb-24 text-secondary-black">
           {formatMarketMessage({ id: 'select.market', defaultMessage: 'Select your market' })}
         </Typography>
         <>
           {markets.map((market) => (
-            <button
+            <Button
               key={market.flag}
+              variant="secondary"
               onClick={() => handleMarketClick(market)}
-              className="flex h-24 w-full items-center justify-start p-26"
+              className="flex w-full items-center justify-start"
             >
               {selectedMarket?.region === market?.region && <CheckIcon className="mr-11 w-20" />}
               <FlagIcons flagName={market.flag} className="mr-8 text-14" />
               {market.region}
-            </button>
+            </Button>
           ))}
         </>
       </div>

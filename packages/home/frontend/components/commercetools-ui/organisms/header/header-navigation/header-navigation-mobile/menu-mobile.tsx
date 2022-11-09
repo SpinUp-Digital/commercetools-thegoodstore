@@ -1,6 +1,7 @@
-import React, { Dispatch, FC, useMemo } from 'react';
+import React, { Dispatch, FC } from 'react';
 import { Category } from '@commercetools/domain-types/product/Category';
 import { ChevronRightIcon, ArrowLongLeftIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import Button from 'components/commercetools-ui/atoms/button';
 import Link from 'components/commercetools-ui/atoms/link';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { useFormat } from 'helpers/hooks/useFormat';
@@ -19,20 +20,22 @@ const MobileMenu: FC<Props> = ({ links, hideHeaderMenu, category, setCategory })
     <>
       <div className="w-fill flex h-83 justify-between bg-neutral-300">
         {category.length > 0 && (
-          <button
-            onClick={() => setCategory((array) => array.slice(0, -1))}
-            className="flex h-full w-full items-center justify-start"
-          >
-            <ArrowLongLeftIcon className="h-7.5 m-22 w-20 text-secondary-black" />
-          </button>
+          <div className="mx-10 flex h-full w-full items-center justify-start">
+            <Button size="icon" variant="ghost" onClick={() => setCategory((array) => array.slice(0, -1))}>
+              <ArrowLongLeftIcon className="w-20 text-secondary-black" />
+            </Button>
+          </div>
         )}
-        <button
-          onClick={hideHeaderMenu}
-          title={formatMessage({ id: 'close', defaultMessage: 'Close' })}
-          className="flex h-full w-full items-center justify-end"
-        >
-          <XMarkIcon className="my-22 mx-25 w-20 text-secondary-black" />
-        </button>
+        <div className="mx-15 flex h-full w-full items-center justify-end">
+          <Button
+            size="icon"
+            variant="ghost"
+            onClick={hideHeaderMenu}
+            title={formatMessage({ id: 'close', defaultMessage: 'Close' })}
+          >
+            <XMarkIcon className="w-20 text-secondary-black" />
+          </Button>
+        </div>
       </div>
       <>
         {category.length <= 0 ? (

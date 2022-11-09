@@ -24,9 +24,9 @@ const HeaderNavigationDesktop = ({
   hideSubMenu,
   market,
 }) => {
-  const scrollDirection = useScrollDirection(5, -3);
+  const scrollDirection = useScrollDirection(5, -1);
   const navigationClassNames = useClassNames([
-    'relative hidden items-center justify-center lg:flex transition-all duration-400',
+    'relative hidden items-center justify-center lg:flex transition-all duration-150',
     scrollDirection === 'down' ? 'h-0 opacity-0 pointer-events-none' : 'h-64 opacity-1 pointer-events-auto',
   ]);
 
