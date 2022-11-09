@@ -3,7 +3,7 @@ import { GetServerSideProps, Redirect } from 'next';
 import Head from 'next/head';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { createClient, ResponseError, LocaleStorage } from 'frontastic';
+import { createClient, ResponseError } from 'frontastic';
 import { FrontasticRenderer } from 'frontastic/lib/renderer';
 import { tastics } from 'frontastic/tastics';
 import { Log } from '../helpers/errorLogger';
@@ -19,8 +19,6 @@ type SlugProps = {
 };
 
 export default function Slug({ data, locale }: SlugProps) {
-  LocaleStorage.locale = locale;
-
   const { formatMessage } = useFormat({ name: 'common' });
 
   if (!data || typeof data === 'string') {
@@ -58,7 +56,7 @@ export default function Slug({ data, locale }: SlugProps) {
 }
 
 export const getServerSideProps: GetServerSideProps | Redirect = async ({ params, locale, query, req, res }) => {
-  LocaleStorage.locale = locale;
+  SDK.configure(locale);
 
   const extensions = SDK.getExtensions();
 

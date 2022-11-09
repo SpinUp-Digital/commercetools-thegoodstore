@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { fetchApiHub } from 'frontastic/lib/fetch-api-hub';
+import { useRouter } from 'next/router';
 
 type Character = {
   name: string;
@@ -25,12 +26,14 @@ type Props = {
 };
 
 const StarWarsCharacterSearch: React.FC<Props> = ({ data }) => {
+  const { locale } = useRouter();
+
   const [inputText, setInputText] = useState('');
   const [results, setResults] = useState(data);
   const resultLabels = ['Name', 'Mass', 'Height', 'Gender', 'Eye color', 'Hair color'];
 
   const handleSearchCharacter = () => {
-    fetchApiHub(`/action/star-wars/character?search=${inputText}`).then((data) => {
+    fetchApiHub(`/action/star-wars/character?search=${inputText}`, locale).then((data) => {
       setResults(data.data.allPeople.people);
     });
   };

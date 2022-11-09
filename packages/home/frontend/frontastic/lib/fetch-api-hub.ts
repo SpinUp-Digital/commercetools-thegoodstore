@@ -4,11 +4,7 @@ import ServerCookies from 'cookies';
 import { SESSION_PERSISTENCE } from 'helpers/constants/auth';
 import { REMEMBER_ME } from 'helpers/constants/localStorage';
 import { Log } from 'helpers/errorLogger';
-import { mapLanguage } from '../../project.config';
-
-export class LocaleStorage {
-  static locale: string = '';
-}
+import { mapLanguage } from 'project.config';
 
 export function resolveApiHubUrl(): string {
   if (process.env['NEXT_PUBLIC_FRONTASTIC_HOST'] === undefined) {
@@ -55,10 +51,16 @@ export class ResponseError extends Error {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type FetchFunction = (endpointPath: string, init?: RequestInit, payload?: object) => Promise<any>;
+export type FetchFunction = (
+  endpointPath: string,
+  locale: string,
+  init?: RequestInit,
+  payload?: object,
+) => Promise<any>;
 
 const performFetchApiHub = async (
   endpointPath: string,
+  locale: string,
   init: RequestInit,
   payload: object = null,
   cookieManager: CookieManager,
@@ -82,7 +84,7 @@ const performFetchApiHub = async (
       ...(init.headers || {}),
       'X-Frontastic-Access-Token': 'APIKEY',
       ...frontasticSessionHeaders,
-      'Frontastic-Locale': mapLanguage(LocaleStorage.locale),
+      'Frontastic-Locale': mapLanguage(locale),
     },
   };
 
@@ -96,8 +98,8 @@ const performFetchApiHub = async (
   });
 };
 
-export const rawFetchApiHub: FetchFunction = async (endpointPath, init = {}, payload = null) => {
-  return await performFetchApiHub(endpointPath, init, payload, {
+export const rawFetchApiHub: FetchFunction = async (endpointPath, locale: string, init = {}, payload = null) => {
+  return await performFetchApiHub(endpointPath, locale, init, payload, {
     getCookie: (cookieIdenfier) => {
       return cookieCutter.get(cookieIdenfier);
     },
@@ -144,17 +146,18 @@ export const handleApiHubResponse = (fetchApiHubPromise: Promise<Response | Resp
     });
 };
 
-export const fetchApiHub: FetchFunction = async (endpointPath, init = {}, payload = null) => {
-  return handleApiHubResponse(rawFetchApiHub(endpointPath, init, payload));
+export const fetchApiHub: FetchFunction = async (endpointPath, locale: string, init = {}, payload = null) => {
+  return handleApiHubResponse(rawFetchApiHub(endpointPath, locale, init, payload));
 };
 
 export const rawFetchApiHubServerSide = async (
   endpointPath: string,
+  locale: string,
   expressMessages: ExpressMessages,
   headers: HeadersInit = [],
 ) => {
   const cookies = new ServerCookies(expressMessages.req, expressMessages.res);
-  return await performFetchApiHub(endpointPath, { headers }, null, {
+  return await performFetchApiHub(endpointPath, locale, { headers }, null, {
     getCookie: (cookieIdentifier) => {
       return cookies.get(cookieIdentifier);
     },
@@ -166,8 +169,9 @@ export const rawFetchApiHubServerSide = async (
 
 export const fetchApiHubServerSide = async (
   endpointPath: string,
+  locale: string,
   expressMessages: ExpressMessages,
   headers: HeadersInit = [],
 ) => {
-  return handleApiHubResponse(rawFetchApiHubServerSide(endpointPath, expressMessages, headers));
+  return handleApiHubResponse(rawFetchApiHubServerSide(endpointPath, locale, expressMessages, headers));
 };

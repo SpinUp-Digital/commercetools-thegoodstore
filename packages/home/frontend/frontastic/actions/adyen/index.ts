@@ -1,7 +1,7 @@
 import { mutate } from 'swr';
 import { fetchApiHub } from 'frontastic';
 
-export const createSession = async (value: number, currency: string, returnUrl: string) => {
+export const createSession = async (value: number, currency: string, returnUrl: string, locale: string) => {
   const payload = {
     amount: {
       value: value,
@@ -10,12 +10,12 @@ export const createSession = async (value: number, currency: string, returnUrl: 
     returnUrl,
   };
 
-  const res = await fetchApiHub('/action/adyen/createSession', { method: 'POST' }, payload);
+  const res = await fetchApiHub('/action/adyen/createSession', locale, { method: 'POST' }, payload);
   await mutate('/action/adyen/createSession', res);
   return res;
 };
 
-export const adyenCheckout = async (sessionId: string, redirectResult: string): Promise<void> => {
+export const adyenCheckout = async (sessionId: string, redirectResult: string, locale: string): Promise<void> => {
   const payload = {
     sessionId: sessionId,
     redirectResult: redirectResult,
@@ -23,6 +23,7 @@ export const adyenCheckout = async (sessionId: string, redirectResult: string): 
 
   const res = await fetchApiHub(
     '/action/adyen/checkout',
+    locale,
     {
       headers: {
         accept: 'application/json',

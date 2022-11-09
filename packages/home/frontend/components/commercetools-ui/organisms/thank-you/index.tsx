@@ -14,8 +14,8 @@ const ThankYou = () => {
   useEffect(() => {
     const { sessionId, redirectResult } = router.query;
 
-    adyenCheckout(sessionId, redirectResult);
-  }, []);
+    adyenCheckout(sessionId, redirectResult, router.locale);
+  }, [router.query, router.locale]);
 
   return (
     <main className="relative lg:min-h-full">
