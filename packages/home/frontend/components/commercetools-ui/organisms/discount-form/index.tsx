@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Discount } from '@commercetools/domain-types/cart/Discount';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { useFormat } from 'helpers/hooks/useFormat';
+import useClassNames from 'helpers/hooks/useClassNames';
 import { useCart } from 'frontastic/provider';
 
 export interface Props {
@@ -22,19 +23,26 @@ const DiscountForm: React.FC<Props> = ({ className }) => {
     setDiscounts(data.discountCodes);
   }, [data]);
 
+  const inputClassName = useClassNames([
+    'h-40 w-full rounded-sm px-10 py-12 text-14 placeholder:text-secondary-black disabled:bg-neutral-300',
+    codeIsInvalid ? 'border-accent-red text-accent-red' : 'border-neutral-300',
+  ]);
+
+  const discountsContainerClassName = useClassNames([
+    'mt-8 flex flex-wrap justify-items-start gap-12',
+    discounts?.length === 0 ? 'pt-0' : 'pt-4',
+  ]);
+
   const onApplyDiscount = () => {
     if (processing || !code) return;
 
     setProcessing(true);
 
     redeemDiscountCode(code)
-      .catch((e: Error) => {
-        if ((e.message = '101')) {
-          setCodeIsInvalid(true);
-        }
-      })
+      .catch(() => setCodeIsInvalid(true))
       .finally(() => {
         setProcessing(false);
+        if (!codeIsInvalid) setCode('');
       });
   };
 
@@ -53,7 +61,7 @@ const DiscountForm: React.FC<Props> = ({ className }) => {
   };
 
   return (
-    <div className={`${className}`}>
+    <div className={className}>
       <div className="w-full">
         <p className="text-16 font-semibold">
           {formatCartMessage({ id: 'discount.apply', defaultMessage: 'Apply a discount' })}
@@ -63,9 +71,7 @@ const DiscountForm: React.FC<Props> = ({ className }) => {
         <div>
           <form className="mt-16" onSubmit={handleSubmit}>
             <input
-              className={`h-40 w-full rounded-sm ${
-                codeIsInvalid ? 'border-accent-red text-accent-red' : 'border-neutral-300'
-              } px-10 py-12 text-14 placeholder:text-secondary-black disabled:bg-neutral-300`}
+              className={inputClassName}
               type="text"
               value={code}
               placeholder={formatCartMessage({
@@ -81,23 +87,10 @@ const DiscountForm: React.FC<Props> = ({ className }) => {
               </p>
             )}
           </form>
-          {/* <button
-            type="button"
-            onClick={onApplyDiscount}
-            disabled={code === '' ? true : false}
-            className="border-accent-400 text-accent-400 hover:bg-accent-400 w-24 cursor-pointer content-center rounded border-2 bg-white p-2 font-bold hover:text-white focus:outline-none disabled:cursor-not-allowed disabled:border-none disabled:bg-gray-300 disabled:text-gray-500"
-          >
-            {formatCartMessage({
-              id: 'cart.apply',
-              defaultMessage: 'Apply',
-            })}
-          </button> */}
         </div>
 
-        {!!discounts.length && (
-          <div
-            className={`mt-8 flex flex-wrap justify-items-start gap-12 ${discounts?.length === 0 ? 'pt-0' : 'pt-4'}`}
-          >
+        {discounts && !!discounts.length && (
+          <div className={discountsContainerClassName}>
             {discounts.map((discount) => (
               <div
                 key={discount.discountId}
