@@ -54,6 +54,7 @@ export const getRouteData =
 
     const data: RedirectResponse | PageDataResponse = (await fetchApiHubServerSide(
       endpoint,
+      locale,
       {
         req: nextJsReq,
         res: nextJsRes,
@@ -76,7 +77,7 @@ export const getPreview =
   ): Promise<PagePreviewDataResponse> => {
     const endpoint = `/preview?previewId=${previewId}&locale=${locale}`;
 
-    const data: PagePreviewDataResponse = (await fetchApiHubServerSide(endpoint, {
+    const data: PagePreviewDataResponse = (await fetchApiHubServerSide(endpoint, locale, {
       req: nextJsReq,
       res: nextJsRes,
     })) as PagePreviewDataResponse;
@@ -102,6 +103,7 @@ export const getCategories =
 
     const data = (await fetchApiHubServerSide(
       endpoint,
+      locale,
       {
         req: nextJsReq,
         res: nextJsRes,

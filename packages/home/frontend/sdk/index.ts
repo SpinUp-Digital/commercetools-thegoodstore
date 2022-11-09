@@ -1,20 +1,22 @@
 import { sdk } from '@commercetools/sdk';
 import { ComposableCommerce } from '@commercetools/composable-commerce';
 import { mapSDKLanguage } from 'project.config';
-import { LocaleStorage, resolveApiHubUrl } from 'frontastic';
+import { resolveApiHubUrl } from 'frontastic';
 
 export class SDK {
-  static configureSDK() {
+  private static extensions: ComposableCommerce;
+
+  static configure(locale: string) {
     sdk.configure({
-      locale: mapSDKLanguage(LocaleStorage.locale),
+      locale: mapSDKLanguage(locale),
       currency: 'EUR',
       endpoint: resolveApiHubUrl().split('/frontastic')[0],
     });
+
+    this.extensions = new ComposableCommerce(sdk);
   }
 
   static getExtensions() {
-    this.configureSDK();
-
-    return new ComposableCommerce(sdk);
+    return this.extensions;
   }
 }
