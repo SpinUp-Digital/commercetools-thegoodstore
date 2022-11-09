@@ -23,13 +23,13 @@ const HeaderDropdownTile: FC<Props> = ({ title, image, buttonLabel, buttonLink, 
         as="h3"
         align="center"
         fontWeight="bold"
-        className="absolute top-83 left-1/2 h-35 w-full -translate-x-1/2 -translate-y-1/2 text-28 text-white drop-shadow-xl"
+        className="absolute top-83 left-1/2 h-35 w-full -translate-x-1/2 -translate-y-1/2 text-28 uppercase text-white drop-shadow-xl"
       >
         {title}
       </Typography>
       <Link
         link={buttonLink}
-        className="absolute top-144 left-1/2 -translate-x-1/2 -translate-y-1/2 border-b-2 text-24 text-white drop-shadow-xl"
+        className="absolute top-144 left-1/2 -translate-x-1/2 -translate-y-1/2 border-b-2 text-24 uppercase text-white drop-shadow-xl"
       >
         {buttonLabel}
       </Link>
