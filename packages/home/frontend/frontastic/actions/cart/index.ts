@@ -115,9 +115,6 @@ export const redeemDiscountCode = async (code: string) => {
 export const removeDiscountCode = async (discount: Discount) => {
   const extensions = SDK.getExtensions();
 
-  const payload = {
-    code: discount.discountId,
-  };
-  const res = await extensions.redeemDiscountCode(payload);
+  const res = await extensions.removeDiscountCode({ discountId: discount.discountId });
   mutate('/action/cart/getCart', res);
 };
