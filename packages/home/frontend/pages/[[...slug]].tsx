@@ -3,10 +3,11 @@ import { GetServerSideProps, Redirect } from 'next';
 import Head from 'next/head';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { createClient, ResponseError, LocaleStorage, getExtensions } from 'frontastic';
+import { createClient, ResponseError, LocaleStorage } from 'frontastic';
 import { FrontasticRenderer } from 'frontastic/lib/renderer';
 import { tastics } from 'frontastic/tastics';
 import { Log } from '../helpers/errorLogger';
+import { SDK } from 'sdk';
 import styles from './slug.module.css';
 
 type SlugProps = {
@@ -59,7 +60,7 @@ export default function Slug({ data, locale }: SlugProps) {
 export const getServerSideProps: GetServerSideProps | Redirect = async ({ params, locale, query, req, res }) => {
   LocaleStorage.locale = locale;
 
-  const extensions = getExtensions();
+  const extensions = SDK.getExtensions();
 
   const frontastic = createClient();
   const data = await frontastic.getRouteData(params, locale, query, req, res);
