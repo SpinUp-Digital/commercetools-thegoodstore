@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Account } from '@commercetools/domain-types/account/Account';
-import { UserIcon, HeartIcon, ShoppingBagIcon } from '@heroicons/react/24/outline';
+import { UserIcon, HeartIcon } from '@heroicons/react/24/outline';
+import CartIcon from 'components/icons/cart';
 import Link from 'components/commercetools-ui/atoms/link';
 import Slideout, { State as MenuState } from 'components/commercetools-ui/atoms/slide-out';
 import { useFormat } from 'helpers/hooks/useFormat';
@@ -26,7 +27,7 @@ const UtilitySection: React.FC<Props> = ({ accountLink, wishlistItemCount }) => 
 
   return (
     <div className="flex h-30 w-109 items-center justify-between lg:mr-12 lg:w-200 xl:w-300">
-      <div className="flex w-full  justify-center lg:w-210">
+      <div className="flex w-full justify-center lg:w-210">
         <Link
           title={formatAccountMessage({ id: 'account', defaultMessage: 'Account' })}
           link={accountLink}
@@ -49,14 +50,7 @@ const UtilitySection: React.FC<Props> = ({ accountLink, wishlistItemCount }) => 
           className="relative mx-5 cursor-pointer lg:mx-10"
           onClick={() => setMenuState('cart')}
         >
-          {totalCartItems > 0 && <span className="absolute -top-5 -right-4 h-8 w-8 rounded-full bg-green-500" />}
-
-          {totalCartItems > 0 && (
-            <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-10">
-              {totalCartItems}
-            </span>
-          )}
-          <ShoppingBagIcon className="w-25 text-secondary-black" />
+          <CartIcon className="w-25" totalCartItems={totalCartItems} />
         </div>
       </div>
 
