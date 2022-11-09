@@ -3,7 +3,8 @@ import { Address } from '@commercetools/domain-types/account/Address';
 import { Cart } from '@commercetools/domain-types/cart/Cart';
 import { Discount } from '@commercetools/domain-types/cart/Discount';
 import { Variant } from '@commercetools/domain-types/product/Variant';
-import { fetchApiHub, revalidateOptions, getExtensions } from 'frontastic';
+import { fetchApiHub, revalidateOptions } from 'frontastic';
+import { SDK } from 'sdk';
 
 export type CartDetails = {
   account?: { email: string };
@@ -12,13 +13,13 @@ export type CartDetails = {
 };
 
 export const cartItems = () => {
-  const extensions = getExtensions();
+  const extensions = SDK.getExtensions();
 
   return useSWR('/action/cart/getCart', extensions.getCart, revalidateOptions);
 };
 
 export const addItem = async (variant: Variant, quantity: number) => {
-  const extensions = getExtensions();
+  const extensions = SDK.getExtensions();
 
   const payload = {
     variant: {
@@ -32,26 +33,26 @@ export const addItem = async (variant: Variant, quantity: number) => {
 };
 
 export const orderCart = async () => {
-  const extensions = getExtensions();
+  const extensions = SDK.getExtensions();
 
   const res = await extensions.checkoutCart();
   mutate('/action/cart/getCart', res);
 };
 
 export const orderHistory = async () => {
-  const extensions = getExtensions();
+  const extensions = SDK.getExtensions();
 
   return await extensions.getOrderHistory();
 };
 
 export const getProjectSettings = async () => {
-  const extensions = getExtensions();
+  const extensions = SDK.getExtensions();
 
   return await extensions.getProjectSettings();
 };
 
 export const removeItem = async (lineItemId: string) => {
-  const extensions = getExtensions();
+  const extensions = SDK.getExtensions();
 
   const payload = {
     lineItem: { id: lineItemId },
@@ -62,13 +63,13 @@ export const removeItem = async (lineItemId: string) => {
 };
 
 export const shippingMethods = () => {
-  const extensions = getExtensions();
+  const extensions = SDK.getExtensions();
 
   return useSWR('/action/cart/getShippingMethods', extensions.getShippingMethods, revalidateOptions);
 };
 
 export const updateItem = async (lineItemId: string, newQuantity: number) => {
-  const extensions = getExtensions();
+  const extensions = SDK.getExtensions();
 
   const payload = {
     lineItem: {
@@ -81,7 +82,7 @@ export const updateItem = async (lineItemId: string, newQuantity: number) => {
 };
 
 export const updateCart = async (payload: CartDetails): Promise<Cart> => {
-  const extensions = getExtensions();
+  const extensions = SDK.getExtensions();
 
   const res = await extensions.updateCart(payload);
   mutate('/action/cart/getCart', res);
@@ -89,7 +90,7 @@ export const updateCart = async (payload: CartDetails): Promise<Cart> => {
 };
 
 export const setShippingMethod = async (shippingMethodId: string) => {
-  const extensions = getExtensions();
+  const extensions = SDK.getExtensions();
 
   const payload = {
     shippingMethod: {
@@ -102,7 +103,7 @@ export const setShippingMethod = async (shippingMethodId: string) => {
 };
 
 export const redeemDiscountCode = async (code: string) => {
-  const extensions = getExtensions();
+  const extensions = SDK.getExtensions();
 
   const payload = {
     code: code,
@@ -112,7 +113,7 @@ export const redeemDiscountCode = async (code: string) => {
 };
 
 export const removeDiscountCode = async (discount: Discount) => {
-  const extensions = getExtensions();
+  const extensions = SDK.getExtensions();
 
   const payload = {
     code: discount.discountId,
