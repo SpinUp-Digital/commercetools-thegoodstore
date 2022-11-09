@@ -26,8 +26,8 @@ const useButtonClassNames: UseButtonClassNames = ({ variant, size, className, in
   const secondaryClassName = useClassNames([
     'bg-white-100 text-gray-700 bg-white',
     'hover:shadow-inset',
-    'active:outline-2 active:shadow-button active:outline-1 outline-gray-300 outline-offset-0',
-    'focus-visible:outline border-white-100 focus-visible:border focus-visible:outline-offset-[3px]',
+    'active:outline-2 active:shadow-button active:outline-1 active:outline-gray-300 active:outline-offset-0',
+    'focus-visible:outline focus-visible:border-white-100 focus-visible:border focus-visible:outline-offset-[3px]',
     'disabled:text-neutral-100 disabled:bg-neutral-400',
   ]);
 
