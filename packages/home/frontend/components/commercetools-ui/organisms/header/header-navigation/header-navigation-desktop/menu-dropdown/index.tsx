@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Category } from '@commercetools/domain-types/product/Category';
 import Link from 'components/commercetools-ui/atoms/link';
 import Typography from 'components/commercetools-ui/atoms/typography';
@@ -15,6 +15,7 @@ export interface Props {
 
 const MenuDropdown: FC<Props> = ({ links, tileContent, market, onClick }) => {
   const wrapperClassNames = useClassNames([
+    'animate-[appear_1s_ease-in-out]',
     'absolute bottom-0 left-0 z-20 flex h-fit w-full translate-y-full',
     tileContent ? 'justify-between' : 'justify-center',
     'border-b-[1.5px] border-t-[1.5px] border-b-secondary-grey border-t-neutral-400 bg-white px-50 py-34 xl:pl-143 xl:pr-195',

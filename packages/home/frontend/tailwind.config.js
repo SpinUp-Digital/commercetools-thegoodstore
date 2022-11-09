@@ -10,6 +10,22 @@ module.exports = {
   safelist: [{ pattern: /bg-(.+)/ }],
   theme: {
     extend: {
+      keyframes: {
+        appear: {
+          '0%': {
+            opacity: 0,
+          },
+          '50%': {
+            opacity: 0,
+          },
+          '100%': {
+            opacity: 1,
+          },
+        },
+      },
+      animation: {
+        appear: 'appear 1s ease-in-out',
+      },
       fontFamily: {
         body: 'Inter, sans-serif',
         heading: 'Libre Baskerville, serif',
@@ -51,7 +67,7 @@ module.exports = {
         400: '0px 16px 16px rgba(25, 40, 81, 0.05)',
         dark: '0px 1px 6px rgba(0, 0, 0, 0.25)',
         button: '1px 1px 1px rgba(0, 0, 0, 0.15), -1px -1px 1px rgba(25, 40, 81, 0.15)',
-        inset:  'inset 0px 30px 16px rgba(127, 127, 127, 0.2)',
+        inset: 'inset 0px 30px 16px rgba(127, 127, 127, 0.2)',
       },
       colors: {
         primary: {
@@ -66,6 +82,7 @@ module.exports = {
           red: '#D14253',
         },
         gray: {
+          400: '#7F7F7F',
           500: '#767676',
           700: '#1A1A1A',
         },

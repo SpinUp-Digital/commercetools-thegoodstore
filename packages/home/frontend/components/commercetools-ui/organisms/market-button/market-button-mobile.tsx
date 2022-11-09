@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
+import Button from 'components/commercetools-ui/atoms/button';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import FlagIcons from 'components/icons/flags';
 import useClassNames from 'helpers/hooks/useClassNames';
@@ -68,13 +69,15 @@ const MarketButtonMobile: React.FC<Props> = ({ market: selectedMarket, markets, 
                     {markets.map((market, index) => (
                       <Menu.Item key={index}>
                         <div className="overflow-y-scroll">
-                          <button
+                          <Button
+                            variant="secondary"
+                            size="full"
                             onClick={() => handleMarketClick(market)}
-                            className="flex h-24 w-full items-center justify-start p-26"
+                            className="flex w-full items-center justify-start px-10"
                           >
                             <FlagIcons flagName={market.flag} className="mr-8" />
                             <span className="mb-1 text-14 font-medium text-secondary-black">{market.region}</span>
-                          </button>
+                          </Button>
                         </div>
                       </Menu.Item>
                     ))}
