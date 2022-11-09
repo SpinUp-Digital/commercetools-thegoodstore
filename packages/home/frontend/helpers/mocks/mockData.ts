@@ -1,5 +1,5 @@
-import { Link } from 'components/commercetools-ui/organisms/footer/column';
 import { Account } from '@commercetools/domain-types/account/Account';
+import { AccountToken } from '@commercetools/domain-types/account/AccountToken';
 import { Address } from '@commercetools/domain-types/account/Address';
 import { Group } from '@commercetools/domain-types/account/Group';
 import { Cart } from '@commercetools/domain-types/cart/Cart';
@@ -158,6 +158,10 @@ export const wishlist: Wishlist = {
   lineItems: lineItems,
 };
 
+export const accountToken: AccountToken = {
+  token: 'token',
+};
+
 export const addresses: Address[] = [
   {
     addressId: 'adrs-1',
@@ -192,7 +196,7 @@ export const account: Account = {
   password: '123456789',
   birthday: new Date('1995, 11, 17'),
   apiToken: 'token',
-  confirmationToken: { token: 'token' },
+  confirmationToken: accountToken,
   confirmed: true,
   salutation: 'Salutations',
   groups: groups,

@@ -1,20 +1,16 @@
-import { Request, Response } from '@frontastic/extension-types';
-import { ActionContext } from '@frontastic/extension-types';
+import { Request, Response, ActionContext } from '@frontastic/extension-types';
 import { Cart } from '@commercetools/domain-types/cart/Cart';
 import { LineItem } from '@commercetools/domain-types/cart/LineItem';
+import { Discount } from '@commercetools/domain-types/cart/Discount';
 import { Address } from '@commercetools/domain-types/account/Address';
 import { CartFetcher } from '../utils/CartFetcher';
 import { ShippingMethod } from '@commercetools/domain-types/cart/ShippingMethod';
 import { Payment, PaymentStatuses } from '@commercetools/domain-types/cart/Payment';
 import { CartApi } from '../apis/CartApi';
 import { getLocale } from '../utils/Request';
-import { Discount } from '@commercetools/domain-types/cart/Discount';
-import { EmailApi } from '../apis/EmailApi';
-
-type ControllerResponse = Response & {
-  error?: string;
-  errorCode?: number;
-};
+import { EmailApiFactory } from '../utils/EmailApiFactory';
+import { AccountAuthenticationError } from '../errors/AccountAuthenticationError';
+import { CartRedeemDiscountCodeError } from '../errors/CartRedeemDiscountCodeError';
 
 type ActionHook = (request: Request, actionContext: ActionContext) => Promise<Response>;
 
@@ -169,14 +165,15 @@ export const updateCart: ActionHook = async (request: Request, actionContext: Ac
 };
 
 export const checkout: ActionHook = async (request: Request, actionContext: ActionContext) => {
-  const cartApi = new CartApi(actionContext.frontasticContext, getLocale(request));
-  const emailApi = new EmailApi(actionContext.frontasticContext.project.configuration.smtp);
+  const locale = getLocale(request);
 
-  const { account } = JSON.parse(request.body);
+  const cartApi = new CartApi(actionContext.frontasticContext, locale);
+  const emailApi = EmailApiFactory.getDefaultApi(actionContext.frontasticContext, locale);
 
-  let cart = await updateCartFromRequest(request, actionContext);
-  cart = await cartApi.order(cart);
-  if (cart) await emailApi.sendPaymentConfirmationEmail(account.email);
+  const cart = await updateCartFromRequest(request, actionContext);
+  const order = await cartApi.order(cart);
+
+  emailApi.sendOrderConfirmationEmail({ ...order, email: order.email || cart.email });
 
   // Unset the cartId
   const cartId: string = undefined;
@@ -199,7 +196,7 @@ export const getOrders: ActionHook = async (request: Request, actionContext: Act
   const account = request.sessionData?.account !== undefined ? request.sessionData.account : undefined;
 
   if (account === undefined) {
-    throw new Error('Not logged in.');
+    throw new AccountAuthenticationError({ message: 'Not logged in.' });
   }
 
   const orders = await cartApi.getOrders(account);
@@ -216,7 +213,6 @@ export const getOrders: ActionHook = async (request: Request, actionContext: Act
 
 export const getShippingMethods: ActionHook = async (request: Request, actionContext: ActionContext) => {
   const cartApi = new CartApi(actionContext.frontasticContext, getLocale(request));
-  const cart = await CartFetcher.fetchCart(request, actionContext);
   const onlyMatching = request.query.onlyMatching === 'true';
 
   const shippingMethods = await cartApi.getShippingMethods(onlyMatching);
@@ -226,7 +222,6 @@ export const getShippingMethods: ActionHook = async (request: Request, actionCon
     body: JSON.stringify(shippingMethods),
     sessionData: {
       ...request.sessionData,
-      cartId: cart.cartId,
     },
   };
 
@@ -255,8 +250,12 @@ export const setShippingMethod: ActionHook = async (request: Request, actionCont
   const cartApi = new CartApi(actionContext.frontasticContext, getLocale(request));
   let cart = await CartFetcher.fetchCart(request, actionContext);
 
+  const body: {
+    shippingMethod?: { id?: string };
+  } = JSON.parse(request.body);
+
   const shippingMethod: ShippingMethod = {
-    shippingMethodId: request.query.shippingMethodId,
+    shippingMethodId: body.shippingMethod?.id,
   };
 
   cart = await cartApi.setShippingMethod(cart, shippingMethod);
@@ -309,6 +308,31 @@ export const addPaymentByInvoice: ActionHook = async (request: Request, actionCo
   return response;
 };
 
+/*
+export const getPayment: ActionHook = async (request: Request, actionContext: ActionContext) => {
+  const cartApi = new CartApi(actionContext.frontasticContext, getLocale(request));
+
+  const id = 'fd9b52ff-204b-4986-b13d-b25f53ac3343';
+
+  const amount: any = {
+    centAmount: 1000,
+    currencyCode: 'EUR'
+  };
+
+  let payment = await cartApi.getPayment(id);
+
+  payment = await cartApi.updateOrderPayment(id, payment.body.version, PaymentStatuses.PENDING, 'Payment method', amount);
+
+  const response: Response = {
+    statusCode: 200,
+    body: JSON.stringify(payment),
+    sessionData: request.sessionData,
+  };
+
+  return response;
+}
+*/
+
 export const updatePayment: ActionHook = async (request: Request, actionContext: ActionContext) => {
   const cartApi = new CartApi(actionContext.frontasticContext, getLocale(request));
   const cart = await CartFetcher.fetchCart(request, actionContext);
@@ -333,33 +357,40 @@ export const updatePayment: ActionHook = async (request: Request, actionContext:
 
 export const redeemDiscount: ActionHook = async (request: Request, actionContext: ActionContext) => {
   const cartApi = new CartApi(actionContext.frontasticContext, getLocale(request));
-  const cart = await CartFetcher.fetchCart(request, actionContext);
+  let cart = await CartFetcher.fetchCart(request, actionContext);
 
   const body: {
     code?: string;
   } = JSON.parse(request.body);
 
-  const result = await cartApi.redeemDiscountCode(cart, body.code);
+  let response: Response;
 
-  let response: ControllerResponse;
+  try {
+    cart = await cartApi.redeemDiscountCode(cart, body.code);
 
-  if (result.data) {
     response = {
       statusCode: 200,
-      body: JSON.stringify(result.data),
+      body: JSON.stringify(cart),
       sessionData: {
         ...request.sessionData,
-        cartId: result.data.cartId,
+        cartId: cart.cartId,
       },
     };
-  }
+  } catch (error) {
+    if (error instanceof CartRedeemDiscountCodeError) {
+      response = {
+        statusCode: error.status,
+        body: JSON.stringify(error.message),
+        sessionData: {
+          ...request.sessionData,
+          cartId: cart.cartId,
+        },
+      };
 
-  if (result.error) {
-    response = {
-      statusCode: result.statusCode,
-      errorCode: 101,
-      error: result.error,
-    };
+      return response;
+    }
+
+    throw error;
   }
 
   return response;

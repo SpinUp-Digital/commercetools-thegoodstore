@@ -53,6 +53,8 @@ export const login = async (email: string, password: string, remember?: boolean)
   if (remember) window.localStorage.setItem(REMEMBER_ME, '1');
   const res = await extensions.login(payload);
   await mutate('/action/account/getAccount', res);
+  await mutate('/action/cart/getCart');
+  await mutate('/action/wishlist/getWishlist');
   return res;
 };
 
@@ -62,14 +64,15 @@ export const logout = async () => {
   window.localStorage.removeItem(REMEMBER_ME);
   const res = await extensions.logout();
   await mutate('/action/account/getAccount', res);
+  await mutate('/action/cart/getCart');
+  await mutate('/action/wishlist/getWishlist');
+  return res;
 };
 
 export const register = async (account: RegisterAccount): Promise<Account> => {
   const extensions = getExtensions();
 
-  const host = typeof window !== 'undefined' ? window.location.origin : '';
-  const acc = { ...account, host };
-  return await extensions.registerAccount({ account: acc });
+  return await extensions.registerAccount({ account: account });
 };
 
 export const confirm = async (token: string): Promise<Account> => {
@@ -80,18 +83,14 @@ export const confirm = async (token: string): Promise<Account> => {
   return res;
 };
 
-export const resendVerificationEmail = async (email: string, password: string): Promise<void> => {
+export const requestConfirmationEmail = async (email: string, password: string): Promise<void> => {
   const extensions = getExtensions();
-
-  const host = typeof window !== 'undefined' ? window.location.origin : '';
 
   const payload = {
     email,
     password,
-    host,
   };
-  const res = await extensions.requestAccountConfirmationEmail(payload);
-  return res;
+  return await extensions.requestAccountConfirmationEmail(payload);
 };
 
 export const changePassword = async (token: string, newPassword: string): Promise<Account> => {
@@ -103,11 +102,8 @@ export const changePassword = async (token: string, newPassword: string): Promis
 export const requestPasswordReset = async (email: string): Promise<void> => {
   const extensions = getExtensions();
 
-  const host = typeof window !== 'undefined' ? window.location.origin : '';
-
   const payload = {
     email,
-    host,
   };
 
   return await extensions.requestResetAccountPassword(payload);

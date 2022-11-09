@@ -1,10 +1,10 @@
 import { BaseApi } from './BaseApi';
 import { Account } from '@commercetools/domain-types/account/Account';
+import { AccountToken } from '@commercetools/domain-types/account/AccountToken';
 import {
   CustomerDraft,
   CustomerUpdate,
   CustomerUpdateAction,
-  CustomerToken,
 } from '@commercetools/platform-sdk/dist/declarations/src/generated/models/customer';
 import { AccountMapper } from '../mappers/AccontMapper';
 import { BaseAddress } from '@commercetools/platform-sdk/dist/declarations/src/generated/models/common';
@@ -12,181 +12,153 @@ import { Cart } from '@commercetools/domain-types/cart/Cart';
 import { CartResourceIdentifier } from '@commercetools/platform-sdk/dist/declarations/src/generated/models/cart';
 import { Address } from '@commercetools/domain-types/account/Address';
 import { Guid } from '../utils/Guid';
-import { PasswordResetToken } from '@commercetools/domain-types/account/PasswordResetToken';
+import { ExternalError, ValidationError } from '../utils/Errors';
+import { AccountEmailDuplicatedError } from '../errors/AccountEmailDuplicatedError';
+import { AccountAuthenticationError } from '../errors/AccountAuthenticationError';
 
 export class AccountApi extends BaseApi {
   create: (account: Account, cart: Cart | undefined) => Promise<Account> = async (
     account: Account,
     cart: Cart | undefined,
   ) => {
-    try {
-      const locale = await this.getCommercetoolsLocal();
+    const locale = await this.getCommercetoolsLocal();
 
-      const {
-        commercetoolsAddresses,
-        billingAddresses,
-        shippingAddresses,
-        defaultBillingAddress,
-        defaultShippingAddress,
-      } = this.extractAddresses(account);
+    const {
+      commercetoolsAddresses,
+      billingAddresses,
+      shippingAddresses,
+      defaultBillingAddress,
+      defaultShippingAddress,
+    } = this.extractAddresses(account);
 
-      const customerDraft: CustomerDraft = {
-        email: account.email,
-        password: account.password,
-        salutation: account?.salutation,
-        firstName: account?.firstName,
-        lastName: account?.lastName,
-        dateOfBirth: account?.birthday
-          ? account.birthday.getFullYear() + '-' + account.birthday.getMonth() + '-' + account.birthday.getDate()
+    const customerDraft: CustomerDraft = {
+      email: account.email,
+      password: account.password,
+      salutation: account?.salutation,
+      firstName: account?.firstName,
+      lastName: account?.lastName,
+      dateOfBirth: account?.birthday
+        ? account.birthday.getFullYear() + '-' + account.birthday.getMonth() + '-' + account.birthday.getDate()
+        : undefined,
+      isEmailVerified: account?.confirmed,
+      addresses: commercetoolsAddresses.length > 0 ? commercetoolsAddresses : undefined,
+      defaultBillingAddress: defaultBillingAddress,
+      defaultShippingAddress: defaultShippingAddress,
+      billingAddresses: billingAddresses.length > 0 ? billingAddresses : undefined,
+      shippingAddresses: shippingAddresses.length > 0 ? shippingAddresses : undefined,
+      anonymousCart:
+        cart !== undefined
+          ? ({
+              typeId: 'cart',
+              id: cart.cartId,
+            } as CartResourceIdentifier)
           : undefined,
-        isEmailVerified: account?.confirmed,
-        addresses: commercetoolsAddresses.length > 0 ? commercetoolsAddresses : undefined,
-        defaultBillingAddress: defaultBillingAddress,
-        defaultShippingAddress: defaultShippingAddress,
-        billingAddresses: billingAddresses.length > 0 ? billingAddresses : undefined,
-        shippingAddresses: shippingAddresses.length > 0 ? shippingAddresses : undefined,
-        anonymousCart:
-          cart !== undefined
-            ? ({
-                typeId: 'cart',
-                id: cart.cartId,
-              } as CartResourceIdentifier)
-            : undefined,
-      };
+    };
 
-      account = await this.getApiForProject()
-        .customers()
-        .post({
-          body: customerDraft,
-        })
-        .execute()
-        .then((response) => {
-          return AccountMapper.commercetoolsCustomerToAccount(response.body.customer, locale);
-        })
-        .catch((error) => {
-          if (error.code && error.code === 400) {
-            if (error.body && error.body?.errors?.[0]?.code === 'DuplicateField') {
-              throw new Error(`The account ${account.email} does already exist.`);
-            }
-
-            /*
-             * The cart might already belong to another user, so we try to create tje account without the cart.
-             */
-            if (cart) {
-              return this.create(account, undefined);
-            }
+    account = await this.getApiForProject()
+      .customers()
+      .post({
+        body: customerDraft,
+      })
+      .execute()
+      .then((response) => {
+        return AccountMapper.commercetoolsCustomerToAccount(response.body.customer, locale);
+      })
+      .catch((error) => {
+        if (error.code === 400) {
+          if (error.body?.errors?.[0]?.code === 'DuplicateField') {
+            throw new AccountEmailDuplicatedError({
+              message: `The account ${account.email} does already exist. ${error.message}`,
+            });
           }
 
-          throw error;
-        });
+          /*
+           * The cart might already belong to another user, so we try to create tje account without the cart.
+           */
+          if (cart) {
+            return this.create(account, undefined);
+          }
+        }
 
-      const token = await this.generateToken(account);
+        throw error;
+      });
 
-      if (token) account.confirmationToken = AccountMapper.commercetoolsCustomerTokenToToken(token, account);
-
-      return account;
-    } catch (error) {
-      //TODO: better error, get status code etc...
-      throw new Error(`create failed. ${error}`);
+    if (!account.confirmed) {
+      account.confirmationToken = await this.getConfirmationToken(account);
     }
-  };
 
-  generateToken: (account: Account) => Promise<CustomerToken> = async (account: Account) => {
-    const token = await this.getApiForProject()
-      .customers()
-      .emailToken()
-      .post({
-        body: {
-          id: account.accountId,
-          ttlMinutes: 2 * 7 * 24 * 60,
-        },
-      })
-      .execute();
-
-    return token.body;
+    return account;
   };
 
   confirmEmail: (token: string) => Promise<Account> = async (token: string) => {
-    try {
-      const locale = await this.getCommercetoolsLocal();
+    const locale = await this.getCommercetoolsLocal();
 
-      return await this.getApiForProject()
-        .customers()
-        .emailConfirm()
-        .post({
-          body: {
-            tokenValue: token,
-          },
-        })
-        .execute()
-        .then((response) => {
-          return AccountMapper.commercetoolsCustomerToAccount(response.body, locale);
-        })
-        .catch((error) => {
-          throw new Error(`Failed to confirm email with token ${token}. ${error}`);
-        });
-    } catch (error) {
-      //TODO: better error, get status code etc...
-      throw new Error(`Confirm email failed. ${error}`);
-    }
+    return await this.getApiForProject()
+      .customers()
+      .emailConfirm()
+      .post({
+        body: {
+          tokenValue: token,
+        },
+      })
+      .execute()
+      .then((response) => {
+        return AccountMapper.commercetoolsCustomerToAccount(response.body, locale);
+      })
+      .catch((error) => {
+        throw new ExternalError({ status: error.code, message: error.message, body: error.body });
+      });
   };
 
-  login: (account: Account, cart: Cart | undefined, reverify?: boolean) => Promise<Account> = async (
+  login: (account: Account, cart: Cart | undefined) => Promise<Account> = async (
     account: Account,
     cart: Cart | undefined,
-    reverify = false,
   ) => {
-    try {
-      const locale = await this.getCommercetoolsLocal();
+    const locale = await this.getCommercetoolsLocal();
 
-      account = await this.getApiForProject()
-        .login()
-        .post({
-          body: {
-            email: account.email,
-            password: account.password,
-            anonymousCart:
-              cart !== undefined
-                ? ({
-                    typeId: 'cart',
-                    id: cart.cartId,
-                  } as CartResourceIdentifier)
-                : undefined,
-          },
-        })
-        .execute()
-        .then((response) => {
-          return AccountMapper.commercetoolsCustomerToAccount(response.body.customer, locale);
-        })
-        .catch((error) => {
-          if (error.code && error.code === 400) {
-            if (error.body && error.body?.errors?.[0]?.code === 'InvalidCredentials') {
-              throw new Error(`Invalid credentials to login with the account ${account.email}`);
-            }
-
-            /*
-             * The cart might already belong to another user, so we try to log in without the cart.
-             */
-            if (cart) {
-              return this.login(account, undefined, reverify);
-            }
+    account = await this.getApiForProject()
+      .login()
+      .post({
+        body: {
+          email: account.email,
+          password: account.password,
+          anonymousCart:
+            cart !== undefined
+              ? ({
+                  typeId: 'cart',
+                  id: cart.cartId,
+                } as CartResourceIdentifier)
+              : undefined,
+        },
+      })
+      .execute()
+      .then((response) => {
+        return AccountMapper.commercetoolsCustomerToAccount(response.body.customer, locale);
+      })
+      .catch((error) => {
+        if (error.code && error.code === 400) {
+          if (error.body && error.body?.errors?.[0]?.code === 'InvalidCredentials') {
+            throw new AccountAuthenticationError({
+              message: 'Failed to login account with the given credentials',
+            });
           }
 
-          throw new Error(`Failed to login account  ${account.email}.`);
-        });
+          /*
+           * The cart might already belong to another user, so we try to log in without the cart.
+           */
+          if (cart) {
+            return this.login(account, undefined);
+          }
+        }
 
-      if (reverify) {
-        const token = await this.generateToken(account);
-        account.confirmationToken = AccountMapper.commercetoolsCustomerTokenToToken(token, account);
-      } else if (!account.confirmed) {
-        throw new Error(`Your account ${account.email} is not activated yet!`);
-      }
+        throw new ExternalError({ status: error.code, message: error.message, body: error.body });
+      });
 
-      return account;
-    } catch (error) {
-      //TODO: better error, get status code etc...
-      throw new Error(`login failed. ${error}`);
+    if (!account.confirmed) {
+      account.confirmationToken = await this.getConfirmationToken(account);
     }
+
+    return account;
   };
 
   updatePassword: (account: Account, oldPassword: string, newPassword: string) => Promise<Account> = async (
@@ -194,260 +166,215 @@ export class AccountApi extends BaseApi {
     oldPassword: string,
     newPassword: string,
   ) => {
-    try {
-      const locale = await this.getCommercetoolsLocal();
+    const locale = await this.getCommercetoolsLocal();
 
-      const accountVersion = await this.fetchAccountVersion(account);
+    const accountVersion = await this.fetchAccountVersion(account);
 
-      account = await this.getApiForProject()
-        .customers()
-        .password()
-        .post({
-          body: {
-            id: account.accountId,
-            version: accountVersion,
-            currentPassword: oldPassword,
-            newPassword: newPassword,
-          },
-        })
-        .execute()
-        .then((response) => {
-          return AccountMapper.commercetoolsCustomerToAccount(response.body, locale);
-        })
-        .catch((error) => {
-          throw new Error(`Failed to update password for account ${account.email}. ${error}`);
-        });
+    account = await this.getApiForProject()
+      .customers()
+      .password()
+      .post({
+        body: {
+          id: account.accountId,
+          version: accountVersion,
+          currentPassword: oldPassword,
+          newPassword: newPassword,
+        },
+      })
+      .execute()
+      .then((response) => {
+        return AccountMapper.commercetoolsCustomerToAccount(response.body, locale);
+      })
+      .catch((error) => {
+        throw new ExternalError({ status: error.code, message: error.message, body: error.body });
+      });
 
-      return account;
-    } catch (error) {
-      //TODO: better error, get status code etc...
-      throw new Error(`updateAccount failed. ${error}`);
-    }
+    return account;
   };
 
-  generatePasswordResetToken: (email: string) => Promise<PasswordResetToken> = async (email: string) => {
-    try {
-      return await this.getApiForProject()
-        .customers()
-        .passwordToken()
-        .post({
-          body: {
-            email: email,
-            ttlMinutes: 2 * 24 * 60,
-          },
-        })
-        .execute()
-        .then((response) => {
-          return {
-            email: email,
-            confirmationToken: response.body.value,
-            tokenValidUntil: new Date(response.body.expiresAt),
-          };
-        })
-        .catch((error) => {
-          throw new Error(`Failed to generate reset token for account ${email}. ${error}`);
-        });
-    } catch (error) {
-      //TODO: better error, get status code etc...
-      throw new Error(`generatePasswordResetToken failed. ${error}`);
-    }
+  generatePasswordResetToken: (email: string) => Promise<AccountToken> = async (email: string) => {
+    return await this.getApiForProject()
+      .customers()
+      .passwordToken()
+      .post({
+        body: {
+          email: email,
+          ttlMinutes: 2 * 24 * 60,
+        },
+      })
+      .execute()
+      .then((response) => {
+        return {
+          email: email,
+          token: response.body.value,
+          tokenValidUntil: new Date(response.body.expiresAt),
+        };
+      })
+      .catch((error) => {
+        throw new ExternalError({ status: error.code, message: error.message, body: error.body });
+      });
   };
 
   resetPassword: (token: string, newPassword: string) => Promise<Account> = async (
     token: string,
     newPassword: string,
   ) => {
-    try {
-      const locale = await this.getCommercetoolsLocal();
+    const locale = await this.getCommercetoolsLocal();
 
-      return await this.getApiForProject()
-        .customers()
-        .passwordReset()
-        .post({
-          body: {
-            tokenValue: token,
-            newPassword: newPassword,
-          },
-        })
-        .execute()
-        .then((response) => {
-          return AccountMapper.commercetoolsCustomerToAccount(response.body, locale);
-        })
-        .catch((error) => {
-          throw new Error(`Failed to reset password with token ${token}. ${error}`);
-        });
-    } catch (error) {
-      //TODO: better error, get status code etc...
-      throw new Error(`resetPassword failed. ${error}`);
-    }
+    return await this.getApiForProject()
+      .customers()
+      .passwordReset()
+      .post({
+        body: {
+          tokenValue: token,
+          newPassword: newPassword,
+        },
+      })
+      .execute()
+      .then((response) => {
+        return AccountMapper.commercetoolsCustomerToAccount(response.body, locale);
+      })
+      .catch((error) => {
+        throw new ExternalError({ status: error.code, message: error.message, body: error.body });
+      });
   };
 
   update: (account: Account) => Promise<Account> = async (account: Account) => {
-    try {
-      const customerUpdateActions: CustomerUpdateAction[] = [];
+    const customerUpdateActions: CustomerUpdateAction[] = [];
 
-      if (account.firstName) {
-        customerUpdateActions.push({ action: 'setFirstName', firstName: account.firstName });
-      }
-
-      if (account.lastName) {
-        customerUpdateActions.push({ action: 'setLastName', lastName: account.lastName });
-      }
-
-      if (account.salutation) {
-        customerUpdateActions.push({ action: 'setSalutation', salutation: account.salutation });
-      }
-
-      if (account.birthday) {
-        customerUpdateActions.push({
-          action: 'setDateOfBirth',
-          dateOfBirth:
-            account.birthday.getFullYear() + '-' + account.birthday.getMonth() + '-' + account.birthday.getDate(),
-        });
-      }
-
-      // TODO: should we also update addresses in this method?
-
-      return await this.updateAccount(account, customerUpdateActions);
-    } catch (error) {
-      //TODO: better error, get status code etc...
-      throw new Error(`update failed. ${error}`);
+    if (account.firstName) {
+      customerUpdateActions.push({ action: 'setFirstName', firstName: account.firstName });
     }
+
+    if (account.lastName) {
+      customerUpdateActions.push({ action: 'setLastName', lastName: account.lastName });
+    }
+
+    if (account.salutation) {
+      customerUpdateActions.push({ action: 'setSalutation', salutation: account.salutation });
+    }
+
+    if (account.birthday) {
+      customerUpdateActions.push({
+        action: 'setDateOfBirth',
+        dateOfBirth:
+          account.birthday.getFullYear() + '-' + account.birthday.getMonth() + '-' + account.birthday.getDate(),
+      });
+    }
+
+    // TODO: should we also update addresses in this method?
+
+    return await this.updateAccount(account, customerUpdateActions);
   };
 
   addAddress: (account: Account, address: Address) => Promise<Account> = async (account: Account, address: Address) => {
-    try {
-      const customerUpdateActions: CustomerUpdateAction[] = [];
+    const customerUpdateActions: CustomerUpdateAction[] = [];
 
-      let addressData = AccountMapper.addressToCommercetoolsAddress(address);
+    let addressData = AccountMapper.addressToCommercetoolsAddress(address);
 
-      if (addressData.id !== undefined) {
-        addressData = {
-          ...addressData,
-          id: undefined,
-        };
-      }
-
-      if (address.isDefaultBillingAddress || address.isDefaultShippingAddress) {
-        addressData = {
-          ...addressData,
-          key: Guid.newGuid(),
-        };
-      }
-
-      customerUpdateActions.push({ action: 'addAddress', address: addressData });
-
-      if (address.isDefaultBillingAddress) {
-        customerUpdateActions.push({ action: 'setDefaultBillingAddress', addressKey: addressData.key });
-      }
-
-      if (address.isDefaultShippingAddress) {
-        customerUpdateActions.push({ action: 'setDefaultShippingAddress', addressKey: addressData.key });
-      }
-
-      return await this.updateAccount(account, customerUpdateActions);
-    } catch (error) {
-      //TODO: better error, get status code etc...
-      throw new Error(`addAddress failed. ${error}`);
+    if (addressData.id !== undefined) {
+      addressData = {
+        ...addressData,
+        id: undefined,
+      };
     }
+
+    if (address.isDefaultBillingAddress || address.isDefaultShippingAddress) {
+      addressData = {
+        ...addressData,
+        key: Guid.newGuid(),
+      };
+    }
+
+    customerUpdateActions.push({ action: 'addAddress', address: addressData });
+
+    if (address.isDefaultBillingAddress) {
+      customerUpdateActions.push({ action: 'setDefaultBillingAddress', addressKey: addressData.key });
+    }
+
+    if (address.isDefaultShippingAddress) {
+      customerUpdateActions.push({ action: 'setDefaultShippingAddress', addressKey: addressData.key });
+    }
+
+    return await this.updateAccount(account, customerUpdateActions);
   };
 
   updateAddress: (account: Account, address: Address) => Promise<Account> = async (
     account: Account,
     address: Address,
   ) => {
-    try {
-      const customerUpdateActions: CustomerUpdateAction[] = [];
+    const customerUpdateActions: CustomerUpdateAction[] = [];
 
-      let addressData = AccountMapper.addressToCommercetoolsAddress(address);
+    let addressData = AccountMapper.addressToCommercetoolsAddress(address);
 
-      if (addressData.id !== undefined) {
-        addressData = {
-          ...addressData,
-          id: undefined,
-        };
-      }
-
-      if (address.isDefaultBillingAddress || address.isDefaultShippingAddress) {
-        addressData = {
-          ...addressData,
-          key: Guid.newGuid(),
-        };
-      }
-
-      customerUpdateActions.push({ action: 'changeAddress', addressId: address.addressId, address: addressData });
-
-      if (address.isDefaultBillingAddress) {
-        customerUpdateActions.push({ action: 'setDefaultBillingAddress', addressKey: addressData.key });
-      }
-
-      if (address.isDefaultShippingAddress) {
-        customerUpdateActions.push({ action: 'setDefaultShippingAddress', addressKey: addressData.key });
-      }
-
-      return await this.updateAccount(account, customerUpdateActions);
-    } catch (error) {
-      //TODO: better error, get status code etc...
-      throw new Error(`updateAddress failed. ${error}`);
+    if (addressData.id !== undefined) {
+      addressData = {
+        ...addressData,
+        id: undefined,
+      };
     }
+
+    if (address.isDefaultBillingAddress || address.isDefaultShippingAddress) {
+      addressData = {
+        ...addressData,
+        key: Guid.newGuid(),
+      };
+    }
+
+    customerUpdateActions.push({ action: 'changeAddress', addressId: address.addressId, address: addressData });
+
+    if (address.isDefaultBillingAddress) {
+      customerUpdateActions.push({ action: 'setDefaultBillingAddress', addressKey: addressData.key });
+    }
+
+    if (address.isDefaultShippingAddress) {
+      customerUpdateActions.push({ action: 'setDefaultShippingAddress', addressKey: addressData.key });
+    }
+
+    return await this.updateAccount(account, customerUpdateActions);
   };
 
   removeAddress: (account: Account, address: Address) => Promise<Account> = async (
     account: Account,
     address: Address,
   ) => {
-    try {
-      const customerUpdateActions: CustomerUpdateAction[] = [];
+    const customerUpdateActions: CustomerUpdateAction[] = [];
 
-      const addressData = AccountMapper.addressToCommercetoolsAddress(address);
+    const addressData = AccountMapper.addressToCommercetoolsAddress(address);
 
-      if (addressData.id === undefined) {
-        throw new Error(`The address passed doesn't contain an id.`);
-      }
-
-      customerUpdateActions.push({ action: 'removeAddress', addressId: address.addressId });
-
-      return await this.updateAccount(account, customerUpdateActions);
-    } catch (error) {
-      //TODO: better error, get status code etc...
-      throw new Error(`removeAddress failed. ${error}`);
+    if (addressData.id === undefined) {
+      throw new ValidationError({ message: `The address passed doesn't contain an id.` });
     }
+
+    customerUpdateActions.push({ action: 'removeAddress', addressId: address.addressId });
+
+    return await this.updateAccount(account, customerUpdateActions);
   };
 
   setDefaultBillingAddress: (account: Account, address: Address) => Promise<Account> = async (
     account: Account,
     address: Address,
   ) => {
-    try {
-      const customerUpdateActions: CustomerUpdateAction[] = [];
+    const customerUpdateActions: CustomerUpdateAction[] = [];
 
-      const addressData = AccountMapper.addressToCommercetoolsAddress(address);
+    const addressData = AccountMapper.addressToCommercetoolsAddress(address);
 
-      customerUpdateActions.push({ action: 'setDefaultBillingAddress', addressId: addressData.id });
+    customerUpdateActions.push({ action: 'setDefaultBillingAddress', addressId: addressData.id });
 
-      return await this.updateAccount(account, customerUpdateActions);
-    } catch (error) {
-      //TODO: better error, get status code etc...
-      throw new Error(`setDefaultBillingAddress failed. ${error}`);
-    }
+    return await this.updateAccount(account, customerUpdateActions);
   };
 
   setDefaultShippingAddress: (account: Account, address: Address) => Promise<Account> = async (
     account: Account,
     address: Address,
   ) => {
-    try {
-      const customerUpdateActions: CustomerUpdateAction[] = [];
+    const customerUpdateActions: CustomerUpdateAction[] = [];
 
-      const addressData = AccountMapper.addressToCommercetoolsAddress(address);
+    const addressData = AccountMapper.addressToCommercetoolsAddress(address);
 
-      customerUpdateActions.push({ action: 'setDefaultShippingAddress', addressId: addressData.id });
+    customerUpdateActions.push({ action: 'setDefaultShippingAddress', addressId: addressData.id });
 
-      return await this.updateAccount(account, customerUpdateActions);
-    } catch (error) {
-      //TODO: better error, get status code etc...
-      throw new Error(`setDefaultShippingAddress failed. ${error}`);
-    }
+    return await this.updateAccount(account, customerUpdateActions);
   };
 
   protected extractAddresses(account: Account) {
@@ -513,7 +440,32 @@ export class AccountApi extends BaseApi {
         return AccountMapper.commercetoolsCustomerToAccount(response.body, locale);
       })
       .catch((error) => {
-        throw error;
+        throw new ExternalError({ status: error.code, message: error.message, body: error.body });
+      });
+  }
+
+  protected async getConfirmationToken(account: Account): Promise<AccountToken> {
+    return await this.getApiForProject()
+      .customers()
+      .emailToken()
+      .post({
+        body: {
+          id: account.accountId,
+          ttlMinutes: 2 * 7 * 24 * 60,
+        },
+      })
+      .execute()
+      .then((response) => {
+        const accountToken: AccountToken = {
+          email: account.email,
+          token: response.body.value,
+          tokenValidUntil: new Date(response.body.expiresAt),
+        };
+
+        return accountToken;
+      })
+      .catch((error) => {
+        throw new ExternalError({ status: error.code, message: error.message, body: error.body });
       });
   }
 }

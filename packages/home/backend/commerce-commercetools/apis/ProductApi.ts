@@ -216,7 +216,7 @@ export class ProductApi extends BaseApi {
         .categories()
         .get(methodArgs)
         .execute()
-        .then(async (response) => {
+        .then((response) => {
           const categories = response.body.results;
 
           const nodes = {};
@@ -230,70 +230,37 @@ export class ProductApi extends BaseApi {
             if (categories[i].parent) {
               nodes[categories[i].parent.id].subCategories.push(categories[i]);
             }
-
-            if (categoryQuery.parentId) {
-              where.push(`parent(id="${categoryQuery.parentId}")`);
-            }
-
-            const methodArgs = {
-              queryArgs: {
-                limit: limit,
-                offset: this.getOffsetFromCursor(categoryQuery.cursor),
-                where: where.length > 0 ? where : undefined,
-              },
-            };
-
-            return await this.getApiForProject()
-              .categories()
-              .get(methodArgs)
-              .execute()
-              .then((response) => {
-                const categories = response.body.results;
-
-                const nodes = {};
-
-                for (let i = 0; i < categories.length; i++) {
-                  (categories[i] as any).subCategories = [];
-                  nodes[categories[i].id] = categories[i];
-                }
-
-                for (let i = 0; i < categories.length; i++) {
-                  if (categories[i].parent) {
-                    nodes[categories[i].parent.id].subCategories.push(categories[i]);
-                  }
-                }
-                const nodesQueue = [categories];
-
-                while (nodesQueue.length > 0) {
-                  const currentCategories = nodesQueue.pop();
-                  currentCategories.sort((a, b) => +b.orderHint - +a.orderHint);
-                  currentCategories.forEach((category) => nodesQueue.push(nodes[category.id].subCategories));
-                }
-
-                const items = categories.map((category) =>
-                  ProductMapper.commercetoolsCategoryToCategory(category, locale),
-                );
-
-                const result: Result = {
-                  total: response.body.total,
-                  items: items,
-                  count: response.body.count,
-                  previousCursor: ProductMapper.calculatePreviousCursor(response.body.offset, response.body.count),
-                  nextCursor: ProductMapper.calculateNextCursor(
-                    response.body.offset,
-                    response.body.count,
-                    response.body.total,
-                  ),
-                  query: categoryQuery,
-                };
-
-                return result;
-              })
-              .catch((error) => {
-                throw error;
-              });
           }
-        });
+          const nodesQueue = [categories];
+
+          while (nodesQueue.length > 0) {
+            const currentCategories = nodesQueue.pop();
+            currentCategories.sort((a, b) => +b.orderHint - +a.orderHint);
+            currentCategories.forEach((category) => nodesQueue.push(nodes[category.id].subCategories));
+          }
+
+          const items = categories.map((category) =>
+            ProductMapper.commercetoolsCategoryToCategory(category, locale),
+          );
+
+          const result: Result = {
+            total: response.body.total,
+            items: items,
+            count: response.body.count,
+            previousCursor: ProductMapper.calculatePreviousCursor(response.body.offset, response.body.count),
+            nextCursor: ProductMapper.calculateNextCursor(
+              response.body.offset,
+              response.body.count,
+              response.body.total,
+            ),
+            query: categoryQuery,
+          };
+
+          return result;
+        })
+        .catch((error) => {
+          throw error;
+        });  
     } catch (error) {
       //TODO: better error, get status code etc...
       throw new Error(`queryCategories failed. ${error}`);

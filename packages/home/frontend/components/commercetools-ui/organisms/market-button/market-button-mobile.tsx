@@ -34,7 +34,7 @@ const MarketButtonMobile: React.FC<Props> = ({ market: selectedMarket, markets, 
       </div>
       <Menu as="div" className="relative px-15">
         {({ open }) => (
-          <div w-full>
+          <div>
             <Menu.Button className="flex h-40 w-full items-center justify-between border-[1px] border-neutral-400 bg-white">
               <div className="ml-10 flex w-fit justify-start">
                 <FlagIcons flagName={selectedMarket?.flag} className="my-auto mr-8" />

@@ -163,7 +163,7 @@ export default {
       return await productApi.query(productQuery).then((queryResult) => {
         return {
           dataSourcePayload: {
-            ...queryResult,
+            ...queryResult,            
             items: shuffleArray(queryResult.items),
           },
         };
