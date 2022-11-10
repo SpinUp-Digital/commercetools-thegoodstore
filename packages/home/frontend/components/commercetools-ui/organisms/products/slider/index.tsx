@@ -32,7 +32,7 @@ export default function ProductSlider({
   const [isDesktopSize] = useMediaQuery(desktop);
 
   return (
-    <Wrapper background="neutral-200" phonePadding="left-padding-only">
+    <Wrapper background="neutral-200" variant="left-padding-only">
       <div className="text-start">
         <Title title={title} variant={titleVariant} />
         {(subline || ctaLink) && (

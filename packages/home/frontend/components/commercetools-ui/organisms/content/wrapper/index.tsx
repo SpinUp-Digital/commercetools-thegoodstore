@@ -3,31 +3,32 @@ import React, { FC, ReactNode } from 'react';
 type WrapperProps = {
   children: ReactNode;
   background?: 'white' | 'neutral-200';
-  phonePadding?: 'none' | 'left-padding-only' | 'full-padding';
+  variant?: 'none' | 'left-padding-only' | 'full-padding-small' | 'full-padding';
   className?: string;
   clearDefaultStyles?: boolean;
 };
 
-type phonePaddingClassNames = {
-  [key in WrapperProps['phonePadding']]: string;
+type variantClassNames = {
+  [key in WrapperProps['variant']]: string;
 };
 
 const Wrapper: FC<WrapperProps> = ({
   children,
   background = 'white',
-  phonePadding = 'none',
+  variant = 'none',
   className,
   clearDefaultStyles,
 }) => {
-  const phonePaddingClassNames: phonePaddingClassNames = {
+  const variantClassNames: variantClassNames = {
     none: '',
     'left-padding-only': 'pl-8 md:pl-25 lg:pr-25 xl:pl-0 xl:pr-0',
+    'full-padding-small': 'px-8 md:px-12',
     'full-padding': 'px-16 md:px-25',
   };
 
   const wrapperClassName = clearDefaultStyles
     ? className
-    : `mx-auto max-w-[1248px] ${phonePaddingClassNames[phonePadding]} ${className ?? ''}`;
+    : `mx-auto max-w-[1248px] ${variantClassNames[variant]} ${className ?? ''}`;
 
   return (
     <div className={`bg-${background}`}>

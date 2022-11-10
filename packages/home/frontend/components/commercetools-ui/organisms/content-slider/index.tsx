@@ -70,7 +70,7 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
   );
 
   return (
-    <Wrapper phonePadding="left-padding-only">
+    <Wrapper variant="full-padding-small">
       {title && <Title className="mb-13" title={title} />}
       {subtitle && <Subtitle className="mb-24" subtitle={subtitle} />}
       {isDesktop ? (

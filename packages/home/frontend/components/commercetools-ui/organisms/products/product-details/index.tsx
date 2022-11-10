@@ -60,7 +60,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({
     : 'py-50 md:grid md:grid-cols-3 md:items-start md:gap-x-26 lg:gap-x-96';
 
   return (
-    <Wrapper phonePadding="full-padding" className={wrapperClassName} clearDefaultStyles={inModalVersion}>
+    <Wrapper variant="full-padding" className={wrapperClassName} clearDefaultStyles={inModalVersion}>
       <Gallery images={variant?.images} inModalVersion={inModalVersion} />
       <div className="mt-22 md:mt-0">
         <ProductInformation
