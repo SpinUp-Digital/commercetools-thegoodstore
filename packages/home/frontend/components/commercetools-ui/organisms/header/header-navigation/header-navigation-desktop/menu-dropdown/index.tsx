@@ -64,15 +64,7 @@ const MenuDropdown: FC<Props> = ({ links, tileContent, market, onClick }) => {
           </div>
         ))}
       </div>
-      {tileContent && (
-        <HeaderDropdownTile
-          title={tileContent.tileHeaderText}
-          image={tileContent.tileImage}
-          buttonLabel={tileContent.tileButtonLabel}
-          buttonLink={tileContent.tileButtonLink}
-          market={market}
-        />
-      )}
+      {tileContent && <HeaderDropdownTile tileContent={tileContent} market={market} />}
     </div>
   );
 };

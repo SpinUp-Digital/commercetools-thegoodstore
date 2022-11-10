@@ -19,7 +19,9 @@ export interface Tile {
   tileCategory: string;
   tileImage: NextFrontasticImage;
   tileHeaderText: string;
+  tileHeaderDecoration: 'uppercase' | 'lowercase' | 'capitalize' | 'normal-case';
   tileButtonLabel: string;
+  tileButtonLabelDecoration: 'uppercase' | 'lowercase' | 'capitalize' | 'normal-case';
   tileButtonLink: Reference;
 }
 
