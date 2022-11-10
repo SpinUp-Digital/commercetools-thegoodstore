@@ -3,7 +3,7 @@ import { Address } from '@commercetools/domain-types/account/Address';
 import { Cart } from '@commercetools/domain-types/cart/Cart';
 import { Discount } from '@commercetools/domain-types/cart/Discount';
 import { Variant } from '@commercetools/domain-types/product/Variant';
-import { fetchApiHub, revalidateOptions } from 'frontastic';
+import { revalidateOptions } from 'frontastic';
 import { SDK } from 'sdk';
 
 export type CartDetails = {
@@ -109,7 +109,12 @@ export const redeemDiscountCode = async (code: string) => {
     code: code,
   };
   const res = await extensions.redeemDiscountCode(payload);
-  mutate('/action/cart/getCart', res);
+
+  if ((res as Cart).cartId) {
+    mutate('/action/cart/getCart', res);
+  } else {
+    throw new Error('code not valid');
+  }
 };
 
 export const removeDiscountCode = async (discount: Discount) => {
