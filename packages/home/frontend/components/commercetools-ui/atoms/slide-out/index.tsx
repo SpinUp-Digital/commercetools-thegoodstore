@@ -1,10 +1,11 @@
-import React, { useCallback, useMemo, useState } from 'react';
-import CartIcon from 'components/icons/cart';
+import React, { useCallback, useMemo } from 'react';
 import CloseIcon from 'components/icons/close';
-import HeartIcon from 'components/icons/heart';
+import CartIcon from 'components/icons/cart';
+import { HeartIcon } from '@heroicons/react/24/outline';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import useClickOutside from 'helpers/hooks/useClickOutside';
 import { useFormat } from 'helpers/hooks/useFormat';
+import useClassNames from 'helpers/hooks/useClassNames';
 import { useCart, useWishlist } from 'frontastic';
 import DiscountForm from '../../organisms/discount-form';
 import CartItem from './cart-item';
@@ -25,7 +26,6 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
 
   const { data: wishlistData } = useWishlist();
 
-  const cartItems = useMemo(() => cartData?.lineItems, [cartData]);
   const wishlistItems = useMemo(() => wishlistData?.lineItems, [wishlistData]);
 
   const title = useMemo(() => {
@@ -43,6 +43,23 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
     if (state) return 'opacity-1';
     else return 'translate-x-full opacity-0';
   }, [state]);
+
+  const iconClassName = 'absolute -bottom-1 left-[-4px] h-2 w-34 transition duration-200';
+
+  const slideoutClassName = useClassNames([
+    'fixed right-0 top-0 z-50 flex h-screen w-[90%] max-w-[380px] flex-col items-stretch bg-neutral-200 shadow-lg transition duration-300 ease-out',
+    getStateStyles(),
+  ]);
+
+  const wishlistClassName = useClassNames([
+    iconClassName,
+    state === 'wishlist' ? 'bg-secondary-grey ease-out' : 'bg-transparent ease-in',
+  ]);
+
+  const cartClassName = useClassNames([
+    iconClassName,
+    state === 'cart' ? 'bg-secondary-grey ease-out' : 'bg-transparent ease-in',
+  ]);
 
   const transaction = useMemo(() => {
     if (!cartData?.lineItems)
@@ -144,46 +161,31 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
   }, [state, cartData, wishlistData, transaction, formatCartMessage]);
 
   return (
-    <div
-      ref={ref}
-      className={`fixed right-0 top-0 z-50 flex h-screen w-[90%] max-w-[380px] flex-col items-stretch bg-neutral-200 shadow-lg transition duration-300 ease-out ${getStateStyles()}`}
-    >
+    <div ref={ref} className={slideoutClassName}>
       <div className="flex items-center justify-between border-b border-neutral-400 px-12 pt-24 md:px-22 md:pt-32">
         <h3 className="pb-24 text-18 font-bold leading-normal md:pb-32 md:text-20">{title}</h3>
-        <div className=" flex h-full items-center gap-24 sm:gap-36">
+        <div className="flex h-full items-center gap-12 sm:gap-24">
           <div
             className="relative h-full cursor-pointer hover:opacity-80 md:pb-32"
             onClick={() => changeState?.('wishlist')}
           >
-            <div
-              className={`absolute -bottom-1 h-2 w-full transition duration-200 ${
-                state === 'wishlist' ? 'bg-secondary-grey ease-out' : 'bg-transparent ease-in'
-              }`}
-            />
+            <div className={wishlistClassName} />
             {wishlistItems?.length > 0 && (
               <span className="absolute top-[-7px] right-[-7px] h-8 w-8 rounded-full bg-green-500" />
             )}
-            <HeartIcon className="mt-2 h-20 w-20 md:h-24 md:w-24" pathClassName="stroke-secondary-black stroke-2" />
+            <HeartIcon className="w-25" />
           </div>
           <div
             className="relative h-full cursor-pointer hover:opacity-80 md:pb-32"
             onClick={() => changeState?.('cart')}
           >
-            {cartItems?.length > 0 && (
-              <>
-                <span className="absolute top-[-4px] right-[-3px] h-8 w-8 rounded-full bg-green-500" />
-                <span className="absolute top-[11px] left-1/2 -translate-x-1/2 text-10">{totalCartItems}</span>
-              </>
-            )}
-            <div
-              className={`absolute -bottom-1 h-2 w-full transition duration-200  ${
-                state === 'cart' ? 'bg-secondary-grey ease-out' : 'bg-transparent ease-in'
-              }`}
-            />
-            <CartIcon className="h-24 w-24 md:h-26 md:w-26" />
+            <>
+              <div className={cartClassName} />
+              <CartIcon className="w-25" totalCartItems={totalCartItems} />
+            </>
           </div>
           <div onClick={onClose} className="cursor-pointer pb-24 md:pb-32">
-            <CloseIcon className="h-18 w-18" />
+            <CloseIcon className="ml-12 h-14 w-14 sm:h-16 sm:w-16" />
           </div>
         </div>
       </div>
