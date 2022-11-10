@@ -74,6 +74,13 @@
 					"min": 1,
 					"fields": [
 						{
+							"label": "Category",
+							"field": "tileCategory",
+							"translatable": true,
+							"required": true,
+							"type": "string"
+						},
+						{
 							"label": "Tile Image",
 							"field": "tileImage",
 							"type": "media",
@@ -88,11 +95,59 @@
 							"type": "string"
 						},
 						{
+							"label": "Tile Header Text Decorations",
+							"field": "tileHeaderDecoration",
+							"type": "enum",
+							"values": [
+								{
+									"name": "Uppercase",
+									"value": "uppercase"
+								},
+								{
+									"name": "Lowercase",
+									"value": "lowercase"
+								},
+								{
+									"name": "Capitalize",
+									"value": "capitalize"
+								},
+								{
+									"name": "Normal Case",
+									"value": "normal-case"
+								}
+							],
+							"default": "uppercase"
+						},
+						{
 							"label": "Tile Button Label",
 							"field": "tileButtonLabel",
 							"translatable": true,
 							"required": true,
 							"type": "string"
+						},
+						{
+							"label": "Tile Button Label Decorations",
+							"field": "tileButtonLabelDecoration",
+							"type": "enum",
+							"values": [
+								{
+									"name": "Uppercase",
+									"value": "uppercase"
+								},
+								{
+									"name": "Lowercase",
+									"value": "lowercase"
+								},
+								{
+									"name": "Capitalize",
+									"value": "capitalize"
+								},
+								{
+									"name": "Normal Case",
+									"value": "normal-case"
+								}
+							],
+							"default": "uppercase"
 						},
 						{
 							"label": "Tile Button link",
