@@ -18,7 +18,6 @@ export interface Props {
 }
 
 const CategorySlider: React.FC<Props> = ({ tiles = [] }) => {
-  const [isTabletSize] = useMediaQuery(tablet);
   const [isDesktopSize] = useMediaQuery(desktop);
 
   const tileImageSizes = useImageSizes({ md: 0.5, lg: 0.25, defaultSize: 0.25 });
@@ -26,12 +25,23 @@ const CategorySlider: React.FC<Props> = ({ tiles = [] }) => {
   return (
     <Wrapper background="neutral-200">
       <Slider
-        slidesPerView={isDesktopSize ? 4 : 2.3}
+        slidesPerView={2.3}
         dots={false}
-        spaceBetween={isDesktopSize ? 16 : isTabletSize ? 8 : 4}
+        spaceBetween={4}
         arrows={isDesktopSize && tiles.length > 4}
-        allowTouchMove={!isDesktopSize || (isDesktopSize && tiles.length > 4)}
+        allowTouchMove
         loop
+        breakpoints={{
+          [tablet]: {
+            spaceBetween: 8,
+          },
+          [desktop]: {
+            allowTouchMove: tiles.length > 4,
+            loop: tiles.length > 4,
+            spaceBetween: 16,
+            slidesPerView: 4,
+          },
+        }}
       >
         {tiles.map((tile, index) => (
           <Link key={index} link={tile.target} className="block">
