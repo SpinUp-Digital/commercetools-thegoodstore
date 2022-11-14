@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import AnnouncementBar from '.';
 
 export default {
-  title: 'Frontastic/Announcement Bar',
+  title: 'commercetools Frontend/Organisms/Announcement Bar',
   component: AnnouncementBar,
 } as ComponentMeta<typeof AnnouncementBar>;
 

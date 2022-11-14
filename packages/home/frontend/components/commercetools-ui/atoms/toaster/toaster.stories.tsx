@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/react';
 import Toaster from './index';
 
 export default {
-  title: 'Frontastic/Toaster',
+  title: 'commercetools Frontend/Atoms/Toaster',
   component: Toaster,
   argTypes: {
     backgroundColor: { control: 'color' },

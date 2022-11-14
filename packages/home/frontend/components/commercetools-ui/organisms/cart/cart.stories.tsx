@@ -4,7 +4,7 @@ import { cart, shippingMethods } from '../../../../helpers/mocks/mockData';
 import CartPage, { Props } from './index';
 
 export default {
-  title: 'Frontastic/Cart',
+  title: 'commercetools Frontend/Organisms/Cart',
   component: CartPage,
   argTypes: {
     backgroundColor: { control: 'color' },

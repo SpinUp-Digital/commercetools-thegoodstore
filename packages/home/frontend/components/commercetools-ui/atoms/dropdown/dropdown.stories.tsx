@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/react';
 import Dropdown, { DropdownProps } from '.';
 
 export default {
-  title: 'Frontastic/Dropdown',
+  title: 'commercetools Frontend/Atoms/Dropdown',
   component: Dropdown,
 } as Meta;
 

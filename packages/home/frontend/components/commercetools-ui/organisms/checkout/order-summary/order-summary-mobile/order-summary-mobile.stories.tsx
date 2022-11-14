@@ -5,7 +5,7 @@ import { shippingMethods } from 'frontastic/actions/cart';
 import MobileOrderSummary, { Props as MobileOrderSummaryProps } from './index';
 
 export default {
-  title: 'Frontastic/OrderSummaryMobile',
+  title: 'commercetools Frontend/Organisms/OrderSummaryMobile',
   component: MobileOrderSummary,
   argTypes: {
     backgroundColor: { control: 'color' },

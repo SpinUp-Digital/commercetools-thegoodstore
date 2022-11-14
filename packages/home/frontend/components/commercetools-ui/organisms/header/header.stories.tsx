@@ -4,7 +4,7 @@ import Header from './index';
 import { HeaderProps } from './types';
 
 export default {
-  title: 'Frontastic/Header',
+  title: 'commercetools Frontend/Organisms/Header',
   component: Header,
   argTypes: {
     backgroundColor: { control: 'color' },

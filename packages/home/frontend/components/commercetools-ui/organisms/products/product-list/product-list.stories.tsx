@@ -4,7 +4,7 @@ import { products } from 'helpers/mocks/mockData';
 import ProductList, { Props as ProductListProps } from './index';
 
 export default {
-  title: 'Frontastic/ProductList',
+  title: 'commercetools Frontend/Organisms/ProductList',
   component: ProductList,
   argTypes: {
     backgroundColor: { control: 'color' },

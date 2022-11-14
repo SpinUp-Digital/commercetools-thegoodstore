@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/react';
 import Breadcrumb, { BreadcrumbProps } from './index';
 
 export default {
-  title: 'Frontastic/Breadcrumb',
+  title: 'commercetools Frontend/Organisms/Breadcrumb',
   component: Breadcrumb,
   argTypes: {
     backgroundColor: { control: 'color' },

@@ -4,7 +4,7 @@ import { wishlist } from 'helpers/mocks/mockData';
 import WishList, { Props } from './index';
 
 export default {
-  title: 'Frontastic/Wishlist',
+  title: 'commercetools Frontend/Organisms/Wishlist',
   component: WishList,
   argTypes: {
     backgroundColor: { control: 'color' },

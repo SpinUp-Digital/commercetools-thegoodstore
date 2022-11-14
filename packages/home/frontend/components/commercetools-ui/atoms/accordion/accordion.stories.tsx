@@ -4,7 +4,7 @@ import { accordionMockItems } from 'helpers/mocks/mockData';
 import AccordionBtn from './index';
 
 export default {
-  title: 'Frontastic/AccordionButton',
+  title: 'commercetools Frontend/Atoms/AccordionButton',
   component: AccordionBtn,
   argTypes: {},
 } as Meta;

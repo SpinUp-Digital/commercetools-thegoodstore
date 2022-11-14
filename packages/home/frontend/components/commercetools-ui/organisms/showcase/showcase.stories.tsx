@@ -2,7 +2,7 @@ import { Meta, Story } from '@storybook/react';
 import Showcase, { Props as ShowcaseProps } from '.';
 
 export default {
-  title: 'Frontastic/Show Case',
+  title: 'commercetools Frontend/Organisms/Show Case',
   component: Showcase,
 } as Meta;
 

@@ -5,7 +5,7 @@ import { shippingMethods } from 'frontastic/actions/cart';
 import DesktopOrderSummary, { Props as DesktopOrderSummaryProps } from './index';
 
 export default {
-  title: 'Frontastic/OrderSummaryDesktop',
+  title: 'commercetools Frontend/Organisms/OrderSummaryDesktop',
   component: DesktopOrderSummary,
   argTypes: {
     backgroundColor: { control: 'color' },

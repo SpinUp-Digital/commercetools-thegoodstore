@@ -4,7 +4,7 @@ import { account, cart } from 'helpers/mocks/mockData';
 import CheckoutForm, { Props as CheckoutFormProps } from './index';
 
 export default {
-  title: 'Frontastic/CheckoutForm',
+  title: 'commercetools Frontend/Organisms/CheckoutForm',
   component: CheckoutForm,
   argTypes: {
     backgroundColor: { control: 'color' },
