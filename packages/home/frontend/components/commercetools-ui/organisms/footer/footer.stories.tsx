@@ -4,7 +4,7 @@ import { footerColumns, footerLogo, footerSocialMediaLinks } from 'helpers/mocks
 import Footer, { Props as FooterProps } from './index';
 
 export default {
-  title: 'Frontastic/Footer',
+  title: 'commercetools Frontend/Organisms/Footer',
   component: Footer,
   argTypes: {
     backgroundColor: { control: 'color' },

@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/react';
 import ContentSlider, { ContentSliderProps } from '.';
 
 export default {
-  title: 'Frontastic/Content Slider',
+  title: 'commercetools Frontend/Organisms/Content Slider',
   component: ContentSlider,
 } as Meta;
 

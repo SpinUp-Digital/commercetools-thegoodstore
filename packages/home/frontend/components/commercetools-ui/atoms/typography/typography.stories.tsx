@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/react';
 import Typography from '.';
 
 export default {
-  title: 'Frontastic/Typography',
+  title: 'commercetools Frontend/Atoms/Typography',
   component: Typography,
   argTypes: {
     backgroundColor: { control: 'color' },

@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import Input from '.';
 
 export default {
-  title: 'Frontastic/Input',
+  title: 'commercetools Frontend/Atoms/Input',
   component: Input,
 } as ComponentMeta<typeof Input>;
 

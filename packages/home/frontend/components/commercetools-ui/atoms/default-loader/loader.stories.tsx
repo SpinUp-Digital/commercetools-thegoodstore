@@ -4,7 +4,7 @@ import DefaultLoader from './index';
 import '../../../../styles/components/default-loader.css';
 
 export default {
-  title: 'Frontastic/DefaultLoader',
+  title: 'commercetools Frontend/Atoms/DefaultLoader',
   component: DefaultLoader,
   argTypes: {},
 } as Meta;

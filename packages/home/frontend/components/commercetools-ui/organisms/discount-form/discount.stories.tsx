@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/react';
 import DiscountForm, { Props as DiscountProps } from './index';
 
 export default {
-  title: 'Frontastic/DiscountForm',
+  title: 'commercetools Frontend/Organisms/DiscountForm',
   component: DiscountForm,
   argTypes: {
     backgroundColor: { control: 'color' },

@@ -5,7 +5,7 @@ import { Reference } from 'types/reference';
 import Hero, { HeroProps } from './index';
 
 export default {
-  title: 'Frontastic/Hero',
+  title: 'commercetools Frontend/Organisms/Hero',
   component: Hero,
   argTypes: {
     backgroundColor: { control: 'color' },

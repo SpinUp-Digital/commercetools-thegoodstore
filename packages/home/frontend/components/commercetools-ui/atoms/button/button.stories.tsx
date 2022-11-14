@@ -4,7 +4,7 @@ import { Meta, Story } from '@storybook/react';
 import Button, { ButtonProps } from '.';
 
 export default {
-  title: 'Frontastic/Button',
+  title: 'commercetools Frontend/Atoms/Button',
   component: Button,
   argTypes: {
     variant: {

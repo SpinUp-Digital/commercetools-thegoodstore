@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import Checkbox from '.';
 
 export default {
-  title: 'Frontastic/Checkbox',
+  title: 'commercetools Frontend/Atoms/Checkbox',
   component: Checkbox,
 } as ComponentMeta<typeof Checkbox>;
 

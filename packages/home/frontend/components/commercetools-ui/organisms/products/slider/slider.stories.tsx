@@ -4,7 +4,7 @@ import { products, headerButtonLink } from 'helpers/mocks/mockData';
 import ProductSlider, { Props as SliderProps } from './index';
 
 export default {
-  title: 'Frontastic/ProductSlider',
+  title: 'commercetools Frontend/Organisms/ProductSlider',
   component: ProductSlider,
   argTypes: {
     backgroundColor: { control: 'color' },

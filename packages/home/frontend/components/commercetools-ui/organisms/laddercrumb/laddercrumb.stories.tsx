@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/react';
 import Laddercrumb from './index';
 
 export default {
-  title: 'Frontastic/Laddercrumb',
+  title: 'commercetools Frontend/Organisms/Laddercrumb',
   component: Laddercrumb,
   argTypes: {
     backgroundColor: { control: 'color' },
