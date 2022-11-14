@@ -12,6 +12,6 @@ export class EmailApiFactory {
   }
 
   static getDefaultApi(context: Context, locale: string) {
-    return this.getSmtpApi(context, locale);
+    return this.getSendgridApi(context, locale);
   }
 }
