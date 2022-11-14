@@ -16,7 +16,7 @@ const Link: React.FC<React.PropsWithChildren<Props>> = ({ children, target, unde
   return (
     <ReferenceLink
       link={target}
-      className={`flex w-fit items-center gap-12 text-12 font-regular underline-offset-4 md:text-16 ${classNames}`}
+      className={`flex w-fit items-center gap-12 text-14 font-regular underline-offset-4 md:text-16 ${classNames}`}
     >
       <span>{children}</span>
       {withArrow && (
