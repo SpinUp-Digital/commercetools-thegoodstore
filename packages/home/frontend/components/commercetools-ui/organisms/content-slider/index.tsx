@@ -32,7 +32,7 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
   const tileImageSizes = useImageSizes({ md: 1, lg: 0.33, defaultSize: 0.33 });
 
   type BreakpointsRef = {
-    [key in CurrentBreakpoint]?: any;
+    [key in CurrentBreakpoint]?: number;
   };
 
   const spaceBetweenRef: BreakpointsRef = {
@@ -59,14 +59,14 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="h-7.5 w-18"
+              className="h-7 w-18"
             >
               <path d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
             </svg>
           </div>
         </Link>
       )),
-    [slides],
+    [slides, tileImageSizes],
   );
 
   return (
@@ -74,7 +74,7 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
       {title && <Title className="mb-13" title={title} />}
       {subtitle && <Subtitle className="mb-24" subtitle={subtitle} />}
       {isDesktop ? (
-        <div className="justify-stretch flex w-full gap-24">{slidesElement}</div>
+        <div className="flex w-full gap-24">{slidesElement}</div>
       ) : (
         <Slider
           arrows={false}

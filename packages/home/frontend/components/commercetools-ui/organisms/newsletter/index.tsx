@@ -58,7 +58,7 @@ export default function Newsletter({
   });
   const fallbackSuccessMessage = formatNewsletterMessage({
     id: 'success.fallback.message',
-    defaultMessage: 'You’re subscribed. We’ll keep you up to date with all things fashion.',
+    defaultMessage: "You're subscribed. We'll keep you up to date with all things fashion.",
   });
 
   //form data
@@ -85,16 +85,14 @@ export default function Newsletter({
   };
 
   return (
-    <div className="dark:bg-primary-200 mx-auto max-w-7xl rounded-lg bg-gray-100 py-2 px-4 sm:px-6 lg:px-0">
+    <div className="mx-auto max-w-7xl rounded-lg bg-gray-100 py-2 px-4 sm:px-6 lg:px-0">
       {!isConfirm ? (
         <div className="relative py-3 px-6 text-neutral-700 md:py-6 md:px-12 lg:py-9 lg:px-16 xl:flex xl:items-center">
           <div className="xl:w-0 xl:flex-1">
-            <h2 className="dark:text-light-100 mt-2 text-center text-2xl font-bold tracking-[0.010em] md:text-left">
+            <h2 className="mt-2 text-center text-2xl font-bold tracking-[0.010em] md:text-left">
               {headline || fallbackHeadline}
             </h2>
-            <p className="dark:text-light-100 mt-3 max-w-2xl text-center text-sm md:text-left">
-              {description || fallbackDescription}
-            </p>
+            <p className="mt-3 max-w-2xl text-center text-sm md:text-left">{description || fallbackDescription}</p>
           </div>
           <div className="mt-8 sm:w-full sm:max-w-md xl:mt-0 xl:ml-8">
             <form action="#" className="mt-4 sm:mx-auto sm:flex sm:max-w-xl xl:px-4" onSubmit={onSubmit}>
@@ -105,20 +103,20 @@ export default function Newsletter({
                 id="cta-email"
                 name="email"
                 type="email"
-                className="focus:ring-offset-accent-400 block w-full rounded-md border border-transparent py-3 px-5 text-sm leading-5 text-gray-600 shadow-sm placeholder:text-gray-500 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
+                className="block w-full rounded-md border border-transparent py-3 px-5 text-sm leading-5 text-gray-600 shadow-sm placeholder:text-gray-500 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
                 placeholder={inputPlaceholder}
                 onChange={onChange}
               />
               <div className="mt-4 sm:mt-0 sm:ml-3">
                 <button
                   type="submit"
-                  className="bg-accent-400 hover:bg-accent-500 block w-full rounded-md py-3 px-6 text-base font-bold leading-5 text-white sm:px-11"
+                  className="block w-full rounded-md py-3 px-6 text-base font-bold leading-5 text-white sm:px-11"
                 >
                   <Typography>{ctaLabel || fallbackCta}</Typography>
                 </button>
               </div>
             </form>
-            <p className="dark:text-light-100 mt-2 max-w-md text-left text-xs text-neutral-600 xl:px-5">
+            <p className="mt-2 max-w-md text-left text-xs text-neutral-600 xl:px-5">
               <Typography>{disclaimer || fallbackDisclaimer}</Typography>
             </p>
           </div>

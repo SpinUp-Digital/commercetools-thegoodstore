@@ -18,7 +18,7 @@ type SlugProps = {
   locale: string;
 };
 
-export default function Slug({ data, locale }: SlugProps) {
+export default function Slug({ data }: SlugProps) {
   const { formatMessage } = useFormat({ name: 'common' });
 
   if (!data || typeof data === 'string') {

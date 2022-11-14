@@ -32,12 +32,8 @@ const List: React.FC<Props> = ({ products, filtering }) => {
                   className="h-full w-full rounded-lg object-cover object-center"
                 />
               </div>
-              <h3 className="dark:text-light-100 mt-4 overflow-hidden truncate text-lg font-bold text-gray-700">
-                {product.name}
-              </h3>
-              <p className="dark:text-light-100 text-sm text-gray-900">
-                {CurrencyHelpers.formatForCurrency(product.variants[0].price)}
-              </p>
+              <h3 className="mt-4 overflow-hidden truncate text-lg font-bold text-gray-700">{product.name}</h3>
+              <p className="text-sm text-gray-900">{CurrencyHelpers.formatForCurrency(product.variants[0].price)}</p>
             </a>
           </NextLink>
         ))}

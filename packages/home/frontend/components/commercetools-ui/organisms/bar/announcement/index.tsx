@@ -34,7 +34,7 @@ const AnnouncementBar: React.FC<Props> = ({ text, highlightedSubstring, target }
 
   return (
     <div className="w-full bg-primary-dark py-16">
-      <p className="letter-[1%] text-center text-12 leading-loose text-white">
+      <p className="text-center text-12 leading-loose text-white">
         {previewText.prefix}
         <Link link={target} className="underline underline-offset-2">
           {previewText.middle}

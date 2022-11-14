@@ -5,11 +5,7 @@ export interface Props {
 }
 
 const Showcase: React.FC<Props> = ({ content }) => {
-  return (
-    <div className="dark:text-light-100 w-full border border-solid border-slate-300 p-4 text-slate-600 md:p-8">
-      {content}
-    </div>
-  );
+  return <div className="w-full border border-solid border-slate-300 p-4 text-slate-600 md:p-8">{content}</div>;
 };
 
 export default Showcase;

@@ -25,11 +25,12 @@
     "tailwindcss/enforces-negative-arbitrary-values": "warn",
     "tailwindcss/enforces-shorthand": "warn",
     "tailwindcss/migration-from-tailwind-2": "warn",
-    "tailwindcss/no-arbitrary-value": "warn",
     "tailwindcss/no-custom-classname": "warn",
     "tailwindcss/no-contradicting-classname": "error",
     "prettier/prettier": "error",
     "@typescript-eslint/no-explicit-any": "warn",
+    "import/no-named-as-default": 0,
+    "jsx-a11y/alt-text": 0,
     "import/order": [
       "warn",
       {

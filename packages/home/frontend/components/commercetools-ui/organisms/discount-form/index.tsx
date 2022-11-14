@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Discount } from '@commercetools/domain-types/cart/Discount';
 import { XMarkIcon } from '@heroicons/react/24/outline';
-import { useFormat } from 'helpers/hooks/useFormat';
 import useClassNames from 'helpers/hooks/useClassNames';
+import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart } from 'frontastic/provider';
 
 export interface Props {

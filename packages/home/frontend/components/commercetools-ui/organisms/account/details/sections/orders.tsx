@@ -35,7 +35,7 @@ const OrdersHistory: FC<Props> = ({ orders }) => {
     <div>
       <div className="mt-10">
         <div className="space-y-1">
-          <h3 className="dark:text-light-100 text-lg font-medium leading-6 text-gray-900">
+          <h3 className="text-lg font-medium leading-6 text-gray-900">
             {formatAccountMessage({ id: 'orders.history', defaultMessage: 'My order history' })}
           </h3>
           <p className="max-w-2xl text-sm text-gray-500">
@@ -96,7 +96,7 @@ const OrdersHistory: FC<Props> = ({ orders }) => {
                     </dl>
                     {/* <a
                       href={order.orderId}
-                      className="mt-6 flex w-full items-center justify-center rounded-md border border-accent-400 bg-white py-2 px-4 text-sm font-medium text-accent-400 shadow-sm hover:bg-gray-50 focus:outline-none sm:mt-0 sm:w-auto"
+                      className="mt-6 flex w-full items-center justify-center rounded-md border border-accent-400 bg-white py-2 px-4 text-sm font-medium shadow-sm hover:bg-gray-50 focus:outline-none sm:mt-0 sm:w-auto"
                     >
                       {formatAccountMessage({
                         id: 'orders.view.invoice',
@@ -115,28 +115,25 @@ const OrdersHistory: FC<Props> = ({ orders }) => {
                     </caption>
                     <thead className="sr-only text-left text-sm text-gray-800 sm:not-sr-only">
                       <tr>
-                        <th scope="col" className="dark:text-light-100 py-3 pr-8 font-normal sm:w-2/5 lg:w-1/3">
+                        <th scope="col" className="py-3 pr-8 font-normal sm:w-2/5 lg:w-1/3">
                           {formatProductMessage({
                             id: 'product',
                             defaultMessage: 'Product',
                           })}
                         </th>
-                        <th
-                          scope="col"
-                          className="dark:text-light-100 hidden w-1/5 py-3 pr-8 font-normal sm:table-cell"
-                        >
+                        <th scope="col" className="hidden w-1/5 py-3 pr-8 font-normal sm:table-cell">
                           {formatProductMessage({
                             id: 'price',
                             defaultMessage: 'Price',
                           })}
                         </th>
-                        <th scope="col" className="dark:text-light-100 hidden py-3 pr-8 font-normal sm:table-cell">
+                        <th scope="col" className="hidden py-3 pr-8 font-normal sm:table-cell">
                           {formatProductMessage({
                             id: 'size',
                             defaultMessage: 'Size',
                           })}
                         </th>
-                        <th scope="col" className="dark:text-light-100 w-0 py-3 text-right font-normal">
+                        <th scope="col" className="w-0 py-3 text-right font-normal">
                           {formatProductMessage({
                             id: 'product.info',
                             defaultMessage: 'Product information',
@@ -155,24 +152,22 @@ const OrdersHistory: FC<Props> = ({ orders }) => {
                                 className="mr-6 h-16 w-16 rounded object-cover object-center"
                               />
                               <div>
-                                <div className="dark:text-light-100 font-medium text-gray-900">{product.name}</div>
-                                <div className="dark:text-light-100 mt-1 sm:hidden">
+                                <div className="font-medium text-gray-900">{product.name}</div>
+                                <div className="mt-1 sm:hidden">
                                   {(product.price.centAmount / 100).toFixed(2)}
                                   {product.price.currencyCode}
                                 </div>
                               </div>
                             </div>
                           </td>
-                          <td className="dark:text-light-100 hidden py-6 pr-8 sm:table-cell">
+                          <td className="hidden py-6 pr-8 sm:table-cell">
                             {(product.price.centAmount / 100).toFixed(2)}
                             {product.price.currencyCode}
                           </td>
-                          <td className="dark:text-light-100 hidden py-6 pr-8 sm:table-cell">
-                            {product.variant.attributes.size}
-                          </td>
-                          <td className="dark:text-light-100 whitespace-nowrap py-6 text-right font-medium">
+                          <td className="hidden py-6 pr-8 sm:table-cell">{product.variant.attributes.size}</td>
+                          <td className="whitespace-nowrap py-6 text-right font-medium">
                             <NextLink href={product._url || ''}>
-                              <a className="text-accent-400">
+                              <a>
                                 {formatProductMessage({
                                   id: 'product.view',
                                   defaultMessage: 'View product',

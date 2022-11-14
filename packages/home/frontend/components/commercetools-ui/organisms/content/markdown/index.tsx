@@ -7,12 +7,11 @@ interface Props {
   className?: string;
 }
 
-const Markdown: React.FC<Props> = ({ text, className }) => {
+const Markdown: React.FC<Props> = ({ text }) => {
   if (typeof text !== 'string') {
     Log.error(`Markdown: Invalid text property. Expected string but received ${typeof text}`);
     return <></>;
   }
-
   return (
     <>
       <style>
@@ -26,6 +25,7 @@ const Markdown: React.FC<Props> = ({ text, className }) => {
       `}
       </style>
 
+      {/* eslint-disable-next-line tailwindcss/no-custom-classname */}
       <div className="markdown" dangerouslySetInnerHTML={{ __html: markdown.toHTML(text) }}></div>
     </>
   );

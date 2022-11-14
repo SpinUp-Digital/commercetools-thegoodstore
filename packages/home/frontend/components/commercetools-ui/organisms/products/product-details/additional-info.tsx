@@ -12,6 +12,7 @@ const AdditionalInfo: FC<AdditionalInfoProps> = ({ productspec, description }) =
   const { formatMessage } = useFormat({ name: 'product' });
 
   return (
+    // eslint-disable-next-line tailwindcss/no-custom-classname
     <div className="additional-info col-span-2">
       <style>
         {`

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { ShippingMethod } from '@commercetools/domain-types/cart/ShippingMethod';
 import toast from 'react-hot-toast';
 import Address from 'components/commercetools-ui/organisms/adyen-checkout/panels/address';
@@ -89,7 +89,7 @@ const AdyenCheckout = ({ termsLink, cancellationLink, privacyLink }) => {
     setData(data);
   };
 
-  const updateCartData = () => {
+  const updateCartData = useCallback(() => {
     if (countryBasedShippingRateIndex[data.shippingCountry] == undefined) {
       toast.error(
         formatCheckoutMessage({
@@ -105,7 +105,7 @@ const AdyenCheckout = ({ termsLink, cancellationLink, privacyLink }) => {
       const updatedData = mapToCartStructure(data, billingIsSameAsShipping);
       updateCart(updatedData);
     }
-  };
+  }, [billingIsSameAsShipping, data, dataIsValid, formatCheckoutMessage, updateCart]);
 
   const updatecurrentShippingMethod = (shippingMethod: ShippingMethod) => {
     if (shippingMethod?.shippingMethodId) {
@@ -156,14 +156,14 @@ const AdyenCheckout = ({ termsLink, cancellationLink, privacyLink }) => {
     if (data.shippingCountry !== '') {
       updateCartData();
     }
-  }, [data.shippingCountry, dataIsValid]);
+  }, [data.shippingCountry, dataIsValid, updateCartData]);
 
   useEffect(() => {
     const defaultData = mapToFormStructure(cartList);
     if (defaultData && requiredDataIsValid(defaultData, billingIsSameAsShipping)) {
       updateData(defaultData);
     }
-  }, [cartList]);
+  }, [billingIsSameAsShipping, cartList]);
 
   useEffect(() => {
     if (!currentShippingMethod && cartList?.availableShippingMethods) {
@@ -176,7 +176,7 @@ const AdyenCheckout = ({ termsLink, cancellationLink, privacyLink }) => {
         setCurrentShippingMethod(cartList?.availableShippingMethods?.[0]);
       }
     }
-  }, [cartList?.availableShippingMethods]);
+  }, [cartList.availableShippingMethods, cartList.shippingInfo, currentShippingMethod]);
 
   return (
     <div className="mx-auto max-w-4xl md:mt-4">

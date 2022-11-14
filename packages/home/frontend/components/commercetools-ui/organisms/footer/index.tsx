@@ -31,7 +31,7 @@ const Footer: React.FC<Props> = ({ columns, logo, socialMedia }) => {
         <div className="mx-auto w-full max-w-[1248px] px-72 py-58 xl:px-0">
           <div className="grid grid-cols-4 ">
             {columns?.map((column, index) => (
-              <div key={index} className="lg:justify-left">
+              <div key={index}>
                 <Column
                   header={column.header}
                   links={column.links}
@@ -59,7 +59,7 @@ const Footer: React.FC<Props> = ({ columns, logo, socialMedia }) => {
         </ul>
       )}
       <div className="w-full sm:border-t sm:border-secondary-grey"></div>
-      <div className="lg:items-auto mx-auto flex max-w-[1248px] flex-col-reverse items-center gap-y-32 px-72 lg:flex-row lg:flex-row lg:justify-between lg:gap-y-0 lg:py-40 xl:px-0">
+      <div className="mx-auto flex max-w-[1248px] flex-col-reverse items-center gap-y-32 px-72 lg:flex-row lg:justify-between lg:gap-y-0 lg:py-40 xl:px-0">
         {logo && (
           <div className="mb-32 w-160 self-center lg:mb-0">
             <Image {...logo} alt="logo" />

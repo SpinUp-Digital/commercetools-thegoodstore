@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
-import { Category } from '@commercetools/domain-types/product/Category';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Log } from 'helpers/errorLogger';
 import { SDK } from 'sdk';

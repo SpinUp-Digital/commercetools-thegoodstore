@@ -54,13 +54,13 @@ const HeaderMenuMobile: FC<Props> = ({ links, language, languages, handleCurrent
           showMenu ? 'left-0 translate-x-0' : '-translate-x-[1000px]'
         }`}
       >
-        <div className="w-fill flex h-83 justify-between bg-neutral-300">
+        <div className="flex h-83 w-full justify-between bg-neutral-300">
           {selected.length > 0 && (
             <button
               onClick={() => setSelected((array) => array.slice(0, -1))}
               className="flex h-full w-full items-center justify-start"
             >
-              <BackIcon className="h-7.5 m-22 w-18" />
+              <BackIcon className="m-22 h-7 w-18" />
             </button>
           )}
           <button

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import AdyenCheckout from '@adyen/adyen-web';
+import toast from 'react-hot-toast';
 import { useCart, useAdyen } from 'frontastic';
 import '@adyen/adyen-web/dist/adyen.css';
-import toast from 'react-hot-toast';
-import { useRouter } from 'next/router';
 
 type Session = {
   id: string;
@@ -40,18 +40,18 @@ const Checkout = () => {
   useEffect(() => {
     if (session) {
       const sessionConfiguration = {
-        //For demo swiss we allways set to test environment
+        //For demo swiss we always set to test environment
         environment: 'test',
         //environment: process.env.NODE_ENV === 'production' ? 'live' : 'test',
         clientKey: 'test_VDRCU3ALS5GMDC45GLZGUF6ANM3P75ZK',
         session,
-        onPaymentCompleted: (result, component) => {
+        onPaymentCompleted: (result) => {
           console.log(result);
 
           if (result === 'Authorised') {
           }
         },
-        onError: (error, component) => {
+        onError: (error) => {
           console.log(error);
 
           toast.error(error);

@@ -40,7 +40,7 @@ const Addresses = () => {
       </style>
       <div className="mt-10 divide-y divide-gray-200">
         <div className="space-y-1">
-          <h3 className="text-lg font-medium leading-6 text-gray-900 dark:text-white">
+          <h3 className="text-lg font-medium leading-6 text-gray-900">
             {formatAccountMessage({ id: 'address.myAddresses', defaultMessage: 'My Addresses' })}
           </h3>
           <p className="max-w-2xl text-sm text-gray-500">
@@ -60,7 +60,7 @@ const Addresses = () => {
         <div className="py-4 sm:py-8">
           <button
             type="button"
-            className="bg-accent-400 focus:ring-accent-400 mt-4 w-full items-center rounded-md border border-transparent px-0 py-2 text-center text-sm font-medium text-white shadow-sm transition-colors duration-150 ease-out focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:bg-gray-300 sm:w-fit sm:px-24"
+            className="mt-4 w-full items-center rounded-md border border-transparent px-0 py-2 text-center text-sm font-medium text-white shadow-sm transition-colors duration-150 ease-out focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:bg-gray-300 sm:w-fit sm:px-24"
             onClick={openCreateModal}
           >
             {formatAccountMessage({ id: 'address.add', defaultMessage: 'Add an address' })}

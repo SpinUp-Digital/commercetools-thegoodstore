@@ -33,7 +33,7 @@ const Item = ({ lineItem, goToProductPage, editItemQuantity, removeItem }: Props
             <div className="flex justify-between">
               <h3 className="text-sm">
                 <p
-                  className="dark:text-light-100 cursor-pointer font-medium text-gray-700 hover:text-gray-800"
+                  className="cursor-pointer font-medium text-gray-700 hover:text-gray-800"
                   onClick={() => goToProductPage(lineItem._url)}
                 >
                   {lineItem.name}
@@ -42,19 +42,19 @@ const Item = ({ lineItem, goToProductPage, editItemQuantity, removeItem }: Props
             </div>
             <div className="mt-1 flex text-sm">
               {lineItem.variant.attributes?.color && (
-                <p className="dark:text-light-100 text-gray-900">
+                <p className="text-gray-900">
                   {StringHelpers.capitaliseFirstLetter(lineItem.variant.attributes.color.label)}
                 </p>
               )}
               {lineItem.variant.attributes?.size && (
-                <p className="dark:text-light-100 ml-4 border-l border-gray-200 pl-4 text-gray-500">
+                <p className="ml-4 border-l border-gray-200 pl-4 text-gray-500">
                   {StringHelpers.isNumeric(lineItem.variant.attributes.size)
                     ? lineItem.variant.attributes.size
                     : StringHelpers.capitaliseFirstLetter(lineItem.variant.attributes.size)}
                 </p>
               )}
             </div>
-            <p className="dark:text-light-100 mt-1 text-sm font-medium text-gray-900">
+            <p className="mt-1 text-sm font-medium text-gray-900">
               {CurrencyHelpers.formatForCurrency(lineItem.price)}
             </p>
 

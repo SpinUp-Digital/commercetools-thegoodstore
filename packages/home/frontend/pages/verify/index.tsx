@@ -23,14 +23,14 @@ const Verify: NextPage = () => {
     router
       .push('/')
       .then(() => Toast.success(formatAccountMessage({ id: 'verification.done', defaultMessage: 'Email verified' })));
-  }, []);
+  }, [formatAccountMessage, router]);
 
-  //error redirection becaues of invalid token
+  //error redirection because of invalid token
   const errorRedirect = useCallback(() => {
     router
       .push('/')
       .then(() => Toast.error(formatAccountMessage({ id: 'verification.failed', defaultMessage: 'Invalid token' })));
-  }, []);
+  }, [formatAccountMessage, router]);
 
   //verify user's email
   const verifyUser = useCallback(async () => {

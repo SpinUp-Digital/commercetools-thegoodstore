@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Account } from '@commercetools/domain-types/account/Account';
 import { UserIcon, HeartIcon } from '@heroicons/react/24/outline';
-import CartIcon from 'components/icons/cart';
 import Link from 'components/commercetools-ui/atoms/link';
 import Slideout, { State as MenuState } from 'components/commercetools-ui/atoms/slide-out';
+import CartIcon from 'components/icons/cart';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { Reference } from 'types/reference';
 import { useCart } from 'frontastic/provider';

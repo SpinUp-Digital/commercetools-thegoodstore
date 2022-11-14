@@ -27,7 +27,7 @@ const Address: React.FC<AddressProps> = ({ data, updateData, billingIsSameAsShip
       setProjectSettingsCountries(data);
       setShippingMethodsData(shippingMethods.data);
     });
-  }, []);
+  }, [getProjectSettings, shippingMethods.data]);
 
   useEffect(() => {
     if (!shippingMethods.data || !projectSettingsCountries) {
@@ -44,7 +44,7 @@ const Address: React.FC<AddressProps> = ({ data, updateData, billingIsSameAsShip
 
       setAvailableCountryOptions(totalCountries);
     }
-  }, [shippingMethods, projectSettingsCountries, shippingMethodsData]);
+  }, [shippingMethods, projectSettingsCountries, shippingMethodsData, formatMessage]);
 
   const handleChange = (e: ChangeEvent) => {
     const updatedData = {

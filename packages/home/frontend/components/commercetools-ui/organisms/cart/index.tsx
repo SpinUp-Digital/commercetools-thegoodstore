@@ -12,7 +12,7 @@ import OrderSummary from './orderSummary';
 
 export interface Props {
   pageTitle?: string;
-  emptyStateImage?: NextFrontasticImage;
+  emptyStateImage?: { media: NextFrontasticImage['media'] | string };
   emptyStateTitle?: string;
   emptyStateSubtitle?: string;
   emptyStateCTALabel?: string;
@@ -27,7 +27,6 @@ const Cart = ({
   cart,
   editItemQuantity,
   removeItem,
-  shippingMethods,
   pageTitle,
   emptyStateImage,
   emptyStateTitle,
@@ -78,7 +77,7 @@ const Cart = ({
 
   return (
     <main className="mx-auto max-w-2xl px-2 pt-20 pb-24 sm:px-4 lg:max-w-7xl lg:px-8">
-      <h1 className="dark:text-light-100 pb-12 text-center text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+      <h1 className="pb-12 text-center text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
         {formatCartMessage({ id: 'cart.shopping', defaultMessage: 'Shopping Cart' })}
       </h1>
       {loading ? (

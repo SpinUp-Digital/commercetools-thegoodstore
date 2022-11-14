@@ -16,7 +16,7 @@ const CartItem: React.FC<Props> = ({ item }) => {
 
   const { removeItem, updateItem } = useCart();
 
-  const { addToWishlist, data } = useWishlist();
+  const { addToWishlist } = useWishlist();
 
   const [processing, setProcessing] = useState(false);
 
@@ -41,10 +41,10 @@ const CartItem: React.FC<Props> = ({ item }) => {
   const moveToWishlist = useCallback(() => {
     removeItem(item.lineItemId);
     addToWishlist(item.variant.sku, 1);
-  }, [removeItem, addToWishlist]);
+  }, [removeItem, item.lineItemId, item.variant.sku, addToWishlist]);
 
   return (
-    <div className="gap:10 flex max-w-full items-stretch justify-start py-18 md:gap-15">
+    <div className="flex max-w-full items-stretch justify-start gap-10 py-18 md:gap-15">
       <div className="w-[125px] shrink-0 bg-white p-12">
         <div className="relative h-full w-full">
           <Image src={item.variant?.images?.[0]} suffix="small" objectFit="contain" />
