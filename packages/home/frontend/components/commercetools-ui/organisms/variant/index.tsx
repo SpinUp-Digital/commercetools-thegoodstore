@@ -21,7 +21,7 @@ const Variant: FC<VariantProps> = ({ className, currentVariant, variants, attrib
   useEffect(() => {
     const filteredVariants: VariantType[] = discardRepeatedValues(variants, attribute.toString());
     setVariantsToUse(filteredVariants);
-  }, [variants]);
+  }, [variants, attribute]);
 
   return (
     <div className={className}>

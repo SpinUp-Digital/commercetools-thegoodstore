@@ -5,7 +5,7 @@ import { NextFrontasticImage } from 'frontastic/lib/image';
 
 interface Props {
   pageTitle?: string;
-  image?: NextFrontasticImage;
+  image?: { media: NextFrontasticImage['media'] | string };
   title?: string;
   subtitle?: string;
   ctaLabel?: string;

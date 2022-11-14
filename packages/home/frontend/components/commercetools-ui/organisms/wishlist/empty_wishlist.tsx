@@ -1,10 +1,11 @@
 import { EmptyState } from 'components/commercetools-ui/organisms/empty-state';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { Reference } from 'types/reference';
+import { NextFrontasticImage } from 'frontastic/lib/image';
 
 interface Props {
   pageTitle?: string;
-  image?: { media: any } | any;
+  image?: { media: NextFrontasticImage['media'] | string };
   title?: string;
   subtitle?: string;
   ctaLabel?: string;

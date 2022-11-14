@@ -76,13 +76,13 @@ const UpdateAddress: React.FC<UpdateAddressProps> = ({ open, onClose, defaultVal
               <div className="absolute inset-0" onClick={onClose}>
                 {/* eslint-disable */}
                 <div
-                  className="dark:bg-primary-200 absolute top-1/2 left-1/2 h-[90vh] w-[90%] max-w-[800px] -translate-x-1/2 -translate-y-1/2 overflow-auto bg-white py-16 px-4 sm:px-6 lg:py-24 lg:px-8"
+                  className="absolute top-1/2 left-1/2 h-[90vh] w-[90%] max-w-[800px] -translate-x-1/2 -translate-y-1/2 overflow-auto bg-white py-16 px-4 sm:px-6 lg:py-24 lg:px-8"
                   onClick={(e) => e.stopPropagation()}
                 >
                   {/* eslint-enable */}
                   <div className="relative mx-auto max-w-xl">
                     <div className="text-center">
-                      <h2 className="dark:text-light-100 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                      <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
                         {formatAccountMessage({ id: 'address.update.headline', defaultMessage: 'Update Address' })}
                       </h2>
                       <p className="mt-4 text-lg leading-6 text-gray-400">
@@ -96,10 +96,7 @@ const UpdateAddress: React.FC<UpdateAddressProps> = ({ open, onClose, defaultVal
                     <div className="mt-12">
                       <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
                         <div>
-                          <label
-                            htmlFor="first-name"
-                            className="dark:text-light-100 block text-sm font-medium text-gray-700"
-                          >
+                          <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
                             {formatMessage({ id: 'firstName', defaultMessage: 'First Name' })}
                           </label>
                           <div className="mt-1">
@@ -109,17 +106,14 @@ const UpdateAddress: React.FC<UpdateAddressProps> = ({ open, onClose, defaultVal
                               name="firstName"
                               id="first-name"
                               autoComplete="given-name"
-                              className="focus:border-accent-400 focus:ring-accent-400 block w-full rounded-md border-gray-300 py-3 px-4 shadow-sm"
+                              className="block w-full rounded-md border-gray-300 py-3 px-4 shadow-sm"
                               onChange={handleChange}
                               defaultValue={defaultValues.firstName}
                             />
                           </div>
                         </div>
                         <div>
-                          <label
-                            htmlFor="last-name"
-                            className="dark:text-light-100 block text-sm font-medium text-gray-700"
-                          >
+                          <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
                             {formatMessage({ id: 'lastName', defaultMessage: 'Last Name' })}
                           </label>
                           <div className="mt-1">
@@ -129,17 +123,14 @@ const UpdateAddress: React.FC<UpdateAddressProps> = ({ open, onClose, defaultVal
                               name="lastName"
                               id="last-name"
                               autoComplete="family-name"
-                              className="focus:border-accent-400 focus:ring-accent-400 block w-full rounded-md border-gray-300 py-3 px-4 shadow-sm"
+                              className="block w-full rounded-md border-gray-300 py-3 px-4 shadow-sm"
                               onChange={handleChange}
                               defaultValue={defaultValues.lastName}
                             />
                           </div>
                         </div>
                         <div className="">
-                          <label
-                            htmlFor="street-number"
-                            className="dark:text-light-100 block text-sm font-medium text-gray-700"
-                          >
+                          <label htmlFor="street-number" className="block text-sm font-medium text-gray-700">
                             {formatMessage({ id: 'street.number', defaultMessage: 'Street Number' })}
                           </label>
                           <div className="mt-1">
@@ -148,17 +139,14 @@ const UpdateAddress: React.FC<UpdateAddressProps> = ({ open, onClose, defaultVal
                               type="text"
                               name="streetNumber"
                               id="street-number"
-                              className="focus:border-accent-400 focus:ring-accent-400 block w-full rounded-md border-gray-300 py-3 px-4 shadow-sm"
+                              className="block w-full rounded-md border-gray-300 py-3 px-4 shadow-sm"
                               onChange={handleChange}
                               defaultValue={defaultValues.streetNumber}
                             />
                           </div>
                         </div>
                         <div className="">
-                          <label
-                            htmlFor="street-name"
-                            className="dark:text-light-100 block text-sm font-medium text-gray-700"
-                          >
+                          <label htmlFor="street-name" className="block text-sm font-medium text-gray-700">
                             {formatMessage({ id: 'street.name', defaultMessage: 'Street Name' })}
                           </label>
                           <div className="mt-1">
@@ -168,17 +156,14 @@ const UpdateAddress: React.FC<UpdateAddressProps> = ({ open, onClose, defaultVal
                               name="streetName"
                               type="text"
                               autoComplete="address-line1"
-                              className="focus:border-accent-400 focus:ring-accent-400 block w-full rounded-md border-gray-300 py-3 px-4 shadow-sm"
+                              className="block w-full rounded-md border-gray-300 py-3 px-4 shadow-sm"
                               onChange={handleChange}
                               defaultValue={defaultValues.streetName}
                             />
                           </div>
                         </div>
                         <div className="sm:col-span-2">
-                          <label
-                            htmlFor="phone"
-                            className="dark:text-light-100 block text-sm font-medium text-gray-700"
-                          >
+                          <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
                             {formatMessage({ id: 'phone', defaultMessage: 'Phone' })}
                           </label>
                           <div className="mt-1">
@@ -188,17 +173,14 @@ const UpdateAddress: React.FC<UpdateAddressProps> = ({ open, onClose, defaultVal
                               name="phone"
                               id="phone"
                               autoComplete="tel"
-                              className="focus:border-accent-400 focus:ring-accent-400 block w-full rounded-md border-gray-300 py-3 px-4 shadow-sm"
+                              className="block w-full rounded-md border-gray-300 py-3 px-4 shadow-sm"
                               onChange={handleChange}
                               defaultValue={defaultValues.phone}
                             />
                           </div>
                         </div>
                         <div>
-                          <label
-                            htmlFor="postal-code"
-                            className="dark:text-light-100 block text-sm font-medium text-gray-700"
-                          >
+                          <label htmlFor="postal-code" className="block text-sm font-medium text-gray-700">
                             {formatMessage({ id: 'zipCode', defaultMessage: 'Postal Code' })}
                           </label>
                           <div className="mt-1">
@@ -208,14 +190,14 @@ const UpdateAddress: React.FC<UpdateAddressProps> = ({ open, onClose, defaultVal
                               name="postalCode"
                               id="postal-code"
                               autoComplete="postal-code"
-                              className="focus:border-accent-400 focus:ring-accent-400 block w-full rounded-md border-gray-300 py-3 px-4 shadow-sm"
+                              className="block w-full rounded-md border-gray-300 py-3 px-4 shadow-sm"
                               onChange={handleChange}
                               defaultValue={defaultValues.postalCode}
                             />
                           </div>
                         </div>
                         <div>
-                          <label htmlFor="city" className="dark:text-light-100 block text-sm font-medium text-gray-700">
+                          <label htmlFor="city" className="block text-sm font-medium text-gray-700">
                             {formatMessage({ id: 'city', defaultMessage: 'City' })}
                           </label>
                           <div className="mt-1">
@@ -225,7 +207,7 @@ const UpdateAddress: React.FC<UpdateAddressProps> = ({ open, onClose, defaultVal
                               name="city"
                               id="city"
                               autoComplete="country"
-                              className="focus:border-accent-400 focus:ring-accent-400 block w-full rounded-md border-gray-300 py-3 px-4 shadow-sm"
+                              className="block w-full rounded-md border-gray-300 py-3 px-4 shadow-sm"
                               onChange={handleChange}
                               defaultValue={defaultValues.city}
                             />
@@ -246,7 +228,7 @@ const UpdateAddress: React.FC<UpdateAddressProps> = ({ open, onClose, defaultVal
                                   aria-describedby="Set as default shipping address"
                                   name="isDefaultShippingAddress"
                                   type="checkbox"
-                                  className="focus:ring-accent-400 h-6 w-6 rounded border-gray-300 text-white"
+                                  className="h-6 w-6 rounded border-gray-300 text-white"
                                   onChange={handleCheckboxChange}
                                   defaultChecked={defaultValues.isDefaultShippingAddress}
                                 />
@@ -277,7 +259,7 @@ const UpdateAddress: React.FC<UpdateAddressProps> = ({ open, onClose, defaultVal
                                   aria-describedby="Set as default billing addaress"
                                   name="isDefaultBillingAddress"
                                   type="checkbox"
-                                  className="focus:ring-accent-400 h-6 w-6 rounded border-gray-300 text-white"
+                                  className="h-6 w-6 rounded border-gray-300 text-white"
                                   onChange={handleCheckboxChange}
                                   defaultChecked={defaultValues.isDefaultBillingAddress}
                                 />
@@ -312,7 +294,7 @@ const UpdateAddress: React.FC<UpdateAddressProps> = ({ open, onClose, defaultVal
                           </button>
                           <button
                             type="submit"
-                            className="bg-accent-400 hover:bg-accent-500 focus:ring-accent-400 inline-flex w-full items-center justify-center rounded-md border border-transparent py-3 px-6 text-base font-medium text-white shadow-sm transition-colors duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-offset-2"
+                            className="inline-flex w-full items-center justify-center rounded-md border border-transparent py-3 px-6 text-base font-medium text-white shadow-sm transition-colors duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-offset-2"
                           >
                             {formatMessage({ id: 'save', defaultMessage: 'Save' })}
                           </button>

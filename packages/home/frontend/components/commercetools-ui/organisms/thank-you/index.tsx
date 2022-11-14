@@ -15,7 +15,7 @@ const ThankYou = () => {
     const { sessionId, redirectResult } = router.query;
 
     adyenCheckout(sessionId, redirectResult, router.locale);
-  }, [router.query, router.locale]);
+  }, [router.query, router.locale, adyenCheckout]);
 
   return (
     <main className="relative lg:min-h-full">
@@ -30,10 +30,10 @@ const ThankYou = () => {
       <div>
         <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:py-32 lg:px-8 xl:gap-x-24">
           <div className="lg:col-start-2">
-            <p className="dark:text-light-100 mt-2 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
+            <p className="mt-2 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
               {formatCheckoutMessage({ id: 'order.thanks', defaultMessage: 'Thanks for ordering' })}
             </p>
-            <p className="dark:text-light-100 mt-2 text-base text-gray-500">
+            <p className="mt-2 text-base text-gray-500">
               {formatCheckoutMessage({
                 id: 'order.appreciate',
                 defaultMessage:
@@ -42,10 +42,7 @@ const ThankYou = () => {
             </p>
 
             <div className="mt-16 border-t border-gray-200 py-6 text-right">
-              <p
-                className="text-accent-400 hover:text-accent-500 cursor-pointer text-sm font-medium"
-                onClick={() => router.push('/')}
-              >
+              <p className="cursor-pointer text-sm font-medium" onClick={() => router.push('/')}>
                 {formatCheckoutMessage({ id: 'continueShopping', defaultMessage: 'Continue Shopping' })}
                 <span aria-hidden="true"> &rarr;</span>
               </p>

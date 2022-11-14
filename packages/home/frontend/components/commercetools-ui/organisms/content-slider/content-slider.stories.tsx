@@ -7,7 +7,7 @@ export default {
   component: ContentSlider,
 } as Meta;
 
-const Template: Story<ContentSliderProps> = (args) => {
+const Template: Story<ContentSliderProps> = () => {
   const slides: ContentSliderProps['slides'] = Array(3).fill({
     image: {
       media: {

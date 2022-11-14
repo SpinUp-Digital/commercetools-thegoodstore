@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import type { AppProps } from 'next/app';
+import { useRouter } from 'next/router';
 import { appWithTranslation } from 'next-i18next';
 import Toaster from 'components/commercetools-ui/atoms/toaster';
+import { SDK } from 'sdk';
 import { FrontasticProvider } from 'frontastic';
 import 'tailwindcss/tailwind.css';
 import '../styles/app.css';
-import { SDK } from 'sdk';
-import { useRouter } from 'next/router';
 
 function FrontasticStarter({ Component, pageProps }: AppProps) {
   const { locale } = useRouter();

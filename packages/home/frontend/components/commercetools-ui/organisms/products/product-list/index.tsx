@@ -56,27 +56,27 @@ export default function ProductList({ products, totalProducts, previousCursor, n
         {isFiltering ? (
           <button onClick={toggleFiltering} className="w-full py-2">
             <div className="flex justify-between">
-              <h6 className="dark:text-light-100 text-base font-bold text-neutral-700">
+              <h6 className="text-base font-bold text-neutral-700">
                 {formatProductMessage({ id: 'sortAndFilter', defaultMessage: 'Sort & Filter' })}
               </h6>
-              <CloseIcon className="dark:fill-light-100 h-6 w-5 fill-neutral-700" />
+              <CloseIcon className="h-6 w-5 fill-neutral-700" />
             </div>
           </button>
         ) : (
           <button onClick={toggleFiltering} className="flex w-full justify-between py-2">
             <div className="flex gap-1">
-              <FilterIcon className="dark:fill-light-100 h-6 w-5 fill-neutral-700" />
-              <h6 className="dark:text-light-100 text-base font-bold text-neutral-700">
+              <FilterIcon className="h-6 w-5 fill-neutral-700" />
+              <h6 className="text-base font-bold text-neutral-700">
                 {formatProductMessage({ id: 'sortAndFilter', defaultMessage: 'Sort & Filter' })}
               </h6>
             </div>
 
-            <h6 className="dark:text-light-100 col-span-2 block text-right lg:hidden">
+            <h6 className="col-span-2 block text-right lg:hidden">
               {`${products?.length} ${formatProductMessage({ id: 'items', defaultMessage: 'Items' })}`}
             </h6>
           </button>
         )}
-        <h6 className="dark:text-light-100 col-span-2 hidden text-right lg:block">
+        <h6 className="col-span-2 hidden text-right lg:block">
           {`${products?.length} ${formatProductMessage({ id: 'items', defaultMessage: 'Items' })} ${totalProducts}`}
         </h6>
       </div>

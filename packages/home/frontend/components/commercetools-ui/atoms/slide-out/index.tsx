@@ -1,11 +1,11 @@
 import React, { useCallback, useMemo } from 'react';
-import CloseIcon from 'components/icons/close';
-import CartIcon from 'components/icons/cart';
 import { HeartIcon } from '@heroicons/react/24/outline';
+import CartIcon from 'components/icons/cart';
+import CloseIcon from 'components/icons/close';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
+import useClassNames from 'helpers/hooks/useClassNames';
 import useClickOutside from 'helpers/hooks/useClickOutside';
 import { useFormat } from 'helpers/hooks/useFormat';
-import useClassNames from 'helpers/hooks/useClassNames';
 import { useCart, useWishlist } from 'frontastic';
 import DiscountForm from '../../organisms/discount-form';
 import CartItem from './cart-item';
@@ -35,7 +35,7 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
       case 'wishlist':
         return formatWishlistMessage({ id: 'myWishlist', defaultMessage: 'My Wishlist' });
     }
-  }, [state]);
+  }, [formatCartMessage, formatWishlistMessage, state]);
 
   const { ref } = useClickOutside(() => !!state && onClose());
 
@@ -158,7 +158,7 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
         </>
       );
     }
-  }, [state, cartData, wishlistData, transaction, formatCartMessage]);
+  }, [state, cartData, transaction, formatCartMessage]);
 
   return (
     <div ref={ref} className={slideoutClassName}>

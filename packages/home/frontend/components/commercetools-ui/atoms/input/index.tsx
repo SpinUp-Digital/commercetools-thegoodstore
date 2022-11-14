@@ -13,7 +13,6 @@ const Input: React.FC<Props> = ({
   value,
   onBlur,
   onFocus,
-  style = {},
   variant = 'primary',
   className = '',
   ...props

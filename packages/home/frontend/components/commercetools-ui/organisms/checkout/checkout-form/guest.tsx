@@ -81,7 +81,7 @@ const CheckoutForm = ({
           onChange={updateFormInput}
         />
         <div className="col-span-full pt-8">
-          <label className="dark:text-light-100 text-base font-medium text-gray-900">
+          <label className="text-base font-medium text-gray-900">
             {formatCheckoutMessage({ id: 'billingAddress', defaultMessage: 'Billing address' })}
           </label>
         </div>
@@ -127,7 +127,7 @@ const CheckoutForm = ({
         {!billingSameAsShipping && (
           <>
             <div className="col-span-full pt-6">
-              <label className="dark:text-light-100 text-base font-medium text-gray-900">
+              <label className="text-base font-medium text-gray-900">
                 {formatCheckoutMessage({ id: 'shippingAddress', defaultMessage: 'Shipping address' })}
               </label>
             </div>

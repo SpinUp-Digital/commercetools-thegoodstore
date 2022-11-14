@@ -18,7 +18,7 @@ const MobileMenu: FC<Props> = ({ links, hideHeaderMenu, category, setCategory })
 
   return (
     <>
-      <div className="w-fill flex h-83 justify-between bg-neutral-300">
+      <div className="flex h-83 w-full justify-between bg-neutral-300">
         {category.length > 0 && (
           <div className="mx-10 flex h-full w-full items-center justify-start">
             <Button size="icon" variant="ghost" onClick={() => setCategory((array) => array.slice(0, -1))}>

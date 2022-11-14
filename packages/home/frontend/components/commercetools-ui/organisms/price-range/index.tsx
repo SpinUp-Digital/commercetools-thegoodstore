@@ -66,7 +66,7 @@ const PriceRange: FC<PriceRangeProps> = ({ products, facets, updatePriceFilterin
     ];
 
     updatePriceFilteringParams?.(params);
-  }, [values]);
+  }, [values, updatePriceFilteringParams]);
 
   return (
     <div className="grid w-full gap-4">

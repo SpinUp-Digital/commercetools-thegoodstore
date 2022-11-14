@@ -33,7 +33,7 @@ export default function ProductSlider({
 
   return (
     <Wrapper background="neutral-200" variant="left-padding-only">
-      <div className="text-start">
+      <div>
         <Title title={title} variant={titleVariant} />
         {(subline || ctaLink) && (
           <div className="mt-8 flex items-center justify-between md:mt-16 lg:mt-14">

@@ -68,7 +68,7 @@ const Tile: FC<TileProps> = ({ product }) => {
     else await addToWishlist(selectedVariant.sku, 1);
 
     setProcessing(false);
-  }, [addToWishlist, selectedVariant, wishlistLineItem, processing]);
+  }, [addToWishlist, selectedVariant, wishlistLineItem, processing, removeLineItem]);
 
   const [imageHovered, setImageHovered] = useState(false);
 

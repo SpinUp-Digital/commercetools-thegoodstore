@@ -46,7 +46,7 @@ const ProductInformation: FC<ProductInformationProps> = ({
       const item = wishlist.data.lineItems.find(({ variant: { sku } }) => sku === variant.sku);
       setOnWishlist(!!item);
     }
-  }, [wishlist?.data?.lineItems]);
+  }, [wishlist?.data?.lineItems, variant.sku]);
 
   return (
     <div>

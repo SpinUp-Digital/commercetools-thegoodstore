@@ -1,5 +1,4 @@
 import React, { useState, FC, Children, CSSProperties, useRef } from 'react';
-import useClassNames from 'helpers/hooks/useClassNames';
 import SwiperType, { Navigation, Pagination, Thumbs } from 'swiper';
 import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react'; // eslint-disable-line import/no-unresolved
 import 'swiper/css'; // eslint-disable-line import/no-unresolved
@@ -7,6 +6,7 @@ import 'swiper/css/navigation'; // eslint-disable-line import/no-unresolved
 import 'swiper/css/pagination'; // eslint-disable-line import/no-unresolved
 import 'swiper/css/scrollbar'; // eslint-disable-line import/no-unresolved
 import { NavigationOptions } from 'swiper/types';
+import useClassNames from 'helpers/hooks/useClassNames';
 import SliderNavigation from './slider-navigation';
 
 export type SliderProps = {
@@ -46,9 +46,9 @@ const Slider: FC<SliderProps> = ({
 
   const swiperRef = useRef<SwiperType>();
 
-  const validToFit: boolean = Boolean(fitToSlides) && Boolean(slideWidth) && Boolean(slidesPerView);
+  const validToFit: boolean = !!fitToSlides && !!slideWidth && !!slidesPerView;
   const sliderWidth: CSSProperties['width'] = validToFit
-    ? `${spaceBetween * (slidesPerView! - 1) + slideWidth! * slidesPerView!}px`
+    ? `${spaceBetween * (slidesPerView - 1) + slideWidth * slidesPerView}px`
     : '';
 
   const containerClassName = useClassNames([

@@ -52,7 +52,7 @@ const ProductDetailsAdapter: FC<ProductDetailsAdapterProps> = ({ product, inModa
       router.replace(as);
       return false;
     });
-  }, []);
+  }, [router]);
 
   const handleAddToWishList = () => {
     wishlist.addToWishlist(variant.sku, 1);

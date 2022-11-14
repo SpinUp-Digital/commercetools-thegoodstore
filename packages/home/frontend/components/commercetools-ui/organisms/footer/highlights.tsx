@@ -30,8 +30,8 @@ const Highlights = () => {
           key={index}
           className="flex flex-1 items-center justify-center gap-5 py-4 px-8 lg:justify-items-center lg:px-0"
         >
-          <Icon size={30} className="text-accent-400" />
-          <span className="dark:text-light-100">{text}</span>
+          <Icon size={30} />
+          <span>{text}</span>
         </div>
       ))}
     </HighlightBar>
