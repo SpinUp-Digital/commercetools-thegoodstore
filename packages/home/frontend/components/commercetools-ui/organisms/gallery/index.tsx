@@ -32,8 +32,10 @@ const Gallery: FC<GalleryProps> = ({ images, inModalVersion }) => {
     inModalVersion ? 'h-[250px] max-w-[300px]' : 'h-[447px]',
   ]);
 
+  const mainDivClassName = useClassNames(['gap-y-34 px-4 md:mb-50', inModalVersion ? 'col-span-1' : 'col-span-2']);
+
   return (
-    <div className={`${inModalVersion ? 'col-span-1' : 'col-span-2'} gap-y-34 md:mb-50`}>
+    <div className={mainDivClassName}>
       <Slider
         className={inModalVersion ? 'w-[300px]' : ''}
         onSlideChange={handleSlide}
