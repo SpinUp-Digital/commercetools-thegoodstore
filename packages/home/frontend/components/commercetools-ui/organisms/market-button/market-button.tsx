@@ -5,6 +5,7 @@ import Typography from 'components/commercetools-ui/atoms/typography';
 import { Market } from 'components/commercetools-ui/organisms/header/types';
 import FlagIcons from 'components/icons/flags';
 import { useFormat } from 'helpers/hooks/useFormat';
+import useClassNames from 'helpers/hooks/useClassNames';
 
 interface Props {
   market?: Market;
@@ -30,6 +31,11 @@ const MarketButton: React.FC<Props> = ({ market: selectedMarket, markets, handle
     setShowMarket(false);
   };
 
+  const marketMenuClassName = useClassNames([
+    'delay-50 fixed top-0 z-20 h-full w-356 bg-white transition ease-in-out',
+    showMarket ? 'left-0 translate-x-0' : '-translate-x-400',
+  ]);
+
   return (
     <div className="ml-10 hidden justify-center md:w-109 lg:flex lg:w-200 xl:w-300">
       {selectedMarket && (
@@ -44,12 +50,7 @@ const MarketButton: React.FC<Props> = ({ market: selectedMarket, markets, handle
         <div onClick={hideMarketMenu} className="fixed top-0 left-0 z-10 h-full w-full bg-black opacity-50" />
       )}
 
-      <div
-        onClick={hideMarketMenu}
-        className={`delay-50 fixed top-0 z-20 h-full w-356 bg-white transition ease-in-out ${
-          showMarket ? 'left-0 translate-x-0' : '-translate-x-400'
-        }`}
-      >
+      <div onClick={hideMarketMenu} className={marketMenuClassName}>
         <div className="flex w-full justify-end">
           <Button
             variant="ghost"

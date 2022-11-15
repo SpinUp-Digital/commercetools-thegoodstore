@@ -32,33 +32,26 @@ const MenuDropdown: FC<Props> = ({ links, tileContent, market, onClick }) => {
           <div key={link.categoryId} className="w-185 lg:w-200">
             {link.depth === 1 ? (
               <div key={link.categoryId}>
-                <div className="w-3/4 overflow-visible text-primary-black xl:w-full">
-                  <Link link={link.slug ?? link.path}>
-                    <Typography as="p" fontSize={14} fontWeight="medium">
-                      {link.name}
-                    </Typography>
+                <div>
+                  <Link
+                    link={link.slug ?? link.path}
+                    variant="menu-header"
+                    className="w-3/4 overflow-visible xl:w-full"
+                  >
+                    <Typography>{link.name}</Typography>
                   </Link>
                 </div>
                 {link.subCategories.map((field) => (
-                  <div key={field.categoryId} onClick={onClick} className="my-4 cursor-pointer">
-                    <Link link={field.slug ?? field.path}>
-                      <Typography
-                        as="p"
-                        fontSize={14}
-                        fontWeight="light"
-                        className="h-22 w-fit border-secondary-black text-secondary-black hover:border-b-[1px]"
-                      >
-                        {field.name}
-                      </Typography>
+                  <div key={field.categoryId} onClick={onClick} className="my-4">
+                    <Link link={field.slug ?? field.path} className="h-22 w-fit" variant="menu-item">
+                      <Typography>{field.name}</Typography>
                     </Link>
                   </div>
                 ))}
               </div>
             ) : (
-              <Link key={link.categoryId} link={link.slug ?? link.path}>
-                <Typography as="p" fontSize={14} fontWeight="medium" className="cursor-pointer text-primary-black">
-                  {link.name}
-                </Typography>
+              <Link key={link.categoryId} link={link.slug ?? link.path} variant="menu-header">
+                <Typography>{link.name}</Typography>
               </Link>
             )}
           </div>

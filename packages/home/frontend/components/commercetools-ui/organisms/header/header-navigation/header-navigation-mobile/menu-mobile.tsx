@@ -54,7 +54,8 @@ const MobileMenu: FC<Props> = ({ links, hideHeaderMenu, category, setCategory })
               ) : (
                 <Link
                   link={link.slug ?? link.path}
-                  className="mx-20 my-12 flex h-24 justify-between text-16 font-medium"
+                  variant="menu-item"
+                  className="mx-20 my-12 flex h-24 justify-between text-16"
                 >
                   {link.name}
                 </Link>
@@ -83,6 +84,7 @@ const MobileMenu: FC<Props> = ({ links, hideHeaderMenu, category, setCategory })
                 ) : (
                   <Link
                     link={nav.slug ?? nav.path}
+                    variant="menu-header"
                     className="mx-20 my-12 flex h-24 justify-between text-16 font-normal"
                   >
                     {nav.name}
