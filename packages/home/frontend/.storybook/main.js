@@ -1,4 +1,5 @@
 const path = require('path');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
   stories: ['../components/**/*.stories.mdx', '../components/**/*.stories.@(js|jsx|ts|tsx)'],
@@ -30,6 +31,7 @@ module.exports = {
   },
   webpackFinal: async (config) => {
     config.resolve.modules.push(path.resolve(__dirname, '..'));
+
     config.resolve.fallback = {
       fs: false,
       tls: false,
@@ -39,6 +41,14 @@ module.exports = {
       crypto: false,
       path: require.resolve('path-browserify'),
     };
+
+    config.resolve.plugins = [
+      new TsconfigPathsPlugin({
+        configFile: path.resolve(__dirname, '..', 'tsconfig.json'),
+        extensions: ['.ts', '.tsx', '.js', '.jsx'],
+      }),
+    ];
+
     config.module.rules.find((rule) => rule.test.toString() === '/\\.css$/').exclude = /\.module\.css$/;
 
     config.module.rules.push({

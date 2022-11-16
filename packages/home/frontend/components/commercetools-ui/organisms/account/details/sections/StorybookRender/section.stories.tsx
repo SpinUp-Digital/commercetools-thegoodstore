@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/react';
 import Sections from './index';
 
 export default {
-  title: 'Frontastic/AccountDetailsSections',
+  title: 'commercetools Frontend/Organisms/AccountDetailsSections',
   component: Sections,
   argTypes: {},
 } as Meta;
