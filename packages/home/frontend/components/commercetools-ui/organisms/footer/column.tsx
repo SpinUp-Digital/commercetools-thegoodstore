@@ -22,17 +22,17 @@ const Column: React.FC<Props> = ({ header, links, className }) => {
           as="h3"
           fontFamily="inter"
           fontSize={14}
-          fontWeight="semibold"
-          className="text-neutral-200 sm:self-center sm:pb-20 lg:self-start lg:text-16"
+          medium
+          className=" text-neutral-200 sm:self-center sm:pb-20 lg:self-start lg:text-16"
         >
           {header}
         </Typography>
       )}
       <ul role="list" className="flex flex-col gap-y-12 sm:self-center md:items-center lg:items-start lg:self-start">
         {links.map((item, i) => (
-          <li key={i}>
-            <Link link={item.reference} variant="primary">
-              <Typography>{item.name}</Typography>
+          <li key={i} className="lg:text-16">
+            <Link className="text-14" link={item.reference}>
+              <Typography as="fragment">{item.name}</Typography>
             </Link>
           </li>
         ))}

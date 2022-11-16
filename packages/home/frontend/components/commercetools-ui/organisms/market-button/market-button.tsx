@@ -4,8 +4,8 @@ import Button from 'components/commercetools-ui/atoms/button';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { Market } from 'components/commercetools-ui/organisms/header/types';
 import FlagIcons from 'components/icons/flags';
-import { useFormat } from 'helpers/hooks/useFormat';
 import useClassNames from 'helpers/hooks/useClassNames';
+import { useFormat } from 'helpers/hooks/useFormat';
 
 interface Props {
   market?: Market;
@@ -60,7 +60,7 @@ const MarketButton: React.FC<Props> = ({ market: selectedMarket, markets, handle
             <XMarkIcon className="m-16 w-20" />
           </Button>
         </div>
-        <Typography as="h5" fontSize={22} fontWeight="regular" className="px-26 pb-24 text-secondary-black">
+        <Typography as="h5" fontSize={22} className="px-26 pb-24 text-secondary-black">
           {formatMarketMessage({ id: 'select.market', defaultMessage: 'Select your market' })}
         </Typography>
         <>

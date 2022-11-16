@@ -46,7 +46,7 @@ const MobileMenu: FC<Props> = ({ links, hideHeaderMenu, category, setCategory })
                   onClick={() => setCategory((array) => [...array, link])}
                   className="mx-20 my-12 flex h-24 justify-between"
                 >
-                  <Typography as="p" fontSize={16} fontWeight="medium">
+                  <Typography fontSize={16} medium>
                     {link.name}
                   </Typography>
                   <ChevronRightIcon className="mt-2 mr-6 w-20 text-secondary-black" />
@@ -65,7 +65,7 @@ const MobileMenu: FC<Props> = ({ links, hideHeaderMenu, category, setCategory })
         ) : (
           <>
             <div className="mx-20 my-18 flex h-24 justify-start">
-              <Typography as="p" fontSize={16} fontWeight="medium">
+              <Typography fontSize={16} medium>
                 {category[category.length - 1].name}
               </Typography>
             </div>
@@ -76,9 +76,7 @@ const MobileMenu: FC<Props> = ({ links, hideHeaderMenu, category, setCategory })
                     onClick={() => setCategory((array) => [...array, nav])}
                     className="mx-20 my-12 flex h-24 justify-between"
                   >
-                    <Typography as="p" fontSize={16} fontWeight="regular">
-                      {nav.name}
-                    </Typography>
+                    <Typography fontSize={16}>{nav.name}</Typography>
                     <ChevronRightIcon className="mt-2 mr-6 w-20" />
                   </div>
                 ) : (

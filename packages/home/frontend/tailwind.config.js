@@ -1,13 +1,24 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+const { fontSizePattern } = require('./tailwind.settings');
+
 module.exports = {
   mode: 'jit',
   darkMode: 'class',
+  relative: true,
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
     './frontastic/**/*.{js,ts,jsx,tsx}',
     './stories/**/*.{js,ts,jsx,tsx}',
   ],
-  safelist: [{ pattern: /bg-(.+)/ }],
+  safelist: [
+    'font-medium',
+    { pattern: /bg-(.+)/ },
+    { pattern: /font-(body|heading)/ },
+    {
+      pattern: fontSizePattern,
+    },
+  ],
   theme: {
     extend: {
       keyframes: {
@@ -68,6 +79,9 @@ module.exports = {
         dark: '0px 1px 6px rgba(0, 0, 0, 0.25)',
         button: '1px 1px 1px rgba(0, 0, 0, 0.15), -1px -1px 1px rgba(25, 40, 81, 0.15)',
         inset: 'inset 0px 30px 16px rgba(127, 127, 127, 0.2)',
+      },
+      textUnderlineOffset: {
+        default: '0.25em',
       },
       colors: {
         primary: {

@@ -1,4 +1,5 @@
 import { FC, useMemo } from 'react';
+import Typography from 'components/commercetools-ui/atoms/typography';
 import useCurrentBreakpoint from 'helpers/hooks/useCurrentBreakpoint';
 import useImageSizes from 'helpers/hooks/useImageSizes';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
@@ -48,9 +49,13 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
             <div className="absolute z-10 h-full w-full rounded-md bg-black opacity-20"></div>
             <Image {...image} sizes={tileImageSizes} className="mb-5 rounded-md" layout="fill" objectFit="cover" />
           </div>
-          <h4 className="my-3.5 max-w-[90%] overflow-hidden text-ellipsis whitespace-pre text-18 font-normal">
+          <Typography
+            as="h4"
+            fontSize={18}
+            className="my-3.5 max-w-[90%] overflow-hidden text-ellipsis whitespace-pre font-normal"
+          >
             {title}
-          </h4>
+          </Typography>
           <div className="flex gap-1.5">
             <p className="text-16 font-normal">{ctaLabel}</p>
             <svg

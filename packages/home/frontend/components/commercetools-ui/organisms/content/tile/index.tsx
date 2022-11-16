@@ -32,7 +32,6 @@ const Tile: React.FC<TileProps> = ({
       <div className="absolute top-1/2 left-0 w-full -translate-y-1/2 text-center">
         <Typography
           className="text-shadow text-white md:text-16 lg:font-medium"
-          as="p"
           fontSize={14}
           lineHeight="loose"
           align="center"
@@ -44,7 +43,7 @@ const Tile: React.FC<TileProps> = ({
           className="text-shadow mt-18  text-white lg:text-28"
           fontSize={24}
           align="center"
-          fontWeight="bold"
+          medium
           fontFamily="libre"
         >
           {title}
