@@ -4,7 +4,7 @@ import { frontasticImage } from 'helpers/mocks/mockData';
 import Login, { LoginProps } from './index';
 
 export default {
-  title: 'Frontastic/Login',
+  title: 'commercetools Frontend/Organisms/Login',
   component: Login,
   argTypes: {},
 } as Meta;

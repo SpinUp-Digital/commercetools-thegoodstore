@@ -4,7 +4,7 @@ import { frontasticImage } from 'helpers/mocks/mockData';
 import ResetPassword, { ResetPasswordProps } from './index';
 
 export default {
-  title: 'Frontastic/ResetPassword',
+  title: 'commercetools Frontend/Organisms/ResetPassword',
   component: ResetPassword,
   argTypes: {},
 } as Meta;

@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/react';
 import CreateAddress, { CreateAddressProps } from './index';
 
 export default {
-  title: 'Frontastic/CreateAddress',
+  title: 'commercetools Frontend/Organisms/CreateAddress',
   component: CreateAddress,
   argTypes: {},
 } as Meta;

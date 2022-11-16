@@ -4,7 +4,7 @@ import { addresses } from 'helpers/mocks/mockData';
 import UpdateAddress, { UpdateAddressProps } from './index';
 
 export default {
-  title: 'Frontastic/UpdateAddress',
+  title: 'commercetools Frontend/Organisms/UpdateAddress',
   component: UpdateAddress,
   argTypes: {},
 } as Meta;

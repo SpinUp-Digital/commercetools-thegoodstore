@@ -35,11 +35,14 @@
   "password.reset.desc": "Fill the fields below to complete your password reset",
   "settings": "Settings",
   "general": "General",
-  "addresses":"Addresses",
-  "orders":"Orders",
-  "security":"Security",
+  "addresses": "Addresses",
+  "orders": "Orders",
+  "security": "Security",
   "hello": "Hi, ",
   "account.button": "Login / Register",
   "signout": "Logout",
-  "user":"User "
+  "user": "User",
+  "membership.info": "Membership info",
+  "not.member": "Not a member",
+  "join.here": "Join here"
 }

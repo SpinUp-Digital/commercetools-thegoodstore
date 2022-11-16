@@ -4,7 +4,7 @@ import { frontasticImage } from 'helpers/mocks/mockData';
 import Register, { RegisterProps } from './index';
 
 export default {
-  title: 'Frontastic/Register',
+  title: 'commercetools Frontend/Organisms/Register',
   component: Register,
   argTypes: {},
 } as Meta;
