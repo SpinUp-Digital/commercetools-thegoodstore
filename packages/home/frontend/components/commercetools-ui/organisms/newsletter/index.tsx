@@ -97,7 +97,7 @@ export default function Newsletter({
           <div className="mt-8 sm:w-full sm:max-w-md xl:mt-0 xl:ml-8">
             <form action="#" className="mt-4 sm:mx-auto sm:flex sm:max-w-xl xl:px-4" onSubmit={onSubmit}>
               <label htmlFor="cta-email" className="sr-only">
-                <Typography>{inputPlaceholder || fallbackPlaceholder}</Typography>
+                <Typography as="fragment">{inputPlaceholder || fallbackPlaceholder}</Typography>
               </label>
               <input
                 id="cta-email"
@@ -112,12 +112,12 @@ export default function Newsletter({
                   type="submit"
                   className="block w-full rounded-md py-3 px-6 text-base font-bold leading-5 text-white sm:px-11"
                 >
-                  <Typography>{ctaLabel || fallbackCta}</Typography>
+                  <Typography as="fragment">{ctaLabel || fallbackCta}</Typography>
                 </button>
               </div>
             </form>
             <p className="mt-2 max-w-md text-left text-xs text-neutral-600 xl:px-5">
-              <Typography>{disclaimer || fallbackDisclaimer}</Typography>
+              <Typography as="fragment">{disclaimer || fallbackDisclaimer}</Typography>
             </p>
           </div>
         </div>
@@ -168,10 +168,10 @@ export default function Newsletter({
             </div>
 
             <h2 className="mt-2 text-center text-2xl font-bold tracking-[0.010em] lg:text-3xl">
-              <Typography>{successTitle || fallbackSuccessTitle}</Typography>
+              <Typography as="fragment">{successTitle || fallbackSuccessTitle}</Typography>
             </h2>
             <p className="mx-auto mt-1 max-w-2xl text-center text-sm ">
-              <Typography>{successMessage || fallbackSuccessMessage}</Typography>
+              <Typography as="fragment">{successMessage || fallbackSuccessMessage}</Typography>
             </p>
           </div>
         </div>

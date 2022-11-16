@@ -29,7 +29,7 @@ const MarketButtonMobile: React.FC<Props> = ({ market: selectedMarket, markets, 
   return (
     <div className="mt-58">
       <div className="my-10 mx-15">
-        <Typography fontSize={12}>
+        <Typography as="p" fontSize={12}>
           {formatMarketMessage({ id: 'select.country', defaultMessage: 'Select your country' })}
         </Typography>
       </div>

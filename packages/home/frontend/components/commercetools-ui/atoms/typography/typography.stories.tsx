@@ -1,21 +1,26 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
+import { fontSizesToUse } from 'tailwind.settings';
 import Typography from '.';
+import { tagTypesToUse, TypographyProps } from './types';
 
 export default {
   title: 'commercetools Frontend/Atoms/Typography',
   component: Typography,
   argTypes: {
-    backgroundColor: { control: 'color' },
+    fontFamily: { control: { type: 'select' }, options: ['libre', 'inter'], defaultValue: 'libre' },
+    as: { control: { type: 'select' }, options: ['fragment', ...tagTypesToUse], defaultValue: 'p' },
+    fontSize: { control: { type: 'select' }, options: fontSizesToUse, defaultValue: 16 },
+    medium: { control: 'boolean', defaultValue: false },
+    underline: { control: 'boolean', defaultValue: false },
   },
 } as Meta;
 
-const Template: Story = () => (
-  <Typography as="h1" fontSize={30}>
-    Typography Component
-  </Typography>
-);
+const Template: Story<TypographyProps> = (args) => <Typography {...args}>Typography Component</Typography>;
 
-export const Primary = Template.bind({});
-
-Primary.args = {};
+export const Default = Template.bind({});
+Default.args = {
+  fontFamily: 'inter',
+  as: 'h1',
+  fontSize: 58,
+};

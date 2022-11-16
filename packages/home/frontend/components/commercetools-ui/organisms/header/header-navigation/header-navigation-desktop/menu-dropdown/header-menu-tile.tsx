@@ -30,7 +30,7 @@ const HeaderDropdownTile: FC<Props> = ({ tileContent, market }) => {
         className="brightness-75"
         alt={tileContent?.tileImage.title[locale]}
       />
-      <Typography as="h3" align="center" fontWeight="bold" className={tileHeaderTextClassName}>
+      <Typography as="h3" align="center" medium className={tileHeaderTextClassName}>
         {tileContent?.tileHeaderText}
       </Typography>
       <Link link={tileContent?.tileButtonLink} className={tileButtonClassName}>

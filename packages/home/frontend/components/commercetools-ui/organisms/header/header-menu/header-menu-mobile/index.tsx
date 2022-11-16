@@ -86,12 +86,7 @@ const HeaderMenuMobile: FC<Props> = ({ links, language, languages, handleCurrent
                     </div>
                   ) : (
                     <Link href={link.slug ?? link.path}>
-                      <Typography
-                        as="p"
-                        fontSize={16}
-                        fontWeight="medium"
-                        className="mx-20 my-12 flex h-24 justify-between"
-                      >
+                      <Typography fontSize={16} medium className="mx-20 my-12 flex h-24 justify-between">
                         {link.name}
                       </Typography>
                     </Link>

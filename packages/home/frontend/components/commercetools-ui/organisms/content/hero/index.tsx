@@ -29,7 +29,7 @@ const Hero: React.FC<HeroProps> = ({ image, title, subtitle, ctaLabel, ctaRefere
         </div>
       )}
       <div className="absolute top-1/2 left-0 w-full -translate-y-1/2 px-48 text-center">
-        <Typography as="p" align="center" fontSize={14} lineHeight="normal" className="text-white md:text-20">
+        <Typography align="center" fontSize={14} lineHeight="normal" className="text-white md:text-20">
           {subtitle}
         </Typography>
         <Typography

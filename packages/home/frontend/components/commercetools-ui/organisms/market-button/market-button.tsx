@@ -60,7 +60,7 @@ const MarketButton: React.FC<Props> = ({ market: selectedMarket, markets, handle
             <XMarkIcon className="m-16 w-20" />
           </Button>
         </div>
-        <Typography as="h5" fontSize={22} fontWeight="regular" className="px-26 pb-24 text-secondary-black">
+        <Typography as="h5" fontSize={22} className="px-26 pb-24 text-secondary-black">
           {formatMarketMessage({ id: 'select.market', defaultMessage: 'Select your market' })}
         </Typography>
         <>
