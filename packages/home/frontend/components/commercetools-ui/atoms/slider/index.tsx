@@ -1,4 +1,4 @@
-import React, { useState, FC, Children, CSSProperties, useRef } from 'react';
+import React, { useState, FC, Children, CSSProperties, useRef, useCallback } from 'react';
 import SwiperType, { Navigation, Pagination, Thumbs } from 'swiper';
 import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react'; // eslint-disable-line import/no-unresolved
 import 'swiper/css'; // eslint-disable-line import/no-unresolved
@@ -34,11 +34,22 @@ const Slider: FC<SliderProps> = ({
   withThumbs,
   children,
   onSwiper,
+  onInit,
   prevButtonStyles = {},
   nextButtonStyles = {},
   compactNavigation,
   ...props
 }) => {
+  const [init, setInit] = useState(false);
+
+  const handleInit = useCallback(
+    (swiper: SwiperType) => {
+      setInit(true);
+      onInit?.(swiper);
+    },
+    [onInit],
+  );
+
   const navigationPrevRef = useRef<HTMLDivElement>(null);
   const navigationNextRef = useRef<HTMLDivElement>(null);
 
@@ -60,8 +71,14 @@ const Slider: FC<SliderProps> = ({
   ]);
   const slidesClassName = useClassNames(['slider', className]);
 
+  const slideProps = {
+    visibility: init ? 'visible' : 'hidden',
+  } as React.CSSProperties;
+
   const slides = Children.map(children, (child) => (
-    <SwiperSlide style={slideWidth ? { width: `${slideWidth}px` } : {}}>{child}</SwiperSlide>
+    <SwiperSlide style={slideWidth ? { width: `${slideWidth}px`, ...slideProps } : { ...slideProps }}>
+      {child}
+    </SwiperSlide>
   ));
 
   const handleOnSwiper = (swiper: SwiperType) => {
@@ -96,6 +113,7 @@ const Slider: FC<SliderProps> = ({
         onBeforeInit={handleOnBeforeInit}
         observer
         observeParents
+        onInit={handleInit}
         {...props}
       >
         {slides}
