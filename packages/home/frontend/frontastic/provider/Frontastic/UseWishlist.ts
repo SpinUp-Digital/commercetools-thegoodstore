@@ -1,8 +1,10 @@
+import { LineItem } from '@commercetools/domain-types/wishlist/LineItem';
 import { Wishlist } from '@commercetools/domain-types/wishlist/Wishlist';
 
 export interface UseWishlist {
   data?: Wishlist;
-  addToWishlist: (sku: string, count?: number) => Promise<void>;
-  removeLineItem: (lineItemId: string) => Promise<void>;
-  updateLineItem: (lineItemId: string, count?: number) => Promise<void>;
+  totalItems: number;
+  addToWishlist: (wishlist: Wishlist, lineItem: LineItem, count?: number) => Promise<void>;
+  removeLineItem: (wishlist: Wishlist, lineItem: LineItem) => Promise<void>;
+  updateLineItem: (wishlist: Wishlist, lineItem: LineItem, count?: number) => Promise<void>;
 }

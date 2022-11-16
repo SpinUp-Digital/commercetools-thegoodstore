@@ -9,7 +9,6 @@ import useMediaQuery from 'helpers/hooks/useMediaQuery';
 const HeaderTastic = ({ data, categories }) => {
   const headerRef = useRef(null);
   const { getProjectSettings } = useCart();
-  const { data: wishlist } = useWishlist();
   const { account } = useAccount();
   const [markets, setMarkets] = useState<Market[]>([]);
   const [market, setMarket] = useState<Market>(undefined);
@@ -63,7 +62,6 @@ const HeaderTastic = ({ data, categories }) => {
         links={flattenedCategories}
         markets={markets}
         market={market}
-        wishlistItemCount={wishlist?.lineItems?.length || 0}
         logo={data.logo}
         logoLink={data.logoLink}
         account={account}

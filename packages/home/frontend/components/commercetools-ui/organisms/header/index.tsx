@@ -11,7 +11,6 @@ const Header: React.FC<HeaderProps> = ({
   links,
   markets,
   market,
-  wishlistItemCount,
   logo,
   logoLink,
   account,
@@ -52,7 +51,7 @@ const Header: React.FC<HeaderProps> = ({
 
         <HeaderLogo market={market} logo={logo} logoLink={logoLink} />
 
-        <UtilitySection account={account} accountLink={accountLink} wishlistItemCount={wishlistItemCount} />
+        <UtilitySection account={account} accountLink={accountLink} />
       </div>
 
       <HeaderNavigationDesktop

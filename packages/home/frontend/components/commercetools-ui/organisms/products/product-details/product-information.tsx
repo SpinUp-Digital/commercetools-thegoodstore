@@ -1,35 +1,17 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useMemo } from 'react';
 import { useRouter } from 'next/router';
+import { LineItem } from '@commercetools/domain-types/wishlist/LineItem';
 import Variant from 'components/commercetools-ui/organisms/variant';
 import WishlistButton from 'components/commercetools-ui/organisms/wishlist-button';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
-import { useWishlist } from 'frontastic';
 import { ProductDetailsProps } from '.';
 
 type ProductInformationProps = Omit<ProductDetailsProps, 'onAddToCart'>;
 
-const ProductInformation: FC<ProductInformationProps> = ({
-  product,
-  variant,
-  onAddToWishlist,
-  onRemoveFromWishlist,
-  onChangeVariant,
-  inModalVersion,
-}) => {
+const ProductInformation: FC<ProductInformationProps> = ({ product, variant, onChangeVariant, inModalVersion }) => {
   const router = useRouter();
 
-  const wishlist = useWishlist();
-  const [onWishlist, setOnWishlist] = useState<boolean>(false);
-
   const attributesToDisplay = ['color', 'finish'];
-
-  const handleWishlistButtonClick = () => {
-    if (onWishlist) {
-      onRemoveFromWishlist();
-    } else {
-      onAddToWishlist();
-    }
-  };
 
   const discountPercentage =
     variant.discountedPrice &&
@@ -41,18 +23,23 @@ const ProductInformation: FC<ProductInformationProps> = ({
     });
   };
 
-  useEffect(() => {
-    if (wishlist?.data?.lineItems) {
-      const item = wishlist.data.lineItems.find(({ variant: { sku } }) => sku === variant.sku);
-      setOnWishlist(!!item);
-    }
-  }, [wishlist?.data?.lineItems, variant.sku]);
+  const productToWishlistLineItem = useMemo<LineItem>(() => {
+    return {
+      lineItemId: product?.productId,
+      productId: product?.productId,
+      name: product?.name,
+      count: 1,
+      variant: variant,
+      addedAt: new Date(),
+      _url: product?._url,
+    };
+  }, [product, variant]);
 
   return (
     <div>
       <div className="relative flex pr-40">
         <h3 className="break-normal font-body text-18 font-bold leading-loose">{product?.name}</h3>
-        <WishlistButton onWishlist={onWishlist} onClick={handleWishlistButtonClick} />
+        <WishlistButton lineItem={productToWishlistLineItem} />
       </div>
       {variant.discountedPrice ? (
         <div className="flex flex-row justify-between">
@@ -82,7 +69,7 @@ const ProductInformation: FC<ProductInformationProps> = ({
           return (
             <Variant
               key={index}
-              className={`mt-25 border-b border-b-neutral-400 pb-20`}
+              className="mt-25 border-b border-b-neutral-400 pb-20"
               variants={product?.variants}
               currentVariant={variant}
               attribute={attribute}

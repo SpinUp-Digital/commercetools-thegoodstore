@@ -1,30 +1,44 @@
 import useSWR, { mutate } from 'swr';
-import { fetchApiHub, revalidateOptions } from 'frontastic';
+import { revalidateOptions } from 'frontastic';
 import { SDK } from 'sdk';
+import { LineItem } from '@commercetools/domain-types/wishlist/LineItem';
+import { Wishlist } from '@commercetools/domain-types/wishlist/Wishlist';
 
 export const getWishlist = () => {
   const extensions = SDK.getExtensions();
-
   return useSWR('/action/wishlist/getWishlist', extensions.getWishlist, revalidateOptions);
 };
 
-export const addToWishlist = async (sku: string, count = 1) => {
+export const addToWishlist = async (wishlist: Wishlist, lineItem: LineItem, count = 1) => {
   const extensions = SDK.getExtensions();
+  const newWishlist = { ...wishlist, lineItems: [...wishlist.lineItems, lineItem] };
 
-  const res = await extensions.addToWishlist({ variant: { sku }, count });
-  mutate('/action/wishlist/getWishlist', res);
+  const res = extensions.addToWishlist({ variant: { sku: lineItem.variant.sku }, count });
+  await mutate('/action/wishlist/getWishlist', res, { optimisticData: newWishlist, rollbackOnError: true });
 };
 
-export const removeLineItem = async (lineItemId: string) => {
+export const removeLineItem = async (wishlist: Wishlist, lineItem: LineItem) => {
   const extensions = SDK.getExtensions();
+  const newWishlist = {
+    ...wishlist,
+    lineItems: wishlist.lineItems.filter((item) => item.lineItemId !== lineItem.lineItemId),
+  };
 
-  const res = await extensions.removeFromWishlist({ lineItem: { id: lineItemId } });
-  mutate('/action/wishlist/getWishlist', res);
+  const res = extensions.removeFromWishlist({ lineItem: { id: lineItem.lineItemId } });
+  await mutate('/action/wishlist/getWishlist', res, { optimisticData: newWishlist, rollbackOnError: true });
 };
 
-export const updateLineItem = async (lineItemId: string, count = 1) => {
+export const updateLineItem = async (wishlist: Wishlist, lineItem: LineItem, count = 1) => {
   const extensions = SDK.getExtensions();
+  const newWishlist = {
+    ...wishlist,
+    lineItems: wishlist.lineItems.map((item) => {
+      if (item.lineItemId === lineItem.lineItemId) {
+        return { ...lineItem, count: ++count };
+      }
+    }),
+  };
 
-  const res = await extensions.updateWishlistItem({ lineItem: { id: lineItemId }, count });
-  mutate('/action/wishlist/getWishlist', res);
+  const res = extensions.updateWishlistItem({ lineItem: { id: lineItem.lineItemId }, count });
+  await mutate('/action/wishlist/getWishlist', res, { optimisticData: newWishlist, rollbackOnError: true });
 };
