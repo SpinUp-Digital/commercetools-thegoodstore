@@ -18,7 +18,7 @@ const CategorySlider: React.FC<Props> = ({ tiles = [] }) => {
   );
 
   return (
-    <Wrapper background="neutral-200">
+    <Wrapper background="neutral-200" variant="full-padding-small">
       <Slider
         slidesPerView={2.3}
         dots={false}

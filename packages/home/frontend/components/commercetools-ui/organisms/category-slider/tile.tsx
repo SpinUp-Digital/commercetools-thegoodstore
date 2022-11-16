@@ -18,7 +18,7 @@ const Tile: React.FC<Props> = ({ tile }) => {
 
   return (
     <Link link={tile.target} className="block shrink-0 grow basis-0">
-      <div className="relative h-[160px] sm:h-[256px] md:h-[356px]">
+      <div className="relative" style={{ paddingBottom: '122%' }}>
         <Image
           {...tile.image}
           sizes={tileImageSizes}
