@@ -4,12 +4,12 @@ import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import * as screensizes from 'helpers/utils/screensizes';
 import { Reference } from 'types/reference';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
-import ReferenceLink from '../../atoms/link';
-import Column, { Link } from './column';
+import Link from '../../atoms/link';
+import Column, { Link as FooterLink } from './column';
 
 export interface FooterColumn {
   header?: string;
-  links?: Link[];
+  links?: FooterLink[];
 }
 export interface Props {
   columns: FooterColumn[];
@@ -68,9 +68,9 @@ const Footer: React.FC<Props> = ({ columns, logo, socialMedia }) => {
         <ul className="mt-40 flex flex-row gap-20 self-center lg:mt-0">
           {socialMedia?.map((item, i) => (
             <li key={i} className="w-22">
-              <ReferenceLink link={item.reference}>
+              <Link link={item.reference}>
                 <Image {...item.logo} className="mb-20" />
-              </ReferenceLink>
+              </Link>
             </li>
           ))}
         </ul>
