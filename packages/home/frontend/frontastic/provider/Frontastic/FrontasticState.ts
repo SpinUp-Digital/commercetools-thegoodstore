@@ -38,6 +38,7 @@ import { UseWishlist } from './UseWishlist';
 import { UseProduct } from './UseProduct';
 import { UseAdyen } from './UseAdyen';
 import { Cart } from '@commercetools/domain-types/cart/Cart';
+import { Wishlist } from '@commercetools/domain-types/wishlist/Wishlist';
 
 export interface FrontasticState {
   useCart: UseCart;
@@ -54,6 +55,9 @@ export const getFrontasticState = (): FrontasticState => {
   const accountData = getAccount();
 
   const wishlistData = getWishlist();
+
+  const totalWishlistItems =
+    (wishlistData.data as Wishlist)?.lineItems?.reduce((acc, curr) => acc + curr.count, 0) ?? 0;
 
   const categoriesData = queryCategories();
 
@@ -92,6 +96,7 @@ export const getFrontasticState = (): FrontasticState => {
     },
     useWishlist: {
       ...wishlistData,
+      totalItems: totalWishlistItems,
       addToWishlist,
       removeLineItem,
       updateLineItem,

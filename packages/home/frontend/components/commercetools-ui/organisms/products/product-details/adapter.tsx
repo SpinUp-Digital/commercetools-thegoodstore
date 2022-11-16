@@ -7,7 +7,6 @@ import usePreloadImages from 'helpers/hooks/usePreloadImages';
 import { toUIColor } from 'helpers/mappers/toUIColor';
 import { toUIProduct } from 'helpers/mappers/toUIProduct';
 import { toUISize } from 'helpers/mappers/toUIsize';
-import { useWishlist } from 'frontastic';
 import ProductDetails, { ProductDetailsProps } from '.';
 
 type ProductDetailsAdapterProps = {
@@ -18,7 +17,6 @@ type ProductDetailsAdapterProps = {
 
 const ProductDetailsAdapter: FC<ProductDetailsAdapterProps> = ({ product, inModalVersion, setIsOpen }) => {
   const router = useRouter();
-  const wishlist = useWishlist();
 
   const [variant, setVariant] = useState<Variant>();
   const [mappedProduct, setMappedProduct] = useState<UIProduct>();
@@ -54,15 +52,6 @@ const ProductDetailsAdapter: FC<ProductDetailsAdapterProps> = ({ product, inModa
     });
   }, [router]);
 
-  const handleAddToWishList = () => {
-    wishlist.addToWishlist(variant.sku, 1);
-  };
-
-  const handleRemoveFromWishlist = () => {
-    const item = wishlist.data.lineItems.find(({ variant: { sku } }) => sku === variant.sku);
-    wishlist.removeLineItem(item?.lineItemId);
-  };
-
   const handleChangeVariant = (sku: string) => {
     const variantsToUse = product.variants.find((variant) => variant.sku === sku);
     setVariant(variantsToUse);
@@ -76,8 +65,6 @@ const ProductDetailsAdapter: FC<ProductDetailsAdapterProps> = ({ product, inModa
         product={mappedProduct}
         variant={variant}
         url={product._url}
-        onAddToWishlist={handleAddToWishList}
-        onRemoveFromWishlist={handleRemoveFromWishlist}
         inModalVersion={inModalVersion}
         onChangeVariant={handleChangeVariant}
         setIsOpen={setIsOpen}

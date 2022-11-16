@@ -4,8 +4,8 @@ import Button from 'components/commercetools-ui/atoms/button';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { Market } from 'components/commercetools-ui/organisms/header/types';
 import FlagIcons from 'components/icons/flags';
-import { useFormat } from 'helpers/hooks/useFormat';
 import useClassNames from 'helpers/hooks/useClassNames';
+import { useFormat } from 'helpers/hooks/useFormat';
 
 interface Props {
   market?: Market;

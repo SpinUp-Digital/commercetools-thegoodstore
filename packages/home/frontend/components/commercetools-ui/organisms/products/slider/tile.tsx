@@ -1,15 +1,15 @@
-import React, { FC, useCallback, useMemo, useState } from 'react';
+import React, { FC, useMemo, useState } from 'react';
 import NextLink from 'next/link';
 import { Product } from '@commercetools/domain-types/product/Product';
 import { Variant } from '@commercetools/domain-types/product/Variant';
+import { LineItem } from '@commercetools/domain-types/wishlist/LineItem';
 import Slider from 'components/commercetools-ui/atoms/slider';
-import HeartIcon from 'components/icons/heart';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import usePreloadImages from 'helpers/hooks/usePreloadImages';
 import { desktop } from 'helpers/utils/screensizes';
-import { useWishlist } from 'frontastic';
 import Image from 'frontastic/lib/image';
+import WishlistButton from '../../wishlist-button';
 import QuickView from '../product-quick-view';
 
 interface TileProps {
@@ -32,9 +32,8 @@ const Tile: FC<TileProps> = ({ product }) => {
         variantReturned = variant;
       }
     }
-
     return variantReturned;
-  }, [product?.variants]);
+  }, [product]);
 
   const discountedPrice = useMemo(() => variantWithDiscount?.discountedPrice, [variantWithDiscount]);
 
@@ -49,28 +48,21 @@ const Tile: FC<TileProps> = ({ product }) => {
 
   const [selectedVariant, setSelectedVariant] = useState(() => variantWithDiscount ?? product?.variants[0]);
 
-  const { addToWishlist, removeLineItem, data } = useWishlist();
-
-  const [processing, setProcessing] = useState(false);
-
-  const wishlistLineItem = useMemo(() => {
-    return data?.lineItems?.find((lineItem) =>
-      product?.variants.find((variant) => variant.sku === lineItem.variant?.sku),
-    );
-  }, [data, product?.variants]);
-
-  const handleAddToWishlist = useCallback(async () => {
-    if (processing) return;
-
-    setProcessing(true);
-
-    if (wishlistLineItem) await removeLineItem(wishlistLineItem.lineItemId);
-    else await addToWishlist(selectedVariant.sku, 1);
-
-    setProcessing(false);
-  }, [addToWishlist, selectedVariant, wishlistLineItem, processing, removeLineItem]);
-
   const [imageHovered, setImageHovered] = useState(false);
+
+  const productToWishlistLineItem = useMemo<LineItem>(() => {
+    if (product) {
+      return {
+        lineItemId: product.productId,
+        productId: product.productId,
+        name: product.name,
+        count: 1,
+        variant: selectedVariant,
+        addedAt: new Date(),
+        _url: product._url,
+      };
+    }
+  }, [product, selectedVariant]);
 
   return (
     <div className="relative w-full">
@@ -134,15 +126,10 @@ const Tile: FC<TileProps> = ({ product }) => {
             </NextLink>
           </div>
         )}
-        <span
-          onClick={handleAddToWishlist}
-          className="absolute right-0 top-0 z-10 flex h-[32px] w-[32px] cursor-pointer items-center justify-center md:h-[48px] md:w-[48px]"
-        >
-          <HeartIcon
+        <span className="absolute right-0 top-0 z-10 flex h-[32px] w-[32px] cursor-pointer items-center justify-center md:h-[48px] md:w-[48px]">
+          <WishlistButton
+            lineItem={productToWishlistLineItem}
             className="h-[16px] w-[16px] md:h-[20px] md:w-[20px] lg:h-[24px] lg:w-[24px]"
-            pathClassName={`transition duration-150 ease-out hover:fill-accent-red hover:stroke-accent-red ${
-              wishlistLineItem ? 'fill-accent-red stroke-accent-red' : 'fill-white stroke-secondary-black'
-            }`}
           />
         </span>
         <div className="absolute left-0 bottom-0 z-10 w-full text-center">

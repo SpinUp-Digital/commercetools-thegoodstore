@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import NextLink from 'next/link';
-import { resolveReferenceProps, resolveReferenceTarget } from 'helpers/reference';
 import useClassNames from 'helpers/hooks/useClassNames';
+import { resolveReferenceProps, resolveReferenceTarget } from 'helpers/reference';
 import { Reference } from 'types/reference';
 
 interface Props extends React.ComponentProps<'a'> {

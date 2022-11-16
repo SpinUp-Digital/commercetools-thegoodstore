@@ -1,9 +1,9 @@
 import React from 'react';
+import useImageSizes from 'helpers/hooks/useImageSizes';
 import { Reference } from 'types/reference';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
 import Link from '../../atoms/link';
 import Typography from '../../atoms/typography';
-import useImageSizes from 'helpers/hooks/useImageSizes';
 
 export interface Props {
   tile: {

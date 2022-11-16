@@ -29,7 +29,6 @@ export interface HeaderProps {
   links: Category[];
   markets: Market[];
   market: Market;
-  wishlistItemCount?: number;
   logo: NextFrontasticImage;
   logoLink: Reference;
   account: Account;

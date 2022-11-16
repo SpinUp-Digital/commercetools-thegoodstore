@@ -1,4 +1,5 @@
 import { Money } from '@commercetools/domain-types/product/Money';
+import { Product } from '@commercetools/domain-types/product/Product';
 import { Variant } from '@commercetools/domain-types/product/Variant';
 
 export type UIProduct = {
@@ -10,7 +11,7 @@ export type UIProduct = {
   sizes: UISize[];
   description: string;
   details: UIDetail[];
-};
+} & Product;
 
 interface UIImage {
   id: string;

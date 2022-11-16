@@ -1,7 +1,7 @@
+import React from 'react';
 import Button from 'components/commercetools-ui/atoms/button';
 import Link from 'components/commercetools-ui/atoms/link';
 import { useFormat } from 'helpers/hooks/useFormat';
-import React from 'react';
 
 const LoggedOut = () => {
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });

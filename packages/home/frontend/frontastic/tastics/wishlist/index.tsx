@@ -7,7 +7,7 @@ const WishlistTastic = ({ data }) => {
   const { data: wishlist, removeLineItem } = useWishlist();
 
   const removeLineItems = async (item: LineItem) => {
-    await removeLineItem(item.lineItemId);
+    await removeLineItem(wishlist, item);
   };
 
   return (

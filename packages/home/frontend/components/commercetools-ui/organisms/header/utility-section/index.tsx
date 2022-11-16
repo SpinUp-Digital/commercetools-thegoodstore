@@ -1,24 +1,25 @@
 import React, { useState } from 'react';
 import { Account } from '@commercetools/domain-types/account/Account';
-import { UserIcon, HeartIcon } from '@heroicons/react/24/outline';
+import { UserIcon } from '@heroicons/react/24/outline';
 import Link from 'components/commercetools-ui/atoms/link';
 import Slideout, { State as MenuState } from 'components/commercetools-ui/atoms/slide-out';
 import CartIcon from 'components/icons/cart';
+import WishlistIcon from 'components/icons/wishlist';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { Reference } from 'types/reference';
-import { useCart } from 'frontastic/provider';
+import { useCart, useWishlist } from 'frontastic/provider';
 
 interface Props {
   accountLink: Reference;
   account: Account;
   cartItemCount?: number;
   cartLink?: Reference;
-  wishlistItemCount?: number;
   wishlistLink?: Reference;
 }
 
-const UtilitySection: React.FC<Props> = ({ accountLink, wishlistItemCount }) => {
+const UtilitySection: React.FC<Props> = ({ accountLink }) => {
   const { totalItems: totalCartItems } = useCart();
+  const { totalItems: totalWishlistItems } = useWishlist();
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
   const { formatMessage: formatWishlistMessage } = useFormat({ name: 'wishlist' });
@@ -41,8 +42,7 @@ const UtilitySection: React.FC<Props> = ({ accountLink, wishlistItemCount }) => 
           className="relative mx-5 h-30  cursor-pointer lg:mx-10"
           onClick={() => setMenuState('wishlist')}
         >
-          {wishlistItemCount > 0 && <span className="absolute -top-5 -right-4 h-8 w-8 rounded-full bg-green-500" />}
-          <HeartIcon className="w-25 text-secondary-black" />
+          <WishlistIcon totalWishlistItems={totalWishlistItems} className="w-25 text-secondary-black" />
         </div>
 
         <div

@@ -1,5 +1,6 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { LineItem } from '@commercetools/domain-types/cart/LineItem';
+import { LineItem as LineItemWishlist } from '@commercetools/domain-types/wishlist/LineItem';
 import { TrashIcon } from '@heroicons/react/24/outline';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import useClassNames from 'helpers/hooks/useClassNames';
@@ -16,7 +17,7 @@ const CartItem: React.FC<Props> = ({ item }) => {
 
   const { removeItem, updateItem } = useCart();
 
-  const { addToWishlist } = useWishlist();
+  const { data: wishlist, addToWishlist } = useWishlist();
 
   const [processing, setProcessing] = useState(false);
 
@@ -38,10 +39,22 @@ const CartItem: React.FC<Props> = ({ item }) => {
     [updateItem, processing, item],
   );
 
+  const cartLineItemToWishlistLineItem = useMemo<LineItemWishlist>(() => {
+    return {
+      lineItemId: item.lineItemId,
+      productId: item.productId,
+      name: item.name,
+      type: item.type,
+      count: 1,
+      variant: item.variant,
+      addedAt: new Date(),
+      _url: item._url,
+    };
+  }, [item]);
   const moveToWishlist = useCallback(() => {
     removeItem(item.lineItemId);
-    addToWishlist(item.variant.sku, 1);
-  }, [removeItem, item.lineItemId, item.variant.sku, addToWishlist]);
+    addToWishlist(wishlist, cartLineItemToWishlistLineItem, 1);
+  }, [removeItem, item.lineItemId, addToWishlist, wishlist, cartLineItemToWishlistLineItem]);
 
   return (
     <div className="flex max-w-full items-stretch justify-start gap-10 py-18 md:gap-15">
