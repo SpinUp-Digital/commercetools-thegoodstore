@@ -31,7 +31,7 @@ const Column: React.FC<Props> = ({ header, links, className }) => {
       <ul role="list" className="flex flex-col gap-y-12 sm:self-center md:items-center lg:items-start lg:self-start">
         {links.map((item, i) => (
           <li key={i} className="lg:text-16">
-            <Link className="text-14" link={item.reference}>
+            <Link variant="primary" link={item.reference}>
               <Typography as="fragment">{item.name}</Typography>
             </Link>
           </li>
