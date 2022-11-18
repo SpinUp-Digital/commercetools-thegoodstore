@@ -50,7 +50,7 @@ const UtilitySection: React.FC<Props> = ({ accountLink }) => {
           className="relative mx-5 cursor-pointer lg:mx-10"
           onClick={() => setMenuState('cart')}
         >
-          <CartIcon className="w-25" totalCartItems={totalCartItems} />
+          <CartIcon className="w-25 stroke-secondary-black" totalCartItems={totalCartItems} />
         </div>
       </div>
 
