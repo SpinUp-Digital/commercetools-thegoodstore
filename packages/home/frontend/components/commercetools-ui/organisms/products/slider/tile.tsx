@@ -70,7 +70,7 @@ const Tile: FC<TileProps> = ({ product }) => {
         className="relative w-full"
         onMouseEnter={() => setImageHovered(true)}
         onMouseLeave={() => setImageHovered(false)}
-        onClick={() => setImageHovered(false)}
+        // onClick={() => setImageHovered(false)}
       >
         {isDesktopSize ? (
           <Slider
