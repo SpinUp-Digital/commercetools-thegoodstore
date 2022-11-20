@@ -32,6 +32,7 @@
   "verification.resent": "Eine E-Mail wurde an {email} gesendet",
   "password.reset.headline": "Setze dein Passwort zurück",
   "password.reset.desc": "Füllen Sie die Felder unten aus, um Ihr Passwort zurückzusetzen",
+  "password.reset.keyword": "Reset",
   "account.security.warning": "Seien Sie vorsichtig, wenn Sie diese Einstellung verwenden.",
   "orders.history": "Meine Bestellhistorie",
   "orders.desc": "Überprüfen Sie den Status der letzten Bestellungen, verwalten Sie Rücksendungen und laden Sie Rechnungen herunter.",
@@ -47,5 +48,6 @@
   "hello": "Hallo, ",
   "account.button": "Anmelden / Konto erstellen",
   "signout": "Abmelden",
-  "user":"Benutzer / Benutzerin"
+  "user":"Benutzer / Benutzerin",
+  "account.back.sign": "Zurück zum Anmelden"
 }

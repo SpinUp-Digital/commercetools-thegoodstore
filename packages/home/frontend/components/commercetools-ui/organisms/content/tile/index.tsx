@@ -41,7 +41,7 @@ const Tile: React.FC<TileProps> = ({
         <Typography
           as="h2"
           className="text-shadow mt-18  text-white lg:text-28"
-          fontSize={24}
+          fontSize={26}
           align="center"
           medium
           fontFamily="libre"

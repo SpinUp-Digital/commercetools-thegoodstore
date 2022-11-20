@@ -38,7 +38,7 @@ const Typography: React.FC<TypographyProps> = ({
 
   const fontFamiliesRef = {
     inter: 'body',
-    body: 'heading',
+    libre: 'heading',
   };
 
   // Constructing classnames of the element

@@ -18,7 +18,7 @@
   "account.security.warning": "Be careful when using this setting",
   "rememberMe": "Remember me",
   "password": "Password",
-  "password.confirm": "Confirm Password",
+  "password.confirm": "Confirm password",
   "password.forgot": "Forgot your password?",
   "password.old": "Old Password",
   "sign.in": "Sign in",
@@ -33,6 +33,7 @@
   "verification.resent": "An email was sent to {email}",
   "password.reset.headline": "Reset your password",
   "password.reset.desc": "Fill the fields below to complete your password reset",
+  "password.reset.keyword": "Reset",
   "settings": "Settings",
   "general": "General",
   "addresses": "Addresses",
@@ -44,5 +45,6 @@
   "user": "User",
   "membership.info": "Membership info",
   "not.member": "Not a member",
-  "join.here": "Join here"
+  "join.here": "Join here",
+  "account.back.sign": "Back to sign in"
 }

@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { useRouter } from 'next/router';
+import Button from 'components/commercetools-ui/atoms/button';
+import { InputProps } from 'components/commercetools-ui/atoms/input';
+import Link from 'components/commercetools-ui/atoms/link';
+import PasswordInput from 'components/commercetools-ui/atoms/password-input';
+import Typography from 'components/commercetools-ui/atoms/typography';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { resolveReferenceTarget } from 'helpers/reference';
 import { Reference } from 'types/reference';
 import { useAccount } from 'frontastic';
-import Image, { NextFrontasticImage } from 'frontastic/lib/image';
 
 export interface ResetPasswordProps {
-  logo?: NextFrontasticImage;
   token?: string | string[];
-  accountLink?: Reference;
+  accountLink: Reference;
+  signInLink: Reference;
 }
 
-const ResetPassword: React.FC<ResetPasswordProps> = ({ logo, token, accountLink }) => {
+const ResetPassword: FC<ResetPasswordProps> = ({ token, accountLink, signInLink }) => {
   //i18n messages
   const { formatMessage: formatErrorMessage } = useFormat({ name: 'error' });
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
@@ -33,8 +37,8 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({ logo, token, accountLink 
   const [loading, setLoading] = useState(false);
 
   //handle text input change
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setData({ ...data, [e.target.name]: e.target.value });
+  const handleChange: InputProps['onChange'] = ({ target: { name, value } }) => {
+    setData({ ...data, [name]: value });
   };
 
   //data validation
@@ -76,74 +80,47 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({ logo, token, accountLink 
   };
 
   return (
-    <>
-      <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="relative h-12">
-            <Image {...logo} alt="Logo" layout="fill" objectFit="contain" />
-          </div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            {formatAccountMessage({ id: 'password.reset.headline', defaultMessage: 'Reset your password' })}
-          </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            {formatAccountMessage({
-              id: 'password.reset.desc',
-              defaultMessage: 'Fill the fields below to complete your password reset',
-            })}
-          </p>
-        </div>
+    <div className="m-auto grid max-w-[480px]">
+      <Typography fontFamily="libre" className="mb-16 text-16 md:mb-24 md:text-20 lg:text-24">
+        {formatAccountMessage({ id: 'password.reset.headline', defaultMessage: 'Reset your password' })}
+      </Typography>
 
-        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <form className="space-y-6" onSubmit={handleSubmit}>
-              {error && <p className="text-sm">{error}</p>}
-              <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                  {formatAccountMessage({ id: 'password', defaultMessage: 'Password' })}
-                </label>
-                <div className="mt-1">
-                  <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    autoComplete="current-password"
-                    required
-                    className="block w-full appearance-none rounded-md border border-gray-300 py-2 px-3 shadow-sm placeholder:text-gray-400 focus:outline-none sm:text-sm"
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
+      <form onSubmit={handleSubmit}>
+        {error && (
+          <Typography fontSize={12} className="mb-12 capitalize text-accent-red">
+            {error}
+          </Typography>
+        )}
 
-              <div>
-                <label htmlFor="confirm-password" className="block text-sm font-medium text-gray-700">
-                  {formatAccountMessage({ id: 'password.confirm', defaultMessage: 'Confirm Password' })}
-                </label>
-                <div className="mt-1">
-                  <input
-                    id="confirm-password"
-                    name="confirmPassword"
-                    type="password"
-                    autoComplete="current-password"
-                    required
-                    className="block w-full appearance-none rounded-md border border-gray-300 py-2 px-3 shadow-sm placeholder:text-gray-400 focus:outline-none sm:text-sm"
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
-              <div>
-                <button
-                  type="submit"
-                  className="flex w-full justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-white shadow-sm transition-colors duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:bg-gray-200"
-                  disabled={loading}
-                >
-                  {formatAccountMessage({ id: 'submit', defaultMessage: 'Submit' })}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </>
+        <PasswordInput
+          required
+          id="password"
+          name="password"
+          autoComplete="current-password"
+          placeholder={formatAccountMessage({ id: 'password', defaultMessage: 'Password' })}
+          className="mb-16 md:mb-20"
+          onChange={handleChange}
+        />
+
+        <PasswordInput
+          required
+          id="confirm-password"
+          name="confirmPassword"
+          autoComplete="current-password"
+          placeholder={formatAccountMessage({ id: 'password.confirm', defaultMessage: 'Confirm Password' })}
+          className="mb-16 md:mb-20"
+          onChange={handleChange}
+        />
+
+        <Button size="full" type="submit" className="mb-16 text-16 leading-tight md:mb-20" disabled={loading}>
+          {formatAccountMessage({ id: 'password.reset.keyword', defaultMessage: 'Reset' })}
+        </Button>
+
+        <Link variant="menu-item" className="mx-auto block w-fit border-b-[1px]" link={signInLink}>
+          {formatAccountMessage({ id: 'account.back.sign', defaultMessage: 'Back to sign in' })}
+        </Link>
+      </form>
+    </div>
   );
 };
 

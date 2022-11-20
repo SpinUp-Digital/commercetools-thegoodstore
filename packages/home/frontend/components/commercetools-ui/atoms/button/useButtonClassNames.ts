@@ -48,7 +48,7 @@ const useButtonClassNames: UseButtonClassNames = ({ variant, size, className, in
     variantClassNames[variant],
     { 'rounded-md': variant !== 'ghost' },
     { 'flex gap-10 items-center': includesIcon },
-    'relative text-12 font-body font-medium leading-4',
+    'relative text-12 leading-4',
   ]);
 
   return buttonClassName;
