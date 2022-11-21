@@ -39,10 +39,13 @@ const DiscountForm: React.FC<Props> = ({ className }) => {
     setProcessing(true);
 
     redeemDiscountCode(code)
-      .catch(() => setCodeIsInvalid(true))
+      .then(() => setCode(''))
+      .catch(() => {
+        setCodeIsInvalid(true);
+        setCode(code);
+      })
       .finally(() => {
         setProcessing(false);
-        if (!codeIsInvalid) setCode('');
       });
   };
 
