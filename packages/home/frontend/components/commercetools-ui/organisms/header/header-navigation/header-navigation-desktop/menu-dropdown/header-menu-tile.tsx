@@ -13,11 +13,11 @@ export interface Props {
 const HeaderDropdownTile: FC<Props> = ({ tileContent, market }) => {
   const locale = market?.locale;
   const tileHeaderTextClassName = useClassNames([
-    'absolute top-83 left-1/2 h-35 w-full -translate-x-1/2 -translate-y-1/2 text-28 text-white drop-shadow-xl',
+    ' text-white drop-shadow-xl pb-15',
     tileContent?.tileHeaderDecoration,
   ]);
   const tileButtonClassName = useClassNames([
-    'absolute top-144 left-1/2 -translate-x-1/2 -translate-y-1/2 border-b-2 text-24 text-white drop-shadow-xl',
+    'border-b-2 text-white drop-shadow-xl',
     tileContent?.tileButtonLabelDecoration,
   ]);
 
@@ -30,12 +30,18 @@ const HeaderDropdownTile: FC<Props> = ({ tileContent, market }) => {
         className="brightness-75"
         alt={tileContent?.tileImage.title[locale]}
       />
-      <Typography as="h3" align="center" medium className={tileHeaderTextClassName}>
-        {tileContent?.tileHeaderText}
-      </Typography>
-      <Link link={tileContent?.tileButtonLink} className={tileButtonClassName}>
-        {tileContent?.tileButtonLabel}
-      </Link>
+      <div className="absolute top-[42%] left-1/2 h-35 w-full -translate-x-1/2 -translate-y-1/2">
+        <Typography fontSize={28} fontFamily="libre" medium as="h3" align="center" className={tileHeaderTextClassName}>
+          {tileContent?.tileHeaderText}
+        </Typography>
+        <div className="flex justify-center">
+          <Link link={tileContent?.tileButtonLink} className={tileButtonClassName}>
+            <Typography fontSize={22} fontFamily="inter">
+              {tileContent?.tileButtonLabel}
+            </Typography>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,25 +1,36 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Header from 'components/commercetools-ui/organisms/header';
 import { useRouter } from 'next/router';
-import { useCart, useWishlist, useAccount } from 'frontastic/provider';
+import { useCart } from 'frontastic/provider';
 import { Market } from 'components/commercetools-ui/organisms/header/types';
 import AnnouncementBar from 'components/commercetools-ui/organisms/bar/announcement';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
+import useResizeObserver from 'helpers/hooks/useResizeObserver';
 
 const HeaderTastic = ({ data, categories }) => {
   const headerRef = useRef(null);
   const { getProjectSettings } = useCart();
-  const { account } = useAccount();
   const [markets, setMarkets] = useState<Market[]>([]);
   const [market, setMarket] = useState<Market>(undefined);
   const router = useRouter();
   const [screenWidth] = useMediaQuery();
 
-  useEffect(() => {
+  const getCurrency = (country: string) => {
+    switch (country) {
+      case 'GB':
+        return { currency: 'GBP', currencyCode: '£' };
+      default:
+        return { currency: 'EUR', currencyCode: '€' };
+    }
+  };
+
+  const setPaddingTop = useCallback(() => {
     if (headerRef.current) {
       document.body.style.paddingTop = `${headerRef.current.clientHeight}px`;
     }
   }, [screenWidth]);
+
+  useResizeObserver(headerRef, setPaddingTop);
 
   useEffect(() => {
     getProjectSettings().then((data) => {
@@ -27,8 +38,8 @@ const HeaderTastic = ({ data, categories }) => {
         region: country,
         flag: country,
         locale: data.languages[index],
-        currency: 'EUR',
-        currencyCode: '&#8364;',
+        currency: getCurrency(country).currency,
+        currencyCode: getCurrency(country).currencyCode,
       }));
       setMarkets(initialMarkets);
 
@@ -64,8 +75,6 @@ const HeaderTastic = ({ data, categories }) => {
         market={market}
         logo={data.logo}
         logoLink={data.logoLink}
-        account={account}
-        accountLink={data.accountLink}
         tiles={data.tiles}
         handleMarket={handleMarket}
       />

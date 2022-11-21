@@ -1,4 +1,3 @@
-import { Account } from '@commercetools/domain-types/account/Account';
 import { Category } from '@commercetools/domain-types/product/Category';
 import { Reference } from 'types/reference';
 import { NextFrontasticImage } from 'frontastic/lib/image';
@@ -31,8 +30,6 @@ export interface HeaderProps {
   market: Market;
   logo: NextFrontasticImage;
   logoLink: Reference;
-  account: Account;
-  accountLink: Reference;
   tiles?: Tile[];
   handleMarket: (market: Market) => void;
 }

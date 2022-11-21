@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ChevronDownIcon, CheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { CheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import Button from 'components/commercetools-ui/atoms/button';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { Market } from 'components/commercetools-ui/organisms/header/types';
@@ -32,18 +32,18 @@ const MarketButton: React.FC<Props> = ({ market: selectedMarket, markets, handle
   };
 
   const marketMenuClassName = useClassNames([
-    'delay-50 fixed top-0 z-20 h-full w-356 bg-white transition ease-in-out',
-    showMarket ? 'left-0 translate-x-0' : '-translate-x-400',
+    'delay-50 fixed top-0 z-20 h-full w-fit bg-white transition ease-in-out',
+    showMarket ? 'left-0 translate-x-0' : '-translate-x-[500px]',
   ]);
+
+  const marketButtonLabel = `${selectedMarket?.region} | ${selectedMarket?.currency} ${selectedMarket?.currencyCode}`;
 
   return (
     <div className="ml-10 hidden justify-center md:w-109 lg:flex lg:w-200 xl:w-300">
       {selectedMarket && (
-        <Button variant="ghost" onClick={showMarketMenu} className="flex items-center justify-center p-3 text-14">
-          <FlagIcons flagName={selectedMarket?.flag} className="mr-8 text-14" />
-          {selectedMarket?.region} | {selectedMarket?.currency}
-          <span dangerouslySetInnerHTML={{ __html: selectedMarket?.currencyCode }} className="ml-5 mr-20" />
-          <ChevronDownIcon className="h-11 w-11" />
+        <Button variant="ghost" onClick={showMarketMenu} className="flex w-full items-center justify-center p-3">
+          <FlagIcons flagName={selectedMarket?.flag} className="mr-3 w-30" />
+          <span className="ml-5 mr-20 text-14 font-normal text-secondary-black">{marketButtonLabel}</span>
         </Button>
       )}
       {showMarket && (
@@ -51,32 +51,33 @@ const MarketButton: React.FC<Props> = ({ market: selectedMarket, markets, handle
       )}
 
       <div onClick={hideMarketMenu} className={marketMenuClassName}>
-        <div className="flex w-full justify-end">
+        <div className="flex w-full items-center justify-between border-b-[1px] border-neutral-400 py-20">
+          <Typography as="h5" fontFamily="libre" fontSize={22} className=" pl-15 text-secondary-black">
+            {formatMarketMessage({ id: 'select.market', defaultMessage: 'Select your market' })}
+          </Typography>
           <Button
             variant="ghost"
             onClick={hideMarketMenu}
             title={formatMarketMessage({ id: 'close', defaultMessage: 'Close' })}
           >
-            <XMarkIcon className="m-16 w-20" />
+            <XMarkIcon className="w-25" />
           </Button>
         </div>
-        <Typography as="h5" fontSize={22} className="px-26 pb-24 text-secondary-black">
-          {formatMarketMessage({ id: 'select.market', defaultMessage: 'Select your market' })}
-        </Typography>
-        <>
+
+        <div className="py-35">
           {markets.map((market) => (
             <Button
               key={market.flag}
-              variant="secondary"
+              variant="ghost"
               onClick={() => handleMarketClick(market)}
-              className="flex w-full items-center justify-start"
+              className="ml-5 flex w-full items-center justify-start py-15 text-16"
             >
-              {selectedMarket?.region === market?.region && <CheckIcon className="mr-11 w-20" />}
-              <FlagIcons flagName={market.flag} className="mr-8 text-14" />
+              {selectedMarket?.region === market?.region && <CheckIcon className="ml-5 mr-11 w-20" />}
+              <FlagIcons flagName={market.flag} className="mr-8 w-30" />
               {market.region}
             </Button>
           ))}
-        </>
+        </div>
       </div>
     </div>
   );

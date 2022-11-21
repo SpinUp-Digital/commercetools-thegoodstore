@@ -1,26 +1,14 @@
 import React, { useState } from 'react';
-import { Account } from '@commercetools/domain-types/account/Account';
-import { UserIcon } from '@heroicons/react/24/outline';
-import Link from 'components/commercetools-ui/atoms/link';
 import Slideout, { State as MenuState } from 'components/commercetools-ui/atoms/slide-out';
 import CartIcon from 'components/icons/cart';
 import WishlistIcon from 'components/icons/wishlist';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { Reference } from 'types/reference';
 import { useCart, useWishlist } from 'frontastic/provider';
+import AccountButton from './account-button';
 
-interface Props {
-  accountLink: Reference;
-  account: Account;
-  cartItemCount?: number;
-  cartLink?: Reference;
-  wishlistLink?: Reference;
-}
-
-const UtilitySection: React.FC<Props> = ({ accountLink }) => {
+const UtilitySection: React.FC = () => {
   const { totalItems: totalCartItems } = useCart();
   const { totalItems: totalWishlistItems } = useWishlist();
-  const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
   const { formatMessage: formatWishlistMessage } = useFormat({ name: 'wishlist' });
 
@@ -29,13 +17,7 @@ const UtilitySection: React.FC<Props> = ({ accountLink }) => {
   return (
     <div className="flex h-30 w-109 items-center justify-between lg:mr-12 lg:w-200 xl:w-300">
       <div className="flex w-full justify-center lg:w-210">
-        <Link
-          title={formatAccountMessage({ id: 'account', defaultMessage: 'Account' })}
-          link={accountLink}
-          className="mx-5 lg:mx-10"
-        >
-          <UserIcon className="w-25 text-secondary-black" />
-        </Link>
+        <AccountButton />
 
         <div
           title={formatWishlistMessage({ id: 'wishlist', defaultMessage: 'Wishlist' })}
@@ -50,7 +32,7 @@ const UtilitySection: React.FC<Props> = ({ accountLink }) => {
           className="relative mx-5 cursor-pointer lg:mx-10"
           onClick={() => setMenuState('cart')}
         >
-          <CartIcon className="w-25 stroke-secondary-black" totalCartItems={totalCartItems} />
+          <CartIcon className="w-23 text-secondary-black" totalCartItems={totalCartItems} />
         </div>
       </div>
 
