@@ -48,7 +48,7 @@ const Footer: React.FC<Props> = ({ columns, logo, socialMedia }) => {
               <Accordion
                 closedSectionTitle={column.header}
                 openSectionTitle={column.header}
-                iconColor="text-neutral-500"
+                iconColor="text-neutral-100"
               >
                 <div className="mb-16 flex flex-row text-14 md:ml-24" key={index}>
                   <Column links={column.links} className="px-0" />
