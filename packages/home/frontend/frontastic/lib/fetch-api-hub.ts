@@ -7,11 +7,8 @@ import { Log } from 'helpers/errorLogger';
 import { mapLanguage } from 'project.config';
 
 export function resolveApiHubUrl(): string {
-  //TODO remove hardcoded parameter
-  return 'https://home-thegoodstore.frontastic.io/frontastic';
-
   if (process.env['NEXT_PUBLIC_FRONTASTIC_HOST'] === undefined) {
-    throw new Error(`Env variable "NEXT_PUBLIC_FRONTASTIC_HOST" not set`);
+    return 'https://home-thegoodstore.frontastic.io/frontastic';
   }
   const apiHubUrl = process.env.NEXT_PUBLIC_FRONTASTIC_HOST;
   /*

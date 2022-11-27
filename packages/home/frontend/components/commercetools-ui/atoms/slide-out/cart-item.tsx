@@ -78,7 +78,7 @@ const CartItem: React.FC<Props> = ({ item }) => {
               <span className="text-14 font-semibold leading-loose text-accent-red">
                 {CurrencyHelpers.formatForCurrency(item.discountedPrice)}
               </span>
-              <span className="text-14 font-semibold leading-loose text-gray-500 line-through">
+              <span className="text-12 font-semibold leading-loose text-gray-500 line-through">
                 {CurrencyHelpers.formatForCurrency(item.price)}
               </span>
             </div>
@@ -97,7 +97,7 @@ const CartItem: React.FC<Props> = ({ item }) => {
             </button>
           </div>
         </div>
-        <div className="mt-16 text-14 leading-normal">
+        <div className="mt-16 text-12 leading-normal">
           <p className="cursor-pointer text-secondary-black" onClick={moveToWishlist}>
             {formatCartMessage({ id: 'move.to.wishlist', defaultMessage: 'Move to wishlist' })}
           </p>

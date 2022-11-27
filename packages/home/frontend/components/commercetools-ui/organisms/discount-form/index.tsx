@@ -65,11 +65,6 @@ const DiscountForm: React.FC<Props> = ({ className }) => {
 
   return (
     <div className={className}>
-      <div className="w-full">
-        <p className="text-16 font-semibold">
-          {formatCartMessage({ id: 'discount.apply', defaultMessage: 'Apply a discount' })}
-        </p>
-      </div>
       <div>
         <div>
           <form className="mt-16" onSubmit={handleSubmit}>
