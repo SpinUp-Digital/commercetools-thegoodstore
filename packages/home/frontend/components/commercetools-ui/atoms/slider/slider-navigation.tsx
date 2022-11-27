@@ -2,9 +2,10 @@ import React, { CSSProperties, FC, LegacyRef } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import SwiperType from 'swiper';
 
-export type SliderNavigation = {
+export type SliderNavigationProps = {
   compactNavigation?: boolean;
   arrows?: boolean;
+  innerArrows?: boolean;
   prevButtonStyles?: CSSProperties;
   nextButtonStyles?: CSSProperties;
   totalSlides?: number;
@@ -13,9 +14,10 @@ export type SliderNavigation = {
   navigationNextRef?: LegacyRef<HTMLDivElement>;
 };
 
-const SliderNavigation: FC<SliderNavigation> = ({
+const SliderNavigation: FC<SliderNavigationProps> = ({
   compactNavigation,
   arrows,
+  innerArrows,
   prevButtonStyles,
   nextButtonStyles,
   totalSlides,
@@ -42,10 +44,20 @@ const SliderNavigation: FC<SliderNavigation> = ({
       </div>
     );
 
+  const innerArrowsClassName = innerArrows ? 'slider_arrow_inner' : '';
+
   return (
     <div style={{ display: arrows ? 'block' : 'none' }}>
-      <div ref={navigationPrevRef} className="slider_arrow slider_arrow_prev" style={prevButtonStyles} />
-      <div ref={navigationNextRef} className="slider_arrow slider_arrow_next" style={nextButtonStyles} />
+      <div
+        ref={navigationPrevRef}
+        className={`slider_arrow slider_arrow_prev ${innerArrowsClassName}`}
+        style={prevButtonStyles}
+      />
+      <div
+        ref={navigationNextRef}
+        className={`slider_arrow slider_arrow_next ${innerArrowsClassName}`}
+        style={nextButtonStyles}
+      />
     </div>
   );
 };

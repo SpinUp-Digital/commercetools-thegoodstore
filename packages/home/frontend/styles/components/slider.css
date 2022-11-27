@@ -63,6 +63,14 @@
   transform: translateY(-50%) rotateZ(-45deg);
 }
 
+.slider_arrow_prev.slider_arrow_inner {
+  left: 10px;
+}
+
+.slider_arrow_next.slider_arrow_inner {
+  right: 10px;
+}
+
 .swiper-button-disabled {
   display: none;
 }
