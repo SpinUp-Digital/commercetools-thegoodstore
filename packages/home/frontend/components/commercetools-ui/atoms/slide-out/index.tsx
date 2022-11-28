@@ -71,7 +71,7 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
         shipping: { centAmount: 0 },
         total: { centAmount: 0 },
       };
-    console.log(cartData);
+
     const currencyCode = cartData.sum.currencyCode;
     const fractionDigits = cartData.sum.fractionDigits;
 
