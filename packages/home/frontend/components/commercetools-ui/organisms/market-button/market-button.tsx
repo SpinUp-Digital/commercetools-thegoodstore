@@ -5,7 +5,6 @@ import Drawer from 'components/commercetools-ui/atoms/drawer';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { Market } from 'components/commercetools-ui/organisms/header/types';
 import FlagIcons from 'components/icons/flags';
-import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
 
 interface Props {

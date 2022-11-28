@@ -1,8 +1,8 @@
 import React, { FC, useState } from 'react';
 import { Category } from '@commercetools/domain-types/product/Category';
 import { Bars3Icon } from '@heroicons/react/24/outline';
-import Drawer from 'components/commercetools-ui/atoms/drawer';
 import Button from 'components/commercetools-ui/atoms/button';
+import Drawer from 'components/commercetools-ui/atoms/drawer';
 import MobileMenu from 'components/commercetools-ui/organisms/header/header-navigation/header-navigation-mobile/menu-mobile';
 import { Market } from 'components/commercetools-ui/organisms/header/types';
 import MarketButtonMobile from 'components/commercetools-ui/organisms/market-button/market-button-mobile';
@@ -40,7 +40,7 @@ const HeaderNavigationMobile: FC<Props> = ({ links, market, markets, handleMarke
       >
         <Bars3Icon className="w-30 text-secondary-black" />
       </Button>
-     
+
       <Drawer isOpen={showMenu} direction="left" className="w-4/5" onClose={hideHeaderMenu}>
         <MobileMenu links={links} hideHeaderMenu={hideHeaderMenu} category={category} setCategory={setCategory} />
         <>

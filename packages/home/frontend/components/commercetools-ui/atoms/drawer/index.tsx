@@ -1,7 +1,7 @@
 import React, { FC, useCallback, useEffect, useRef } from 'react';
 import useClassNames from 'helpers/hooks/useClassNames';
-import useScrollBlock from 'helpers/hooks/useScrollBlock';
 import useOnClickOutside from 'helpers/hooks/useOnClickOutside';
+import useScrollBlock from 'helpers/hooks/useScrollBlock';
 
 export interface DrawerProps {
   className?: string;
@@ -22,7 +22,7 @@ const Drawer: FC<DrawerProps> = ({ className, isOpen, direction, blockScrolling 
         blockScroll();
       }
     }
-  }, [isOpen]);
+  }, [isOpen, allowScroll, blockScroll, blockScrolling]);
 
   const ref = useRef();
   useOnClickOutside(ref, () => {
@@ -62,9 +62,7 @@ const Drawer: FC<DrawerProps> = ({ className, isOpen, direction, blockScrolling 
       {isOpen && <div className="fixed top-0 left-0 z-10 h-full w-full bg-secondary-black opacity-30" />}
 
       <div ref={ref} className={drawerClassName}>
-        <>
-          {children}
-        </>
+        <>{children}</>
       </div>
     </>
   );
