@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Drawer from 'components/commercetools-ui/atoms/drawer';
 import Slideout, { State as MenuState } from 'components/commercetools-ui/atoms/slide-out';
 import CartIcon from 'components/icons/cart';
 import WishlistIcon from 'components/icons/wishlist';
@@ -13,6 +14,17 @@ const UtilitySection: React.FC = () => {
   const { formatMessage: formatWishlistMessage } = useFormat({ name: 'wishlist' });
 
   const [menuState, setMenuState] = useState<MenuState>();
+  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
+
+  const onWishlistClicked = () => {
+    setIsDrawerOpen(true);
+    setMenuState('wishlist');
+  };
+
+  const onCartClicked = () => {
+    setIsDrawerOpen(true);
+    setMenuState('cart');
+  };
 
   return (
     <div className="flex h-30 w-109 items-center justify-between lg:mr-12 lg:w-200 xl:w-300">
@@ -22,7 +34,7 @@ const UtilitySection: React.FC = () => {
         <div
           title={formatWishlistMessage({ id: 'wishlist', defaultMessage: 'Wishlist' })}
           className="relative mx-5 h-30  cursor-pointer lg:mx-10"
-          onClick={() => setMenuState('wishlist')}
+          onClick={onWishlistClicked}
         >
           <WishlistIcon totalWishlistItems={totalWishlistItems} className="w-25 text-secondary-black" />
         </div>
@@ -30,19 +42,24 @@ const UtilitySection: React.FC = () => {
         <div
           title={formatCartMessage({ id: 'myCart', defaultMessage: 'My Cart' })}
           className="relative mx-5 cursor-pointer lg:mx-10"
-          onClick={() => setMenuState('cart')}
+          onClick={onCartClicked}
         >
           <CartIcon className="w-23 text-secondary-black" totalCartItems={totalCartItems} />
         </div>
       </div>
 
-      {menuState && <div className="fixed top-0 left-0 z-10 h-full w-full bg-black opacity-50" />}
-
-      <Slideout
-        state={menuState}
-        onClose={() => setMenuState(null)}
-        changeState={(newState) => setMenuState(newState)}
-      />
+      <Drawer
+        isOpen={isDrawerOpen}
+        direction="right"
+        className="w-[90%] max-w-[380px]"
+        onClose={() => setIsDrawerOpen(false)}
+      >
+        <Slideout
+          state={menuState}
+          onClose={() => setIsDrawerOpen(false)}
+          changeState={(newState) => setMenuState(newState)}
+        />
+      </Drawer>
     </div>
   );
 };

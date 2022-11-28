@@ -2,10 +2,10 @@ import React, { FC, useState } from 'react';
 import { Category } from '@commercetools/domain-types/product/Category';
 import { Bars3Icon } from '@heroicons/react/24/outline';
 import Button from 'components/commercetools-ui/atoms/button';
+import Drawer from 'components/commercetools-ui/atoms/drawer';
 import MobileMenu from 'components/commercetools-ui/organisms/header/header-navigation/header-navigation-mobile/menu-mobile';
 import { Market } from 'components/commercetools-ui/organisms/header/types';
 import MarketButtonMobile from 'components/commercetools-ui/organisms/market-button/market-button-mobile';
-import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
 
 export interface Props {
@@ -30,11 +30,6 @@ const HeaderNavigationMobile: FC<Props> = ({ links, market, markets, handleMarke
     setCategory([]);
   };
 
-  const menuClassNames = useClassNames([
-    'delay-50 fixed top-0 z-20 h-full w-4/5 bg-neutral-200 opacity-100 transition ease-in-out',
-    showMenu ? 'left-0 translate-x-0' : '-translate-x-[1000px]',
-  ]);
-
   return (
     <div className="flex md:w-109 lg:hidden">
       <Button
@@ -45,15 +40,13 @@ const HeaderNavigationMobile: FC<Props> = ({ links, market, markets, handleMarke
       >
         <Bars3Icon className="w-30 text-secondary-black" />
       </Button>
-      {showMenu && (
-        <div onClick={hideHeaderMenu} className="fixed top-0 left-0 z-10 h-full w-full bg-gray-400 opacity-30" />
-      )}
-      <div className={menuClassNames}>
+
+      <Drawer isOpen={showMenu} direction="left" className="w-4/5" onClose={hideHeaderMenu}>
         <MobileMenu links={links} hideHeaderMenu={hideHeaderMenu} category={category} setCategory={setCategory} />
         <>
           {category.length <= 0 && <MarketButtonMobile market={market} handleMarket={handleMarket} markets={markets} />}
         </>
-      </div>
+      </Drawer>
     </div>
   );
 };

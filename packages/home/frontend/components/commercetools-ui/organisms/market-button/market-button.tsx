@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { CheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import Button from 'components/commercetools-ui/atoms/button';
+import Drawer from 'components/commercetools-ui/atoms/drawer';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { Market } from 'components/commercetools-ui/organisms/header/types';
 import FlagIcons from 'components/icons/flags';
-import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
 
 interface Props {
@@ -31,11 +31,6 @@ const MarketButton: React.FC<Props> = ({ market: selectedMarket, markets, handle
     setShowMarket(false);
   };
 
-  const marketMenuClassName = useClassNames([
-    'delay-50 fixed top-0 z-20 h-full w-fit bg-white transition ease-in-out',
-    showMarket ? 'left-0 translate-x-0' : '-translate-x-[500px]',
-  ]);
-
   const marketButtonLabel = `${selectedMarket?.region} | ${selectedMarket?.currency} ${selectedMarket?.currencyCode}`;
 
   return (
@@ -46,11 +41,8 @@ const MarketButton: React.FC<Props> = ({ market: selectedMarket, markets, handle
           <span className="ml-5 mr-20 text-14 font-normal text-secondary-black">{marketButtonLabel}</span>
         </Button>
       )}
-      {showMarket && (
-        <div onClick={hideMarketMenu} className="fixed top-0 left-0 z-10 h-full w-full bg-black opacity-50" />
-      )}
 
-      <div onClick={hideMarketMenu} className={marketMenuClassName}>
+      <Drawer isOpen={showMarket} direction="left" className="w-[90%] max-w-[380px]" onClose={hideMarketMenu}>
         <div className="flex w-full items-center justify-between border-b-[1px] border-neutral-400 py-20">
           <Typography as="h5" fontFamily="libre" fontSize={22} className=" pl-15 text-secondary-black">
             {formatMarketMessage({ id: 'select.market', defaultMessage: 'Select your market' })}
@@ -78,7 +70,7 @@ const MarketButton: React.FC<Props> = ({ market: selectedMarket, markets, handle
             </Button>
           ))}
         </div>
-      </div>
+      </Drawer>
     </div>
   );
 };

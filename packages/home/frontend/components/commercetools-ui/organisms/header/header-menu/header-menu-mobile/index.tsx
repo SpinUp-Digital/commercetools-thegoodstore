@@ -2,6 +2,7 @@ import React, { FC, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { Category } from '@commercetools/domain-types/product/Category';
 import Button from 'components/commercetools-ui/atoms/button';
+import Drawer from 'components/commercetools-ui/atoms/drawer';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import MarketButtonMobile from 'components/commercetools-ui/organisms/market-button/market-button-mobile';
 import BackIcon from 'components/icons/back';
@@ -46,14 +47,8 @@ const HeaderMenuMobile: FC<Props> = ({ links, language, languages, handleCurrent
       >
         <MenuIcon className="" />
       </Button>
-      {showMenu && (
-        <div onClick={hideHeaderMenu} className="fixed top-0 left-0 z-10 h-full w-full bg-black opacity-50" />
-      )}
-      <div
-        className={`delay-50 fixed top-0 z-20 h-full w-4/5 bg-neutral-200 opacity-100 transition ease-in-out ${
-          showMenu ? 'left-0 translate-x-0' : '-translate-x-[1000px]'
-        }`}
-      >
+
+      <Drawer isOpen={showMenu} direction="left" className="w-[90%] max-w-[380px]" onClose={hideHeaderMenu}>
         <div className="flex h-83 w-full justify-between bg-neutral-300">
           {selected.length > 0 && (
             <button
@@ -122,7 +117,7 @@ const HeaderMenuMobile: FC<Props> = ({ links, language, languages, handleCurrent
             <MarketButtonMobile market={language} handleMarket={handleCurrentMarket} markets={languages} />
           )}
         </>
-      </div>
+      </Drawer>
     </div>
   );
 };
