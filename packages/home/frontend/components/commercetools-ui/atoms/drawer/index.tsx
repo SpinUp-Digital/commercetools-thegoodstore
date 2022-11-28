@@ -5,24 +5,20 @@ import useScrollBlock from 'helpers/hooks/useScrollBlock';
 
 export interface DrawerProps {
   className?: string;
-  isOpen: boolean | string | undefined | null;
+  isOpen: boolean;
   direction: 'left' | 'top' | 'right' | 'bottom';
   blockScrolling?: boolean;
   onClose?: () => void;
 }
 
 const Drawer: FC<DrawerProps> = ({ className, isOpen, direction, blockScrolling = true, onClose, children }) => {
-  const [allowScroll, blockScroll] = useScrollBlock();
+  const { blockScroll } = useScrollBlock();
 
   useEffect(() => {
     if (blockScrolling) {
-      if (isOpen) {
-        allowScroll();
-      } else {
-        blockScroll();
-      }
+      blockScroll(isOpen);
     }
-  }, [isOpen, allowScroll, blockScroll, blockScrolling]);
+  }, [isOpen, blockScroll, blockScrolling]);
 
   const ref = useRef();
   useOnClickOutside(ref, () => {

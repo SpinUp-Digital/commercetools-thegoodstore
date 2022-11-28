@@ -14,6 +14,17 @@ const UtilitySection: React.FC = () => {
   const { formatMessage: formatWishlistMessage } = useFormat({ name: 'wishlist' });
 
   const [menuState, setMenuState] = useState<MenuState>();
+  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
+
+  const onWishlistClicked = () => {
+    setIsDrawerOpen(true);
+    setMenuState('wishlist');
+  };
+
+  const onCartClicked = () => {
+    setIsDrawerOpen(true);
+    setMenuState('cart');
+  };
 
   return (
     <div className="flex h-30 w-109 items-center justify-between lg:mr-12 lg:w-200 xl:w-300">
@@ -23,7 +34,7 @@ const UtilitySection: React.FC = () => {
         <div
           title={formatWishlistMessage({ id: 'wishlist', defaultMessage: 'Wishlist' })}
           className="relative mx-5 h-30  cursor-pointer lg:mx-10"
-          onClick={() => setMenuState('wishlist')}
+          onClick={onWishlistClicked}
         >
           <WishlistIcon totalWishlistItems={totalWishlistItems} className="w-25 text-secondary-black" />
         </div>
@@ -31,16 +42,21 @@ const UtilitySection: React.FC = () => {
         <div
           title={formatCartMessage({ id: 'myCart', defaultMessage: 'My Cart' })}
           className="relative mx-5 cursor-pointer lg:mx-10"
-          onClick={() => setMenuState('cart')}
+          onClick={onCartClicked}
         >
           <CartIcon className="w-23 text-secondary-black" totalCartItems={totalCartItems} />
         </div>
       </div>
 
-      <Drawer isOpen={menuState} direction="right" className="w-[90%] max-w-[380px]" onClose={() => setMenuState(null)}>
+      <Drawer
+        isOpen={isDrawerOpen}
+        direction="right"
+        className="w-[90%] max-w-[380px]"
+        onClose={() => setIsDrawerOpen(false)}
+      >
         <Slideout
           state={menuState}
-          onClose={() => setMenuState(null)}
+          onClose={() => setIsDrawerOpen(false)}
           changeState={(newState) => setMenuState(newState)}
         />
       </Drawer>

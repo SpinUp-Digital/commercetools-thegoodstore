@@ -1,18 +1,16 @@
-import { useRef } from 'react';
+import { useState, useRef } from 'react';
 
 const useScrollBlock = () => {
   const scroll = useRef(false);
+  const [isBlocked, setIsBlocked] = useState<boolean>(false);
 
-  const blockScroll = () => {
+  const blockScrolling = () => {
     if (typeof document === 'undefined') return;
 
     const html = document.documentElement;
     const { body } = document;
 
     if (!body || !body.style || scroll.current) return;
-
-    const scrollBarWidth = window.innerWidth - html.clientWidth;
-    const bodyPaddingRight = parseInt(window.getComputedStyle(body).getPropertyValue('padding-right')) || 0;
 
     /**
      * 1. Fixes a bug in iOS and desktop Safari whereby setting
@@ -24,12 +22,11 @@ const useScrollBlock = () => {
     body.style.position = 'relative'; /* [1] */
     html.style.overflow = 'hidden'; /* [2] */
     body.style.overflow = 'hidden'; /* [2] */
-    //body.style.paddingRight = `${bodyPaddingRight + scrollBarWidth}px`;
 
     scroll.current = true;
   };
 
-  const allowScroll = () => {
+  const allowScrolling = () => {
     if (typeof document === 'undefined') return;
 
     const html = document.documentElement;
@@ -46,7 +43,17 @@ const useScrollBlock = () => {
     scroll.current = false;
   };
 
-  return [blockScroll, allowScroll];
+  const blockScroll = (status: boolean) => {
+    if (status) {
+      blockScrolling();
+    } else {
+      allowScrolling();
+    }
+
+    setIsBlocked(status);
+  };
+
+  return { isBlocked, blockScroll };
 };
 
 export default useScrollBlock;
