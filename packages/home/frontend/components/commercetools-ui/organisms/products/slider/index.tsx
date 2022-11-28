@@ -9,6 +9,7 @@ import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import { desktop, tablet } from 'helpers/utils/screensizes';
 import { Reference } from 'types/reference';
 import Tile from './tile';
+import useTouchDevice from 'helpers/hooks/useTouchDevice';
 
 export interface Props {
   products: Product[];
@@ -31,6 +32,8 @@ export default function ProductSlider({
 }: Props) {
   const [isDesktopSize] = useMediaQuery(desktop);
 
+  const { isTouchDevice } = useTouchDevice();
+  console.log(isTouchDevice);
   return (
     <Wrapper background="neutral-200" variant="left-padding-only">
       <div>
@@ -62,9 +65,11 @@ export default function ProductSlider({
             slidesPerGroup={1}
             cssMode
             dots={false}
-            arrows={isDesktopSize}
+            arrows={!isTouchDevice}
+            innerArrows={!isDesktopSize}
             nextButtonStyles={{ transform: 'translateY(-250%) rotateZ(-45deg)' }}
             prevButtonStyles={{ transform: 'translateY(-250%) rotateZ(135deg)' }}
+            allowTouchMove={isTouchDevice}
             spaceBetween={8}
             breakpoints={{
               [tablet]: {

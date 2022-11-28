@@ -37,6 +37,7 @@ const Hero: React.FC<HeroProps> = ({ image, title, subtitle, ctaLabel, ctaRefere
           align="center"
           fontSize={26}
           className="mt-22 font-bold text-white md:mt-32 md:text-36 lg:text-56"
+          fontFamily="libre"
         >
           {title}
         </Typography>

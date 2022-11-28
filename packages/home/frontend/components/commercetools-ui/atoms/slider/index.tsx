@@ -7,20 +7,16 @@ import 'swiper/css/pagination'; // eslint-disable-line import/no-unresolved
 import 'swiper/css/scrollbar'; // eslint-disable-line import/no-unresolved
 import { NavigationOptions } from 'swiper/types';
 import useClassNames from 'helpers/hooks/useClassNames';
-import SliderNavigation from './slider-navigation';
+import SliderNavigation, { SliderNavigationProps } from './slider-navigation';
 
-export type SliderProps = {
+export type SliderProps = SliderNavigationProps & {
   className?: string;
   spaceBetween?: number;
   slidesPerView?: number;
-  arrows?: boolean;
   dots?: boolean;
   fitToSlides?: boolean;
   slideWidth?: number;
   withThumbs?: boolean;
-  prevButtonStyles?: React.CSSProperties;
-  nextButtonStyles?: React.CSSProperties;
-  compactNavigation?: boolean;
 } & SwiperProps;
 
 const Slider: FC<SliderProps> = ({
@@ -29,6 +25,7 @@ const Slider: FC<SliderProps> = ({
   slidesPerView,
   fitToSlides = false,
   arrows = false,
+  innerArrows = false,
   dots = true,
   spaceBetween = 20,
   withThumbs,
@@ -127,6 +124,7 @@ const Slider: FC<SliderProps> = ({
         navigationNextRef={navigationNextRef}
         totalSlides={slides?.length}
         swiperRef={swiperRef?.current}
+        innerArrows={innerArrows}
       />
     </div>
   );
