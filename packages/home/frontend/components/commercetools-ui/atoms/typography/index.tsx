@@ -25,7 +25,7 @@ const Typography: React.FC<TypographyProps> = ({
     if (typeof children !== 'string') {
       // Update text based on locale
       const locale = router?.locale || router?.defaultLocale;
-      return children[locale];
+      return children?.[locale];
     }
 
     // Check if there is translation
@@ -60,7 +60,11 @@ const Typography: React.FC<TypographyProps> = ({
     ...props,
   };
 
-  const TypographyElement = createElement(as == 'fragment' ? Fragment : as, elementProps, getContent());
+  const TypographyElement = createElement(
+    as == 'fragment' ? Fragment : as,
+    as !== 'fragment' && elementProps,
+    getContent(),
+  );
 
   return TypographyElement;
 };
