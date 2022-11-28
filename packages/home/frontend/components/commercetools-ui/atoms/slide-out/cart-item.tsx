@@ -88,11 +88,11 @@ const CartItem: React.FC<Props> = ({ item }) => {
         </div>
         <div className="mt-16">
           <div className={counterClassName}>
-            <button onClick={() => updateCartItem(item.count - 1)} className="cursor-[inherit] py-8 pl-12">
+            <button onClick={() => updateCartItem(item.count - 1)} className="cursor-[inherit] py-3 pl-12">
               -
             </button>
-            <span className="py-8 text-14">{item.count}</span>
-            <button onClick={() => updateCartItem(item.count + 1)} className="cursor-[inherit] py-8 pr-12">
+            <span className="py-3 text-14">{item.count}</span>
+            <button onClick={() => updateCartItem(item.count + 1)} className="cursor-[inherit] py-3 pr-12">
               +
             </button>
           </div>
