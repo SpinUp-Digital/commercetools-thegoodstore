@@ -13,6 +13,7 @@
   "address.desc": "Here you can add different delivery addresses for your account",
   "account.alreadyHave": "Already have an account?",
   "account.doNotHave": "Don't have an account?",
+  "account.register": "Register",
   "account.register.here": "Register here",
   "account.login.here": "Login here",
   "account.security.warning": "Be careful when using this setting",
@@ -48,5 +49,9 @@
   "join.here": "Join here",
   "account.back.sign": "Back to sign in",
   "welcome.back": "Welcome back",
-  "account.reset.link": "Get reset link"
+  "account.reset.link": "Get reset link",
+  "become.member": "Become a member",
+  "receive.emails": "I wish to receive emails about special offers, new products and promotions.",
+  "by.registering": "By registering an account, you agree to our",
+  "terms.of.use": "Terms of Use."
 }

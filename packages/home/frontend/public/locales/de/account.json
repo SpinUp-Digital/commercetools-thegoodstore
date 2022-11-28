@@ -13,6 +13,7 @@
   "address.desc": "Hier kannst du verschiedene Lieferadressen für dein Konto hinzufügen",
   "account.doNotHave": "Du hast noch kein Konto?",
   "account.alreadyHave": "Sie haben bereits ein Konto?",
+  "account.register": "Registrieren",
   "account.register.here": "Hier registrieren",
   "account.login.here": "Hier anmelden",
   "rememberMe": "Anmeldeinformationen speichern",
@@ -51,5 +52,7 @@
   "user": "Benutzer / Benutzerin",
   "account.back.sign": "Zurück zum Anmelden",
   "welcome.back": "Willkommen zurück",
-  "get.reset.link": "Link zum Zurücksetzen abrufen"
+  "get.reset.link": "Link zum Zurücksetzen abrufen",
+  "become.member": "Mitglied werden",
+  "receive.emails": "Ich möchte E-Mails über Sonderangebote, neue Produkte und Aktionen erhalten."
 }
