@@ -1,13 +1,13 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { ChangeEvent, ComponentProps, FC, useCallback, useMemo, useState } from 'react';
 import useClassNames from 'helpers/hooks/useClassNames';
 
-export interface Props extends Omit<React.ComponentProps<'input'>, 'onChange'> {
+export interface InputProps extends Omit<ComponentProps<'input'>, 'onChange'> {
   label?: string;
-  onChange?: (value: string) => void;
+  onChange?: (target: ChangeEvent<HTMLInputElement>) => void;
   variant?: 'primary' | 'secondary';
 }
 
-const Input: React.FC<Props> = ({
+const Input: FC<InputProps> = ({
   label,
   onChange,
   value,
@@ -21,9 +21,9 @@ const Input: React.FC<Props> = ({
   const [isFocused, setIsFocused] = useState(false);
 
   const handleChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setLocalValue(e.target.value);
-      onChange?.(e.target.value);
+    (event: ChangeEvent<HTMLInputElement>) => {
+      setLocalValue(event.target.value);
+      onChange?.(event);
     },
     [onChange],
   );
@@ -56,20 +56,19 @@ const Input: React.FC<Props> = ({
 
   const labelClassName = useClassNames([
     'absolute top-[6px] left-[12px] block text-10 font-semibold transition duration-150 ease-out',
-    isInActiveState ? 'opacity-1 scale-100' : 'scale-0 opacity-0',
+    isInActiveState && label ? 'opacity-1 scale-100' : 'scale-0 opacity-0',
   ]);
 
   const inputClassName = useClassNames([
-    'w-full rounded-l-sm border border-neutral-300 px-12 text-primary-black placeholder:text-14 placeholder:leading-normal placeholder:text-primary-black focus:outline-none disabled:cursor-not-allowed disabled:bg-neutral-400',
-    className,
+    'h-40 w-full rounded-sm border border-neutral-300 px-12 text-primary-black placeholder:text-14 placeholder:leading-normal placeholder:text-secondary-black focus:outline-none disabled:cursor-not-allowed disabled:bg-neutral-400',
     bgClassName,
-    isInActiveState ? 'pt-[20px]' : 'pt-[12px]',
-    isInActiveState ? 'pb-[4px]' : 'pb-[12px]',
+    isInActiveState && label ? 'pt-[20px] pb-[4px]' : 'pt-[10px] pb-[10px]',
+    className,
   ]);
 
   return (
     <div className="relative">
-      <span className={labelClassName}>{label}</span>
+      {label && <span className={labelClassName}>{label}</span>}
       <input className={inputClassName} onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} {...props} />
     </div>
   );

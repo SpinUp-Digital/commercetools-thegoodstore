@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const { fontSizePattern } = require('./tailwind.settings');
-
 module.exports = {
   mode: 'jit',
   darkMode: 'class',
@@ -11,14 +8,7 @@ module.exports = {
     './frontastic/**/*.{js,ts,jsx,tsx}',
     './stories/**/*.{js,ts,jsx,tsx}',
   ],
-  safelist: [
-    'font-medium',
-    { pattern: /bg-(.+)/ },
-    { pattern: /font-(body|heading)/ },
-    {
-      pattern: fontSizePattern,
-    },
-  ],
+  safelist: [{ pattern: /bg-(.+)/ }, { pattern: /font-(.+)/ }, { pattern: /text-(.+)/ }],
   theme: {
     extend: {
       keyframes: {
