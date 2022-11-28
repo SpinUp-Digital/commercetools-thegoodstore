@@ -6,10 +6,10 @@ import Title, { TitleProps } from 'components/commercetools-ui/atoms/title';
 import Link from 'components/commercetools-ui/organisms/content/link';
 import Wrapper from 'components/commercetools-ui/organisms/content/wrapper';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
+import useTouchDevice from 'helpers/hooks/useTouchDevice';
 import { desktop, tablet } from 'helpers/utils/screensizes';
 import { Reference } from 'types/reference';
 import Tile from './tile';
-import useTouchDevice from 'helpers/hooks/useTouchDevice';
 
 export interface Props {
   products: Product[];
