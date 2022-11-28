@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 
 export interface Props extends Omit<React.ComponentProps<'input'>, 'onChange'> {
-  onChange?: (checked: boolean) => void;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Checkbox: React.FC<Props> = ({ onChange, className = '', ...props }) => {
@@ -12,7 +12,7 @@ const Checkbox: React.FC<Props> = ({ onChange, className = '', ...props }) => {
       <input
         className={`${className} ${checkboxClassName}`}
         type="checkbox"
-        onChange={(e) => onChange?.(e.target.checked)}
+        onChange={(e) => onChange?.(e)}
         {...props}
       />
     </div>

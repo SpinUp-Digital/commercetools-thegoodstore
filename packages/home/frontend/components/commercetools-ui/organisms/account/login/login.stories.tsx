@@ -1,6 +1,5 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
-import { frontasticImage } from 'helpers/mocks/mockData';
 import Login, { LoginProps } from './index';
 
 export default {
@@ -13,6 +12,4 @@ const Template: Story<LoginProps> = (args) => <Login {...args} />;
 
 export const Primary = Template.bind({});
 
-Primary.args = {
-  logo: frontasticImage,
-};
+Primary.args = {};

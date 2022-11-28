@@ -48,6 +48,8 @@
   "hello": "Hallo, ",
   "account.button": "Anmelden / Konto erstellen",
   "signout": "Abmelden",
-  "user":"Benutzer / Benutzerin",
-  "account.back.sign": "Zurück zum Anmelden"
+  "user": "Benutzer / Benutzerin",
+  "account.back.sign": "Zurück zum Anmelden",
+  "welcome.back": "Willkommen zurück",
+  "get.reset.link": "Link zum Zurücksetzen abrufen"
 }
