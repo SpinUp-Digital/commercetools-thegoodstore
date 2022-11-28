@@ -1,4 +1,4 @@
-import React, { createElement, Fragment, ReactElement, useEffect, useState } from 'react';
+import React, { createElement, Fragment, ReactElement, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
@@ -19,22 +19,23 @@ const Typography: React.FC<TypographyProps> = ({
 }) => {
   const router = useRouter();
   const { formatMessage } = useFormat({ name: translation?.file });
-  const [text, setText] = useState<TypographyProps['children']>(children);
 
-  useEffect(() => {
+  const getContent = useCallback(() => {
     // Check if the children has different locales
     if (typeof children !== 'string') {
       // Update text based on locale
       const locale = router?.locale || router?.defaultLocale;
-      setText(children[locale]);
+      return children[locale];
     }
 
     // Check if there is translation
     if (translation) {
       const content = formatMessage({ id: translation.id, defaultMessage: children });
-      setText(content);
+      return content;
     }
-  }, [children, formatMessage, router?.defaultLocale, router?.locale, translation]);
+
+    return children;
+  }, [formatMessage, router?.defaultLocale, router?.locale, translation, children]);
 
   const fontFamiliesRef = {
     inter: 'body',
@@ -59,7 +60,7 @@ const Typography: React.FC<TypographyProps> = ({
     ...props,
   };
 
-  const TypographyElement = createElement(as == 'fragment' ? Fragment : as, elementProps, text);
+  const TypographyElement = createElement(as == 'fragment' ? Fragment : as, elementProps, getContent());
 
   return TypographyElement;
 };

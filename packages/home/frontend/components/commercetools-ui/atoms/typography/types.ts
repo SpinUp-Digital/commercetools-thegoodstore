@@ -6,7 +6,7 @@ type Translation = {
   defaultValue?: string;
 };
 
-export const tagTypesToUse = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'] as const;
+export const tagTypesToUse = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span', 'label'] as const;
 type ElementType = Pick<JSX.IntrinsicElements, typeof tagTypesToUse[number]>;
 
 export const fontSizes = [10, 12, 14, 16, 18, 20, 22, 26, 28, 32, 36, 42, 46, 52, 58] as const;

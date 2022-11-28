@@ -46,5 +46,7 @@
   "membership.info": "Membership info",
   "not.member": "Not a member",
   "join.here": "Join here",
-  "account.back.sign": "Back to sign in"
+  "account.back.sign": "Back to sign in",
+  "welcome.back": "Welcome back",
+  "account.reset.link": "Get reset link"
 }
