@@ -14,7 +14,7 @@ const WishlistButton: FC<wishlistButtonProps> = ({ lineItem, className }) => {
   const [onWishlist, setOnWishlist] = useState<boolean>(false);
   const [processing, setProcessing] = useState(false);
   const pathClassNames = useClassNames([
-    //'transition duration-150 ease-out hover:fill-accent-red hover:stroke-accent-red',
+    'transition duration-150 ease-out hover:fill-accent-red hover:stroke-accent-red',
     onWishlist ? 'fill-accent-red stroke-accent-red' : 'fill-transparent stroke-secondary-black',
   ]);
 
