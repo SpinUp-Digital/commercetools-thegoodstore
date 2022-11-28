@@ -9,6 +9,7 @@ import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart, useWishlist } from 'frontastic';
 import DiscountForm from '../../organisms/discount-form';
 import CartItem from './cart-item';
+import AccordionBtn from '../accordion';
 
 export type State = 'wishlist' | 'cart';
 
@@ -70,26 +71,19 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
         shipping: { centAmount: 0 },
         total: { centAmount: 0 },
       };
-
+    console.log(cartData);
     const currencyCode = cartData.sum.currencyCode;
     const fractionDigits = cartData.sum.fractionDigits;
 
     return {
       subtotal: {
-        centAmount: cartData.lineItems.reduce(
-          (acc, curr) =>
-            acc +
-            (curr.totalPrice?.centAmount || 0) +
-            curr.discounts.reduce((acc1, curr1) => acc1 + (curr1.discountedAmount.centAmount || 0), 0),
-          0,
-        ),
+        centAmount: cartData.lineItems.reduce((acc, curr) => acc + (curr.price?.centAmount || 0) * curr.count, 0),
         currencyCode,
         fractionDigits,
       },
       discount: {
         centAmount: cartData.lineItems.reduce(
-          (acc, curr) =>
-            acc + (curr.discounts?.reduce((acc1, curr1) => acc1 + curr1.discountedAmount.centAmount, 0) || 0),
+          (acc, curr) => acc + ((curr.price?.centAmount || 0) * curr.count - (curr.totalPrice?.centAmount || 0)),
           0,
         ),
         currencyCode,
@@ -115,36 +109,39 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
             ))}
           </div>
           <div className="border-t border-neutral-400 px-12 pt-16 pb-24 md:px-22">
-            <DiscountForm />
+            <AccordionBtn
+              closedSectionTitle={formatCartMessage({ id: 'discount.apply', defaultMessage: 'Apply a discount' })}
+              buttonClassName="font-medium text-14"
+            >
+              <DiscountForm />
+            </AccordionBtn>
           </div>
           <div className="border-t border-neutral-400 bg-white px-12 pt-16 pb-18 md:px-22">
-            <div className="flex items-center justify-between">
-              <span>{formatCartMessage({ id: 'subtotal', defaultMessage: 'Subtotal' })}: </span>
+            <div className="flex items-center justify-between text-14">
+              <span>{formatCartMessage({ id: 'subtotal', defaultMessage: 'Subtotal' })} </span>
               <span>{CurrencyHelpers.formatForCurrency(transaction.subtotal)}</span>
             </div>
 
             {transaction.discount.centAmount > 0 && (
-              <div className="flex items-center justify-between">
-                <span>{formatCartMessage({ id: 'discount', defaultMessage: 'Discount' })}: </span>
+              <div className="flex items-center justify-between text-14">
+                <span>{formatCartMessage({ id: 'discount', defaultMessage: 'Discount' })} </span>
                 <span>{CurrencyHelpers.formatForCurrency(transaction.discount)}</span>
               </div>
             )}
 
-            {transaction.tax.centAmount > 0 && (
-              <div className="flex items-center justify-between">
-                <span>{formatCartMessage({ id: 'tax', defaultMessage: 'Tax' })}: </span>
-                <span>{CurrencyHelpers.formatForCurrency(transaction.tax)}</span>
-              </div>
-            )}
+            <div className="flex items-center justify-between text-14">
+              <span>{formatCartMessage({ id: 'tax', defaultMessage: 'Tax' })} </span>
+              <span>{CurrencyHelpers.formatForCurrency(transaction.tax)}</span>
+            </div>
 
             {transaction.shipping.centAmount > 0 && (
-              <div className="flex items-center justify-between">
-                <span>{formatCartMessage({ id: 'shipping.estimate', defaultMessage: 'Est. Shipping' })}: </span>
+              <div className="flex items-center justify-between text-14">
+                <span>{formatCartMessage({ id: 'shipping.estimate', defaultMessage: 'Est. Shipping' })} </span>
                 <span>{CurrencyHelpers.formatForCurrency(transaction.shipping)}</span>
               </div>
             )}
 
-            <div className="mt-26 flex items-center justify-between text-18 font-semibold">
+            <div className="mt-26 flex items-center justify-between font-semibold">
               <span>{formatCartMessage({ id: 'total', defaultMessage: 'Total' })}: </span>
               <span>{CurrencyHelpers.formatForCurrency(transaction.total)}</span>
             </div>
@@ -163,20 +160,20 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
   return (
     <div ref={ref} className={slideoutClassName}>
       <div className="flex items-center justify-between border-b border-neutral-400 px-12 pt-24 md:px-22 md:pt-32">
-        <h3 className="pb-24 text-18 font-bold leading-normal md:pb-32 md:text-20">{title}</h3>
-        <div className="flex h-full items-center gap-12 sm:gap-24">
+        <h3 className="pb-22 text-18 font-bold leading-normal md:text-20">{title}</h3>
+        <div className="flex h-full items-center">
           <div
-            className="relative h-full cursor-pointer hover:opacity-80 md:pb-32"
+            className="relative mr-12 h-full cursor-pointer hover:opacity-80 md:mr-24"
             onClick={() => changeState?.('wishlist')}
           >
             <div className={wishlistClassName} />
             {wishlistItems?.length > 0 && (
-              <span className="absolute top-[-7px] right-[-7px] h-8 w-8 rounded-full bg-green-500" />
+              <span className="absolute top-[-5px] right-[-5px] h-8 w-8 rounded-full bg-green-500" />
             )}
             <HeartIcon className="w-25" />
           </div>
           <div
-            className="relative h-full cursor-pointer hover:opacity-80 md:pb-32"
+            className="relative mr-8 h-full cursor-pointer hover:opacity-80 md:mr-16"
             onClick={() => changeState?.('cart')}
           >
             <>
@@ -184,7 +181,7 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
               <CartIcon className="w-25" totalCartItems={totalCartItems} />
             </>
           </div>
-          <div onClick={onClose} className="cursor-pointer pb-24 md:pb-32">
+          <div onClick={onClose} className="cursor-pointer pb-22">
             <CloseIcon className="ml-12 h-14 w-14 sm:h-16 sm:w-16" />
           </div>
         </div>

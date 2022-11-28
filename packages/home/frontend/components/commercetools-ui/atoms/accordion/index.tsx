@@ -1,6 +1,7 @@
 import React from 'react';
 import { Disclosure, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
+import useClassNames from 'helpers/hooks/useClassNames';
 
 export interface AccordionProps {
   index?: number;
@@ -22,14 +23,16 @@ const AccordionBtn: React.FC<AccordionProps> = ({
   buttonClassName,
   panelClassName,
 }) => {
+  const buttonClassNames = useClassNames(['w-full', buttonClassName]);
+
+  const panelClassNames = useClassNames([panelClassName]);
+
   return (
     <div className={className}>
       <Disclosure>
         {({ open }) => (
           <>
-            <Disclosure.Button
-              className={`w-full py-14 px-12 text-14 font-semibold text-neutral-200 ${buttonClassName}`}
-            >
+            <Disclosure.Button className={buttonClassNames}>
               <div className="flex justify-between">
                 <p className="self-center transition">{open ? openSectionTitle : closedSectionTitle}</p>
                 <ChevronDownIcon
@@ -47,9 +50,7 @@ const AccordionBtn: React.FC<AccordionProps> = ({
               leaveFrom="transform scale-y-100 opacity-100"
               leaveTo="transform scale-y-95 opacity-0"
             >
-              <Disclosure.Panel className={`mb-18 px-20 text-neutral-200 md:p-20 ${panelClassName}`}>
-                {children}
-              </Disclosure.Panel>
+              <Disclosure.Panel className={panelClassNames}>{children}</Disclosure.Panel>
             </Transition>
           </>
         )}
