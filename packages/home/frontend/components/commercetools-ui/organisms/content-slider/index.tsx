@@ -1,4 +1,5 @@
 import { FC, useMemo } from 'react';
+import { ArrowLongRightIcon } from '@heroicons/react/24/outline';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import useCurrentBreakpoint from 'helpers/hooks/useCurrentBreakpoint';
 import useImageSizes from 'helpers/hooks/useImageSizes';
@@ -52,22 +53,16 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
           <Typography
             as="h4"
             fontSize={18}
-            className="my-3.5 max-w-[90%] overflow-hidden text-ellipsis whitespace-pre font-normal"
+            fontFamily="libre"
+            className="my-3.5 max-w-[90%] overflow-hidden text-ellipsis whitespace-pre text-primary-black"
           >
             {title}
           </Typography>
           <div className="flex gap-1.5">
-            <p className="text-16 font-normal">{ctaLabel}</p>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="h-7 w-18"
-            >
-              <path d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-            </svg>
+            <Typography fontSize={16} className="hidden text-black md:block">
+              {ctaLabel}
+            </Typography>
+            <ArrowLongRightIcon className="mt-2 h-20 w-24 text-secondary-black" />
           </div>
         </Link>
       )),

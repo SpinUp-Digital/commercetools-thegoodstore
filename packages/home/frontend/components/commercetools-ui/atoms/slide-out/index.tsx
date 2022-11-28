@@ -8,8 +8,8 @@ import useClickOutside from 'helpers/hooks/useClickOutside';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart, useWishlist } from 'frontastic';
 import DiscountForm from '../../organisms/discount-form';
-import CartItem from './cart-item';
 import AccordionBtn from '../accordion';
+import CartItem from './cart-item';
 
 export type State = 'wishlist' | 'cart';
 

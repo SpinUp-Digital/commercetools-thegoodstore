@@ -1,6 +1,7 @@
 import { FC, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { LineItem } from '@commercetools/domain-types/wishlist/LineItem';
+import Typography from 'components/commercetools-ui/atoms/typography';
 import Variant from 'components/commercetools-ui/organisms/variant';
 import WishlistButton from 'components/commercetools-ui/organisms/wishlist-button';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
@@ -38,18 +39,21 @@ const ProductInformation: FC<ProductInformationProps> = ({ product, variant, onC
   return (
     <div>
       <div className="relative flex pr-40">
-        <h3 className="break-normal font-body text-18 font-bold leading-loose">{product?.name}</h3>
+        <Typography fontSize={16} className="ld:text-18 break-normal font-body font-bold leading-loose">
+          {product?.name}
+        </Typography>
+
         <WishlistButton lineItem={productToWishlistLineItem} />
       </div>
       {variant.discountedPrice ? (
         <div className="flex flex-row justify-between">
           <div className="mt-10 flex items-center gap-8">
-            <span className="block text-16 font-regular leading-loose text-accent-red">
+            <Typography fontSize={16} className="block font-regular leading-loose text-accent-red lg:text-18">
               {CurrencyHelpers.formatForCurrency(variant.discountedPrice)}
-            </span>
-            <span className="block text-12 leading-loose text-gray-500 line-through">
+            </Typography>
+            <Typography fontSize={16} className="block leading-loose text-gray-500 line-through lg:text-18">
               {CurrencyHelpers.formatForCurrency(variant.price)}
-            </span>
+            </Typography>
           </div>
 
           {
