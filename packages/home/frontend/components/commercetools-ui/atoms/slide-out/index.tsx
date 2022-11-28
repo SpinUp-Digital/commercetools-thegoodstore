@@ -1,10 +1,9 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import CartIcon from 'components/icons/cart';
 import CloseIcon from 'components/icons/close';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import useClassNames from 'helpers/hooks/useClassNames';
-import useClickOutside from 'helpers/hooks/useClickOutside';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart, useWishlist } from 'frontastic';
 import DiscountForm from '../../organisms/discount-form';
@@ -38,19 +37,7 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
     }
   }, [formatCartMessage, formatWishlistMessage, state]);
 
-  const { ref } = useClickOutside(() => !!state && onClose());
-
-  const getStateStyles = useCallback(() => {
-    if (state) return 'opacity-1';
-    else return 'translate-x-full opacity-0';
-  }, [state]);
-
   const iconClassName = 'absolute -bottom-1 left-[-4px] h-2 w-34 transition duration-200';
-
-  const slideoutClassName = useClassNames([
-    'fixed right-0 top-0 z-50 flex h-screen w-[90%] max-w-[380px] flex-col items-stretch bg-neutral-200 shadow-lg transition duration-300 ease-out',
-    getStateStyles(),
-  ]);
 
   const wishlistClassName = useClassNames([
     iconClassName,
@@ -71,7 +58,6 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
         shipping: { centAmount: 0 },
         total: { centAmount: 0 },
       };
-    console.log(cartData);
     const currencyCode = cartData.sum.currencyCode;
     const fractionDigits = cartData.sum.fractionDigits;
 
@@ -158,7 +144,7 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
   }, [state, cartData, transaction, formatCartMessage]);
 
   return (
-    <div ref={ref} className={slideoutClassName}>
+    <>
       <div className="flex items-center justify-between border-b border-neutral-400 px-12 pt-24 md:px-22 md:pt-32">
         <h3 className="pb-22 text-18 font-bold leading-normal md:text-20">{title}</h3>
         <div className="flex h-full items-center">
@@ -187,7 +173,7 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
         </div>
       </div>
       {ActiveSection}
-    </div>
+    </>
   );
 };
 

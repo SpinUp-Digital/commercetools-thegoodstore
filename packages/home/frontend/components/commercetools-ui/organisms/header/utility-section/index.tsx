@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Drawer from 'components/commercetools-ui/atoms/drawer';
 import Slideout, { State as MenuState } from 'components/commercetools-ui/atoms/slide-out';
 import CartIcon from 'components/icons/cart';
 import WishlistIcon from 'components/icons/wishlist';
@@ -36,13 +37,13 @@ const UtilitySection: React.FC = () => {
         </div>
       </div>
 
-      {menuState && <div className="fixed top-0 left-0 z-10 h-full w-full bg-black opacity-50" />}
-
-      <Slideout
-        state={menuState}
-        onClose={() => setMenuState(null)}
-        changeState={(newState) => setMenuState(newState)}
-      />
+      <Drawer isOpen={menuState} direction="right" className="w-[90%] max-w-[380px]" onClose={() => setMenuState(null)}>
+        <Slideout
+          state={menuState}
+          onClose={() => setMenuState(null)}
+          changeState={(newState) => setMenuState(newState)}
+        />
+      </Drawer>
     </div>
   );
 };
