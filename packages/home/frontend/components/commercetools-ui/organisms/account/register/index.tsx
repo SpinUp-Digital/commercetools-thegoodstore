@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
+import Button from 'components/commercetools-ui/atoms/button';
+import Checkbox from 'components/commercetools-ui/atoms/checkbox';
+import Input from 'components/commercetools-ui/atoms/input';
 import Link from 'components/commercetools-ui/atoms/link';
+import PasswordInput from 'components/commercetools-ui/atoms/password-input';
+import Typography from 'components/commercetools-ui/atoms/typography';
 import { useFormat } from 'helpers/hooks/useFormat';
 import Redirect from 'helpers/redirect';
 import { Reference } from 'types/reference';
 import { useAccount } from 'frontastic';
-import Image, { NextFrontasticImage } from 'frontastic/lib/image';
 
 export interface RegisterProps {
-  logo?: NextFrontasticImage;
-  loginLink?: Reference;
+  termsOfUseLink?: Reference;
 }
 
-const Register: React.FC<RegisterProps> = ({ logo, loginLink }) => {
+const Register: React.FC<RegisterProps> = ({ termsOfUseLink }) => {
   //i18n messages
   const { formatMessage: formatErrorMessage } = useFormat({ name: 'error' });
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
@@ -87,92 +90,87 @@ const Register: React.FC<RegisterProps> = ({ logo, loginLink }) => {
   if (loggedIn) return <Redirect target="/" />;
 
   return (
-    <>
-      <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="relative h-12">
-            <Image {...logo} alt="Logo" layout="fill" objectFit="contain" />
-          </div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            {formatAccountMessage({ id: 'account.create.new', defaultMessage: 'Create a new account' })}
-          </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            {formatAccountMessage({ id: 'account.alreadyHave', defaultMessage: 'Already have an account?' })}{' '}
-            <Link link={loginLink} className="font-medium underline">
-              {formatAccountMessage({ id: 'account.login.here', defaultMessage: 'Login here' })}
-            </Link>
-          </p>
+    <div className="m-auto grid max-w-[480px] px-16">
+      <Typography as="h3" fontFamily="libre" className="mb-16 text-16 md:mb-24 md:text-20 lg:text-24">
+        {formatAccountMessage({ id: 'become.member', defaultMessage: 'Become a member' })}
+      </Typography>
+      <form onSubmit={handleSubmit}>
+        {error && (
+          <Typography fontSize={12} className="mb-12 capitalize text-accent-red">
+            {error}
+          </Typography>
+        )}
+        {success && (
+          <Typography fontSize={12} className="mb-12 capitalize text-green-600">
+            {success}
+          </Typography>
+        )}
+
+        <Input
+          id="name"
+          name="name"
+          type="name"
+          autoComplete="name"
+          required
+          className="mb-16 md:mb-20"
+          placeholder={formatMessage({ id: 'name', defaultMessage: 'Name' })}
+          onChange={handleChange}
+        />
+
+        <Input
+          id="email"
+          name="email"
+          type="email"
+          autoComplete="email"
+          required
+          className="mb-16 md:mb-20"
+          placeholder={formatMessage({ id: 'emailAddress', defaultMessage: 'Email Address' })}
+          onChange={handleChange}
+        />
+
+        <PasswordInput
+          required
+          id="password"
+          name="password"
+          autoComplete="current-password"
+          placeholder={formatAccountMessage({ id: 'password', defaultMessage: 'Password' })}
+          className="mb-16 md:mb-20"
+          onChange={handleChange}
+        />
+
+        <div className="mb-20 flex gap-8">
+          <Checkbox
+            className="h-16 w-16 rounded-sm"
+            id="agree-on-terms"
+            name="agree-on-terms"
+            type="checkbox"
+            required
+          />
+          <Typography fontSize={12} className="text-secondary-black md:text-14" as="label">
+            {formatMessage({
+              id: 'receive.emails',
+              defaultMessage: 'I wish to receive emails about special offers, new products and promotions.',
+            })}
+          </Typography>
         </div>
 
-        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <form className="space-y-6" onSubmit={handleSubmit}>
-              {success && <p className="text-sm text-green-600" dangerouslySetInnerHTML={{ __html: success }}></p>}
-              {error && <p className="text-sm">{error}</p>}
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                  {formatMessage({ id: 'emailAddress', defaultMessage: 'Email Address' })}
-                </label>
-                <div className="mt-1">
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    required
-                    className="block w-full appearance-none rounded-md border border-gray-300 py-2 px-3 shadow-sm placeholder:text-gray-400 focus:outline-none sm:text-sm"
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
+        <Button size="full" type="submit" className="mb-16 text-16 leading-tight md:mb-20" disabled={loading}>
+          {formatAccountMessage({ id: 'account.register', defaultMessage: 'Register' })}
+        </Button>
 
-              <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                  {formatAccountMessage({ id: 'password', defaultMessage: 'Password' })}
-                </label>
-                <div className="mt-1">
-                  <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    autoComplete="current-password"
-                    required
-                    className="block w-full appearance-none rounded-md border border-gray-300 py-2 px-3 shadow-sm placeholder:text-gray-400 focus:outline-none sm:text-sm"
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="confirm-password" className="block text-sm font-medium text-gray-700">
-                  {formatAccountMessage({ id: 'password.confirm', defaultMessage: 'Confirm Password' })}
-                </label>
-                <div className="mt-1">
-                  <input
-                    id="confirm-password"
-                    name="confirmPassword"
-                    type="password"
-                    autoComplete="current-password"
-                    required
-                    className="block w-full appearance-none rounded-md border border-gray-300 py-2 px-3 shadow-sm placeholder:text-gray-400 focus:outline-none sm:text-sm"
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
-              <div>
-                <button
-                  type="submit"
-                  className="flex w-full justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-white shadow-sm transition-colors duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:bg-gray-200"
-                  disabled={loading}
-                >
-                  {formatAccountMessage({ id: 'sign.up', defaultMessage: 'Sign up' })}
-                </button>
-              </div>
-            </form>
-          </div>
+        <div className="flex flex-wrap items-center justify-center gap-4 px-15 md:px-30">
+          <Typography fontFamily="inter" fontSize={12} as="p" className="text-secondary-black md:text-14">
+            {formatAccountMessage({
+              id: 'by.registering',
+              defaultMessage: 'By registering an account, you agree to our',
+            })}
+          </Typography>
+          <Link className="border-b text-12 text-secondary-black md:text-14" link={termsOfUseLink} variant="menu-item">
+            {formatAccountMessage({ id: 'terms.of.use', defaultMessage: 'Terms of Use.' })}
+          </Link>
         </div>
-      </div>
-    </>
+      </form>
+    </div>
   );
 };
 
