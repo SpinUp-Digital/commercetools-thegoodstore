@@ -13,6 +13,7 @@ import Slider from '../../atoms/slider';
 import Subtitle from '../../atoms/subtitle';
 import Title from '../../atoms/title';
 import Wrapper from '../content/wrapper';
+import useTouchDevice from 'helpers/hooks/useTouchDevice';
 
 type ContentSliderSlide = {
   image: NextFrontasticImage;
@@ -32,6 +33,8 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
   const [isTablet] = useMediaQuery(screensizes.tablet);
   const currentBreakPoint = useCurrentBreakpoint();
   const tileImageSizes = useImageSizes({ md: 1, lg: 0.33, defaultSize: 0.33 });
+
+  const { isTouchDevice } = useTouchDevice();
 
   type BreakpointsRef = {
     [key in CurrentBreakpoint]?: number;
@@ -77,10 +80,13 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
         <div className="flex w-full gap-24">{slidesElement}</div>
       ) : (
         <Slider
-          arrows={false}
+          arrows={!isTouchDevice && !isDesktop}
+          innerArrows={!isDesktop}
           dots={false}
           slideWidth={isTablet ? 400 : 246}
           spaceBetween={spaceBetweenRef[currentBreakPoint] ?? 12}
+          cssMode
+          allowTouchMove={isTouchDevice}
         >
           {slidesElement}
         </Slider>
