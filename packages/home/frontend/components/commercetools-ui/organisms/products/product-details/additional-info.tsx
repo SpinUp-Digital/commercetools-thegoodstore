@@ -18,7 +18,7 @@ const AdditionalInfo: FC<AdditionalInfoProps> = ({ productspec, description }) =
         {`
         .additional-info ul {
           padding: 0 !important;
-          list-style: circle;
+          list-style: inside circle;
         }
 
         .additional-info li {
@@ -48,7 +48,10 @@ const AdditionalInfo: FC<AdditionalInfoProps> = ({ productspec, description }) =
         buttonClassName="py-21 font-body text-16 leading-tight text-primary-black pl-0 md:pr-12"
         panelClassName="pb-20 md:pt-10 md:pb-30 text-primary-black"
       >
-        <Markdown className="font-body text-14 font-regular leading-loose text-primary-black" text={productspec} />
+        <Markdown
+          className="block font-body text-14 font-regular leading-loose text-primary-black"
+          text={productspec}
+        />
       </AccordionBtn>
     </div>
   );

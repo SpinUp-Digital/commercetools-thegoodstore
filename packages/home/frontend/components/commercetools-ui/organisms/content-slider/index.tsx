@@ -12,7 +12,6 @@ import Image, { NextFrontasticImage } from 'frontastic/lib/image';
 import Link from '../../atoms/link';
 import Slider from '../../atoms/slider';
 import Subtitle from '../../atoms/subtitle';
-import Title from '../../atoms/title';
 import Wrapper from '../content/wrapper';
 
 type ContentSliderSlide = {
@@ -74,7 +73,11 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
 
   return (
     <Wrapper variant="left-padding-only">
-      {title && <Title className="mb-13" title={title} />}
+      {title && (
+        <Typography className="mb-12 md:text-22 lg:text-28" fontSize={20} as="h3" fontFamily="libre">
+          {title}
+        </Typography>
+      )}
       {subtitle && <Subtitle className="mb-24" subtitle={subtitle} />}
       {isDesktop ? (
         <div className="flex w-full gap-24">{slidesElement}</div>
