@@ -25,7 +25,7 @@ const Register: React.FC<RegisterProps> = ({ termsOfUseLink }) => {
   const { register, loggedIn } = useAccount();
 
   //register data
-  const [data, setData] = useState({ email: '', password: '', confirmPassword: '' });
+  const [data, setData] = useState({ email: '', password: '' });
 
   //error
   const [error, setError] = useState('');
@@ -43,15 +43,20 @@ const Register: React.FC<RegisterProps> = ({ termsOfUseLink }) => {
 
   //data validation
   const validate = () => {
-    //validation schema
-    const passwordsMatch = data.password === data.confirmPassword;
+    const passwordRules = new RegExp('((?=.{8,})(?=.*[A-Z]))');
+    const validPassword = passwordRules.test(data.password);
 
     //UI error messages
-    if (!passwordsMatch)
-      setError(formatErrorMessage({ id: 'password.noMatch', defaultMessage: "Passwords don't match" }));
+    if (!validPassword)
+      setError(
+        formatErrorMessage({
+          id: 'password.not.valid',
+          defaultMessage: 'Password has to be at least 8 characters long and have at least one uppercase letter.',
+        }),
+      );
 
     //return a boolean representing the data validity
-    return passwordsMatch;
+    return validPassword;
   };
 
   //form submission
@@ -96,12 +101,12 @@ const Register: React.FC<RegisterProps> = ({ termsOfUseLink }) => {
       </Typography>
       <form onSubmit={handleSubmit}>
         {error && (
-          <Typography fontSize={12} className="mb-12 capitalize text-accent-red">
+          <Typography as="span" fontSize={12} className="mb-12 block text-accent-red">
             {error}
           </Typography>
         )}
         {success && (
-          <Typography fontSize={12} className="mb-12 capitalize text-green-600">
+          <Typography as="span" fontSize={12} className="mb-12 block text-green-600">
             {success}
           </Typography>
         )}
@@ -139,13 +144,7 @@ const Register: React.FC<RegisterProps> = ({ termsOfUseLink }) => {
         />
 
         <div className="mb-20 flex gap-8">
-          <Checkbox
-            className="h-16 w-16 rounded-sm"
-            id="agree-on-terms"
-            name="agree-on-terms"
-            type="checkbox"
-            required
-          />
+          <Checkbox className="h-16 w-16 rounded-sm" id="agree-on-terms" name="agree-on-terms" type="checkbox" />
           <Typography fontSize={12} className="text-secondary-black md:text-14" as="label">
             {formatMessage({
               id: 'receive.emails',
