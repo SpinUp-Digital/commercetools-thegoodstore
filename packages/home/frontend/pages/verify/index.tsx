@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import Toast from 'react-hot-toast';
@@ -32,9 +32,15 @@ const Verify: NextPage = () => {
       .then(() => Toast.error(formatAccountMessage({ id: 'verification.failed', defaultMessage: 'Invalid token' })));
   }, [formatAccountMessage, router]);
 
+  //Confirmed flag to prevent multiple requests
+  const confirmed = useRef(false);
+
   //verify user's email
   const verifyUser = useCallback(async () => {
-    if (!token) return;
+    if (!token || confirmed.current) return;
+
+    confirmed.current = true;
+
     try {
       const response = await confirm(token as string);
       if (response.accountId) successRedirect();

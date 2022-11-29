@@ -3,7 +3,7 @@ import { Account } from '@commercetools/domain-types/account/Account';
 import { Address } from '@commercetools/domain-types/account/Address';
 import { REMEMBER_ME } from 'helpers/constants/localStorage';
 import { revalidateOptions } from 'frontastic';
-import { fetchApiHub, ResponseError } from 'frontastic/lib/fetch-api-hub';
+import { ResponseError } from 'frontastic/lib/fetch-api-hub';
 import { SDK } from 'sdk';
 
 export interface GetAccountResult {
@@ -50,23 +50,25 @@ export const login = async (email: string, password: string, remember?: boolean)
   const payload = {
     email,
     password,
+    remember,
   };
-  if (remember) window.localStorage.setItem(REMEMBER_ME, '1');
+
   const res = await extensions.login(payload);
-  await mutate('/action/account/getAccount', res);
-  await mutate('/action/cart/getCart');
-  await mutate('/action/wishlist/getWishlist');
+
+  mutate('/action/account/getAccount', res);
+  mutate('/action/cart/getCart');
+  mutate('/action/wishlist/getWishlist');
   return res;
 };
 
 export const logout = async () => {
   const extensions = SDK.getExtensions();
 
-  window.localStorage.removeItem(REMEMBER_ME);
   const res = await extensions.logout();
-  await mutate('/action/account/getAccount', res);
-  await mutate('/action/cart/getCart');
-  await mutate('/action/wishlist/getWishlist');
+
+  mutate('/action/account/getAccount', res);
+  mutate('/action/cart/getCart');
+  mutate('/action/wishlist/getWishlist');
   return res;
 };
 
@@ -80,7 +82,7 @@ export const confirm = async (token: string): Promise<Account> => {
   const extensions = SDK.getExtensions();
 
   const res = await extensions.confirmAccount({ token });
-  await mutate('/action/account/getAccount', res);
+  mutate('/action/account/getAccount', res);
   return res;
 };
 
@@ -114,7 +116,7 @@ export const resetPassword = async (token: string, newPassword: string): Promise
   const extensions = SDK.getExtensions();
 
   const res = await extensions.resetAccountPassword({ token, newPassword });
-  await mutate('/action/account/getAccount', res);
+  mutate('/action/account/getAccount', res);
   return res;
 };
 
@@ -122,7 +124,7 @@ export const update = async (account: UpdateAccount): Promise<Account> => {
   const extensions = SDK.getExtensions();
 
   const res = await extensions.updateAccount(account);
-  await mutate('/action/account/getAccount', res);
+  mutate('/action/account/getAccount', res);
   return res;
 };
 
@@ -130,7 +132,7 @@ export const addAddress = async (address: Omit<Address, 'addressId'>): Promise<A
   const extensions = SDK.getExtensions();
 
   const res = await extensions.addAccountAddress({ address });
-  await mutate('/action/account/getAccount', res);
+  mutate('/action/account/getAccount', res);
   return res;
 };
 
@@ -138,7 +140,7 @@ export const updateAddress = async (address: Address): Promise<Account> => {
   const extensions = SDK.getExtensions();
 
   const res = await extensions.updateAccountAddress({ address });
-  await mutate('/action/account/getAccount', res);
+  mutate('/action/account/getAccount', res);
   return res;
 };
 
@@ -146,7 +148,7 @@ export const removeAddress = async (addressId: string): Promise<Account> => {
   const extensions = SDK.getExtensions();
 
   const res = await extensions.removeAccountAddress({ addressId });
-  await mutate('/action/account/getAccount', res);
+  mutate('/action/account/getAccount', res);
   return res;
 };
 
@@ -154,7 +156,7 @@ export const setDefaultBillingAddress = async (addressId: string): Promise<Accou
   const extensions = SDK.getExtensions();
 
   const res = await extensions.setDefaultBillingAddress({ addressId });
-  await mutate('/action/account/getAccount', res);
+  mutate('/action/account/getAccount', res);
   return res;
 };
 
@@ -162,6 +164,6 @@ export const setDefaultShippingAddress = async (addressId: string): Promise<Acco
   const extensions = SDK.getExtensions();
 
   const res = await extensions.setDefaultShippingAddress({ addressId });
-  await mutate('/action/account/getAccount', res);
+  mutate('/action/account/getAccount', res);
   return res;
 };
