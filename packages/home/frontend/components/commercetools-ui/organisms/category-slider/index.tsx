@@ -4,6 +4,7 @@ import { desktop, tablet } from 'helpers/utils/screensizes';
 import Slider from '../../atoms/slider';
 import Wrapper from '../content/wrapper';
 import Tile, { Props as TileProps } from './tile';
+import useTouchDevice from 'helpers/hooks/useTouchDevice';
 
 export interface Props {
   tiles: Array<TileProps['tile']>;
@@ -11,6 +12,8 @@ export interface Props {
 
 const CategorySlider: React.FC<Props> = ({ tiles = [] }) => {
   const [isDesktopSize] = useMediaQuery(desktop);
+
+  const { isTouchDevice } = useTouchDevice();
 
   const fitsToScreenSize = useMemo(
     () => (isDesktopSize && tiles.length <= 4) || (!isDesktopSize && tiles.length <= 2),
@@ -23,8 +26,10 @@ const CategorySlider: React.FC<Props> = ({ tiles = [] }) => {
         slidesPerView={2.3}
         dots={false}
         spaceBetween={4}
-        arrows={isDesktopSize && !fitsToScreenSize}
-        allowTouchMove={!fitsToScreenSize}
+        arrows={!isTouchDevice && !fitsToScreenSize}
+        innerArrows={!isDesktopSize}
+        allowTouchMove={isTouchDevice && !fitsToScreenSize}
+        cssMode
         breakpoints={{
           [tablet]: {
             spaceBetween: 8,
