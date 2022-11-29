@@ -46,6 +46,11 @@ const Login: React.FC<LoginProps> = ({ signInLink, accountLink }) => {
   //not on default login modal
   const subModal = resendVerification || resendPasswordReset;
 
+  const resetFeedback = () => {
+    setError('');
+    setSuccess('');
+  };
+
   //get back to login modal
   const backToLogin = () => {
     setResendPasswordReset(false);
@@ -56,6 +61,7 @@ const Login: React.FC<LoginProps> = ({ signInLink, accountLink }) => {
   const toResendPassword = () => {
     setResendPasswordReset(true);
     setResendVerification(false);
+    resetFeedback();
   };
 
   //handle text input change
@@ -207,7 +213,12 @@ const Login: React.FC<LoginProps> = ({ signInLink, accountLink }) => {
         </Button>
 
         {resendPasswordReset && (
-          <Link variant="menu-item" className="mx-auto block w-fit border-b-[1px]" link={signInLink}>
+          <Link
+            variant="menu-item"
+            className="mx-auto block w-fit border-b-[1px]"
+            link={signInLink}
+            onClick={backToLogin}
+          >
             {formatAccountMessage({ id: 'account.back.sign', defaultMessage: 'Back to sign in' })}
           </Link>
         )}
