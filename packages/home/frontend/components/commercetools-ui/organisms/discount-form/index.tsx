@@ -25,8 +25,8 @@ const DiscountForm: React.FC<Props> = ({ className }) => {
   }, [data]);
 
   const inputClassName = useClassNames([
-    'h-40 w-full rounded-sm px-10 py-12 text-14 placeholder:text-secondary-black disabled:bg-neutral-300',
-    codeIsInvalid ? 'border-accent-red text-accent-red' : 'border-neutral-300',
+    'h-40 w-full border rounded-sm px-10 py-12 text-14 placeholder:text-secondary-black disabled:bg-neutral-300 focus:outline-none',
+    codeIsInvalid ? 'border-accent-red text-accent-red focus:border-accent-red' : 'border-neutral-300',
   ]);
 
   const discountsContainerClassName = useClassNames([
@@ -77,7 +77,6 @@ const DiscountForm: React.FC<Props> = ({ className }) => {
             <div className="relative">
               <input
                 className={inputClassName}
-                type="text"
                 value={code}
                 placeholder={formatCartMessage({
                   id: 'cart.discount.enter',
