@@ -2,13 +2,10 @@ import React, { useMemo } from 'react';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import CartIcon from 'components/icons/cart';
 import CloseIcon from 'components/icons/close';
-import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart, useWishlist } from 'frontastic';
-import DiscountForm from '../../organisms/discount-form';
-import AccordionBtn from '../accordion';
-import CartItem from './cart-item';
+import Cart from 'components/commercetools-ui/organisms/cart';
 
 export type State = 'wishlist' | 'cart';
 
@@ -22,11 +19,9 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
   const { formatMessage: formatWishlistMessage } = useFormat({ name: 'wishlist' });
 
-  const { data: cartData, totalItems: totalCartItems } = useCart();
+  const { totalItems: totalCartItems } = useCart();
 
-  const { data: wishlistData } = useWishlist();
-
-  const wishlistItems = useMemo(() => wishlistData?.lineItems, [wishlistData]);
+  const { totalItems: totalWishlistItems } = useWishlist();
 
   const title = useMemo(() => {
     switch (state) {
@@ -49,120 +44,36 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
     state === 'cart' ? 'bg-secondary-grey ease-out' : 'bg-transparent ease-in',
   ]);
 
-  const transaction = useMemo(() => {
-    if (!cartData?.lineItems)
-      return {
-        subtotal: { centAmount: 0 },
-        discount: { centAmount: 0 },
-        tax: { centAmount: 0 },
-        shipping: { centAmount: 0 },
-        total: { centAmount: 0 },
-      };
-    const currencyCode = cartData.sum.currencyCode;
-    const fractionDigits = cartData.sum.fractionDigits;
-
-    return {
-      subtotal: {
-        centAmount: cartData.lineItems.reduce((acc, curr) => acc + (curr.price?.centAmount || 0) * curr.count, 0),
-        currencyCode,
-        fractionDigits,
-      },
-      discount: {
-        centAmount: cartData.lineItems.reduce(
-          (acc, curr) => acc + ((curr.price?.centAmount || 0) * curr.count - (curr.totalPrice?.centAmount || 0)),
-          0,
-        ),
-        currencyCode,
-        fractionDigits,
-      },
-      shipping: cartData.shippingInfo?.price ?? {},
-      tax: {
-        centAmount: cartData.taxed?.taxPortions?.reduce((acc, curr) => acc + curr.amount?.centAmount, 0) ?? 0,
-        currencyCode,
-        fractionDigits,
-      },
-      total: cartData.sum,
-    };
-  }, [cartData]);
-
-  const ActiveSection = useMemo(() => {
-    if (state === 'cart') {
-      return (
-        <>
-          <div className="grow divide-y divide-neutral-400 overflow-auto px-12 md:px-22">
-            {cartData.lineItems?.map((lineItem) => (
-              <CartItem key={lineItem.lineItemId} item={lineItem} />
-            ))}
-          </div>
-          <div className="border-t border-neutral-400 px-12 py-24 md:px-22">
-            <AccordionBtn
-              closedSectionTitle={formatCartMessage({ id: 'discount.apply', defaultMessage: 'Apply a discount' })}
-              buttonClassName="font-normal text-14"
-            >
-              <DiscountForm />
-            </AccordionBtn>
-          </div>
-          <div className="border-t border-neutral-400 bg-white px-12 pt-16 pb-18 md:px-22">
-            <div className="flex items-center justify-between text-14">
-              <span>{formatCartMessage({ id: 'subtotal', defaultMessage: 'Subtotal' })} </span>
-              <span>{CurrencyHelpers.formatForCurrency(transaction.subtotal)}</span>
-            </div>
-
-            {transaction.discount.centAmount > 0 && (
-              <div className="flex items-center justify-between text-14">
-                <span>{formatCartMessage({ id: 'discount', defaultMessage: 'Discount' })} </span>
-                <span>{CurrencyHelpers.formatForCurrency(transaction.discount)}</span>
-              </div>
-            )}
-
-            <div className="flex items-center justify-between text-14">
-              <span>{formatCartMessage({ id: 'tax', defaultMessage: 'Tax' })} </span>
-              <span>{CurrencyHelpers.formatForCurrency(transaction.tax)}</span>
-            </div>
-
-            {transaction.shipping.centAmount > 0 && (
-              <div className="flex items-center justify-between text-14">
-                <span>{formatCartMessage({ id: 'shipping.estimate', defaultMessage: 'Est. Shipping' })} </span>
-                <span>{CurrencyHelpers.formatForCurrency(transaction.shipping)}</span>
-              </div>
-            )}
-
-            <div className="mt-26 flex items-center justify-between font-medium">
-              <span>{formatCartMessage({ id: 'total', defaultMessage: 'Total' })}: </span>
-              <span>{CurrencyHelpers.formatForCurrency(transaction.total)}</span>
-            </div>
-
-            <div className="mt-16">
-              <button className="w-full rounded-md bg-primary-black py-12 font-medium text-white">
-                {formatCartMessage({ id: 'checkout.go', defaultMessage: 'Go to checkout' })}
-              </button>
-            </div>
-          </div>
-        </>
-      );
-    }
-  }, [state, cartData, transaction, formatCartMessage]);
+  const ActiveSection = useMemo(
+    () =>
+      ({
+        cart: <Cart />,
+      }[state]),
+    [state],
+  );
 
   return (
     <>
       <div className="flex items-center justify-between border-b border-neutral-400 px-12 pt-24 md:px-22 md:pt-32">
-        <h3 className="pb-22 text-18 font-bold leading-normal md:text-20">{title}</h3>
-        <div className="flex h-full items-center gap-12 md:gap-24">
+        <h3 className="pb-22 text-18 font-medium leading-normal md:text-20">{title}</h3>
+        <div className="flex h-full items-center gap-24 md:gap-38">
           <div className="relative h-full cursor-pointer hover:opacity-80" onClick={() => changeState?.('wishlist')}>
             <div className={wishlistClassName} />
-            {wishlistItems?.length > 0 && (
+            {totalWishlistItems > 0 && (
               <span className="absolute top-[-5px] right-[-5px] h-8 w-8 rounded-full bg-green-500" />
             )}
-            <HeartIcon className="w-25" />
+            <HeartIcon className="w-28" />
           </div>
           <div className="relative h-full cursor-pointer hover:opacity-80" onClick={() => changeState?.('cart')}>
             <>
               <div className={cartClassName} />
-              <CartIcon className="w-25" totalCartItems={totalCartItems} />
+              <div className="relative pb-6">
+                <CartIcon className="w-28" totalCartItems={totalCartItems} />
+              </div>
             </>
           </div>
-          <div onClick={onClose} className="ml-4 cursor-pointer pb-22">
-            <CloseIcon className="h-14 w-14 sm:h-16 sm:w-16" />
+          <div onClick={onClose} className="ml-4 cursor-pointer pb-22 pt-6">
+            <CloseIcon className="h-18 w-18" />
           </div>
         </div>
       </div>

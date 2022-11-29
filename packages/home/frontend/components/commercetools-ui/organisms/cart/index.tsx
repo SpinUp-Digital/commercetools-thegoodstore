@@ -1,101 +1,104 @@
-import { useState, useEffect, FormEvent } from 'react';
-import { useRouter } from 'next/router';
-import { Cart as CartType } from '@commercetools/domain-types/cart/Cart';
-import { ShippingMethod } from '@commercetools/domain-types/cart/ShippingMethod';
+import AccordionBtn from 'components/commercetools-ui/atoms/accordion';
+import { useCart } from 'frontastic';
+import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { Reference } from 'types/reference';
-import { NextFrontasticImage } from 'frontastic/lib/image';
-import Spinner from '../../atoms/spinner';
-import EmptyCart from './emptyCart';
-import ItemList from './itemList';
-import OrderSummary from './orderSummary';
+import React, { useMemo } from 'react';
+import DiscountForm from '../discount-form';
+import CartItem from './item';
 
-export interface Props {
-  pageTitle?: string;
-  emptyStateImage?: { media: NextFrontasticImage['media'] | string };
-  emptyStateTitle?: string;
-  emptyStateSubtitle?: string;
-  emptyStateCTALabel?: string;
-  emptyStateCTALink?: Reference;
-  cart: CartType;
-  editItemQuantity: (lineItemId: string, newQuantity: number) => Promise<void>;
-  removeItem: (lineItemId: string) => void;
-  shippingMethods: ShippingMethod[];
-}
-
-const Cart = ({
-  cart,
-  editItemQuantity,
-  removeItem,
-  pageTitle,
-  emptyStateImage,
-  emptyStateTitle,
-  emptyStateSubtitle,
-  emptyStateCTALabel,
-  emptyStateCTALink,
-}: Props) => {
-  const [loading, setLoading] = useState<boolean>(true);
-
-  //i18n messages
+const Cart = () => {
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
 
-  const router = useRouter();
+  const { data } = useCart();
 
-  const onCheckout = (e: FormEvent) => {
-    e.preventDefault();
-    router.push('/checkout');
-  };
+  const transaction = useMemo(() => {
+    if (!data?.lineItems)
+      return {
+        subtotal: { centAmount: 0 },
+        discount: { centAmount: 0 },
+        tax: { centAmount: 0 },
+        shipping: { centAmount: 0 },
+        total: { centAmount: 0 },
+      };
+    const currencyCode = data.sum.currencyCode;
+    const fractionDigits = data.sum.fractionDigits;
 
-  const goToProductPage = (_url: string) => router.push(_url);
-
-  useEffect(() => {
-    if (cart?.lineItems) {
-      setLoading(false);
-    }
-  }, [cart]);
-
-  if (loading) {
-    return (
-      <div className="flex items-stretch justify-center py-20 px-12">
-        <Spinner />
-      </div>
-    );
-  }
-
-  if ((!loading && !cart?.lineItems) || cart.lineItems.length < 1) {
-    return (
-      <EmptyCart
-        pageTitle={pageTitle}
-        image={emptyStateImage}
-        title={emptyStateTitle}
-        subtitle={emptyStateSubtitle}
-        ctaLabel={emptyStateCTALabel}
-        ctaLink={emptyStateCTALink}
-      />
-    );
-  }
+    return {
+      subtotal: {
+        centAmount: data.lineItems.reduce((acc, curr) => acc + (curr.price?.centAmount || 0) * curr.count, 0),
+        currencyCode,
+        fractionDigits,
+      },
+      discount: {
+        centAmount: data.lineItems.reduce(
+          (acc, curr) => acc + ((curr.price?.centAmount || 0) * curr.count - (curr.totalPrice?.centAmount || 0)),
+          0,
+        ),
+        currencyCode,
+        fractionDigits,
+      },
+      shipping: data.shippingInfo?.price ?? {},
+      tax: {
+        centAmount: data.taxed?.taxPortions?.reduce((acc, curr) => acc + curr.amount?.centAmount, 0) ?? 0,
+        currencyCode,
+        fractionDigits,
+      },
+      total: data.sum,
+    };
+  }, [data]);
 
   return (
-    <main className="mx-auto max-w-2xl px-2 pt-20 pb-24 sm:px-4 lg:max-w-7xl lg:px-8">
-      <h1 className="pb-12 text-center text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-        {formatCartMessage({ id: 'cart.shopping', defaultMessage: 'Shopping Cart' })}
-      </h1>
-      {loading ? (
-        <div className="flex items-stretch justify-center py-10 px-12">
-          <Spinner />
+    <>
+      <div className="grow divide-y divide-neutral-400 overflow-auto px-12 md:px-22">
+        {data.lineItems?.map((lineItem) => (
+          <CartItem key={lineItem.lineItemId} item={lineItem} />
+        ))}
+      </div>
+      <div className="border-t border-neutral-400 px-12 py-24 md:px-22">
+        <AccordionBtn
+          closedSectionTitle={formatCartMessage({ id: 'discount.apply', defaultMessage: 'Apply a discount' })}
+          buttonClassName="font-medium text-14"
+        >
+          <DiscountForm />
+        </AccordionBtn>
+      </div>
+      <div className="border-t border-neutral-400 bg-white px-12 pt-16 pb-18 md:px-22">
+        <div className="flex items-center justify-between text-14">
+          <span>{formatCartMessage({ id: 'subtotal', defaultMessage: 'Subtotal' })} </span>
+          <span>{CurrencyHelpers.formatForCurrency(transaction.subtotal)}</span>
         </div>
-      ) : (
-        <form className="lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16">
-          <ItemList
-            cart={cart}
-            editItemQuantity={editItemQuantity}
-            goToProductPage={goToProductPage}
-            removeItem={(lineItemId: string) => removeItem(lineItemId)}
-          />
-          <OrderSummary cart={cart} onSubmit={onCheckout} showDiscountsForm={false} />
-        </form>
-      )}
-    </main>
+
+        {transaction.discount.centAmount > 0 && (
+          <div className="flex items-center justify-between text-14">
+            <span>{formatCartMessage({ id: 'discount', defaultMessage: 'Discount' })} </span>
+            <span>{CurrencyHelpers.formatForCurrency(transaction.discount)}</span>
+          </div>
+        )}
+
+        <div className="flex items-center justify-between text-14">
+          <span>{formatCartMessage({ id: 'tax', defaultMessage: 'Tax' })} </span>
+          <span>{CurrencyHelpers.formatForCurrency(transaction.tax)}</span>
+        </div>
+
+        {transaction.shipping.centAmount > 0 && (
+          <div className="flex items-center justify-between text-14">
+            <span>{formatCartMessage({ id: 'shipping.estimate', defaultMessage: 'Est. Shipping' })} </span>
+            <span>{CurrencyHelpers.formatForCurrency(transaction.shipping)}</span>
+          </div>
+        )}
+
+        <div className="mt-26 flex items-center justify-between font-medium">
+          <span>{formatCartMessage({ id: 'total', defaultMessage: 'Total' })}: </span>
+          <span>{CurrencyHelpers.formatForCurrency(transaction.total)}</span>
+        </div>
+
+        <div className="mt-16">
+          <button className="w-full rounded-md bg-primary-black py-12 font-medium text-white">
+            {formatCartMessage({ id: 'checkout.go', defaultMessage: 'Go to checkout' })}
+          </button>
+        </div>
+      </div>
+    </>
   );
 };
 

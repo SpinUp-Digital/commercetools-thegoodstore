@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { Address } from '@commercetools/domain-types/account/Address';
 import * as yup from 'yup';
 import { ObjectShape } from 'yup/lib/object';
-import EmptyCart from 'components/commercetools-ui/organisms/cart/emptyCart';
+import EmptyCart from 'components/commercetools-ui/organisms/old_cart/emptyCart';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useI18n from 'helpers/hooks/useI18n';

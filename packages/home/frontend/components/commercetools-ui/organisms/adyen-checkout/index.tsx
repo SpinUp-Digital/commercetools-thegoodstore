@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import Address from 'components/commercetools-ui/organisms/adyen-checkout/panels/address';
 import Checkout from 'components/commercetools-ui/organisms/adyen-checkout/panels/checkout';
 import Overview from 'components/commercetools-ui/organisms/adyen-checkout/panels/overview';
-import OrderSummary from 'components/commercetools-ui/organisms/cart/orderSummary';
+import OrderSummary from 'components/commercetools-ui/organisms/old_cart/orderSummary';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { countryBasedShippingRateIndex } from 'helpers/utils/flattenShippingMethod';
 import { useCart } from 'frontastic';
