@@ -2,7 +2,7 @@ import React from 'react';
 import { Product } from '@commercetools/domain-types/product/Product';
 import Slider from 'components/commercetools-ui/atoms/slider';
 import Subtitle, { SubtitleProps } from 'components/commercetools-ui/atoms/subtitle';
-import Title, { TitleProps } from 'components/commercetools-ui/atoms/title';
+import Typography from 'components/commercetools-ui/atoms/typography';
 import Link from 'components/commercetools-ui/organisms/content/link';
 import Wrapper from 'components/commercetools-ui/organisms/content/wrapper';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
@@ -15,21 +15,12 @@ export interface Props {
   products: Product[];
   title: string;
   subline?: string;
-  titleVariant?: TitleProps['variant'];
   subtitleVariant?: SubtitleProps['variant'];
   ctaLabel: string;
   ctaLink: Reference;
 }
 
-export default function ProductSlider({
-  products,
-  title,
-  subline,
-  ctaLabel,
-  ctaLink,
-  titleVariant = 'lg',
-  subtitleVariant = 'lg',
-}: Props) {
+export default function ProductSlider({ products, title, subline, ctaLabel, ctaLink, subtitleVariant = 'lg' }: Props) {
   const [isDesktopSize] = useMediaQuery(desktop);
 
   const { isTouchDevice } = useTouchDevice();
@@ -37,7 +28,9 @@ export default function ProductSlider({
   return (
     <Wrapper background="neutral-200" variant="left-padding-only">
       <div>
-        <Title title={title} variant={titleVariant} />
+        <Typography className="mb-12 md:text-22 lg:text-28" fontSize={20} as="h3" fontFamily="libre">
+          {title}
+        </Typography>
         {(subline || ctaLink) && (
           <div className="mt-8 flex items-center justify-between md:mt-16 lg:mt-14">
             {subline && <Subtitle subtitle={subline} variant={subtitleVariant} />}

@@ -39,7 +39,7 @@ const ProductInformation: FC<ProductInformationProps> = ({ product, variant, onC
   return (
     <div>
       <div className="relative flex pr-40">
-        <Typography fontSize={16} className="ld:text-18 break-normal font-body font-bold leading-loose">
+        <Typography as="h3" lineHeight="loose" medium fontSize={16} className="break-normal lg:text-18">
           {product?.name}
         </Typography>
 

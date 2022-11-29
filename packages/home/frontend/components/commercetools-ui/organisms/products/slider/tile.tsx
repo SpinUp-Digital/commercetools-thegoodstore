@@ -3,6 +3,7 @@ import NextLink from 'next/link';
 import { Product } from '@commercetools/domain-types/product/Product';
 import { Variant } from '@commercetools/domain-types/product/Variant';
 import { LineItem } from '@commercetools/domain-types/wishlist/LineItem';
+import Typography from 'components/commercetools-ui/atoms/typography';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import usePreloadImages from 'helpers/hooks/usePreloadImages';
@@ -124,17 +125,23 @@ const Tile: FC<TileProps> = ({ product }) => {
           <div>
             {variantWithDiscount ? (
               <div className="flex items-center gap-8">
-                <span className="block text-14 font-semibold leading-loose text-accent-red">
+                <Typography as="h4" medium lineHeight="loose" fontSize={11} className="text-accent-red  md:text-14">
                   {CurrencyHelpers.formatForCurrency(discountedPrice)}
-                </span>
-                <span className="block text-12 leading-loose text-gray-500 line-through">
+                </Typography>
+                <Typography
+                  as="h5"
+                  medium
+                  lineHeight="loose"
+                  fontSize={10}
+                  className="text-gray-500 line-through md:text-12"
+                >
                   {CurrencyHelpers.formatForCurrency(variantWithDiscount.price)}
-                </span>
+                </Typography>
               </div>
             ) : (
-              <span className="block text-12 font-semibold leading-loose md:text-14">
+              <Typography as="h4" medium fontSize={11} lineHeight="loose" className="md:text-14">
                 {CurrencyHelpers.formatForCurrency(product?.variants[0].price)}
-              </span>
+              </Typography>
             )}
           </div>
         </div>
