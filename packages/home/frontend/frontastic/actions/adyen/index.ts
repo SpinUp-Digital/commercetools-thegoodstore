@@ -11,7 +11,7 @@ export const createSession = async (value: number, currency: string, returnUrl: 
   };
 
   const res = await fetchApiHub('/action/adyen/createSession', locale, { method: 'POST' }, payload);
-  await mutate('/action/adyen/createSession', res);
+
   return res;
 };
 
