@@ -4,6 +4,7 @@ import Typography from 'components/commercetools-ui/atoms/typography';
 import useCurrentBreakpoint from 'helpers/hooks/useCurrentBreakpoint';
 import useImageSizes from 'helpers/hooks/useImageSizes';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
+import useTouchDevice from 'helpers/hooks/useTouchDevice';
 import { CurrentBreakpoint } from 'helpers/utils/breakpoints';
 import * as screensizes from 'helpers/utils/screensizes';
 import { Reference } from 'types/reference';
@@ -13,7 +14,6 @@ import Slider from '../../atoms/slider';
 import Subtitle from '../../atoms/subtitle';
 import Title from '../../atoms/title';
 import Wrapper from '../content/wrapper';
-import useTouchDevice from 'helpers/hooks/useTouchDevice';
 
 type ContentSliderSlide = {
   image: NextFrontasticImage;

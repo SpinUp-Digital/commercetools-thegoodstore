@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Discount } from '@commercetools/domain-types/cart/Discount';
 import { XMarkIcon } from '@heroicons/react/24/outline';
+import CloseIcon from 'components/icons/close';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart } from 'frontastic/provider';
-import CloseIcon from 'components/icons/close';
 
 export interface Props {
   className?: string;
