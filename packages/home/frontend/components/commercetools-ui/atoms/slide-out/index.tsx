@@ -48,7 +48,7 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
     () =>
       ({
         cart: <Cart />,
-      }[state]),
+      }[state] ?? <></>),
     [state],
   );
 
