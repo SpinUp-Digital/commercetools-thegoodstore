@@ -94,10 +94,10 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
               <CartItem key={lineItem.lineItemId} item={lineItem} />
             ))}
           </div>
-          <div className="border-t border-neutral-400 px-12 pt-16 pb-24 md:px-22">
+          <div className="border-t border-neutral-400 px-12 py-24 md:px-22">
             <AccordionBtn
               closedSectionTitle={formatCartMessage({ id: 'discount.apply', defaultMessage: 'Apply a discount' })}
-              buttonClassName="font-medium text-14"
+              buttonClassName="font-normal text-14"
             >
               <DiscountForm />
             </AccordionBtn>
@@ -127,7 +127,7 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
               </div>
             )}
 
-            <div className="mt-26 flex items-center justify-between font-semibold">
+            <div className="mt-26 flex items-center justify-between font-medium">
               <span>{formatCartMessage({ id: 'total', defaultMessage: 'Total' })}: </span>
               <span>{CurrencyHelpers.formatForCurrency(transaction.total)}</span>
             </div>
@@ -147,28 +147,22 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
     <>
       <div className="flex items-center justify-between border-b border-neutral-400 px-12 pt-24 md:px-22 md:pt-32">
         <h3 className="pb-22 text-18 font-bold leading-normal md:text-20">{title}</h3>
-        <div className="flex h-full items-center">
-          <div
-            className="relative mr-12 h-full cursor-pointer hover:opacity-80 md:mr-24"
-            onClick={() => changeState?.('wishlist')}
-          >
+        <div className="flex h-full items-center gap-12 md:gap-24">
+          <div className="relative h-full cursor-pointer hover:opacity-80" onClick={() => changeState?.('wishlist')}>
             <div className={wishlistClassName} />
             {wishlistItems?.length > 0 && (
               <span className="absolute top-[-5px] right-[-5px] h-8 w-8 rounded-full bg-green-500" />
             )}
             <HeartIcon className="w-25" />
           </div>
-          <div
-            className="relative mr-8 h-full cursor-pointer hover:opacity-80 md:mr-16"
-            onClick={() => changeState?.('cart')}
-          >
+          <div className="relative h-full cursor-pointer hover:opacity-80" onClick={() => changeState?.('cart')}>
             <>
               <div className={cartClassName} />
               <CartIcon className="w-25" totalCartItems={totalCartItems} />
             </>
           </div>
-          <div onClick={onClose} className="cursor-pointer pb-22">
-            <CloseIcon className="ml-12 h-14 w-14 sm:h-16 sm:w-16" />
+          <div onClick={onClose} className="ml-4 cursor-pointer pb-22">
+            <CloseIcon className="h-14 w-14 sm:h-16 sm:w-16" />
           </div>
         </div>
       </div>

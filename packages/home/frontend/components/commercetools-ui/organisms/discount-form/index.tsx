@@ -4,6 +4,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart } from 'frontastic/provider';
+import CloseIcon from 'components/icons/close';
 
 export interface Props {
   className?: string;
@@ -63,22 +64,40 @@ const DiscountForm: React.FC<Props> = ({ className }) => {
     onApplyDiscount();
   };
 
+  const resetCode = () => {
+    setCode('');
+    setCodeIsInvalid(false);
+  };
+
   return (
     <div className={className}>
       <div>
         <div>
           <form className="mt-16" onSubmit={handleSubmit}>
-            <input
-              className={inputClassName}
-              type="text"
-              value={code}
-              placeholder={formatCartMessage({
-                id: 'cart.discount.enter',
-                defaultMessage: 'Enter discount code',
-              })}
-              onChange={handleChange}
-              disabled={processing}
-            />
+            <div className="relative">
+              <input
+                className={inputClassName}
+                type="text"
+                value={code}
+                placeholder={formatCartMessage({
+                  id: 'cart.discount.enter',
+                  defaultMessage: 'Enter discount code',
+                })}
+                onChange={handleChange}
+                disabled={processing}
+              />
+              {codeIsInvalid && (
+                <span
+                  className="absolute right-16 top-1/2 -translate-y-1/2"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    resetCode();
+                  }}
+                >
+                  <CloseIcon className=" h-10 w-10 cursor-pointer" />
+                </span>
+              )}
+            </div>
             {codeIsInvalid && (
               <p className="mt-16 font-body text-12 font-medium leading-normal text-accent-red">
                 {formatCartMessage({ id: 'codeNotValid', defaultMessage: 'The discount code is not valid' })}
