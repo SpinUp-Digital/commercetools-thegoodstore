@@ -114,7 +114,10 @@ const Tile: FC<TileProps> = ({ product }) => {
                   variant.sku !== selectedVariant.sku ? 'border-neutral-300' : 'border-neutral-500'
                 }`}
                 style={{ backgroundColor: variant.attributes.color || variant.attributes.finish }}
-                onClick={() => setSelectedVariant(variant)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setSelectedVariant(variant);
+                }}
               ></span>
             ))}
           </div>
