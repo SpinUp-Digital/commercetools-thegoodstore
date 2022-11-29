@@ -11,7 +11,7 @@ const Icon: React.FC<Props> = ({ className, totalCartItems }: Props) => (
     {totalCartItems > 0 && (
       <>
         <span className="absolute top-[-4px] right-[-3px] h-8 w-8 rounded-full bg-green-500" />
-        <span className="absolute top-15 left-1/2 -translate-y-1/2 -translate-x-1/2 text-10">{totalCartItems}</span>
+        <span className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 text-10">{totalCartItems}</span>
       </>
     )}
     <ShoppingBagIcon className={className} />

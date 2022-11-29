@@ -73,7 +73,7 @@ const DiscountForm: React.FC<Props> = ({ className }) => {
     <div className={className}>
       <div>
         <div>
-          <form className="mt-16" onSubmit={handleSubmit}>
+          <form className="mt-24" onSubmit={handleSubmit}>
             <div className="relative">
               <input
                 className={inputClassName}

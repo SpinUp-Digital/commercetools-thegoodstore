@@ -78,15 +78,15 @@ const CartItem: React.FC<Props> = ({ item }) => {
         <div className="mt-12">
           {item.discountedPrice ? (
             <div className="flex items-center gap-5">
-              <span className="text-14 font-semibold leading-loose text-accent-red">
+              <span className="text-14 font-medium leading-loose text-accent-red">
                 {CurrencyHelpers.formatForCurrency(item.discountedPrice)}
               </span>
-              <span className="text-12 font-semibold leading-loose text-gray-500 line-through">
+              <span className="text-12 font-normal leading-loose text-gray-500 line-through">
                 {CurrencyHelpers.formatForCurrency(item.price)}
               </span>
             </div>
           ) : (
-            <span className="text-14 font-semibold leading-loose">{CurrencyHelpers.formatForCurrency(item.price)}</span>
+            <span className="text-14 font-medium leading-loose">{CurrencyHelpers.formatForCurrency(item.price)}</span>
           )}
         </div>
         <div className="mt-16">
