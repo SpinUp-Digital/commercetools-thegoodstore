@@ -21,14 +21,14 @@ const Wrapper: FC<WrapperProps> = ({
 }) => {
   const variantClassNames: variantClassNames = {
     none: '',
-    'left-padding-only': 'pl-8 md:pl-25 lg:pr-96 lg:pl-96 xl:pl-0 xl:pr-0',
+    'left-padding-only': 'pl-8 md:pr-96 md:pl-96 xl:pl-0 xl:pr-0',
     'full-padding-small': 'px-8 md:px-12',
-    'full-padding': 'px-16 md:px-25 lg:px-96',
+    'full-padding': 'px-16 md:px-96',
   };
 
   const wrapperClassName = clearDefaultStyles
     ? className
-    : `mx-auto max-w-[1248px] ${variantClassNames[variant]} ${className ?? ''}`;
+    : `mx-auto max-w-[1150px] 2xl:max-w-[1248px] ${variantClassNames[variant]} ${className ?? ''}`;
 
   return (
     <div className={`bg-${background}`}>
