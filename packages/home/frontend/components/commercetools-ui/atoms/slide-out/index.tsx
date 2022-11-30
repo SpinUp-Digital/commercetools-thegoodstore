@@ -1,7 +1,8 @@
 import React, { useMemo } from 'react';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import CartIcon from 'components/icons/cart';
-import CloseIcon from 'components/icons/close';
+// import CloseIcon from 'components/icons/close';
+import CloseIcon from '@heroicons/react/24/outline/XMarkIcon';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart, useWishlist } from 'frontastic';
@@ -32,7 +33,7 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
     }
   }, [formatCartMessage, formatWishlistMessage, state]);
 
-  const iconClassName = 'absolute -bottom-1 left-[-4px] h-2 w-34 transition duration-200';
+  const iconClassName = 'absolute -bottom-23 left-1/2 -translate-x-1/2 h-2 w-[110%] transition duration-200';
 
   const wishlistClassName = useClassNames([
     iconClassName,
@@ -54,26 +55,32 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
 
   return (
     <>
-      <div className="flex items-center justify-between border-b border-neutral-400 px-12 pt-24 md:px-22 md:pt-32">
-        <h3 className="pb-22 text-18 font-medium leading-normal md:text-20">{title}</h3>
+      <div className="flex items-center justify-between border-b border-neutral-400 px-12 py-24 pb-22 md:px-22">
+        <h3 className="text-18 font-medium leading-normal md:text-20">{title}</h3>
         <div className="flex h-full items-center gap-24 md:gap-38">
-          <div className="relative h-full cursor-pointer hover:opacity-80" onClick={() => changeState?.('wishlist')}>
+          <div
+            className="relative h-full cursor-pointer transition hover:opacity-80"
+            onClick={() => changeState?.('wishlist')}
+          >
             <div className={wishlistClassName} />
             {totalWishlistItems > 0 && (
               <span className="absolute top-[-5px] right-[-5px] h-8 w-8 rounded-full bg-green-500" />
             )}
-            <HeartIcon className="w-28" />
+            <HeartIcon className="w-28" stroke="#494949" />
           </div>
-          <div className="relative h-full cursor-pointer hover:opacity-80" onClick={() => changeState?.('cart')}>
+          <div
+            className="relative h-full cursor-pointer transition hover:opacity-80"
+            onClick={() => changeState?.('cart')}
+          >
             <>
               <div className={cartClassName} />
-              <div className="relative pb-6">
-                <CartIcon className="w-28" totalCartItems={totalCartItems} />
+              <div className="relative">
+                <CartIcon className="w-28" totalCartItems={totalCartItems} counterClassName="-translate-y-1/4" />
               </div>
             </>
           </div>
-          <div onClick={onClose} className="ml-4 cursor-pointer pb-22 pt-6">
-            <CloseIcon className="h-18 w-18" />
+          <div onClick={onClose} className="cursor-pointer transition hover:opacity-80">
+            <CloseIcon className="w-28" stroke="#494949" />
           </div>
         </div>
       </div>

@@ -2,14 +2,14 @@ import AccordionBtn from 'components/commercetools-ui/atoms/accordion';
 import { useCart } from 'frontastic';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import DiscountForm from '../discount-form';
 import CartItem from './item';
 
 const Cart = () => {
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
 
-  const { data } = useCart();
+  const { data, updateCart } = useCart();
 
   const transaction = useMemo(() => {
     if (!data?.lineItems)
@@ -22,6 +22,8 @@ const Cart = () => {
       };
     const currencyCode = data.sum.currencyCode;
     const fractionDigits = data.sum.fractionDigits;
+
+    const totalTax = data.taxed?.taxPortions?.reduce((acc, curr) => acc + curr.amount?.centAmount, 0) ?? 0;
 
     return {
       subtotal: {
@@ -39,11 +41,15 @@ const Cart = () => {
       },
       shipping: data.shippingInfo?.price ?? {},
       tax: {
-        centAmount: data.taxed?.taxPortions?.reduce((acc, curr) => acc + curr.amount?.centAmount, 0) ?? 0,
+        centAmount: totalTax,
         currencyCode,
         fractionDigits,
       },
-      total: data.sum,
+      total: {
+        centAmount: data.sum.centAmount + totalTax,
+        currencyCode,
+        fractionDigits,
+      },
     };
   }, [data]);
 
