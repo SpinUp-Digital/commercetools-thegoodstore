@@ -6,8 +6,7 @@ import Typography from 'components/commercetools-ui/atoms/typography';
 import Link from 'components/commercetools-ui/organisms/content/link';
 import Wrapper from 'components/commercetools-ui/organisms/content/wrapper';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
-import useTouchDevice from 'helpers/hooks/useTouchDevice';
-import { desktop, tablet } from 'helpers/utils/screensizes';
+import { mediumDesktop, tablet } from 'helpers/utils/screensizes';
 import { Reference } from 'types/reference';
 import Tile from './tile';
 
@@ -21,9 +20,8 @@ export interface Props {
 }
 
 export default function ProductSlider({ products, title, subline, ctaLabel, ctaLink, subtitleVariant = 'lg' }: Props) {
-  const [isDesktopSize] = useMediaQuery(desktop);
-
-  const { isTouchDevice } = useTouchDevice();
+  const [isDesktopSize] = useMediaQuery(mediumDesktop);
+  const [isTablet] = useMediaQuery(tablet);
 
   return (
     <Wrapper background="neutral-200" variant="left-padding-only">
@@ -54,22 +52,20 @@ export default function ProductSlider({ products, title, subline, ctaLabel, ctaL
       <div className="mt-20 md:mt-24 lg:mt-20">
         <div className="relative mt-6 w-full">
           <Slider
+            key={`${isDesktopSize}`}
             slidesPerView={2.3}
             slidesPerGroup={1}
-            cssMode
             dots={false}
-            arrows={!isTouchDevice}
-            innerArrows={!isDesktopSize}
+            arrows={isTablet}
             nextButtonStyles={{ transform: 'translateY(-250%) rotateZ(-45deg)' }}
             prevButtonStyles={{ transform: 'translateY(-250%) rotateZ(135deg)' }}
-            allowTouchMove={isTouchDevice}
+            allowTouchMove={!isDesktopSize}
             spaceBetween={8}
             breakpoints={{
               [tablet]: {
                 spaceBetween: 25,
               },
-              [desktop]: {
-                cssMode: false,
+              [mediumDesktop]: {
                 slidesPerView: 4,
                 slidesPerGroup: 4,
                 spaceBetween: 25,

@@ -28,7 +28,7 @@ export type ContentSliderProps = {
 };
 
 const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
-  const [isDesktop] = useMediaQuery(screensizes.desktop);
+  const [isDesktop] = useMediaQuery(screensizes.mediumDesktop);
   const [isTablet] = useMediaQuery(screensizes.tablet);
   const currentBreakPoint = useCurrentBreakpoint();
   const tileImageSizes = useImageSizes({ md: 1, lg: 0.33, defaultSize: 0.33 });
@@ -83,13 +83,12 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
         <div className="flex w-full gap-24">{slidesElement}</div>
       ) : (
         <Slider
-          arrows={!isTouchDevice && !isDesktop}
-          innerArrows={!isDesktop}
+          key={`${isDesktop}`}
+          arrows={isTablet}
           dots={false}
           slideWidth={isTablet ? 400 : 246}
           spaceBetween={spaceBetweenRef[currentBreakPoint] ?? 12}
-          cssMode
-          allowTouchMove={isTouchDevice}
+          allowTouchMove={!isDesktop}
         >
           {slidesElement}
         </Slider>
