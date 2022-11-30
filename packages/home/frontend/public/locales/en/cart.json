@@ -41,5 +41,8 @@
   "codeAdded": "Discount code added",
   "cart.add": "Add to cart",
   "move.to.wishlist": "Move to wishlist",
-  "checkout.go": "Go to checkout"
+  "checkout.go": "Go to checkout",
+  "delivery.standard": "Standard Delivery",
+  "delivery.express": "Express Delivery",
+  "add.postcode": "Add postcode for availability"
 }
