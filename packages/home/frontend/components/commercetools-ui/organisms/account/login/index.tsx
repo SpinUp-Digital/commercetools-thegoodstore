@@ -55,6 +55,7 @@ const Login: React.FC<LoginProps> = ({ signInLink, accountLink }) => {
   const backToLogin = () => {
     setResendPasswordReset(false);
     setResendVerification(false);
+    resetFeedback();
   };
 
   //requesting a password reset
