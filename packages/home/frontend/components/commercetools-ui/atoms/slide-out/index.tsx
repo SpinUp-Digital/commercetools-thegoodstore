@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react';
 import { HeartIcon } from '@heroicons/react/24/outline';
-import CartIcon from 'components/icons/cart';
 import CloseIcon from '@heroicons/react/24/outline/XMarkIcon';
+import Cart from 'components/commercetools-ui/organisms/cart';
+import CartIcon from 'components/icons/cart';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart, useWishlist } from 'frontastic';
-import Cart from 'components/commercetools-ui/organisms/cart';
 
 export type State = 'wishlist' | 'cart';
 
