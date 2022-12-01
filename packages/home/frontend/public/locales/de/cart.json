@@ -34,5 +34,8 @@
   "includedVat": "Gesamtbetrag {amount} inkl. Mwst",
   "codeNotValid": "Der Rabattcode ist ungültig",
   "codeAdded": "Rabattcode hinzugefügt",
-  "cart.add": "In den Warenkorb legen"
+  "cart.add": "In den Warenkorb legen",
+  "delivery.standard": "Standard Lieferung",
+  "delivery.express": "Expresszustellung",
+  "add.postcode": "Postleitzahl für Verfügbarkeit hinzufügen"
 }

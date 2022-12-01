@@ -67,7 +67,6 @@ const ProductInformation: FC<ProductInformationProps> = ({ product, variant, onC
           {CurrencyHelpers.formatForCurrency(variant.price)}
         </span>
       )}
-
       {attributesToDisplay.map((attribute, index) => {
         if (variant?.attributes?.[attribute]) {
           return (
