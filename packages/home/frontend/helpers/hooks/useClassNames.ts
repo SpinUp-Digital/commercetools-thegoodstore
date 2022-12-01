@@ -1,37 +1,64 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 // Hook can take an array of either simple strings or conditioned classnames
 // example: ['firstClassName', {'secondClassName': BooleanToCheck}]
 // Only if Boolean is true in the example above the className will be added
-type ClassNames = Array<string | { [key: string]: Boolean }>;
+type ClassNames = Array<string | { [key: string]: boolean }>;
 
 // Should be extended with any further options
 type UseClassNamesOptions = { prefix?: string };
 type UseClassNames = (classNames: ClassNames, options?: UseClassNamesOptions) => string;
 
 const useClassNames: UseClassNames = (classNames, options) => {
-  const stringifiedClassNames: Array<string> = [];
+  const [result, setResult] = useState('');
 
-  const addClassName = (className: string) => {
-    stringifiedClassNames.push(`${options?.prefix ?? ''}${className}`);
-  };
+  const resolveClassNameOptions = useCallback(
+    (className: string) => {
+      return `${options?.prefix ?? ''}${className}`;
+    },
+    [options?.prefix],
+  );
+
+  const resolveObject = useCallback(
+    (className) => {
+      const value = Object.keys(className)[0];
+      const condition = Object.values(className)[0];
+      return condition ? resolveClassNameOptions(value) : '';
+    },
+    [resolveClassNameOptions],
+  );
+
+  const resolveClassName = useCallback(
+    (className) => {
+      if (typeof className == 'object') {
+        return resolveObject(className);
+      } else if (className) {
+        return resolveClassNameOptions(className);
+      }
+    },
+    [resolveClassNameOptions, resolveObject],
+  );
 
   const resolveClassNames = useCallback(
     (classNames) => {
+      const stringifiedClassNames = [];
+
       classNames.map((className) => {
-        if (typeof className == 'object') {
-          const value = Object.keys(className)[0];
-          const condition = Object.values(className)[0];
-          if (condition) addClassName(value);
-        } else if (className) addClassName(className);
+        const resolvedClassName: string = resolveClassName(className);
+        stringifiedClassNames.push(resolvedClassName);
       });
 
-      return stringifiedClassNames.join(' ');
+      return stringifiedClassNames;
     },
-    [classNames],
+    [resolveClassName],
   );
 
-  return resolveClassNames(classNames);
+  useEffect(() => {
+    const resolvedClassNames = resolveClassNames(classNames);
+    setResult(resolvedClassNames.join(' '));
+  }, [classNames, resolveClassNames]);
+
+  return result;
 };
 
 export default useClassNames;

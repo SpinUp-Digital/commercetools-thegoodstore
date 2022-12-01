@@ -8,7 +8,7 @@ const Modal: FC<ReactModalProps> = ({ children, ...props }) => {
 
   const modalStyle: ReactModalProps['style'] = {
     overlay: {
-      zIndex: 12,
+      zIndex: 51,
     },
     content: {
       top: '50%',

@@ -75,6 +75,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({
 
         <div className="flex gap-8 pt-25">
           <Dropdown
+            className="rounded-sm"
             defaultValue="1"
             items={Array(10)
               .fill(0)
