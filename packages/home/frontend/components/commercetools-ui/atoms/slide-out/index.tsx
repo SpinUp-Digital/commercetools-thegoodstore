@@ -54,9 +54,9 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
 
   return (
     <>
-      <div className="flex items-center justify-between border-b border-neutral-400 px-12 py-24 pb-22 md:px-22">
+      <div className="flex items-center justify-between border-b border-neutral-400 py-24 pl-12 pr-8 pb-22 md:pl-22 md:pr-18">
         <h3 className="text-18 font-medium leading-normal md:text-20">{title}</h3>
-        <div className="flex h-full items-center gap-24 md:gap-38">
+        <div className="flex h-full items-center gap-24">
           <div
             className="relative h-full cursor-pointer transition hover:opacity-80"
             onClick={() => changeState?.('wishlist')}
