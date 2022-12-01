@@ -1,3 +1,4 @@
+import useTouchDevice from 'helpers/hooks/useTouchDevice';
 import React, { FC, ReactNode } from 'react';
 
 type WrapperProps = {
@@ -19,9 +20,13 @@ const Wrapper: FC<WrapperProps> = ({
   className,
   clearDefaultStyles,
 }) => {
+  const { isTouchDevice } = useTouchDevice();
+
   const variantClassNames: variantClassNames = {
     none: '',
-    'left-padding-only': 'pl-8 md:pr-96 md:pl-96 xl:pl-0 xl:pr-0',
+    'left-padding-only': !isTouchDevice
+      ? 'pl-8 md:pr-96 md:pl-96 xl:pl-0 xl:pr-0'
+      : 'pl-8 lg:pr-96 lg:pl-96 xl:pl-0 xl:pr-0',
     'full-padding-small': 'px-8 md:px-12',
     'full-padding': 'px-16 md:px-96',
   };

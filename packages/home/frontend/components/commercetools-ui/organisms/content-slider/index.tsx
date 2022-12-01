@@ -4,7 +4,6 @@ import Typography from 'components/commercetools-ui/atoms/typography';
 import useCurrentBreakpoint from 'helpers/hooks/useCurrentBreakpoint';
 import useImageSizes from 'helpers/hooks/useImageSizes';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
-import useTouchDevice from 'helpers/hooks/useTouchDevice';
 import { CurrentBreakpoint } from 'helpers/utils/breakpoints';
 import * as screensizes from 'helpers/utils/screensizes';
 import { Reference } from 'types/reference';
@@ -32,8 +31,6 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
   const [isTablet] = useMediaQuery(screensizes.tablet);
   const currentBreakPoint = useCurrentBreakpoint();
   const tileImageSizes = useImageSizes({ md: 1, lg: 0.33, defaultSize: 0.33 });
-
-  const { isTouchDevice } = useTouchDevice();
 
   type BreakpointsRef = {
     [key in CurrentBreakpoint]?: number;
@@ -83,7 +80,7 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
         <div className="flex w-full gap-24">{slidesElement}</div>
       ) : (
         <Slider
-          arrows={isTablet}
+          arrows
           dots={false}
           slideWidth={isTablet ? 400 : 246}
           spaceBetween={spaceBetweenRef[currentBreakPoint] ?? 12}

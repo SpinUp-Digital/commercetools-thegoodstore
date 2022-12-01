@@ -11,7 +11,6 @@ export interface Props {
 
 const CategorySlider: React.FC<Props> = ({ tiles = [] }) => {
   const [isDesktopSize] = useMediaQuery(mediumDesktop);
-  const [isTablet, width] = useMediaQuery(tablet);
 
   const fitsToScreenSize = useMemo(
     () => (isDesktopSize && tiles.length <= 4) || (!isDesktopSize && tiles.length <= 2),
@@ -24,8 +23,8 @@ const CategorySlider: React.FC<Props> = ({ tiles = [] }) => {
         slidesPerView={2.3}
         dots={false}
         spaceBetween={4}
-        arrows={isTablet && !fitsToScreenSize}
-        allowTouchMove={!isDesktopSize && !fitsToScreenSize}
+        arrows={!fitsToScreenSize}
+        allowTouchMove={!fitsToScreenSize}
         breakpoints={{
           [tablet]: {
             spaceBetween: 8,
