@@ -52,7 +52,6 @@ export default function ProductSlider({ products, title, subline, ctaLabel, ctaL
       <div className="mt-20 md:mt-24 lg:mt-20">
         <div className="relative mt-6 w-full">
           <Slider
-            key={`${isDesktopSize}`}
             slidesPerView={2.3}
             slidesPerGroup={1}
             dots={false}

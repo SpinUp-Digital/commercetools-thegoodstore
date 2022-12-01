@@ -21,7 +21,6 @@ const CategorySlider: React.FC<Props> = ({ tiles = [] }) => {
   return (
     <Wrapper background="neutral-200" variant="left-padding-only">
       <Slider
-        key={`${isDesktopSize} ${fitsToScreenSize}`}
         slidesPerView={2.3}
         dots={false}
         spaceBetween={4}

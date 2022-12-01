@@ -8,6 +8,7 @@ import 'swiper/css/scrollbar'; // eslint-disable-line import/no-unresolved
 import { NavigationOptions } from 'swiper/types';
 import useClassNames from 'helpers/hooks/useClassNames';
 import SliderNavigation, { SliderNavigationProps } from './slider-navigation';
+import useTouchDevice from 'helpers/hooks/useTouchDevice';
 
 export type SliderProps = SliderNavigationProps & {
   className?: string;
@@ -32,11 +33,14 @@ const Slider: FC<SliderProps> = ({
   children,
   onSwiper,
   onInit,
+  allowTouchMove,
   prevButtonStyles = {},
   nextButtonStyles = {},
   compactNavigation,
   ...props
 }) => {
+  const { isTouchDevice } = useTouchDevice();
+
   const [init, setInit] = useState(false);
 
   const handleInit = useCallback(
@@ -95,6 +99,7 @@ const Slider: FC<SliderProps> = ({
   return (
     <div className={containerClassName}>
       <Swiper
+        key={`${allowTouchMove} ${isTouchDevice}`}
         className={slidesClassName}
         modules={[Navigation, Pagination, Thumbs]}
         thumbs={{ swiper: thumbsSwiper }}
@@ -111,6 +116,7 @@ const Slider: FC<SliderProps> = ({
         observer
         observeParents
         onInit={handleInit}
+        allowTouchMove={allowTouchMove && isTouchDevice}
         {...props}
       >
         {slides}
