@@ -59,7 +59,7 @@ const CartItem: React.FC<Props> = ({ item }) => {
   return (
     <div className="flex max-w-full items-stretch justify-start gap-10 py-18 md:gap-15">
       <div className="w-[125px] shrink-0 bg-white p-12">
-        <div className="relative h-full w-full">
+        <div className="relative h-full w-full rounded-sm">
           <Image src={item.variant?.images?.[0]} suffix="small" objectFit="contain" />
         </div>
       </div>
@@ -71,8 +71,8 @@ const CartItem: React.FC<Props> = ({ item }) => {
           >
             {item.name}
           </p>
-          <i onClick={() => removeItem(item.lineItemId)} className="block h-15 w-15 cursor-pointer">
-            <TrashIcon />
+          <i onClick={() => removeItem(item.lineItemId)} className="block cursor-pointer">
+            <TrashIcon stroke="#494949" className="w-20" />
           </i>
         </div>
         <div className="mt-12">
@@ -91,11 +91,17 @@ const CartItem: React.FC<Props> = ({ item }) => {
         </div>
         <div className="mt-16">
           <div className={counterClassName}>
-            <button onClick={() => updateCartItem(item.count - 1)} className="cursor-[inherit] py-3 pl-12">
+            <button
+              onClick={() => updateCartItem(item.count - 1)}
+              className="cursor-[inherit] py-3 pl-12 text-secondary-black"
+            >
               -
             </button>
-            <span className="py-3 text-14">{item.count}</span>
-            <button onClick={() => updateCartItem(item.count + 1)} className="cursor-[inherit] py-3 pr-12">
+            <span className="py-3 text-14 text-secondary-black">{item.count}</span>
+            <button
+              onClick={() => updateCartItem(item.count + 1)}
+              className="cursor-[inherit] py-3 pr-12 text-secondary-black"
+            >
               +
             </button>
           </div>
