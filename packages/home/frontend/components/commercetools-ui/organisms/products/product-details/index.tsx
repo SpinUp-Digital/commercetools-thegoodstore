@@ -1,9 +1,9 @@
 import { FC, useState } from 'react';
-import NextLink from 'next/link';
 import { Variant } from '@commercetools/domain-types/product/Variant';
 import { TruckIcon } from '@heroicons/react/24/outline';
 import Button from 'components/commercetools-ui/atoms/button';
 import Dropdown from 'components/commercetools-ui/atoms/dropdown';
+import Link from 'components/commercetools-ui/atoms/link';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import Wrapper from 'components/commercetools-ui/organisms/content/wrapper';
 import Gallery from 'components/commercetools-ui/organisms/gallery';
@@ -117,12 +117,15 @@ const ProductDetails: FC<ProductDetailsProps> = ({
         )}
 
         {inModalVersion && (
-          <div className="flex justify-center pt-30" onClick={() => setIsOpen(false)}>
-            <NextLink href={url}>
-              <a className="font-body text-14 font-regular leading-loose text-secondary-black underline">
-                More details
-              </a>
-            </NextLink>
+          <div>
+            <Link
+              link={url}
+              variant="menu-item"
+              className="mx-auto mt-30 block w-fit border-b text-center text-14 leading-loose text-secondary-black"
+              onClick={() => setIsOpen(false)}
+            >
+              <a>More details</a>
+            </Link>
           </div>
         )}
       </div>
