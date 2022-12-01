@@ -7,17 +7,17 @@ import { useFormat } from 'helpers/hooks/useFormat';
 import ProductDetailsAdapter from '../product-details/adapter';
 
 type QuickViewProps = {
-  imageHovered: boolean;
+  containerHovered: boolean;
   isDesktopSize: boolean;
   product: Product;
 };
 
-const QuickView: FC<QuickViewProps> = ({ imageHovered, isDesktopSize, product }) => {
+const QuickView: FC<QuickViewProps> = ({ containerHovered, isDesktopSize, product }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
 
   const { formatMessage } = useFormat({ name: 'product' });
   const classNames = useClassNames([
-    imageHovered && isDesktopSize ? 'block' : 'hidden',
+    containerHovered && isDesktopSize ? 'block' : 'hidden',
     'w-full border border-neutral-400 bg-white py-16 text-center text-12 capitalize leading-[16px] transition duration-150 ease-out hover:border-primary-black',
   ]);
 
