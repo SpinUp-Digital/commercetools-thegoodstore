@@ -9,7 +9,7 @@ import CartItem from './item';
 const Cart = () => {
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
 
-  const { data, updateCart } = useCart();
+  const { data } = useCart();
 
   const transaction = useMemo(() => {
     if (!data?.lineItems)
@@ -20,33 +20,44 @@ const Cart = () => {
         shipping: { centAmount: 0 },
         total: { centAmount: 0 },
       };
+
     const currencyCode = data.sum.currencyCode;
     const fractionDigits = data.sum.fractionDigits;
 
+    const totalAmount = data.sum.centAmount;
+    const subTotalAmount = data.lineItems.reduce((acc, curr) => acc + (curr.price?.centAmount || 0) * curr.count, 0);
+    const discountedAmount = data.lineItems.reduce(
+      (acc, curr) => acc + ((curr.price?.centAmount || 0) * curr.count - (curr.totalPrice?.centAmount || 0)),
+      0,
+    );
+
     const totalTax = data.taxed?.taxPortions?.reduce((acc, curr) => acc + curr.amount?.centAmount, 0) ?? 0;
+    const totalShipping =
+      data.sum.centAmount > 0 ? data.availableShippingMethods?.[0]?.rates?.[0]?.price.centAmount ?? 0 : 0;
 
     return {
       subtotal: {
-        centAmount: data.lineItems.reduce((acc, curr) => acc + (curr.price?.centAmount || 0) * curr.count, 0),
+        centAmount: subTotalAmount,
         currencyCode,
         fractionDigits,
       },
       discount: {
-        centAmount: data.lineItems.reduce(
-          (acc, curr) => acc + ((curr.price?.centAmount || 0) * curr.count - (curr.totalPrice?.centAmount || 0)),
-          0,
-        ),
+        centAmount: discountedAmount,
         currencyCode,
         fractionDigits,
       },
-      shipping: data.shippingInfo?.price ?? {},
+      shipping: {
+        centAmount: totalShipping,
+        currencyCode,
+        fractionDigits,
+      },
       tax: {
         centAmount: totalTax,
         currencyCode,
         fractionDigits,
       },
       total: {
-        centAmount: data.sum.centAmount + totalTax,
+        centAmount: totalAmount + totalTax + totalShipping,
         currencyCode,
         fractionDigits,
       },

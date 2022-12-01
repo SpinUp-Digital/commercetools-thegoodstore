@@ -39,7 +39,7 @@ const CreateAddress: React.FC<CreateAddressProps> = ({ open, onClose }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      addAddress(data);
+      addAddress({ ...data, country });
     } catch (err) {
     } finally {
       onClose();

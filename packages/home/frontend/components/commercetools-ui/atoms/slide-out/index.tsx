@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import CartIcon from 'components/icons/cart';
-// import CloseIcon from 'components/icons/close';
 import CloseIcon from '@heroicons/react/24/outline/XMarkIcon';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
@@ -33,7 +32,7 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
     }
   }, [formatCartMessage, formatWishlistMessage, state]);
 
-  const iconClassName = 'absolute -bottom-23 left-1/2 -translate-x-1/2 h-2 w-[110%] transition duration-200';
+  const iconClassName = 'absolute -bottom-23 left-1/2 -translate-x-1/2 h-2 w-[130%] transition duration-200';
 
   const wishlistClassName = useClassNames([
     iconClassName,
