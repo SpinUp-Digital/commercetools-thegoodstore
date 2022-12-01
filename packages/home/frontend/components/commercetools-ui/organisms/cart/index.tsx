@@ -74,7 +74,7 @@ const Cart = () => {
       <div className="border-t border-neutral-400 px-12 py-24 md:px-22">
         <AccordionBtn
           closedSectionTitle={formatCartMessage({ id: 'discount.apply', defaultMessage: 'Apply a discount' })}
-          buttonClassName="font-medium text-14"
+          buttonClassName="font-medium text-14 text-secondary-black"
         >
           <DiscountForm />
         </AccordionBtn>
