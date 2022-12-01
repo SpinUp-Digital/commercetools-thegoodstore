@@ -123,7 +123,7 @@ const Slider: FC<SliderProps> = ({
       </Swiper>
       <SliderNavigation
         compactNavigation={compactNavigation}
-        arrows={arrows}
+        arrows={arrows && !isTouchDevice}
         prevButtonStyles={prevButtonStyles}
         nextButtonStyles={nextButtonStyles}
         navigationPrevRef={navigationPrevRef}

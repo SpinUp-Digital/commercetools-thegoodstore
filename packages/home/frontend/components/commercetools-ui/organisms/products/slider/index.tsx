@@ -5,7 +5,6 @@ import Subtitle, { SubtitleProps } from 'components/commercetools-ui/atoms/subti
 import Typography from 'components/commercetools-ui/atoms/typography';
 import Link from 'components/commercetools-ui/organisms/content/link';
 import Wrapper from 'components/commercetools-ui/organisms/content/wrapper';
-import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import { mediumDesktop, tablet } from 'helpers/utils/screensizes';
 import { Reference } from 'types/reference';
 import Tile from './tile';
@@ -20,9 +19,6 @@ export interface Props {
 }
 
 export default function ProductSlider({ products, title, subline, ctaLabel, ctaLink, subtitleVariant = 'lg' }: Props) {
-  const [isDesktopSize] = useMediaQuery(mediumDesktop);
-  const [isTablet] = useMediaQuery(tablet);
-
   return (
     <Wrapper background="neutral-200" variant="left-padding-only">
       <div>
@@ -55,10 +51,10 @@ export default function ProductSlider({ products, title, subline, ctaLabel, ctaL
             slidesPerView={2.3}
             slidesPerGroup={1}
             dots={false}
-            arrows={isTablet}
+            arrows
             nextButtonStyles={{ transform: 'translateY(-250%) rotateZ(-45deg)' }}
             prevButtonStyles={{ transform: 'translateY(-250%) rotateZ(135deg)' }}
-            allowTouchMove={!isDesktopSize}
+            allowTouchMove
             spaceBetween={8}
             breakpoints={{
               [tablet]: {
