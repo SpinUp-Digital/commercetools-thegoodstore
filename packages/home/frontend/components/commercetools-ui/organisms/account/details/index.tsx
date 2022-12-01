@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useHash from 'helpers/hooks/useHash';
+import useI18n from 'helpers/hooks/useI18n';
 import Redirect from 'helpers/redirect';
 import { Reference } from 'types/reference';
 import { useAccount, useCart } from 'frontastic';
 import { AddressesSection, GeneralSection, SecuritySection, OrdersHistorySection } from './sections/exporter';
-import useI18n from 'helpers/hooks/useI18n';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');

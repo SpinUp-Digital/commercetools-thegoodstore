@@ -1,6 +1,5 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
-import { wishlist } from 'helpers/mocks/mockData';
 import WishList, { Props } from './index';
 
 export default {
@@ -11,8 +10,6 @@ export default {
   },
 } as Meta;
 
-const Template: Story<Props> = (args) => (
-  <WishList items={wishlist} removeLineItems={() => console.log('CLICK')} {...args} />
-);
+const Template: Story<Props> = (args) => <WishList {...args} />;
 
 export const Primary = Template.bind({});

@@ -12,15 +12,15 @@ const LoggedOut = () => {
 
   return (
     <div className="w-[235px] p-14">
-      <Button className="w-full py-12 text-16 leading-[16px]" onClick={goToLoginPage}>
+      <Button variant="primary" className="w-full py-12 text-16 leading-[16px]">
         {formatAccountMessage({ id: 'sign.in', defaultMessage: 'Sign in' })}
       </Button>
-      <Link link="/" className="mt-20 block">
+      <Link variant="menu-item" link="#" className="mt-20 block w-fit">
         {formatAccountMessage({ id: 'membership.info', defaultMessage: 'Membership info' })}
       </Link>
       <span className="mt-32 block">
         {formatAccountMessage({ id: 'not.member', defaultMessage: 'Not a member' })}?{' '}
-        <Link link="/register" className="font-bold">
+        <Link variant="menu-item" link="#" className="font-bold">
           {formatAccountMessage({ id: 'join.here', defaultMessage: 'Join here' })}
         </Link>
       </span>

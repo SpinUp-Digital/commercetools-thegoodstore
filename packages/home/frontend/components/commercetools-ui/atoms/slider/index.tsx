@@ -7,8 +7,8 @@ import 'swiper/css/pagination'; // eslint-disable-line import/no-unresolved
 import 'swiper/css/scrollbar'; // eslint-disable-line import/no-unresolved
 import { NavigationOptions } from 'swiper/types';
 import useClassNames from 'helpers/hooks/useClassNames';
-import SliderNavigation, { SliderNavigationProps } from './slider-navigation';
 import useTouchDevice from 'helpers/hooks/useTouchDevice';
+import SliderNavigation, { SliderNavigationProps } from './slider-navigation';
 
 export type SliderProps = SliderNavigationProps & {
   className?: string;

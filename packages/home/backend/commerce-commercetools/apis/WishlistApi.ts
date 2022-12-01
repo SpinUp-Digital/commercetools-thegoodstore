@@ -149,6 +149,26 @@ export class WishlistApi extends BaseApi {
     }
   };
 
+  clearWishlist = async (wishlist: Wishlist) => {
+    try {
+      const locale = await this.getCommercetoolsLocal();
+
+      const response = await this.getApiForProject()
+        .shoppingLists()
+        .withId({ ID: wishlist.wishlistId })
+        .delete({
+          queryArgs: {
+            version: +wishlist.wishlistVersion,
+          },
+        })
+        .execute();
+
+      return WishlistMapper.commercetoolsShoppingListToWishlist(response.body, locale);
+    } catch (error) {
+      throw new Error(`Add to wishlist failed: ${error}`);
+    }
+  };
+
   updateLineItemCount = async (wishlist: Wishlist, lineItemId: string, count: number) => {
     try {
       const locale = await this.getCommercetoolsLocal();

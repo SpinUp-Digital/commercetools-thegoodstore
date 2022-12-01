@@ -1,55 +1,60 @@
 import React from 'react';
-import { LineItem } from '@commercetools/domain-types/wishlist/LineItem';
-import { Wishlist } from '@commercetools/domain-types/wishlist/Wishlist';
+import Button from 'components/commercetools-ui/atoms/button';
+import { EmptyState } from 'components/commercetools-ui/organisms/empty-state';
+import { Link } from 'components/commercetools-ui/organisms/footer/column';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { Reference } from 'types/reference';
+import { useWishlist } from 'frontastic';
 import { NextFrontasticImage } from 'frontastic/lib/image';
-import EmptyWishlist from './empty_wishlist';
-import List from './list';
+import WishlistItem from './wishlist-item';
 
 export interface Props {
-  pageTitle?: string;
-  emptyStateImage?: { media: NextFrontasticImage['media'] | string };
-  emptyStateTitle?: string;
-  emptyStateSubtitle?: string;
-  emptyStateCTALabel?: string;
-  emptyStateCTALink?: Reference;
-  items?: Wishlist;
-  removeLineItems: (item: LineItem) => Promise<void>;
+  emptyWishlistTitle: string;
+  emptyWishlistSubtitle: string;
+  emptyWishlistImage: NextFrontasticImage;
+  emptyWishlistCategories: Link[];
 }
-
-const WishList: React.FC<Props> = ({
-  pageTitle,
-  emptyStateImage,
-  emptyStateTitle,
-  emptyStateSubtitle,
-  emptyStateCTALabel,
-  emptyStateCTALink,
-  items,
-  removeLineItems,
-}) => {
+const Wishlist = ({ emptyWishlistTitle, emptyWishlistSubtitle, emptyWishlistImage, emptyWishlistCategories }) => {
   const { formatMessage: formatWishlistMessage } = useFormat({ name: 'wishlist' });
-
-  if (!items?.lineItems?.length)
-    return (
-      <EmptyWishlist
-        pageTitle={pageTitle}
-        title={emptyStateTitle}
-        subtitle={emptyStateSubtitle}
-        ctaLabel={emptyStateCTALabel}
-        ctaLink={emptyStateCTALink}
-        image={emptyStateImage}
-      />
-    );
+  const { data: wishlistData, clearWishlist } = useWishlist();
+  const handleClearWishlist = async () => {
+    await clearWishlist(wishlistData);
+  };
 
   return (
-    <main className="mx-auto max-w-2xl px-2 pt-20 pb-24 sm:px-4 lg:max-w-7xl lg:px-8">
-      <h1 className="pb-12 text-center text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-        {formatWishlistMessage({ id: 'wishlist.items', defaultMessage: 'Wishlist Items' })}
-      </h1>
-      {items?.lineItems && <List items={items.lineItems} removeLineItems={removeLineItems} />}
-    </main>
+    <>
+      {
+        <>
+          {!wishlistData?.lineItems?.length ? (
+            <>
+              <EmptyState
+                title={emptyWishlistTitle}
+                subtitle={emptyWishlistSubtitle}
+                image={emptyWishlistImage}
+                categories={emptyWishlistCategories}
+              />
+            </>
+          ) : (
+            <>
+              <div className="grow divide-y divide-neutral-400 overflow-auto px-12 md:px-22">
+                {wishlistData?.lineItems?.map((lineItem) => (
+                  <WishlistItem key={lineItem.lineItemId} item={lineItem} />
+                ))}
+              </div>
+              <div className="mt-16 p-20">
+                <Button
+                  onClick={handleClearWishlist}
+                  variant="secondary"
+                  className="w-full border border-primary-black"
+                >
+                  {formatWishlistMessage({ id: 'wishlist.clear.list', defaultMessage: 'Clear the list' })}
+                </Button>
+              </div>
+            </>
+          )}
+        </>
+      }
+    </>
   );
 };
 
-export default WishList;
+export default Wishlist;

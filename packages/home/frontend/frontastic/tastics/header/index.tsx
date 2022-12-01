@@ -26,7 +26,7 @@ const HeaderTastic = ({ data, categories }) => {
 
   const setPaddingTop = useCallback(() => {
     if (headerRef.current) {
-      document.body.style.paddingTop = `${headerRef.current.clientHeight}px`;
+      document.body.style.paddingTop = `${headerRef.current.clientHeight - 1}px`;
     }
   }, [screenWidth]);
 
@@ -77,6 +77,14 @@ const HeaderTastic = ({ data, categories }) => {
         logoLink={data.logoLink}
         tiles={data.tiles}
         handleMarket={handleMarket}
+        emptyCartTitle={data.emptyCartTitle}
+        emptyCartSubtitle={data.emptyCartSubtitle}
+        emptyCartImage={data.emptyCartImage}
+        emptyCartCategories={data.emptyCartCategories}
+        emptyWishlistTitle={data.emptyWishlistTitle}
+        emptyWishlistSubtitle={data.emptyWishlistSubtitle}
+        emptyWishlistImage={data.emptyWishlistImage}
+        emptyWishlistCategories={data.emptyWishlistCategories}
       />
     </div>
   );
