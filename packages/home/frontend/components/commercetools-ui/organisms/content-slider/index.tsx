@@ -83,7 +83,6 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
         <div className="flex w-full gap-24">{slidesElement}</div>
       ) : (
         <Slider
-          key={`${isDesktop}`}
           arrows={isTablet}
           dots={false}
           slideWidth={isTablet ? 400 : 246}
