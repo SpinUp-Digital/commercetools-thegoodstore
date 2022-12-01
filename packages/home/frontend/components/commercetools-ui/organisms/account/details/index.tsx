@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useHash from 'helpers/hooks/useHash';
 import Redirect from 'helpers/redirect';
 import { Reference } from 'types/reference';
-import { useAccount } from 'frontastic';
+import { useAccount, useCart } from 'frontastic';
 import { AddressesSection, GeneralSection, SecuritySection, OrdersHistorySection } from './sections/exporter';
+import useI18n from 'helpers/hooks/useI18n';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -16,13 +17,36 @@ export interface AccountDetailsProps {
 
 const AccountDetails: React.FC<AccountDetailsProps> = ({ loginLink }) => {
   //account data
-  const { loggedIn } = useAccount();
+  const { account, loggedIn } = useAccount();
+
+  //Cart
+  const { updateCart } = useCart();
 
   //i18n messages
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
 
   //current window hash
   const hash = useHash();
+
+  //I18n info
+  const { country } = useI18n();
+
+  //update associated cart data using account data
+  useEffect(() => {
+    if (!account) return;
+
+    const email = account.email;
+    const addresses = account.addresses.filter((address) => address.country === country);
+
+    const shippingAddress = addresses?.find((address) => address.isDefaultShippingAddress) || addresses?.[0];
+    const billingAddress = addresses?.find((address) => address.isDefaultBillingAddress) || addresses?.[0];
+
+    updateCart({
+      account: { email },
+      shipping: shippingAddress,
+      billing: billingAddress,
+    });
+  }, [account, country]);
 
   //user not logged in
   if (!loggedIn) return <Redirect target={loginLink} />;

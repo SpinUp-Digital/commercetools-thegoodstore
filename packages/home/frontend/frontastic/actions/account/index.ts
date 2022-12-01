@@ -3,7 +3,7 @@ import { Account } from '@commercetools/domain-types/account/Account';
 import { Address } from '@commercetools/domain-types/account/Address';
 import { REMEMBER_ME } from 'helpers/constants/localStorage';
 import { revalidateOptions } from 'frontastic';
-import { ResponseError } from 'frontastic/lib/fetch-api-hub';
+import { fetchApiHub, ResponseError } from 'frontastic/lib/fetch-api-hub';
 import { SDK } from 'sdk';
 
 export interface GetAccountResult {
@@ -31,7 +31,7 @@ export interface RegisterAccount extends UpdateAccount {
 export const getAccount = (): GetAccountResult => {
   const extensions = SDK.getExtensions();
 
-  const result = useSWR<unknown>('/action/account/getAccount', extensions.getAccount, revalidateOptions);
+  const result = useSWR<unknown>('/action/account/getAccount', fetchApiHub, revalidateOptions);
 
   const account = (result.data as GetAccountResult)?.account || (result.data as Account);
 

@@ -1,7 +1,17 @@
-import { useState } from 'react';
+import { useMemo } from 'react';
+import { useRouter } from 'next/router';
 
 const useI18n = () => {
-  const [country, setCountry] = useState('DE');
+  const { locale } = useRouter();
+
+  const country = useMemo(
+    () =>
+      ({
+        en: 'GB',
+        de: 'DE',
+      }[locale]),
+    [locale],
+  );
 
   return { country };
 };

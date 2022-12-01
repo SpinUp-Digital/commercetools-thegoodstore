@@ -467,7 +467,7 @@ export class CartApi extends BaseApi {
     const commercetoolsCart = await this.updateCart(cart.cartId, cartUpdate, locale);
 
     return this.buildCartWithAvailableShippingMethods(commercetoolsCart, locale);
-  };  
+  };
 
   updatePayment: (cart: Cart, payment: Payment) => Promise<Payment> = async (cart: Cart, payment: Payment) => {
     const locale = await this.getCommercetoolsLocal();
@@ -532,14 +532,17 @@ export class CartApi extends BaseApi {
         ID: paymentId,
       })
       .get()
-      .execute()
+      .execute();
   };
-    
-  updateOrderPayment: (paymentId: string, paymentDraft: Payment) => Promise<any> = async (paymentId: string, paymentDraft: Payment) => {
+
+  updateOrderPayment: (paymentId: string, paymentDraft: Payment) => Promise<any> = async (
+    paymentId: string,
+    paymentDraft: Payment,
+  ) => {
     const locale = await this.getCommercetoolsLocal();
 
     const paymentUpdateActions: PaymentUpdateAction[] = [];
-    
+
     /*if (paymentDraft.) {
       paymentUpdateActions.push({
         action: 'setMethodInfoName',
@@ -552,7 +555,7 @@ export class CartApi extends BaseApi {
     if (paymentDraft.paymentMethod) {
       paymentUpdateActions.push({
         action: 'setMethodInfoMethod',
-        method: paymentDraft.paymentMethod
+        method: paymentDraft.paymentMethod,
       });
     }
 
@@ -561,8 +564,8 @@ export class CartApi extends BaseApi {
         action: 'changeAmountPlanned',
         amount: {
           centAmount: paymentDraft.amountPlanned.centAmount,
-          currencyCode: paymentDraft.amountPlanned.currencyCode
-        }
+          currencyCode: paymentDraft.amountPlanned.currencyCode,
+        },
       });
     }
 
@@ -584,7 +587,7 @@ export class CartApi extends BaseApi {
       .payments()
       .withId({
         ID: paymentId,
-      })      
+      })
       .post({
         body: {
           version: paymentDraft.version,
@@ -598,7 +601,7 @@ export class CartApi extends BaseApi {
       })
       .catch((error) => {
         throw new ExternalError({ status: error.code, message: error.message, body: error.body });
-      });   
+      });
   };
 
   redeemDiscountCode: (cart: Cart, code: string) => Promise<Cart> = async (cart: Cart, code: string) => {
@@ -743,10 +746,8 @@ export class CartApi extends BaseApi {
     // }
 
     const propertyList = [
-      'customerId',
       'customerEmail',
       'customerGroup',
-      'anonymousId',
       'store',
       'inventoryMode',
       'taxMode',
@@ -761,6 +762,9 @@ export class CartApi extends BaseApi {
       'shippingRateInput',
       'itemShippingAddresses',
     ];
+
+    if (primaryCommercetoolsCart.customerId) cartDraft['customerId' as string] = primaryCommercetoolsCart.customerId;
+    else cartDraft['anonymousId' as string] = primaryCommercetoolsCart.anonymousId;
 
     for (const key of propertyList) {
       if (primaryCommercetoolsCart.hasOwnProperty(key)) {
