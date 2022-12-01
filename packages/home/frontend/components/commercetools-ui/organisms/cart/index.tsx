@@ -1,8 +1,8 @@
+import React, { useMemo } from 'react';
 import AccordionBtn from 'components/commercetools-ui/atoms/accordion';
-import { useCart } from 'frontastic';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
-import React, { useEffect, useMemo } from 'react';
+import { useCart } from 'frontastic';
 import DiscountForm from '../discount-form';
 import CartItem from './item';
 
