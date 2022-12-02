@@ -1,5 +1,5 @@
-import useTouchDevice from 'helpers/hooks/useTouchDevice';
 import React, { FC, ReactNode } from 'react';
+import useTouchDevice from 'helpers/hooks/useTouchDevice';
 
 type WrapperProps = {
   children: ReactNode;

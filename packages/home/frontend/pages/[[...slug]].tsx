@@ -63,7 +63,7 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({ params
   const frontastic = createClient();
   const [data, categories] = await Promise.all([
     frontastic.getRouteData(params, locale, query, req, res),
-    extensions.queryProductCategories({ query: { limit: 99 } })
+    extensions.queryProductCategories({ query: { limit: 99 } }),
   ]);
 
   if (data) {
