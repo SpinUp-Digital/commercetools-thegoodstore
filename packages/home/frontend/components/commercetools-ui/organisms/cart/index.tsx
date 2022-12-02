@@ -1,12 +1,23 @@
-import React, { useMemo } from 'react';
+import React, { FC, useMemo } from 'react';
 import AccordionBtn from 'components/commercetools-ui/atoms/accordion';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart } from 'frontastic';
+import { NextFrontasticImage } from 'frontastic/lib/image';
 import DiscountForm from '../discount-form';
+import { EmptyState } from '../empty-state';
+import { Link } from '../header/types';
 import CartItem from './item';
 
-const Cart = () => {
+export interface Props {
+  emptyStateImage: NextFrontasticImage;
+  emptyStateTitle: string;
+  emptyStateSubtitle: string;
+  emptyStateCategories: Link[];
+}
+
+const Cart: FC<Props> = ({ emptyStateImage, emptyStateTitle, emptyStateSubtitle, emptyStateCategories }) => {
+  //i18n messages
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
 
   const { data } = useCart();
@@ -66,11 +77,20 @@ const Cart = () => {
 
   return (
     <>
-      <div className="grow divide-y divide-neutral-400 overflow-auto px-12 md:px-22">
-        {data.lineItems?.map((lineItem) => (
-          <CartItem key={lineItem.lineItemId} item={lineItem} />
-        ))}
-      </div>
+      {data.lineItems?.length === 0 ? (
+        <EmptyState
+          categories={emptyStateCategories}
+          image={emptyStateImage}
+          title={emptyStateTitle}
+          subtitle={emptyStateSubtitle}
+        />
+      ) : (
+        <div className="grow divide-y divide-neutral-400 overflow-auto px-12 md:px-22">
+          {data.lineItems?.map((lineItem) => (
+            <CartItem key={lineItem.lineItemId} item={lineItem} />
+          ))}
+        </div>
+      )}
       <div className="border-t border-neutral-400 px-12 py-24 md:px-22">
         <AccordionBtn
           closedSectionTitle={formatCartMessage({ id: 'discount.apply', defaultMessage: 'Apply a discount' })}
@@ -118,5 +138,4 @@ const Cart = () => {
     </>
   );
 };
-
 export default Cart;

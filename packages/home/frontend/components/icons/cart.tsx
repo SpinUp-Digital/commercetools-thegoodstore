@@ -7,11 +7,11 @@ type Props = {
   counterClassName?: string;
 };
 
-const Icon: React.FC<Props> = ({ className, totalCartItems, counterClassName = '' }: Props) => (
+const Icon: React.FC<Props> = ({ className, totalCartItems, counterClassName }) => (
   <>
     {totalCartItems > 0 && (
       <>
-        <span className="absolute top-[-4px] right-[-3px] h-8 w-8 rounded-full bg-green-500" />
+        <span className="absolute top-[-4px] right-[-4px] h-8 w-8 rounded-full bg-green-500" />
         <span
           className={`absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 text-9 text-secondary-black ${counterClassName}`}
         >

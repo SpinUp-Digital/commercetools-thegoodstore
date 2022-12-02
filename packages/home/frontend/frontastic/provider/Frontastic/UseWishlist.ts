@@ -6,5 +6,6 @@ export interface UseWishlist {
   totalItems: number;
   addToWishlist: (wishlist: Wishlist, lineItem: LineItem, count?: number) => Promise<void>;
   removeLineItem: (wishlist: Wishlist, lineItem: LineItem) => Promise<void>;
+  clearWishlist: (wishlist: Wishlist) => Promise<void>;
   updateLineItem: (wishlist: Wishlist, lineItem: LineItem, count?: number) => Promise<void>;
 }

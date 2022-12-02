@@ -2,10 +2,13 @@ import React, { useMemo } from 'react';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import CloseIcon from '@heroicons/react/24/outline/XMarkIcon';
 import Cart from 'components/commercetools-ui/organisms/cart';
+import { Link } from 'components/commercetools-ui/organisms/header/types';
+import Wishlist from 'components/commercetools-ui/organisms/wishlist';
 import CartIcon from 'components/icons/cart';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart, useWishlist } from 'frontastic';
+import { NextFrontasticImage } from 'frontastic/lib/image';
 
 export type State = 'wishlist' | 'cart';
 
@@ -13,9 +16,29 @@ export interface Props {
   state?: State;
   changeState?: (newState?: State) => void;
   onClose?: () => void;
+  emptyCartTitle: string;
+  emptyCartSubtitle: string;
+  emptyCartImage: NextFrontasticImage;
+  emptyCartCategories: Link[];
+  emptyWishlistTitle: string;
+  emptyWishlistSubtitle: string;
+  emptyWishlistImage: NextFrontasticImage;
+  emptyWishlistCategories: Link[];
 }
 
-const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
+const Slideout: React.FC<Props> = ({
+  state,
+  changeState,
+  onClose,
+  emptyCartTitle,
+  emptyCartSubtitle,
+  emptyCartImage,
+  emptyCartCategories,
+  emptyWishlistTitle,
+  emptyWishlistSubtitle,
+  emptyWishlistImage,
+  emptyWishlistCategories,
+}) => {
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
   const { formatMessage: formatWishlistMessage } = useFormat({ name: 'wishlist' });
 
@@ -47,7 +70,22 @@ const Slideout: React.FC<Props> = ({ state, changeState, onClose }) => {
   const ActiveSection = useMemo(
     () =>
       ({
-        cart: <Cart />,
+        cart: (
+          <Cart
+            emptyStateImage={emptyCartImage}
+            emptyStateTitle={emptyCartTitle}
+            emptyStateSubtitle={emptyCartSubtitle}
+            emptyStateCategories={emptyCartCategories}
+          />
+        ),
+        wishlist: (
+          <Wishlist
+            emptyWishlistTitle={emptyWishlistTitle}
+            emptyWishlistSubtitle={emptyWishlistSubtitle}
+            emptyWishlistImage={emptyWishlistImage}
+            emptyWishlistCategories={emptyWishlistCategories}
+          />
+        ),
       }[state] ?? <></>),
     [state],
   );

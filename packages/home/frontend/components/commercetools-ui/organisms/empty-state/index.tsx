@@ -1,65 +1,45 @@
 import React from 'react';
-import { Reference } from 'types/reference';
+import Button from 'components/commercetools-ui/atoms/button';
+import Link from 'components/commercetools-ui/atoms/link';
+import Typography from 'components/commercetools-ui/atoms/typography';
+import { Link as CategoryLink } from 'components/commercetools-ui/organisms/header/types';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
-import Link from '../../atoms/link';
 
 type Props = {
-  pageTitle?: string;
-  image?: { media: NextFrontasticImage['media'] | string };
-  title?: string;
-  subtitle?: string;
-  callToAction?: string;
-  callToActionLink?: Reference;
+  image: NextFrontasticImage;
+  title: string;
+  subtitle: string;
+  categories: CategoryLink[];
 };
 
-export const EmptyState: React.FC<Props> = ({
-  pageTitle,
-  image,
-  title,
-  subtitle,
-  callToAction,
-  callToActionLink,
-}: Props) => {
+export const EmptyState: React.FC<Props> = ({ image, title, subtitle, categories }: Props) => {
   return (
-    <div className="mx-auto max-w-2xl px-2 pt-16 pb-24 sm:px-4 lg:max-w-7xl lg:px-8">
-      {pageTitle && (
-        <div className="mx-28 mt-4 text-left">
-          <h1 className="pb-12 text-center text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-            {pageTitle}
-          </h1>
+    <div className="my-36 bg-neutral-200">
+      <Typography as="h6" fontSize={16} align="center">
+        {title}
+      </Typography>
+      <div className="flex w-full justify-center">
+        <div className="relative h-92 w-197 px-10 text-center md:mt-55 md:mb-120">
+          <Image media={image.media} layout="fill" objectFit="contain" alt={image.title} />
         </div>
-      )}
-
-      {image && (
-        <div className="grid justify-items-center">
-          <div className="mt-20 h-32 w-32">
-            <Image
-              {...(typeof image.media === 'string' ? { src: image.media } : { media: image.media })}
-              className="h-7 w-auto sm:h-10"
-              alt="Empty Wishlist"
-            />
-          </div>
-        </div>
-      )}
-
-      {title && (
-        <div className="mt-4 text-center">
-          <h1 className="text-3xl font-bold text-gray-600">{title}</h1>
-        </div>
-      )}
-
-      {subtitle && (
-        <div className="mt-2 w-auto text-center">
-          <h1 className="text-lg text-gray-600">{subtitle}</h1>
-        </div>
-      )}
-      {callToActionLink && (
-        <div className="mt-8 mb-24 text-center">
-          <Link link={callToActionLink}>
-            <button className="w-56 rounded py-3 px-4 font-bold text-white">{callToAction}</button>
-          </Link>
-        </div>
-      )}
+      </div>
+      <ul className="mt-55 flex flex-col items-center gap-y-20">
+        <Typography as="h6" fontSize={16} align="center">
+          {subtitle}
+        </Typography>
+        {categories.map((category) => (
+          <li key={category.name}>
+            <Link link={category.reference}>
+              <Button
+                className="w-200 rounded-[4px] border border-primary-black text-16 text-secondary-black"
+                variant="ghost"
+              >
+                {category.name}
+              </Button>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

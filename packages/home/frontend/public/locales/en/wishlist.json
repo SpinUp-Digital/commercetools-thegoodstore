@@ -6,5 +6,6 @@
   "wishlist.oops": "Oops...",
   "wishlist.empty": "It seems that your wishlist is empty",
   "wishlist.add.items": "Add items",
-  "wishlist.add.item.error": "Sorry could not add item. Please try again."
+  "wishlist.add.to.cart": "Add to Cart",
+  "wishlist.clear.list": "Clear the list"
 }

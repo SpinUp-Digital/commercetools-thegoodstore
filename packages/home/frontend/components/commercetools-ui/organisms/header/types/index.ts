@@ -32,4 +32,12 @@ export interface HeaderProps {
   logoLink: Reference;
   tiles?: Tile[];
   handleMarket: (market: Market) => void;
+  emptyCartTitle: string;
+  emptyCartSubtitle: string;
+  emptyCartImage: NextFrontasticImage;
+  emptyCartCategories: Link[];
+  emptyWishlistTitle: string;
+  emptyWishlistSubtitle: string;
+  emptyWishlistImage: NextFrontasticImage;
+  emptyWishlistCategories: Link[];
 }

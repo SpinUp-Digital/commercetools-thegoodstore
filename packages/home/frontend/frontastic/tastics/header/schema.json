@@ -158,6 +158,96 @@
 					]
 				}
 			]
+		},
+		{
+			"name": "Empty Cart",
+			"fields": [
+				{
+					"label": "Title",
+					"field": "emptyCartTitle",
+					"translatable": true,
+					"type": "string"
+				},
+				{
+					"label": "Subtitle",
+					"field": "emptyCartSubtitle",
+					"translatable": true,
+					"type": "string"
+				},
+				{
+					"label": "Image",
+					"field": "emptyCartImage",
+					"type": "media",
+					"required": true,
+					"options": {}
+				},
+				{
+					"label": "Categories",
+					"field": "emptyCartCategories",
+					"type": "group",
+					"min": 1,
+					"fields": [
+						{
+							"label": "Name",
+							"field": "name",
+							"translatable": true,
+							"required": true,
+							"type": "string"
+						},
+						{
+							"label": "Link",
+							"field": "reference",
+							"type": "reference",
+							"required": true
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Empty Wishlist",
+			"fields": [
+				{
+					"label": "Image",
+					"field": "emptyWishlistImage",
+					"type": "media",
+					"required": true,
+					"options": {}
+				},
+				{
+					"label": "Title",
+					"field": "emptyWishlistTitle",
+					"translatable": true,
+					"type": "string"
+				},
+				{
+					"label": "Subtitle",
+					"field": "emptyWishlistSubtitle",
+					"translatable": true,
+					"type": "string"
+				},
+				{
+					"label": "Categories",
+					"field": "emptyWishlistCategories",
+					"type": "group",
+					"min": 1,
+					"fields": [
+						{
+							"label": "Name",
+							"field": "name",
+							"translatable": true,
+							"required": true,
+							"type": "string"
+						},
+						{
+							"label": "Link",
+							"field": "reference",
+							"type": "reference",
+							"required": true
+						}
+					]
+				}
+			]
 		}
 	]
 }

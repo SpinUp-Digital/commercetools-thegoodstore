@@ -29,7 +29,7 @@ import {
   removeDiscountCode,
   getProjectSettings,
 } from '../../actions/cart';
-import { getWishlist, addToWishlist, removeLineItem, updateLineItem } from '../../actions/wishlist';
+import { getWishlist, addToWishlist, removeLineItem, clearWishlist, updateLineItem } from '../../actions/wishlist';
 import { queryCategories } from '../../actions/product';
 import { createSession, adyenCheckout } from '../../actions/adyen';
 import { UseAccount } from './UseAccount';
@@ -99,6 +99,7 @@ export const getFrontasticState = (): FrontasticState => {
       totalItems: totalWishlistItems,
       addToWishlist,
       removeLineItem,
+      clearWishlist,
       updateLineItem,
     },
     useProduct: {
