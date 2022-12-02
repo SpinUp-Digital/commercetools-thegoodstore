@@ -18,11 +18,10 @@ const Register: React.FC<RegisterProps> = ({ termsOfUseLink }) => {
   //i18n messages
   const { formatMessage: formatErrorMessage } = useFormat({ name: 'error' });
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
-  const { formatMessage: formatSuccessMessage } = useFormat({ name: 'success' });
   const { formatMessage } = useFormat({ name: 'common' });
 
   //account actions
-  const { register, loggedIn } = useAccount();
+  const { register, loggedIn, login } = useAccount();
 
   //register data
   const [data, setData] = useState({ email: '', password: '' });
@@ -75,14 +74,7 @@ const Register: React.FC<RegisterProps> = ({ termsOfUseLink }) => {
         );
         setSuccess('');
       } else {
-        setError('');
-        setSuccess(
-          formatSuccessMessage({
-            id: 'account.created',
-            defaultMessage: 'A verification email was sent to {email} ✓',
-            values: { email: data.email },
-          }),
-        );
+        login(data.email, data.password);
       }
     } catch (err) {
       setError(formatErrorMessage({ id: 'wentWrong', defaultMessage: 'Sorry. Something went wrong..' }));
@@ -92,7 +84,7 @@ const Register: React.FC<RegisterProps> = ({ termsOfUseLink }) => {
     setLoading(false);
   };
 
-  if (loggedIn) return <Redirect target="/" />;
+  if (loggedIn) return <Redirect target="/account" />;
 
   return (
     <div className="m-auto grid max-w-[480px] px-16">
