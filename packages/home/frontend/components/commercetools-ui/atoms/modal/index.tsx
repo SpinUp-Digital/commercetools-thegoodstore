@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import ReactModal, { Props as ReactModalProps } from 'react-modal';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import { desktop } from 'helpers/utils/screensizes';
@@ -8,7 +8,7 @@ const Modal: FC<ReactModalProps> = ({ children, ...props }) => {
 
   const modalStyle: ReactModalProps['style'] = {
     overlay: {
-      zIndex: 12,
+      zIndex: 51,
     },
     content: {
       top: '50%',
@@ -22,6 +22,10 @@ const Modal: FC<ReactModalProps> = ({ children, ...props }) => {
       padding: 0,
     },
   };
+
+  useEffect(() => {
+    document.querySelector('body').style.overflow = props.isOpen ? 'hidden' : 'auto';
+  }, [props.isOpen]);
 
   return (
     <ReactModal style={modalStyle} {...props}>

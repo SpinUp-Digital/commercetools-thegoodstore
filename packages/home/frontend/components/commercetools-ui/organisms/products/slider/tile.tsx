@@ -50,6 +50,10 @@ const Tile: FC<TileProps> = ({ product }) => {
 
   const [imageHovered, setImageHovered] = useState(false);
   const [buttonHovered, setButtonHovered] = useState(false);
+  const showButton = useMemo(
+    () => (imageHovered || buttonHovered) && isDesktopSize,
+    [imageHovered, buttonHovered, isDesktopSize],
+  );
 
   const productToWishlistLineItem = useMemo<LineItem>(() => {
     if (product) {
@@ -64,8 +68,6 @@ const Tile: FC<TileProps> = ({ product }) => {
       };
     }
   }, [product, selectedVariant]);
-
-  const containerHovered = useMemo(() => imageHovered || buttonHovered, [imageHovered, buttonHovered]);
 
   return (
     <div>
@@ -114,7 +116,7 @@ const Tile: FC<TileProps> = ({ product }) => {
           onMouseEnter={() => setButtonHovered(true)}
           onMouseLeave={() => setButtonHovered(false)}
         >
-          <QuickView containerHovered={containerHovered} isDesktopSize={isDesktopSize} product={product} />
+          <QuickView showButton={showButton} product={product} />
         </div>
       </div>
 
