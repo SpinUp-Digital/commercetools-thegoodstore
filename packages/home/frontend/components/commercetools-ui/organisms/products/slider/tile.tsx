@@ -100,22 +100,22 @@ const Tile: FC<TileProps> = ({ product }) => {
                   className="h-[16px] w-[16px] md:h-[20px] md:w-[20px] lg:h-[24px] lg:w-[24px]"
                 />
               </span>
-              <div className="absolute left-0 bottom-0 z-10 w-full text-center">
-                {variantWithDiscount && (
-                  <span className="ml-8 mb-8 flex h-[25px] w-[45px] items-center justify-center bg-accent-red text-12 text-neutral-100">
-                    {Math.round(discountPercentage)}%
-                  </span>
-                )}
-              </div>
             </div>
           </a>
         </NextLink>
 
         <div
-          className="absolute bottom-0 w-full"
+          className="absolute bottom-0 z-10 w-full"
           onMouseEnter={() => setButtonHovered(true)}
           onMouseLeave={() => setButtonHovered(false)}
         >
+          <div className="w-full text-center">
+            {variantWithDiscount && (
+              <span className="ml-8 mb-8 flex h-[25px] w-[45px] items-center justify-center bg-accent-red text-12 text-neutral-100">
+                {Math.round(discountPercentage)}%
+              </span>
+            )}
+          </div>
           <QuickView showButton={showButton} product={product} />
         </div>
       </div>
