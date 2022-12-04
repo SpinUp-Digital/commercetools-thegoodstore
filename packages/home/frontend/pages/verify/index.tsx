@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import Toast from 'react-hot-toast';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useAccount } from 'frontastic';
+import { Account } from '@commercetools/domain-types/account/Account';
 
 const Verify: NextPage = () => {
   //i18n messages
@@ -18,19 +19,25 @@ const Verify: NextPage = () => {
   //account actions
   const { confirm } = useAccount();
 
-  //successful redirection after verification
-  const successRedirect = useCallback(() => {
-    router
-      .push('/')
-      .then(() => Toast.success(formatAccountMessage({ id: 'verification.done', defaultMessage: 'Email verified' })));
+  //error callback because of invalid token
+  const errorCallback = useCallback(() => {
+    Toast.error(formatAccountMessage({ id: 'verification.failed', defaultMessage: 'Invalid token' }));
   }, [formatAccountMessage, router]);
 
-  //error redirection because of invalid token
-  const errorRedirect = useCallback(() => {
-    router
-      .push('/')
-      .then(() => Toast.error(formatAccountMessage({ id: 'verification.failed', defaultMessage: 'Invalid token' })));
-  }, [formatAccountMessage, router]);
+  //successful callback after verification
+  const successCallback = useCallback(
+    (account: Account) => {
+      if (account.accountId)
+        Toast.success(formatAccountMessage({ id: 'verification.done', defaultMessage: 'Email verified' }));
+      else errorCallback();
+    },
+    [formatAccountMessage, router, errorCallback],
+  );
+
+  //done callback after either success or failure
+  const doneCallback = useCallback(() => {
+    router.replace('/account', undefined, { shallow: true });
+  }, [router]);
 
   //Confirmed flag to prevent multiple requests
   const confirmed = useRef(false);
@@ -41,14 +48,13 @@ const Verify: NextPage = () => {
 
     confirmed.current = true;
 
-    try {
-      const response = await confirm(token as string);
-      if (response.accountId) successRedirect();
-      else errorRedirect();
-    } catch (err) {
-      errorRedirect();
-    }
-  }, [token, confirm, successRedirect, errorRedirect]);
+    router.push('/account?verify=1');
+
+    confirm(token as string)
+      .then(successCallback)
+      .catch(errorCallback)
+      .finally(doneCallback);
+  }, [token, confirm, successCallback, errorCallback, doneCallback]);
 
   useEffect(() => {
     verifyUser();
