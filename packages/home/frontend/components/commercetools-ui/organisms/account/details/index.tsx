@@ -6,6 +6,7 @@ import Redirect from 'helpers/redirect';
 import { Reference } from 'types/reference';
 import { useAccount, useCart } from 'frontastic';
 import { AddressesSection, GeneralSection, SecuritySection, OrdersHistorySection } from './sections/exporter';
+import { useRouter } from 'next/router';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -18,6 +19,12 @@ export interface AccountDetailsProps {
 const AccountDetails: React.FC<AccountDetailsProps> = ({ loginLink }) => {
   //account data
   const { account, loggedIn } = useAccount();
+
+  //router
+  const { query } = useRouter();
+
+  //in verification process?
+  const { verify: verifying } = query;
 
   //Cart
   const { updateCart } = useCart();
