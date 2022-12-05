@@ -9,7 +9,7 @@ export class SDK {
   static configure(locale: string) {
     sdk.configure({
       locale: mapSDKLanguage(locale),
-      currency: 'EUR',
+      currency: locale === 'de' ? 'EUR' : 'GBP',
       endpoint: resolveApiHubUrl().split('/frontastic')[0],
     });
 

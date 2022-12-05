@@ -1,5 +1,5 @@
 export const languageMapper = {
-  en: 'en_GB@EUR',
+  en: 'en_GB@GBP',
   de: 'de_DE@EUR',
 };
 
