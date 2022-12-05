@@ -20,7 +20,7 @@ const LoggedOut = () => {
       </Link>
       <span className="mt-32 block">
         {formatAccountMessage({ id: 'not.member', defaultMessage: 'Not a member' })}?{' '}
-        <Link variant="menu-item" link="/register" className="font-bold">
+        <Link variant="menu-item" link="/register" className="font-medium">
           {formatAccountMessage({ id: 'join.here', defaultMessage: 'Join here' })}
         </Link>
       </span>

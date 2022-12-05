@@ -35,20 +35,20 @@ const MenuDropdown: FC<Props> = ({ links, tileContent, market, onClick }) => {
               <div key={link.categoryId}>
                 <div className="w-fit pb-4">
                   <Link link={link.slug ?? link.path} variant="menu-header">
-                    <Typography>{link.name}</Typography>
+                    <Typography fontSize={14}>{link.name}</Typography>
                   </Link>
                 </div>
                 {link.subCategories.map((field) => (
                   <div key={field.categoryId} onClick={onClick} className="py-4">
                     <Link link={field.slug ?? field.path} className="h-22 w-fit" variant="menu-item">
-                      <Typography>{field.name}</Typography>
+                      <Typography fontSize={14}>{field.name}</Typography>
                     </Link>
                   </div>
                 ))}
               </div>
             ) : (
               <Link key={link.categoryId} link={link.slug ?? link.path} variant="menu-header">
-                <Typography>{link.name}</Typography>
+                <Typography fontSize={14}>{link.name}</Typography>
               </Link>
             )}
           </div>

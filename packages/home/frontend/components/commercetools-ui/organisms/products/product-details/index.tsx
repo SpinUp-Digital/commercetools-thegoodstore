@@ -88,7 +88,13 @@ const ProductDetails: FC<ProductDetailsProps> = ({
               })}
             onChange={handleQuantityChange}
           />
-          <Button className="w-full" variant="primary" onClick={handleAddToCart} loading={loading} added={added}>
+          <Button
+            className="w-full text-14 font-bold"
+            variant="primary"
+            onClick={handleAddToCart}
+            loading={loading}
+            added={added}
+          >
             {formatMessage({ id: 'cart.add', defaultMessage: 'Add to cart' })}
           </Button>
         </div>
@@ -120,8 +126,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({
           <div>
             <Link
               link={url}
-              variant="menu-item"
-              className="mx-auto mt-30 block w-fit border-b text-center text-14 leading-loose text-secondary-black"
+              className="mx-auto mt-30 block w-fit border-b border-secondary-black text-center text-14 leading-loose text-secondary-black"
               onClick={() => setIsOpen(false)}
             >
               <a>More details</a>

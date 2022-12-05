@@ -1,16 +1,16 @@
 import React from 'react';
+import Link from 'components/commercetools-ui/atoms/link';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { Reference } from 'types/reference';
-import Link from '../../atoms/link';
 
-export interface Link {
+export interface FooterLink {
   name: string;
   reference: Reference;
 }
 
 export interface Props {
   header?: string;
-  links: Link[];
+  links: FooterLink[];
   className?: string;
 }
 
@@ -28,9 +28,12 @@ const Column: React.FC<Props> = ({ header, links, className }) => {
           {header}
         </Typography>
       )}
-      <ul role="list" className="flex flex-col gap-y-12 sm:self-center md:items-center lg:items-start lg:self-start">
+      <ul
+        role="list"
+        className="mb-3 flex flex-col gap-y-18 sm:self-center md:items-center lg:items-start lg:self-start"
+      >
         {links.map((item, i) => (
-          <li key={i} className="lg:text-16">
+          <li key={i}>
             <Link variant="primary" link={item.reference}>
               <Typography as="fragment">{item.name}</Typography>
             </Link>
