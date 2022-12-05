@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { Cart } from '@commercetools/domain-types/cart/Cart';
 import { ShippingMethod } from '@commercetools/domain-types/cart/ShippingMethod';
 import { Disclosure } from '@headlessui/react';
@@ -6,7 +7,6 @@ import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { StringHelpers } from 'helpers/stringHelpers';
 import Image from 'frontastic/lib/image';
-import { useRouter } from 'next/router';
 
 export interface Props {
   readonly cart: Cart;
