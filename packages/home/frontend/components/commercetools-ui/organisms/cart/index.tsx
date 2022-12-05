@@ -1,4 +1,5 @@
 import React, { FC, useMemo } from 'react';
+import { useRouter } from 'next/router';
 import AccordionBtn from 'components/commercetools-ui/atoms/accordion';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
@@ -8,7 +9,6 @@ import DiscountForm from '../discount-form';
 import { EmptyState } from '../empty-state';
 import { Link } from '../header/types';
 import CartItem from './item';
-import { useRouter } from 'next/router';
 
 export interface Props {
   emptyStateImage: NextFrontasticImage;

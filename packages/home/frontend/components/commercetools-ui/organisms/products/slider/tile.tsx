@@ -1,5 +1,6 @@
 import React, { FC, useMemo, useState } from 'react';
 import NextLink from 'next/link';
+import { useRouter } from 'next/router';
 import { Product } from '@commercetools/domain-types/product/Product';
 import { Variant } from '@commercetools/domain-types/product/Variant';
 import { LineItem } from '@commercetools/domain-types/wishlist/LineItem';
@@ -11,7 +12,6 @@ import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import usePreloadImages from 'helpers/hooks/usePreloadImages';
 import { desktop } from 'helpers/utils/screensizes';
 import Image from 'frontastic/lib/image';
-import { useRouter } from 'next/router';
 
 interface TileProps {
   product: Product;

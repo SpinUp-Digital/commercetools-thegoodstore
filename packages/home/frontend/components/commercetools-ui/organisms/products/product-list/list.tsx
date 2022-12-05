@@ -1,10 +1,10 @@
 import React from 'react';
 import NextLink from 'next/link';
+import { useRouter } from 'next/router';
 import { Product } from '@commercetools/domain-types/product/Product';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
 import Image from 'frontastic/lib/image';
-import { useRouter } from 'next/router';
 
 interface Props {
   products: Product[];

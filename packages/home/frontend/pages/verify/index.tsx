@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
+import { Account } from '@commercetools/domain-types/account/Account';
 import Toast from 'react-hot-toast';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useAccount } from 'frontastic';
-import { Account } from '@commercetools/domain-types/account/Account';
 
 const Verify: NextPage = () => {
   //i18n messages
