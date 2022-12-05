@@ -6,6 +6,7 @@ import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { StringHelpers } from 'helpers/stringHelpers';
 import Image from 'frontastic/lib/image';
+import { useRouter } from 'next/router';
 
 export interface Props {
   readonly cart: Cart;
@@ -24,6 +25,8 @@ const MobileOrderSummary = ({
   selectedShipping,
   someOutOfStock,
 }: Props) => {
+  const { locale } = useRouter();
+
   //i18n messages
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
   const { formatMessage: formatCheckoutMessage } = useFormat({ name: 'checkout' });
@@ -68,7 +71,7 @@ const MobileOrderSummary = ({
                             {lineItem.name}
                           </h3>
                           <div className="flex space-x-4">
-                            <p className="text-gray-900">{CurrencyHelpers.formatForCurrency(lineItem.price)}</p>
+                            <p className="text-gray-900">{CurrencyHelpers.formatForCurrency(lineItem.price, locale)}</p>
                             {lineItem.count && <p className="text-gray-900">{`x${lineItem.count}`}</p>}
                           </div>
                           {lineItem.variant.attributes?.color && (
@@ -130,6 +133,7 @@ const MobileOrderSummary = ({
                             currencyCode: cart.lineItems[0].price.currencyCode,
                           },
                         ),
+                        locale,
                       )}
                     </dd>
                   </div>
@@ -157,6 +161,7 @@ const MobileOrderSummary = ({
                             currencyCode: cart.lineItems[0].price.currencyCode,
                           },
                         ),
+                        locale,
                       )}
                     </dd>
                   </div>
@@ -167,7 +172,7 @@ const MobileOrderSummary = ({
                   <div className="flex justify-between">
                     <dt>{formatCheckoutMessage({ id: 'shipping', defaultMessage: 'Shipping' })}</dt>
                     <dd className="text-gray-900">
-                      {CurrencyHelpers.formatForCurrency(selectedShipping?.rates?.[0]?.price || {})}
+                      {CurrencyHelpers.formatForCurrency(selectedShipping?.rates?.[0]?.price || {}, locale)}
                     </dd>
                   </div>
                 </dl>
@@ -178,6 +183,7 @@ const MobileOrderSummary = ({
                 <span className="text-base">
                   {CurrencyHelpers.formatForCurrency(
                     CurrencyHelpers.addCurrency(cart.sum, selectedShipping?.rates?.[0]?.price || {}),
+                    locale,
                   )}
                 </span>
               </p>

@@ -11,12 +11,15 @@ import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import usePreloadImages from 'helpers/hooks/usePreloadImages';
 import { desktop } from 'helpers/utils/screensizes';
 import Image from 'frontastic/lib/image';
+import { useRouter } from 'next/router';
 
 interface TileProps {
   product: Product;
 }
 
 const Tile: FC<TileProps> = ({ product }) => {
+  const { locale } = useRouter();
+
   const [isDesktopSize] = useMediaQuery(desktop);
 
   usePreloadImages(
@@ -145,7 +148,7 @@ const Tile: FC<TileProps> = ({ product }) => {
               {variantWithDiscount ? (
                 <div className="flex items-center gap-8">
                   <Typography as="h4" medium lineHeight="loose" fontSize={11} className="text-accent-red  md:text-14">
-                    {CurrencyHelpers.formatForCurrency(discountedPrice)}
+                    {CurrencyHelpers.formatForCurrency(discountedPrice, locale)}
                   </Typography>
                   <Typography
                     as="h5"
@@ -154,12 +157,12 @@ const Tile: FC<TileProps> = ({ product }) => {
                     fontSize={10}
                     className="text-gray-500 line-through md:text-12"
                   >
-                    {CurrencyHelpers.formatForCurrency(variantWithDiscount.price)}
+                    {CurrencyHelpers.formatForCurrency(variantWithDiscount.price, locale)}
                   </Typography>
                 </div>
               ) : (
                 <Typography as="h4" medium fontSize={11} lineHeight="loose" className="md:text-14">
-                  {CurrencyHelpers.formatForCurrency(selectedVariant.price)}
+                  {CurrencyHelpers.formatForCurrency(selectedVariant.price, locale)}
                 </Typography>
               )}
             </div>

@@ -230,9 +230,12 @@ const Checkout = ({ shippingCountryOptions }: Props) => {
               submitText={`${formatCheckoutMessage({
                 id: 'pay',
                 defaultMessage: 'Pay',
-              })} ${CurrencyHelpers.formatForCurrency(
-                CurrencyHelpers.addCurrency(data.sum, shippingMethods.data?.[0]?.rates?.[0]?.price || {}),
-              )}`}
+              })} ${
+                (CurrencyHelpers.formatForCurrency(
+                  CurrencyHelpers.addCurrency(data.sum, shippingMethods.data?.[0]?.rates?.[0]?.price || {}),
+                ),
+                router.locale)
+              }`}
               updateFormInput={updateFormInput}
               submitForm={submitForm}
               data={checkoutData}
@@ -246,9 +249,12 @@ const Checkout = ({ shippingCountryOptions }: Props) => {
               submitText={`${formatCheckoutMessage({
                 id: 'pay',
                 defaultMessage: 'Pay',
-              })} ${CurrencyHelpers.formatForCurrency(
-                CurrencyHelpers.addCurrency(data.sum, shippingMethods.data?.[0]?.rates?.[0]?.price || {}),
-              )}`}
+              })} ${
+                (CurrencyHelpers.formatForCurrency(
+                  CurrencyHelpers.addCurrency(data.sum, shippingMethods.data?.[0]?.rates?.[0]?.price || {}),
+                ),
+                router.locale)
+              }`}
               updateFormInput={updateFormInput}
               submitForm={submitForm}
               data={checkoutData}

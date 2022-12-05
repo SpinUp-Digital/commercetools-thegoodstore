@@ -4,6 +4,7 @@ import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart } from 'frontastic';
 import CartItems from './cart-items';
+import { useRouter } from 'next/router';
 
 type OverviewProps = {
   shippingMethods: ShippingMethod[];
@@ -12,6 +13,8 @@ type OverviewProps = {
 };
 
 const Overview: React.FC<OverviewProps> = ({ shippingMethods, currentShippingMethod, onSelectShippingMethod }) => {
+  const { locale } = useRouter();
+
   const { data } = useCart();
 
   const { formatMessage } = useFormat({ name: 'checkout' });
@@ -48,7 +51,7 @@ const Overview: React.FC<OverviewProps> = ({ shippingMethods, currentShippingMet
                   <span className="text-xs text-neutral-600">{description}</span>
                 </div>
                 <span className="ml-auto text-base font-bold">
-                  <span className=" ">{CurrencyHelpers.formatForCurrency(rates?.[0]?.price)}</span>
+                  <span className=" ">{CurrencyHelpers.formatForCurrency(rates?.[0]?.price, locale)}</span>
                 </span>
               </label>
             ))}

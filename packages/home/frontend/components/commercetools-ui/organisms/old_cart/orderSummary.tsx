@@ -7,6 +7,7 @@ import { useFormat } from 'helpers/hooks/useFormat';
 import { Reference } from 'types/reference';
 import Link from '../../atoms/link';
 import DiscountForm from '../discount-form';
+import { useRouter } from 'next/router';
 
 interface Props {
   readonly cart: Cart;
@@ -32,6 +33,8 @@ const OrderSummary = ({
   cancellationLink,
   privacyLink,
 }: Props) => {
+  const { locale } = useRouter();
+
   //i18n messages
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
   const { t } = useTranslation(['checkout']);
@@ -78,7 +81,9 @@ const OrderSummary = ({
       <dl className="mt-6 space-y-4">
         <div className="flex items-center justify-between">
           <dt className="text-sm text-gray-600">{formatCartMessage({ id: 'subtotal', defaultMessage: 'Subtotal' })}</dt>
-          <dd className="text-sm font-medium text-gray-900">{CurrencyHelpers.formatForCurrency(productPrice)}</dd>
+          <dd className="text-sm font-medium text-gray-900">
+            {CurrencyHelpers.formatForCurrency(productPrice, locale)}
+          </dd>
         </div>
 
         {cart?.shippingInfo && (
@@ -87,7 +92,7 @@ const OrderSummary = ({
               <span>{formatCartMessage({ id: 'shipping.estimate', defaultMessage: 'Shipping estimate' })}</span>
             </dt>
             <dd className="text-sm font-medium text-gray-900">
-              {CurrencyHelpers.formatForCurrency(cart?.shippingInfo?.price || {})}
+              {CurrencyHelpers.formatForCurrency(cart?.shippingInfo?.price || {}, locale)}
             </dd>
           </div>
         )}
@@ -97,7 +102,7 @@ const OrderSummary = ({
             <span>{formatCartMessage({ id: 'discounts', defaultMessage: 'Discounts' })}</span>
           </dt>
           <dd className="text-sm font-medium text-gray-900">
-            {CurrencyHelpers.formatForCurrency(-discountPrice || {})}
+            {CurrencyHelpers.formatForCurrency(-discountPrice || {}, locale)}
           </dd>
         </div>
 
@@ -105,7 +110,9 @@ const OrderSummary = ({
           <dt className="text-base font-medium text-gray-900">
             {formatCartMessage({ id: 'orderTotal', defaultMessage: 'Order total' })}
           </dt>
-          <dd className="text-base font-medium text-gray-900">{CurrencyHelpers.formatForCurrency(cart?.sum || {})}</dd>
+          <dd className="text-base font-medium text-gray-900">
+            {CurrencyHelpers.formatForCurrency(cart?.sum || {}, locale)}
+          </dd>
         </div>
 
         {cart?.taxed && (
@@ -114,7 +121,7 @@ const OrderSummary = ({
             {formatCartMessage({
               id: 'includedVat',
               defaultMessage: 'Tax included',
-              values: { amount: CurrencyHelpers.formatForCurrency(totalTaxes || {}) },
+              values: { amount: CurrencyHelpers.formatForCurrency(totalTaxes || {}, locale) },
             })}
             )
           </div>

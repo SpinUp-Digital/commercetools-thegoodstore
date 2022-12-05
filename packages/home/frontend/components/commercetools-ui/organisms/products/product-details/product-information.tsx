@@ -49,10 +49,10 @@ const ProductInformation: FC<ProductInformationProps> = ({ product, variant, onC
         <div className="flex flex-row justify-between">
           <div className="mt-10 flex items-center gap-8">
             <Typography fontSize={16} className="block font-regular leading-loose text-accent-red lg:text-18">
-              {CurrencyHelpers.formatForCurrency(variant.discountedPrice)}
+              {CurrencyHelpers.formatForCurrency(variant.discountedPrice, router.locale)}
             </Typography>
             <Typography fontSize={16} className="block leading-loose text-gray-500 line-through lg:text-18">
-              {CurrencyHelpers.formatForCurrency(variant.price)}
+              {CurrencyHelpers.formatForCurrency(variant.price, router.locale)}
             </Typography>
           </div>
 
@@ -64,7 +64,7 @@ const ProductInformation: FC<ProductInformationProps> = ({ product, variant, onC
         </div>
       ) : (
         <span className="mt-10 block font-body text-16 font-regular leading-loose">
-          {CurrencyHelpers.formatForCurrency(variant.price)}
+          {CurrencyHelpers.formatForCurrency(variant.price, router.locale)}
         </span>
       )}
       {attributesToDisplay.map((attribute, index) => {
