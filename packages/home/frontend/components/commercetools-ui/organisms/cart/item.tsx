@@ -7,12 +7,15 @@ import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart, useWishlist } from 'frontastic';
 import Image from 'frontastic/lib/image';
+import { useRouter } from 'next/router';
 
 export interface Props {
   item: LineItem;
 }
 
 const CartItem: React.FC<Props> = ({ item }) => {
+  const { locale } = useRouter();
+
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
 
   const { removeItem, updateItem } = useCart();
@@ -79,14 +82,16 @@ const CartItem: React.FC<Props> = ({ item }) => {
           {item.discountedPrice ? (
             <div className="flex items-center gap-5">
               <span className="text-14 font-medium leading-loose text-accent-red">
-                {CurrencyHelpers.formatForCurrency(item.discountedPrice)}
+                {CurrencyHelpers.formatForCurrency(item.discountedPrice, locale)}
               </span>
               <span className="text-12 font-normal leading-loose text-gray-500 line-through">
-                {CurrencyHelpers.formatForCurrency(item.price)}
+                {CurrencyHelpers.formatForCurrency(item.price, locale)}
               </span>
             </div>
           ) : (
-            <span className="text-14 font-medium leading-loose">{CurrencyHelpers.formatForCurrency(item.price)}</span>
+            <span className="text-14 font-medium leading-loose">
+              {CurrencyHelpers.formatForCurrency(item.price, locale)}
+            </span>
           )}
         </div>
         <div className="mt-16">

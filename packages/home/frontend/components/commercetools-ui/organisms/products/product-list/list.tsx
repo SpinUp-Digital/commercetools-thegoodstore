@@ -4,6 +4,7 @@ import { Product } from '@commercetools/domain-types/product/Product';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
 import Image from 'frontastic/lib/image';
+import { useRouter } from 'next/router';
 
 interface Props {
   products: Product[];
@@ -11,6 +12,8 @@ interface Props {
 }
 
 const List: React.FC<Props> = ({ products, filtering }) => {
+  const { locale } = useRouter();
+
   //i18n messages
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
@@ -33,7 +36,9 @@ const List: React.FC<Props> = ({ products, filtering }) => {
                 />
               </div>
               <h3 className="mt-4 overflow-hidden truncate text-lg font-bold text-gray-700">{product.name}</h3>
-              <p className="text-sm text-gray-900">{CurrencyHelpers.formatForCurrency(product.variants[0].price)}</p>
+              <p className="text-sm text-gray-900">
+                {CurrencyHelpers.formatForCurrency(product.variants[0].price, locale)}
+              </p>
             </a>
           </NextLink>
         ))}

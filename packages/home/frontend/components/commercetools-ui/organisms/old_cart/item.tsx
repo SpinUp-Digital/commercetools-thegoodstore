@@ -5,6 +5,7 @@ import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { StringHelpers } from 'helpers/stringHelpers';
 import Image from 'frontastic/lib/image';
+import { useRouter } from 'next/router';
 
 interface Props {
   lineItem: LineItem;
@@ -14,6 +15,8 @@ interface Props {
 }
 
 const Item = ({ lineItem, goToProductPage, editItemQuantity, removeItem }: Props) => {
+  const { locale } = useRouter();
+
   const { formatMessage } = useFormat({ name: 'common' });
 
   return (
@@ -55,7 +58,7 @@ const Item = ({ lineItem, goToProductPage, editItemQuantity, removeItem }: Props
               )}
             </div>
             <p className="mt-1 text-sm font-medium text-gray-900">
-              {CurrencyHelpers.formatForCurrency(lineItem.price)}
+              {CurrencyHelpers.formatForCurrency(lineItem.price, locale)}
             </p>
 
             <div className=" h-8 w-28 pt-2 md:pt-24">

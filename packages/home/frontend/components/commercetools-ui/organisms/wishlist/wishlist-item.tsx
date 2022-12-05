@@ -6,12 +6,15 @@ import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart, useWishlist } from 'frontastic';
 import Image from 'frontastic/lib/image';
+import { useRouter } from 'next/router';
 
 export interface Props {
   item: LineItem;
 }
 
 const WishlistItem: FC<Props> = ({ item }) => {
+  const { locale } = useRouter();
+
   const { formatMessage: formatWishlistMessage } = useFormat({ name: 'wishlist' });
   const { data: wishlist, removeLineItem } = useWishlist();
   const { addItem } = useCart();
@@ -40,15 +43,15 @@ const WishlistItem: FC<Props> = ({ item }) => {
           {item.variant.discountedPrice ? (
             <div className="flex items-center gap-5">
               <span className="text-14 font-semibold leading-loose text-accent-red">
-                {CurrencyHelpers.formatForCurrency(item.variant.discountedPrice)}
+                {CurrencyHelpers.formatForCurrency(item.variant.discountedPrice, locale)}
               </span>
               <span className="text-14 font-semibold leading-loose text-gray-500 line-through">
-                {CurrencyHelpers.formatForCurrency(item.variant.price)}
+                {CurrencyHelpers.formatForCurrency(item.variant.price, locale)}
               </span>
             </div>
           ) : (
             <span className="text-14 font-semibold leading-loose">
-              {CurrencyHelpers.formatForCurrency(item.variant.price)}
+              {CurrencyHelpers.formatForCurrency(item.variant.price, locale)}
             </span>
           )}
         </div>

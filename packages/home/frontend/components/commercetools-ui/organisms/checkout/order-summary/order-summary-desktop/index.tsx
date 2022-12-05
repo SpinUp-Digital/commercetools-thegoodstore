@@ -6,6 +6,7 @@ import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { StringHelpers } from 'helpers/stringHelpers';
 import Image from 'frontastic/lib/image';
+import { useRouter } from 'next/router';
 
 export interface Props {
   readonly cart: Cart;
@@ -24,6 +25,8 @@ const DesktopOrderSummary = ({
   selectedShipping,
   someOutOfStock,
 }: Props) => {
+  const { locale } = useRouter();
+
   //i18n messages
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
   const { formatMessage: formatCheckoutMessage } = useFormat({ name: 'checkout' });
@@ -57,7 +60,7 @@ const DesktopOrderSummary = ({
                   {lineItem.name}
                 </h3>
                 <div className="flex space-x-4">
-                  <p className="text-gray-900">{CurrencyHelpers.formatForCurrency(lineItem.price)}</p>
+                  <p className="text-gray-900">{CurrencyHelpers.formatForCurrency(lineItem.price, locale)}</p>
                   {lineItem.count && <p className="text-gray-900">{`x${lineItem.count}`}</p>}
                 </div>
                 {lineItem.variant.attributes?.color && (
@@ -114,6 +117,7 @@ const DesktopOrderSummary = ({
                     currencyCode: cart.lineItems[0].price.currencyCode,
                   },
                 ),
+                locale,
               )}
             </dd>
           </div>
@@ -136,13 +140,14 @@ const DesktopOrderSummary = ({
                     currencyCode: cart.lineItems[0].price.currencyCode,
                   },
                 ),
+                locale,
               )}
             </dd>
           </div>
           <div className="flex justify-between">
             <dt>{formatCheckoutMessage({ id: 'shipping', defaultMessage: 'Shipping' })}</dt>
             <dd className="text-gray-900">
-              {CurrencyHelpers.formatForCurrency(selectedShipping?.rates?.[0]?.price || {})}
+              {CurrencyHelpers.formatForCurrency(selectedShipping?.rates?.[0]?.price || {}, locale)}
             </dd>
           </div>
           <div className="flex items-center justify-between border-t border-gray-200 pt-6 text-gray-900">
@@ -150,6 +155,7 @@ const DesktopOrderSummary = ({
             <dd className="text-base">
               {CurrencyHelpers.formatForCurrency(
                 CurrencyHelpers.addCurrency(cart.sum, selectedShipping?.rates?.[0]?.price || {}),
+                locale,
               )}
             </dd>
           </div>
