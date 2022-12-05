@@ -7,17 +7,19 @@ import { Market, Tile } from '../../../types';
 import HeaderDropdownTile from './header-menu-tile';
 
 export interface Props {
+  show: boolean;
   links: Category[];
   market: Market;
   tileContent?: Tile;
   onClick?: () => void;
 }
 
-const MenuDropdown: FC<Props> = ({ links, tileContent, market, onClick }) => {
+const MenuDropdown: FC<Props> = ({ links, tileContent, market, onClick, show }) => {
   const wrapperClassNames = useClassNames([
     'animate-[appear_1s_ease-in-out]',
-    'absolute bottom-0 left-0 z-20 flex h-fit w-full translate-y-full',
+    'absolute bottom-0 left-0 z-20 h-fit w-full translate-y-full',
     tileContent ? 'justify-between' : 'justify-center',
+    show ? 'flex' : 'hidden',
     'border-b-[1.5px] border-t-[1.5px] border-b-secondary-grey border-t-neutral-400 bg-white px-50 py-34 xl:pl-143 xl:pr-195',
   ]);
   const linksClassNames = useClassNames([
