@@ -10,11 +10,12 @@ type Props = {
   title: string;
   subtitle: string;
   categories: CategoryLink[];
+  className?: string;
 };
 
-export const EmptyState: React.FC<Props> = ({ image, title, subtitle, categories }: Props) => {
+export const EmptyState: React.FC<Props> = ({ image, title, subtitle, categories, className = '' }: Props) => {
   return (
-    <div className="my-36 overflow-auto bg-neutral-200">
+    <div className={`py-36 text-center ${className}`}>
       <Typography as="h6" fontSize={16} align="center">
         {title}
       </Typography>
