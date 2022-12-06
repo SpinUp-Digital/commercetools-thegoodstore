@@ -54,8 +54,9 @@ const CartItem: React.FC<Props> = ({ item }) => {
       _url: item._url,
     };
   }, [item]);
-  const moveToWishlist = useCallback(() => {
-    removeItem(item.lineItemId);
+
+  const moveToWishlist = useCallback(async () => {
+    await removeItem(item.lineItemId);
     addToWishlist(wishlist, cartLineItemToWishlistLineItem, 1);
   }, [removeItem, item.lineItemId, addToWishlist, wishlist, cartLineItemToWishlistLineItem]);
 
@@ -112,7 +113,10 @@ const CartItem: React.FC<Props> = ({ item }) => {
           </div>
         </div>
         <div className="mt-16 text-12 leading-normal">
-          <p className="cursor-pointer text-secondary-black" onClick={moveToWishlist}>
+          <p
+            className="cursor-pointer text-secondary-black decoration-secondary-black hover:underline"
+            onClick={moveToWishlist}
+          >
             {formatCartMessage({ id: 'move.to.wishlist', defaultMessage: 'Move to wishlist' })}
           </p>
         </div>
