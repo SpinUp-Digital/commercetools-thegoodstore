@@ -1,10 +1,10 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import { ShippingMethod } from '@commercetools/domain-types/cart/ShippingMethod';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart } from 'frontastic';
 import CartItems from './cart-items';
-import { useRouter } from 'next/router';
 
 type OverviewProps = {
   shippingMethods: ShippingMethod[];

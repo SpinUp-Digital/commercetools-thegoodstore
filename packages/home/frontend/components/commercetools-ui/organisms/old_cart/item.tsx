@@ -1,11 +1,11 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import { LineItem } from '@commercetools/domain-types/cart/LineItem';
 import { XIcon as XIconSolid } from '@heroicons/react/solid';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { StringHelpers } from 'helpers/stringHelpers';
 import Image from 'frontastic/lib/image';
-import { useRouter } from 'next/router';
 
 interface Props {
   lineItem: LineItem;
