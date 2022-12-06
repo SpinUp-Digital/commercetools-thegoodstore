@@ -50,7 +50,7 @@ const MenuDropdown: FC<Props> = ({ show, links, tileContent, market, onClick }) 
               </>
             ) : (
               <Link key={link.categoryId} link={link.slug ?? link.path} variant="menu-header">
-                <Typography>{link.name}</Typography>
+                <Typography fontSize={14}>{link.name}</Typography>
               </Link>
             )}
           </div>

@@ -5,10 +5,10 @@ import Subtitle, { SubtitleProps } from 'components/commercetools-ui/atoms/subti
 import Typography from 'components/commercetools-ui/atoms/typography';
 import Link from 'components/commercetools-ui/organisms/content/link';
 import Wrapper from 'components/commercetools-ui/organisms/content/wrapper';
+import useTouchDevice from 'helpers/hooks/useTouchDevice';
 import { mediumDesktop, tablet } from 'helpers/utils/screensizes';
 import { Reference } from 'types/reference';
 import Tile from './tile';
-import useTouchDevice from 'helpers/hooks/useTouchDevice';
 
 export interface Props {
   products: Product[];

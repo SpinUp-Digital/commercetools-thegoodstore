@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from 'components/commercetools-ui/atoms/button';
 import { EmptyState } from 'components/commercetools-ui/organisms/empty-state';
-import { Link } from 'components/commercetools-ui/organisms/footer/column';
+import { FooterLink } from 'components/commercetools-ui/organisms/footer/column';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useWishlist } from 'frontastic';
 import { NextFrontasticImage } from 'frontastic/lib/image';
@@ -11,7 +11,7 @@ export interface Props {
   emptyWishlistTitle: string;
   emptyWishlistSubtitle: string;
   emptyWishlistImage: NextFrontasticImage;
-  emptyWishlistCategories: Link[];
+  emptyWishlistCategories: FooterLink[];
 }
 const Wishlist = ({ emptyWishlistTitle, emptyWishlistSubtitle, emptyWishlistImage, emptyWishlistCategories }) => {
   const { formatMessage: formatWishlistMessage } = useFormat({ name: 'wishlist' });

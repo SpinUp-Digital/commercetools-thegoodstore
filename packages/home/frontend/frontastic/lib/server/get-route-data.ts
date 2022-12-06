@@ -50,8 +50,6 @@ export const getRouteData =
     };
     const endpoint = `/page?${encodeQueryParams(query).join('&')}`;
 
-    console.log('endpoint: ', headers, endpoint);
-
     const data: RedirectResponse | PageDataResponse = (await fetchApiHubServerSide(
       endpoint,
       locale,
@@ -61,8 +59,6 @@ export const getRouteData =
       },
       headers,
     )) as RedirectResponse | PageDataResponse;
-
-    console.log('response: ', data);
 
     return data;
   };

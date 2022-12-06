@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
+import useTouchDevice from 'helpers/hooks/useTouchDevice';
 import { mediumDesktop, tablet } from 'helpers/utils/screensizes';
 import Slider from '../../atoms/slider';
 import Wrapper from '../content/wrapper';
 import Tile, { Props as TileProps } from './tile';
-import useTouchDevice from 'helpers/hooks/useTouchDevice';
 
 export interface Props {
   tiles: Array<TileProps['tile']>;

@@ -1,11 +1,11 @@
 import React from 'react';
 import Accordion from 'components/commercetools-ui/atoms/accordion';
+import Link from 'components/commercetools-ui/atoms/link';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import * as screensizes from 'helpers/utils/screensizes';
 import { Reference } from 'types/reference';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
-import Link from '../../atoms/link';
-import Column, { Link as FooterLink } from './column';
+import Column, { FooterLink } from './column';
 
 export interface FooterColumn {
   header?: string;
@@ -48,9 +48,10 @@ const Footer: React.FC<Props> = ({ columns, logo, socialMedia }) => {
               <Accordion
                 closedSectionTitle={column.header}
                 openSectionTitle={column.header}
+                buttonClassName="h-48 text-14 font-medium text-neutral-100 px-12 text-neutral-150"
                 iconColor="text-neutral-100"
               >
-                <div className="mb-16 flex flex-row text-14 md:ml-24" key={index}>
+                <div className="mb-16 ml-20 flex flex-row text-14 md:ml-24" key={index}>
                   <Column links={column.links} className="px-0" />
                 </div>
               </Accordion>
