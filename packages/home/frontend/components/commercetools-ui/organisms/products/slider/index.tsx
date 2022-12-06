@@ -8,6 +8,7 @@ import Wrapper from 'components/commercetools-ui/organisms/content/wrapper';
 import { mediumDesktop, tablet } from 'helpers/utils/screensizes';
 import { Reference } from 'types/reference';
 import Tile from './tile';
+import useTouchDevice from 'helpers/hooks/useTouchDevice';
 
 export interface Props {
   products: Product[];
@@ -19,6 +20,8 @@ export interface Props {
 }
 
 export default function ProductSlider({ products, title, subline, ctaLabel, ctaLink, subtitleVariant = 'lg' }: Props) {
+  const { isTouchDevice } = useTouchDevice();
+
   return (
     <Wrapper background="neutral-200" variant="left-padding-only">
       <div>
@@ -48,7 +51,7 @@ export default function ProductSlider({ products, title, subline, ctaLabel, ctaL
       <div className="mt-20 md:mt-24 lg:mt-20">
         <div className="relative mt-6 w-full">
           <Slider
-            slidesPerView={2.3}
+            slidesPerView={isTouchDevice ? 2.3 : 1.3}
             slidesPerGroup={1}
             dots={false}
             arrows
@@ -58,6 +61,7 @@ export default function ProductSlider({ products, title, subline, ctaLabel, ctaL
             spaceBetween={8}
             breakpoints={{
               [tablet]: {
+                slidesPerView: 2.3,
                 spaceBetween: 25,
               },
               [mediumDesktop]: {
