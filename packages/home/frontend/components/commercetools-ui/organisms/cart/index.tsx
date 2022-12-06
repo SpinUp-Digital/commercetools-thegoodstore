@@ -25,6 +25,8 @@ const Cart: FC<Props> = ({ emptyStateImage, emptyStateTitle, emptyStateSubtitle,
 
   const { data } = useCart();
 
+  const isEmpty = data.lineItems?.length === 0;
+
   const transaction = useMemo(() => {
     if (!data?.lineItems)
       return {
@@ -80,7 +82,7 @@ const Cart: FC<Props> = ({ emptyStateImage, emptyStateTitle, emptyStateSubtitle,
 
   return (
     <>
-      {data.lineItems?.length === 0 ? (
+      {isEmpty ? (
         <EmptyState
           categories={emptyStateCategories}
           image={emptyStateImage}
@@ -133,7 +135,10 @@ const Cart: FC<Props> = ({ emptyStateImage, emptyStateTitle, emptyStateSubtitle,
         </div>
 
         <div className="mt-16">
-          <button className="w-full rounded-md bg-primary-black py-12 font-medium text-white">
+          <button
+            disabled={isEmpty}
+            className="w-full rounded-md bg-primary-black py-12 font-medium text-white transition hover:bg-gray-500 disabled:cursor-not-allowed disabled:bg-neutral-400"
+          >
             {formatCartMessage({ id: 'checkout.go', defaultMessage: 'Go to checkout' })}
           </button>
         </div>
