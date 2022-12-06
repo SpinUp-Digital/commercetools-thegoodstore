@@ -25,7 +25,7 @@ const Wrapper: FC<WrapperProps> = ({
   const variantClassNames: variantClassNames = {
     none: '',
     'left-padding-only': !isTouchDevice
-      ? 'pl-8 md:pr-96 md:pl-96 xl:pl-0 xl:pr-0'
+      ? 'pl-72 pr-72 md:pr-96 md:pl-96 xl:pl-0 xl:pr-0'
       : 'pl-8 lg:pr-96 lg:pl-96 xl:pl-0 xl:pr-0',
     'full-padding-small': 'px-8 md:px-12',
     'full-padding': 'px-16 md:px-96',

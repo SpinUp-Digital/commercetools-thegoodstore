@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useRef } from 'react';
+import React, { FC, useCallback, useEffect, useRef, useState } from 'react';
 import useClassNames from 'helpers/hooks/useClassNames';
 import useOnClickOutside from 'helpers/hooks/useOnClickOutside';
 import useScrollBlock from 'helpers/hooks/useScrollBlock';
@@ -46,12 +46,19 @@ const Drawer: FC<DrawerProps> = ({ className, isOpen, direction, blockScrolling 
     }
   }, [isOpen, direction]);
 
+  const [transitionClassNames, setTransitionClassNames] = useState('');
+
   const drawerClassName = useClassNames([
     className,
-    'fixed z-50 flex flex-col items-stretch bg-neutral-200 shadow-lg transition duration-300 ease-out',
+    'fixed z-50 flex flex-col items-stretch bg-neutral-200 shadow-lg',
     directionStyles[direction],
     getTransitionStyles(),
+    transitionClassNames,
   ]);
+
+  useEffect(() => {
+    setTransitionClassNames('transition duration-300 ease-out');
+  }, []);
 
   return (
     <>

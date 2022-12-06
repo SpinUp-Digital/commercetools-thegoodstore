@@ -24,14 +24,14 @@ const HeaderNavigationButtonDesktop: FC<Props> = ({ show, link, tiles, market, u
           {link?.name}
         </Typography>
       </div>
-      {show && (
-        <MenuDropdown
-          onClick={updateSubMenu}
-          links={link?.subCategories}
-          market={market}
-          tileContent={tileContent[0]}
-        />
-      )}
+
+      <MenuDropdown
+        show={show}
+        onClick={updateSubMenu}
+        links={link?.subCategories}
+        market={market}
+        tileContent={tileContent[0]}
+      />
     </>
   );
 };

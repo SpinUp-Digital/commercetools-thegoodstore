@@ -55,7 +55,7 @@ const HeaderTastic = ({ data, categories }) => {
   const handleMarket = (market: Market) => {
     setMarket(market);
 
-    router.push(router.asPath, router.asPath, { locale: market.locale.substring(0, 2) });
+    router.push(router.asPath, router.asPath, { locale: market.locale.substring(0, 2) }).then(() => router.reload());
   };
 
   const flattenedCategories = categories?.items?.filter((category) => category.depth === 0);

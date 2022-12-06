@@ -1,4 +1,5 @@
 import React, { FC, useMemo } from 'react';
+import { useRouter } from 'next/router';
 import AccordionBtn from 'components/commercetools-ui/atoms/accordion';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
@@ -17,6 +18,8 @@ export interface Props {
 }
 
 const Cart: FC<Props> = ({ emptyStateImage, emptyStateTitle, emptyStateSubtitle, emptyStateCategories }) => {
+  const { locale } = useRouter();
+
   //i18n messages
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
 
@@ -102,31 +105,31 @@ const Cart: FC<Props> = ({ emptyStateImage, emptyStateTitle, emptyStateSubtitle,
       <div className="border-t border-neutral-400 bg-white px-12 pt-16 pb-18 md:px-22">
         <div className="flex items-center justify-between text-14">
           <span>{formatCartMessage({ id: 'subtotal', defaultMessage: 'Subtotal' })} </span>
-          <span>{CurrencyHelpers.formatForCurrency(transaction.subtotal)}</span>
+          <span>{CurrencyHelpers.formatForCurrency(transaction.subtotal, locale)}</span>
         </div>
 
         {transaction.discount.centAmount > 0 && (
           <div className="flex items-center justify-between text-14">
             <span>{formatCartMessage({ id: 'discount', defaultMessage: 'Discount' })} </span>
-            <span>{CurrencyHelpers.formatForCurrency(transaction.discount)}</span>
+            <span>{CurrencyHelpers.formatForCurrency(transaction.discount, locale)}</span>
           </div>
         )}
 
         <div className="flex items-center justify-between text-14">
           <span>{formatCartMessage({ id: 'tax', defaultMessage: 'Tax' })} </span>
-          <span>{CurrencyHelpers.formatForCurrency(transaction.tax)}</span>
+          <span>{CurrencyHelpers.formatForCurrency(transaction.tax, locale)}</span>
         </div>
 
         {transaction.shipping.centAmount > 0 && (
           <div className="flex items-center justify-between text-14">
             <span>{formatCartMessage({ id: 'shipping.estimate', defaultMessage: 'Est. Shipping' })} </span>
-            <span>{CurrencyHelpers.formatForCurrency(transaction.shipping)}</span>
+            <span>{CurrencyHelpers.formatForCurrency(transaction.shipping, locale)}</span>
           </div>
         )}
 
         <div className="mt-26 flex items-center justify-between font-medium">
           <span>{formatCartMessage({ id: 'total', defaultMessage: 'Total' })}: </span>
-          <span>{CurrencyHelpers.formatForCurrency(transaction.total)}</span>
+          <span>{CurrencyHelpers.formatForCurrency(transaction.total, locale)}</span>
         </div>
 
         <div className="mt-16">

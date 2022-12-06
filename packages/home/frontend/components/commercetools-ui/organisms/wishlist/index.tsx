@@ -43,8 +43,8 @@ const Wishlist = ({ emptyWishlistTitle, emptyWishlistSubtitle, emptyWishlistImag
               <div className="mt-16 p-20">
                 <Button
                   onClick={handleClearWishlist}
-                  variant="secondary"
-                  className="w-full border border-primary-black"
+                  variant="ghost"
+                  className="w-full rounded-md border border-primary-black text-16"
                 >
                   {formatWishlistMessage({ id: 'wishlist.clear.list', defaultMessage: 'Clear the list' })}
                 </Button>

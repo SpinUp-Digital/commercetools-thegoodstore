@@ -14,7 +14,7 @@ type Props = {
 
 export const EmptyState: React.FC<Props> = ({ image, title, subtitle, categories }: Props) => {
   return (
-    <div className="my-36 bg-neutral-200">
+    <div className="my-36 overflow-auto bg-neutral-200">
       <Typography as="h6" fontSize={16} align="center">
         {title}
       </Typography>

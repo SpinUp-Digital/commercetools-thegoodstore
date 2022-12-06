@@ -1,4 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
+import { useRouter } from 'next/router';
 import { LineItem } from '@commercetools/domain-types/cart/LineItem';
 import { LineItem as LineItemWishlist } from '@commercetools/domain-types/wishlist/LineItem';
 import { TrashIcon } from '@heroicons/react/24/outline';
@@ -13,6 +14,8 @@ export interface Props {
 }
 
 const CartItem: React.FC<Props> = ({ item }) => {
+  const { locale } = useRouter();
+
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
 
   const { removeItem, updateItem } = useCart();
@@ -79,14 +82,16 @@ const CartItem: React.FC<Props> = ({ item }) => {
           {item.discountedPrice ? (
             <div className="flex items-center gap-5">
               <span className="text-14 font-medium leading-loose text-accent-red">
-                {CurrencyHelpers.formatForCurrency(item.discountedPrice)}
+                {CurrencyHelpers.formatForCurrency(item.discountedPrice, locale)}
               </span>
               <span className="text-12 font-normal leading-loose text-gray-500 line-through">
-                {CurrencyHelpers.formatForCurrency(item.price)}
+                {CurrencyHelpers.formatForCurrency(item.price, locale)}
               </span>
             </div>
           ) : (
-            <span className="text-14 font-medium leading-loose">{CurrencyHelpers.formatForCurrency(item.price)}</span>
+            <span className="text-14 font-medium leading-loose">
+              {CurrencyHelpers.formatForCurrency(item.price, locale)}
+            </span>
           )}
         </div>
         <div className="mt-16">
