@@ -26,12 +26,9 @@ export interface Tile {
 
 export interface HeaderProps {
   links: Category[];
-  markets: Market[];
-  market: Market;
   logo: NextFrontasticImage;
   logoLink: Reference;
   tiles?: Tile[];
-  handleMarket: (market: Market) => void;
   emptyCartTitle: string;
   emptyCartSubtitle: string;
   emptyCartImage: NextFrontasticImage;

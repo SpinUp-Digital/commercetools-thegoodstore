@@ -15,15 +15,7 @@ export interface Props {
   market: Market;
 }
 
-const HeaderNavigationDesktop = ({
-  links,
-  handleMouseIn,
-  handleMouseOut,
-  activeCategory,
-  tiles,
-  hideSubMenu,
-  market,
-}) => {
+const HeaderNavigationDesktop = ({ links, handleMouseIn, handleMouseOut, activeCategory, tiles, hideSubMenu }) => {
   const scrollDirection = useScrollDirection(5, -1);
   const navigationClassNames = useClassNames([
     'relative hidden items-center justify-center lg:flex transition-all duration-150',
@@ -44,7 +36,6 @@ const HeaderNavigationDesktop = ({
               <HeaderNavigationButtonDesktop
                 show={link.categoryId === activeCategory?.categoryId}
                 link={link}
-                market={market}
                 updateSubMenu={hideSubMenu}
                 tiles={tiles}
               />

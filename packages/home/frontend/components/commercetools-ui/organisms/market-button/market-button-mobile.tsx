@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import Button from 'components/commercetools-ui/atoms/button';
@@ -6,16 +6,12 @@ import Typography from 'components/commercetools-ui/atoms/typography';
 import FlagIcons from 'components/icons/flags';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
+import { MarketContext } from 'frontastic/provider/marketProvider';
 import { Market } from '../header/types';
 
-interface Props {
-  market?: Market;
-  markets?: Market[];
-  handleMarket: (market: Market) => void;
-}
-
-const MarketButtonMobile: React.FC<Props> = ({ market: selectedMarket, markets, handleMarket }) => {
+const MarketButtonMobile = () => {
   const { formatMessage: formatMarketMessage } = useFormat({ name: 'common' });
+  const { market: selectedMarket, markets, handleMarket } = useContext(MarketContext);
 
   const marketItemsClassNames = useClassNames([
     markets.length > 6 ? 'bottom-45' : 'top-45',
@@ -65,23 +61,21 @@ const MarketButtonMobile: React.FC<Props> = ({ market: selectedMarket, markets, 
             >
               <Menu.Items className={marketItemsClassNames}>
                 <div className="max-h-300 overflow-scroll border-[1px] border-neutral-400 bg-white shadow-lg">
-                  <>
-                    {markets.map((market, index) => (
-                      <Menu.Item key={index}>
-                        <div className="overflow-y-scroll">
-                          <Button
-                            variant="secondary"
-                            size="full"
-                            onClick={() => handleMarketClick(market)}
-                            className="flex w-full items-center justify-start px-10"
-                          >
-                            <FlagIcons flagName={market.flag} className="mr-8" />
-                            <span className="mb-1 text-14 font-medium text-secondary-black">{market.region}</span>
-                          </Button>
-                        </div>
-                      </Menu.Item>
-                    ))}
-                  </>
+                  {markets.map((market, index) => (
+                    <Menu.Item key={index}>
+                      <div className="overflow-y-scroll">
+                        <Button
+                          variant="secondary"
+                          size="full"
+                          onClick={() => handleMarketClick(market)}
+                          className="flex w-full items-center justify-start px-10"
+                        >
+                          <FlagIcons flagName={market.flag} className="mr-8" />
+                          <span className="mb-1 text-14 font-medium text-secondary-black">{market.region}</span>
+                        </Button>
+                      </div>
+                    </Menu.Item>
+                  ))}
                 </div>
               </Menu.Items>
             </Transition>

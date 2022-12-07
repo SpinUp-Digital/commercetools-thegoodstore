@@ -10,12 +10,9 @@ import { useFormat } from 'helpers/hooks/useFormat';
 
 export interface Props {
   links: Category[];
-  market: Market;
-  markets: Market[];
-  handleMarket: (market: Market) => void;
 }
 
-const HeaderNavigationMobile: FC<Props> = ({ links, market, markets, handleMarket }) => {
+const HeaderNavigationMobile: FC<Props> = ({ links }) => {
   const [category, setCategory] = useState<Category[]>([]);
   const [showMenu, setShowMenu] = useState(false);
 
@@ -43,9 +40,7 @@ const HeaderNavigationMobile: FC<Props> = ({ links, market, markets, handleMarke
 
       <Drawer isOpen={showMenu} direction="left" className="w-4/5" onClose={hideHeaderMenu}>
         <MobileMenu links={links} hideHeaderMenu={hideHeaderMenu} category={category} setCategory={setCategory} />
-        <>
-          {category.length <= 0 && <MarketButtonMobile market={market} handleMarket={handleMarket} markets={markets} />}
-        </>
+        {category.length <= 0 && <MarketButtonMobile />}
       </Drawer>
     </div>
   );

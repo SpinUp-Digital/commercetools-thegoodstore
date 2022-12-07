@@ -1,16 +1,16 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import Link from 'components/commercetools-ui/atoms/link';
-import { Market } from 'components/commercetools-ui/organisms/header/types';
 import { Reference } from 'types/reference';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
+import { MarketContext } from 'frontastic/provider/marketProvider';
 
 export interface Props {
-  market: Market;
   logo: NextFrontasticImage;
   logoLink: Reference;
 }
 
-const HeaderLogo: FC<Props> = ({ logoLink, logo, market }) => {
+const HeaderLogo: FC<Props> = ({ logoLink, logo }) => {
+  const { market } = useContext(MarketContext);
   return (
     <div className="relative px-10 md:mt-0">
       <Link

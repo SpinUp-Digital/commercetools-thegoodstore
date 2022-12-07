@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { CheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import Button from 'components/commercetools-ui/atoms/button';
 import Drawer from 'components/commercetools-ui/atoms/drawer';
@@ -6,15 +6,11 @@ import Typography from 'components/commercetools-ui/atoms/typography';
 import { Market } from 'components/commercetools-ui/organisms/header/types';
 import FlagIcons from 'components/icons/flags';
 import { useFormat } from 'helpers/hooks/useFormat';
+import { MarketContext } from 'frontastic/provider/marketProvider';
 
-interface Props {
-  market?: Market;
-  markets?: Market[];
-  handleMarket: (market: Market) => void;
-}
-
-const MarketButton: React.FC<Props> = ({ market: selectedMarket, markets, handleMarket }) => {
+const MarketButton = () => {
   const [showMarket, setShowMarket] = useState(false);
+  const { market: selectedMarket, markets, handleMarket } = useContext(MarketContext);
 
   const { formatMessage: formatMarketMessage } = useFormat({ name: 'common' });
 
