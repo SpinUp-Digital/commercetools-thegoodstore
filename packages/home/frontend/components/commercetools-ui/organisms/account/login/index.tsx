@@ -10,6 +10,8 @@ import { useFormat } from 'helpers/hooks/useFormat';
 import Redirect from 'helpers/redirect';
 import { Reference } from 'types/reference';
 import { useAccount } from 'frontastic';
+import AlterForm from '../alter-form';
+import Feedback from '../feedback';
 
 export interface LoginProps {
   signInLink: Reference;
@@ -136,95 +138,89 @@ const Login: React.FC<LoginProps> = ({ signInLink, accountLink }) => {
   if (loggedIn) return <Redirect target={accountLink} />;
 
   return (
-    <div className="m-auto grid max-w-[480px] px-16">
-      <Typography as="h3" fontFamily="libre" className="mb-16 text-16 md:mb-24 md:text-20 lg:text-24">
-        {resendPasswordReset
-          ? formatAccountMessage({ id: 'password.reset.headline', defaultMessage: 'Reset your password' })
-          : formatAccountMessage({ id: 'welcome.back', defaultMessage: 'Welcome back' })}
-      </Typography>
+    <>
+      <div className="m-auto grid max-w-[480px] px-16">
+        <Typography as="h3" fontFamily="libre" className="mb-16 text-16 md:mb-24 md:text-20 lg:text-24">
+          {resendPasswordReset
+            ? formatAccountMessage({ id: 'password.reset.headline', defaultMessage: 'Reset your password' })
+            : formatAccountMessage({ id: 'welcome.back', defaultMessage: 'Welcome back' })}
+        </Typography>
 
-      <form onSubmit={handleSubmit}>
-        {error && (
-          <Typography fontSize={12} className="mb-12 capitalize text-accent-red">
-            {error}
-          </Typography>
-        )}
-        {success && (
-          <Typography fontSize={12} className="mb-12 capitalize text-green-600">
-            {success}
-          </Typography>
-        )}
+        <form onSubmit={handleSubmit}>
+          <Feedback success={success} error={error} />
 
-        <Input
-          id="email"
-          name="email"
-          type="email"
-          autoComplete="email"
-          required
-          className="mb-16 md:mb-20"
-          placeholder={formatMessage({ id: 'emailAddress', defaultMessage: 'Email Address' })}
-          onChange={handleChange}
-        />
-
-        {!resendPasswordReset && (
-          <PasswordInput
+          <Input
+            id="email"
+            name="email"
+            type="email"
+            autoComplete="email"
             required
-            id="password"
-            name="password"
-            autoComplete="current-password"
-            placeholder={formatAccountMessage({ id: 'password', defaultMessage: 'Password' })}
             className="mb-16 md:mb-20"
+            placeholder={formatMessage({ id: 'emailAddress', defaultMessage: 'Email Address' })}
             onChange={handleChange}
           />
-        )}
 
-        {subModal ? (
-          <div>
-            <ArrowLeftIcon className="w-4 cursor-pointer" onClick={backToLogin} />
-          </div>
-        ) : (
-          <div className="mb-30 flex items-center justify-between">
-            <div className="flex items-center gap-8">
-              <Checkbox
-                className="h-16 w-16 rounded-sm"
-                id="remember-me"
-                name="rememberMe"
-                type="checkbox"
-                onChange={handleCheckboxChange}
-              />
-              <Typography fontSize={12} className="text-secondary-black md:text-14" as="label">
-                {formatMessage({ id: 'rememberMe', defaultMessage: 'Remember me' })}
+          {!resendPasswordReset && (
+            <PasswordInput
+              required
+              id="password"
+              name="password"
+              autoComplete="current-password"
+              placeholder={formatAccountMessage({ id: 'password', defaultMessage: 'Password' })}
+              className="mb-16 md:mb-20"
+              onChange={handleChange}
+            />
+          )}
+
+          {subModal ? (
+            <div>
+              <ArrowLeftIcon className="w-4 cursor-pointer" onClick={backToLogin} />
+            </div>
+          ) : (
+            <div className="mb-30 flex items-center justify-between">
+              <div className="flex items-center gap-8">
+                <Checkbox
+                  className="h-16 w-16 rounded-sm"
+                  id="remember-me"
+                  name="rememberMe"
+                  type="checkbox"
+                  onChange={handleCheckboxChange}
+                />
+                <Typography fontSize={12} className="text-secondary-black md:text-14" as="label">
+                  {formatMessage({ id: 'rememberMe', defaultMessage: 'Remember me' })}
+                </Typography>
+              </div>
+
+              <Typography
+                className="cursor-pointer text-secondary-black md:text-14"
+                fontSize={12}
+                onClick={toResendPassword}
+              >
+                {formatAccountMessage({ id: 'password.forgot', defaultMessage: 'Forgot your password?' })}
               </Typography>
             </div>
+          )}
 
-            <Typography
-              className="cursor-pointer text-secondary-black md:text-14"
-              fontSize={12}
-              onClick={toResendPassword}
+          <Button size="full" type="submit" className="mb-16 text-16 leading-tight md:mb-20" disabled={loading}>
+            {resendPasswordReset
+              ? formatAccountMessage({ id: 'account.reset.link', defaultMessage: 'Get reset link' })
+              : formatAccountMessage({ id: 'sign.in', defaultMessage: 'Sign in' })}
+          </Button>
+
+          {resendPasswordReset && (
+            <Link
+              variant="menu-item"
+              className="mx-auto block w-fit border-b-[1px]"
+              link={signInLink}
+              onClick={backToLogin}
             >
-              {formatAccountMessage({ id: 'password.forgot', defaultMessage: 'Forgot your password?' })}
-            </Typography>
-          </div>
-        )}
-
-        <Button size="full" type="submit" className="mb-16 text-16 leading-tight md:mb-20" disabled={loading}>
-          {resendPasswordReset
-            ? formatAccountMessage({ id: 'account.reset.link', defaultMessage: 'Get reset link' })
-            : formatAccountMessage({ id: 'sign.in', defaultMessage: 'Sign in' })}
-        </Button>
-
-        {resendPasswordReset && (
-          <Link
-            variant="menu-item"
-            className="mx-auto block w-fit border-b-[1px]"
-            link={signInLink}
-            onClick={backToLogin}
-          >
-            {formatAccountMessage({ id: 'account.back.sign', defaultMessage: 'Back to sign in' })}
-          </Link>
-        )}
-      </form>
-    </div>
+              {formatAccountMessage({ id: 'account.back.sign', defaultMessage: 'Back to sign in' })}
+            </Link>
+          )}
+        </form>
+      </div>
+      <AlterForm page="register" />
+    </>
   );
 };
 

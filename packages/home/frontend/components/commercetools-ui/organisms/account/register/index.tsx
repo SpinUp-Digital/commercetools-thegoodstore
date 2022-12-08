@@ -9,6 +9,8 @@ import { useFormat } from 'helpers/hooks/useFormat';
 import Redirect from 'helpers/redirect';
 import { Reference } from 'types/reference';
 import { useAccount } from 'frontastic';
+import AlterForm from '../alter-form';
+import Feedback from '../feedback';
 
 export interface RegisterProps {
   termsOfUseLink?: Reference;
@@ -87,81 +89,79 @@ const Register: React.FC<RegisterProps> = ({ termsOfUseLink }) => {
   if (loggedIn) return <Redirect target="/account" />;
 
   return (
-    <div className="m-auto grid max-w-[480px] px-16">
-      <Typography as="h3" fontFamily="libre" className="mb-16 text-16 md:mb-24 md:text-20 lg:text-24">
-        {formatAccountMessage({ id: 'become.member', defaultMessage: 'Become a member' })}
-      </Typography>
-      <form onSubmit={handleSubmit}>
-        {error && (
-          <Typography as="span" fontSize={12} className="mb-12 block text-accent-red">
-            {error}
-          </Typography>
-        )}
-        {success && (
-          <Typography as="span" fontSize={12} className="mb-12 block text-green-600">
-            {success}
-          </Typography>
-        )}
+    <>
+      <div className="m-auto grid max-w-[480px] px-16">
+        <Typography as="h3" fontFamily="libre" className="mb-16 text-16 md:mb-24 md:text-20 lg:text-24">
+          {formatAccountMessage({ id: 'become.member', defaultMessage: 'Become a member' })}
+        </Typography>
+        <form onSubmit={handleSubmit}>
+          <Feedback success={success} error={error} />
 
-        <Input
-          id="name"
-          name="name"
-          type="name"
-          autoComplete="name"
-          required
-          className="mb-16 md:mb-20"
-          placeholder={formatMessage({ id: 'name', defaultMessage: 'Name' })}
-          onChange={handleChange}
-        />
+          <Input
+            id="name"
+            name="name"
+            type="name"
+            autoComplete="name"
+            required
+            className="mb-16 md:mb-20"
+            placeholder={formatMessage({ id: 'name', defaultMessage: 'Name' })}
+            onChange={handleChange}
+          />
 
-        <Input
-          id="email"
-          name="email"
-          type="email"
-          autoComplete="email"
-          required
-          className="mb-16 md:mb-20"
-          placeholder={formatMessage({ id: 'emailAddress', defaultMessage: 'Email Address' })}
-          onChange={handleChange}
-        />
+          <Input
+            id="email"
+            name="email"
+            type="email"
+            autoComplete="email"
+            required
+            className="mb-16 md:mb-20"
+            placeholder={formatMessage({ id: 'emailAddress', defaultMessage: 'Email Address' })}
+            onChange={handleChange}
+          />
 
-        <PasswordInput
-          required
-          id="password"
-          name="password"
-          autoComplete="current-password"
-          placeholder={formatAccountMessage({ id: 'password', defaultMessage: 'Password' })}
-          className="mb-16 md:mb-20"
-          onChange={handleChange}
-        />
+          <PasswordInput
+            required
+            id="password"
+            name="password"
+            autoComplete="current-password"
+            placeholder={formatAccountMessage({ id: 'password', defaultMessage: 'Password' })}
+            className="mb-16 md:mb-20"
+            onChange={handleChange}
+          />
 
-        <div className="mb-20 flex gap-8">
-          <Checkbox className="h-16 w-16 rounded-sm" id="agree-on-terms" name="agree-on-terms" type="checkbox" />
-          <Typography fontSize={12} className="text-secondary-black md:text-14" as="label">
-            {formatMessage({
-              id: 'receive.emails',
-              defaultMessage: 'I wish to receive emails about special offers, new products and promotions.',
-            })}
-          </Typography>
-        </div>
+          <div className="mb-20 flex gap-8">
+            <Checkbox className="h-16 w-16 rounded-sm" id="agree-on-terms" name="agree-on-terms" type="checkbox" />
+            <Typography fontSize={12} className="text-secondary-black md:text-14" as="label">
+              {formatMessage({
+                id: 'receive.emails',
+                defaultMessage: 'I wish to receive emails about special offers, new products and promotions.',
+              })}
+            </Typography>
+          </div>
 
-        <Button size="full" type="submit" className="mb-16 text-16 leading-tight md:mb-20" disabled={loading}>
-          {formatAccountMessage({ id: 'account.register', defaultMessage: 'Register' })}
-        </Button>
+          <Button size="full" type="submit" className="mb-16 text-16 leading-tight md:mb-20" disabled={loading}>
+            {formatAccountMessage({ id: 'account.register', defaultMessage: 'Register' })}
+          </Button>
 
-        <div className="flex flex-wrap items-center justify-center gap-4 px-15 md:px-30">
-          <Typography fontFamily="inter" fontSize={12} as="p" className="text-secondary-black md:text-14">
-            {formatAccountMessage({
-              id: 'by.registering',
-              defaultMessage: 'By registering an account, you agree to our',
-            })}
-          </Typography>
-          <Link className="border-b text-12 text-secondary-black md:text-14" link={termsOfUseLink} variant="menu-item">
-            {formatAccountMessage({ id: 'terms.of.use', defaultMessage: 'Terms of Use.' })}
-          </Link>
-        </div>
-      </form>
-    </div>
+          <div className="flex flex-wrap items-center justify-center gap-4 px-15 md:px-30">
+            <Typography fontFamily="inter" fontSize={12} as="p" className="text-secondary-black md:text-14">
+              {formatAccountMessage({
+                id: 'by.registering',
+                defaultMessage: 'By registering an account, you agree to our',
+              })}
+            </Typography>
+            <Link
+              className="border-b text-12 text-secondary-black md:text-14"
+              link={termsOfUseLink}
+              variant="menu-item"
+            >
+              {formatAccountMessage({ id: 'terms.of.use', defaultMessage: 'Terms of Use.' })}
+            </Link>
+          </div>
+        </form>
+      </div>
+      <AlterForm page="login" />
+    </>
   );
 };
 
