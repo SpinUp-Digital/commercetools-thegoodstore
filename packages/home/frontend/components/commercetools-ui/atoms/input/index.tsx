@@ -1,28 +1,33 @@
-import React, { ChangeEvent, ComponentProps, FC, useCallback, useMemo, useState } from 'react';
+import React, { ChangeEvent, ComponentProps, FC, MutableRefObject, useCallback, useMemo, useState } from 'react';
 import useClassNames from 'helpers/hooks/useClassNames';
+import Typography from '../typography';
 
 export interface InputProps extends Omit<ComponentProps<'input'>, 'onChange'> {
   label?: string;
   onChange?: (target: ChangeEvent<HTMLInputElement>) => void;
   variant?: 'primary' | 'secondary';
+  labelPosition?: 'top' | 'inline';
+  innerRef?: MutableRefObject<undefined>;
+  error?: string;
 }
 
 const Input: FC<InputProps> = ({
   label,
   onChange,
-  value,
   onBlur,
   onFocus,
   variant = 'primary',
+  labelPosition = 'top',
   className = '',
+  innerRef,
+  value,
+  error,
   ...props
 }) => {
-  const [localValue, setLocalValue] = useState(value);
   const [isFocused, setIsFocused] = useState(false);
 
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      setLocalValue(event.target.value);
       onChange?.(event);
     },
     [onChange],
@@ -52,24 +57,49 @@ const Input: FC<InputProps> = ({
     [variant],
   );
 
-  const isInActiveState = useMemo(() => isFocused || !!localValue, [isFocused, localValue]);
+  const isInActiveState = useMemo(() => isFocused || !!value, [isFocused, value]);
 
   const labelClassName = useClassNames([
-    'absolute top-[6px] left-[12px] block text-10 font-semibold transition duration-150 ease-out',
-    isInActiveState && label ? 'opacity-1 scale-100' : 'scale-0 opacity-0',
+    { ['block text-secondary-black mb-8']: labelPosition === 'top' },
+    { [isInActiveState && label ? 'opacity-1 scale-100' : 'scale-0 opacity-0']: labelPosition === 'inline' },
+    {
+      ['absolute top-[6px] left-[12px] font-medium block transition duration-150 ease-out']: labelPosition === 'inline',
+    },
   ]);
 
   const inputClassName = useClassNames([
     'h-40 w-full rounded-sm border border-neutral-300 px-12 text-primary-black placeholder:text-14 placeholder:leading-normal placeholder:text-secondary-black focus:outline-none disabled:cursor-not-allowed disabled:bg-neutral-400',
     bgClassName,
-    isInActiveState && label ? 'pt-[20px] pb-[4px]' : 'pt-[10px] pb-[10px]',
+    isInActiveState && label && labelPosition == 'inline' ? 'pt-[20px] pb-[4px]' : 'py-10',
     className,
   ]);
 
   return (
     <div className="relative">
-      {label && <span className={labelClassName}>{label}</span>}
-      <input className={inputClassName} onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} {...props} />
+      {label && (
+        <Typography
+          lineHeight={labelPosition ? 'loose' : 'normal'}
+          fontSize={labelPosition === 'top' ? 14 : 10}
+          as="label"
+          className={labelClassName}
+        >
+          {label}
+        </Typography>
+      )}
+      <input
+        className={inputClassName}
+        onChange={handleChange}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        ref={innerRef}
+        value={value}
+        {...props}
+      />
+      {error && (
+        <Typography className="mt-12 leading-[16px] text-red-500" medium fontSize={12} as="span">
+          {error}
+        </Typography>
+      )}
     </div>
   );
 };

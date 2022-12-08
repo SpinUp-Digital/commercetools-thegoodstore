@@ -1,16 +1,16 @@
-import { FC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Variant } from '@commercetools/domain-types/product/Variant';
-import { TruckIcon } from '@heroicons/react/24/outline';
 import Button from 'components/commercetools-ui/atoms/button';
 import Dropdown from 'components/commercetools-ui/atoms/dropdown';
 import Link from 'components/commercetools-ui/atoms/link';
-import Typography from 'components/commercetools-ui/atoms/typography';
 import Wrapper from 'components/commercetools-ui/organisms/content/wrapper';
 import Gallery from 'components/commercetools-ui/organisms/gallery';
+import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart } from 'frontastic';
 import AdditionalInfo from './additional-info';
 import ProductInformation from './product-information';
+import ShippingSection from './shipping-section';
 import { UIProduct } from './types';
 
 export interface ProductDetailsProps {
@@ -53,19 +53,27 @@ const ProductDetails: FC<ProductDetailsProps> = ({
     });
   };
 
-  const deliveryTypes = [
-    formatMessage({ id: 'delivery.standard', defaultMessage: 'Standard Delivery' }),
-    formatMessage({ id: 'delivery.express', defaultMessage: 'Express Delivery' }),
-  ];
-
   const wrapperClassName = inModalVersion
-    ? 'grid grid-cols-2 pt-70 pb-35 px-20 gap-58 md:pr-40'
-    : 'py-50 md:grid md:grid-cols-3 md:items-start md:gap-x-26 lg:gap-x-96';
+    ? 'md:grid grid-cols-12 pt-70 pb-35 px-20 gap-58 md:pr-36'
+    : 'pt-16 pb-32 md:grid md:grid-cols-12 md:items-start md:px-24 px-16';
+
+  const galleryContainerClassName = useClassNames([
+    inModalVersion ? 'col-span-6' : 'md:col-span-7 lg:col-span-8',
+    'md:pr-26 lg:pr-96',
+  ]);
+
+  const informationContainerClassName = useClassNames([
+    inModalVersion ? 'col-span-6' : 'md:col-span-5 lg:col-span-4',
+    'mt-24 md:mt-0',
+  ]);
 
   return (
-    <Wrapper variant="full-padding" className={wrapperClassName} clearDefaultStyles={inModalVersion}>
-      <Gallery images={variant?.images} inModalVersion={inModalVersion} />
-      <div className="mt-22 md:mt-0">
+    <Wrapper className={wrapperClassName} clearDefaultStyles={inModalVersion}>
+      <div className={galleryContainerClassName}>
+        <Gallery images={variant?.images} inModalVersion={inModalVersion} />
+      </div>
+
+      <div className={informationContainerClassName}>
         <ProductInformation
           product={product}
           variant={variant}
@@ -99,28 +107,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({
           </Button>
         </div>
 
-        {!inModalVersion && (
-          <>
-            <hr className="mt-25 h-1 bg-neutral-400" />
-            <div className="mt-25 grid border border-neutral-400">
-              {deliveryTypes.map((type) => (
-                <div key={type} className="flex gap-24 px-17 py-11 first:border-b first:border-neutral-400">
-                  <div className="grid h-full items-center">
-                    <TruckIcon className="h-24 w-24 rounded-full border border-neutral-400 p-4" />
-                  </div>
-                  <div className="grid">
-                    <Typography lineHeight="loose" medium className="text-primary-black" fontSize={14}>
-                      {type}
-                    </Typography>
-                    <Typography fontSize={14} lineHeight="loose" className="text-secondary-black underline">
-                      {formatMessage({ id: 'add.postcode', defaultMessage: 'Add postcode for availability' })}
-                    </Typography>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </>
-        )}
+        {!inModalVersion && <ShippingSection />}
 
         {inModalVersion && (
           <div>
@@ -136,7 +123,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({
       </div>
 
       {!inModalVersion && (
-        <div className="col-span-2 grid gap-y-34 md:mb-50">
+        <div className="grid gap-y-34 md:col-span-7 md:mb-50 md:pr-26">
           <AdditionalInfo productspec={variant?.attributes.productspec} description={product?.description} />
         </div>
       )}

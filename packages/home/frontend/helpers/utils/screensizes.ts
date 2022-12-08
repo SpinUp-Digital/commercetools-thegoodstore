@@ -1,7 +1,7 @@
 const screenSizes = {
   smallMobile: 320,
   mobile: 480,
-  tablet: 768,
+  tablet: 744,
   desktop: 1024,
   mediumDesktop: 1280,
   largeDesktop: 1440,

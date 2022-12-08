@@ -28,14 +28,12 @@ const Gallery: FC<GalleryProps> = ({ images, inModalVersion }) => {
   };
 
   const imagesContainerClassName = useClassNames([
-    'relative',
+    'relative mx-20 lg:mx-auto',
     inModalVersion ? 'h-[250px] max-w-[300px]' : 'h-[447px]',
   ]);
 
-  const mainDivClassName = useClassNames(['gap-y-34 px-4 md:mb-50', inModalVersion ? 'col-span-1' : 'col-span-2']);
-
   return (
-    <div className={mainDivClassName}>
+    <div className="gap-y-34 px-4 md:mb-50">
       <Slider
         className={inModalVersion ? 'w-[300px]' : ''}
         onSlideChange={handleSlide}
@@ -44,8 +42,8 @@ const Gallery: FC<GalleryProps> = ({ images, inModalVersion }) => {
         }}
         arrows={isTabletSize}
         dots={!isTabletSize}
-        prevButtonStyles={{ left: isDesktopSize ? -10 : 10 }}
-        nextButtonStyles={{ right: isDesktopSize ? -10 : 10 }}
+        prevButtonStyles={{ left: isDesktopSize ? -10 : -4 }}
+        nextButtonStyles={{ right: isDesktopSize ? -10 : -4 }}
         compactNavigation={inModalVersion}
         slidesPerView={1}
         loop
