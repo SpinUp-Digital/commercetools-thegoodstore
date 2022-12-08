@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Hits, Configure, SearchBox } from 'react-instantsearch-hooks-web';
-import SearchItem from '../search-item';
 import withInstantSearch from 'components/HOC/WithInstantSearch';
 import { productsIndex } from 'helpers/constants/algolia';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useScrollBlock from 'helpers/hooks/useScrollBlock';
+import SearchItem from '../search-item';
 
 const Search: React.FC = () => {
   const [focused, setFocused] = useState(false);

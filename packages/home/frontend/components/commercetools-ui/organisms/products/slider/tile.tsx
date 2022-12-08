@@ -4,16 +4,16 @@ import { useRouter } from 'next/router';
 import { Product } from '@commercetools/domain-types/product/Product';
 import { Variant } from '@commercetools/domain-types/product/Variant';
 import { LineItem } from '@commercetools/domain-types/wishlist/LineItem';
+import Prices from 'components/commercetools-ui/atoms/prices';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import QuickView from 'components/commercetools-ui/organisms/products/product-quick-view';
 import WishlistButton from 'components/commercetools-ui/organisms/wishlist-button';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import usePreloadImages from 'helpers/hooks/usePreloadImages';
+import useVariantWithDiscount from 'helpers/hooks/useVariantWithDiscount';
 import { desktop } from 'helpers/utils/screensizes';
 import Image from 'frontastic/lib/image';
-import useVariantWithDiscount from 'helpers/hooks/useVariantWithDiscount';
-import Prices from 'components/commercetools-ui/atoms/prices';
 
 interface TileProps {
   product: Product;

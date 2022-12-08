@@ -1,12 +1,12 @@
-import { Product } from '@commercetools/domain-types/product/Product';
-import Image from 'frontastic/lib/image';
 import React, { useMemo } from 'react';
-import { Subset } from 'types/subset';
-import { Highlight } from 'react-instantsearch-hooks-web';
+import { Product } from '@commercetools/domain-types/product/Product';
 import { Hit } from 'instantsearch.js';
-import useVariantWithDiscount from 'helpers/hooks/useVariantWithDiscount';
-import Prices from '../prices';
+import { Highlight } from 'react-instantsearch-hooks-web';
 import Link from 'components/commercetools-ui/atoms/link';
+import useVariantWithDiscount from 'helpers/hooks/useVariantWithDiscount';
+import { Subset } from 'types/subset';
+import Image from 'frontastic/lib/image';
+import Prices from '../prices';
 
 interface Props {
   hit: Hit<Subset<Product>>;

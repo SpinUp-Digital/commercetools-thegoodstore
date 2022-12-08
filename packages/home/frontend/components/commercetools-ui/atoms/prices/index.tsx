@@ -1,7 +1,7 @@
+import React from 'react';
+import { useRouter } from 'next/router';
 import { Money } from '@commercetools/domain-types/product/Money';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
-import { useRouter } from 'next/router';
-import React from 'react';
 import Typography from '../typography';
 
 interface Props {
