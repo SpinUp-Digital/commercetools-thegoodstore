@@ -3,9 +3,9 @@ import classNames from 'classnames';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { orderHistoryMock } from 'helpers/mocks/mockData';
 import Addresses from '../addresses';
-import General from '../general';
+import CustomerSupport from '../customer';
+import MyAccount from '../general';
 import OrdersHistory from '../orders';
-import Security from '../security';
 
 const Sections = () => {
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
@@ -60,13 +60,13 @@ const Sections = () => {
             </div>
           </div>
           {selectedTab === tabs[0].href ? (
-            <General />
+            <MyAccount />
           ) : selectedTab === tabs[1].href ? (
             <Addresses />
           ) : selectedTab === tabs[2].href ? (
             <OrdersHistory orders={orderHistoryMock} />
           ) : (
-            <Security />
+            <CustomerSupport />
           )}
         </div>
       </div>
