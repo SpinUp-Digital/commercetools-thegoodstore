@@ -4,6 +4,7 @@
 
 @import url('./components/slider.css');
 @import url('./components/default-loader.css');
+@import url('./components/quick-search.css');
 
 body {
   @apply font-body;

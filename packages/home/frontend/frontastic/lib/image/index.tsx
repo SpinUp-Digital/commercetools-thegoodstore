@@ -32,6 +32,8 @@ export default function Image({
         layout={isNaN(+width) || isNaN(+baseHeight) ? 'fill' : layout}
         alt={alt}
         loading={loading}
+        width={width}
+        height={baseHeight}
       />
     );
 

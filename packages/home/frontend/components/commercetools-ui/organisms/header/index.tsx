@@ -6,6 +6,7 @@ import HeaderNavigationMobile from 'components/commercetools-ui/organisms/header
 import { HeaderProps } from 'components/commercetools-ui/organisms/header/types';
 import UtilitySection from 'components/commercetools-ui/organisms/header/utility-section';
 import MarketButton from '../../organisms/market-button/market-button';
+import Search from 'components/commercetools-ui/atoms/search';
 
 const Header: React.FC<HeaderProps> = ({
   links,
@@ -67,6 +68,10 @@ const Header: React.FC<HeaderProps> = ({
           emptyWishlistImage={emptyWishlistImage}
           emptyWishlistCategories={emptyWishlistCategories}
         />
+      </div>
+
+      <div className="relative border-t border-neutral-400 px-15 py-12 md:px-32 lg:hidden lg:px-20 xl:px-60">
+        <Search />
       </div>
 
       <HeaderNavigationDesktop

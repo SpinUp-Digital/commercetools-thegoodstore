@@ -12,6 +12,8 @@ import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import usePreloadImages from 'helpers/hooks/usePreloadImages';
 import { desktop } from 'helpers/utils/screensizes';
 import Image from 'frontastic/lib/image';
+import useVariantWithDiscount from 'helpers/hooks/useVariantWithDiscount';
+import Prices from 'components/commercetools-ui/atoms/prices';
 
 interface TileProps {
   product: Product;
@@ -27,16 +29,7 @@ const Tile: FC<TileProps> = ({ product }) => {
     'medium',
   );
 
-  const variantWithDiscount = useMemo(() => {
-    let variantReturned: Variant;
-
-    for (const variant of product?.variants) {
-      if (variant.discountedPrice && (!variantReturned || variant.discountedPrice < variantReturned.discountedPrice)) {
-        variantReturned = variant;
-      }
-    }
-    return variantReturned;
-  }, [product]);
+  const variantWithDiscount = useVariantWithDiscount(product.variants) as Variant;
 
   const discountedPrice = useMemo(() => variantWithDiscount?.discountedPrice, [variantWithDiscount]);
 
@@ -145,26 +138,10 @@ const Tile: FC<TileProps> = ({ product }) => {
               ))}
             </div>
             <div>
-              {variantWithDiscount ? (
-                <div className="flex items-center gap-8">
-                  <Typography as="h4" medium lineHeight="loose" fontSize={11} className="text-accent-red  md:text-14">
-                    {CurrencyHelpers.formatForCurrency(discountedPrice, locale)}
-                  </Typography>
-                  <Typography
-                    as="h5"
-                    medium
-                    lineHeight="loose"
-                    fontSize={10}
-                    className="text-gray-500 line-through md:text-12"
-                  >
-                    {CurrencyHelpers.formatForCurrency(variantWithDiscount.price, locale)}
-                  </Typography>
-                </div>
-              ) : (
-                <Typography as="h4" medium fontSize={11} lineHeight="loose" className="md:text-14">
-                  {CurrencyHelpers.formatForCurrency(selectedVariant.price, locale)}
-                </Typography>
-              )}
+              <Prices
+                price={variantWithDiscount?.price ?? selectedVariant?.price}
+                discountedPrice={variantWithDiscount?.discountedPrice}
+              />
             </div>
           </div>
         </a>
