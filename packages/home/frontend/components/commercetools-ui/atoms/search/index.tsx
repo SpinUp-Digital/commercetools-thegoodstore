@@ -1,9 +1,10 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Hits, Configure, SearchBox } from 'react-instantsearch-hooks-web';
 import SearchItem from '../search-item';
 import withInstantSearch from 'components/HOC/WithInstantSearch';
 import { productsIndex } from 'helpers/constants/algolia';
 import { useFormat } from 'helpers/hooks/useFormat';
+import useScrollBlock from 'helpers/hooks/useScrollBlock';
 
 const Search: React.FC = () => {
   const [focused, setFocused] = useState(false);
@@ -12,6 +13,12 @@ const Search: React.FC = () => {
   const onBlur = useCallback(() => setFocused(false), []);
 
   const { formatMessage } = useFormat({ name: 'common' });
+
+  const { blockScroll } = useScrollBlock();
+
+  useEffect(() => {
+    blockScroll(focused);
+  }, [focused]);
 
   return (
     <>
@@ -34,7 +41,7 @@ const Search: React.FC = () => {
           hitComponent={({ hit }) => <SearchItem hit={hit} onClick={onBlur} />}
           classNames={{
             root: 'py-36 px-20 lg:px-24 xl:px-64 md:px-32 absolute left-0 w-full bottom-0 translate-y-full bg-white',
-            list: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-72',
+            list: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-72 max-h-[60vh] overflow-auto',
           }}
         />
       )}
