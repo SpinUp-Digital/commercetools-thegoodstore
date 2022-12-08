@@ -44,5 +44,6 @@
   "checkout.go": "Go to checkout",
   "delivery.standard": "Standard Delivery",
   "delivery.express": "Express Delivery",
-  "add.postcode": "Add postcode for availability"
+  "add.postcode": "Add postcode for availability",
+  "postcode.invalid": "The postcode is not valid."
 }

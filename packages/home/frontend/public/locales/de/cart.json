@@ -37,5 +37,6 @@
   "cart.add": "In den Warenkorb legen",
   "delivery.standard": "Standard Lieferung",
   "delivery.express": "Expresszustellung",
-  "add.postcode": "Postleitzahl für Verfügbarkeit hinzufügen"
+  "add.postcode": "Postleitzahl für Verfügbarkeit hinzufügen",
+  "postcode.invalid": "Die Postleitzahl ist ungültig."
 }
