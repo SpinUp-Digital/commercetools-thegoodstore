@@ -21,9 +21,9 @@ const Column: React.FC<Props> = ({ header, links, className }) => {
         <Typography
           as="h3"
           fontFamily="inter"
-          fontSize={14}
+          fontSize={16}
           medium
-          className=" text-neutral-200 sm:self-center sm:pb-20 lg:self-start lg:text-16"
+          className=" text-neutral-200 sm:self-center sm:pb-20 lg:self-start"
         >
           {header}
         </Typography>
@@ -35,7 +35,9 @@ const Column: React.FC<Props> = ({ header, links, className }) => {
         {links.map((item, i) => (
           <li key={i}>
             <Link variant="primary" link={item.reference}>
-              <Typography as="fragment">{item.name}</Typography>
+              <Typography as="fragment" fontSize={16} fontFamily="inter">
+                {item.name}
+              </Typography>
             </Link>
           </li>
         ))}
