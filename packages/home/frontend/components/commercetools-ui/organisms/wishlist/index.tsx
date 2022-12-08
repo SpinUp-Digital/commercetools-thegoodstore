@@ -41,13 +41,15 @@ const Wishlist = ({ emptyWishlistTitle, emptyWishlistSubtitle, emptyWishlistImag
                 ))}
               </div>
               <div className="mt-16 p-20">
-                <Button
-                  onClick={handleClearWishlist}
-                  variant="ghost"
-                  className="w-full rounded-md border border-primary-black text-16"
-                >
-                  {formatWishlistMessage({ id: 'wishlist.clear.list', defaultMessage: 'Clear the list' })}
-                </Button>
+                <div className="overflow-hidden rounded-md border-[0.5px] border-transparent hover:border-primary-black">
+                  <Button
+                    onClick={handleClearWishlist}
+                    variant="ghost"
+                    className="w-full border border-primary-black text-16"
+                  >
+                    {formatWishlistMessage({ id: 'wishlist.clear.list', defaultMessage: 'Clear the list' })}
+                  </Button>
+                </div>
               </div>
             </>
           )}

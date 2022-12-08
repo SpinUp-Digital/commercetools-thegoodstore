@@ -10,16 +10,12 @@ import CloseIcon from 'components/icons/close';
 import ChevronRightIcon from 'components/icons/home-chevron-right';
 import MenuIcon from 'components/icons/menu-icon';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { Market } from '../../types';
 
 export interface Props {
   links: Category[];
-  language: Market;
-  languages: Market[];
-  handleCurrentMarket: (market: Market) => void;
 }
 
-const HeaderMenuMobile: FC<Props> = ({ links, language, languages, handleCurrentMarket }) => {
+const HeaderMenuMobile: FC<Props> = ({ links }) => {
   const [selected, setSelected] = useState<Category[]>([]);
   const [showMenu, setShowMenu] = useState(false);
 
@@ -112,11 +108,7 @@ const HeaderMenuMobile: FC<Props> = ({ links, language, languages, handleCurrent
             </>
           )}
         </>
-        <>
-          {selected.length <= 0 && (
-            <MarketButtonMobile market={language} handleMarket={handleCurrentMarket} markets={languages} />
-          )}
-        </>
+        <>{selected.length <= 0 && <MarketButtonMobile />}</>
       </Drawer>
     </div>
   );

@@ -6,16 +6,13 @@ import HeaderNavigationDesktop from 'components/commercetools-ui/organisms/heade
 import HeaderNavigationMobile from 'components/commercetools-ui/organisms/header/header-navigation/header-navigation-mobile';
 import { HeaderProps } from 'components/commercetools-ui/organisms/header/types';
 import UtilitySection from 'components/commercetools-ui/organisms/header/utility-section';
-import MarketButton from '../../organisms/market-button/market-button';
+import MarketButton from 'components/commercetools-ui/organisms/market-button/market-button';
 
 const Header: React.FC<HeaderProps> = ({
   links,
-  markets,
-  market,
   logo,
   logoLink,
   tiles,
-  handleMarket,
   emptyCartTitle,
   emptyCartSubtitle,
   emptyCartImage,
@@ -52,11 +49,11 @@ const Header: React.FC<HeaderProps> = ({
   return (
     <header className="h-fit w-full border-b-[1.5px] border-neutral-400 bg-white">
       <div aria-label="Top" className="mx-5 flex h-60 items-center justify-between md:mx-22 md:h-80 lg:mx-10 xl:mx-50">
-        <MarketButton market={market} markets={markets} handleMarket={handleMarket} />
+        <MarketButton />
 
-        <HeaderNavigationMobile links={links} market={market} markets={markets} handleMarket={handleMarket} />
+        <HeaderNavigationMobile links={links} />
 
-        <HeaderLogo market={market} logo={logo} logoLink={logoLink} />
+        <HeaderLogo logo={logo} logoLink={logoLink} />
 
         <UtilitySection
           emptyCartTitle={emptyCartTitle}
@@ -77,7 +74,6 @@ const Header: React.FC<HeaderProps> = ({
       <HeaderNavigationDesktop
         links={links}
         tiles={tiles}
-        market={market}
         activeCategory={activeCategory}
         handleMouseIn={handleMouseIn}
         handleMouseOut={handleMouseOut}
