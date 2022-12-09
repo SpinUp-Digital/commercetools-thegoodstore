@@ -6,7 +6,7 @@ import { mapLocaleToMeaningfulFormat } from 'helpers/utils/i18n';
 import { useAccount } from 'frontastic';
 import Editable from '../editable';
 
-const General = () => {
+const MyAccount = () => {
   //i18n messages
   const { formatMessage } = useFormat({ name: 'common' });
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
@@ -128,4 +128,4 @@ const General = () => {
   );
 };
 
-export default General;
+export default MyAccount;

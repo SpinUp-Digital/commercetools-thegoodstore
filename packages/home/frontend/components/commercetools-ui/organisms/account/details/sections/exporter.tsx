@@ -1,6 +1,7 @@
 import AddressesSection from './addresses';
-import GeneralSection from './general';
+import CustomerSupportSection from './customer';
+import MyAccountSection from './general';
 import OrdersHistorySection from './orders';
-import SecuritySection from './security';
+import PaymentMethodsSection from './payment';
 
-export { GeneralSection, SecuritySection, AddressesSection, OrdersHistorySection };
+export { MyAccountSection, CustomerSupportSection, AddressesSection, OrdersHistorySection, PaymentMethodsSection };

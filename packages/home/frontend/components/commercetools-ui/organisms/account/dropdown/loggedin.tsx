@@ -1,7 +1,40 @@
 import React from 'react';
+import { Popover } from '@headlessui/react';
+import Link from 'components/commercetools-ui/atoms/link';
+import Typography from 'components/commercetools-ui/atoms/typography';
+import { useFormat } from 'helpers/hooks/useFormat';
+import { useAccount } from 'frontastic';
 
 const LoggedIn = () => {
-  return <div>LoggedIn</div>;
+  const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
+  const { logout } = useAccount();
+  return (
+    <div className="w-[235px] p-14">
+      <Popover.Button className="w-full">
+        <Link link="/account#" className="mt-20 block w-fit ">
+          <Typography fontSize={16} fontFamily="inter" className="text-primary-black hover:underline">
+            {formatAccountMessage({ id: 'my.account', defaultMessage: 'Membership info' })}
+          </Typography>
+        </Link>
+      </Popover.Button>
+
+      <Popover.Button className="w-full">
+        <Link link="/account#support" className="mt-20 block w-fit">
+          <Typography fontSize={16} fontFamily="inter" className="text-primary-black hover:underline">
+            {formatAccountMessage({ id: 'customer.support', defaultMessage: 'Membership info' })}
+          </Typography>
+        </Link>
+      </Popover.Button>
+
+      <Popover.Button className="mt-20 block w-full">
+        <div onClick={logout} className="w-fit">
+          <Typography fontSize={16} fontFamily="inter" className="text-primary-black hover:underline">
+            {formatAccountMessage({ id: 'sign.out', defaultMessage: 'Membership info' })}
+          </Typography>
+        </div>
+      </Popover.Button>
+    </div>
+  );
 };
 
 export default LoggedIn;
