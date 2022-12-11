@@ -11603,6 +11603,15 @@ react-inspector@^5.1.0:
     is-dom "^1.0.0"
     prop-types "^15.0.0"
 
+react-instantsearch-hooks-server@^6.38.1:
+  version "6.38.1"
+  resolved "https://registry.yarnpkg.com/react-instantsearch-hooks-server/-/react-instantsearch-hooks-server-6.38.1.tgz#674e45f3950b2d3e89b55be02222876a0478c306"
+  integrity sha512-CxA9ryLnP+R3VRj5ba2qLm06GSMhfvvcQtbELN0tZKr6jF0UPhQRg4DNYNnzIswsZ8PqTCAjtD63BHAEBf/QLQ==
+  dependencies:
+    "@babel/runtime" "^7.1.2"
+    instantsearch.js "^4.47.0"
+    react-instantsearch-hooks "6.38.1"
+
 react-instantsearch-hooks-web@^6.38.1:
   version "6.38.1"
   resolved "https://registry.yarnpkg.com/react-instantsearch-hooks-web/-/react-instantsearch-hooks-web-6.38.1.tgz#8ce841122c6f55d8b8621a8b4e4fae7674e93ab0"

@@ -25,7 +25,7 @@ const HeaderTastic = ({ data, categories }) => {
 
   useResizeObserver(headerRef, setPaddingTop);
 
-  const flattenedCategories = categories?.items?.filter((category) => category.depth === 0);
+  const flattenedCategories = categories?.filter((category) => category.depth === 0);
 
   const announcementBarData = {
     text: data.text,

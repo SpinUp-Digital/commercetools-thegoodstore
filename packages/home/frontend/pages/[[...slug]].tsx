@@ -8,6 +8,9 @@ import { createClient, ResponseError } from 'frontastic';
 import { FrontasticRenderer } from 'frontastic/lib/renderer';
 import { tastics } from 'frontastic/tastics';
 import { Log } from '../helpers/errorLogger';
+import { renderToString } from 'react-dom/server';
+import ProductList from 'frontastic/tastics/products/product-list';
+import { getServerState } from 'react-instantsearch-hooks-server';
 import styles from './slug.module.css';
 
 type SlugProps = {
@@ -100,9 +103,13 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({ params
     };
   }
 
+  const protocol = req.headers.referer?.split('://')[0] || 'https';
+  const serverUrl = `${protocol}://${req.headers.host}${req.url}`;
+  const serverState = await getServerState(<ProductList serverUrl={serverUrl} categories={[]} />, { renderToString });
+
   return {
     props: {
-      data: { ...data, categories } || null,
+      data: { ...data, categories, serverState, serverUrl } || null,
       locale: locale,
       ...(await serverSideTranslations(locale, [
         'common',
