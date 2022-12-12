@@ -14,6 +14,8 @@ export interface DrawerProps {
 const Drawer: FC<DrawerProps> = ({ className, isOpen, direction, blockScrolling = true, onClose, children }) => {
   const { blockScroll } = useScrollBlock();
 
+  const [loaded, setIsLoaded] = useState<boolean>(false);
+
   useEffect(() => {
     if (blockScrolling) {
       blockScroll(isOpen);
@@ -50,13 +52,15 @@ const Drawer: FC<DrawerProps> = ({ className, isOpen, direction, blockScrolling 
 
   const drawerClassName = useClassNames([
     className,
-    'fixed z-50 flex flex-col items-stretch bg-neutral-200 shadow-lg',
+    'fixed z-50 bg-neutral-200 shadow-lg',
     directionStyles[direction],
     getTransitionStyles(),
     transitionClassNames,
+    loaded ? 'block' : 'hidden',
   ]);
 
   useEffect(() => {
+    setIsLoaded(true);
     setTransitionClassNames('transition duration-300 ease-out');
   }, []);
 
@@ -65,7 +69,9 @@ const Drawer: FC<DrawerProps> = ({ className, isOpen, direction, blockScrolling 
       {isOpen && <div className="fixed top-0 left-0 z-10 h-full w-full bg-secondary-black opacity-30" />}
 
       <div ref={ref} className={drawerClassName}>
-        <>{children}</>
+        <div className="flex flex-col items-stretch">
+          <>{children}</>
+        </div>
       </div>
     </>
   );
