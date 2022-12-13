@@ -1,9 +1,9 @@
 import React from 'react';
+import algoliaSearch from 'algoliasearch';
 import {
   InstantSearch as ReactInstantSearch,
   InstantSearchProps as ReactInstantSearchProps,
 } from 'react-instantsearch-hooks';
-import algoliaSearch from 'algoliasearch';
 
 export const searchClient = algoliaSearch(
   process.env.NEXT_PUBLIC_ALGOLIA_APPLICATION_ID,

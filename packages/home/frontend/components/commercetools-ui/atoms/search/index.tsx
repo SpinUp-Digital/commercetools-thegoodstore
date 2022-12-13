@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { Hits, Configure, SearchBox } from 'react-instantsearch-hooks-web';
-import SearchItem from '../search-item';
+import InstantSearch from 'components/HOC/InstantSearch';
 import { productsIndex } from 'helpers/constants/algolia';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useScrollBlock from 'helpers/hooks/useScrollBlock';
-import InstantSearch from 'components/HOC/InstantSearch';
-import { useRouter } from 'next/router';
+import SearchItem from '../search-item';
 
 const Search: React.FC = () => {
   const [focused, setFocused] = useState(false);

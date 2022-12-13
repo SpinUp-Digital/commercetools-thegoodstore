@@ -3,17 +3,16 @@
  */
 import { PropsWithChildren, useCallback, useEffect, useRef, useState } from 'react';
 import type { SearchResults } from 'algoliasearch-helper';
+import type { UiState } from 'instantsearch.js';
 import type {
   CurrentRefinementsConnectorParamsRefinement,
   CurrentRefinementsRenderState,
 } from 'instantsearch.js/es/connectors/current-refinements/connectCurrentRefinements';
-import type { UiState } from 'instantsearch.js';
 import { useCurrentRefinements, useInstantSearch } from 'react-instantsearch-hooks-web';
-
-import Panel from './Panel';
 import { useCloseDropdown } from './hooks/useCloseDropdown';
 import { useLockedBody } from './hooks/useLockedBody';
 import { useMediaQuery } from './hooks/useMediaQuery';
+import Panel from './Panel';
 import { capitalize, cx, getFirstChildPropValue } from './utils';
 
 export type DropdownProps = PropsWithChildren<{

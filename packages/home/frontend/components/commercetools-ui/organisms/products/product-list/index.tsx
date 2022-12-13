@@ -1,12 +1,8 @@
+import React, { useMemo } from 'react';
+import { useRouter } from 'next/router';
 import { Category } from '@commercetools/domain-types/product/Category';
 import { Product } from '@commercetools/domain-types/product/Product';
-import { DropdownClassNames, FacetDropdown } from 'components/commercetools-ui/atoms/facet-dropdown';
-import Link from 'components/commercetools-ui/atoms/link';
-import { productsIndex } from 'helpers/constants/algolia';
-import { useFormat } from 'helpers/hooks/useFormat';
 import { Hit } from 'instantsearch.js';
-import { useRouter } from 'next/router';
-import React, { useMemo } from 'react';
 import {
   ClearRefinements,
   Configure,
@@ -16,6 +12,10 @@ import {
   SortBy,
   useHits,
 } from 'react-instantsearch-hooks-web';
+import { DropdownClassNames, FacetDropdown } from 'components/commercetools-ui/atoms/facet-dropdown';
+import Link from 'components/commercetools-ui/atoms/link';
+import { productsIndex } from 'helpers/constants/algolia';
+import { useFormat } from 'helpers/hooks/useFormat';
 import Breadcrumb from '../../breadcrumb';
 import ProductTile from '../tile';
 

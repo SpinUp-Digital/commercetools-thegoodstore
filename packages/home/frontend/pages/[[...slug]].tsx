@@ -2,15 +2,15 @@ import React from 'react';
 import { GetServerSideProps, Redirect } from 'next';
 import Head from 'next/head';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { renderToString } from 'react-dom/server';
+import { getServerState } from 'react-instantsearch-hooks-server';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { SDK } from 'sdk';
 import { createClient, ResponseError } from 'frontastic';
 import { FrontasticRenderer } from 'frontastic/lib/renderer';
 import { tastics } from 'frontastic/tastics';
-import { Log } from '../helpers/errorLogger';
-import { renderToString } from 'react-dom/server';
 import ProductList from 'frontastic/tastics/products/product-list';
-import { getServerState } from 'react-instantsearch-hooks-server';
+import { Log } from '../helpers/errorLogger';
 import styles from './slug.module.css';
 
 type SlugProps = {
