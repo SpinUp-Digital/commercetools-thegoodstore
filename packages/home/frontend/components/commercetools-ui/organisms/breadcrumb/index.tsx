@@ -8,7 +8,7 @@ export type BreadcrumbProps = {
 const Breadcrumb: React.FC<BreadcrumbProps> = ({ children, Separator, className = '' }) => {
   return (
     <nav className={className} aria-label="Breadcrumb">
-      <ol role="list" className="flex flex-wrap items-center items-center justify-center gap-y-22 gap-x-4">
+      <ol role="list" className="flex flex-wrap items-center justify-center gap-y-22 gap-x-4">
         {React.Children.map(children, (Child, index) => (
           <>
             <li>
