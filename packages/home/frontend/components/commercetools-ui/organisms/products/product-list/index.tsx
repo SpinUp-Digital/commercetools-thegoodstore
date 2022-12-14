@@ -1,120 +1,162 @@
-import React, { useEffect, useState } from 'react';
-import NextLink from 'next/link';
+import React, { useMemo } from 'react';
+import { useRouter } from 'next/router';
+import { Category } from '@commercetools/domain-types/product/Category';
 import { Product } from '@commercetools/domain-types/product/Product';
-import { Facet } from '@commercetools/domain-types/result/Facet';
-import Breadcrumb from 'components/commercetools-ui/organisms/breadcrumb';
-import Filters from 'components/commercetools-ui/organisms/filters';
-import FilterIcon from 'components/icons/filter';
-import CloseIcon from 'components/icons/icon-x';
+import { Hit } from 'instantsearch.js';
+import {
+  ClearRefinements,
+  Configure,
+  InfiniteHits,
+  RangeInput,
+  RefinementList,
+  SortBy,
+  useHits,
+} from 'react-instantsearch-hooks-web';
+import { DropdownClassNames, FacetDropdown } from 'components/commercetools-ui/atoms/facet-dropdown';
+import Link from 'components/commercetools-ui/atoms/link';
+import { productsIndex } from 'helpers/constants/algolia';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { updateURLParams } from 'helpers/utils/updateURLParams';
-import List from './list';
+import Breadcrumb from '../../breadcrumb';
+import ProductTile from '../tile';
 
-// import List from './List';
-export interface Props {
-  products: Product[];
-  previousCursor: string;
-  nextCursor: string;
-  category: string;
-  facets: Facet[];
-  totalProducts: number;
+interface Props {
+  serverUrl: string;
+  categories: Category[];
 }
 
-export default function ProductList({ products, totalProducts, previousCursor, nextCursor, category, facets }: Props) {
-  const [isFiltering, setIsFiltering] = useState<boolean>(false);
-  const [previousPageURL, setPreviousPageURL] = useState<string>('/');
-  const [nextPageURL, setNextPageURL] = useState<string>('/');
-
-  //i18n messages
-  const { formatMessage } = useFormat({ name: 'common' });
+const ProductList: React.FC<Props> = ({ serverUrl, categories }) => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
-  const activeButtonClassName =
-    'relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50';
+  const dropdownClassNames = { button: 'bg-white rounded-md' } as Partial<DropdownClassNames>;
 
-  const disabledButtonClassName = 'pointer-events-none rounded bg-gray-500 py-2 px-4 font-bold text-white opacity-50';
+  const categoryIdChunks = serverUrl.split('/');
+  const categoryId = categoryIdChunks[categoryIdChunks.length - 1];
 
-  const toggleFiltering = () => {
-    setIsFiltering(!isFiltering);
-  };
+  const searchQuery = categoryId.split('?q=')[1]?.split('&')?.[0];
 
-  useEffect(() => {
-    if (previousCursor) {
-      setPreviousPageURL(updateURLParams([{ key: 'cursor', value: previousCursor }]));
-    }
+  const router = useRouter();
 
-    if (nextCursor) {
-      setNextPageURL(updateURLParams([{ key: 'cursor', value: nextCursor }]));
-    }
-  }, [previousCursor, nextCursor]);
+  const parentCategories = useMemo(() => {
+    if (!router?.query?.path) return [];
+
+    const categoryIdChunks = (router.query.path as string).slice(1).split('/').slice(0, -1);
+
+    return categoryIdChunks.map((id) => (categories.find((category) => category.categoryId === id) ?? {}) as Category);
+  }, [router, categories]);
+
+  const currentCategory = useMemo(() => {
+    return (categories.find((category) => category.categoryId === categoryId) ?? {}) as Category;
+  }, [categories, categoryId]);
+
+  const subCategories = useMemo(() => {
+    return ((categories.find((category) => category.categoryId === categoryId) as Category)?.subCategories ??
+      []) as Category[];
+  }, [categories, categoryId]);
+
+  const {
+    hits,
+    results: { nbHits, page, nbPages, hitsPerPage },
+  } = useHits();
+
+  const accumulativeHitsCount = page === 0 ? hits.length : (nbPages - page) * hitsPerPage + hits.length;
+
+  if (!searchQuery && !categoryId) return <></>;
 
   return (
-    <div className="mt-10 px-1 sm:px-3 lg:px-6">
-      {category && <Breadcrumb Separator="/">{category.split('/')}</Breadcrumb>}
+    <div className="bg-neutral-200 py-52">
+      <Configure
+        hitsPerPage={24}
+        {...(!searchQuery ? { filters: `categories.categoryId:${categoryId}` } : { query: searchQuery })}
+      />
+      <div className="flex flex-col items-center">
+        <Breadcrumb Separator="/">
+          {parentCategories.map((category) => (
+            <Link key={category.categoryId} link={category.path} className="text-12">
+              {category.name}
+            </Link>
+          ))}
 
-      <div className="mt-8 gap-16 lg:grid lg:grid-cols-3">
-        {isFiltering ? (
-          <button onClick={toggleFiltering} className="w-full py-2">
-            <div className="flex justify-between">
-              <h6 className="text-base font-bold text-neutral-700">
-                {formatProductMessage({ id: 'sortAndFilter', defaultMessage: 'Sort & Filter' })}
-              </h6>
-              <CloseIcon className="h-6 w-5 fill-neutral-700" />
-            </div>
-          </button>
-        ) : (
-          <button onClick={toggleFiltering} className="flex w-full justify-between py-2">
-            <div className="flex gap-1">
-              <FilterIcon className="h-6 w-5 fill-neutral-700" />
-              <h6 className="text-base font-bold text-neutral-700">
-                {formatProductMessage({ id: 'sortAndFilter', defaultMessage: 'Sort & Filter' })}
-              </h6>
-            </div>
-
-            <h6 className="col-span-2 block text-right lg:hidden">
-              {`${products?.length} ${formatProductMessage({ id: 'items', defaultMessage: 'Items' })}`}
-            </h6>
-          </button>
+          {currentCategory && (
+            <Link key={currentCategory.categoryId} link={currentCategory.path} className="text-12">
+              {currentCategory.name}
+            </Link>
+          )}
+        </Breadcrumb>
+        <h1 className="mt-20 text-28 leading-[35px]">{currentCategory.name}</h1>
+        {subCategories?.length > 0 && (
+          <Breadcrumb className="mt-32">
+            <Link
+              link={currentCategory.path}
+              className="mr-8 rounded-md border border-gray-700 bg-gray-700 py-8 px-16 text-12 leading-[16px] text-white"
+            >
+              {formatProductMessage({ id: 'items.all', defaultMessage: 'All items' })}
+            </Link>
+            {subCategories.map((category) => (
+              <Link
+                key={category.categoryId}
+                link={category.path}
+                className="mr-8 rounded-md border border-gray-700 bg-transparent py-8 px-16 text-12 leading-[16px] text-primary-black transition hover:bg-gray-700 hover:text-white"
+              >
+                {category.name}
+              </Link>
+            ))}
+          </Breadcrumb>
         )}
-        <h6 className="col-span-2 hidden text-right lg:block">
-          {`${products?.length} ${formatProductMessage({ id: 'items', defaultMessage: 'Items' })} ${totalProducts}`}
-        </h6>
       </div>
-
-      {isFiltering ? (
-        <div className="mt-2 grid gap-16 lg:grid-cols-3">
-          <div className="">
-            <Filters facets={facets} products={products} />
+      <div className="relative mx-auto mt-52 max-w-[1150px] px-12 md:px-24 2xl:max-w-[1248px]">
+        <div className="flex items-center justify-between border-b border-neutral-400 pb-16">
+          <div className="flex items-center gap-12">
+            <FacetDropdown
+              buttonText={formatProductMessage({ id: 'color', defaultMessage: 'Color' })}
+              classNames={dropdownClassNames}
+            >
+              <RefinementList attribute="variants.attributes.colorlabel" />
+            </FacetDropdown>
+            <FacetDropdown
+              buttonText={formatProductMessage({ id: 'price', defaultMessage: 'Price' })}
+              classNames={dropdownClassNames}
+            >
+              <RangeInput attribute="variants.price.centAmount" />
+            </FacetDropdown>
+            <ClearRefinements classNames={{ button: 'disabled:hidden' }} />
           </div>
-          <div className="lg:col-span-2">
-            {products.length > 0 ? (
-              <List products={products} filtering={isFiltering} />
-            ) : (
-              <p>{formatProductMessage({ id: 'noProductsFound', defaultMessage: 'No products found.' })}</p>
-            )}
-          </div>
+          <span>
+            {nbHits} {formatProductMessage({ id: 'items', defaultMessage: 'Items' })}
+          </span>
         </div>
-      ) : (
-        <List products={products} />
-      )}
-
-      <nav
-        className="flex items-center justify-between border-t border-gray-200 py-3 px-4 sm:px-6"
-        aria-label="Pagination"
-      >
-        <div className="flex flex-1 justify-between gap-x-1.5 sm:justify-end">
-          <NextLink href={previousPageURL}>
-            <a className={previousCursor ? activeButtonClassName : disabledButtonClassName}>
-              {formatMessage({ id: 'prev', defaultMessage: 'Previous' })}
-            </a>
-          </NextLink>
-          <NextLink href={nextPageURL}>
-            <a className={nextCursor ? activeButtonClassName : disabledButtonClassName}>
-              {formatMessage({ id: 'next', defaultMessage: 'Next' })}
-            </a>
-          </NextLink>
+        <div className="flex items-center gap-16 py-16">
+          <span>{formatProductMessage({ id: 'sortBy', defaultMessage: 'Sort by' })}: </span>
+          <SortBy
+            items={[
+              { label: formatProductMessage({ id: 'relevance', defaultMessage: 'Relevance' }), value: productsIndex },
+            ]}
+          />
         </div>
-      </nav>
+        <InfiniteHits
+          showPrevious={false}
+          hitComponent={({ hit }: { hit: Hit<Partial<Product>> }) => <ProductTile product={hit as Product} />}
+          classNames={{
+            root: 'pt-4',
+            list: 'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-24',
+            loadMore:
+              'mx-auto bg-primary-black rounded-md font-medium text-white text-16 px-48 py-12 block mt-[90px] hover:bg-gray-500 transition disabled:bg-neutral-400',
+          }}
+          translations={{
+            showMoreButtonText: formatProductMessage({ id: 'load.more', defaultMessage: 'Load More' }),
+          }}
+        />
+        <div className="absolute bottom-72 left-1/2 -translate-x-1/2">
+          <p>
+            {formatProductMessage({
+              id: 'showing',
+              defaultMessage: 'Showing {current} of {total}',
+              values: { current: accumulativeHitsCount, total: nbHits },
+            })}
+          </p>
+        </div>
+      </div>
     </div>
   );
-}
+};
+
+export default ProductList;

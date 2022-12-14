@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { Category } from '@commercetools/domain-types/product/Category';
+import Link from 'components/commercetools-ui/atoms/link';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import MenuDropdown from 'components/commercetools-ui/organisms/header/header-navigation/header-navigation-desktop/menu-dropdown';
 import { Tile } from 'components/commercetools-ui/organisms/header/types';
@@ -18,11 +19,11 @@ const HeaderNavigationButtonDesktop: FC<Props> = ({ show, link, tiles, updateSub
 
   return (
     <>
-      <div className="mx-20 cursor-pointer py-20">
+      <Link link={link.slug ?? link.path} title={link?.name} className="mx-20 cursor-pointer py-20">
         <Typography as="span" fontSize={16} className={linkClassNames}>
           {link?.name}
         </Typography>
-      </div>
+      </Link>
 
       <MenuDropdown show={show} onClick={updateSubMenu} links={link?.subCategories} tileContent={tileContent[0]} />
     </>

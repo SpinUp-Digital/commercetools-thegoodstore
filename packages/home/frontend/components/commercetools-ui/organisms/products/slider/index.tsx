@@ -8,7 +8,7 @@ import Wrapper from 'components/commercetools-ui/organisms/content/wrapper';
 import useTouchDevice from 'helpers/hooks/useTouchDevice';
 import { mediumDesktop, tablet } from 'helpers/utils/screensizes';
 import { Reference } from 'types/reference';
-import Tile from './tile';
+import Tile from '../tile';
 
 export interface Props {
   products: Product[];

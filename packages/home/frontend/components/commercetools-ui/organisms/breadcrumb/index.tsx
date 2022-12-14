@@ -1,40 +1,22 @@
 import React from 'react';
-import NextLink from 'next/link';
-import { HomeIcon } from '@heroicons/react/24/solid';
 
 export type BreadcrumbProps = {
   Separator?: React.ReactNode;
+  className?: string;
 };
 
-const Breadcrumb: React.FC<BreadcrumbProps> = ({ children, Separator }) => {
+const Breadcrumb: React.FC<BreadcrumbProps> = ({ children, Separator, className = '' }) => {
   return (
-    <nav className="flex" aria-label="Breadcrumb">
-      <ol role="list" className="flex items-center space-x-4">
-        <li>
-          <div>
-            <NextLink href="/">
-              <a className="text-gray-400 hover:text-gray-500">
-                <HomeIcon className="h-5 w-5 shrink-0" aria-hidden="true" />
-                <span className="sr-only">Home</span>
-              </a>
-            </NextLink>
-          </div>
-        </li>
-        {React.Children.map(children, (Child, index) => {
-          if (index < React.Children.count(children) - 1) {
-            return (
-              <li>
-                <b className="font-medium capitalize">{Child}</b>
-                <span>{Separator}</span>
-              </li>
-            );
-          }
-          return (
+    <nav className={className} aria-label="Breadcrumb">
+      <ol role="list" className="flex flex-wrap items-center justify-center gap-y-22 gap-x-4">
+        {React.Children.map(children, (Child, index) => (
+          <>
             <li>
-              <span className="capitalize text-gray-400">{Child}</span>
+              <button>{Child}</button>
             </li>
-          );
-        })}
+            {Separator && <li>{index < React.Children.count(children) - 1 && <span>{Separator}</span>}</li>}
+          </>
+        ))}
       </ol>
     </nav>
   );

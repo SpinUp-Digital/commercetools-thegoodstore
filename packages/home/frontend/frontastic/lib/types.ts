@@ -1,4 +1,5 @@
 import { Category } from '@commercetools/domain-types/product/Category';
+import { InstantSearchServerState } from 'react-instantsearch-hooks';
 
 type ViewData = {
   _type: 'Frontastic\\Catwalk\\FrontendBundle\\Domain\\ViewData';
@@ -114,6 +115,8 @@ export type TasticWrapperProps = {
   categories: Category[];
   pageFolder: PageFolder;
   highlight?: boolean;
+  serverState?: InstantSearchServerState;
+  serverUrl: string;
 };
 export interface DataSourceConfiguration {
   dataSourceId: string;

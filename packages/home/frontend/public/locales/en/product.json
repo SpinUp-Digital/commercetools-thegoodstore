@@ -17,8 +17,13 @@
   "priceAsc": "Price (ascending)",
   "priceDesc": "Price (descending)",
   "noProductsFound": "No products found.",
-  "items": "Items out of ",
+  "items": "Items",
   "product": "Product",
   "product.view": "View product",
-  "quick.view": "Quick view"
+  "quick.view": "Quick view",
+  "load.more": "Load more",
+  "showing": "Showing {current} of {total}",
+  "searching.for": "You are searching for {term}",
+  "relevance": "Relevance",
+  "items.all": "All items"
 }

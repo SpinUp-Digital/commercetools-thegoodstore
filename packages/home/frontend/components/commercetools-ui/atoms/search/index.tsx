@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { Hits, Configure, SearchBox } from 'react-instantsearch-hooks-web';
-import withInstantSearch from 'components/HOC/WithInstantSearch';
+import InstantSearch from 'components/HOC/InstantSearch';
 import { productsIndex } from 'helpers/constants/algolia';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useScrollBlock from 'helpers/hooks/useScrollBlock';
@@ -20,8 +21,23 @@ const Search: React.FC = () => {
     blockScroll(focused);
   }, [focused]);
 
+  const router = useRouter();
+
+  const [query, setQuery] = useState('');
+
+  const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value), []);
+
+  const onSubmit = useCallback(
+    (e: React.FormEvent) => {
+      router.push(`/search?q=${query}`);
+      setQuery('');
+      (e.target as HTMLFormElement).reset();
+    },
+    [query],
+  );
+
   return (
-    <>
+    <InstantSearch indexName={productsIndex}>
       <Configure hitsPerPage={5} />
       <SearchBox
         onFocus={onFocus}
@@ -35,18 +51,20 @@ const Search: React.FC = () => {
           reset: 'hidden',
           loadingIndicator: 'hidden',
         }}
+        onInput={onChange}
+        onSubmit={onSubmit}
       />
       {focused && (
         <Hits
           hitComponent={({ hit }) => <SearchItem hit={hit} onClick={onBlur} />}
           classNames={{
-            root: 'py-36 px-20 lg:px-24 xl:px-64 md:px-32 absolute left-0 w-full bottom-0 translate-y-full bg-white',
-            list: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-72 max-h-[60vh] overflow-auto',
+            root: 'absolute left-0 w-full bottom-0 translate-y-full bg-white shadow-sm',
+            list: 'overflow-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-72 max-h-[60vh] py-36 px-20 lg:px-24 xl:px-64 md:px-32',
           }}
         />
       )}
-    </>
+    </InstantSearch>
   );
 };
 
-export default withInstantSearch(Search, productsIndex);
+export default Search;

@@ -39,7 +39,7 @@ const MobileMenu: FC<Props> = ({ links, hideHeaderMenu, category, setCategory })
       </div>
       <>
         {category.length <= 0 ? (
-          links.map((link) => (
+          links?.map((link) => (
             <div key={link.categoryId} className="cursor-pointer border-b-[1px] border-neutral-400">
               {link?.subCategories?.length > 0 ? (
                 <div

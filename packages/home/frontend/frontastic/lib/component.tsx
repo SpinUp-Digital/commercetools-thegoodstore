@@ -9,7 +9,7 @@ export function highlightClassNames(highlight: boolean) {
 }
 
 export function TasticWrapper(props: TasticWrapperProps) {
-  const { tastics, data, categories, dataSources, highlight = false } = props;
+  const { tastics, data, categories, dataSources, serverUrl, serverState, highlight = false } = props;
   const TasticToRender: React.ElementType = tastics[data.tasticType] || tastics['default'];
 
   // inject all datasources into the proper nodes
@@ -34,6 +34,8 @@ export function TasticWrapper(props: TasticWrapperProps) {
           data={updatedBlock}
           categories={categories}
           pageFolder={props.pageFolder}
+          serverState={serverState}
+          serverUrl={serverUrl}
         />
       </ErrorBoundary>
     </div>

@@ -1,5 +1,6 @@
 import { Category } from '@commercetools/domain-types/product/Category';
 import React from 'react';
+import { InstantSearchServerState } from 'react-instantsearch-hooks';
 import { Cell as LayoutElement } from './cell';
 import { highlightClassNames, TasticWrapper } from './component';
 import { Errors } from './errors';
@@ -13,7 +14,11 @@ export function FrontasticRenderer({
   wrapperClassName,
   currentHighlight,
 }: {
-  data: PageDataResponse & { categories: Category[] };
+  data: PageDataResponse & {
+    categories: { items: Category[] };
+    serverState?: InstantSearchServerState;
+    serverUrl: string;
+  };
   tastics: TasticRegistry;
   gridClassName?: string;
   wrapperClassName?: string;
@@ -37,10 +42,12 @@ export function FrontasticRenderer({
                 tastics={tastics}
                 key={t.tasticId}
                 data={t}
-                categories={data.categories}
+                categories={data.categories.items ?? []}
                 dataSources={data.data.dataSources}
                 pageFolder={data.pageFolder}
                 highlight={currentHighlight === t.tasticId}
+                serverUrl={data.serverUrl}
+                serverState={data.serverState}
               />
             ))}
           </LayoutElement>
@@ -61,10 +68,12 @@ export function FrontasticRenderer({
                 tastics={tastics}
                 key={t.tasticId}
                 data={t}
-                categories={data.categories}
+                categories={data.categories.items ?? []}
                 dataSources={data.data.dataSources}
                 pageFolder={data.pageFolder}
                 highlight={currentHighlight === t.tasticId}
+                serverUrl={data.serverUrl}
+                serverState={data.serverState}
               />
             ))}
           </LayoutElement>
@@ -85,10 +94,12 @@ export function FrontasticRenderer({
                 tastics={tastics}
                 key={t.tasticId}
                 data={t}
-                categories={data.categories}
+                categories={data.categories.items ?? []}
                 dataSources={data.data.dataSources}
                 pageFolder={data.pageFolder}
                 highlight={currentHighlight === t.tasticId}
+                serverUrl={data.serverUrl}
+                serverState={data.serverState}
               />
             ))}
           </LayoutElement>

@@ -5,19 +5,13 @@ import Breadcrumb, { BreadcrumbProps } from './index';
 export default {
   title: 'commercetools Frontend/Organisms/Breadcrumb',
   component: Breadcrumb,
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
 } as Meta;
 
 const links = ['link 1', 'link 2', 'link 3', 'link 4', 'link 5'];
 
-const Template: Story<BreadcrumbProps> = (args) => (
-  <Breadcrumb Separator={'/'} {...args}>
-    {links}
-  </Breadcrumb>
-);
+const Template: Story<BreadcrumbProps> = (args) => <Breadcrumb {...args}>{links}</Breadcrumb>;
 
 export const Primary = Template.bind({});
-
-Primary.args = {};
+Primary.args = {
+  Separator: '/',
+};

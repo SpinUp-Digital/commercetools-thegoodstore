@@ -3,7 +3,7 @@ import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import * as screensizes from 'helpers/utils/screensizes';
 
 export interface Props {
-  backgroundColor: 'white' | 'neutral';
+  backgroundColor: 'white' | 'neutral-200';
   customMobile: number;
   customTablet: number;
   customDesktop: number;
