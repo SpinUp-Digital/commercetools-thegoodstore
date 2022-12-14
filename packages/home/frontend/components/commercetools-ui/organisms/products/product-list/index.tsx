@@ -70,30 +70,38 @@ const ProductList: React.FC<Props> = ({ serverUrl, categories }) => {
       />
       <div className="flex flex-col items-center">
         <Breadcrumb Separator="/">
-          {[...parentCategories, currentCategory].map((category) => (
+          {parentCategories.map((category) => (
             <Link key={category.categoryId} link={category.path} className="text-12">
               {category.name}
             </Link>
           ))}
+
+          {currentCategory && (
+            <Link key={currentCategory.categoryId} link={currentCategory.path} className="text-12">
+              {currentCategory.name}
+            </Link>
+          )}
         </Breadcrumb>
         <h1 className="mt-20 text-28 leading-[35px]">{currentCategory.name}</h1>
-        <Breadcrumb className="mt-32">
-          <Link
-            link="#"
-            className="mr-8 rounded-md border border-gray-700 bg-gray-700 py-8 px-16 text-12 leading-[16px] text-white"
-          >
-            {formatProductMessage({ id: 'items.all', defaultMessage: 'All items' })}
-          </Link>
-          {subCategories.map((category) => (
+        {subCategories?.length > 0 && (
+          <Breadcrumb className="mt-32">
             <Link
-              key={category.categoryId}
-              link={category.path}
-              className="mr-8 rounded-md border border-gray-700 bg-transparent py-8 px-16 text-12 leading-[16px] text-primary-black transition hover:bg-gray-700 hover:text-white"
+              link={currentCategory.path}
+              className="mr-8 rounded-md border border-gray-700 bg-gray-700 py-8 px-16 text-12 leading-[16px] text-white"
             >
-              {category.name}
+              {formatProductMessage({ id: 'items.all', defaultMessage: 'All items' })}
             </Link>
-          ))}
-        </Breadcrumb>
+            {subCategories.map((category) => (
+              <Link
+                key={category.categoryId}
+                link={category.path}
+                className="mr-8 rounded-md border border-gray-700 bg-transparent py-8 px-16 text-12 leading-[16px] text-primary-black transition hover:bg-gray-700 hover:text-white"
+              >
+                {category.name}
+              </Link>
+            ))}
+          </Breadcrumb>
+        )}
       </div>
       <div className="relative mx-auto mt-52 max-w-[1150px] px-12 md:px-24 2xl:max-w-[1248px]">
         <div className="flex items-center justify-between border-b border-neutral-400 pb-16">
