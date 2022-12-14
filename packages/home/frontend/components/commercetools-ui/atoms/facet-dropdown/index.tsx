@@ -1,6 +1,3 @@
-/**
- * Prebuilt component.. Refer back to https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/facet-dropdown/react-hooks/
- */
 import { PropsWithChildren, useCallback, useEffect, useRef, useState } from 'react';
 import type { SearchResults } from 'algoliasearch-helper';
 import type { UiState } from 'instantsearch.js';
@@ -9,14 +6,14 @@ import type {
   CurrentRefinementsRenderState,
 } from 'instantsearch.js/es/connectors/current-refinements/connectCurrentRefinements';
 import { useCurrentRefinements, useInstantSearch } from 'react-instantsearch-hooks-web';
-import { useCloseDropdown } from './hooks/useCloseDropdown';
-import { useLockedBody } from './hooks/useLockedBody';
-import { useMediaQuery } from './hooks/useMediaQuery';
+import useClassNames from 'helpers/hooks/useClassNames';
+import useScrollBlock from 'helpers/hooks/useScrollBlock';
+import useOnClickOutside from 'helpers/hooks/useOnClickOutside';
 import Panel from './Panel';
-import { capitalize, cx, getFirstChildPropValue } from './utils';
+import { getFirstChildPropValue } from './utils';
 
 export type DropdownProps = PropsWithChildren<{
-  buttonText?: string | ((options: DropdownButtonTextOptions) => string);
+  buttonText?: string;
   classNames?: Partial<DropdownClassNames>;
   closeOnChange?: boolean | (() => boolean);
 }>;
@@ -30,7 +27,6 @@ export type DropdownButtonTextOptions = {
 export type DropdownClassNames = {
   root: string;
   button: string;
-  buttonRefined: string;
   closeButton: string;
   mobileTitle: string;
 };
@@ -66,18 +62,22 @@ function DropdownMiddleware({ isOpened, closeOnChange, close }: MiddlewareProps)
 }
 
 export function FacetDropdown({ children, buttonText, closeOnChange, classNames = {} }: DropdownProps) {
-  const { results, uiState } = useInstantSearch();
+  const { results } = useInstantSearch();
   const { items } = useCurrentRefinements({}, { $$widgetType: 'cmty.facetDropdown' });
   const [isOpened, setIsOpened] = useState(false);
   const panelRef = useRef(null);
 
   // Close the dropdown when click outside or press the Escape key
+  
   const close = useCallback(() => setIsOpened(false), []);
-  useCloseDropdown(panelRef, close, isOpened);
+  useOnClickOutside(panelRef, close, isOpened);
 
   // Prevent scrolling on mobile when the dropdown is opened
-  const isMobile = useMediaQuery('(max-width: 375px)');
-  useLockedBody(isOpened && isMobile);
+  const { blockScroll } = useScrollBlock();
+
+  useEffect(() => {
+    blockScroll(isOpened);
+  }, [blockScroll, isOpened]);
 
   // Get the attribute(s) of the first child widget
   const attributeProp = getFirstChildPropValue(children, (props) =>
@@ -93,34 +93,27 @@ export function FacetDropdown({ children, buttonText, closeOnChange, classNames 
   const isRefined = refinements.length > 0;
   const isDisabled = results.hits.length === 0;
 
-  // Get the header button text
-  let text;
-  if (typeof buttonText === 'string') {
-    text = buttonText;
-  } else if (typeof buttonText === 'function') {
-    text = buttonText({ results, uiState, refinements });
-  } else if (typeof attribute === 'string') {
-    text = isRefined ? `${capitalize(attribute)} (${refinements.length})` : capitalize(attribute);
-  }
-
   const header = (
     <button
       type="button"
-      className={cx(
+      className={useClassNames([
         'ais-Dropdown-button',
         classNames.button,
-        isRefined && cx('ais-Dropdown-button--refined', classNames.buttonRefined),
-        isDisabled && 'ais-Dropdown-button--disabled',
-      )}
+        { 'ais-Dropdown-button--refined': isRefined },
+        { 'ais-Dropdown-button--disabled': isDisabled },
+      ])}
       disabled={isDisabled}
       onClick={() => setIsOpened((opened) => !opened)}
     >
-      {text}
+      {buttonText}
     </button>
   );
 
   const footer = (
-    <button className={cx('ais-Dropdown-close ais-Dropdown-button', classNames.closeButton)} onClick={close}>
+    <button
+      className={useClassNames(['ais-Dropdown-close ais-Dropdown-button', classNames.closeButton])}
+      onClick={close}
+    >
       Apply
     </button>
   );
@@ -129,11 +122,11 @@ export function FacetDropdown({ children, buttonText, closeOnChange, classNames 
     <Panel
       header={header}
       footer={footer}
-      className={cx('ais-Dropdown', isOpened && 'ais-Dropdown--opened', classNames.root)}
+      className={useClassNames(['ais-Dropdown', { 'ais-Dropdown--opened': isOpened }, classNames.root])}
       ref={panelRef}
     >
       <DropdownMiddleware isOpened={isOpened} closeOnChange={closeOnChange} close={close} />
-      <h2 className={cx('ais-Dropdown-mobileTitle', classNames.mobileTitle)}>{text}</h2>
+      <h2 className={useClassNames(['ais-Dropdown-mobileTitle', classNames.mobileTitle])}>{buttonText}</h2>
       {children}
     </Panel>
   );

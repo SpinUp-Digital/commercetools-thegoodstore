@@ -1,10 +1,10 @@
 import { ComponentProps, forwardRef, PropsWithChildren, ReactNode } from 'react';
-import { cx } from './utils';
+import useClassNames from 'helpers/hooks/useClassNames';
 
 export type PanelProps = ComponentProps<'div'> &
   PropsWithChildren<{
-    header?: string | ReactNode;
-    footer?: string | ReactNode;
+    header: string | ReactNode;
+    footer: string | ReactNode;
     classNames?: Partial<PanelClassNames>;
   }>;
 
@@ -20,10 +20,10 @@ const Panel = (
   ref: React.ForwardedRef<HTMLDivElement>,
 ) => {
   return (
-    <div {...props} className={cx('ais-Panel', classNames.root, className)} ref={ref}>
-      {header && <div className={cx('ais-Panel-header', classNames.header)}>{header}</div>}
-      <div className={cx('ais-Panel-body z-20', classNames.body)}>{children}</div>
-      {footer && <div className={cx('ais-Panel-footer', classNames.footer)}>{footer}</div>}
+    <div {...props} className={useClassNames(['ais-Panel', classNames.root, className])} ref={ref}>
+      <div className={useClassNames(['ais-Panel-header', classNames.header])}>{header}</div>
+      <div className={useClassNames(['ais-Panel-body z-20', classNames.body])}>{children}</div>
+      <div className={useClassNames(['ais-Panel-footer', classNames.footer])}>{footer}</div>
     </div>
   );
 };
