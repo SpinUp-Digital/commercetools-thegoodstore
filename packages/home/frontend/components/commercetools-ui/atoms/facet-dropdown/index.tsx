@@ -7,8 +7,8 @@ import type {
 } from 'instantsearch.js/es/connectors/current-refinements/connectCurrentRefinements';
 import { useCurrentRefinements, useInstantSearch } from 'react-instantsearch-hooks-web';
 import useClassNames from 'helpers/hooks/useClassNames';
-import useScrollBlock from 'helpers/hooks/useScrollBlock';
 import useOnClickOutside from 'helpers/hooks/useOnClickOutside';
+import useScrollBlock from 'helpers/hooks/useScrollBlock';
 import Panel from './Panel';
 import { getFirstChildPropValue } from './utils';
 
@@ -68,7 +68,7 @@ export function FacetDropdown({ children, buttonText, closeOnChange, classNames 
   const panelRef = useRef(null);
 
   // Close the dropdown when click outside or press the Escape key
-  
+
   const close = useCallback(() => setIsOpened(false), []);
   useOnClickOutside(panelRef, close, isOpened);
 
