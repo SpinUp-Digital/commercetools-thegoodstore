@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { useRouter } from 'next/router';
 import Button from 'components/commercetools-ui/atoms/button';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { useFormat } from 'helpers/hooks/useFormat';
@@ -21,9 +20,10 @@ export interface AccountDetailsProps {
 }
 
 const AccountDetails: React.FC<AccountDetailsProps> = ({ loginLink }) => {
+  //account data
   const { account, loggedIn, logout } = useAccount();
-  const { query } = useRouter();
-  const { verify: verifying } = query;
+
+  //Cart
   const { updateCart } = useCart();
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
   const hash = useHash();
@@ -60,11 +60,6 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({ loginLink }) => {
     { name: formatAccountMessage({ id: 'customer.support', defaultMessage: 'Customer support' }), href: '#support' },
   ];
 
-  //tabs change (mobile only)
-  const handleTabChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    window.location.hash = e.target.value;
-  };
-
   //tabs-content mapping
   const mapping = {
     '#': MyAccountSection,
@@ -78,31 +73,25 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({ loginLink }) => {
   const Content = mapping[hash];
 
   return (
-    <div className="flex w-full justify-center bg-neutral-200 py-67">
-      <div className="flex h-[700px] w-[78%]  bg-white ">
-        <div className="flex h-full w-[20%] flex-col justify-between border-r border-neutral-400">
-          <ul className="pt-37 pl-24">
+    <div className="min-h-[80vh] bg-neutral-200 md:h-[80vh] xl:py-[68px]">
+      <div className="mx-auto grid h-full w-full max-w-[1116px] grid-cols-4 bg-white">
+        <div className="hidden h-full flex-col justify-between border-r border-neutral-400 px-24 pt-24 pb-16 md:flex xl:pt-36">
+          <ul className="grid gap-36 pl-8">
             {tabs.map((tab) => (
-              <li key={tab.name} className="pb-24">
-                <a href={tab.href} className="font-">
-                  <Typography fontSize={16} fontFamily="inter" className={tab.href === hash ? 'font-medium' : ''}>
-                    {tab.name}
-                  </Typography>
-                </a>
-              </li>
+              <a key={tab.name} href={tab.href}>
+                <Typography className="hover:underline" fontSize={16} medium={tab.href === hash}>
+                  {tab.name}
+                </Typography>
+              </a>
             ))}
           </ul>
-          <div className="p-16">
-            <div className="overflow-hidden rounded-md border-[0.5px] border-transparent hover:border-primary-black">
-              <Button onClick={logout} variant="ghost" className="w-full border border-primary-black py-8">
-                <Typography fontSize={14} fontFamily="inter" align="center">
-                  {formatAccountMessage({ id: 'sign.out', defaultMessage: 'Sign out' })}
-                </Typography>
-              </Button>
-            </div>
-          </div>
+          <Button onClick={logout} variant="secondary" className="w-full border border-primary-black py-8 px-0">
+            {formatAccountMessage({ id: 'sign.out', defaultMessage: 'Sign out' })}
+          </Button>
         </div>
-        <div className="w-[80%]">{Content && <Content />}</div>
+        <div className="col-span-4 py-20 px-16 md:col-span-3 md:overflow-auto md:p-24 2xl:p-44">
+          {Content && <Content />}
+        </div>
       </div>
     </div>
   );

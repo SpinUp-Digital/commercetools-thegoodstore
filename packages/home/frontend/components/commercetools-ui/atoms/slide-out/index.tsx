@@ -87,7 +87,17 @@ const Slideout: React.FC<Props> = ({
           />
         ),
       }[state] ?? <></>),
-    [state],
+    [
+      emptyCartCategories,
+      emptyCartImage,
+      emptyCartSubtitle,
+      emptyCartTitle,
+      emptyWishlistCategories,
+      emptyWishlistImage,
+      emptyWishlistSubtitle,
+      emptyWishlistTitle,
+      state,
+    ],
   );
 
   return (

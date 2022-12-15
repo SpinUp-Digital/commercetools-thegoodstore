@@ -22,7 +22,7 @@ const Verify: NextPage = () => {
   //error callback because of invalid token
   const errorCallback = useCallback(() => {
     Toast.error(formatAccountMessage({ id: 'verification.failed', defaultMessage: 'Invalid token' }));
-  }, [formatAccountMessage, router]);
+  }, [formatAccountMessage]);
 
   //successful callback after verification
   const successCallback = useCallback(
@@ -31,7 +31,7 @@ const Verify: NextPage = () => {
         Toast.success(formatAccountMessage({ id: 'verification.done', defaultMessage: 'Email verified' }));
       else errorCallback();
     },
-    [formatAccountMessage, router, errorCallback],
+    [formatAccountMessage, errorCallback],
   );
 
   //done callback after either success or failure
@@ -54,7 +54,7 @@ const Verify: NextPage = () => {
       .then(successCallback)
       .catch(errorCallback)
       .finally(doneCallback);
-  }, [token, confirm, successCallback, errorCallback, doneCallback]);
+  }, [token, router, confirm, successCallback, errorCallback, doneCallback]);
 
   useEffect(() => {
     verifyUser();

@@ -19,7 +19,7 @@ const Search: React.FC = () => {
 
   useEffect(() => {
     blockScroll(focused);
-  }, [focused]);
+  }, [blockScroll, focused]);
 
   const router = useRouter();
 

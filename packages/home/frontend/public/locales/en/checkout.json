@@ -1,5 +1,6 @@
 {
   "shipping": "Shipping",
+  "billing": "Billing",
   "payment": "Payment",
   "overview": "Overview",
   "nextPayment": "Continue to payment",

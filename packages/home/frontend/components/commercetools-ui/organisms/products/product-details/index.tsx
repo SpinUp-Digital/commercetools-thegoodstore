@@ -37,8 +37,8 @@ const ProductDetails: FC<ProductDetailsProps> = ({
   const [loading, setLoading] = useState(false);
   const [added, setAdded] = useState(false);
 
-  const handleQuantityChange = (value: string) => {
-    setQuantity(+value);
+  const handleQuantityChange = (e: React.FormEvent) => {
+    setQuantity(+(e.target as HTMLSelectElement).value);
   };
 
   const handleAddToCart = () => {
@@ -83,6 +83,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({
 
         <div className="flex gap-8 pt-25">
           <Dropdown
+            containerClassName="w-72"
             className="rounded-sm"
             defaultValue="1"
             items={Array(10)
