@@ -67,7 +67,7 @@ const Header: React.FC<HeaderProps> = ({
         />
       </div>
 
-      <div className="relative border-t border-neutral-400 px-15 py-12 md:px-32 lg:hidden lg:px-20 xl:px-60">
+      <div className="relative border-t border-neutral-400 px-15 py-12 md:px-32 lg:px-20 xl:px-60">
         <Search />
       </div>
 

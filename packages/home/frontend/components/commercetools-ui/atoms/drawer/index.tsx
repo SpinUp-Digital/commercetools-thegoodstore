@@ -14,8 +14,6 @@ export interface DrawerProps {
 const Drawer: FC<DrawerProps> = ({ className, isOpen, direction, blockScrolling = true, onClose, children }) => {
   const { blockScroll } = useScrollBlock();
 
-  const [loaded, setIsLoaded] = useState<boolean>(false);
-
   useEffect(() => {
     if (blockScrolling) {
       blockScroll(isOpen);
@@ -56,11 +54,9 @@ const Drawer: FC<DrawerProps> = ({ className, isOpen, direction, blockScrolling 
     directionStyles[direction],
     getTransitionStyles(),
     transitionClassNames,
-    loaded ? 'block' : 'hidden',
   ]);
 
   useEffect(() => {
-    setIsLoaded(true);
     setTransitionClassNames('transition duration-300 ease-out');
   }, []);
 
