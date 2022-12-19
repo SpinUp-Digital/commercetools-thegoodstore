@@ -295,6 +295,66 @@ export class AccountApi extends BaseApi {
     return await this.updateAccount(account, customerUpdateActions);
   };
 
+  addShippingAddress: (account: Account, address: Address) => Promise<Account> = async (
+    account: Account,
+    address: Address,
+  ) => {
+    const customerUpdateActions: CustomerUpdateAction[] = [];
+
+    let addressData = AccountMapper.addressToCommercetoolsAddress(address);
+
+    if (addressData.id !== undefined) {
+      addressData = {
+        ...addressData,
+        id: undefined,
+      };
+    }
+
+    addressData = {
+      ...addressData,
+      key: Guid.newGuid(),
+    };
+
+    customerUpdateActions.push({ action: 'addAddress', address: addressData });
+    customerUpdateActions.push({ action: 'addShippingAddressId', addressKey: addressData.key });
+
+    if (address.isDefaultShippingAddress) {
+      customerUpdateActions.push({ action: 'setDefaultShippingAddress', addressKey: addressData.key });
+    }
+
+    return await this.updateAccount(account, customerUpdateActions);
+  };
+
+  addBillingAddress: (account: Account, address: Address) => Promise<Account> = async (
+    account: Account,
+    address: Address,
+  ) => {
+    const customerUpdateActions: CustomerUpdateAction[] = [];
+
+    let addressData = AccountMapper.addressToCommercetoolsAddress(address);
+
+    if (addressData.id !== undefined) {
+      addressData = {
+        ...addressData,
+        id: undefined,
+      };
+    }
+
+    addressData = {
+      ...addressData,
+      key: Guid.newGuid(),
+    };
+
+    customerUpdateActions.push({ action: 'addAddress', address: addressData });
+    customerUpdateActions.push({ action: 'addBillingAddressId', addressKey: addressData.key });
+
+    if (address.isDefaultBillingAddress) {
+      customerUpdateActions.push({ action: 'setDefaultBillingAddress', addressKey: addressData.key });
+    }
+
+    return await this.updateAccount(account, customerUpdateActions);
+  };
+
   updateAddress: (account: Account, address: Address) => Promise<Account> = async (
     account: Account,
     address: Address,

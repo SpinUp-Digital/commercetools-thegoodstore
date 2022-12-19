@@ -1,74 +1,86 @@
 import React, { useState } from 'react';
+import Button from 'components/commercetools-ui/atoms/button';
+import Typography from 'components/commercetools-ui/atoms/typography';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useAccount } from 'frontastic';
+import { removeAddress, updateAddress } from 'frontastic/actions/account';
 import Address from '../address';
-import CreateAddressModal from '../modals/createAddress';
+import AddressForm, { AddressFormData } from '../address/address-form';
+import usePropsToAddressType from '../address/mapPropsToAddressType';
 
 const Addresses = () => {
-  //18in messages
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
 
-  //account data
   const { account } = useAccount();
-
-  //user addresses
   const addresses = account?.addresses;
 
-  //create address modal
-  const [createModalOpen, setCreateModalOpen] = useState(false);
-
-  const openCreateModal = () => {
-    setCreateModalOpen(true);
+  const [formIsOpen, setFormIsOpen] = useState(false);
+  const [defaultValues, setDefaultValues] = useState<AddressFormData>();
+  const openModal = () => setFormIsOpen(true);
+  const closeModal = () => {
+    setDefaultValues(undefined);
+    setFormIsOpen(false);
   };
 
-  const closeCreateModal = () => {
-    setCreateModalOpen(false);
+  const { mapPropsToAddress } = usePropsToAddressType();
+
+  const handleSubmit = (address: AddressFormData) => {
+    if (defaultValues) {
+      if (defaultValues.addressType !== address.addressType) {
+        const { addAddress } = mapPropsToAddress(address);
+        removeAddress(defaultValues.addressId).then(addAddress).then(closeModal);
+      } else {
+        updateAddress(address).then(closeModal);
+      }
+    } else {
+      const { addAddress } = mapPropsToAddress(address);
+      addAddress().then(closeModal);
+    }
+  };
+
+  const handleEdit = (address: AddressFormData) => {
+    setDefaultValues(address);
+    openModal();
   };
 
   return (
-    <>
-      <style>
-        {`
-        form input[type='checkbox']:checked {
-          background-image: url("data:image/svg+xml,<svg viewBox='0 0 16 16' fill='%23CE3E72' xmlns='http://www.w3.org/2000/svg'><path d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/></svg>");
-          border-color: rgb(209 213 219 / var(--tw-border-opacity));
-        }
-        form input[type='checkbox']:checked:hover {
-          border-color: rgb(209 213 219 / var(--tw-border-opacity));
-        }
-        `}
-      </style>
-      <div className="mt-10 divide-y divide-gray-200">
-        <div className="space-y-1">
-          <h3 className="text-lg font-medium leading-6 text-gray-900">
-            {formatAccountMessage({ id: 'address.myAddresses', defaultMessage: 'My Addresses' })}
-          </h3>
-          <p className="max-w-2xl text-sm text-gray-500">
-            {formatAccountMessage({
-              id: 'address.desc',
-              defaultMessage: 'Here you can add different delivery addresses for your account',
-            })}
-          </p>
-        </div>
-        <div className="mt-6">
-          <dl className="divide-y divide-gray-200">
-            {addresses?.map((address) => (
-              <Address key={address.addressId} address={address} />
+    <div>
+      {formIsOpen ? (
+        <AddressForm onClose={closeModal} onSubmit={handleSubmit} defaultValues={defaultValues} />
+      ) : (
+        <>
+          <div>
+            <Typography
+              as="h2"
+              className="mb-20 text-primary-black md:text-22 2xl:mb-28 2xl:text-24"
+              fontFamily="libre"
+              fontSize={18}
+            >
+              {formatAccountMessage({ id: 'addresses', defaultMessage: 'Addresses' })}
+            </Typography>
+            <Typography fontSize={14} lineHeight="loose" className="mb-24 text-secondary-black md:text-14 2xl:text-16">
+              {formatAccountMessage({
+                id: 'address.desc',
+                defaultMessage: 'Manage or add addresses for your account.',
+              })}
+            </Typography>
+            <Button
+              onClick={openModal}
+              size="full"
+              className="bg-gray-700 py-8 px-16 text-14 font-medium leading-[114%] md:w-fit 2xl:p-12"
+            >
+              {formatAccountMessage({ id: 'address.add', defaultMessage: 'Add an address' })}
+            </Button>
+          </div>
+
+          <div className="mt-32 grid gap-20">
+            {addresses.map((address) => (
+              <Address key={address.addressId} address={address} onEdit={handleEdit} />
             ))}
-          </dl>
-        </div>
-        <div className="py-4 sm:py-8">
-          <button
-            type="button"
-            className="mt-4 w-full items-center rounded-md border border-transparent px-0 py-2 text-center text-sm font-medium text-white shadow-sm transition-colors duration-150 ease-out focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:bg-gray-300 sm:w-fit sm:px-24"
-            onClick={openCreateModal}
-          >
-            {formatAccountMessage({ id: 'address.add', defaultMessage: 'Add an address' })}
-          </button>
-        </div>
-      </div>
-      <CreateAddressModal open={createModalOpen} onClose={closeCreateModal} />
-    </>
+          </div>
+        </>
+      )}
+    </div>
   );
 };
 

@@ -5,6 +5,7 @@ import { REMEMBER_ME } from 'helpers/constants/localStorage';
 import { revalidateOptions } from 'frontastic';
 import { fetchApiHub, ResponseError } from 'frontastic/lib/fetch-api-hub';
 import { SDK } from 'sdk';
+import { sdk } from '@commercetools/sdk';
 
 export interface GetAccountResult {
   loggedIn: boolean;
@@ -132,6 +133,26 @@ export const addAddress = async (address: Omit<Address, 'addressId'>): Promise<A
   const extensions = SDK.getExtensions();
 
   const res = await extensions.addAccountAddress({ address });
+  mutate('/action/account/getAccount', res);
+  return res;
+};
+
+export const addShippingAddress = async (address: Omit<Address, 'addressId'>): Promise<Account> => {
+  const extensions = SDK.getExtensions();
+  const { account } = await extensions.getAccount();
+
+  const res = await sdk.callAction<Account>('account/addShippingAddress', { account, address });
+
+  mutate('/action/account/getAccount', res);
+  return res;
+};
+
+export const addBillingAddress = async (address: Omit<Address, 'addressId'>): Promise<Account> => {
+  const extensions = SDK.getExtensions();
+  const { account } = await extensions.getAccount();
+
+  const res = await sdk.callAction<Account>('account/addBillingAddress', { account, address });
+
   mutate('/action/account/getAccount', res);
   return res;
 };

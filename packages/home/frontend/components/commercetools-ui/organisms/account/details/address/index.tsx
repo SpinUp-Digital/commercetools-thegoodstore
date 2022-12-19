@@ -1,73 +1,63 @@
-import React, { useState } from 'react';
-import type { Address as AddressType } from '@commercetools/domain-types/account/Address';
-import { StarIcon } from '@heroicons/react/24/solid';
+import React from 'react';
+import { Address as AddressType } from '@commercetools/domain-types/account/Address';
+import Button from 'components/commercetools-ui/atoms/button';
+import Typography from 'components/commercetools-ui/atoms/typography';
+import { TypographyProps } from 'components/commercetools-ui/atoms/typography/types';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { useAccount } from 'frontastic';
-import UpdateAddressModal from '../modals/updateAddress';
+import { AddressFormData } from './address-form';
+import usePropsToAddressType from './mapPropsToAddressType';
 
 export interface AddressProps {
   address: AddressType;
+  onEdit: (defaultValues: AddressFormData) => void;
 }
 
-const Address: React.FC<AddressProps> = ({ address }) => {
-  //account data
-  const { removeAddress } = useAccount();
-
-  //i18n messages
+const Address: React.FC<AddressProps> = ({ address, onEdit }) => {
   const { formatMessage } = useFormat({ name: 'common' });
 
-  //handle address deletion
-  const handleDelete = () => {
-    removeAddress(address.addressId);
+  const { mapPropsToAddress } = usePropsToAddressType();
+  const { addressType, checked, label, setAsDefault } = mapPropsToAddress(address);
+
+  const defaultAddressInfoTypographyProps: TypographyProps = {
+    fontSize: 14,
+    lineHeight: 'loose',
+    className: 'text-secondary-black',
   };
 
-  //update modal
-  const [updateModalOpen, setUpdateModalOpen] = useState(false);
-
-  const openUpdateModal = () => setUpdateModalOpen(true);
-
-  const closeUpdateModal = () => setUpdateModalOpen(false);
+  const defaultValues: AddressFormData = {
+    ...address,
+    addressType,
+    isDefaultAddress: checked,
+  };
 
   return (
-    <>
-      <div className="flex flex-col gap-4 py-4 sm:py-8 md:flex-row" key={address.addressId}>
-        <div className="flex-1">
-          <dt className="flex items-center justify-start gap-2">
-            <span className="text-base font-bold text-gray-700">
-              {address.firstName} {address.lastName}
-            </span>
-            {(address.isDefaultBillingAddress || address.isDefaultShippingAddress) && <StarIcon className="h-4" />}
-          </dt>
-          <dt className="mt-2 text-sm">
-            {address.streetName} {address.streetNumber}
-          </dt>
-          <dt className="text-sm">
-            {address.postalCode} {address.city}
-          </dt>
-          <dt className="mt-2 text-sm text-slate-500">{address.phone}</dt>
+    <div className="flex items-center justify-between border border-neutral-400 p-28" key={address.addressId}>
+      <div className="flex items-center gap-28">
+        <input
+          className="hover:cursor-pointer"
+          type="radio"
+          defaultChecked={checked}
+          onClick={!checked ? setAsDefault : undefined}
+        ></input>
+
+        <div className="grid">
+          <Typography className="mb-4" medium fontSize={16}>
+            {label}
+          </Typography>
+          <Typography {...defaultAddressInfoTypographyProps}>{address.firstName}</Typography>
+          <Typography {...defaultAddressInfoTypographyProps}>{address.streetName}</Typography>
+          <Typography {...defaultAddressInfoTypographyProps}>{`${address.postalCode} ${address.city}`}</Typography>
         </div>
-        <span className="flex shrink-0 items-start space-x-4 md:ml-4">
-          <button
-            type="button"
-            className="rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2"
-            onClick={openUpdateModal}
-          >
-            {formatMessage({ id: 'update', defaultMessage: 'Update' })}
-          </button>
-          <span className="text-gray-300" aria-hidden="true">
-            |
-          </span>
-          <button
-            type="button"
-            className="rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2"
-            onClick={handleDelete}
-          >
-            {formatMessage({ id: 'remove', defaultMessage: 'Remove' })}
-          </button>
-        </span>
       </div>
-      <UpdateAddressModal open={updateModalOpen} onClose={closeUpdateModal} defaultValues={address} />
-    </>
+
+      <Button
+        className="h-fit text-14 font-medium text-primary-black hover:underline"
+        variant="ghost"
+        onClick={() => onEdit(defaultValues)}
+      >
+        {formatMessage({ id: 'update', defaultMessage: 'Update' })}
+      </Button>
+    </div>
   );
 };
 

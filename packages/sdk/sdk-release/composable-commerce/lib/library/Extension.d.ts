@@ -1,9 +1,47 @@
 import { SDK, Extension } from "@commercetools/sdk";
-import { AddAccountAddressAction, ChangeAccountPasswordAction, ConfirmAccountAction, GetAccountAction, LoginAccountAction, LogoutAccountAction, RegisterAccountAction, RemoveAccountAddressAction, RequestAccountConfirmationEmailAction, RequestAccountPasswordResetAction, ResetAccountPasswordAction, SetDefaultAccountShippingAddressAction, UpdateAccountAction, UpdateAccountAddressAction } from "./actions/AccountActions";
-import { AddCartItemAction, CheckoutCartAction, GetAvailableCartShippingMethodsAction, GetCartAction, GetCartShippingMethodsAction, GetOrderHistoryAction, RedeemDiscountCodeAction, RemoveCartItemAction, RemoveDiscountCodeAction, SetCartShippingMethodAction, UpdateCartAction, UpdateCartItemAction } from "./actions/CartActions";
-import { GetProductAction, ProductQueryAction, QueryProductCategoriesAction, GetSearchableProductAttributesAction } from "./actions/ProductActions";
+import {
+    AddAccountAddressAction,
+    ChangeAccountPasswordAction,
+    ConfirmAccountAction,
+    GetAccountAction,
+    LoginAccountAction,
+    LogoutAccountAction,
+    RegisterAccountAction,
+    RemoveAccountAddressAction,
+    RequestAccountConfirmationEmailAction,
+    RequestAccountPasswordResetAction,
+    ResetAccountPasswordAction,
+    SetDefaultAccountShippingAddressAction,
+    UpdateAccountAction,
+    UpdateAccountAddressAction,
+} from "./actions/AccountActions";
+import {
+    AddCartItemAction,
+    CheckoutCartAction,
+    GetAvailableCartShippingMethodsAction,
+    GetCartAction,
+    GetCartShippingMethodsAction,
+    GetOrderHistoryAction,
+    RedeemDiscountCodeAction,
+    RemoveCartItemAction,
+    RemoveDiscountCodeAction,
+    SetCartShippingMethodAction,
+    UpdateCartAction,
+    UpdateCartItemAction,
+} from "./actions/CartActions";
+import {
+    GetProductAction,
+    ProductQueryAction,
+    QueryProductCategoriesAction,
+    GetSearchableProductAttributesAction,
+} from "./actions/ProductActions";
 import { GetProjectSettingsAction } from "./actions/ProjectActions";
-import { AddToWishlistAction, GetWishlistAction, RemoveFromWishlistAction, UpdateWishlistItemAction } from "./actions/WishlistActions";
+import {
+    AddToWishlistAction,
+    GetWishlistAction,
+    RemoveFromWishlistAction,
+    UpdateWishlistItemAction,
+} from "./actions/WishlistActions";
 declare class ComposableCommerce extends Extension {
     constructor(sdk: SDK);
     unregisterExtension(): void;
