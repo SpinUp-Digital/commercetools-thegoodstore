@@ -1,11 +1,11 @@
 import React, { FC, useState } from 'react';
-import { Category } from 'types/category';
 import { Bars3Icon } from '@heroicons/react/24/outline';
 import Button from 'components/commercetools-ui/atoms/button';
 import Drawer from 'components/commercetools-ui/atoms/drawer';
 import MobileMenu from 'components/commercetools-ui/organisms/header/header-navigation/header-navigation-mobile/menu-mobile';
 import MarketButtonMobile from 'components/commercetools-ui/organisms/market-button/market-button-mobile';
 import { useFormat } from 'helpers/hooks/useFormat';
+import { Category } from 'types/category';
 
 export interface Props {
   links: Category[];

@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import Link from 'components/commercetools-ui/atoms/link';
-import { Category } from 'types/category';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import MenuDropdown from 'components/commercetools-ui/organisms/header/header-navigation/header-navigation-desktop/menu-dropdown';
 import { Tile } from 'components/commercetools-ui/organisms/header/types';
 import useClassNames from 'helpers/hooks/useClassNames';
+import { Category } from 'types/category';
 
 export interface Props {
   show: boolean;

@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import { Category } from 'types/category';
 import Search from 'components/commercetools-ui/atoms/search';
 import HeaderLogo from 'components/commercetools-ui/organisms/header/header-logo';
 import HeaderNavigationDesktop from 'components/commercetools-ui/organisms/header/header-navigation/header-navigation-desktop';
@@ -7,6 +6,7 @@ import HeaderNavigationMobile from 'components/commercetools-ui/organisms/header
 import { HeaderProps } from 'components/commercetools-ui/organisms/header/types';
 import UtilitySection from 'components/commercetools-ui/organisms/header/utility-section';
 import MarketButton from 'components/commercetools-ui/organisms/market-button/market-button';
+import { Category } from 'types/category';
 
 const Header: React.FC<HeaderProps> = ({
   links,

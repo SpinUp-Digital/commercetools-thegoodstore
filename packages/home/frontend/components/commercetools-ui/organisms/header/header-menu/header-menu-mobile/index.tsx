@@ -1,6 +1,5 @@
 import React, { FC, useMemo, useState } from 'react';
 import Link from 'next/link';
-import { Category } from 'types/category';
 import Button from 'components/commercetools-ui/atoms/button';
 import Drawer from 'components/commercetools-ui/atoms/drawer';
 import Typography from 'components/commercetools-ui/atoms/typography';
@@ -10,6 +9,7 @@ import CloseIcon from 'components/icons/close';
 import ChevronRightIcon from 'components/icons/home-chevron-right';
 import MenuIcon from 'components/icons/menu-icon';
 import { useFormat } from 'helpers/hooks/useFormat';
+import { Category } from 'types/category';
 
 export interface Props {
   links: Category[];

@@ -1,8 +1,8 @@
 import React from 'react';
+import type { Address as AddressType } from '@commercetools/frontend-domain-types/account/Address';
 import Button from 'components/commercetools-ui/atoms/button';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { TypographyProps } from 'components/commercetools-ui/atoms/typography/types';
-import type { Address as AddressType } from '@commercetools/frontend-domain-types/account/Address';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { AddressFormData } from './address-form';
 import usePropsToAddressType from './mapPropsToAddressType';

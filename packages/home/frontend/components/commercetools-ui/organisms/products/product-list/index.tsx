@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { useRouter } from 'next/router';
+import { Product } from '@commercetools/frontend-domain-types/product/Product';
 import { Hit } from 'instantsearch.js';
 import {
   ClearRefinements,
@@ -12,12 +13,11 @@ import {
 } from 'react-instantsearch-hooks-web';
 import { DropdownClassNames, FacetDropdown } from 'components/commercetools-ui/atoms/facet-dropdown';
 import Link from 'components/commercetools-ui/atoms/link';
-import { productsIndex } from 'helpers/constants/algolia';
-import { Product } from '@commercetools/frontend-domain-types/product/Product';
 import Breadcrumb from 'components/commercetools-ui/organisms/breadcrumb';
+import { productsIndex } from 'helpers/constants/algolia';
 import { useFormat } from 'helpers/hooks/useFormat';
-import ProductTile from '../tile';
 import { Category } from 'types/category';
+import ProductTile from '../tile';
 
 interface Props {
   serverUrl: string;
