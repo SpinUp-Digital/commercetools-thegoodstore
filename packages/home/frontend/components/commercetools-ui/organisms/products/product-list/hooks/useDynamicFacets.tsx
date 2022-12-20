@@ -1,0 +1,48 @@
+import { Facet } from '@commercetools/frontend-domain-types/query/Facet';
+import { useMemo } from 'react';
+import ColorFacet from '../components/facets/color';
+import RangeFacet from '../components/facets/range';
+import TermFacet from '../components/facets/term';
+import { FacetProps } from '../components/facets/types';
+import { FacetConfiguration } from '../types';
+
+interface Options {
+  configuration?: Record<string, FacetConfiguration>;
+  ordering?: string[];
+  render?: (result: { attribute: string; Component: JSX.Element }) => JSX.Element;
+}
+
+const useDynamicFacets = ({ configuration, ordering, render }: Options = {}) => {
+  const facetMapping = useMemo<Record<FacetConfiguration['type'], React.ComponentType<FacetProps>>>(
+    () => ({
+      range: RangeFacet,
+      color: ColorFacet,
+      term: TermFacet,
+    }),
+    [],
+  );
+
+  const dynamicFacets = useMemo(() => {
+    if (!configuration) return <></>;
+
+    const facets = Object.keys(configuration).map((attribute) => {
+      const facet = configuration[attribute];
+
+      const Component = facetMapping[facet.type];
+      const FinalComponent = <Component label={facet.label} attribute={attribute} />;
+
+      return {
+        attribute,
+        Component: render?.({ attribute, Component: FinalComponent }) ?? FinalComponent,
+      };
+    });
+
+    if (ordering) facets.sort((a, b) => ordering.indexOf(a.attribute) - ordering.indexOf(b.attribute));
+
+    return facets.map((facet) => facet.Component);
+  }, [facetMapping, configuration, ordering]);
+
+  return dynamicFacets;
+};
+
+export default useDynamicFacets;
