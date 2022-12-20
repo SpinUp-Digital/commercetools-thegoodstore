@@ -1,11 +1,11 @@
 import { Request, Response, ActionContext } from '@frontastic/extension-types';
-import { Cart } from '@commercetools/domain-types/cart/Cart';
-import { LineItem } from '@commercetools/domain-types/cart/LineItem';
-import { Discount } from '@commercetools/domain-types/cart/Discount';
-import { Address } from '@commercetools/domain-types/account/Address';
+import { Cart } from '@commercetools/frontend-domain-types/cart/Cart';
+import { LineItem } from '@commercetools/frontend-domain-types/cart/LineItem';
+import { Discount } from '@commercetools/frontend-domain-types/cart/Discount';
+import { Address } from '@commercetools/frontend-domain-types/account/Address';
 import { CartFetcher } from '../utils/CartFetcher';
-import { ShippingMethod } from '@commercetools/domain-types/cart/ShippingMethod';
-import { Payment, PaymentStatuses } from '@commercetools/domain-types/cart/Payment';
+import { ShippingMethod } from '@commercetools/frontend-domain-types/cart/ShippingMethod';
+import { Payment, PaymentStatuses } from '@commercetools/frontend-domain-types/cart/Payment';
 import { CartApi } from '../apis/CartApi';
 import { getLocale } from '../utils/Request';
 import { EmailApiFactory } from '../utils/EmailApiFactory';

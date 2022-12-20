@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { useRouter } from 'next/router';
-import { LineItem } from '@commercetools/domain-types/wishlist/LineItem';
+import { LineItem } from '@commercetools/frontend-domain-types/wishlist/LineItem';
 import { TrashIcon } from '@heroicons/react/24/outline';
 import Button from 'components/commercetools-ui/atoms/button';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';

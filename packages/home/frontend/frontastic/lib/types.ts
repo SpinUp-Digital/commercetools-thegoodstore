@@ -1,5 +1,5 @@
-import { Category } from '@commercetools/domain-types/product/Category';
 import { InstantSearchServerState } from 'react-instantsearch-hooks';
+import { Category } from 'types/category';
 
 type ViewData = {
   _type: 'Frontastic\\Catwalk\\FrontendBundle\\Domain\\ViewData';

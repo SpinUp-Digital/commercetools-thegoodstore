@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
-import { Cart } from '@commercetools/domain-types/cart/Cart';
-import { ShippingMethod } from '@commercetools/domain-types/cart/ShippingMethod';
+import { Cart } from '@commercetools/frontend-domain-types/cart/Cart';
+import { ShippingMethod } from '@commercetools/frontend-domain-types/cart/ShippingMethod';
 import { Disclosure } from '@headlessui/react';
 import { ExclamationCircleIcon } from '@heroicons/react/outline';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';

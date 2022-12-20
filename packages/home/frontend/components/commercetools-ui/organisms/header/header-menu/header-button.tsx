@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import Link from 'next/link';
-import { Category } from '@commercetools/domain-types/product/Category';
+import { Category } from 'types/category';
 import Typography from 'components/commercetools-ui/atoms/typography';
 
 export interface Props {

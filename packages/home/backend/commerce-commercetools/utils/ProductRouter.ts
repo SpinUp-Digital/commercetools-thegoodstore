@@ -1,10 +1,10 @@
-import { Product } from '@commercetools/domain-types/product/Product';
+import { Product } from '@commercetools/frontend-domain-types/product/Product';
 import { Context, Request } from '@frontastic/extension-types';
-import { ProductQuery } from '@commercetools/domain-types/query/ProductQuery';
+import { ProductQuery } from '@commercetools/frontend-domain-types/query/ProductQuery';
 import { ProductApi } from '../apis/ProductApi';
-import { LineItem } from '@commercetools/domain-types/cart/LineItem';
+import { LineItem } from '@commercetools/frontend-domain-types/cart/LineItem';
 import { getPath, getLocale } from './Request';
-import { LineItem as WishlistItem } from '@commercetools/domain-types/wishlist/LineItem';
+import { LineItem as WishlistItem } from '@commercetools/frontend-domain-types/wishlist/LineItem';
 
 export class ProductRouter {
   private static isProduct(product: Product | LineItem | WishlistItem): product is Product {

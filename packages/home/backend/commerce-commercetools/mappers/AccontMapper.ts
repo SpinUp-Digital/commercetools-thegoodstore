@@ -1,9 +1,9 @@
 import { Customer as commercetoolsCustomer, CustomerToken } from '@commercetools/platform-sdk';
 import { Locale } from '../Locale';
-import { Account } from '@commercetools/domain-types/account/Account';
-import { Address } from '@commercetools/domain-types/account/Address';
+import { Account } from '@commercetools/frontend-domain-types/account/Account';
+import { Address } from '@commercetools/frontend-domain-types/account/Address';
 import { BaseAddress } from '@commercetools/platform-sdk/dist/declarations/src/generated/models/common';
-import { AccountToken } from '@commercetools/domain-types/account/AccountToken';
+import { AccountToken } from '@commercetools/frontend-domain-types/account/AccountToken';
 
 export class AccountMapper {
   static commercetoolsCustomerToAccount: (commercetoolsCustomer: commercetoolsCustomer, locale: Locale) => Account = (

@@ -1,11 +1,10 @@
 import useSWR, { mutate } from 'swr';
-import { Account } from '@commercetools/domain-types/account/Account';
-import { Address } from '@commercetools/domain-types/account/Address';
-import { REMEMBER_ME } from 'helpers/constants/localStorage';
+import { Account } from '@commercetools/frontend-domain-types/account/Account';
+import { Address } from '@commercetools/frontend-domain-types/account/Address';
 import { revalidateOptions } from 'frontastic';
-import { fetchApiHub, ResponseError } from 'frontastic/lib/fetch-api-hub';
+import { ResponseError } from 'frontastic/lib/fetch-api-hub';
 import { SDK } from 'sdk';
-import { sdk } from '@commercetools/sdk';
+import { sdk } from '@commercetools/frontend-sdk';
 
 export interface GetAccountResult {
   loggedIn: boolean;
@@ -32,9 +31,9 @@ export interface RegisterAccount extends UpdateAccount {
 export const getAccount = (): GetAccountResult => {
   const extensions = SDK.getExtensions();
 
-  const result = useSWR<unknown>('/action/account/getAccount', fetchApiHub, revalidateOptions);
+  const result = useSWR<unknown>('/action/account/getAccount', extensions.account.getAccount, revalidateOptions);
 
-  const account = (result.data as GetAccountResult)?.account || (result.data as Account);
+  const account = ((result as any).data?.data as GetAccountResult)?.account as Account;
 
   if (account?.accountId) return { account, loggedIn: true };
 
@@ -54,37 +53,41 @@ export const login = async (email: string, password: string, remember?: boolean)
     remember,
   };
 
-  const res = await extensions.login(payload);
+  const res = await extensions.account.login(payload);
 
   mutate('/action/account/getAccount', res);
   mutate('/action/cart/getCart');
   mutate('/action/wishlist/getWishlist');
-  return res;
+
+  return (res as any).data;
 };
 
 export const logout = async () => {
   const extensions = SDK.getExtensions();
 
-  const res = await extensions.logout();
+  const res = await extensions.account.logout();
 
   mutate('/action/account/getAccount', res);
   mutate('/action/cart/getCart');
   mutate('/action/wishlist/getWishlist');
-  return res;
 };
 
 export const register = async (account: RegisterAccount): Promise<Account> => {
   const extensions = SDK.getExtensions();
 
-  return await extensions.registerAccount({ account: account });
+  const res = await extensions.account.register({ account: account });
+
+  return (res as any).data;
 };
 
 export const confirm = async (token: string): Promise<Account> => {
   const extensions = SDK.getExtensions();
 
-  const res = await extensions.confirmAccount({ token });
+  const res = await extensions.account.confirm({ token });
+
   mutate('/action/account/getAccount', res);
-  return res;
+
+  return (res as any).data;
 };
 
 export const requestConfirmationEmail = async (email: string, password: string): Promise<void> => {
@@ -94,13 +97,18 @@ export const requestConfirmationEmail = async (email: string, password: string):
     email,
     password,
   };
-  return await extensions.requestAccountConfirmationEmail(payload);
+
+  const res = await extensions.account.requestConfirmationEmail(payload);
+
+  return (res as any).data;
 };
 
 export const changePassword = async (token: string, newPassword: string): Promise<Account> => {
   const extensions = SDK.getExtensions();
 
-  return await extensions.resetAccountPassword({ token, newPassword });
+  const res = await extensions.account.resetPassword({ token, newPassword });
+
+  return (res as any).data;
 };
 
 export const requestPasswordReset = async (email: string): Promise<void> => {
@@ -110,81 +118,105 @@ export const requestPasswordReset = async (email: string): Promise<void> => {
     email,
   };
 
-  return await extensions.requestResetAccountPassword(payload);
+  const res = await extensions.account.requestResetPassword(payload);
+
+  return (res as any).data;
 };
 
 export const resetPassword = async (token: string, newPassword: string): Promise<Account> => {
   const extensions = SDK.getExtensions();
 
-  const res = await extensions.resetAccountPassword({ token, newPassword });
+  const res = await extensions.account.resetPassword({ token, newPassword });
+
   mutate('/action/account/getAccount', res);
-  return res;
+
+  return (res as any).data;
 };
 
 export const update = async (account: UpdateAccount): Promise<Account> => {
   const extensions = SDK.getExtensions();
 
-  const res = await extensions.updateAccount(account);
+  const res = await extensions.account.updateAccount(account);
+
   mutate('/action/account/getAccount', res);
-  return res;
+
+  return (res as any).data;
 };
 
 export const addAddress = async (address: Omit<Address, 'addressId'>): Promise<Account> => {
   const extensions = SDK.getExtensions();
 
-  const res = await extensions.addAccountAddress({ address });
+  const res = await extensions.account.addAddress({ address });
+
   mutate('/action/account/getAccount', res);
-  return res;
+
+  return (res as any).data;
 };
 
 export const addShippingAddress = async (address: Omit<Address, 'addressId'>): Promise<Account> => {
   const extensions = SDK.getExtensions();
-  const { account } = await extensions.getAccount();
+  const { account } = ((await extensions.account.getAccount()) as any).data;
 
-  const res = await sdk.callAction<Account>('account/addShippingAddress', { account, address });
+  const res = await sdk.callAction<Account>({
+    actionName: 'account/addShippingAddress',
+    payload: { account, address },
+  });
 
   mutate('/action/account/getAccount', res);
-  return res;
+
+  return (res as any).data;
 };
 
 export const addBillingAddress = async (address: Omit<Address, 'addressId'>): Promise<Account> => {
   const extensions = SDK.getExtensions();
-  const { account } = await extensions.getAccount();
+  const { account } = ((await extensions.account.getAccount()) as any).data;
 
-  const res = await sdk.callAction<Account>('account/addBillingAddress', { account, address });
+  const res = await sdk.callAction<Account>({
+    actionName: 'account/addBillingAddress',
+    payload: { account, address },
+  });
 
   mutate('/action/account/getAccount', res);
-  return res;
+
+  return (res as any).data;
 };
 
 export const updateAddress = async (address: Address): Promise<Account> => {
   const extensions = SDK.getExtensions();
 
-  const res = await extensions.updateAccountAddress({ address });
+  const res = await extensions.account.updateAddress({ address });
+
   mutate('/action/account/getAccount', res);
-  return res;
+
+  return (res as any).data;
 };
 
 export const removeAddress = async (addressId: string): Promise<Account> => {
   const extensions = SDK.getExtensions();
 
-  const res = await extensions.removeAccountAddress({ addressId });
+  const res = await extensions.account.removeAddress({ addressId });
+
   mutate('/action/account/getAccount', res);
-  return res;
+
+  return (res as any).data;
 };
 
 export const setDefaultBillingAddress = async (addressId: string): Promise<Account> => {
   const extensions = SDK.getExtensions();
 
-  const res = await extensions.setDefaultBillingAddress({ addressId });
+  const res = await extensions.account.setDefaultBillingAddress({ addressId });
+
   mutate('/action/account/getAccount', res);
-  return res;
+
+  return (res as any).data;
 };
 
 export const setDefaultShippingAddress = async (addressId: string): Promise<Account> => {
   const extensions = SDK.getExtensions();
 
-  const res = await extensions.setDefaultShippingAddress({ addressId });
+  const res = await extensions.account.setDefaultShippingAddress({ addressId });
+
   mutate('/action/account/getAccount', res);
-  return res;
+
+  return (res as any).data;
 };

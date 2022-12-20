@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { Category } from '@commercetools/domain-types/product/Category';
 import Link from 'components/commercetools-ui/atoms/link';
+import { Category } from 'types/category';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import MenuDropdown from 'components/commercetools-ui/organisms/header/header-navigation/header-navigation-desktop/menu-dropdown';
 import { Tile } from 'components/commercetools-ui/organisms/header/types';

@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { Category } from '@commercetools/domain-types/product/Category';
+import { Category } from 'types/category';
 import { Bars3Icon } from '@heroicons/react/24/outline';
 import Button from 'components/commercetools-ui/atoms/button';
 import Drawer from 'components/commercetools-ui/atoms/drawer';

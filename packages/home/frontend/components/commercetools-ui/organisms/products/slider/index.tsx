@@ -1,5 +1,5 @@
 import React from 'react';
-import { Product } from '@commercetools/domain-types/product/Product';
+import { Product } from '@commercetools/frontend-domain-types/product/Product';
 import Slider from 'components/commercetools-ui/atoms/slider';
 import Subtitle, { SubtitleProps } from 'components/commercetools-ui/atoms/subtitle';
 import Typography from 'components/commercetools-ui/atoms/typography';

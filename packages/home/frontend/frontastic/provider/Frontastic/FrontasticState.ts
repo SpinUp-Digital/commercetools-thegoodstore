@@ -39,8 +39,8 @@ import { UseCart } from './UseCart';
 import { UseWishlist } from './UseWishlist';
 import { UseProduct } from './UseProduct';
 import { UseAdyen } from './UseAdyen';
-import { Cart } from '@commercetools/domain-types/cart/Cart';
-import { Wishlist } from '@commercetools/domain-types/wishlist/Wishlist';
+import { Cart } from '@commercetools/frontend-domain-types/cart/Cart';
+import { Wishlist } from '@commercetools/frontend-domain-types/wishlist/Wishlist';
 
 export interface FrontasticState {
   useCart: UseCart;

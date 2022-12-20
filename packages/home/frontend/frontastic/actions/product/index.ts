@@ -5,5 +5,5 @@ import { SDK } from 'sdk';
 export const queryCategories = () => {
   const extensions = SDK.getExtensions();
 
-  return useSWR('/action/product/queryCategories?limit=10', extensions.queryProductCategories, revalidateOptions);
+  return useSWR('/action/product/queryCategories?limit=10', extensions.product.queryCategories, revalidateOptions);
 };

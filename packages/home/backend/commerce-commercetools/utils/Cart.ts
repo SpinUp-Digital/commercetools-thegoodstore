@@ -1,4 +1,4 @@
-import { Cart } from '@commercetools/domain-types/cart/Cart';
+import { Cart } from '@commercetools/frontend-domain-types/cart/Cart';
 
 export const hasUser = (cart: Cart): boolean => {
   return cart.email !== undefined;

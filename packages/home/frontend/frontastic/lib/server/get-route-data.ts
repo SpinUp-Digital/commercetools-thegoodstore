@@ -1,4 +1,4 @@
-import { Category } from '@commercetools/domain-types/product/Category';
+import { Category } from 'types/category';
 import { IncomingMessage, ServerResponse } from 'http';
 import { fetchApiHubServerSide } from '../fetch-api-hub';
 import { PageDataResponse, PagePreviewDataResponse, RedirectResponse } from '../types';

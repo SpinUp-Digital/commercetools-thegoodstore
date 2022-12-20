@@ -1,4 +1,4 @@
-import { Cart } from '@commercetools/domain-types/cart/Cart';
+import { Cart } from '@commercetools/frontend-domain-types/cart/Cart';
 import {
   CartAddPaymentAction,
   CartDraft,
@@ -19,21 +19,21 @@ import {
   CartSetCustomerEmailAction,
   CartUpdate,
 } from '@commercetools/platform-sdk/dist/declarations/src/generated/models/cart';
-import { Address } from '@commercetools/domain-types/account/Address';
-import { Order } from '@commercetools/domain-types/cart/Order';
+import { Address } from '@commercetools/frontend-domain-types/account/Address';
+import { Order } from '@commercetools/frontend-domain-types/cart/Order';
 import { OrderFromCartDraft } from '@commercetools/platform-sdk/dist/declarations/src/generated/models/order';
 import { Guid } from '../utils/Guid';
 import { BaseApi } from './BaseApi';
-import { ShippingMethod } from '@commercetools/domain-types/cart/ShippingMethod';
-import { LineItem } from '@commercetools/domain-types/cart/LineItem';
-import { Discount } from '@commercetools/domain-types/cart/Discount';
+import { ShippingMethod } from '@commercetools/frontend-domain-types/cart/ShippingMethod';
+import { LineItem } from '@commercetools/frontend-domain-types/cart/LineItem';
+import { Discount } from '@commercetools/frontend-domain-types/cart/Discount';
 import { Locale } from '../Locale';
-import { Payment } from '@commercetools/domain-types/cart/Payment';
+import { Payment } from '@commercetools/frontend-domain-types/cart/Payment';
 import {
   PaymentDraft,
   PaymentUpdateAction,
 } from '@commercetools/platform-sdk/dist/declarations/src/generated/models/payment';
-import { Account } from '@commercetools/domain-types/account/Account';
+import { Account } from '@commercetools/frontend-domain-types/account/Account';
 import { isReadyForCheckout } from '../utils/Cart';
 import { ExternalError } from '../utils/Errors';
 import { CartNotCompleteError } from '../errors/CartNotCompleteError';

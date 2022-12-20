@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { Product } from '@commercetools/domain-types/product/Product';
+import { Product } from '@commercetools/frontend-domain-types/product/Product';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import Modal from 'components/commercetools-ui/atoms/modal';
 import useClassNames from 'helpers/hooks/useClassNames';

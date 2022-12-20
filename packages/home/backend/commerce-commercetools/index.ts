@@ -15,9 +15,9 @@ import {
 } from '@frontastic/extension-types';
 import { getLocale, getPath } from './utils/Request';
 import { ProductRouter } from './utils/ProductRouter';
-import { Product } from '@commercetools/domain-types/product/Product';
+import { Product } from '@commercetools/frontend-domain-types/product/Product';
 import { SearchRouter } from './utils/SearchRouter';
-import { Result } from '@commercetools/domain-types/product/Result';
+import { Result } from '@commercetools/frontend-domain-types/product/Result';
 import { CategoryRouter } from './utils/CategoryRouter';
 import { ProductApi } from './apis/ProductApi';
 import { ProductQueryFactory } from './utils/ProductQueryFactory';

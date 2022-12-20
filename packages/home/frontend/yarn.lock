@@ -1848,6 +1848,25 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@commercetools/frontend-composable-commerce@^3.0.4-alpha.0":
+  version "3.0.4-alpha.0"
+  resolved "https://registry.yarnpkg.com/@commercetools/frontend-composable-commerce/-/frontend-composable-commerce-3.0.4-alpha.0.tgz#1471e2d4f2969d5932f876a0197365f669472f3a"
+  integrity sha512-8hNc2xXg5cFFOlqr6e5JZpqm4h+SpBWuk0hnumkKrZdtmWzzIelJ/sEsOWBi71zkIGjSU64aCR4GEO2bAAgksg==
+
+"@commercetools/frontend-domain-types@^1.0.4-alpha.0":
+  version "1.0.4-alpha.0"
+  resolved "https://registry.yarnpkg.com/@commercetools/frontend-domain-types/-/frontend-domain-types-1.0.4-alpha.0.tgz#eda29819c407b1b229ab54253d4f19c0d4dcad19"
+  integrity sha512-1iBJe4bwjjgUsnETdDsj2csFTuf9wuptP3Y9I/DyeBFdX7G5tBZjGlsKK5j+d9G7Ivt1o3DLd1GVWQWpIinm3g==
+  dependencies:
+    typescript "4.8.3"
+
+"@commercetools/frontend-sdk@^4.0.2-alpha.0":
+  version "4.0.2-alpha.0"
+  resolved "https://registry.yarnpkg.com/@commercetools/frontend-sdk/-/frontend-sdk-4.0.2-alpha.0.tgz#b0a4dcb8edf2cffb1ebf6c72b99cb164a42924d2"
+  integrity sha512-7qIS/8kyD6HmtvOByLXHJJZyQcrs0bFViCsUlaYXo1a3PMGHcXUU7i1B1V42XjaKVqzQUbTob5C2QVUyRIwXvg==
+  dependencies:
+    js-cookie "3.0.1"
+
 "@design-systems/utils@2.12.0":
   version "2.12.0"
   resolved "https://registry.yarnpkg.com/@design-systems/utils/-/utils-2.12.0.tgz#955c108be07cb8f01532207cbfea8f848fa760c9"
@@ -9008,6 +9027,11 @@ jest-worker@^27.4.5:
     merge-stream "^2.0.0"
     supports-color "^8.0.0"
 
+js-cookie@3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-3.0.1.tgz#9e39b4c6c2f56563708d7d31f6f5f21873a92414"
+  integrity sha512-+0rgsUXZu4ncpPxRL+lNEptWMOWl9etvPHc/koSRp6MPwpRYAhmk0dUG00J4bxVV3r9uUzfo24wW0knS07SKSw==
+
 js-string-escape@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/js-string-escape/-/js-string-escape-1.0.1.tgz#e2625badbc0d67c7533e9edc1068c587ae4137ef"
@@ -13423,6 +13447,11 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
+
+typescript@4.8.3:
+  version "4.8.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.8.3.tgz#d59344522c4bc464a65a730ac695007fdb66dd88"
+  integrity sha512-goMHfm00nWPa8UvR/CPSvykqf6dVV8x/dp0c5mFTMTIu0u0FlGWRioyy7Nn0PGAdHxpJZnuO/ut+PpQ8UiHAig==
 
 typescript@^4.5.4, typescript@^4.6.4:
   version "4.6.4"

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Address } from '@commercetools/domain-types/account/Address';
+import { Address } from '@commercetools/frontend-domain-types/account/Address';
 import { TrashIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import Button from 'components/commercetools-ui/atoms/button';
 import Checkbox from 'components/commercetools-ui/atoms/checkbox';
@@ -18,8 +18,12 @@ export interface AddressFormProps {
 }
 
 export interface AddressFormData extends Address {
+  addressId: string;
   addressType?: 'shipping' | 'billing';
   isDefaultAddress?: boolean;
+  isBillingAddress?: boolean;
+  isDefaultBillingAddress?: boolean;
+  isDefaultShippingAddress?: boolean;
 }
 
 type AddressType = 'shipping' | 'billing';
@@ -37,7 +41,10 @@ const AddressForm: React.FC<AddressFormProps> = ({ defaultValues, onClose, onSub
   const { country } = useI18n();
 
   //new address data
-  const defaultData = useMemo(() => (defaultValues as Address) ?? { country }, [country, defaultValues]);
+  const defaultData = useMemo(
+    () => (defaultValues as Address) ?? { country },
+    [country, defaultValues],
+  ) as AddressFormData;
   const [data, setData] = useState<AddressFormData>(defaultData);
 
   useEffect(() => {

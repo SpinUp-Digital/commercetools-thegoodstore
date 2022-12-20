@@ -1,5 +1,5 @@
 import React, { Dispatch, FC } from 'react';
-import { Category } from '@commercetools/domain-types/product/Category';
+import { Category } from 'types/category';
 import { ChevronRightIcon, ArrowLongLeftIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import Button from 'components/commercetools-ui/atoms/button';
 import Link from 'components/commercetools-ui/atoms/link';

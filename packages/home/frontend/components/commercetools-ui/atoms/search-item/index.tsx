@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Product } from '@commercetools/domain-types/product/Product';
+import { Product } from '@commercetools/frontend-domain-types/product/Product';
 import { Hit } from 'instantsearch.js';
 import { Highlight } from 'react-instantsearch-hooks-web';
 import Link from 'components/commercetools-ui/atoms/link';

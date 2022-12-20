@@ -1,8 +1,8 @@
 import useSWR, { mutate } from 'swr';
-import { Address } from '@commercetools/domain-types/account/Address';
-import { Cart } from '@commercetools/domain-types/cart/Cart';
-import { Discount } from '@commercetools/domain-types/cart/Discount';
-import { Variant } from '@commercetools/domain-types/product/Variant';
+import { Address } from '@commercetools/frontend-domain-types/account/Address';
+import { Cart } from '@commercetools/frontend-domain-types/cart/Cart';
+import { Discount } from '@commercetools/frontend-domain-types/cart/Discount';
+import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
 import { revalidateOptions } from 'frontastic';
 import { SDK } from 'sdk';
 
@@ -15,7 +15,9 @@ export type CartDetails = {
 export const cartItems = () => {
   const extensions = SDK.getExtensions();
 
-  return useSWR('/action/cart/getCart', extensions.getCart, revalidateOptions);
+  const result = useSWR('/action/cart/getCart', extensions.cart.getCart, revalidateOptions);
+
+  return { data: (result as any).data?.data };
 };
 
 export const addItem = async (variant: Variant, quantity: number) => {
@@ -28,27 +30,31 @@ export const addItem = async (variant: Variant, quantity: number) => {
     },
   };
 
-  const res = await extensions.addCartItem(payload);
+  const res = await extensions.cart.addItem(payload);
   mutate('/action/cart/getCart', res);
 };
 
 export const orderCart = async () => {
   const extensions = SDK.getExtensions();
 
-  const res = await extensions.checkoutCart();
+  const res = await extensions.cart.checkout();
   mutate('/action/cart/getCart', res);
 };
 
 export const orderHistory = async () => {
   const extensions = SDK.getExtensions();
 
-  return await extensions.getOrderHistory();
+  const res = await extensions.cart.getOrderHistory();
+
+  return (res as any).data;
 };
 
 export const getProjectSettings = async () => {
   const extensions = SDK.getExtensions();
 
-  return await extensions.getProjectSettings();
+  const res = await extensions.project.getSettings();
+
+  return (res as any).data;
 };
 
 export const removeItem = async (lineItemId: string) => {
@@ -58,14 +64,16 @@ export const removeItem = async (lineItemId: string) => {
     lineItem: { id: lineItemId },
   };
 
-  const res = await extensions.removeCartItem(payload);
+  const res = await extensions.cart.removeItem(payload);
   mutate('/action/cart/getCart', res);
 };
 
 export const shippingMethods = () => {
   const extensions = SDK.getExtensions();
 
-  return useSWR('/action/cart/getShippingMethods', extensions.getShippingMethods, revalidateOptions);
+  const result = useSWR('/action/cart/getShippingMethods', extensions.cart.getShippingMethods, revalidateOptions);
+
+  return { data: (result as any).data?.data };
 };
 
 export const updateItem = async (lineItemId: string, newQuantity: number) => {
@@ -77,16 +85,18 @@ export const updateItem = async (lineItemId: string, newQuantity: number) => {
       count: newQuantity,
     },
   };
-  const res = await extensions.updateCartItem(payload);
+  const res = await extensions.cart.updateItem(payload);
   mutate('/action/cart/getCart', res);
 };
 
 export const updateCart = async (payload: CartDetails): Promise<Cart> => {
   const extensions = SDK.getExtensions();
 
-  const res = await extensions.updateCart(payload);
+  const res = await extensions.cart.updateCart(payload);
+
   mutate('/action/cart/getCart', res);
-  return res;
+
+  return (res as any).data;
 };
 
 export const setShippingMethod = async (shippingMethodId: string) => {
@@ -98,7 +108,8 @@ export const setShippingMethod = async (shippingMethodId: string) => {
     },
   };
 
-  const res = await extensions.setShippingMethod(payload);
+  const res = await extensions.cart.setShippingMethod(payload);
+
   mutate('/action/cart/getCart', res);
 };
 
@@ -108,9 +119,9 @@ export const redeemDiscountCode = async (code: string) => {
   const payload = {
     code: code,
   };
-  const res = await extensions.redeemDiscountCode(payload);
+  const res = await extensions.cart.redeemDiscountCode(payload);
 
-  if ((res as Cart).cartId) {
+  if (((res as any).data as Cart).cartId) {
     mutate('/action/cart/getCart', res);
   } else {
     throw new Error('code not valid');
@@ -120,6 +131,7 @@ export const redeemDiscountCode = async (code: string) => {
 export const removeDiscountCode = async (discount: Discount) => {
   const extensions = SDK.getExtensions();
 
-  const res = await extensions.removeDiscountCode({ discountId: discount.discountId });
+  const res = await extensions.cart.removeDiscountCode({ discountId: discount.discountId });
+
   mutate('/action/cart/getCart', res);
 };

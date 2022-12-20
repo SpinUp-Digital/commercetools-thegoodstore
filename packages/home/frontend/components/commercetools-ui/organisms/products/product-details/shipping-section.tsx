@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { ShippingMethod } from '@commercetools/domain-types/cart/ShippingMethod';
+import { ShippingMethod } from '@commercetools/frontend-domain-types/cart/ShippingMethod';
 import { TruckIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import Input from 'components/commercetools-ui/atoms/input';
 import Typography from 'components/commercetools-ui/atoms/typography';

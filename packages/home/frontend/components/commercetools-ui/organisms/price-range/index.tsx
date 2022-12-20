@@ -1,8 +1,8 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
-import { Product } from '@commercetools/domain-types/product/Product';
-import { Facet } from '@commercetools/domain-types/result/Facet';
-import { RangeFacet } from '@commercetools/domain-types/result/RangeFacet';
+import { Product } from '@commercetools/frontend-domain-types/product/Product';
+import { Facet } from '@commercetools/frontend-domain-types/result/Facet';
+import { RangeFacet } from '@commercetools/frontend-domain-types/result/RangeFacet';
 import { TwoThumbInputRange } from 'react-two-thumb-input-range';
 import { URLParam } from 'helpers/utils/updateURLParams';
 

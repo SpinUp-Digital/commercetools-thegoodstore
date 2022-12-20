@@ -1,6 +1,6 @@
 import { UIColor } from 'components/commercetools-ui/organisms/products/product-details/types';
-import { Product } from '@commercetools/domain-types/product/Product';
-import { Variant } from '@commercetools/domain-types/product/Variant';
+import { Product } from '@commercetools/frontend-domain-types/product/Product';
+import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
 
 const grayFix = (word: string) => (word === 'grey' ? 'gray' : word);
 

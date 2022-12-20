@@ -1,5 +1,5 @@
-import { Account } from '@commercetools/domain-types/account/Account';
-import { Address } from '@commercetools/domain-types/account/Address';
+import { Account } from '@commercetools/frontend-domain-types/account/Account';
+import { Address } from '@commercetools/frontend-domain-types/account/Address';
 import { GetAccountResult, RegisterAccount, UpdateAccount } from 'frontastic/actions/account';
 
 export interface UseAccount extends GetAccountResult {
