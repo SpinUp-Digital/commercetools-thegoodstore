@@ -1,7 +1,7 @@
 import { MouseEvent } from 'react';
 import { useRouter } from 'next/router';
-import { Cart } from '@commercetools/domain-types/cart/Cart';
-import { LineItem } from '@commercetools/domain-types/cart/LineItem';
+import { Cart } from '@commercetools/frontend-domain-types/cart/Cart';
+import { LineItem } from '@commercetools/frontend-domain-types/cart/LineItem';
 import { useTranslation, Trans } from 'react-i18next';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';

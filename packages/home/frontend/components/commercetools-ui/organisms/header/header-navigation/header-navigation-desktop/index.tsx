@@ -1,5 +1,5 @@
 import React from 'react';
-import { Category } from '@commercetools/domain-types/product/Category';
+import { Category } from 'types/category';
 import HeaderNavigationButtonDesktop from 'components/commercetools-ui/organisms/header/header-navigation/header-navigation-desktop/header-navigation-button';
 import { Market, Tile } from 'components/commercetools-ui/organisms/header/types';
 import useClassNames from 'helpers/hooks/useClassNames';

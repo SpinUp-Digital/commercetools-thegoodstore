@@ -69,7 +69,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params, locale, r
 
   const frontastic = createClient();
   const data = await frontastic.getPreview(params.previewId.toString(), locale, req, res);
-  const categories = await extensions.queryProductCategories({ query: { limit: 99 } });
+  const categories = await extensions.product.queryCategories({ query: { limit: 99 } });
 
   return {
     props: {

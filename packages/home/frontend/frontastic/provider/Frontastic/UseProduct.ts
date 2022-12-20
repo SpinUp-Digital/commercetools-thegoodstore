@@ -1,4 +1,4 @@
-import { Category } from '@commercetools/domain-types/product/Category';
+import { Category } from 'types/category';
 
 export interface UseProduct {
   data?: Category;

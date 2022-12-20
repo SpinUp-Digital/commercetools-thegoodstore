@@ -1,5 +1,5 @@
 import * as nodemailer from 'nodemailer';
-import { Account } from '@commercetools/domain-types/account/Account';
+import { Account } from '@commercetools/frontend-domain-types/account/Account';
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
 
 export class EmailApi {

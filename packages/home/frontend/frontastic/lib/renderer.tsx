@@ -1,4 +1,4 @@
-import { Category } from '@commercetools/domain-types/product/Category';
+import { Category } from 'types/category';
 import React from 'react';
 import { InstantSearchServerState } from 'react-instantsearch-hooks';
 import { Cell as LayoutElement } from './cell';

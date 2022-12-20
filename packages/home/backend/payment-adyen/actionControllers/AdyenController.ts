@@ -5,8 +5,8 @@ import { CartApi } from '../../commerce-commercetools/apis/CartApi';
 import { Guid } from '../utils/Guid';
 import { getLocale } from '../utils/Request';
 import { CartFetcher } from '../utils/CartFetcher';
-import { Account } from '@commercetools/domain-types/account/Account';
-import { Payment, PaymentStatuses } from '@commercetools/domain-types/cart/Payment';
+import { Account } from '@commercetools/frontend-domain-types/account/Account';
+import { Payment, PaymentStatuses } from '@commercetools/frontend-domain-types/cart/Payment';
 
 const { hmacValidator } = require('@adyen/api-library');
 

@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Variant } from '@commercetools/domain-types/product/Variant';
+import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
 
 const useVariantWithDiscount = (variants: Partial<Variant>[]) => {
   const variant = useMemo(() => {

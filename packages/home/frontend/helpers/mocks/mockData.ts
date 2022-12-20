@@ -1,15 +1,15 @@
-import { Account } from '@commercetools/domain-types/account/Account';
-import { AccountToken } from '@commercetools/domain-types/account/AccountToken';
-import { Address } from '@commercetools/domain-types/account/Address';
-import { Group } from '@commercetools/domain-types/account/Group';
-import { Cart } from '@commercetools/domain-types/cart/Cart';
-import { LineItem as CartLineItem } from '@commercetools/domain-types/cart/LineItem';
-import { Order } from '@commercetools/domain-types/cart/Order';
-import { ShippingMethod } from '@commercetools/domain-types/cart/ShippingMethod';
-import { Product } from '@commercetools/domain-types/product/Product';
-import { Variant } from '@commercetools/domain-types/product/Variant';
-import { LineItem } from '@commercetools/domain-types/wishlist/LineItem';
-import { Wishlist } from '@commercetools/domain-types/wishlist/Wishlist';
+import { Account } from '@commercetools/frontend-domain-types/account/Account';
+import { AccountToken } from '@commercetools/frontend-domain-types/account/AccountToken';
+import { Address } from '@commercetools/frontend-domain-types/account/Address';
+import { Group } from '@commercetools/frontend-domain-types/account/Group';
+import { Cart } from '@commercetools/frontend-domain-types/cart/Cart';
+import { LineItem as CartLineItem } from '@commercetools/frontend-domain-types/cart/LineItem';
+import { Order } from '@commercetools/frontend-domain-types/cart/Order';
+import { ShippingMethod } from '@commercetools/frontend-domain-types/cart/ShippingMethod';
+import { Product } from '@commercetools/frontend-domain-types/product/Product';
+import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
+import { LineItem } from '@commercetools/frontend-domain-types/wishlist/LineItem';
+import { Wishlist } from '@commercetools/frontend-domain-types/wishlist/Wishlist';
 import { NextFrontasticImage } from 'frontastic/lib/image';
 
 export const accordionMockItems = [

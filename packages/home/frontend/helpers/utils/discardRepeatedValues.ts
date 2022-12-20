@@ -1,4 +1,4 @@
-import { Variant } from '@commercetools/domain-types/product/Variant';
+import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
 
 export const discardRepeatedValues = (variants: Variant[], attribute: string) => {
   const uniqueValues: { [key: string]: boolean } = {};

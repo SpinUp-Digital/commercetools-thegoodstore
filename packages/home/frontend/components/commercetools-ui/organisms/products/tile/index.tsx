@@ -1,8 +1,9 @@
 import React, { FC, useMemo, useState } from 'react';
 import NextLink from 'next/link';
-import { Product } from '@commercetools/domain-types/product/Product';
-import { Variant } from '@commercetools/domain-types/product/Variant';
-import { LineItem } from '@commercetools/domain-types/wishlist/LineItem';
+import { useRouter } from 'next/router';
+import { Product } from '@commercetools/frontend-domain-types/product/Product';
+import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
+import { LineItem } from '@commercetools/frontend-domain-types/wishlist/LineItem';
 import Prices from 'components/commercetools-ui/atoms/prices';
 import QuickView from 'components/commercetools-ui/organisms/products/product-quick-view';
 import WishlistButton from 'components/commercetools-ui/organisms/wishlist-button';

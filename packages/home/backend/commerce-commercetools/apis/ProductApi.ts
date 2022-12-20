@@ -1,15 +1,15 @@
-import { Result } from '@commercetools/domain-types/product/Result';
+import { Result } from '@commercetools/frontend-domain-types/product/Result';
 import { ProductMapper } from '../mappers/ProductMapper';
-import { ProductQuery } from '@commercetools/domain-types/query/ProductQuery';
-import { Product } from '@commercetools/domain-types/product/Product';
+import { ProductQuery } from '@commercetools/frontend-domain-types/query/ProductQuery';
+import { Product } from '@commercetools/frontend-domain-types/product/Product';
 import { BaseApi } from './BaseApi';
-import { FilterField, FilterFieldTypes } from '@commercetools/domain-types/product/FilterField';
-import { FilterTypes } from '@commercetools/domain-types/query/Filter';
-import { TermFilter } from '@commercetools/domain-types/query/TermFilter';
-import { RangeFilter } from '@commercetools/domain-types/query/RangeFilter';
-import { CategoryQuery } from '@commercetools/domain-types/query/CategoryQuery';
-import { Category } from '@commercetools/domain-types/product/Category';
-import { FacetDefinition } from '@commercetools/domain-types/product/FacetDefinition';
+import { FilterField, FilterFieldTypes } from '@commercetools/frontend-domain-types/product/FilterField';
+import { FilterTypes } from '@commercetools/frontend-domain-types/query/Filter';
+import { TermFilter } from '@commercetools/frontend-domain-types/query/TermFilter';
+import { RangeFilter } from '@commercetools/frontend-domain-types/query/RangeFilter';
+import { CategoryQuery } from '../interfaces/CategoryQuery';
+import { Category } from '@commercetools/frontend-domain-types/product/Category';
+import { FacetDefinition } from '@commercetools/frontend-domain-types/product/FacetDefinition';
 
 export class ProductApi extends BaseApi {
   protected getOffsetFromCursor = (cursor: string) => {
@@ -239,9 +239,7 @@ export class ProductApi extends BaseApi {
             currentCategories.forEach((category) => nodesQueue.push(nodes[category.id].subCategories));
           }
 
-          const items = categories.map((category) =>
-            ProductMapper.commercetoolsCategoryToCategory(category, locale),
-          );
+          const items = categories.map((category) => ProductMapper.commercetoolsCategoryToCategory(category, locale));
 
           const result: Result = {
             total: response.body.total,
@@ -260,7 +258,7 @@ export class ProductApi extends BaseApi {
         })
         .catch((error) => {
           throw error;
-        });  
+        });
     } catch (error) {
       //TODO: better error, get status code etc...
       throw new Error(`queryCategories failed. ${error}`);

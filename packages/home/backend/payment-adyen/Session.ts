@@ -1,4 +1,4 @@
-import { Money } from '@commercetools/domain-types/product/Money';
+import { Money } from '@commercetools/frontend-domain-types/product/Money';
 
 export interface CreateSessionDTO {
   amount: Money;

@@ -1,12 +1,12 @@
 import { DataSourceConfiguration, Request } from '@frontastic/extension-types';
-import { ProductQuery, SortAttributes, SortOrder } from '@commercetools/domain-types/query/ProductQuery';
-import { Filter, FilterTypes } from '@commercetools/domain-types/query/Filter';
-import { RangeFilter } from '@commercetools/domain-types/query/RangeFilter';
-import { TermFilter } from '@commercetools/domain-types/query/TermFilter';
-import { FilterFieldTypes } from '@commercetools/domain-types/product/FilterField';
-import { Facet } from '@commercetools/domain-types/query/Facet';
-import { TermFacet } from '@commercetools/domain-types/query/TermFacet';
-import { RangeFacet } from '@commercetools/domain-types/query/RangeFacet';
+import { ProductQuery, SortAttributes, SortOrder } from '@commercetools/frontend-domain-types/query/ProductQuery';
+import { Filter, FilterTypes } from '@commercetools/frontend-domain-types/query/Filter';
+import { RangeFilter } from '@commercetools/frontend-domain-types/query/RangeFilter';
+import { TermFilter } from '@commercetools/frontend-domain-types/query/TermFilter';
+import { FilterFieldTypes } from '@commercetools/frontend-domain-types/product/FilterField';
+import { Facet } from '@commercetools/frontend-domain-types/query/Facet';
+import { TermFacet } from '@commercetools/frontend-domain-types/query/TermFacet';
+import { RangeFacet } from '@commercetools/frontend-domain-types/query/RangeFacet';
 
 export class ProductQueryFactory {
   static queryFromParams: (request: Request, config?: DataSourceConfiguration) => ProductQuery = (

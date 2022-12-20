@@ -1,4 +1,4 @@
-import { Category } from '@commercetools/domain-types/product/Category';
+import { Category } from 'types/category';
 import { Reference } from 'types/reference';
 import { NextFrontasticImage } from 'frontastic/lib/image';
 

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { ShippingMethod } from '@commercetools/domain-types/cart/ShippingMethod';
+import { ShippingMethod } from '@commercetools/frontend-domain-types/cart/ShippingMethod';
 import toast from 'react-hot-toast';
 import Address from 'components/commercetools-ui/organisms/adyen-checkout/panels/address';
 import Checkout from 'components/commercetools-ui/organisms/adyen-checkout/panels/checkout';

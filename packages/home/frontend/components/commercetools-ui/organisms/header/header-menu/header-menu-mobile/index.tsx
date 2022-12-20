@@ -1,6 +1,6 @@
 import React, { FC, useMemo, useState } from 'react';
 import Link from 'next/link';
-import { Category } from '@commercetools/domain-types/product/Category';
+import { Category } from 'types/category';
 import Button from 'components/commercetools-ui/atoms/button';
 import Drawer from 'components/commercetools-ui/atoms/drawer';
 import Typography from 'components/commercetools-ui/atoms/typography';

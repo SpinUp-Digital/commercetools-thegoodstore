@@ -1,6 +1,6 @@
 import { FC, useMemo } from 'react';
 import { useRouter } from 'next/router';
-import { LineItem } from '@commercetools/domain-types/wishlist/LineItem';
+import { LineItem } from '@commercetools/frontend-domain-types/wishlist/LineItem';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import Variant from 'components/commercetools-ui/organisms/variant';
 import WishlistButton from 'components/commercetools-ui/organisms/wishlist-button';

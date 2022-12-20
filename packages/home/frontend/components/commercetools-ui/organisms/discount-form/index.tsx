@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Discount } from '@commercetools/domain-types/cart/Discount';
+import { Discount } from '@commercetools/frontend-domain-types/cart/Discount';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import CloseIcon from 'components/icons/close';
 import useClassNames from 'helpers/hooks/useClassNames';

@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { Variant } from '@commercetools/domain-types/product/Variant';
+import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
 import Button from 'components/commercetools-ui/atoms/button';
 import Dropdown from 'components/commercetools-ui/atoms/dropdown';
 import Link from 'components/commercetools-ui/atoms/link';

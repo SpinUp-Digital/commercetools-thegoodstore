@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
-import { LineItem } from '@commercetools/domain-types/cart/LineItem';
-import { LineItem as LineItemWishlist } from '@commercetools/domain-types/wishlist/LineItem';
+import { LineItem } from '@commercetools/frontend-domain-types/cart/LineItem';
+import { LineItem as LineItemWishlist } from '@commercetools/frontend-domain-types/wishlist/LineItem';
 import { TrashIcon } from '@heroicons/react/24/outline';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import useClassNames from 'helpers/hooks/useClassNames';

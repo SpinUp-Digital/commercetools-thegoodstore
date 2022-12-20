@@ -1,6 +1,6 @@
-import { Money } from '@commercetools/domain-types/product/Money';
-import { Product } from '@commercetools/domain-types/product/Product';
-import { Variant } from '@commercetools/domain-types/product/Variant';
+import { Money } from '@commercetools/frontend-domain-types/product/Money';
+import { Product } from '@commercetools/frontend-domain-types/product/Product';
+import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
 
 export type UIProduct = {
   name: string;

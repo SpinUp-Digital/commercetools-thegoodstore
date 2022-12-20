@@ -1,22 +1,27 @@
 import useSWR, { mutate } from 'swr';
 import { revalidateOptions } from 'frontastic';
 import { SDK } from 'sdk';
-import { sdk } from '@commercetools/sdk';
-import { LineItem } from '@commercetools/domain-types/wishlist/LineItem';
-import { Wishlist } from '@commercetools/domain-types/wishlist/Wishlist';
+import { sdk } from '@commercetools/frontend-sdk';
+import { LineItem } from '@commercetools/frontend-domain-types/wishlist/LineItem';
+import { Wishlist } from '@commercetools/frontend-domain-types/wishlist/Wishlist';
 
 export const getWishlist = () => {
   const extensions = SDK.getExtensions();
 
-  return useSWR('/action/wishlist/getWishlist', extensions.getWishlist, revalidateOptions);
+  const result = useSWR('/action/wishlist/getWishlist', extensions.wishlist.getWishlist, revalidateOptions);
+
+  return { ...result, data: (result as any).data?.data };
 };
 
 export const addToWishlist = async (wishlist: Wishlist, lineItem: LineItem, count = 1) => {
   const extensions = SDK.getExtensions();
   const newWishlist = { ...wishlist, lineItems: [...wishlist.lineItems, lineItem] };
-  const res = extensions.addToWishlist({ variant: { sku: lineItem.variant.sku }, count });
+  const res = extensions.wishlist.addItem({ variant: { sku: lineItem.variant.sku }, count });
 
-  await mutate('/action/wishlist/getWishlist', res, { optimisticData: newWishlist, rollbackOnError: true });
+  await mutate('/action/wishlist/getWishlist', res, {
+    optimisticData: { data: newWishlist },
+    rollbackOnError: true,
+  });
 };
 
 export const removeLineItem = async (wishlist: Wishlist, lineItem: LineItem) => {
@@ -26,17 +31,24 @@ export const removeLineItem = async (wishlist: Wishlist, lineItem: LineItem) => 
     lineItems: wishlist.lineItems.filter((item) => item.lineItemId !== lineItem.lineItemId),
   };
 
-  const res = extensions.removeFromWishlist({ lineItem: { id: lineItem.lineItemId } });
-  await mutate('/action/wishlist/getWishlist', res, { optimisticData: newWishlist, rollbackOnError: true });
+  const res = extensions.wishlist.removeItem({ lineItem: { id: lineItem.lineItemId } });
+  await mutate('/action/wishlist/getWishlist', res, {
+    optimisticData: { data: newWishlist },
+    rollbackOnError: true,
+  });
 };
 
 export const clearWishlist = async (wishlist: Wishlist) => {
-  const res = sdk.callAction('wishlist/clearWishlist', {});
+  const res = sdk.callAction({ actionName: 'wishlist/clearWishlist' });
   const newWishlist = {
     ...wishlist,
     lineItems: [],
   };
-  await mutate('/action/wishlist/getWishlist', res, { optimisticData: newWishlist, rollbackOnError: true });
+
+  await mutate('/action/wishlist/getWishlist', (res as any).data, {
+    optimisticData: { data: newWishlist },
+    rollbackOnError: true,
+  });
 };
 
 export const updateLineItem = async (wishlist: Wishlist, lineItem: LineItem, count = 1) => {
@@ -50,6 +62,9 @@ export const updateLineItem = async (wishlist: Wishlist, lineItem: LineItem, cou
     }),
   };
 
-  const res = extensions.updateWishlistItem({ lineItem: { id: lineItem.lineItemId }, count });
-  await mutate('/action/wishlist/getWishlist', res, { optimisticData: newWishlist, rollbackOnError: true });
+  const res = extensions.wishlist.updateItem({ lineItem: { id: lineItem.lineItemId }, count });
+  await mutate('/action/wishlist/getWishlist', (res as any).data, {
+    optimisticData: newWishlist,
+    rollbackOnError: true,
+  });
 };

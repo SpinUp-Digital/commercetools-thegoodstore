@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { Address } from '@commercetools/domain-types/account/Address';
+import { Address } from '@commercetools/frontend-domain-types/account/Address';
 import * as yup from 'yup';
 import { ObjectShape } from 'yup/lib/object';
 import EmptyCart from 'components/commercetools-ui/organisms/old_cart/emptyCart';

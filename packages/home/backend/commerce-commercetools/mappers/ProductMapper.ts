@@ -11,32 +11,36 @@ import {
   RangeFacetResult as CommercetoolsRangeFacetResult,
   TermFacetResult as CommercetoolsTermFacetResult,
   TypedMoney,
-  Price as CommercetoolsPrice
+  Price as CommercetoolsPrice,
 } from '@commercetools/platform-sdk';
-import { Product } from '@commercetools/domain-types/product/Product';
-import { Variant } from '@commercetools/domain-types/product/Variant';
-import { Attributes } from '@commercetools/domain-types/product/Attributes';
-import { Category } from '@commercetools/domain-types/product/Category';
+import { Product } from '@commercetools/frontend-domain-types/product/Product';
+import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
+import { Attributes } from '@commercetools/frontend-domain-types/product/Attributes';
+import { Category } from '@commercetools/frontend-domain-types/product/Category';
 import { ProductRouter } from '../utils/ProductRouter';
 import { Locale } from '../Locale';
-import { Money } from '@commercetools/domain-types/product/Money';
-import { FilterField, FilterFieldTypes, FilterFieldValue } from '@commercetools/domain-types/product/FilterField';
+import { Money } from '@commercetools/frontend-domain-types/product/Money';
+import {
+  FilterField,
+  FilterFieldTypes,
+  FilterFieldValue,
+} from '@commercetools/frontend-domain-types/product/FilterField';
 import {
   AttributeEnumType,
   AttributeLocalizedEnumType,
   AttributeSetType,
   AttributeType,
 } from '@commercetools/platform-sdk/dist/declarations/src/generated/models/product-type';
-import { Facet, FacetTypes } from '@commercetools/domain-types/result/Facet';
-import { TermFacet } from '@commercetools/domain-types/result/TermFacet';
-import { RangeFacet as ResultRangeFacet } from '@commercetools/domain-types/result/RangeFacet';
-import { Term } from '@commercetools/domain-types/result/Term';
-import { ProductQuery } from '@commercetools/domain-types/query/ProductQuery';
-import { TermFacet as QueryTermFacet } from '@commercetools/domain-types/query/TermFacet';
-import { RangeFacet as QueryRangeFacet } from '@commercetools/domain-types/query/RangeFacet';
-import { Facet as QueryFacet } from '@commercetools/domain-types/query/Facet';
-import { FacetDefinition } from '@commercetools/domain-types/product/FacetDefinition';
-import { FilterTypes } from '@commercetools/domain-types/query/Filter';
+import { Facet, FacetTypes } from '@commercetools/frontend-domain-types/result/Facet';
+import { TermFacet } from '@commercetools/frontend-domain-types/result/TermFacet';
+import { RangeFacet as ResultRangeFacet } from '@commercetools/frontend-domain-types/result/RangeFacet';
+import { Term } from '@commercetools/frontend-domain-types/result/Term';
+import { ProductQuery } from '@commercetools/frontend-domain-types/query/ProductQuery';
+import { TermFacet as QueryTermFacet } from '@commercetools/frontend-domain-types/query/TermFacet';
+import { RangeFacet as QueryRangeFacet } from '@commercetools/frontend-domain-types/query/RangeFacet';
+import { Facet as QueryFacet } from '@commercetools/frontend-domain-types/query/Facet';
+import { FacetDefinition } from '@commercetools/frontend-domain-types/product/FacetDefinition';
+import { FilterTypes } from '@commercetools/frontend-domain-types/query/Filter';
 
 const TypeMap = new Map<string, string>([
   ['boolean', FilterFieldTypes.BOOLEAN],

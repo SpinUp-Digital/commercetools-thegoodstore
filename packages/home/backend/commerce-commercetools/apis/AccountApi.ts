@@ -1,6 +1,6 @@
 import { BaseApi } from './BaseApi';
-import { Account } from '@commercetools/domain-types/account/Account';
-import { AccountToken } from '@commercetools/domain-types/account/AccountToken';
+import { Account } from '@commercetools/frontend-domain-types/account/Account';
+import { AccountToken } from '@commercetools/frontend-domain-types/account/AccountToken';
 import {
   CustomerDraft,
   CustomerUpdate,
@@ -8,9 +8,9 @@ import {
 } from '@commercetools/platform-sdk/dist/declarations/src/generated/models/customer';
 import { AccountMapper } from '../mappers/AccontMapper';
 import { BaseAddress } from '@commercetools/platform-sdk/dist/declarations/src/generated/models/common';
-import { Cart } from '@commercetools/domain-types/cart/Cart';
+import { Cart } from '@commercetools/frontend-domain-types/cart/Cart';
 import { CartResourceIdentifier } from '@commercetools/platform-sdk/dist/declarations/src/generated/models/cart';
-import { Address } from '@commercetools/domain-types/account/Address';
+import { Address } from '@commercetools/frontend-domain-types/account/Address';
 import { Guid } from '../utils/Guid';
 import { ExternalError, ValidationError } from '../utils/Errors';
 import { AccountEmailDuplicatedError } from '../errors/AccountEmailDuplicatedError';

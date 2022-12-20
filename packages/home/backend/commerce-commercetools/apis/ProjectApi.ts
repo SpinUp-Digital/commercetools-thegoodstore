@@ -1,5 +1,5 @@
 import { BaseApi } from './BaseApi';
-import { ProjectSettings } from '@commercetools/domain-types/ProjectSettings';
+import { ProjectSettings } from '@commercetools/frontend-domain-types/ProjectSettings';
 
 export class ProjectApi extends BaseApi {
   getProjectSettings: () => Promise<ProjectSettings> = async () => {
