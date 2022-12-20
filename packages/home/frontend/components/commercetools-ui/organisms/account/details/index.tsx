@@ -49,7 +49,7 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({ loginLink }) => {
   }, [account, country, updateCart]);
 
   //user not logged in
-  if (!loggedIn) return <Redirect target={loginLink} />;
+  //if (!loggedIn) return <Redirect target={loginLink} />;
 
   //tabs
   const tabs = [
