@@ -91,63 +91,65 @@ const Cart: FC<Props> = ({ emptyStateImage, emptyStateTitle, emptyStateSubtitle,
           subtitle={emptyStateSubtitle}
         />
       ) : (
-        <div className="grow divide-y divide-neutral-400 overflow-auto px-12 md:px-22">
+        <div className="h-[65vh] grow divide-y divide-neutral-400 overflow-auto px-12 md:px-22">
           {data.lineItems?.map((lineItem) => (
             <CartItem key={lineItem.lineItemId} item={lineItem} />
           ))}
         </div>
       )}
-      {!isEmpty && (
-        <div className="border-t border-neutral-400 px-12 py-24 md:px-22">
-          <AccordionBtn
-            closedSectionTitle={formatCartMessage({ id: 'discount.apply', defaultMessage: 'Apply a discount' })}
-            buttonClassName="font-medium text-14 text-secondary-black"
-          >
-            <DiscountForm />
-          </AccordionBtn>
-        </div>
-      )}
-      <div className="border-t border-neutral-400 bg-white px-12 pt-16 pb-18 md:px-22">
+      <div className="absolute bottom-0 w-full">
         {!isEmpty && (
-          <>
-            <div className="flex items-center justify-between text-14">
-              <span>{formatCartMessage({ id: 'subtotal', defaultMessage: 'Subtotal' })} </span>
-              <span>{CurrencyHelpers.formatForCurrency(transaction.subtotal, locale)}</span>
-            </div>
-
-            {transaction.discount.centAmount > 0 && (
-              <div className="flex items-center justify-between text-14">
-                <span>{formatCartMessage({ id: 'discount', defaultMessage: 'Discount' })} </span>
-                <span>{CurrencyHelpers.formatForCurrency(transaction.discount, locale)}</span>
-              </div>
-            )}
-
-            <div className="flex items-center justify-between text-14">
-              <span>{formatCartMessage({ id: 'tax', defaultMessage: 'Tax' })} </span>
-              <span>{CurrencyHelpers.formatForCurrency(transaction.tax, locale)}</span>
-            </div>
-
-            {transaction.shipping.centAmount > 0 && (
-              <div className="flex items-center justify-between text-14">
-                <span>{formatCartMessage({ id: 'shipping.estimate', defaultMessage: 'Est. Shipping' })} </span>
-                <span>{CurrencyHelpers.formatForCurrency(transaction.shipping, locale)}</span>
-              </div>
-            )}
-          </>
+          <div className="border-t border-neutral-400 bg-neutral-200 px-12 py-24 md:px-22">
+            <AccordionBtn
+              closedSectionTitle={formatCartMessage({ id: 'discount.apply', defaultMessage: 'Apply a discount' })}
+              buttonClassName="font-medium text-14 text-secondary-black"
+            >
+              <DiscountForm />
+            </AccordionBtn>
+          </div>
         )}
+        <div className="border-t  border-neutral-400 bg-white px-12 pt-16 pb-18 md:px-22">
+          {!isEmpty && (
+            <>
+              <div className="flex items-center justify-between text-14">
+                <span>{formatCartMessage({ id: 'subtotal', defaultMessage: 'Subtotal' })} </span>
+                <span>{CurrencyHelpers.formatForCurrency(transaction.subtotal, locale)}</span>
+              </div>
 
-        <div className="mt-26 flex items-center justify-between font-medium">
-          <span>{formatCartMessage({ id: 'total', defaultMessage: 'Total' })}: </span>
-          <span>{CurrencyHelpers.formatForCurrency(transaction.total, locale)}</span>
-        </div>
+              {transaction.discount.centAmount > 0 && (
+                <div className="flex items-center justify-between text-14">
+                  <span>{formatCartMessage({ id: 'discount', defaultMessage: 'Discount' })} </span>
+                  <span>{CurrencyHelpers.formatForCurrency(transaction.discount, locale)}</span>
+                </div>
+              )}
 
-        <div className="mt-16">
-          <button
-            disabled={isEmpty}
-            className="w-full rounded-md bg-primary-black py-12 font-medium text-white transition hover:bg-gray-500 disabled:cursor-not-allowed disabled:bg-neutral-400"
-          >
-            {formatCartMessage({ id: 'checkout.go', defaultMessage: 'Go to checkout' })}
-          </button>
+              <div className="flex items-center justify-between text-14">
+                <span>{formatCartMessage({ id: 'tax', defaultMessage: 'Tax' })} </span>
+                <span>{CurrencyHelpers.formatForCurrency(transaction.tax, locale)}</span>
+              </div>
+
+              {transaction.shipping.centAmount > 0 && (
+                <div className="flex items-center justify-between text-14">
+                  <span>{formatCartMessage({ id: 'shipping.estimate', defaultMessage: 'Est. Shipping' })} </span>
+                  <span>{CurrencyHelpers.formatForCurrency(transaction.shipping, locale)}</span>
+                </div>
+              )}
+            </>
+          )}
+
+          <div className="mt-26 flex items-center justify-between font-medium">
+            <span>{formatCartMessage({ id: 'total', defaultMessage: 'Total' })}: </span>
+            <span>{CurrencyHelpers.formatForCurrency(transaction.total, locale)}</span>
+          </div>
+
+          <div className="mt-16">
+            <button
+              disabled={isEmpty}
+              className="w-full rounded-md bg-primary-black py-12 font-medium text-white transition hover:bg-gray-500 disabled:cursor-not-allowed disabled:bg-neutral-400"
+            >
+              {formatCartMessage({ id: 'checkout.go', defaultMessage: 'Go to checkout' })}
+            </button>
+          </div>
         </div>
       </div>
     </>

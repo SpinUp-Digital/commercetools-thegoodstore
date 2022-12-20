@@ -22,41 +22,36 @@ const Wishlist = ({ emptyWishlistTitle, emptyWishlistSubtitle, emptyWishlistImag
 
   return (
     <>
-      {
+      {!wishlistData?.lineItems?.length ? (
         <>
-          {!wishlistData?.lineItems?.length ? (
-            <>
-              <EmptyState
-                title={emptyWishlistTitle}
-                subtitle={emptyWishlistSubtitle}
-                image={emptyWishlistImage}
-                categories={emptyWishlistCategories}
-              />
-            </>
-          ) : (
-            <>
-              <div className="grow divide-y divide-neutral-400 overflow-auto px-12 md:px-22">
-                {wishlistData?.lineItems?.map((lineItem) => (
-                  <WishlistItem key={lineItem.lineItemId} item={lineItem} />
-                ))}
-              </div>
-              <div className="mt-16 p-20">
-                <div className="overflow-hidden rounded-md border-[0.5px] border-transparent hover:border-primary-black">
-                  <Button
-                    onClick={handleClearWishlist}
-                    variant="ghost"
-                    className="w-full border border-primary-black text-16"
-                  >
-                    {formatWishlistMessage({ id: 'wishlist.clear.list', defaultMessage: 'Clear the list' })}
-                  </Button>
-                </div>
-              </div>
-            </>
-          )}
+          <EmptyState
+            title={emptyWishlistTitle}
+            subtitle={emptyWishlistSubtitle}
+            image={emptyWishlistImage}
+            categories={emptyWishlistCategories}
+          />
         </>
-      }
+      ) : (
+        <>
+          <div className="h-[83vh] grow divide-y divide-neutral-400 overflow-auto px-12 md:px-22">
+            {wishlistData?.lineItems?.map((lineItem) => (
+              <WishlistItem key={lineItem.lineItemId} item={lineItem} />
+            ))}
+          </div>
+          <div className="absolute bottom-0 h-88 w-full p-20">
+            <div className="overflow-hidden rounded-md border-[0.5px] border-transparent hover:border-primary-black">
+              <Button
+                onClick={handleClearWishlist}
+                variant="ghost"
+                className="w-full rounded-md border border-primary-black text-16"
+              >
+                {formatWishlistMessage({ id: 'wishlist.clear.list', defaultMessage: 'Clear the list' })}
+              </Button>
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 };
-
 export default Wishlist;

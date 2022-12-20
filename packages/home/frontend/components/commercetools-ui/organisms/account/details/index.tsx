@@ -85,9 +85,15 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({ loginLink }) => {
               </a>
             ))}
           </ul>
-          <Button onClick={logout} variant="secondary" className="w-full border border-primary-black py-8 px-0">
-            {formatAccountMessage({ id: 'sign.out', defaultMessage: 'Sign out' })}
-          </Button>
+          <div className="overflow-hidden rounded-md border-[0.5px] border-transparent hover:border-primary-black">
+            <Button
+              onClick={logout}
+              variant="ghost"
+              className="w-full rounded-md border border-primary-black py-8 px-0"
+            >
+              {formatAccountMessage({ id: 'sign.out', defaultMessage: 'Sign out' })}
+            </Button>
+          </div>
         </div>
         <div className="col-span-4 py-20 px-16 md:col-span-3 md:overflow-auto md:p-24 2xl:p-44">
           {Content && <Content />}
