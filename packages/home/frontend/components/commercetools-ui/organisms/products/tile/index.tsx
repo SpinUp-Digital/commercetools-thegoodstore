@@ -1,6 +1,5 @@
 import React, { FC, useMemo, useState } from 'react';
 import NextLink from 'next/link';
-import { useRouter } from 'next/router';
 import { Product } from '@commercetools/frontend-domain-types/product/Product';
 import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
 import { LineItem } from '@commercetools/frontend-domain-types/wishlist/LineItem';
