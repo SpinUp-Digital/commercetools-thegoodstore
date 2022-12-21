@@ -8,7 +8,7 @@ import { CartFetcher } from '../utils/CartFetcher';
 import { Account } from '@commercetools/frontend-domain-types/account/Account';
 import { Payment, PaymentStatuses } from '@commercetools/frontend-domain-types/cart/Payment';
 
-const { hmacValidator } = require('@adyen/api-library');
+import { hmacValidator } from '@adyen/api-library'; 
 
 export const createSession = async (request: Request, actionContext: ActionContext) => {
   const adyenApi = new AdyenApi(actionContext.frontasticContext.project.configuration.payment.adyen);
