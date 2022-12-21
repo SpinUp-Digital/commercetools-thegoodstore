@@ -3,5 +3,52 @@
   "name": "commercetools UI product list",
   "icon": "list",
   "category": "Products",
-  "schema": []
+  "schema": [
+    {
+      "name": "Facets configuration",
+      "fields": [
+        {
+          "label": "Facet Configuration",
+          "field": "facetsConfiguration",
+          "type": "group",
+          "fields": [
+            {
+              "label": "Key",
+              "field": "key",
+              "type": "string",
+              "required": true,
+              "translatable": false
+            },
+            {
+              "label": "Type",
+              "field": "type",
+              "type": "enum",
+              "default": "term",
+              "required": true,
+              "values": [
+                {
+                  "name": "Range",
+                  "value": "range"
+                },
+                {
+                  "name": "Color",
+                  "value": "color"
+                },
+                {
+                  "name": "Term",
+                  "value": "term"
+                }
+              ]
+            },
+            {
+              "label": "Label",
+              "field": "label",
+              "type": "string",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

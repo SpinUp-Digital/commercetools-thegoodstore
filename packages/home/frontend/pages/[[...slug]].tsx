@@ -6,7 +6,7 @@ import { renderToString } from 'react-dom/server';
 import { getServerState } from 'react-instantsearch-hooks-server';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { SDK } from 'sdk';
-import { createClient, ResponseError } from 'frontastic';
+import { createClient, PageDataResponse, ResponseError } from 'frontastic';
 import { FrontasticRenderer } from 'frontastic/lib/renderer';
 import { tastics } from 'frontastic/tastics';
 import ProductList from 'frontastic/tastics/products/product-list';
@@ -66,7 +66,7 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({ params
   const frontastic = createClient();
   const [data, categories] = await Promise.all([
     frontastic.getRouteData(params, locale, query, req, res),
-    extensions.product.queryCategories({ query: { limit: 99 } }),
+    extensions.product.queryCategories({ query: { limit: 99 } }).then((res) => (res as any).data),
   ]);
 
   if (data) {
@@ -105,7 +105,22 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({ params
 
   const protocol = req.headers.referer?.split('://')[0] || 'https';
   const serverUrl = `${protocol}://${req.headers.host}${req.url}`;
-  const serverState = await getServerState(<ProductList serverUrl={serverUrl} categories={[]} />, { renderToString });
+
+  const serverState = await getServerState(
+    <ProductList
+      serverUrl={serverUrl}
+      categories={[]}
+      data={{
+        facetsConfiguration: (data as PageDataResponse).page.sections.main.layoutElements
+          .find((layoutElement) =>
+            layoutElement.tastics.find((tastic) => tastic.tasticType === 'commercetools/ui/products/product-list'),
+          )
+          ?.tastics.find((tastic) => tastic.tasticType === 'commercetools/ui/products/product-list')?.configuration
+          .facetsConfiguration,
+      }}
+    />,
+    { renderToString },
+  );
 
   return {
     props: {

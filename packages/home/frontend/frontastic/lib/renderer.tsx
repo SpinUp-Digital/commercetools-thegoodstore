@@ -15,7 +15,7 @@ export function FrontasticRenderer({
   currentHighlight,
 }: {
   data: PageDataResponse & {
-    categories: { data: { items: Category[] } };
+    categories: { items: Category[] };
     serverState?: InstantSearchServerState;
     serverUrl: string;
   };
@@ -42,7 +42,7 @@ export function FrontasticRenderer({
                 tastics={tastics}
                 key={t.tasticId}
                 data={t}
-                categories={data.categories.data.items ?? []}
+                categories={data.categories.items ?? []}
                 dataSources={data.data.dataSources}
                 pageFolder={data.pageFolder}
                 highlight={currentHighlight === t.tasticId}
@@ -68,7 +68,7 @@ export function FrontasticRenderer({
                 tastics={tastics}
                 key={t.tasticId}
                 data={t}
-                categories={data.categories.data.items ?? []}
+                categories={data.categories.items ?? []}
                 dataSources={data.data.dataSources}
                 pageFolder={data.pageFolder}
                 highlight={currentHighlight === t.tasticId}
@@ -94,7 +94,7 @@ export function FrontasticRenderer({
                 tastics={tastics}
                 key={t.tasticId}
                 data={t}
-                categories={data.categories.data.items ?? []}
+                categories={data.categories.items ?? []}
                 dataSources={data.data.dataSources}
                 pageFolder={data.pageFolder}
                 highlight={currentHighlight === t.tasticId}
