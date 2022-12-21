@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
-import { DropdownClassNames, FacetDropdown } from 'components/commercetools-ui/atoms/facet-dropdown';
-import { useFormat } from 'helpers/hooks/useFormat';
 import { ClearRefinements, InstantSearchServerState, SortBy, useHits } from 'react-instantsearch-hooks-web';
+import { DropdownClassNames, FacetDropdown } from 'components/commercetools-ui/atoms/facet-dropdown';
 import { productsIndex } from 'helpers/constants/algolia';
-import { FacetConfiguration } from '../../types';
+import { useFormat } from 'helpers/hooks/useFormat';
 import useDynamicFacets from '../../hooks/useDynamicFacets';
+import { FacetConfiguration } from '../../types';
 
 interface Props {
   facetsConfiguration: Record<string, FacetConfiguration>;

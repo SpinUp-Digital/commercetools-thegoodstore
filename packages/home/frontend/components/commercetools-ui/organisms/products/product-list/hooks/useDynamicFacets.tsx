@@ -1,5 +1,5 @@
-import { Facet } from '@commercetools/frontend-domain-types/query/Facet';
 import { useMemo } from 'react';
+import { Facet } from '@commercetools/frontend-domain-types/query/Facet';
 import ColorFacet from '../components/facets/color';
 import RangeFacet from '../components/facets/range';
 import TermFacet from '../components/facets/term';

@@ -3,14 +3,14 @@ import { Product } from '@commercetools/frontend-domain-types/product/Product';
 import { Hit } from 'instantsearch.js';
 import { Configure, InfiniteHits } from 'react-instantsearch-hooks-web';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { Category } from 'types/category';
-import ProductTile from '../tile';
-import DesktopFacets from './components/desktop-facets';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import { desktop } from 'helpers/utils/screensizes';
-import { FacetConfiguration } from './types';
-import Breadcrumbs from './components/breadcrumb';
+import { Category } from 'types/category';
+import ProductTile from '../tile';
 import AccumalativeTrace from './components/accumalative-trace';
+import Breadcrumbs from './components/breadcrumb';
+import DesktopFacets from './components/desktop-facets';
+import { FacetConfiguration } from './types';
 
 interface Props {
   serverUrl: string;

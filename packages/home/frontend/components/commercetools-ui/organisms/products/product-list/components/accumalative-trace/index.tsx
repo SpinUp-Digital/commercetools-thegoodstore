@@ -1,6 +1,6 @@
-import { useFormat } from 'helpers/hooks/useFormat';
 import React from 'react';
 import { useHits } from 'react-instantsearch-hooks';
+import { useFormat } from 'helpers/hooks/useFormat';
 
 const AccumalativeTrace = () => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });

@@ -1,8 +1,8 @@
+import React, { useMemo } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'components/commercetools-ui/atoms/link';
 import Breadcrumb from 'components/commercetools-ui/organisms/breadcrumb';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { useRouter } from 'next/router';
-import React, { useMemo } from 'react';
 import { Category } from 'types/category';
 
 interface Props {
