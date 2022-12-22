@@ -64,7 +64,7 @@ const Drawer: FC<DrawerProps> = ({ className, isOpen, direction, blockScrolling 
     <>
       {isOpen && <div className="fixed top-0 left-0 z-10 h-full w-full bg-secondary-black opacity-30" />}
 
-      <div ref={ref} className={drawerClassName}>
+      <div ref={ref} style={{ display: isOpen ? 'block' : 'none' }} className={drawerClassName}>
         <div className="flex flex-col items-stretch">
           <>{children}</>
         </div>
