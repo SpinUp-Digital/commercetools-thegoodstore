@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Button from 'components/commercetools-ui/atoms/button';
 import Typography from 'components/commercetools-ui/atoms/typography';
+import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useHash from 'helpers/hooks/useHash';
 import useI18n from 'helpers/hooks/useI18n';
@@ -15,11 +16,34 @@ import {
   CustomerSupportSection,
 } from './sections/exporter';
 
-export interface AccountDetailsProps {
-  loginLink?: Reference;
+export interface FAQ {
+  question: string;
+  answer: string;
 }
 
-const AccountDetails: React.FC<AccountDetailsProps> = ({ loginLink }) => {
+export interface AccountDetailsProps {
+  loginLink?: Reference;
+  phoneNumber: string;
+  workingHoursWeekdays: string;
+  workingHoursWeekends: string;
+  email: string;
+  addressLine: string;
+  cityAndPostalCode: string;
+  country: string;
+  faqs: FAQ[];
+}
+
+const AccountDetails: React.FC<AccountDetailsProps> = ({
+  loginLink,
+  phoneNumber,
+  workingHoursWeekdays,
+  workingHoursWeekends,
+  email,
+  addressLine,
+  cityAndPostalCode,
+  country: organizationCountry,
+  faqs,
+}) => {
   //account data
   const { account, loggedIn, logout } = useAccount();
 
@@ -48,6 +72,8 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({ loginLink }) => {
     });
   }, [account, country, updateCart]);
 
+  const navigationButtonClassNames = useClassNames(['hover:underline']);
+
   //user not logged in
   //if (!loggedIn) return <Redirect target={loginLink} />;
 
@@ -62,11 +88,22 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({ loginLink }) => {
 
   //tabs-content mapping
   const mapping = {
-    '#': MyAccountSection,
-    '#orders': OrdersHistorySection,
-    '#payment': PaymentMethodsSection,
-    '#addresses': AddressesSection,
-    '#support': CustomerSupportSection,
+    '#': <MyAccountSection />,
+    '#orders': <OrdersHistorySection />,
+    '#payment': <PaymentMethodsSection />,
+    '#addresses': <AddressesSection />,
+    '#support': (
+      <CustomerSupportSection
+        phoneNumber={phoneNumber}
+        workingHoursWeekdays={workingHoursWeekdays}
+        workingHoursWeekends={workingHoursWeekends}
+        email={email}
+        addressLine={addressLine}
+        cityAndPostalCode={cityAndPostalCode}
+        country={organizationCountry}
+        faqs={faqs}
+      />
+    ),
   };
 
   //current rendered content
@@ -79,7 +116,12 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({ loginLink }) => {
           <ul className="grid gap-36 pl-8">
             {tabs.map((tab) => (
               <a key={tab.name} href={tab.href}>
-                <Typography className="hover:underline" fontSize={16} medium={tab.href === hash}>
+                <Typography
+                  className={`hover:underline ${tab.href === hash ? 'text-primary-black' : 'text-secondary-black'}`}
+                  color="neutral-400"
+                  fontSize={16}
+                  medium={tab.href === hash}
+                >
                   {tab.name}
                 </Typography>
               </a>
@@ -96,7 +138,7 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({ loginLink }) => {
           </div>
         </div>
         <div className="col-span-4 py-20 px-16 md:col-span-3 md:overflow-auto md:p-24 2xl:p-44">
-          {Content && <Content />}
+          {Content && Content}
         </div>
       </div>
     </div>

@@ -19,14 +19,14 @@ const LoggedIn = () => {
       </Popover.Button>
 
       <Popover.Button className="w-full">
-        <Link link="/account#support" className="mt-20 block w-fit">
+        <Link link="/account#support" className="mt-32 block w-fit">
           <Typography fontSize={16} fontFamily="inter" className="text-primary-black hover:underline">
             {formatAccountMessage({ id: 'customer.support', defaultMessage: 'Membership info' })}
           </Typography>
         </Link>
       </Popover.Button>
 
-      <Popover.Button className="mt-20 block w-full">
+      <Popover.Button className="mt-32 block w-full pb-10">
         <div onClick={logout} className="w-fit">
           <Typography fontSize={16} fontFamily="inter" className="text-primary-black hover:underline">
             {formatAccountMessage({ id: 'sign.out', defaultMessage: 'Membership info' })}
