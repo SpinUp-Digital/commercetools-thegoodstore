@@ -12,7 +12,8 @@ import OrderSummary from './orderSummary';
 
 export interface Props {
   pageTitle?: string;
-  emptyStateImage?: { media: NextFrontasticImage['media'] | string };
+  //emptyStateImage?: { media: NextFrontasticImage['media'] | string };
+  emptyStateImage?: NextFrontasticImage;
   emptyStateTitle?: string;
   emptyStateSubtitle?: string;
   emptyStateCTALabel?: string;

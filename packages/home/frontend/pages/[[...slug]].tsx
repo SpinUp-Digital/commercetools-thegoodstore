@@ -111,7 +111,7 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({ params
       serverUrl={serverUrl}
       categories={[]}
       data={{
-        facetsConfiguration: (data as PageDataResponse).page.sections.main.layoutElements
+        facetsConfiguration: (data as PageDataResponse).page?.sections?.main?.layoutElements
           .find((layoutElement) =>
             layoutElement.tastics.find((tastic) => tastic.tasticType === 'commercetools/ui/products/product-list'),
           )
