@@ -11,6 +11,8 @@
           "label": "Facet Configuration",
           "field": "facetsConfiguration",
           "type": "group",
+          "min": 0,
+          "itemLabelField": "key",
           "fields": [
             {
               "label": "Key",
@@ -45,6 +47,47 @@
               "field": "label",
               "type": "string",
               "required": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Prices Configuration",
+      "fields": [
+        {
+          "label": "Price Configuration",
+          "field": "pricesConfiguration",
+          "type": "group",
+          "min": 0,
+          "itemLabelField": "key",
+          "fields": [
+            {
+              "label": "Key",
+              "field": "key",
+              "type": "string",
+              "required": true,
+              "translatable": false
+            },
+            {
+              "label": "Range",
+              "field": "ranges",
+              "type": "group",
+              "fields": [
+                {
+                  "label": "Min",
+                  "field": "min",
+                  "default": 0,
+                  "type": "number",
+                  "required": true
+                },
+                {
+                  "label": "Max",
+                  "field": "max",
+                  "type": "number",
+                  "required": true
+                }
+              ]
             }
           ]
         }

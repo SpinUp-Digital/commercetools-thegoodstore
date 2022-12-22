@@ -25,5 +25,9 @@
   "showing": "Showing {current} of {total}",
   "searching.for": "You are searching for {term}",
   "relevance": "Relevance",
-  "items.all": "All items"
+  "items.all": "All items",
+  "price.range.custom": "Custom price range",
+  "min": "Min",
+  "max": "Max",
+  "go": "GO"
 }
