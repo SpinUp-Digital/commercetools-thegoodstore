@@ -56,7 +56,8 @@
             <for param="file" parallel="true">
                 <path>
                     <fileset dir="./thegoodstore_home" includes="build.xml"/>
-                    <fileset dir="packages" includes="**/build.xml"/>
+                    <fileset dir="packages/home/backend" includes="build.xml"/>
+                    <fileset dir="packages/home/frontend" includes="build.xml"/>
                 </path>
                 <sequential>
                     <trycatch property="buildHasError">
@@ -79,7 +80,8 @@
             <for param="file">
                 <path>
                     <fileset dir="./thegoodstore_home" includes="build.xml"/>
-                    <fileset dir="packages" includes="**/build.xml"/>
+                    <fileset dir="packages/home/backend" includes="build.xml"/>
+                    <fileset dir="packages/home/frontend" includes="build.xml"/>
                 </path>
                 <sequential>
                     <echo>[COMPONENT @{file}]</echo>
