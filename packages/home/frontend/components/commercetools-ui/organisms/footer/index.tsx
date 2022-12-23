@@ -46,6 +46,7 @@ const Footer: React.FC<Props> = ({ columns, logo, socialMedia }) => {
           {columns?.map((column, index) => (
             <li key={index} className="border-b border-neutral-300">
               <Accordion
+                variant="arrow"
                 closedSectionTitle={column.header}
                 openSectionTitle={column.header}
                 buttonClassName="h-48 text-14 font-medium text-neutral-100 px-12 text-neutral-150"

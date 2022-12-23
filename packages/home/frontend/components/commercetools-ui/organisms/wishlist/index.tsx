@@ -38,7 +38,7 @@ const Wishlist = ({ emptyWishlistTitle, emptyWishlistSubtitle, emptyWishlistImag
               <WishlistItem key={lineItem.lineItemId} item={lineItem} />
             ))}
           </div>
-          <div className="absolute bottom-0 h-88 w-full p-20">
+          <div className="absolute bottom-0 h-88 w-full bg-neutral-200 p-20">
             <div className="overflow-hidden rounded-md border-[0.5px] border-transparent hover:border-primary-black">
               <Button
                 onClick={handleClearWishlist}

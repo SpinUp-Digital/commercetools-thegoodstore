@@ -101,6 +101,7 @@ const Cart: FC<Props> = ({ emptyStateImage, emptyStateTitle, emptyStateSubtitle,
         {!isEmpty && (
           <div className="border-t border-neutral-400 bg-neutral-200 px-12 py-24 md:px-22">
             <AccordionBtn
+              variant="arrow"
               closedSectionTitle={formatCartMessage({ id: 'discount.apply', defaultMessage: 'Apply a discount' })}
               buttonClassName="font-medium text-14 text-secondary-black"
             >

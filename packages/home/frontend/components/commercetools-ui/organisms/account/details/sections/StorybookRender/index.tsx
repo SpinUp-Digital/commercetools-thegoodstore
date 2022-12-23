@@ -66,7 +66,16 @@ const Sections = () => {
           ) : selectedTab === tabs[2].href ? (
             <OrdersHistory orders={orderHistoryMock} />
           ) : (
-            <CustomerSupport />
+            <CustomerSupport
+              addressLine="addressLine"
+              phoneNumber="phoneNumber"
+              email="email"
+              faqs={[]}
+              workingHoursWeekdays="workingHoursWeekdays"
+              workingHoursWeekends="workingHoursWeekends"
+              cityAndPostalCode="cityAndPostalCode"
+              country="country"
+            />
           )}
         </div>
       </div>

@@ -14,6 +14,7 @@ const Template: Story = (args) => (
     {accordionMockItems.map((item, index) => (
       <AccordionBtn
         key={index}
+        variant="arrow"
         closedSectionTitle={item.title}
         openSectionTitle={item.title}
         className={index < accordionMockItems.length - 1 ? 'border-b-2' : ''}
