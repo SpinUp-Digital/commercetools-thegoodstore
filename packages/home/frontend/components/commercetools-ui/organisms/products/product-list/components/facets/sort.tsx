@@ -1,5 +1,5 @@
-import { Menu } from '@headlessui/react';
 import React from 'react';
+import { Menu } from '@headlessui/react';
 import { useSortBy, UseSortByProps } from 'react-instantsearch-hooks';
 
 const SortFacet: React.FC<UseSortByProps> = (props) => {

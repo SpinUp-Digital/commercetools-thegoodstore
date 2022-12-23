@@ -1,8 +1,8 @@
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useRange } from 'react-instantsearch-hooks-web';
 import Checkbox from 'components/commercetools-ui/atoms/checkbox';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useI18n from 'helpers/hooks/useI18n';
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useRange } from 'react-instantsearch-hooks-web';
 import { FacetProps } from './types';
 
 const RangeFacet: React.FC<FacetProps> = ({ attribute, pricesConfiguration }) => {

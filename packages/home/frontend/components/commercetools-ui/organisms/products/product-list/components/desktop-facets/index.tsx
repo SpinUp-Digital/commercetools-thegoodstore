@@ -1,12 +1,12 @@
-import { useFormat } from 'helpers/hooks/useFormat';
-import { useHits } from 'react-instantsearch-hooks-web';
-import { productsIndex } from 'helpers/constants/algolia';
-import { FacetConfiguration } from '../../types';
-import useDynamicFacets from '../../hooks/useDynamicFacets';
-import SortFacet from '../facets/sort';
+import { useMemo } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon as ArrowIcon } from '@heroicons/react/24/solid';
-import { useMemo } from 'react';
+import { useHits } from 'react-instantsearch-hooks-web';
+import { productsIndex } from 'helpers/constants/algolia';
+import { useFormat } from 'helpers/hooks/useFormat';
+import useDynamicFacets from '../../hooks/useDynamicFacets';
+import { FacetConfiguration } from '../../types';
+import SortFacet from '../facets/sort';
 import { FacetProps } from '../facets/types';
 
 interface Props {

@@ -4,17 +4,16 @@ import Head from 'next/head';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { renderToString } from 'react-dom/server';
 import { getServerState } from 'react-instantsearch-hooks-server';
+import { searchClient } from 'algolia/searchClient';
+import { productsIndex } from 'helpers/constants/algolia';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { SDK } from 'sdk';
 import { createClient, PageDataResponse, ResponseError } from 'frontastic';
 import { FrontasticRenderer } from 'frontastic/lib/renderer';
 import { tastics } from 'frontastic/tastics';
-import ProductList from 'frontastic/tastics/products/product-list';
+import ProductList, { Props as ProductListTasticProps } from 'frontastic/tastics/products/product-list';
 import { Log } from '../helpers/errorLogger';
 import styles from './slug.module.css';
-import { searchClient } from 'algolia/searchClient';
-import { productsIndex } from 'helpers/constants/algolia';
-import { Props as ProductListTasticProps } from '../frontastic/tastics/products/product-list';
 
 type SlugProps = {
   // This needs an overhaul. Can be too many things in my opinion (*Marcel)
