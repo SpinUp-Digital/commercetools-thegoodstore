@@ -12,6 +12,9 @@ import { tastics } from 'frontastic/tastics';
 import ProductList from 'frontastic/tastics/products/product-list';
 import { Log } from '../helpers/errorLogger';
 import styles from './slug.module.css';
+import { searchClient } from 'algolia/searchClient';
+import { productsIndex } from 'helpers/constants/algolia';
+import { Props as ProductListTasticProps } from '../frontastic/tastics/products/product-list';
 
 type SlugProps = {
   // This needs an overhaul. Can be too many things in my opinion (*Marcel)
@@ -106,20 +109,58 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({ params
   const protocol = req.headers.referer?.split('://')[0] || 'https';
   const serverUrl = `${protocol}://${req.headers.host}${req.url}`;
 
+  /* Algolia */
+
+  const categoryIdChunks = serverUrl.split('/');
+  const categoryId = categoryIdChunks[categoryIdChunks.length - 1]?.split('?')[0];
+
+  const searchQuery = categoryId.split('?q=')[1]?.split('&')?.[0] ?? '';
+
+  const plpTasticKey = 'commercetools/ui/products/product-list';
+
+  const plpConfiguration = ((data as PageDataResponse).page.sections.main.layoutElements
+    .find((layoutElement) => layoutElement.tastics.find((tastic) => tastic.tasticType === plpTasticKey))
+    ?.tastics.find((tastic) => tastic.tasticType === plpTasticKey)?.configuration ?? {}) as Partial<
+    ProductListTasticProps['data']
+  >;
+
   const serverState = await getServerState(
     <ProductList
       serverUrl={serverUrl}
       categories={[]}
       data={{
-        facetsConfiguration: (data as PageDataResponse).page?.sections?.main?.layoutElements
-          .find((layoutElement) =>
-            layoutElement.tastics.find((tastic) => tastic.tasticType === 'commercetools/ui/products/product-list'),
-          )
-          ?.tastics.find((tastic) => tastic.tasticType === 'commercetools/ui/products/product-list')?.configuration
-          .facetsConfiguration,
+        facetsConfiguration: plpConfiguration.facetsConfiguration,
+        pricesConfiguration: plpConfiguration.pricesConfiguration,
       }}
     />,
     { renderToString },
+  );
+
+  const index = searchClient.initIndex(productsIndex);
+
+  await Promise.all(
+    (plpConfiguration.pricesConfiguration ?? []).reduce((acc, { key, ranges }) => {
+      const promises = ranges.map(({ min, max }, i) => {
+        let filters = '';
+
+        if (!searchQuery && categoryId) filters += `categories.categoryId:${categoryId}`;
+
+        if (filters) filters += ' AND ';
+
+        filters += `${key}:${min * 100} TO ${max * 100}`;
+
+        return index
+          .search('', { hitsPerPage: 0, filters, query: searchQuery })
+          .then(
+            (res) =>
+              (plpConfiguration.pricesConfiguration.find((config) => config.key === key).ranges[i].refinements =
+                res.nbHits),
+          )
+          .catch((err) => console.log(err));
+      });
+
+      return [...acc, ...promises];
+    }, []),
   );
 
   return {

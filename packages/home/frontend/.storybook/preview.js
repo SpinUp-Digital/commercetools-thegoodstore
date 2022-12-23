@@ -1,6 +1,5 @@
 import { RouterContext } from 'next/dist/shared/lib/router-context';
 import 'tailwindcss/tailwind.css';
-import '../styles/components/facet-dropdown.css';
 import '../styles/app.css';
 
 export const parameters = {
