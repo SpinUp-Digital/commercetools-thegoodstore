@@ -1,13 +1,17 @@
 import { useFormat } from 'helpers/hooks/useFormat';
 import React from 'react';
+import { useHits } from 'react-instantsearch-hooks';
 
 interface Props {
   query: string;
-  count: number;
 }
 
-const SearchHeader: React.FC<Props> = ({ query, count }) => {
+const SearchHeader: React.FC<Props> = ({ query }) => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
+
+  const {
+    results: { nbHits },
+  } = useHits();
 
   if (!query) return <></>;
 
@@ -24,7 +28,7 @@ const SearchHeader: React.FC<Props> = ({ query, count }) => {
         {formatProductMessage({
           id: 'found.products',
           defaultMessage: 'We found {count} products',
-          values: { count },
+          values: { count: nbHits },
         })}
       </h4>
     </div>

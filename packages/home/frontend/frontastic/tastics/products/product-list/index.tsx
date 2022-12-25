@@ -26,7 +26,7 @@ export interface Props {
   };
 }
 
-function ProductListTastic({ serverUrl, serverState, categories, data }: Props) {
+function ProductListTastic({ categories, data }: Props) {
   const { updatePricesConfiguration } = useProductList();
 
   const { refine: clearAllRefinements } = useClearRefinements();
@@ -81,15 +81,35 @@ function ProductListTastic({ serverUrl, serverState, categories, data }: Props) 
 }
 
 function ProductListTasticWrapper({ serverUrl, serverState, ...props }: Props) {
+  const router = useRouter();
+
   return (
     <InstantSearchSSRProvider {...(serverState ?? {})}>
       <InstantSearch
         indexName={productsIndex}
+        onStateChange={({ uiState, setUiState, ...params }) => {
+          setUiState(uiState);
+        }}
         routing={{
           router: history({
             getLocation: () =>
               typeof window === 'undefined' ? (new URL(serverUrl) as unknown as Location) : window.location,
           }),
+          stateMapping: {
+            stateToRoute(uiState) {
+              const indexUiState = uiState[productsIndex];
+
+              return {
+                ...indexUiState,
+                q: indexUiState.configure?.query,
+              } as UiState;
+            },
+            routeToState(routeState) {
+              return {
+                [productsIndex]: routeState,
+              };
+            },
+          },
         }}
       >
         <ProductListProvider>
