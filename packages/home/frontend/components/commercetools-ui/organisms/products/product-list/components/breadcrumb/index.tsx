@@ -16,9 +16,9 @@ const Breadcrumbs: React.FC<Props> = ({ categoryId, categories }) => {
   const router = useRouter();
 
   const parentCategories = useMemo(() => {
-    if (!router?.query?.path) return [];
+    if (!router?.asPath) return [];
 
-    const categoryIdChunks = (router.query.path as string).slice(1).split('/').slice(0, -1);
+    const categoryIdChunks = router.asPath.split('?')[0].slice(1).split('/').slice(0, -1);
 
     return categoryIdChunks.map((id) => (categories.find((category) => category.categoryId === id) ?? {}) as Category);
   }, [router, categories]);
@@ -31,6 +31,8 @@ const Breadcrumbs: React.FC<Props> = ({ categoryId, categories }) => {
     return ((categories.find((category) => category.categoryId === categoryId) as Category)?.subCategories ??
       []) as Category[];
   }, [categories, categoryId]);
+
+  if (!categoryId) return <></>;
 
   return (
     <div className="flex flex-col items-center">

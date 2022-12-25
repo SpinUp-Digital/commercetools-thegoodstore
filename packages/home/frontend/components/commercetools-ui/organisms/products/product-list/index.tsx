@@ -1,33 +1,33 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { Product } from '@commercetools/frontend-domain-types/product/Product';
 import { Hit } from 'instantsearch.js';
-import { Configure, InfiniteHits } from 'react-instantsearch-hooks-web';
+import { Configure, InfiniteHits, useHits } from 'react-instantsearch-hooks-web';
 import { useFormat } from 'helpers/hooks/useFormat';
-import useMediaQuery from 'helpers/hooks/useMediaQuery';
-import { desktop } from 'helpers/utils/screensizes';
 import { Category } from 'types/category';
 import ProductTile from '../tile';
-import AccumalativeTrace from './components/accumalative-trace';
-import Breadcrumbs from './components/breadcrumb';
 import DesktopFacets from './components/desktop-facets';
-import { FacetConfiguration, PriceConfiguration } from './types';
+import useMediaQuery from 'helpers/hooks/useMediaQuery';
+import { desktop } from 'helpers/utils/screensizes';
+import { FacetConfiguration } from './types';
+import Breadcrumbs from './components/breadcrumb';
+import AccumalativeTrace from './components/accumalative-trace';
+import SearchHeader from './components/search-header';
 
 interface Props {
-  serverUrl: string;
+  categoryId?: string;
+  searchQuery?: string;
   categories: Category[];
   facetsConfiguration: Record<string, FacetConfiguration>;
-  pricesConfiguration: Record<string, PriceConfiguration>;
 }
 
-const ProductList: React.FC<Props> = ({ serverUrl, categories, facetsConfiguration, pricesConfiguration }) => {
+const ProductList: React.FC<Props> = ({ categoryId, searchQuery, categories, facetsConfiguration }) => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
+  const {
+    results: { nbHits },
+  } = useHits();
+
   const [isDesktop] = useMediaQuery(desktop);
-
-  const categoryIdChunks = serverUrl.split('/');
-  const categoryId = categoryIdChunks[categoryIdChunks.length - 1]?.split('?')[0];
-
-  const searchQuery = categoryId.split('?q=')[1]?.split('&')?.[0] ?? '';
 
   if (!searchQuery && !categoryId) return <></>;
 
@@ -37,17 +37,18 @@ const ProductList: React.FC<Props> = ({ serverUrl, categories, facetsConfigurati
 
       <div className="relative mx-auto mt-52 max-w-[1150px] px-12 md:px-24 2xl:max-w-[1248px]">
         <Breadcrumbs categories={categories} categoryId={categoryId} />
+        <SearchHeader count={nbHits} query={searchQuery} />
 
-        <DesktopFacets facetsConfiguration={facetsConfiguration} pricesConfiguration={pricesConfiguration} />
+        <DesktopFacets facetsConfiguration={facetsConfiguration} />
 
         <InfiniteHits
           showPrevious={false}
           hitComponent={({ hit }: { hit: Hit<Partial<Product>> }) => <ProductTile product={hit as Product} />}
           classNames={{
             root: 'pt-4',
-            list: 'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-24',
+            list: 'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-24 min-h-screen',
             loadMore:
-              'mx-auto bg-primary-black rounded-md font-medium text-white text-16 px-48 py-12 block mt-[90px] hover:bg-gray-500 transition disabled:bg-neutral-400',
+              'mx-auto bg-primary-black rounded-md font-medium text-white text-16 px-48 py-12 block mt-[90px] hover:bg-gray-500 transition disabled:bg-neutral-400 disabled:opacity-0',
           }}
           translations={{
             showMoreButtonText: formatProductMessage({ id: 'load.more', defaultMessage: 'Load More' }),
