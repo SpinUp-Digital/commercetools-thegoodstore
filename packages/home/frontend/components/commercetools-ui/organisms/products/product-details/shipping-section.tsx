@@ -63,6 +63,12 @@ const ShippingSection = () => {
     }
   };
 
+  const getRateToUse = (rates: ShippingMethod['rates']) => {
+    const DEFAULT_SHIPPING_RATE_ID =
+      locale == 'GB' ? 'f51d093a-07a4-43ac-90a2-ae072a4aabf5' : '34717e18-4b4d-41f9-af68-158142015ea3';
+    return rates.find(({ shippingRateId }) => shippingRateId === DEFAULT_SHIPPING_RATE_ID);
+  };
+
   return (
     <>
       <hr className="mt-24 h-1 bg-neutral-400" />
@@ -134,7 +140,7 @@ const ShippingSection = () => {
                 lineHeight="loose"
                 medium
               >
-                {CurrencyHelpers.formatForCurrency(rates?.[0]?.price.centAmount / 100, locale)}
+                {CurrencyHelpers.formatForCurrency(getRateToUse(rates).price, locale)}
               </Typography>
             )}
           </div>
