@@ -116,7 +116,7 @@ const ResetPassword: FC<ResetPasswordProps> = ({ token, accountLink, signInLink 
           {formatAccountMessage({ id: 'password.reset.keyword', defaultMessage: 'Reset' })}
         </Button>
 
-        <Link variant="menu-item" className="mx-auto block w-fit border-b-[1px]" link={signInLink}>
+        <Link variant="menu-item" className="mx-auto block w-fit text-14" link={signInLink}>
           {formatAccountMessage({ id: 'account.back.sign', defaultMessage: 'Back to sign in' })}
         </Link>
       </form>
