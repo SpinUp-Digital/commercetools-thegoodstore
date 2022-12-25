@@ -12,6 +12,8 @@ const AccumalativeTrace = () => {
 
   const accumulativeHitsCount = page === 0 ? hits.length : (nbPages - page) * hitsPerPage + hits.length;
 
+  if (!nbHits) return <></>;
+
   return (
     <div className="absolute bottom-72 left-1/2 -translate-x-1/2">
       <p>

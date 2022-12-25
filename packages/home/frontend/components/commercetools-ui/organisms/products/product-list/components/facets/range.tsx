@@ -1,14 +1,17 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useRange } from 'react-instantsearch-hooks-web';
 import Checkbox from 'components/commercetools-ui/atoms/checkbox';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useI18n from 'helpers/hooks/useI18n';
+import { useProductList } from '../../context';
 import { FacetProps } from './types';
 
-const RangeFacet: React.FC<FacetProps> = ({ attribute, pricesConfiguration }) => {
+const RangeFacet: React.FC<FacetProps> = ({ attribute }) => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
-  const { range, refine, start } = useRange({ attribute, min: 0 });
+  const { pricesConfiguration } = useProductList();
+
+  const { range, refine, start } = useRange({ attribute });
 
   const { currencySymbol } = useI18n();
 
@@ -16,29 +19,55 @@ const RangeFacet: React.FC<FacetProps> = ({ attribute, pricesConfiguration }) =>
 
   const [appliedOptions, setAppliedOptions] = useState<Array<number>>([]);
 
-  const appliedRanges = useMemo(() => appliedOptions.map((index) => configuration.ranges[index]), [appliedOptions]);
-
-  const [customPriceRange, setCustomPriceRange] = useState({
-    min: start ? start[0] / 100 : -1,
-    max: start ? start[1] / 100 : -1,
+  const [priceRange, setPriceRange] = useState({
+    min: Math.max(start[0], range.min) / 100,
+    max: Math.min(start[1], range.max) / 100,
     applied: false,
   });
 
+  useEffect(() => {
+    setPriceRange({
+      min: Math.max(start[0], range.min) / 100,
+      max: Math.min(start[1], range.max) / 100,
+      applied: false,
+    });
+  }, [range.min, range.max, start[0], start[1]]);
+
+  useEffect(() => {
+    setAppliedOptions([]);
+  }, [range.min, range.max]);
+
   const handleRangeOptionChange = useCallback(
     (index: number, checked: boolean) => {
-      if (checked) setAppliedOptions([...appliedOptions, index]);
-      else setAppliedOptions(appliedOptions.filter((option) => option !== index));
+      const newAppliedOptions = checked
+        ? [...appliedOptions, index]
+        : appliedOptions.filter((option) => option !== index);
 
-      setCustomPriceRange({ min: -1, max: -1, applied: false });
+      const appliedRanges = newAppliedOptions.map((index) => configuration.ranges[index]);
+
+      const appliedRange =
+        appliedRanges.length > 0
+          ? appliedRanges.reduce(
+              (acc, { min, max }) => ({
+                min: Math.max(range.min / 100, Math.min(min, acc.min)),
+                max: Math.min(range.max / 100, Math.max(max, acc.max)),
+              }),
+              { min: Infinity, max: 0 },
+            )
+          : { min: range.min / 100, max: range.max / 100 };
+
+      setAppliedOptions(newAppliedOptions);
+
+      setPriceRange({ ...appliedRange, applied: true });
     },
-    [appliedOptions],
+    [appliedOptions, range],
   );
 
   const handleRangeInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setCustomPriceRange({ ...customPriceRange, [e.target.name]: e.target.value, applied: false });
+      setPriceRange({ ...priceRange, [e.target.name]: +e.target.value, applied: false });
     },
-    [customPriceRange],
+    [priceRange],
   );
 
   const handleCustomRangeSubmit = useCallback(
@@ -46,53 +75,41 @@ const RangeFacet: React.FC<FacetProps> = ({ attribute, pricesConfiguration }) =>
       e.preventDefault();
 
       setAppliedOptions([]);
-      setCustomPriceRange({ ...customPriceRange, applied: true });
+      setPriceRange({ ...priceRange, applied: true });
     },
-    [customPriceRange],
+    [priceRange],
   );
 
   const rangeOptions = useMemo(() => {
     if (!configuration) return <></>;
 
-    return configuration.ranges.map(({ min, max, refinements }, index) => (
-      <div key={index} className="flex items-center justify-between gap-8">
-        <div>
-          {min}
-          {currencySymbol} - {max}
-          {currencySymbol}
-        </div>
-        <div className="flex items-center gap-12">
-          <span className="text-14 text-secondary-black">{refinements}</span>
-          <div className="w-fit rounded-sm border border-neutral-500 transition hover:border-secondary-black">
-            <Checkbox
-              checked={appliedOptions.includes(index)}
-              className="border-none opacity-30"
-              onChange={(e) => handleRangeOptionChange(index, e.target.checked)}
-              placeholder={formatProductMessage({ id: 'max', defaultMessage: 'Max' })}
-            />
+    return configuration.ranges
+      .filter(({ refinements }) => refinements > 0)
+      .map(({ min, max, refinements }, index) => (
+        <div key={index} className="flex items-center justify-between gap-8">
+          <div>
+            {min}
+            {currencySymbol} - {max}
+            {currencySymbol}
+          </div>
+          <div className="flex items-center gap-12">
+            <span className="text-14 text-secondary-black">{refinements}</span>
+            <div className="w-fit rounded-sm border border-neutral-500 transition hover:border-secondary-black">
+              <Checkbox
+                checked={appliedOptions.includes(index)}
+                className="border-none opacity-30"
+                onChange={(e) => handleRangeOptionChange(index, e.target.checked)}
+                placeholder={formatProductMessage({ id: 'max', defaultMessage: 'Max' })}
+              />
+            </div>
           </div>
         </div>
-      </div>
-    ));
+      ));
   }, [configuration, handleRangeOptionChange]);
 
-  const currentRange = useMemo(() => {
-    if (appliedRanges.length > 0)
-      return appliedRanges.reduce(
-        (acc, { min, max }) => ({ min: Math.min(min, acc.min), max: Math.max(max, acc.max) }),
-        { min: Infinity, max: 0 },
-      );
-
-    if (customPriceRange.applied) return { min: customPriceRange.min, max: customPriceRange.max };
-
-    if (start) return { min: start[0] / 100, max: start[1] / 100 };
-
-    return { min: 0, max: Infinity };
-  }, [appliedRanges, customPriceRange, start, range]);
-
   useEffect(() => {
-    refine([currentRange.min * 100, currentRange.max * 100]);
-  }, [currentRange]);
+    if (priceRange.applied) refine([priceRange.min * 100, priceRange.max * 100]);
+  }, [priceRange]);
 
   return (
     <div>
@@ -111,10 +128,14 @@ const RangeFacet: React.FC<FacetProps> = ({ attribute, pricesConfiguration }) =>
           <input
             id="min"
             name="min"
-            className="w-full outline-none"
-            value={customPriceRange.min !== -1 ? customPriceRange.min.toString() : ''}
+            className="w-full border-none p-0 outline-none focus:border-none focus:outline-none"
+            type="number"
+            value={priceRange.min !== -1 ? priceRange.min.toString() : ''}
             placeholder={formatProductMessage({ id: 'min', defaultMessage: 'Min' })}
             onChange={handleRangeInputChange}
+            min={range.min / 100}
+            max={priceRange.max}
+            step="0.01"
           />
           <span>{currencySymbol}</span>
         </label>
@@ -129,10 +150,14 @@ const RangeFacet: React.FC<FacetProps> = ({ attribute, pricesConfiguration }) =>
           <input
             id="max"
             name="max"
-            className="w-full outline-none"
-            value={customPriceRange.max !== -1 ? customPriceRange.max.toString() : ''}
+            className="w-full border-none p-0 outline-none focus:border-none focus:outline-none"
+            type="number"
+            value={priceRange.max !== -1 ? priceRange.max.toString() : ''}
             placeholder={formatProductMessage({ id: 'max', defaultMessage: 'Max' })}
             onChange={handleRangeInputChange}
+            min={priceRange.min}
+            max={range.max / 100}
+            step="0.01"
           />
           <span>{currencySymbol}</span>
         </label>

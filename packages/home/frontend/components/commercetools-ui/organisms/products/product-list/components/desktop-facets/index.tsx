@@ -7,14 +7,12 @@ import { useFormat } from 'helpers/hooks/useFormat';
 import useDynamicFacets from '../../hooks/useDynamicFacets';
 import { FacetConfiguration } from '../../types';
 import SortFacet from '../facets/sort';
-import { FacetProps } from '../facets/types';
 
 interface Props {
   facetsConfiguration: Record<string, FacetConfiguration>;
-  pricesConfiguration: FacetProps['pricesConfiguration'];
 }
 
-const DesktopFacets: React.FC<Props> = ({ facetsConfiguration, pricesConfiguration }) => {
+const DesktopFacets: React.FC<Props> = ({ facetsConfiguration }) => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
   const {
@@ -36,7 +34,6 @@ const DesktopFacets: React.FC<Props> = ({ facetsConfiguration, pricesConfigurati
   const facets = useDynamicFacets({
     configuration: facetsConfiguration,
     ordering: renderingContent?.facetOrdering?.facets?.order,
-    pricesConfiguration,
     render: ({ attribute, Component }) => (
       <Menu as="div" className="relative" key={attribute}>
         {({ open }) => (

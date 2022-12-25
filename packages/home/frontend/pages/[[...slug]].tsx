@@ -60,7 +60,14 @@ export default function Slug({ data }: SlugProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps | Redirect = async ({ params, locale, query, req, res }) => {
+export const getServerSideProps: GetServerSideProps | Redirect = async ({
+  params,
+  locale,
+  query,
+  req,
+  res,
+  resolvedUrl,
+}) => {
   SDK.configure(locale);
 
   const extensions = SDK.getExtensions();
@@ -106,14 +113,12 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({ params
   }
 
   const protocol = req.headers.referer?.split('://')[0] || 'https';
-  const serverUrl = `${protocol}://${req.headers.host}${req.url}`;
+  const serverUrl = `${protocol}://${req.headers.host}${resolvedUrl}`;
 
   /* Algolia */
+  const categoryId = (params.slug as string[])?.[params.slug?.length - 1];
 
-  const categoryIdChunks = serverUrl.split('/');
-  const categoryId = categoryIdChunks[categoryIdChunks.length - 1]?.split('?')[0];
-
-  const searchQuery = categoryId.split('?q=')[1]?.split('&')?.[0] ?? '';
+  const searchQuery = (query.q as string) ?? '';
 
   const plpTasticKey = 'commercetools/ui/products/product-list';
 
@@ -123,11 +128,16 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({ params
     ProductListTasticProps['data']
   >;
 
+  if (categoryId) plpConfiguration.categoryId = categoryId;
+  if (searchQuery) plpConfiguration.searchQuery = searchQuery;
+
   const serverState = await getServerState(
     <ProductList
       serverUrl={serverUrl}
       categories={[]}
       data={{
+        categoryId,
+        searchQuery,
         facetsConfiguration: plpConfiguration.facetsConfiguration,
         pricesConfiguration: plpConfiguration.pricesConfiguration,
       }}

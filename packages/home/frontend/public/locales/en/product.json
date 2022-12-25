@@ -29,5 +29,7 @@
   "price.range.custom": "Custom price range",
   "min": "Min",
   "max": "Max",
-  "go": "GO"
+  "go": "GO",
+  "search.results.for": "Search results for “{query}”",
+  "found.products": "We found {count} products"
 }
