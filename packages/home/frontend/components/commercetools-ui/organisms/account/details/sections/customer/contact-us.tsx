@@ -62,26 +62,30 @@ const ContactUs: React.FC<Props> = ({
           </Typography>
         </div>
 
-        <div className="flex flex-col border-b pb-20 pl-0 lg:w-[30%] lg:border-b-0 lg:pl-32">
+        <div className="flex flex-col border-b pb-20 pl-0 lg:w-[30%] lg:border-b-0 lg:pl-34">
           <Typography fontSize={14} fontFamily="inter" className="py-1 text-secondary-black">
             {phoneNumber}
           </Typography>
-          <div className="pt-22">
-            <Typography as="span" fontSize={14} fontFamily="inter" className="text-secondary-black">
-              {formatCustomerSupportMessage({ id: 'weekdays', defaultMessage: 'Mon- Fri: ' })}
-            </Typography>
-            <Typography as="span" fontSize={14} fontFamily="inter" className="text-secondary-black">
-              {workingHoursWeekdays}
-            </Typography>
-          </div>
-          <div className="pt-5">
-            <Typography as="span" fontSize={14} fontFamily="inter" className="text-secondary-black">
-              {formatCustomerSupportMessage({ id: 'weekends', defaultMessage: 'Sat- Sun: ' })}
-            </Typography>
-            <Typography as="span" fontSize={14} fontFamily="inter" className="text-secondary-black">
-              {workingHoursWeekends}
-            </Typography>
-          </div>
+          {workingHoursWeekdays && (
+            <div className="pt-22">
+              <Typography as="span" fontSize={14} fontFamily="inter" className="text-secondary-black">
+                {formatCustomerSupportMessage({ id: 'weekdays', defaultMessage: 'Mon- Fri: ' })}
+              </Typography>
+              <Typography as="span" fontSize={14} fontFamily="inter" className="text-secondary-black">
+                {workingHoursWeekdays}
+              </Typography>
+            </div>
+          )}
+          {workingHoursWeekends && (
+            <div className="pt-5">
+              <Typography as="span" fontSize={14} fontFamily="inter" className="text-secondary-black">
+                {formatCustomerSupportMessage({ id: 'weekends', defaultMessage: 'Sat- Sun: ' })}
+              </Typography>
+              <Typography as="span" fontSize={14} fontFamily="inter" className="text-secondary-black">
+                {workingHoursWeekends}
+              </Typography>
+            </div>
+          )}
         </div>
 
         <div className="flex w-[30%] py-20 lg:hidden">
@@ -90,7 +94,7 @@ const ContactUs: React.FC<Props> = ({
             {formatCustomerSupportMessage({ id: 'email', defaultMessage: 'Email' })}
           </Typography>
         </div>
-        <div className="flex border-b pb-20 pl-0 lg:w-[30%] lg:border-b-0 lg:pl-32">
+        <div className="flex border-b pb-20 pl-0 lg:w-[30%] lg:border-b-0 lg:pl-34">
           <Typography fontSize={14} fontFamily="inter" className="py-1 text-secondary-black">
             {email}
           </Typography>
@@ -102,7 +106,7 @@ const ContactUs: React.FC<Props> = ({
             {formatCustomerSupportMessage({ id: 'address', defaultMessage: 'Address' })}
           </Typography>
         </div>
-        <div className="flex flex-col border-b pb-20 pl-0 lg:w-[30%] lg:border-b-0 lg:pl-32">
+        <div className="flex flex-col border-b pb-20 pl-0 lg:w-[30%] lg:border-b-0 lg:pl-34">
           <Typography as="span" fontSize={14} fontFamily="inter" className="pb-2 text-secondary-black">
             {addressLine}
           </Typography>
