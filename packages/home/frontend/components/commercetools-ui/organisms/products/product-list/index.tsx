@@ -1,17 +1,19 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React from 'react';
 import { Product } from '@commercetools/frontend-domain-types/product/Product';
 import { Hit } from 'instantsearch.js';
-import { Configure, InfiniteHits, useHits } from 'react-instantsearch-hooks-web';
+import { Configure, InfiniteHits } from 'react-instantsearch-hooks-web';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { Category } from 'types/category';
-import ProductTile from '../tile';
-import DesktopFacets from './components/desktop-facets';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import { desktop } from 'helpers/utils/screensizes';
-import { FacetConfiguration } from './types';
-import Breadcrumbs from './components/breadcrumb';
+import { Category } from 'types/category';
+import ProductTile from '../tile';
 import AccumalativeTrace from './components/accumalative-trace';
+import Breadcrumbs from './components/breadcrumb';
+import CurrentRefinements from './components/current-refinements';
+import DesktopFacets from './components/desktop-facets';
+import MobileFacets from './components/mobile-facets';
 import SearchHeader from './components/search-header';
+import { FacetConfiguration } from './types';
 
 interface Props {
   categoryId?: string;
@@ -35,13 +37,19 @@ const ProductList: React.FC<Props> = ({ categoryId, searchQuery, categories, fac
         <Breadcrumbs categories={categories} categoryId={categoryId} />
         <SearchHeader query={searchQuery} />
 
-        <DesktopFacets facetsConfiguration={facetsConfiguration} />
+        {isDesktop ? (
+          <DesktopFacets facetsConfiguration={facetsConfiguration} />
+        ) : (
+          <MobileFacets facetsConfiguration={facetsConfiguration} />
+        )}
+
+        <CurrentRefinements />
 
         <InfiniteHits
           showPrevious={false}
           hitComponent={({ hit }: { hit: Hit<Partial<Product>> }) => <ProductTile product={hit as Product} />}
           classNames={{
-            root: 'pt-4',
+            root: 'pt-32',
             list: 'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-24',
             loadMore:
               'mx-auto bg-primary-black rounded-md font-medium text-white text-16 px-48 py-12 block mt-[90px] hover:bg-gray-500 transition disabled:bg-neutral-400 disabled:opacity-0',

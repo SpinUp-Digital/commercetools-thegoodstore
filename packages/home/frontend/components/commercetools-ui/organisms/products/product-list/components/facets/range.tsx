@@ -1,15 +1,26 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { useRange } from 'react-instantsearch-hooks-web';
+import { useHits, useRange } from 'react-instantsearch-hooks-web';
 import Checkbox from 'components/commercetools-ui/atoms/checkbox';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useI18n from 'helpers/hooks/useI18n';
 import { useProductList } from '../../context';
+import { refinementRemovedEventName, refinementsClearedEventName } from '../../context/constants';
+import { RefinementRemovedEvent } from '../../context/types';
 import { FacetProps } from './types';
 
 const RangeFacet: React.FC<FacetProps> = ({ attribute }) => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
   const { pricesConfiguration } = useProductList();
+
+  const {
+    results: { disjunctiveFacets },
+  } = useHits();
+
+  const disjunctiveFacet = useMemo(
+    () => disjunctiveFacets.find((facet) => facet.name === attribute),
+    [attribute, disjunctiveFacets],
+  );
 
   const { range, refine, start } = useRange({ attribute });
 
@@ -19,23 +30,20 @@ const RangeFacet: React.FC<FacetProps> = ({ attribute }) => {
 
   const [appliedOptions, setAppliedOptions] = useState<Array<number>>([]);
 
-  const [priceRange, setPriceRange] = useState({
-    min: Math.max(start[0], range.min) / 100,
-    max: Math.min(start[1], range.max) / 100,
-    applied: false,
-  });
-
-  useEffect(() => {
-    setPriceRange({
+  const activePriceRange = useMemo(
+    () => ({
       min: Math.max(start[0], range.min) / 100,
       max: Math.min(start[1], range.max) / 100,
       applied: false,
-    });
-  }, [range.min, range.max, start[0], start[1]]);
+    }),
+    [range.min, range.max, start[0], start[1]],
+  );
+
+  const [priceRange, setPriceRange] = useState(activePriceRange);
 
   useEffect(() => {
-    setAppliedOptions([]);
-  }, [range.min, range.max]);
+    setPriceRange(activePriceRange);
+  }, [activePriceRange]);
 
   const handleRangeOptionChange = useCallback(
     (index: number, checked: boolean) => {
@@ -60,8 +68,33 @@ const RangeFacet: React.FC<FacetProps> = ({ attribute }) => {
 
       setPriceRange({ ...appliedRange, applied: true });
     },
-    [appliedOptions, range],
+    [appliedOptions, range, configuration.ranges],
   );
+
+  const clearAppliedOptions = useCallback(() => {
+    setAppliedOptions([]);
+  }, []);
+
+  useEffect(() => {
+    clearAppliedOptions();
+  }, [range.min, range.max, clearAppliedOptions]);
+
+  const handleRefinementRemoved = useCallback(
+    (e: CustomEvent<RefinementRemovedEvent>) => {
+      if (e.detail.attribute === attribute) clearAppliedOptions();
+    },
+    [clearAppliedOptions, attribute],
+  );
+
+  useEffect(() => {
+    window.addEventListener(refinementRemovedEventName, handleRefinementRemoved);
+    window.addEventListener(refinementsClearedEventName, clearAppliedOptions);
+
+    return () => {
+      window.removeEventListener(refinementRemovedEventName, handleRefinementRemoved);
+      window.removeEventListener(refinementsClearedEventName, clearAppliedOptions);
+    };
+  }, [handleRefinementRemoved, clearAppliedOptions]);
 
   const handleRangeInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,22 +103,36 @@ const RangeFacet: React.FC<FacetProps> = ({ attribute }) => {
     [priceRange],
   );
 
-  const handleCustomRangeSubmit = useCallback(
+  const handleRangeSubmit = useCallback(
     (e: React.FormEvent) => {
       e.preventDefault();
 
-      setAppliedOptions([]);
+      clearAppliedOptions();
       setPriceRange({ ...priceRange, applied: true });
     },
-    [priceRange],
+    [priceRange, clearAppliedOptions],
   );
 
   const rangeOptions = useMemo(() => {
-    if (!configuration) return <></>;
+    if (!configuration) return { available: false, Component: <></> };
 
-    return configuration.ranges
-      .filter(({ refinements }) => refinements > 0)
-      .map(({ min, max, refinements }, index) => (
+    const ranges = configuration.ranges
+      .map((range) => {
+        if (!disjunctiveFacet) return range;
+
+        const refinements = Object.entries(disjunctiveFacet.data).reduce(
+          (acc, [centAmount, count]: [string, number]) =>
+            acc + (+centAmount >= range.min * 100 && +centAmount < range.max * 100 ? count : 0),
+          0,
+        );
+
+        return { ...range, refinements };
+      })
+      .filter(({ refinements }) => refinements > 0);
+
+    return {
+      available: ranges.length > 0,
+      Component: ranges.map(({ min, max, refinements }, index) => (
         <div key={index} className="flex items-center justify-between gap-8">
           <div>
             {min}
@@ -99,30 +146,30 @@ const RangeFacet: React.FC<FacetProps> = ({ attribute }) => {
                 checked={appliedOptions.includes(index)}
                 className="border-none opacity-30"
                 onChange={(e) => handleRangeOptionChange(index, e.target.checked)}
-                placeholder={formatProductMessage({ id: 'max', defaultMessage: 'Max' })}
               />
             </div>
           </div>
         </div>
-      ));
-  }, [configuration, handleRangeOptionChange]);
+      )),
+    };
+  }, [configuration, handleRangeOptionChange, currencySymbol, formatProductMessage, disjunctiveFacet, appliedOptions]);
 
   useEffect(() => {
     if (priceRange.applied) refine([priceRange.min * 100, priceRange.max * 100]);
-  }, [priceRange]);
+  }, [priceRange, refine]);
 
   return (
     <div>
-      <div className="flex flex-col gap-44">{rangeOptions}</div>
-      <div className="mt-48">
+      <div className="flex flex-col gap-44">{rangeOptions.Component}</div>
+      <div className={rangeOptions.available ? 'mt-48' : ''}>
         <p className="text-16 font-medium">
           {formatProductMessage({ id: 'price.range.custom', defaultMessage: 'Custom price range' })}
         </p>
       </div>
-      <form className="mt-36 flex items-center gap-16" onSubmit={handleCustomRangeSubmit}>
+      <form className="mt-36 flex items-center gap-16" onSubmit={handleRangeSubmit}>
         <label
           htmlFor="min"
-          className="flex w-[85px] items-center gap-4 border border-neutral-500 p-8"
+          className="flex w-[85px] items-center gap-4 border border-neutral-500 bg-white p-8"
           aria-label="min"
         >
           <input
@@ -144,7 +191,7 @@ const RangeFacet: React.FC<FacetProps> = ({ attribute }) => {
 
         <label
           htmlFor="max"
-          className="flex w-[85px] items-center gap-4 border border-neutral-500 p-8"
+          className="flex w-[85px] items-center gap-4 border border-neutral-500 bg-white p-8"
           aria-label="max"
         >
           <input

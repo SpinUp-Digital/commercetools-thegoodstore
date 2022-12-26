@@ -5,6 +5,7 @@ import { useHits } from 'react-instantsearch-hooks-web';
 import { productsIndex } from 'helpers/constants/algolia';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useDynamicFacets from '../../hooks/useDynamicFacets';
+import styles from '../../styles/index.module.css';
 import { FacetConfiguration } from '../../types';
 import SortFacet from '../facets/sort';
 
@@ -47,7 +48,7 @@ const DesktopFacets: React.FC<Props> = ({ facetsConfiguration }) => {
             <Transition show={open} {...transitionDisclosures} unmount={false}>
               <Menu.Items
                 static
-                className="absolute left-0 z-20 min-w-[320px] origin-top-right translate-y-[10px] rounded-md bg-white py-24 pl-36 pr-92 shadow-lg"
+                className={`absolute left-0 z-20 max-h-[316px] min-w-[320px] origin-top-right translate-y-[10px] overflow-auto rounded-md bg-white py-24 px-36 shadow-lg ${styles.desktop_facet_container}`}
               >
                 <Menu.Item>{Component}</Menu.Item>
               </Menu.Items>
@@ -90,11 +91,11 @@ const DesktopFacets: React.FC<Props> = ({ facetsConfiguration }) => {
         )}
       </Menu>
     ),
-    [],
+    [formatProductMessage, transitionDisclosures],
   );
 
   return (
-    <div className="mb-16 flex items-center justify-between border-b border-neutral-400 pb-16 pt-56">
+    <div className="flex items-center justify-between border-b border-neutral-400 pb-16 pt-56">
       <div className="flex items-center gap-12">{facets}</div>
       <div className="flex items-center gap-16">
         <span>

@@ -1,6 +1,6 @@
-import { useFormat } from 'helpers/hooks/useFormat';
 import React from 'react';
 import { useHits } from 'react-instantsearch-hooks';
+import { useFormat } from 'helpers/hooks/useFormat';
 
 interface Props {
   query: string;

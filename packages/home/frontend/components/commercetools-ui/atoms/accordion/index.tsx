@@ -2,7 +2,6 @@ import React from 'react';
 import { Disclosure, Transition } from '@headlessui/react';
 import { ChevronDownIcon, PlusIcon, MinusIcon } from '@heroicons/react/24/outline';
 import useClassNames from 'helpers/hooks/useClassNames';
-import { variant } from 'helpers/mocks/mockData';
 
 export interface AccordionProps {
   index?: number;
@@ -16,7 +15,7 @@ export interface AccordionProps {
   panelClassName?: string;
 }
 
-const AccordionBtn: React.FC<AccordionProps> = ({
+const Accordion: React.FC<AccordionProps> = ({
   variant,
   closedSectionTitle,
   openSectionTitle = closedSectionTitle,
@@ -68,4 +67,4 @@ const AccordionBtn: React.FC<AccordionProps> = ({
   );
 };
 
-export default AccordionBtn;
+export default Accordion;

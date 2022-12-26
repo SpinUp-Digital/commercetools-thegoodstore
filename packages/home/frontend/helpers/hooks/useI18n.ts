@@ -17,7 +17,7 @@ const useI18n = () => {
     () =>
       ({
         de: 'eur',
-        en: 'usd',
+        en: 'sterling',
       }[router?.locale]),
     [router?.locale],
   );
@@ -26,7 +26,7 @@ const useI18n = () => {
     () =>
       ({
         eur: '€',
-        usd: '$',
+        sterling: '£',
       }[currency]),
     [currency],
   );

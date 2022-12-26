@@ -81,15 +81,10 @@ function ProductListTastic({ categories, data }: Props) {
 }
 
 function ProductListTasticWrapper({ serverUrl, serverState, ...props }: Props) {
-  const router = useRouter();
-
   return (
     <InstantSearchSSRProvider {...(serverState ?? {})}>
       <InstantSearch
         indexName={productsIndex}
-        onStateChange={({ uiState, setUiState, ...params }) => {
-          setUiState(uiState);
-        }}
         routing={{
           router: history({
             getLocation: () =>
