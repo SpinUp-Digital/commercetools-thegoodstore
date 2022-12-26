@@ -33,7 +33,7 @@ const Search: React.FC = () => {
       setQuery('');
       (e.target as HTMLFormElement).reset();
     },
-    [query],
+    [query, router],
   );
 
   return (

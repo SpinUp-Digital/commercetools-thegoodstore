@@ -10,7 +10,7 @@
   "products": "Products",
   "outOfStock": "Out of stock",
   "price": "Price",
-  "sortAndFilter": "Sort & Filter",
+  "sortAndFilter": "Filter & Sort",
   "clear": "Clear",
   "applyFilters": "Apply",
   "sortBy": "Sort by",
@@ -31,5 +31,8 @@
   "max": "Max",
   "go": "GO",
   "search.results.for": "Search results for “{query}”",
-  "found.products": "We found {count} products"
+  "found.products": "We found {count} products",
+  "clear.all": "Clear All",
+  "view": "View",
+  "done": "Done"
 }

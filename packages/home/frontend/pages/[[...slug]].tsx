@@ -4,8 +4,6 @@ import Head from 'next/head';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { renderToString } from 'react-dom/server';
 import { getServerState } from 'react-instantsearch-hooks-server';
-import { searchClient } from 'algolia/searchClient';
-import { productsIndex } from 'helpers/constants/algolia';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { SDK } from 'sdk';
 import { createClient, PageDataResponse, ResponseError } from 'frontastic';
@@ -143,33 +141,6 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({
       }}
     />,
     { renderToString },
-  );
-
-  const index = searchClient.initIndex(productsIndex);
-
-  await Promise.all(
-    (plpConfiguration.pricesConfiguration ?? []).reduce((acc, { key, ranges }) => {
-      const promises = ranges.map(({ min, max }, i) => {
-        let filters = '';
-
-        if (!searchQuery && categoryId) filters += `categories.categoryId:${categoryId}`;
-
-        if (filters) filters += ' AND ';
-
-        filters += `${key}:${min * 100} TO ${max * 100}`;
-
-        return index
-          .search('', { hitsPerPage: 0, filters, query: searchQuery })
-          .then(
-            (res) =>
-              (plpConfiguration.pricesConfiguration.find((config) => config.key === key).ranges[i].refinements =
-                res.nbHits),
-          )
-          .catch((err) => console.log(err));
-      });
-
-      return [...acc, ...promises];
-    }, []),
   );
 
   return {

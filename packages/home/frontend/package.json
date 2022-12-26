@@ -57,6 +57,7 @@
     "resize-observer-polyfill": "^1.5.1",
     "sass": "^1.49.9",
     "storybook-addon-next-router": "^4.0.0",
+    "string-to-color": "^2.2.2",
     "swiper": "^8.0.6",
     "swr": "^1.2.0",
     "tailwind-scrollbar-hide": "^1.1.7",
