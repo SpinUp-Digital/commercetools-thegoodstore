@@ -153,6 +153,7 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({
         'product',
         'checkout',
         'account',
+        'customer-support',
         'error',
         'success',
         'wishlist',
