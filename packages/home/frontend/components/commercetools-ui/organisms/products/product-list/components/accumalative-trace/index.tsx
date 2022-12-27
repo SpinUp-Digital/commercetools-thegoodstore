@@ -1,18 +1,21 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useHits } from 'react-instantsearch-hooks';
 import { useFormat } from 'helpers/hooks/useFormat';
 
 const AccumalativeTrace = () => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
-  const {
-    hits,
-    results: { nbHits, page, nbPages, hitsPerPage },
-  } = useHits();
+  const { hits, results } = useHits();
 
-  const accumulativeHitsCount = page === 0 ? hits.length : (nbPages - page) * hitsPerPage + hits.length;
+  const accumulativeHitsCount = useMemo(() => {
+    if (!results) return 0;
 
-  if (!nbHits) return <></>;
+    const { page, nbPages, hitsPerPage } = results;
+
+    return page === 0 ? hits.length : (nbPages - page) * hitsPerPage + hits.length;
+  }, [results, hits]);
+
+  if (!results?.nbHits) return <></>;
 
   return (
     <div className="absolute bottom-72 left-1/2 -translate-x-1/2">
@@ -20,7 +23,7 @@ const AccumalativeTrace = () => {
         {formatProductMessage({
           id: 'showing',
           defaultMessage: 'Showing {current} of {total}',
-          values: { current: accumulativeHitsCount, total: nbHits },
+          values: { current: accumulativeHitsCount, total: results.nbHits ?? 0 },
         })}
       </p>
     </div>

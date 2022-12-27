@@ -9,9 +9,7 @@ interface Props {
 const SearchHeader: React.FC<Props> = ({ query }) => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
-  const {
-    results: { nbHits },
-  } = useHits();
+  const { results } = useHits();
 
   if (!query) return <></>;
 
@@ -28,7 +26,7 @@ const SearchHeader: React.FC<Props> = ({ query }) => {
         {formatProductMessage({
           id: 'found.products',
           defaultMessage: 'We found {count} products',
-          values: { count: nbHits },
+          values: { count: results?.nbHits ?? 0 },
         })}
       </h4>
     </div>

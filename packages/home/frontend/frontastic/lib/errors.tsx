@@ -2,10 +2,10 @@ import * as React from 'react';
 import { Disclosure } from '@headlessui/react';
 import { ChevronDownIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 import classNames from 'classnames';
-import { Log } from 'helpers/errorLogger';
+import { Log, LogError } from 'helpers/errorLogger';
 import { isDevelopment } from 'helpers/utils/environment';
 
-const getErrorMessage = (error) => {
+const getErrorMessage = (error: LogError) => {
   if (typeof error?.data[0] === 'string') {
     return error.data[0];
   }
@@ -35,7 +35,7 @@ export function Errors() {
   // errors happening exactly in parallel.
   //
   // If somebody has a better solution for this, please fix:
-  Log.setErrorLogger((error) => {
+  Log.setErrorLogger((error: LogError) => {
     if (typeof window !== 'undefined') {
       window.setTimeout(() => {
         setErrors([error, ...errors].slice(0, 5));

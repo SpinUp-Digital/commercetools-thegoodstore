@@ -70,7 +70,7 @@ const ResetPassword: FC<ResetPasswordProps> = ({ token, accountLink, signInLink 
         );
       } else {
         setError('');
-        router?.push(resolveReferenceTarget(accountLink));
+        router?.push(resolveReferenceTarget(accountLink) as string);
       }
     } catch (err) {
       setError(formatErrorMessage({ id: 'wentWrong', defaultMessage: 'Sorry. Something went wrong..' }));

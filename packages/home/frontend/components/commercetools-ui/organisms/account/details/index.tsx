@@ -2,11 +2,9 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Button from 'components/commercetools-ui/atoms/button';
 import Typography from 'components/commercetools-ui/atoms/typography';
-import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useHash from 'helpers/hooks/useHash';
 import useI18n from 'helpers/hooks/useI18n';
-import Redirect from 'helpers/redirect';
 import { Reference } from 'types/reference';
 import { useAccount, useCart } from 'frontastic';
 import {
@@ -56,7 +54,7 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
     if (!account) return;
 
     const email = account.email;
-    const addresses = account.addresses.filter((address) => address.country === country);
+    const addresses = account.addresses?.filter((address) => address.country === country);
     const shippingAddress = addresses?.find((address) => address.isDefaultShippingAddress) || addresses?.[0];
     const billingAddress = addresses?.find((address) => address.isDefaultBillingAddress) || addresses?.[0];
 
@@ -99,7 +97,7 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
     ),
   };
 
-  const Content = mapping[hash];
+  const Content = mapping[hash as keyof typeof mapping];
 
   return (
     <div className="min-h-[80vh] bg-neutral-200 md:h-[80vh] xl:py-[68px]">

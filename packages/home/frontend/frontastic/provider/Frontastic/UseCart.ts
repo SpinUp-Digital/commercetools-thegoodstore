@@ -3,8 +3,8 @@ import { Discount } from '@commercetools/frontend-domain-types/cart/Discount';
 import { Order } from '@commercetools/frontend-domain-types/cart/Order';
 import { ShippingMethod } from '@commercetools/frontend-domain-types/cart/ShippingMethod';
 import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
-import { CartDetails } from 'frontastic/actions/cart';
 import { ProjectSettings } from '@commercetools/frontend-domain-types/ProjectSettings';
+import { CartDetails } from 'frontastic/actions/cart';
 
 export interface UseCart {
   data?: Cart;

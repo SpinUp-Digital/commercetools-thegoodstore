@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { Cart } from '@commercetools/frontend-domain-types/cart/Cart';
 import { ShippingMethod } from '@commercetools/frontend-domain-types/cart/ShippingMethod';
 import toast from 'react-hot-toast';
 import Address from 'components/commercetools-ui/organisms/adyen-checkout/panels/address';
@@ -7,6 +8,7 @@ import Overview from 'components/commercetools-ui/organisms/adyen-checkout/panel
 import OrderSummary from 'components/commercetools-ui/organisms/old_cart/orderSummary';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { countryBasedShippingRateIndex } from 'helpers/utils/flattenShippingMethod';
+import { Reference } from 'types/reference';
 import { useCart } from 'frontastic';
 import { mapToCartStructure, mapToFormStructure } from './mapFormData';
 import { requiredDataIsValid } from './requiredDataIsValid';
@@ -26,11 +28,17 @@ export type FormData = {
   billingCountry: string;
 };
 
-const AdyenCheckout = ({ termsLink, cancellationLink, privacyLink }) => {
+export interface Props {
+  termsLink?: Reference;
+  cancellationLink?: Reference;
+  privacyLink?: Reference;
+}
+
+const AdyenCheckout: React.FC<Props> = ({ termsLink, cancellationLink, privacyLink }) => {
   const { data: cartList, updateCart, setShippingMethod } = useCart();
   const { formatMessage } = useFormat({ name: 'cart' });
   const { formatMessage: formatCheckoutMessage } = useFormat({ name: 'checkout' });
-  const containerRef = useRef();
+  const containerRef = useRef<HTMLDivElement>(null);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [disableSubmitButton, setDisableSubmitButton] = useState<boolean>(true);
   const [billingIsSameAsShipping, setBillingIsSameAsShipping] = useState<boolean>(true);
@@ -90,7 +98,9 @@ const AdyenCheckout = ({ termsLink, cancellationLink, privacyLink }) => {
   };
 
   const updateCartData = useCallback(() => {
-    if (countryBasedShippingRateIndex[data.shippingCountry] == undefined) {
+    if (
+      countryBasedShippingRateIndex[data.shippingCountry as keyof typeof countryBasedShippingRateIndex] == undefined
+    ) {
       toast.error(
         formatCheckoutMessage({
           id: 'taxesNotSupported',
@@ -135,8 +145,8 @@ const AdyenCheckout = ({ termsLink, cancellationLink, privacyLink }) => {
       name: formatMessage({ id: 'overview', defaultMessage: 'Overview' }),
       component: (
         <Overview
-          shippingMethods={cartList?.availableShippingMethods}
-          currentShippingMethod={currentShippingMethod}
+          shippingMethods={cartList?.availableShippingMethods ?? []}
+          currentShippingMethod={currentShippingMethod as ShippingMethod}
           onSelectShippingMethod={updatecurrentShippingMethod}
         />
       ),
@@ -159,6 +169,8 @@ const AdyenCheckout = ({ termsLink, cancellationLink, privacyLink }) => {
   }, [data.shippingCountry, dataIsValid, updateCartData]);
 
   useEffect(() => {
+    if (!cartList) return;
+
     const defaultData = mapToFormStructure(cartList);
     if (defaultData && requiredDataIsValid(defaultData, billingIsSameAsShipping)) {
       updateData(defaultData);
@@ -169,14 +181,14 @@ const AdyenCheckout = ({ termsLink, cancellationLink, privacyLink }) => {
     if (!currentShippingMethod && cartList?.availableShippingMethods) {
       if (cartList?.shippingInfo) {
         const currentShippingMethod = cartList.availableShippingMethods.find(
-          ({ shippingMethodId }) => shippingMethodId == cartList.shippingInfo.shippingMethodId,
+          ({ shippingMethodId }) => shippingMethodId == cartList.shippingInfo?.shippingMethodId,
         );
         setCurrentShippingMethod(currentShippingMethod);
       } else {
         setCurrentShippingMethod(cartList?.availableShippingMethods?.[0]);
       }
     }
-  }, [cartList.availableShippingMethods, cartList.shippingInfo, currentShippingMethod]);
+  }, [cartList?.availableShippingMethods, cartList?.shippingInfo, currentShippingMethod]);
 
   return (
     <div className="mx-auto max-w-4xl md:mt-4">
@@ -198,7 +210,7 @@ const AdyenCheckout = ({ termsLink, cancellationLink, privacyLink }) => {
       <div className="lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16" ref={containerRef}>
         {steps[currentStepIndex].component}
         <OrderSummary
-          cart={cartList}
+          cart={cartList as Cart}
           submitButtonLabel={submitButtonLabel[currentStepIndex]}
           disableSubmitButton={disableSubmitButton}
           showDiscountsForm={currentStepIndex < 2}

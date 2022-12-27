@@ -1,12 +1,12 @@
 import useClassNames from 'helpers/hooks/useClassNames';
-import { ButtonProps } from '.';
+import { ButtonProps, ButtonSize, ButtonVariant } from '.';
 
-type variantBasedClassName = { [key in ButtonProps['variant']]?: string };
+type variantBasedClassName = { [key in ButtonVariant]?: string };
 type IncludesIcon = { includesIcon: boolean };
 type UseButtonClassNames = (props: Pick<ButtonProps, 'variant' | 'size' | 'className'> & IncludesIcon) => string;
 
-const useButtonClassNames: UseButtonClassNames = ({ variant, size, className, includesIcon }) => {
-  const sizeClassNames: { [key in ButtonProps['size']]: string } = {
+const useButtonClassNames: UseButtonClassNames = ({ variant, size, className = '', includesIcon }) => {
+  const sizeClassNames: { [key in ButtonSize]: string } = {
     xs: 'p-8',
     s: 'py-12 px-24',
     m: 'py-12 px-36',
@@ -43,8 +43,8 @@ const useButtonClassNames: UseButtonClassNames = ({ variant, size, className, in
   };
 
   const buttonClassName = useClassNames([
-    sizeClassNames[size],
-    variantClassNames[variant],
+    sizeClassNames[size as ButtonSize],
+    variantClassNames[variant as ButtonVariant] as string,
     { 'rounded-md': variant !== 'ghost' },
     { 'flex gap-10 items-center': includesIcon },
     'relative text-12 leading-4',

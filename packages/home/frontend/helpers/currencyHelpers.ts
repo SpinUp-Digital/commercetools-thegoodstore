@@ -16,7 +16,7 @@ export class CurrencyHelpers {
 
   private static formatStringForCurrency = function (costInCents: string, locale?: string) {
     if (!StringHelpers.isNumeric(costInCents)) {
-      Log.error(`Value (${costInCents}) passed for currency formatting cannot be parsed to a number`);
+      Log.error(new Error(`Value (${costInCents}) passed for currency formatting cannot be parsed to a number`));
       return '';
     }
     return CurrencyHelpers.formatNumberForCurrency(parseInt(costInCents, 10), locale);
@@ -32,7 +32,7 @@ export class CurrencyHelpers {
   };
 
   private static formatMoneyCurrency = function (price: Money, locale?: string) {
-    return Intl.NumberFormat(CurrencyHelpers.getLocaleFromShorthenedLocale(locale), {
+    return Intl.NumberFormat(CurrencyHelpers.getLocaleFromShorthenedLocale(locale as string), {
       style: 'currency',
       currency: price?.currencyCode ?? 'EUR',
       maximumFractionDigits: price?.fractionDigits ?? 2,
@@ -57,19 +57,23 @@ export class CurrencyHelpers {
 
     if (value1.fractionDigits !== value2.fractionDigits && value1.fractionDigits && value2.fractionDigits) {
       Log.warn(
-        `Money with different fraction codes passed to addCurrency, value returned will be innacurate. ` +
-          `Value 1: ${value1.fractionDigits}, value 2: ${value2.fractionDigits}`,
+        new Error(
+          `Money with different fraction codes passed to addCurrency, value returned will be innacurate. ` +
+            `Value 1: ${value1.fractionDigits}, value 2: ${value2.fractionDigits}`,
+        ),
       );
     }
     if (value1.currencyCode !== value2.currencyCode && value1.currencyCode && value2.currencyCode) {
       Log.warn(
-        `Money with different currency codes passed to addCurrency, value returned will be innacurate. ` +
-          `Value 1: ${value1.currencyCode}, value 2: ${value2.currencyCode}`,
+        new Error(
+          `Money with different currency codes passed to addCurrency, value returned will be innacurate. ` +
+            `Value 1: ${value1.currencyCode}, value 2: ${value2.currencyCode}`,
+        ),
       );
     }
     return {
       fractionDigits: value1.fractionDigits || value2.fractionDigits,
-      centAmount: value1.centAmount + value2.centAmount,
+      centAmount: (value1.centAmount as number) + (value2.centAmount as number),
       currencyCode: value1.currencyCode || value2.currencyCode,
     };
   };
@@ -77,26 +81,30 @@ export class CurrencyHelpers {
   static subtractCurrency: (value1: Money, value2: Money) => Money = (value1: Money, value2: Money) => {
     if (value1.fractionDigits !== value2.fractionDigits) {
       Log.warn(
-        `Money with different fraction codes passed to addCurrency, value returned will be innacurate. ` +
-          `Value 1: ${value1.fractionDigits}, value 2: ${value2.fractionDigits}`,
+        new Error(
+          `Money with different fraction codes passed to addCurrency, value returned will be innacurate. ` +
+            `Value 1: ${value1.fractionDigits}, value 2: ${value2.fractionDigits}`,
+        ),
       );
     }
     if (value1.currencyCode !== value2.currencyCode) {
       Log.warn(
-        `Money with different currency codes passed to addCurrency, value returned will be innacurate. ` +
-          `Value 1: ${value1.currencyCode}, value 2: ${value2.currencyCode}`,
+        new Error(
+          `Money with different currency codes passed to addCurrency, value returned will be innacurate. ` +
+            `Value 1: ${value1.currencyCode}, value 2: ${value2.currencyCode}`,
+        ),
       );
     }
     return {
       fractionDigits: value1.fractionDigits || value2.fractionDigits,
-      centAmount: value1.centAmount - value2.centAmount,
+      centAmount: (value1.centAmount as number) - (value2.centAmount as number),
       currencyCode: value1.currencyCode || value2.currencyCode,
     };
   };
 
   static multiplyCurrency: (value: Money, numberOfItems: number) => Money = (value: Money, numberOfItems: number) => ({
     fractionDigits: value.fractionDigits,
-    centAmount: value.centAmount * numberOfItems,
+    centAmount: (value.centAmount as number) * numberOfItems,
     currencyCode: value.currencyCode,
   });
 }

@@ -15,14 +15,14 @@ type PreviewProps = {
 };
 
 export default function Preview({ data }: PreviewProps) {
-  const [currentHighlight, setCurrentHighlight] = useState(null);
-  const notifier = useRef(null);
+  const [currentHighlight, setCurrentHighlight] = useState<string>();
+  const notifier = useRef<Notifier>(null) as React.MutableRefObject<Notifier>;
 
   const handleRefresh = () => {
     // Do a proper refresh and no full reload
     window.location = window.location;
   };
-  const handleEndHighlight = () => setCurrentHighlight(null);
+  const handleEndHighlight = () => setCurrentHighlight(undefined);
 
   // in case of an error from API hub, we get a ResponseError as JSON back here
   if (data?.ok === false) {
@@ -30,7 +30,7 @@ export default function Preview({ data }: PreviewProps) {
   }
 
   useEffect(() => {
-    const handleHighlight = ({ item }) => {
+    const handleHighlight = ({ item }: { item: string }) => {
       if (currentHighlight !== item) {
         setCurrentHighlight(item);
       }
@@ -57,26 +57,37 @@ export default function Preview({ data }: PreviewProps) {
       data={data}
       tastics={tastics}
       wrapperClassName={styles.gridWrapper}
-      currentHighlight={currentHighlight}
+      currentHighlight={currentHighlight as string}
     />
   );
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ params, locale, req, res }) => {
-  SDK.configure(locale);
+  SDK.configure(locale as string);
 
   const extensions = SDK.getExtensions();
 
   const frontastic = createClient();
-  const data = await frontastic.getPreview(params.previewId.toString(), locale, req, res);
+  const data = await frontastic.getPreview(params?.previewId?.toString() ?? '', locale as string, req, res);
   const categories = await extensions.product
     .queryCategories({ query: { limit: 99 } })
-    .then((res) => (res as any).data);
+    .then((res) => (res.isError ? [] : res.data));
 
   return {
     props: {
       data: { ...data, categories },
-      ...(await serverSideTranslations(locale, ['common', 'cart', 'product', 'checkout'])),
+      ...(await serverSideTranslations(locale as string, [
+        'common',
+        'cart',
+        'product',
+        'checkout',
+        'account',
+        'customer-support',
+        'error',
+        'success',
+        'wishlist',
+        'newsletter',
+      ])),
     },
   };
 };

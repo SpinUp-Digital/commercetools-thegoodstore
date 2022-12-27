@@ -83,7 +83,7 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
           arrows
           dots={false}
           slideWidth={isTablet ? 400 : 246}
-          spaceBetween={spaceBetweenRef[currentBreakPoint] ?? 12}
+          spaceBetween={spaceBetweenRef[currentBreakPoint as keyof typeof spaceBetweenRef] ?? 12}
           allowTouchMove={!isDesktop}
         >
           {slidesElement}

@@ -14,10 +14,10 @@ const Redirect: React.FC<RedirectProps> = ({ target }) => {
   useEffect(() => {
     if (!target) return;
     //resolve href
-    const resolvedTarget = typeof target === 'string' ? target : resolveReferenceTarget(target);
+    const resolvedTarget = typeof target === 'string' ? target : (resolveReferenceTarget(target) as string);
     //redirect upon mounting
     router.push(resolvedTarget);
-  }, [target]);
+  }, [target, router]);
 
   return <></>;
 };

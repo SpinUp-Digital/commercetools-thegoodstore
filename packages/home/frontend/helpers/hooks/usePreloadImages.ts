@@ -19,7 +19,7 @@ const usePreloadImages = (sources: string[], suffix?: string) => {
     }
 
     setPreloaded(true);
-  }, [sources]);
+  }, [sources, suffix]);
 
   useEffect(() => {
     if (windowLoaded) preloadImages();

@@ -28,7 +28,7 @@ const Icon: React.FC<Props> = ({ className, flagName }: Props) => {
     GB: <UnitedKingdom className={className} />,
     US: <UnitedStates className={className} />,
   };
-  return <>{flags[flagName]}</>;
+  return <>{flags[flagName as keyof typeof flags]}</>;
 };
 
 export default Icon;

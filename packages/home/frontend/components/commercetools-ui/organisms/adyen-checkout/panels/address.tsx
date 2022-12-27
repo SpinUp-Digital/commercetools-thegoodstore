@@ -15,15 +15,15 @@ type AddressProps = {
 };
 
 const Address: React.FC<AddressProps> = ({ data, updateData, billingIsSameAsShipping, toggleBillingAddressOption }) => {
-  const [projectSettingsCountries, setProjectSettingsCountries] = useState<ProjectSettings>(null);
-  const [shippingMethodsData, setShippingMethodsData] = useState<ShippingMethod[]>(null);
-  const [availableCountryOptions, setAvailableCountryOptions] = useState<CountryOption[]>(null);
+  const [projectSettingsCountries, setProjectSettingsCountries] = useState<ProjectSettings>();
+  const [shippingMethodsData, setShippingMethodsData] = useState<ShippingMethod[]>();
+  const [availableCountryOptions, setAvailableCountryOptions] = useState<CountryOption[]>();
   const { getProjectSettings, shippingMethods } = useCart();
   const { formatMessage } = useFormat({ name: 'checkout' });
   const { formatMessage: formatCommonMessage } = useFormat({ name: 'common' });
 
   useEffect(() => {
-    getProjectSettings().then((data) => {
+    getProjectSettings?.().then((data) => {
       setProjectSettingsCountries(data);
       setShippingMethodsData(shippingMethods.data);
     });

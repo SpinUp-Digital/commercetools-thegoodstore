@@ -29,7 +29,7 @@ export default function Image({
         {...props}
         unoptimized
         src={src}
-        layout={isNaN(+width) || isNaN(+baseHeight) ? 'fill' : layout}
+        layout={!width || isNaN(+width) || !baseHeight || isNaN(+baseHeight) ? 'fill' : layout}
         alt={alt}
         loading={loading}
         width={width}
@@ -54,13 +54,13 @@ export default function Image({
   //width getter
   const getImageWidth = () => {
     //return the original width
-    return +(width ?? media.width);
+    return +(width ?? media.width ?? 0);
   };
 
   //height getter
   const getImageHeight = () => {
     //if ratio is not supplied return the original height
-    if (!ratio) return +(baseHeight ?? media.height);
+    if (!ratio) return +(baseHeight ?? media.height ?? 0);
     //Use the crop ratio to calculate the height
     const [nominator, denominator] = ratio.split(':') as [string, string];
     return getImageWidth() * (+denominator / +nominator);

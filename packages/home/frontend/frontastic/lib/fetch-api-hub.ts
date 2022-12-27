@@ -1,4 +1,6 @@
 import { IncomingMessage, ServerResponse } from 'http';
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+//@ts-ignore
 import cookieCutter from 'cookie-cutter';
 import ServerCookies from 'cookies';
 import { SESSION_PERSISTENCE } from 'helpers/constants/auth';
@@ -62,11 +64,11 @@ const performFetchApiHub = async (
   endpointPath: string,
   locale: string,
   init: RequestInit,
-  payload: object = null,
+  payload: object = {},
   cookieManager: CookieManager,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): Promise<any> => {
-  const frontasticSessionHeaders = {};
+  const frontasticSessionHeaders = {} as Record<string, string>;
 
   const frontasticSessionCookie = cookieManager.getCookie('frontastic-session');
   if (frontasticSessionCookie) {
@@ -92,13 +94,13 @@ const performFetchApiHub = async (
 
   return await fetch(endpoint, actualInit).then((response): Response => {
     if (response.ok && response.headers.has('Frontastic-Session')) {
-      cookieManager.setCookie('frontastic-session', response.headers.get('Frontastic-Session'));
+      cookieManager.setCookie('frontastic-session', response.headers.get('Frontastic-Session') as string);
     }
     return response;
   });
 };
 
-export const rawFetchApiHub: FetchFunction = async (endpointPath, locale: string, init = {}, payload = null) => {
+export const rawFetchApiHub: FetchFunction = async (endpointPath, locale: string, init = {}, payload = {}) => {
   return await performFetchApiHub(endpointPath, locale, init, payload, {
     getCookie: (cookieIdenfier) => {
       return cookieCutter.get(cookieIdenfier);
@@ -115,11 +117,11 @@ export const rawFetchApiHub: FetchFunction = async (endpointPath, locale: string
 export const handleApiHubResponse = (fetchApiHubPromise: Promise<Response | ResponseError>): Promise<object> => {
   // TODO: Handle errors
   return fetchApiHubPromise
-    .then((response: Response) => {
-      if (response.ok) {
-        return response.json();
+    .then((response: ResponseError | Response) => {
+      if ((response as Response).ok) {
+        return (response as Response).json();
       }
-      throw new ResponseError(response);
+      throw new ResponseError(response as Response);
     })
     .catch(async (err: ResponseError) => {
       if (err && err.getResponse) {
@@ -130,10 +132,9 @@ export const handleApiHubResponse = (fetchApiHubPromise: Promise<Response | Resp
         } catch (e) {
           error = await response.text();
         }
-        Log.error(error);
+        Log.error(new Error(error as string));
         return error;
       } else {
-        Log.error('Network error: ' + err);
         return 'Network error: ' + err;
       }
     })
@@ -146,7 +147,7 @@ export const handleApiHubResponse = (fetchApiHubPromise: Promise<Response | Resp
     });
 };
 
-export const fetchApiHub: FetchFunction = async (endpointPath, locale: string, init = {}, payload = null) => {
+export const fetchApiHub: FetchFunction = async (endpointPath, locale: string, init = {}, payload = {}) => {
   return handleApiHubResponse(rawFetchApiHub(endpointPath, locale, init, payload));
 };
 
@@ -157,14 +158,20 @@ export const rawFetchApiHubServerSide = async (
   headers: HeadersInit = [],
 ) => {
   const cookies = new ServerCookies(expressMessages.req, expressMessages.res);
-  return await performFetchApiHub(endpointPath, locale, { headers }, null, {
-    getCookie: (cookieIdentifier) => {
-      return cookies.get(cookieIdentifier);
+  return await performFetchApiHub(
+    endpointPath,
+    locale,
+    { headers },
+    {},
+    {
+      getCookie: (cookieIdentifier) => {
+        return cookies.get(cookieIdentifier);
+      },
+      setCookie: () => {
+        // Do nothing. Only actions are eligible to set the session.
+      },
     },
-    setCookie: () => {
-      // Do nothing. Only actions are eligible to set the session.
-    },
-  });
+  );
 };
 
 export const fetchApiHubServerSide = async (

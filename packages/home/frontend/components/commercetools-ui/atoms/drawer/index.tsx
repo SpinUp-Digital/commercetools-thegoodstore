@@ -11,7 +11,7 @@ export interface DrawerProps {
   onClose?: () => void;
 }
 
-const Drawer: FC<DrawerProps> = ({ className, isOpen, direction, blockScrolling = true, onClose, children }) => {
+const Drawer: FC<DrawerProps> = ({ className = '', isOpen, direction, blockScrolling = true, onClose, children }) => {
   const { blockScroll } = useScrollBlock();
 
   useEffect(() => {
@@ -20,7 +20,8 @@ const Drawer: FC<DrawerProps> = ({ className, isOpen, direction, blockScrolling 
     }
   }, [isOpen, blockScroll, blockScrolling]);
 
-  const ref = useRef();
+  const ref = useRef<HTMLDivElement>(null);
+
   useOnClickOutside(ref, () => {
     !!isOpen && onClose?.();
   });

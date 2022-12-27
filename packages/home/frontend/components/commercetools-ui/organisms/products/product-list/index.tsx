@@ -35,7 +35,7 @@ const ProductList: React.FC<Props> = ({ categoryId, searchQuery, categories, fac
 
       <div className="relative mx-auto mt-52 max-w-[1150px] px-12 md:px-24 2xl:max-w-[1248px]">
         <Breadcrumbs categories={categories} categoryId={categoryId} />
-        <SearchHeader query={searchQuery} />
+        <SearchHeader query={searchQuery ?? ''} />
 
         {isDesktop ? (
           <DesktopFacets facetsConfiguration={facetsConfiguration} />

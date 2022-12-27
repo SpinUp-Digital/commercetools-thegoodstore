@@ -12,7 +12,7 @@ export default {
 } as Meta;
 
 const Template: Story<FooterProps> = (args) => (
-  <Footer columns={footerColumns} logo={footerLogo} socialMedia={footerSocialMediaLinks} {...args} />
+  <Footer {...args} columns={footerColumns} logo={footerLogo} socialMedia={footerSocialMediaLinks} />
 );
 
 export const WithoutHighlights = Template.bind({});

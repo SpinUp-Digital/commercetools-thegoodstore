@@ -16,10 +16,10 @@ export type PriceRangeProps = {
 
 const PriceRange: FC<PriceRangeProps> = ({ products, facets, updatePriceFilteringParams }) => {
   const router = useRouter();
-  const widthRef = useRef(null);
+  const widthRef = useRef<HTMLDivElement>(null);
   const [inputWidth, setInputWidth] = useState(0);
-  const [minPrice, setMinPrice] = useState<number>(null);
-  const [maxPrice, setMaxPrice] = useState<number>(null);
+  const [minPrice, setMinPrice] = useState<number>(0);
+  const [maxPrice, setMaxPrice] = useState<number>(0);
   const [values, setValues] = useState<RangeInputValues>([minPrice, maxPrice]);
   const [currency, setCurrency] = useState('');
 
@@ -37,8 +37,8 @@ const PriceRange: FC<PriceRangeProps> = ({ products, facets, updatePriceFilterin
 
       if (priceFacet) {
         const { min, max, minSelected, maxSelected } = priceFacet as RangeFacet;
-        const minConverted = convertCents(min);
-        const maxConverted = convertCents(max);
+        const minConverted = convertCents(min as number);
+        const maxConverted = convertCents(max as number);
 
         setMinPrice(minConverted);
         setMaxPrice(maxConverted);
@@ -51,11 +51,11 @@ const PriceRange: FC<PriceRangeProps> = ({ products, facets, updatePriceFilterin
         } else updateValues([minConverted, maxConverted]);
 
         // Setting currency
-        setCurrency(products?.[0].variants[0].price.currencyCode);
+        setCurrency(products?.[0].variants[0].price?.currencyCode as string);
       }
     };
 
-    setInputWidth(widthRef.current.clientWidth);
+    setInputWidth(widthRef.current?.clientWidth as number);
     setDefaults();
   }, [router, facets, products]);
 

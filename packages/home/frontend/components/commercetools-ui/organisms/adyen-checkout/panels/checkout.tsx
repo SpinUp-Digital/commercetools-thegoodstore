@@ -28,9 +28,16 @@ const Checkout = () => {
   };
 
   useEffect(() => {
+    if (!cartList?.sum) return;
+
     const host = typeof window !== 'undefined' ? window.location.origin : '';
 
-    createSession(cartList.sum.centAmount, cartList.sum.currencyCode, `${host}/thank-you`, locale).then((res) => {
+    createSession(
+      cartList.sum.centAmount as number,
+      cartList.sum.currencyCode as string,
+      `${host}/thank-you`,
+      locale as string,
+    ).then((res) => {
       const { id, sessionData } = res;
 
       setSession({ id, sessionData });
@@ -45,15 +52,12 @@ const Checkout = () => {
         //environment: process.env.NODE_ENV === 'production' ? 'live' : 'test',
         clientKey: 'test_VDRCU3ALS5GMDC45GLZGUF6ANM3P75ZK',
         session,
-        onPaymentCompleted: (result) => {
-          console.log(result);
-
+        onPaymentCompleted: (result: string) => {
           if (result === 'Authorised') {
+            //PAYMENT AUTHORIZED
           }
         },
-        onError: (error) => {
-          console.log(error);
-
+        onError: (error: string) => {
           toast.error(error);
         },
       };

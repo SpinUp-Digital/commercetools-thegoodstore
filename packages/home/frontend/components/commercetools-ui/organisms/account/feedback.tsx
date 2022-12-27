@@ -10,12 +10,12 @@ type FeedbackProps = {
 const Feedback: FC<FeedbackProps> = ({ error, success }) => {
   const feedBackElementClassName = useClassNames(['mb-12 capitalize', success ? 'text-green-600' : 'text-accent-red']);
 
+  if (!error && !success) return <></>;
+
   return (
-    (error || success) && (
-      <Typography fontSize={12} className={feedBackElementClassName}>
-        {error || success}
-      </Typography>
-    )
+    <Typography fontSize={12} className={feedBackElementClassName}>
+      {error || success}
+    </Typography>
   );
 };
 

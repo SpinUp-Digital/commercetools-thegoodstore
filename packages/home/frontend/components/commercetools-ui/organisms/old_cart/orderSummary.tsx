@@ -2,6 +2,7 @@ import { MouseEvent } from 'react';
 import { useRouter } from 'next/router';
 import { Cart } from '@commercetools/frontend-domain-types/cart/Cart';
 import { LineItem } from '@commercetools/frontend-domain-types/cart/LineItem';
+import { Money } from '@commercetools/frontend-domain-types/product/Money';
 import { useTranslation, Trans } from 'react-i18next';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
@@ -49,22 +50,22 @@ const OrderSummary = ({
     <Link key={2} className="cursor-pointer font-medium hover:underline" link={privacyLink} />,
   ];
 
-  const totalTaxes = cart?.taxed?.taxPortions?.reduce((a, b) => a + b.amount.centAmount, 0);
+  const totalTaxes = cart?.taxed?.taxPortions?.reduce((a, b) => a + (b.amount?.centAmount as number), 0);
 
-  const productPrice = cart?.lineItems.reduce((a, b: LineItem) => {
+  const productPrice = cart?.lineItems?.reduce((a, b: LineItem) => {
     if (b.discountedPrice) {
-      return a + b.discountedPrice.centAmount * b.count;
+      return a + (b.discountedPrice.centAmount as number) * (b.count as number);
     } else {
-      return a + b.price.centAmount * b.count;
+      return a + (b.price?.centAmount as number) * (b.count as number);
     }
   }, 0);
 
   const discountPrice = cart?.lineItems?.reduce((a, b) => {
     return (
       a +
-      b.count *
-        b.discounts.reduce((x, y) => {
-          return x + y.discountedAmount.centAmount;
+      (b.count as number) *
+        (b.discounts as Array<{ discountedAmount: Money }>).reduce((x, y) => {
+          return x + (y.discountedAmount.centAmount as number);
         }, 0)
     );
   }, 0);
@@ -82,7 +83,7 @@ const OrderSummary = ({
         <div className="flex items-center justify-between">
           <dt className="text-sm text-gray-600">{formatCartMessage({ id: 'subtotal', defaultMessage: 'Subtotal' })}</dt>
           <dd className="text-sm font-medium text-gray-900">
-            {CurrencyHelpers.formatForCurrency(productPrice, locale)}
+            {CurrencyHelpers.formatForCurrency(productPrice ?? 0, locale)}
           </dd>
         </div>
 
@@ -102,7 +103,7 @@ const OrderSummary = ({
             <span>{formatCartMessage({ id: 'discounts', defaultMessage: 'Discounts' })}</span>
           </dt>
           <dd className="text-sm font-medium text-gray-900">
-            {CurrencyHelpers.formatForCurrency(-discountPrice || {}, locale)}
+            {CurrencyHelpers.formatForCurrency(-(discountPrice ?? 0) || {}, locale)}
           </dd>
         </div>
 

@@ -10,7 +10,13 @@ export interface Props {
   className?: string;
 }
 
-const Link: React.FC<React.PropsWithChildren<Props>> = ({ children, target, underlined, withArrow, className }) => {
+const Link: React.FC<React.PropsWithChildren<Props>> = ({
+  children,
+  target,
+  underlined = false,
+  withArrow = false,
+  className = '',
+}) => {
   const classNames = useClassNames([underlined && 'underline', className]);
 
   return (

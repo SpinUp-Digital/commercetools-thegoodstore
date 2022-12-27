@@ -14,7 +14,7 @@ const ThankYou = () => {
   useEffect(() => {
     const { sessionId, redirectResult } = router.query;
 
-    adyenCheckout(sessionId, redirectResult, router.locale);
+    adyenCheckout(sessionId as string, redirectResult as string, router.locale as string);
   }, [router.query, router.locale, adyenCheckout]);
 
   return (

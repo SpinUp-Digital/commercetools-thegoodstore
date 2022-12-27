@@ -6,14 +6,13 @@ export interface DropdownProps extends ComponentProps<'select'> {
   containerClassName?: string;
   items: Array<{ label: string; value: string }>;
   label?: string;
-  onChange?: (event: React.FormEvent) => void;
   value?: string;
   defaultValue?: string;
 }
 
 const Dropdown: FC<DropdownProps> = ({
-  className,
-  containerClassName,
+  className = '',
+  containerClassName = '',
   label,
   items,
   onChange,

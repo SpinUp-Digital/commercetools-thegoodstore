@@ -32,6 +32,11 @@ const UpdateAddress: React.FC<UpdateAddressProps> = ({ open, onClose, defaultVal
     setData({ ...data, [e.target.name]: e.target.checked });
   };
 
+  //dialog close handler
+  const handleClose = () => {
+    onClose?.();
+  };
+
   //submission handler
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,13 +44,13 @@ const UpdateAddress: React.FC<UpdateAddressProps> = ({ open, onClose, defaultVal
       updateAddress(data);
     } catch (err) {
     } finally {
-      onClose();
+      onClose?.();
     }
   };
 
   return (
     <Transition.Root show={open} as={Fragment}>
-      <Dialog className={`fixed inset-0 z-10 overflow-y-auto`} onClose={onClose}>
+      <Dialog className={`fixed inset-0 z-10 overflow-y-auto`} onClose={handleClose}>
         <>
           <div className="flex min-h-screen items-end justify-center px-4 pb-20 pt-4 text-left sm:block sm:p-0">
             <Transition.Child

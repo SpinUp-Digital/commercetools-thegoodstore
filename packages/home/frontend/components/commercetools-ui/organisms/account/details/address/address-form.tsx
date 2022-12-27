@@ -63,16 +63,16 @@ const AddressForm: React.FC<AddressFormProps> = ({ defaultValues, onClose, onSub
 
   const handleClose = () => {
     resetData();
-    onClose();
+    onClose?.();
   };
 
   //input change handler
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
   const handleDelete = () => {
-    removeAddress(data.addressId).then(() => onClose());
+    removeAddress(data.addressId).then(onClose);
   };
 
   //submission handler

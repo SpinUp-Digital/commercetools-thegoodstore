@@ -1,10 +1,12 @@
-import useSWR, { mutate } from 'swr';
+/* eslint-disable react-hooks/rules-of-hooks*/
+
 import { Account } from '@commercetools/frontend-domain-types/account/Account';
 import { Address } from '@commercetools/frontend-domain-types/account/Address';
+import { sdk } from '@commercetools/frontend-sdk';
+import useSWR, { mutate } from 'swr';
+import { SDK } from 'sdk';
 import { revalidateOptions } from 'frontastic';
 import { ResponseError } from 'frontastic/lib/fetch-api-hub';
-import { SDK } from 'sdk';
-import { sdk } from '@commercetools/frontend-sdk';
 
 export interface GetAccountResult {
   loggedIn: boolean;
@@ -31,9 +33,11 @@ export interface RegisterAccount extends UpdateAccount {
 export const getAccount = (): GetAccountResult => {
   const extensions = SDK.getExtensions();
 
-  const result = useSWR<unknown>('/action/account/getAccount', extensions.account.getAccount, revalidateOptions);
+  const result = useSWR('/action/account/getAccount', extensions.account.getAccount, revalidateOptions);
 
-  const account = ((result as any).data?.data as GetAccountResult)?.account as Account;
+  if (result.data?.isError) return { loggedIn: false, error: result.error };
+
+  const account = (result.data?.data as GetAccountResult)?.account as Account;
 
   if (account?.accountId) return { account, loggedIn: true };
 
@@ -59,7 +63,7 @@ export const login = async (email: string, password: string, remember?: boolean)
   mutate('/action/cart/getCart');
   mutate('/action/wishlist/getWishlist');
 
-  return (res as any).data;
+  return res.isError ? ({} as Account) : res.data;
 };
 
 export const logout = async () => {
@@ -77,7 +81,7 @@ export const register = async (account: RegisterAccount): Promise<Account> => {
 
   const res = await extensions.account.register({ account: account });
 
-  return (res as any).data;
+  return res.isError ? ({} as Account) : res.data;
 };
 
 export const confirm = async (token: string): Promise<Account> => {
@@ -87,7 +91,7 @@ export const confirm = async (token: string): Promise<Account> => {
 
   mutate('/action/account/getAccount', res);
 
-  return (res as any).data;
+  return res.isError ? ({} as Account) : res.data;
 };
 
 export const requestConfirmationEmail = async (email: string, password: string): Promise<void> => {
@@ -98,9 +102,7 @@ export const requestConfirmationEmail = async (email: string, password: string):
     password,
   };
 
-  const res = await extensions.account.requestConfirmationEmail(payload);
-
-  return (res as any).data;
+  await extensions.account.requestConfirmationEmail(payload);
 };
 
 export const changePassword = async (token: string, newPassword: string): Promise<Account> => {
@@ -108,7 +110,7 @@ export const changePassword = async (token: string, newPassword: string): Promis
 
   const res = await extensions.account.resetPassword({ token, newPassword });
 
-  return (res as any).data;
+  return res.isError ? ({} as Account) : res.data;
 };
 
 export const requestPasswordReset = async (email: string): Promise<void> => {
@@ -118,9 +120,7 @@ export const requestPasswordReset = async (email: string): Promise<void> => {
     email,
   };
 
-  const res = await extensions.account.requestResetPassword(payload);
-
-  return (res as any).data;
+  await extensions.account.requestResetPassword(payload);
 };
 
 export const resetPassword = async (token: string, newPassword: string): Promise<Account> => {
@@ -130,7 +130,7 @@ export const resetPassword = async (token: string, newPassword: string): Promise
 
   mutate('/action/account/getAccount', res);
 
-  return (res as any).data;
+  return res.isError ? ({} as Account) : res.data;
 };
 
 export const update = async (account: UpdateAccount): Promise<Account> => {
@@ -140,7 +140,7 @@ export const update = async (account: UpdateAccount): Promise<Account> => {
 
   mutate('/action/account/getAccount', res);
 
-  return (res as any).data;
+  return res.isError ? ({} as Account) : res.data;
 };
 
 export const addAddress = async (address: Omit<Address, 'addressId'>): Promise<Account> => {
@@ -150,35 +150,41 @@ export const addAddress = async (address: Omit<Address, 'addressId'>): Promise<A
 
   mutate('/action/account/getAccount', res);
 
-  return (res as any).data;
+  return res.isError ? ({} as Account) : res.data;
 };
 
 export const addShippingAddress = async (address: Omit<Address, 'addressId'>): Promise<Account> => {
   const extensions = SDK.getExtensions();
-  const { account } = ((await extensions.account.getAccount()) as any).data;
+
+  const response = await extensions.account.getAccount();
+
+  if (response.isError) return {} as Account;
 
   const res = await sdk.callAction<Account>({
     actionName: 'account/addShippingAddress',
-    payload: { account, address },
+    payload: { account: response.data.account, address },
   });
 
   mutate('/action/account/getAccount', res);
 
-  return (res as any).data;
+  return res.isError ? ({} as Account) : res.data;
 };
 
 export const addBillingAddress = async (address: Omit<Address, 'addressId'>): Promise<Account> => {
   const extensions = SDK.getExtensions();
-  const { account } = ((await extensions.account.getAccount()) as any).data;
+
+  const response = await extensions.account.getAccount();
+
+  if (response.isError) return {} as Account;
 
   const res = await sdk.callAction<Account>({
     actionName: 'account/addBillingAddress',
-    payload: { account, address },
+    payload: { account: response.data.account, address },
   });
 
   mutate('/action/account/getAccount', res);
 
-  return (res as any).data;
+  return res.isError ? ({} as Account) : res.data;
 };
 
 export const updateAddress = async (address: Address): Promise<Account> => {
@@ -188,7 +194,7 @@ export const updateAddress = async (address: Address): Promise<Account> => {
 
   mutate('/action/account/getAccount', res);
 
-  return (res as any).data;
+  return res.isError ? ({} as Account) : res.data;
 };
 
 export const removeAddress = async (addressId: string): Promise<Account> => {
@@ -198,7 +204,7 @@ export const removeAddress = async (addressId: string): Promise<Account> => {
 
   mutate('/action/account/getAccount', res);
 
-  return (res as any).data;
+  return res.isError ? ({} as Account) : res.data;
 };
 
 export const setDefaultBillingAddress = async (addressId: string): Promise<Account> => {
@@ -208,7 +214,7 @@ export const setDefaultBillingAddress = async (addressId: string): Promise<Accou
 
   mutate('/action/account/getAccount', res);
 
-  return (res as any).data;
+  return res.isError ? ({} as Account) : res.data;
 };
 
 export const setDefaultShippingAddress = async (addressId: string): Promise<Account> => {
@@ -218,5 +224,5 @@ export const setDefaultShippingAddress = async (addressId: string): Promise<Acco
 
   mutate('/action/account/getAccount', res);
 
-  return (res as any).data;
+  return res.isError ? ({} as Account) : res.data;
 };

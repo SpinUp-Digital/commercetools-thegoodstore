@@ -18,7 +18,7 @@ const FAQ: React.FC<Props> = ({ faqs }) => {
         </Typography>
       </div>
 
-      <div className="grid-col grid gap-y-16">
+      <div className="grid gap-y-16">
         {faqs.map((faq, index) => (
           <div key={index} className="rounded-md border border-neutral-400">
             <AccordionBtn

@@ -27,7 +27,7 @@ const Filters: FC<FiltersProps> = ({ facets, products }) => {
     setSortingParam(param);
   };
 
-  const handleFiltersSubmit = (e) => {
+  const handleFiltersSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const params = [
       {

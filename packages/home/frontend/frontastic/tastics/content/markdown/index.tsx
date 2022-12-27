@@ -1,7 +1,11 @@
-import Markdown from 'components/commercetools-ui/organisms/content/markdown';
+import Markdown, { Props as MarkdownProps } from 'components/commercetools-ui/organisms/content/markdown';
 
-const MarkdownTastic = ({ data }) => {
-  return <Markdown text={data.markdown} />;
+interface Props {
+  data: MarkdownProps;
+}
+
+const MarkdownTastic = ({ data }: Props) => {
+  return <Markdown text={data.text} />;
 };
 
 export default MarkdownTastic;

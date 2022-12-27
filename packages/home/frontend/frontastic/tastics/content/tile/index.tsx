@@ -1,7 +1,11 @@
 import React from 'react';
-import Tile from 'components/commercetools-ui/organisms/content/tile';
+import Tile, { TileProps } from 'components/commercetools-ui/organisms/content/tile';
 
-const TileTastic = ({ data }) => {
+interface Props {
+  data: TileProps;
+}
+
+const TileTastic = ({ data }: Props) => {
   return (
     <Tile
       image={data.image}

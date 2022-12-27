@@ -2,6 +2,8 @@ import React from 'react';
 import { GetServerSideProps, Redirect } from 'next';
 import Head from 'next/head';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+//@ts-ignore
 import { renderToString } from 'react-dom/server';
 import { getServerState } from 'react-instantsearch-hooks-server';
 import { useFormat } from 'helpers/hooks/useFormat';
@@ -66,14 +68,14 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({
   res,
   resolvedUrl,
 }) => {
-  SDK.configure(locale);
+  SDK.configure(locale as string);
 
   const extensions = SDK.getExtensions();
 
   const frontastic = createClient();
   const [data, categories] = await Promise.all([
-    frontastic.getRouteData(params, locale, query, req, res),
-    extensions.product.queryCategories({ query: { limit: 99 } }).then((res) => (res as any).data),
+    frontastic.getRouteData(params ?? {}, locale as string, query, req, res),
+    extensions.product.queryCategories({ query: { limit: 99 } }).then((res) => (res.isError ? [] : res.data)),
   ]);
 
   if (data) {
@@ -95,7 +97,7 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({
     // @TODO: Render nicer error page in debug mode, which shows the error to
     // the developer and also outlines how to debug this (take a look at
     // frontastic-CLI).
-    Log.error('Error retrieving data: ', data);
+    Log.error(new Error('Error retrieving data: '), data);
     return {
       notFound: true,
     };
@@ -114,7 +116,7 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({
   const serverUrl = `${protocol}://${req.headers.host}${resolvedUrl}`;
 
   /* Algolia */
-  const categoryId = (params.slug as string[])?.[params.slug?.length - 1];
+  const categoryId = (params?.slug as string[])?.[(params?.slug?.length as number) - 1];
 
   const searchQuery = (query.q as string) ?? '';
 
@@ -136,8 +138,8 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({
       data={{
         categoryId,
         searchQuery,
-        facetsConfiguration: plpConfiguration.facetsConfiguration,
-        pricesConfiguration: plpConfiguration.pricesConfiguration,
+        facetsConfiguration: plpConfiguration.facetsConfiguration ?? [],
+        pricesConfiguration: plpConfiguration.pricesConfiguration ?? [],
       }}
     />,
     { renderToString },
@@ -147,7 +149,7 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({
     props: {
       data: { ...data, categories, serverState, serverUrl } || null,
       locale: locale,
-      ...(await serverSideTranslations(locale, [
+      ...(await serverSideTranslations(locale as string, [
         'common',
         'cart',
         'product',

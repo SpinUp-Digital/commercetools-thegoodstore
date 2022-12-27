@@ -73,9 +73,9 @@ const MyAccount = () => {
           fields: [
             {
               label: 'language',
-              value: mapLocaleToMeaningfulFormat(router.locale).name,
+              value: mapLocaleToMeaningfulFormat(router.locale as string).name,
               type: 'select',
-              options: router.locales.map((locale) => ({
+              options: router.locales?.map((locale) => ({
                 name: mapLocaleToMeaningfulFormat(locale).name,
                 value: locale,
               })),

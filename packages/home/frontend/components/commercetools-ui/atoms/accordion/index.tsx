@@ -22,8 +22,8 @@ const Accordion: React.FC<AccordionProps> = ({
   iconColor,
   children,
   className,
-  buttonClassName,
-  panelClassName,
+  buttonClassName = '',
+  panelClassName = '',
 }) => {
   const buttonClassNames = useClassNames(['w-full', buttonClassName]);
 

@@ -1,10 +1,14 @@
-import useSWR, { mutate } from 'swr';
+/* eslint-disable react-hooks/rules-of-hooks*/
+
 import { Address } from '@commercetools/frontend-domain-types/account/Address';
 import { Cart } from '@commercetools/frontend-domain-types/cart/Cart';
 import { Discount } from '@commercetools/frontend-domain-types/cart/Discount';
+import { Order } from '@commercetools/frontend-domain-types/cart/Order';
+import { ShippingMethod } from '@commercetools/frontend-domain-types/cart/ShippingMethod';
 import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
-import { revalidateOptions } from 'frontastic';
+import useSWR, { mutate } from 'swr';
 import { SDK } from 'sdk';
+import { revalidateOptions } from 'frontastic';
 
 export type CartDetails = {
   account?: { email: string };
@@ -17,7 +21,9 @@ export const cartItems = () => {
 
   const result = useSWR('/action/cart/getCart', extensions.cart.getCart, revalidateOptions);
 
-  return { data: (result as any).data?.data };
+  if (result.data?.isError) return result as { data?: Cart };
+
+  return { data: result.data?.data };
 };
 
 export const addItem = async (variant: Variant, quantity: number) => {
@@ -46,7 +52,7 @@ export const orderHistory = async () => {
 
   const res = await extensions.cart.getOrderHistory();
 
-  return (res as any).data;
+  return res.isError ? ([] as Order[]) : res.data;
 };
 
 export const getProjectSettings = async () => {
@@ -54,7 +60,7 @@ export const getProjectSettings = async () => {
 
   const res = await extensions.project.getSettings();
 
-  return (res as any).data;
+  return res.isError ? {} : res.data;
 };
 
 export const removeItem = async (lineItemId: string) => {
@@ -73,7 +79,9 @@ export const shippingMethods = () => {
 
   const result = useSWR('/action/cart/getShippingMethods', extensions.cart.getShippingMethods, revalidateOptions);
 
-  return { data: (result as any).data?.data };
+  if (result.data?.isError) return result as { data?: ShippingMethod[] };
+
+  return { data: result.data?.data };
 };
 
 export const updateItem = async (lineItemId: string, newQuantity: number) => {
@@ -96,7 +104,7 @@ export const updateCart = async (payload: CartDetails): Promise<Cart> => {
 
   mutate('/action/cart/getCart', res);
 
-  return (res as any).data;
+  return res.isError ? ({} as Cart) : res.data;
 };
 
 export const setShippingMethod = async (shippingMethodId: string) => {
@@ -121,7 +129,7 @@ export const redeemDiscountCode = async (code: string) => {
   };
   const res = await extensions.cart.redeemDiscountCode(payload);
 
-  if (((res as any).data as Cart).cartId) {
+  if (!res.isError && (res.data as Cart).cartId) {
     mutate('/action/cart/getCart', res);
   } else {
     throw new Error('code not valid');
@@ -131,7 +139,7 @@ export const redeemDiscountCode = async (code: string) => {
 export const removeDiscountCode = async (discount: Discount) => {
   const extensions = SDK.getExtensions();
 
-  const res = await extensions.cart.removeDiscountCode({ discountId: discount.discountId });
+  const res = await extensions.cart.removeDiscountCode({ discountId: discount.discountId as string });
 
   mutate('/action/cart/getCart', res);
 };

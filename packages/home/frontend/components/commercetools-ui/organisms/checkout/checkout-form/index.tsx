@@ -52,7 +52,7 @@ const CheckoutForm = ({
   //available addresses to choose from
   const addresses = (account?.addresses ?? []).map((address) => ({
     display: `${address.city} - ${address.streetName} ${address.streetNumber}`,
-    data: address.addressId,
+    data: address.addressId ?? '',
   }));
 
   //use billing address as shipping address
@@ -147,7 +147,7 @@ const CheckoutForm = ({
                 name="shippingCountry"
                 label={formatMessage({ id: 'country', defaultMessage: 'Land' })}
                 options={shippingCountryOptions}
-                selectedOptionValue={(data.shippingCountry as string) || undefined}
+                selectedOptionValue={(data.shippingCountry as string) || ''}
                 onChange={updateFormInput}
                 containerClassName="col-span-full sm:col-span-4"
               />

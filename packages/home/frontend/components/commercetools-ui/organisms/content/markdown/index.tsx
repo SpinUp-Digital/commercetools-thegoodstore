@@ -1,15 +1,17 @@
 import React from 'react';
 import { Log } from 'helpers/errorLogger';
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+//@ts-ignore
 import { markdown } from 'markdown';
 
-interface Props {
+export interface Props {
   text: string;
   className?: string;
 }
 
 const Markdown: React.FC<Props> = ({ text }) => {
   if (typeof text !== 'string') {
-    Log.error(`Markdown: Invalid text property. Expected string but received ${typeof text}`);
+    Log.error(new Error(`Markdown: Invalid text property. Expected string but received ${typeof text}`));
     return <></>;
   }
   return (

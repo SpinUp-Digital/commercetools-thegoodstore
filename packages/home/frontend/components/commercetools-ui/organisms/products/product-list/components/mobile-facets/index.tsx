@@ -20,9 +20,7 @@ const MobileFacets: React.FC<Props> = ({ facetsConfiguration }) => {
 
   const { removeAllRefinements } = useProductList();
 
-  const {
-    results: { nbHits, renderingContent },
-  } = useHits();
+  const { results } = useHits();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -38,7 +36,7 @@ const MobileFacets: React.FC<Props> = ({ facetsConfiguration }) => {
 
   const facets = useDynamicFacets({
     configuration: facetsConfiguration,
-    ordering: renderingContent?.facetOrdering?.facets?.order,
+    ordering: results?.renderingContent?.facetOrdering?.facets?.order,
     render: ({ attribute, Component }) => (
       <Accordion
         key={attribute}
@@ -93,7 +91,7 @@ const MobileFacets: React.FC<Props> = ({ facetsConfiguration }) => {
         </div>
         <div className="flex items-center gap-16">
           <span>
-            {nbHits} {formatProductMessage({ id: 'items', defaultMessage: 'Items' })}
+            {results?.nbHits ?? 0} {formatProductMessage({ id: 'items', defaultMessage: 'Items' })}
           </span>
         </div>
       </div>

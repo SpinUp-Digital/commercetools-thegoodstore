@@ -1,7 +1,21 @@
 import React from 'react';
-import Footer from 'components/commercetools-ui/organisms/footer';
+import Footer, { Props as FooterProps } from 'components/commercetools-ui/organisms/footer';
+import { FooterLink } from 'components/commercetools-ui/organisms/footer/column';
 
-const FooterTastic = ({ data }) => {
+interface Props {
+  data: FooterProps & {
+    headerCol1: string;
+    linksCol1: FooterLink[];
+    headerCol2: string;
+    linksCol2: FooterLink[];
+    headerCol3: string;
+    linksCol3: FooterLink[];
+    headerCol4: string;
+    linksCol4: FooterLink[];
+  };
+}
+
+const FooterTastic = ({ data }: Props) => {
   const columns = [
     {
       header: data.headerCol1,
@@ -23,7 +37,7 @@ const FooterTastic = ({ data }) => {
 
   return (
     <div className="fixed-screen-width lg:relative-width">
-      <Footer columns={columns} logo={data.logo} socialMedia={data.socialMedia} />
+      <Footer {...data} columns={columns} />
     </div>
   );
 };

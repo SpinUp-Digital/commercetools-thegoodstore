@@ -1,7 +1,11 @@
 import React from 'react';
-import Hero from 'components/commercetools-ui/organisms/content/hero';
+import Hero, { HeroProps } from 'components/commercetools-ui/organisms/content/hero';
 
-const HeroTastic = ({ data }) => {
+interface Props {
+  data: HeroProps;
+}
+
+const HeroTastic = ({ data }: Props) => {
   return (
     <Hero
       image={data.image}

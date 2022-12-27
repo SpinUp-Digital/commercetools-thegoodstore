@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { Product } from '@commercetools/frontend-domain-types/product/Product';
+import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
 import { Hit } from 'instantsearch.js';
 import { Highlight } from 'react-instantsearch-hooks-web';
 import Link from 'components/commercetools-ui/atoms/link';
@@ -15,14 +16,14 @@ interface Props {
 
 const SearchItem: React.FC<Props> = ({ hit, onClick }) => {
   const variant = useMemo(() => hit.variants?.[0], [hit]);
-  const discountedVariant = useVariantWithDiscount(hit.variants);
+  const discountedVariant = useVariantWithDiscount(hit.variants as Partial<Variant>[]);
 
   return (
     <Link link={hit._url} onMouseDown={(e) => e.preventDefault()} onClick={onClick}>
       <div className="flex items-start gap-12">
         <div className="shrink-0 p-8 shadow-md">
           <div className="relative h-90 w-80">
-            <Image src={variant?.images[0]} objectFit="contain" />
+            <Image src={variant?.images?.[0]} objectFit="contain" />
           </div>
         </div>
         <div>

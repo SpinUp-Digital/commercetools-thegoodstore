@@ -11,7 +11,7 @@ import '../styles/app.css';
 function FrontasticStarter({ Component, pageProps }: AppProps) {
   const { locale } = useRouter();
 
-  SDK.configure(locale);
+  SDK.configure(locale as string);
 
   return (
     <FrontasticProvider>

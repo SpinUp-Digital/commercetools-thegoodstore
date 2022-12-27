@@ -2,10 +2,14 @@ import { ComponentProps, FC, ReactElement } from 'react';
 import FeedbackIconLayer from './feedbackIconLayer';
 import useButtonClassNames from './useButtonClassNames';
 
+export type ButtonVariant = 'primary' | 'secondary' | 'underlined' | 'ghost';
+export type ButtonSize = 'xs' | 's' | 'm' | 'l' | 'full' | 'icon';
+export type ButtonIconPosition = 'left' | 'middle' | 'right';
+
 export interface ButtonProps extends ComponentProps<'button'> {
-  variant?: 'primary' | 'secondary' | 'underlined' | 'ghost';
-  size?: 'xs' | 's' | 'm' | 'l' | 'full' | 'icon';
-  iconPosition?: 'left' | 'middle' | 'right';
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  iconPosition?: ButtonIconPosition;
   icon?: ReactElement;
   loading?: boolean;
   added?: boolean;

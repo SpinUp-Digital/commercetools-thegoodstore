@@ -24,7 +24,7 @@ const Modal: FC<ReactModalProps> = ({ children, ...props }) => {
   };
 
   useEffect(() => {
-    document.querySelector('body').style.overflow = props.isOpen ? 'hidden' : 'auto';
+    document.body.style.overflow = props.isOpen ? 'hidden' : 'auto';
   }, [props.isOpen]);
 
   return (

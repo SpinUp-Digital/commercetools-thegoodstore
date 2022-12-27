@@ -10,7 +10,7 @@ export interface Props {
   orders?: Order[];
 }
 
-const OrdersHistory: FC<Props> = ({ orders }) => {
+const OrdersHistory: FC<Props> = ({ orders = [] }) => {
   const [accountOrdersState, setAccountOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   //account data
@@ -80,8 +80,8 @@ const OrdersHistory: FC<Props> = ({ orders }) => {
                           })}
                         </dt>
                         <dd className="sm:mt-1">
-                          {(+order.sum.centAmount / 100).toFixed(2)}
-                          {order.lineItems[0].price.currencyCode}
+                          {(+(order?.sum?.centAmount ?? 0) / 100).toFixed(2)}
+                          {order?.lineItems?.[0]?.price?.currencyCode}
                         </dd>
                       </div>
                       <div className="flex justify-between pt-6 font-medium text-gray-900 sm:block sm:pt-0">
@@ -142,29 +142,29 @@ const OrdersHistory: FC<Props> = ({ orders }) => {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 border-b border-gray-200 text-sm sm:border-t">
-                      {order.lineItems.map((product) => (
+                      {order?.lineItems?.map((product) => (
                         <tr key={product.lineItemId}>
                           <td className="py-6 pr-8">
                             <div className="flex items-center">
                               <Image
-                                src={product.variant.images[0]}
+                                src={product.variant?.images?.[0]}
                                 alt={product.name}
                                 className="mr-6 h-16 w-16 rounded object-cover object-center"
                               />
                               <div>
                                 <div className="font-medium text-gray-900">{product.name}</div>
                                 <div className="mt-1 sm:hidden">
-                                  {(product.price.centAmount / 100).toFixed(2)}
-                                  {product.price.currencyCode}
+                                  {((product.price?.centAmount ?? 0) / 100).toFixed(2)}
+                                  {product.price?.currencyCode}
                                 </div>
                               </div>
                             </div>
                           </td>
                           <td className="hidden py-6 pr-8 sm:table-cell">
-                            {(product.price.centAmount / 100).toFixed(2)}
-                            {product.price.currencyCode}
+                            {((product.price?.centAmount ?? 0) / 100).toFixed(2)}
+                            {product.price?.currencyCode}
                           </td>
-                          <td className="hidden py-6 pr-8 sm:table-cell">{product.variant.attributes.size}</td>
+                          <td className="hidden py-6 pr-8 sm:table-cell">{product.variant?.attributes?.size}</td>
                           <td className="whitespace-nowrap py-6 text-right font-medium">
                             <NextLink href={product._url || ''}>
                               <a>

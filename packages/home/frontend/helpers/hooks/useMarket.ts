@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { mapSDKLanguage } from 'project.config';
-import { Market } from 'components/commercetools-ui/organisms/header/types';
 import { useRouter } from 'next/router';
+import { Market } from 'components/commercetools-ui/organisms/header/types';
+import { mapSDKLanguage } from 'project.config';
 
 const useMarket = () => {
   const [markets, setMarkets] = useState<Market[]>([]);
-  const [market, setMarket] = useState<Market>(undefined);
+  const [market, setMarket] = useState<Market>();
   const router = useRouter();
 
   const getCountryAndCurrency = (country: string) => {
@@ -24,13 +24,16 @@ const useMarket = () => {
   };
 
   useEffect(() => {
-    const initialMarkets = router.locales.map((locale) => ({
+    const initialMarkets = router.locales?.map((locale) => ({
       region: getCountryAndCurrency(mapSDKLanguage(locale)).countryName,
       flag: getCountryAndCurrency(mapSDKLanguage(locale)).countryName,
       locale: mapSDKLanguage(locale),
       currency: getCountryAndCurrency(mapSDKLanguage(locale)).currency,
       currencyCode: getCountryAndCurrency(mapSDKLanguage(locale)).currencyCode,
     }));
+
+    if (!initialMarkets) return;
+
     setMarkets(initialMarkets);
 
     let initialMarket = initialMarkets.find((market) => market.locale.substring(0, 2) === router.locale);
@@ -39,7 +42,7 @@ const useMarket = () => {
     }
 
     setMarket(initialMarket);
-  }, [router.locale, router.defaultLocale]);
+  }, [router.locale, router.defaultLocale, router.locales]);
 
   return { market, markets, handleMarket };
 };

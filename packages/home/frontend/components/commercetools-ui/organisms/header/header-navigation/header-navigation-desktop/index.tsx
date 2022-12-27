@@ -1,6 +1,6 @@
 import React from 'react';
 import HeaderNavigationButtonDesktop from 'components/commercetools-ui/organisms/header/header-navigation/header-navigation-desktop/header-navigation-button';
-import { Market, Tile } from 'components/commercetools-ui/organisms/header/types';
+import { Tile } from 'components/commercetools-ui/organisms/header/types';
 import useClassNames from 'helpers/hooks/useClassNames';
 import useScrollDirection from 'helpers/hooks/useScrollDirection';
 import { Category } from 'types/category';
@@ -12,10 +12,16 @@ export interface Props {
   activeCategory: Category;
   tiles: Tile[];
   hideSubMenu: () => void;
-  market: Market;
 }
 
-const HeaderNavigationDesktop = ({ links, handleMouseIn, handleMouseOut, activeCategory, tiles, hideSubMenu }) => {
+const HeaderNavigationDesktop: React.FC<Props> = ({
+  links,
+  handleMouseIn,
+  handleMouseOut,
+  activeCategory,
+  tiles,
+  hideSubMenu,
+}) => {
   const scrollDirection = useScrollDirection(5, -1);
   const navigationClassNames = useClassNames([
     'relative hidden items-center justify-center lg:flex transition-all duration-150',

@@ -35,7 +35,7 @@ const CartItem: React.FC<Props> = ({ item }) => {
 
       setProcessing(true);
 
-      await updateItem(item.lineItemId, newQuantity);
+      if (item.lineItemId) await updateItem(item.lineItemId, newQuantity);
 
       setProcessing(false);
     },
@@ -44,7 +44,7 @@ const CartItem: React.FC<Props> = ({ item }) => {
 
   const cartLineItemToWishlistLineItem = useMemo<LineItemWishlist>(() => {
     return {
-      lineItemId: item.lineItemId,
+      lineItemId: item.lineItemId ?? '',
       productId: item.productId,
       name: item.name,
       type: item.type,
@@ -56,8 +56,8 @@ const CartItem: React.FC<Props> = ({ item }) => {
   }, [item]);
 
   const moveToWishlist = useCallback(async () => {
-    await removeItem(item.lineItemId);
-    addToWishlist(wishlist, cartLineItemToWishlistLineItem, 1);
+    if (item.lineItemId) await removeItem(item.lineItemId);
+    if (wishlist) addToWishlist(wishlist, cartLineItemToWishlistLineItem, 1);
   }, [removeItem, item.lineItemId, addToWishlist, wishlist, cartLineItemToWishlistLineItem]);
 
   return (
@@ -75,7 +75,7 @@ const CartItem: React.FC<Props> = ({ item }) => {
           >
             {item.name}
           </p>
-          <i onClick={() => removeItem(item.lineItemId)} className="block cursor-pointer">
+          <i onClick={() => removeItem(item.lineItemId ?? '')} className="block cursor-pointer">
             <TrashIcon stroke="#494949" className="w-20" />
           </i>
         </div>
@@ -86,26 +86,26 @@ const CartItem: React.FC<Props> = ({ item }) => {
                 {CurrencyHelpers.formatForCurrency(item.discountedPrice, locale)}
               </span>
               <span className="text-12 font-normal leading-loose text-gray-500 line-through">
-                {CurrencyHelpers.formatForCurrency(item.price, locale)}
+                {CurrencyHelpers.formatForCurrency(item.price ?? 0, locale)}
               </span>
             </div>
           ) : (
             <span className="text-14 font-medium leading-loose">
-              {CurrencyHelpers.formatForCurrency(item.price, locale)}
+              {CurrencyHelpers.formatForCurrency(item.price ?? 0, locale)}
             </span>
           )}
         </div>
         <div className="mt-16">
           <div className={counterClassName}>
             <button
-              onClick={() => updateCartItem(item.count - 1)}
+              onClick={() => updateCartItem((item.count as number) - 1)}
               className="cursor-[inherit] py-3 pl-12 text-secondary-black"
             >
               -
             </button>
             <span className="py-3 text-14 text-secondary-black">{item.count}</span>
             <button
-              onClick={() => updateCartItem(item.count + 1)}
+              onClick={() => updateCartItem((item.count as number) + 1)}
               className="cursor-[inherit] py-3 pr-12 text-secondary-black"
             >
               +

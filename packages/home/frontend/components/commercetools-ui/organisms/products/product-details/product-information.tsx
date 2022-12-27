@@ -16,7 +16,9 @@ const ProductInformation: FC<ProductInformationProps> = ({ product, variant, onC
 
   const discountPercentage =
     variant.discountedPrice &&
-    ((variant.price.centAmount - variant.discountedPrice.centAmount) / variant.price.centAmount) * 100;
+    (((variant.price?.centAmount as number) - (variant.discountedPrice.centAmount as number)) /
+      (variant.price?.centAmount as number)) *
+      100;
 
   const updateVariantSKU = (sku: string) => {
     router.replace(`${router.asPath.split('/').slice(0, -1).join('/')}/${sku}`, undefined, {
@@ -26,7 +28,7 @@ const ProductInformation: FC<ProductInformationProps> = ({ product, variant, onC
 
   const productToWishlistLineItem = useMemo<LineItem>(() => {
     return {
-      lineItemId: product?.productId,
+      lineItemId: product?.productId ?? '',
       productId: product?.productId,
       name: product?.name,
       count: 1,
@@ -45,14 +47,14 @@ const ProductInformation: FC<ProductInformationProps> = ({ product, variant, onC
 
         <WishlistButton lineItem={productToWishlistLineItem} />
       </div>
-      {variant.discountedPrice ? (
+      {discountPercentage ? (
         <div className="flex flex-row justify-between">
           <div className="mt-10 flex items-center gap-8">
             <Typography fontSize={16} className="block font-regular leading-loose text-accent-red lg:text-18">
-              {CurrencyHelpers.formatForCurrency(variant.discountedPrice, router.locale)}
+              {CurrencyHelpers.formatForCurrency(variant.discountedPrice as number, router.locale)}
             </Typography>
             <Typography fontSize={16} className="block leading-loose text-gray-500 line-through lg:text-18">
-              {CurrencyHelpers.formatForCurrency(variant.price, router.locale)}
+              {CurrencyHelpers.formatForCurrency(variant.price ?? 0, router.locale)}
             </Typography>
           </div>
 
@@ -64,7 +66,7 @@ const ProductInformation: FC<ProductInformationProps> = ({ product, variant, onC
         </div>
       ) : (
         <span className="mt-10 block font-body text-16 font-regular leading-loose">
-          {CurrencyHelpers.formatForCurrency(variant.price, router.locale)}
+          {CurrencyHelpers.formatForCurrency(variant.price as number, router.locale)}
         </span>
       )}
       {attributesToDisplay.map((attribute, index) => {

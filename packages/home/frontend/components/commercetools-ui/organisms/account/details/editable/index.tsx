@@ -38,7 +38,7 @@ const Editable: React.FC<EditableProps> = ({
   const stopEdit = () => setIsEdit(false);
 
   //input value
-  const [value, setValue] = useState((input.defaultValue as string) || text);
+  const [value, setValue] = useState((input.defaultValue as string) || text || '');
 
   //displayed text
   const [displayed, setDisplayed] = useState(text);
@@ -57,7 +57,7 @@ const Editable: React.FC<EditableProps> = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validateSubmission && !validateSubmission(value)) return;
-    setDisplayed(input.type === 'select' ? input.options.find((option) => option.value === value).name : value);
+    setDisplayed(input.type === 'select' ? input.options?.find((option) => option.value === value)?.name : value);
     stopEdit();
     onSubmit?.(value);
   };

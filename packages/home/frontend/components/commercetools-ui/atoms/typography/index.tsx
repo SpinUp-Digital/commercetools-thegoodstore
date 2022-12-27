@@ -5,10 +5,10 @@ import { useFormat } from 'helpers/hooks/useFormat';
 import { TypographyProps } from './types';
 
 const Typography: React.FC<TypographyProps> = ({
-  medium,
+  medium = false,
   children,
-  underline,
-  className,
+  underline = false,
+  className = '',
   translation,
   as = 'p',
   fontSize = 16,
@@ -25,7 +25,7 @@ const Typography: React.FC<TypographyProps> = ({
     if (typeof children !== 'string') {
       // Update text based on locale
       const locale = router?.locale || router?.defaultLocale;
-      return children?.[locale];
+      return children?.[locale as string];
     }
 
     // Check if there is translation

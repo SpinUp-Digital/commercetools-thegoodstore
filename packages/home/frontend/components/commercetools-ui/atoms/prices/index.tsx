@@ -20,12 +20,12 @@ const Prices: React.FC<Props> = ({ price, discountedPrice }) => {
             {CurrencyHelpers.formatForCurrency(discountedPrice, locale)}
           </Typography>
           <Typography as="h5" medium lineHeight="loose" fontSize={10} className="text-gray-500 line-through md:text-12">
-            {CurrencyHelpers.formatForCurrency(price, locale)}
+            {CurrencyHelpers.formatForCurrency(price ?? '', locale)}
           </Typography>
         </div>
       ) : (
         <Typography as="h4" medium fontSize={11} lineHeight="loose" className="text-primary-black md:text-14">
-          {CurrencyHelpers.formatForCurrency(price, locale)}
+          {CurrencyHelpers.formatForCurrency(price ?? '', locale)}
         </Typography>
       )}
     </>

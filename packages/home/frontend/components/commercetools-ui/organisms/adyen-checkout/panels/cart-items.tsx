@@ -13,7 +13,7 @@ const CartItems: React.FC<Props> = ({ cart }) => {
       {cart?.lineItems?.map((lineItem, i) => (
         <li key={i} className="flex space-x-6 py-6">
           <Image
-            src={lineItem.variant.images[0]}
+            src={lineItem.variant?.images?.[0]}
             alt={lineItem.name}
             className="h-20 w-20 flex-none rounded-md bg-gray-200 object-cover object-center"
           />
@@ -22,12 +22,12 @@ const CartItems: React.FC<Props> = ({ cart }) => {
               <h3 className="text-gray-900">
                 <span className="pr-2">{`${lineItem.count}x`}</span> {lineItem.name}
               </h3>
-              {lineItem.variant.attributes?.color && (
+              {lineItem.variant?.attributes?.color && (
                 <p className="text-gray-500">
                   {StringHelpers.capitaliseFirstLetter(lineItem.variant.attributes.color.label)}
                 </p>
               )}
-              {lineItem.variant.attributes?.size && (
+              {lineItem.variant?.attributes?.size && (
                 <p className="capitalize text-gray-500">{lineItem.variant.attributes.size}</p>
               )}
             </div>
