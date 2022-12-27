@@ -21,7 +21,7 @@ const ProductDetailsAdapter: FC<ProductDetailsAdapterProps> = ({ product, inModa
   const [variant, setVariant] = useState<Variant>();
   const [mappedProduct, setMappedProduct] = useState<UIProduct>();
 
-  usePreloadImages(product.variants.map((variant) => variant.images).flat());
+  usePreloadImages(product.variants.map((variant) => variant.images ?? []).flat());
 
   useEffect(() => {
     if (product && variant) {
@@ -62,7 +62,7 @@ const ProductDetailsAdapter: FC<ProductDetailsAdapterProps> = ({ product, inModa
   return (
     <>
       <ProductDetails
-        product={mappedProduct}
+        product={mappedProduct as UIProduct}
         variant={variant}
         url={product._url}
         inModalVersion={inModalVersion}

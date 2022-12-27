@@ -34,7 +34,7 @@ const Footer: React.FC<Props> = ({ columns, logo, socialMedia }) => {
               <div key={index}>
                 <Column
                   header={column.header}
-                  links={column.links}
+                  links={column.links ?? []}
                   className="flex flex-col items-center lg:items-start"
                 />
               </div>
@@ -47,13 +47,13 @@ const Footer: React.FC<Props> = ({ columns, logo, socialMedia }) => {
             <li key={index} className="border-b border-neutral-300">
               <Accordion
                 variant="arrow"
-                closedSectionTitle={column.header}
+                closedSectionTitle={column.header ?? ''}
                 openSectionTitle={column.header}
                 buttonClassName="h-48 text-14 font-medium text-neutral-100 px-12 text-neutral-150"
                 iconColor="text-neutral-100"
               >
                 <div className="mb-16 ml-20 flex flex-row text-14 md:ml-24" key={index}>
-                  <Column links={column.links} className="px-0" />
+                  <Column links={column.links ?? []} className="px-0" />
                 </div>
               </Accordion>
             </li>

@@ -7,7 +7,7 @@ type Props = {
   counterClassName?: string;
 };
 
-const Icon: React.FC<Props> = ({ className, totalCartItems, counterClassName }) => (
+const Icon: React.FC<Props> = ({ className, totalCartItems = 0, counterClassName }) => (
   <>
     {totalCartItems > 0 && (
       <>

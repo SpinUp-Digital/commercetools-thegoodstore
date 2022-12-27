@@ -21,18 +21,20 @@ const WishlistButton: FC<wishlistButtonProps> = ({ lineItem, className }) => {
   const buttonClassName = className || 'absolute top-3 right-0 h-20 w-20 cursor-pointer';
   useEffect(() => {
     if (wishlist?.data?.lineItems) {
-      const item = wishlist.data.lineItems.find(({ variant: { sku } }) => sku === lineItem.variant.sku);
+      const item = wishlist.data.lineItems.find(({ variant }) => variant?.sku === lineItem.variant?.sku);
       setOnWishlist(!!item);
     }
-  }, [wishlist?.data?.lineItems, lineItem.variant.sku]);
+  }, [wishlist?.data?.lineItems, lineItem.variant?.sku]);
 
   const handleAddToWishList = async () => {
-    await wishlist.addToWishlist(wishlist?.data, lineItem, 1);
+    if (wishlist?.data) await wishlist.addToWishlist(wishlist?.data, lineItem, 1);
   };
 
   const handleRemoveFromWishlist = async () => {
-    const item = wishlist.data.lineItems.find(({ variant: { sku } }) => sku === lineItem.variant.sku);
-    await wishlist.removeLineItem(wishlist.data, item);
+    if (wishlist?.data?.lineItems) {
+      const item = wishlist.data.lineItems.find(({ variant }) => variant?.sku === lineItem.variant?.sku);
+      if (item) await wishlist.removeLineItem(wishlist.data, item);
+    }
   };
 
   const onClick = async () => {

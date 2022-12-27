@@ -36,22 +36,22 @@ export const mapToCartStructure = (data: FormData, billingIsSameAsShipping: bool
 };
 
 export const mapToFormStructure = (data: Cart): FormData => {
-  if (!data?.shippingAddress) return;
+  if (!data?.shippingAddress) return {} as FormData;
 
   const mappedData: FormData = {
-    firstName: data.shippingAddress.firstName,
-    lastName: data.shippingAddress.lastName,
-    email: data.email,
+    firstName: data.shippingAddress.firstName ?? '',
+    lastName: data.shippingAddress.lastName ?? '',
+    email: data.email ?? '',
 
-    shippingStreetName: data.shippingAddress.streetName,
-    shippingCity: data.shippingAddress.city,
-    shippingPostalCode: data.shippingAddress.postalCode,
-    shippingCountry: data.shippingAddress.country,
+    shippingStreetName: data.shippingAddress.streetName ?? '',
+    shippingCity: data.shippingAddress.city ?? '',
+    shippingPostalCode: data.shippingAddress.postalCode ?? '',
+    shippingCountry: data.shippingAddress.country ?? '',
 
-    billingStreetName: data.billingAddress.streetName,
-    billingCity: data.billingAddress.city,
-    billingPostalCode: data.billingAddress.postalCode,
-    billingCountry: data.billingAddress.country,
+    billingStreetName: data.billingAddress?.streetName ?? '',
+    billingCity: data.billingAddress?.city ?? '',
+    billingPostalCode: data.billingAddress?.postalCode ?? '',
+    billingCountry: data.billingAddress?.country ?? '',
   };
 
   return mappedData;

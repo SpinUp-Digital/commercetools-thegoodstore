@@ -11,7 +11,7 @@ const useResizeObserver = (ref: React.RefObject<HTMLElement>, callback: (entry?:
   useEffect(() => {
     callback();
     const observer = new ResizeObserver(resizeCallback);
-    observer.observe(ref.current);
+    if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, [ref, callback, resizeCallback]);
 };

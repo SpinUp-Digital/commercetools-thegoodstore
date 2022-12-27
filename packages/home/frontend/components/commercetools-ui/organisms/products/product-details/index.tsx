@@ -70,7 +70,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({
   return (
     <Wrapper className={wrapperClassName} clearDefaultStyles={inModalVersion}>
       <div className={galleryContainerClassName}>
-        <Gallery images={variant?.images} inModalVersion={inModalVersion} />
+        <Gallery images={variant?.images ?? []} inModalVersion={inModalVersion} />
       </div>
 
       <div className={informationContainerClassName}>
@@ -115,7 +115,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({
             <Link
               link={url}
               className="mx-auto mt-30 block w-fit border-b border-secondary-black text-center text-14 leading-loose text-secondary-black"
-              onClick={() => setIsOpen(false)}
+              onClick={() => setIsOpen?.(false)}
             >
               <a>More details</a>
             </Link>
@@ -125,7 +125,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({
 
       {!inModalVersion && (
         <div className="grid gap-y-34 md:col-span-7 md:mb-50 md:pr-26">
-          <AdditionalInfo productspec={variant?.attributes.productspec} description={product?.description} />
+          <AdditionalInfo productspec={variant?.attributes?.productspec} description={product?.description} />
         </div>
       )}
     </Wrapper>

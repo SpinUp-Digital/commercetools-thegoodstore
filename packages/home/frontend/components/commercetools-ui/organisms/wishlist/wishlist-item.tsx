@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { useRouter } from 'next/router';
 import { LineItem } from '@commercetools/frontend-domain-types/wishlist/LineItem';
+import { Wishlist } from '@commercetools/frontend-domain-types/wishlist/Wishlist';
 import { TrashIcon } from '@heroicons/react/24/outline';
 import Button from 'components/commercetools-ui/atoms/button';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
@@ -20,8 +21,8 @@ const WishlistItem: FC<Props> = ({ item }) => {
   const { addItem } = useCart();
 
   const moveToCart = () => {
-    removeLineItem(wishlist, item);
-    addItem(item.variant, 1);
+    if (wishlist) removeLineItem(wishlist, item);
+    if (item.variant) addItem(item.variant, 1);
   };
 
   return (
@@ -36,23 +37,23 @@ const WishlistItem: FC<Props> = ({ item }) => {
           <p className="max-w-[150px] overflow-hidden text-ellipsis whitespace-pre text-14 uppercase leading-loose">
             {item.name}
           </p>
-          <i onClick={() => removeLineItem(wishlist, item)} className="block cursor-pointer">
+          <i onClick={() => removeLineItem(wishlist as Wishlist, item)} className="block cursor-pointer">
             <TrashIcon stroke="#494949" className="w-20" />
           </i>
         </div>
         <div className="mt-12">
-          {item.variant.discountedPrice ? (
+          {item.variant?.discountedPrice ? (
             <div className="flex items-center gap-5">
               <span className="text-14 font-medium leading-loose text-accent-red">
                 {CurrencyHelpers.formatForCurrency(item.variant.discountedPrice, locale)}
               </span>
               <span className="text-12 font-normal leading-loose text-gray-500 line-through">
-                {CurrencyHelpers.formatForCurrency(item.variant.price, locale)}
+                {CurrencyHelpers.formatForCurrency(item.variant?.price ?? 0, locale)}
               </span>
             </div>
           ) : (
             <span className="text-14 font-medium leading-loose">
-              {CurrencyHelpers.formatForCurrency(item.variant.price, locale)}
+              {CurrencyHelpers.formatForCurrency(item.variant?.price ?? 0, locale)}
             </span>
           )}
         </div>

@@ -20,7 +20,7 @@ const ProductTile: FC<ProductTileProps> = ({ product }) => {
   const [isDesktopSize] = useMediaQuery(desktop);
 
   usePreloadImages(
-    product.variants.map((variant) => variant.images[0]),
+    product.variants.map((variant) => variant.images?.[0] ?? ''),
     'medium',
   );
 
@@ -31,7 +31,8 @@ const ProductTile: FC<ProductTileProps> = ({ product }) => {
   const discountPercentage = useMemo(
     () =>
       variantWithDiscount
-        ? ((variantWithDiscount.price.centAmount - discountedPrice.centAmount) / variantWithDiscount.price.centAmount) *
+        ? (((variantWithDiscount.price?.centAmount as number) - (discountedPrice?.centAmount as number)) /
+            (variantWithDiscount.price?.centAmount as number)) *
           100
         : 0,
     [discountedPrice, variantWithDiscount],
@@ -46,10 +47,10 @@ const ProductTile: FC<ProductTileProps> = ({ product }) => {
     [imageHovered, buttonHovered, isDesktopSize],
   );
 
-  const productToWishlistLineItem = useMemo<LineItem>(() => {
+  const productToWishlistLineItem = useMemo<LineItem | undefined>(() => {
     if (product) {
       return {
-        lineItemId: product.productId,
+        lineItemId: product.productId ?? '',
         productId: product.productId,
         name: product.name,
         count: 1,
@@ -63,7 +64,7 @@ const ProductTile: FC<ProductTileProps> = ({ product }) => {
   return (
     <div>
       <div className="relative">
-        <NextLink href={product._url}>
+        <NextLink href={product._url ?? '#'}>
           <a>
             <div
               className="relative w-full"
@@ -73,7 +74,7 @@ const ProductTile: FC<ProductTileProps> = ({ product }) => {
               <div className="relative bg-white p-8 md:p-16">
                 <div className="relative block w-full" style={{ paddingBottom: '122%' }}>
                   <Image
-                    src={selectedVariant.images[0]}
+                    src={selectedVariant.images?.[0]}
                     suffix="medium"
                     alt={product.name}
                     objectFit="contain"
@@ -86,10 +87,12 @@ const ProductTile: FC<ProductTileProps> = ({ product }) => {
                 className="absolute right-0 top-0 z-10 flex h-[32px] w-[32px] cursor-pointer items-center justify-center md:h-[48px] md:w-[48px]"
                 onClick={(e) => e.preventDefault()}
               >
-                <WishlistButton
-                  lineItem={productToWishlistLineItem}
-                  className="h-[16px] w-[16px] md:h-[20px] md:w-[20px] lg:h-[24px] lg:w-[24px]"
-                />
+                {productToWishlistLineItem && (
+                  <WishlistButton
+                    lineItem={productToWishlistLineItem}
+                    className="h-[16px] w-[16px] md:h-[20px] md:w-[20px] lg:h-[24px] lg:w-[24px]"
+                  />
+                )}
               </span>
             </div>
           </a>
@@ -111,7 +114,7 @@ const ProductTile: FC<ProductTileProps> = ({ product }) => {
         </div>
       </div>
 
-      <NextLink href={product._url}>
+      <NextLink href={product._url ?? '#'}>
         <a>
           <div>
             <div className="mt-4 block max-w-[80%] overflow-hidden text-ellipsis whitespace-pre text-12 uppercase leading-loose md:mt-12 md:text-14">
@@ -124,7 +127,7 @@ const ProductTile: FC<ProductTileProps> = ({ product }) => {
                   className={`block cursor-pointer rounded-full border p-[6px] ${
                     variant.sku !== selectedVariant.sku ? 'border-neutral-300' : 'border-neutral-500'
                   }`}
-                  style={{ backgroundColor: variant.attributes.color || variant.attributes.finish }}
+                  style={{ backgroundColor: variant.attributes?.color || variant.attributes?.finish }}
                   onClick={(e) => {
                     e.preventDefault();
                     setSelectedVariant(variant);

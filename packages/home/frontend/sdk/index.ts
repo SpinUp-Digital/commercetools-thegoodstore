@@ -1,5 +1,5 @@
-import { sdk } from '@commercetools/frontend-sdk';
 import { ComposableCommerce } from '@commercetools/frontend-composable-commerce';
+import { sdk } from '@commercetools/frontend-sdk';
 import { mapSDKLanguage } from 'project.config';
 import { resolveApiHubUrl } from 'frontastic';
 

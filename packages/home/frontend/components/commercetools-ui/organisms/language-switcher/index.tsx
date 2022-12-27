@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { Menu, Transition } from '@headlessui/react';
-import { ChevronDownIcon } from '@heroicons/react/solid';
+import { ChevronDownIcon } from '@heroicons/react/24/solid';
 import { formatLocaleName } from 'helpers/utils/formatLocaleName';
 
 interface Props {
@@ -33,7 +33,7 @@ const LanguageSwitcher: React.FC<Props> = ({ className }) => {
         >
           <Menu.Items className="absolute right-0 left-28 bottom-4 z-50 mt-2 w-full origin-top-right rounded-md shadow-sm ring-1 ring-black/5 focus:outline-none">
             <div className="py-1">
-              {router?.locales.map((locale, index) => (
+              {router?.locales?.map((locale, index) => (
                 <Menu.Item key={index}>
                   <NextLink href={router?.asPath} locale={locale}>
                     <a className="block py-2 px-4 text-center text-sm hover:bg-gray-300">{formatLocaleName(locale)}</a>

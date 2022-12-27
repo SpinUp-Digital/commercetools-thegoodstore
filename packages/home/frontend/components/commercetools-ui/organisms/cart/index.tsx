@@ -25,7 +25,7 @@ const Cart: FC<Props> = ({ emptyStateImage, emptyStateTitle, emptyStateSubtitle,
 
   const { data } = useCart();
 
-  const isEmpty = data.lineItems?.length === 0;
+  const isEmpty = data?.lineItems?.length === 0;
 
   const transaction = useMemo(() => {
     if (!data?.lineItems)
@@ -37,19 +37,23 @@ const Cart: FC<Props> = ({ emptyStateImage, emptyStateTitle, emptyStateSubtitle,
         total: { centAmount: 0 },
       };
 
-    const currencyCode = data.sum.currencyCode;
-    const fractionDigits = data.sum.fractionDigits;
+    const currencyCode = data.sum?.currencyCode;
+    const fractionDigits = data.sum?.fractionDigits;
 
-    const totalAmount = data.sum.centAmount;
-    const subTotalAmount = data.lineItems.reduce((acc, curr) => acc + (curr.price?.centAmount || 0) * curr.count, 0);
+    const totalAmount = data.sum?.centAmount as number;
+    const subTotalAmount = data.lineItems.reduce(
+      (acc, curr) => acc + (curr.price?.centAmount || 0) * (curr.count as number),
+      0,
+    );
     const discountedAmount = data.lineItems.reduce(
-      (acc, curr) => acc + ((curr.price?.centAmount || 0) * curr.count - (curr.totalPrice?.centAmount || 0)),
+      (acc, curr) =>
+        acc + ((curr.price?.centAmount || 0) * (curr.count as number) - (curr.totalPrice?.centAmount || 0)),
       0,
     );
 
-    const totalTax = data.taxed?.taxPortions?.reduce((acc, curr) => acc + curr.amount?.centAmount, 0) ?? 0;
+    const totalTax = data.taxed?.taxPortions?.reduce((acc, curr) => acc + (curr.amount?.centAmount as number), 0) ?? 0;
     const totalShipping =
-      data.sum.centAmount > 0 ? data.availableShippingMethods?.[0]?.rates?.[0]?.price.centAmount ?? 0 : 0;
+      (data.sum?.centAmount as number) > 0 ? data.availableShippingMethods?.[0]?.rates?.[0]?.price?.centAmount ?? 0 : 0;
 
     return {
       subtotal: {
@@ -92,7 +96,7 @@ const Cart: FC<Props> = ({ emptyStateImage, emptyStateTitle, emptyStateSubtitle,
         />
       ) : (
         <div className="h-[65vh] grow divide-y divide-neutral-400 overflow-auto px-12 md:px-22">
-          {data.lineItems?.map((lineItem) => (
+          {data?.lineItems?.map((lineItem) => (
             <CartItem key={lineItem.lineItemId} item={lineItem} />
           ))}
         </div>

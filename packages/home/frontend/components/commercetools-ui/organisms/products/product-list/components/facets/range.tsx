@@ -13,13 +13,11 @@ const RangeFacet: React.FC<FacetProps> = ({ attribute }) => {
 
   const { pricesConfiguration } = useProductList();
 
-  const {
-    results: { disjunctiveFacets },
-  } = useHits();
+  const { results } = useHits();
 
   const disjunctiveFacet = useMemo(
-    () => disjunctiveFacets.find((facet) => facet.name === attribute),
-    [attribute, disjunctiveFacets],
+    () => results?.disjunctiveFacets.find((facet) => facet.name === attribute),
+    [attribute, results],
   );
 
   const { range, refine, start } = useRange({ attribute });
@@ -32,13 +30,13 @@ const RangeFacet: React.FC<FacetProps> = ({ attribute }) => {
 
   const activePriceRange = useMemo(
     () => ({
-      min: Math.max(start[0], range.min) / 100,
-      max: Math.min(start[1], range.max) / 100,
+      min: Math.max(start[0] as number, range.min as number) / 100,
+      max: Math.min(start[1] as number, range.max as number) / 100,
       applied: false,
     }),
     [range.min, range.max, start],
   );
-  console.log(start, range, activePriceRange);
+
   const [priceRange, setPriceRange] = useState(activePriceRange);
 
   useEffect(() => {
@@ -57,12 +55,12 @@ const RangeFacet: React.FC<FacetProps> = ({ attribute }) => {
         appliedRanges.length > 0
           ? appliedRanges.reduce(
               (acc, { min, max }) => ({
-                min: Math.max(range.min / 100, Math.min(min, acc.min)),
-                max: Math.min(range.max / 100, Math.max(max, acc.max)),
+                min: Math.max((range.min as number) / 100, Math.min(min, acc.min)),
+                max: Math.min((range.max as number) / 100, Math.max(max, acc.max)),
               }),
               { min: Infinity, max: 0 },
             )
-          : { min: range.min / 100, max: range.max / 100 };
+          : { min: (range.min as number) / 100, max: (range.max as number) / 100 };
 
       setAppliedOptions(newAppliedOptions);
 
@@ -87,11 +85,11 @@ const RangeFacet: React.FC<FacetProps> = ({ attribute }) => {
   );
 
   useEffect(() => {
-    window.addEventListener(refinementRemovedEventName, handleRefinementRemoved);
+    window.addEventListener(refinementRemovedEventName, handleRefinementRemoved as EventListener);
     window.addEventListener(refinementsClearedEventName, clearAppliedOptions);
 
     return () => {
-      window.removeEventListener(refinementRemovedEventName, handleRefinementRemoved);
+      window.removeEventListener(refinementRemovedEventName, handleRefinementRemoved as EventListener);
       window.removeEventListener(refinementsClearedEventName, clearAppliedOptions);
     };
   }, [handleRefinementRemoved, clearAppliedOptions]);
@@ -128,7 +126,7 @@ const RangeFacet: React.FC<FacetProps> = ({ attribute }) => {
 
         return { ...range, refinements };
       })
-      .filter(({ refinements }) => refinements > 0);
+      .filter(({ refinements }) => refinements && refinements > 0);
 
     return {
       available: ranges.length > 0,
@@ -180,7 +178,7 @@ const RangeFacet: React.FC<FacetProps> = ({ attribute }) => {
             value={priceRange.min !== -1 ? priceRange.min.toString() : ''}
             placeholder={formatProductMessage({ id: 'min', defaultMessage: 'Min' })}
             onChange={handleRangeInputChange}
-            min={range.min / 100}
+            min={(range.min as number) / 100}
             max={priceRange.max}
             step="0.01"
           />
@@ -203,7 +201,7 @@ const RangeFacet: React.FC<FacetProps> = ({ attribute }) => {
             placeholder={formatProductMessage({ id: 'max', defaultMessage: 'Max' })}
             onChange={handleRangeInputChange}
             min={priceRange.min}
-            max={range.max / 100}
+            max={(range.max as number) / 100}
             step="0.01"
           />
           <span>{currencySymbol}</span>

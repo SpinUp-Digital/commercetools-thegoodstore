@@ -51,7 +51,7 @@ const Overview: React.FC<OverviewProps> = ({ shippingMethods, currentShippingMet
                   <span className="text-xs text-neutral-600">{description}</span>
                 </div>
                 <span className="ml-auto text-base font-bold">
-                  <span className=" ">{CurrencyHelpers.formatForCurrency(rates?.[0]?.price, locale)}</span>
+                  <span className=" ">{CurrencyHelpers.formatForCurrency(rates?.[0]?.price ?? 0, locale)}</span>
                 </span>
               </label>
             ))}
@@ -62,7 +62,7 @@ const Overview: React.FC<OverviewProps> = ({ shippingMethods, currentShippingMet
             <span>{formatMessage({ id: 'overview.order', defaultMessage: 'YOUR ORDER' })}</span>
           </div>
 
-          <CartItems cart={data} />
+          {data && <CartItems cart={data} />}
         </div>
       </section>
     </>

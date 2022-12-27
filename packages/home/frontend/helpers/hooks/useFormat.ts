@@ -1,5 +1,5 @@
-import { TFunction as TranslateByIdType, useTranslation } from 'next-i18next';
 import { useCallback } from 'react';
+import { useTranslation } from 'next-i18next';
 
 //values that can be dynamically replaced in message
 type Values = Record<string | number, string | number>;

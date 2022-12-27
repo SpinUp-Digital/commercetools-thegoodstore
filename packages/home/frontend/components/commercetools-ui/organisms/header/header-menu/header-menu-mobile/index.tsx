@@ -76,7 +76,7 @@ const HeaderMenuMobile: FC<Props> = ({ links }) => {
                       {link.name} <ChevronRightIcon className="mt-7 mr-6 w-10" />
                     </div>
                   ) : (
-                    <Link href={link.slug ?? link.path}>
+                    <Link href={link.slug ?? link.path ?? ''}>
                       <Typography fontSize={16} medium className="mx-20 my-12 flex h-24 justify-between">
                         {link.name}
                       </Typography>
@@ -99,7 +99,7 @@ const HeaderMenuMobile: FC<Props> = ({ links }) => {
                       {nav.name} <ChevronRightIcon className="mt-7 mr-6 w-10" />
                     </div>
                   ) : (
-                    <Link href={nav.slug ?? nav.path}>
+                    <Link href={nav.slug ?? nav.path ?? ''}>
                       <div className="mx-20 my-12 flex h-24 justify-between text-16  font-normal">{nav.name}</div>
                     </Link>
                   )}

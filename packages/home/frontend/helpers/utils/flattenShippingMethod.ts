@@ -1,5 +1,6 @@
 import { FlattenedShippingMethod } from '@commercetools/frontend-domain-types/cart/FlattenedShippingMethod';
 import { ShippingMethod } from '@commercetools/frontend-domain-types/cart/ShippingMethod';
+import { Money } from '@commercetools/frontend-domain-types/product/Money';
 
 export const countryBasedShippingRateIndex = {
   SI: 0,
@@ -20,7 +21,9 @@ export const countryBasedShippingRateIndex = {
 export const flattenShippingMethod = (method: ShippingMethod, country: string) => {
   const updatedMethod: FlattenedShippingMethod = {
     ...method,
-    price: method?.rates[countryBasedShippingRateIndex[country]]?.price,
+    price: method?.rates?.[
+      countryBasedShippingRateIndex[country as keyof typeof countryBasedShippingRateIndex] as number
+    ]?.price as Money,
   };
 
   return updatedMethod;

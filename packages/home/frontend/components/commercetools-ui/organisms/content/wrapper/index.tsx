@@ -1,16 +1,19 @@
 import React, { FC, ReactNode } from 'react';
 import useTouchDevice from 'helpers/hooks/useTouchDevice';
 
+type WrapperVariant = 'none' | 'left-padding-only' | 'full-padding-small' | 'full-padding';
+type WrapperBackground = 'white' | 'neutral-200';
+
 type WrapperProps = {
   children: ReactNode;
-  background?: 'white' | 'neutral-200';
-  variant?: 'none' | 'left-padding-only' | 'full-padding-small' | 'full-padding';
+  background?: WrapperBackground;
+  variant?: WrapperVariant;
   className?: string;
   clearDefaultStyles?: boolean;
 };
 
 type variantClassNames = {
-  [key in WrapperProps['variant']]: string;
+  [key in WrapperVariant]: string;
 };
 
 const Wrapper: FC<WrapperProps> = ({

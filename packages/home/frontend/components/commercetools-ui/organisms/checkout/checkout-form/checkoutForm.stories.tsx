@@ -14,13 +14,13 @@ export default {
 const Template: Story<CheckoutFormProps> = (args) => (
   <div className="w-80 px-20">
     <CheckoutForm
-      data={cart}
+      {...args}
+      data={cart as unknown as { [key: string]: string }}
       account={account}
       submitForm={() => console.log('Submitted')}
       submitText="Submitted"
       updateFormInput={() => console.log('Updated')}
       isFormValid={true}
-      {...args}
     />
   </div>
 );

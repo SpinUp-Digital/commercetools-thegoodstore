@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/rules-of-hooks*/
+
 import { mutate } from 'swr';
 import { fetchApiHub } from 'frontastic';
 
@@ -15,7 +17,11 @@ export const createSession = async (value: number, currency: string, returnUrl: 
   return res;
 };
 
-export const adyenCheckout = async (sessionId: string, redirectResult: string, locale: string): Promise<void> => {
+export const adyenCheckout = async (
+  sessionId: string | string[],
+  redirectResult: string | string[],
+  locale: string,
+): Promise<void> => {
   const payload = {
     sessionId: sessionId,
     redirectResult: redirectResult,

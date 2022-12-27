@@ -1,6 +1,8 @@
+/* eslint-disable react-hooks/rules-of-hooks*/
+
 import useSWR from 'swr';
-import { fetchApiHub, revalidateOptions } from 'frontastic';
 import { SDK } from 'sdk';
+import { revalidateOptions } from 'frontastic';
 
 export const queryCategories = () => {
   const extensions = SDK.getExtensions();

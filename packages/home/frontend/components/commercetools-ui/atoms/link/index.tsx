@@ -4,12 +4,14 @@ import useClassNames from 'helpers/hooks/useClassNames';
 import { resolveReferenceProps, resolveReferenceTarget } from 'helpers/reference';
 import { Reference } from 'types/reference';
 
+export type LinkVariant = 'primary' | 'menu-header' | 'menu-item' | 'breadcrumb';
+
 export interface LinkProps extends ComponentProps<'a'> {
-  link: string | Reference;
-  variant?: 'primary' | 'menu-header' | 'menu-item' | 'breadcrumb';
+  link?: string | Reference;
+  variant?: LinkVariant;
 }
 
-type VariantStyle = { [key in LinkProps['variant']]: string };
+type VariantStyle = { [key in LinkVariant]: string };
 
 const variantStyle: VariantStyle = {
   primary: 'text-14 lg:text-16 cursor-pointer text-neutral-500 hover:text-neutral-400',
@@ -23,7 +25,7 @@ const Link: FC<LinkProps> = ({ link, children, className = '', variant, title = 
     if (!link) return '#';
     if (typeof link === 'string') return link;
 
-    return resolveReferenceTarget(link);
+    return resolveReferenceTarget(link) ?? '#';
   }, [link]);
 
   const linkProps = useMemo(() => {
@@ -32,7 +34,7 @@ const Link: FC<LinkProps> = ({ link, children, className = '', variant, title = 
     return resolveReferenceProps(link);
   }, [link]);
 
-  const linkClassNames = useClassNames([variantStyle[variant], className]);
+  const linkClassNames = useClassNames([variant ? variantStyle[variant] : '', className]);
 
   return (
     <NextLink href={linkUrl}>

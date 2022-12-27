@@ -14826,7 +14826,7 @@ export const getMockCart: (numberOfLineitems?: number) => Cart = (numberOfLineit
   if (numberOfLineitems > 25) {
     console.info('Mock cart returned with only 16 lineitems, only 16 available');
   }
-  let cart: Cart = {
+  const cart: Cart = {
     cartId: 'cf2200af-5891-41f1-aa04-099866ec348a',
     lineItems: products.slice(0, numberOfLineitems).map((product, n) => ({
       lineItemId: `${n.toString(16)}f2200af-5891-41f1-aa04-099866ec348${n.toString(16)}`,
@@ -14835,11 +14835,15 @@ export const getMockCart: (numberOfLineitems?: number) => Cart = (numberOfLineit
       price: product.variants[0].price,
       variant: product.variants[0],
       totalPrice: {
-        centAmount: product.variants[0].price.centAmount,
+        centAmount: product.variants[0].price?.centAmount ?? 0,
       },
     })),
   };
-  cart.sum.centAmount = cart.lineItems.reduce((prev, current) => prev + current.totalPrice.centAmount, 0);
+  if (cart.sum)
+    cart.sum.centAmount = cart.lineItems?.reduce(
+      (prev, current) => prev + (current.totalPrice?.centAmount as number),
+      0,
+    );
   return cart;
 };
 
@@ -14980,8 +14984,8 @@ const footerLinkTwo = {
   reference: linkReferenceOne,
 };
 
-const footerLinksOne = new Array(3).fill(footerLinkOne);
-const footerLinksTwo = new Array(4).fill(footerLinkTwo);
+const footerLinksOne = new Array(3).fill({ name: footerLinkOne, link: '#' });
+const footerLinksTwo = new Array(4).fill({ name: footerLinkTwo, link: '#' });
 
 const footerSocialMedia = {
   logo: {

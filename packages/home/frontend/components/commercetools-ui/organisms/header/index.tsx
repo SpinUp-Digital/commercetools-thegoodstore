@@ -22,7 +22,7 @@ const Header: React.FC<HeaderProps> = ({
   emptyWishlistImage,
   emptyWishlistCategories,
 }) => {
-  const [activeCategory, setActiveCategory] = useState<Category>(undefined);
+  const [activeCategory, setActiveCategory] = useState<Category>();
 
   const showSubMenu = (category?: Category) => {
     setActiveCategory(category);
@@ -31,7 +31,7 @@ const Header: React.FC<HeaderProps> = ({
     setActiveCategory(undefined);
   };
 
-  const showTimeout = useRef<NodeJS.Timer>(null);
+  const showTimeout = useRef<NodeJS.Timer | null>(null) as React.MutableRefObject<NodeJS.Timer | null>;
 
   const handleMouseIn = (category: Category) => {
     if (activeCategory) showSubMenu(category); //Already opened do not delay
@@ -73,8 +73,8 @@ const Header: React.FC<HeaderProps> = ({
 
       <HeaderNavigationDesktop
         links={links}
-        tiles={tiles}
-        activeCategory={activeCategory}
+        tiles={tiles ?? []}
+        activeCategory={activeCategory as Category}
         handleMouseIn={handleMouseIn}
         handleMouseOut={handleMouseOut}
         hideSubMenu={hideSubMenu}

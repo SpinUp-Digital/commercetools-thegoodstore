@@ -21,9 +21,9 @@ const ShippingSection = () => {
 
   const [input, setInput] = useState<string>('');
   const [configured, setConfigured] = useState<boolean>(false);
-  const [error, setError] = useState<Error>(undefined);
+  const [error, setError] = useState<Error>();
   const [usedPostCode, setUsedPostCode] = useState<string>();
-  const [toggledSectionId, setToggledSectionId] = useState<ShippingMethod['shippingMethodId']>(undefined);
+  const [toggledSectionId, setToggledSectionId] = useState<ShippingMethod['shippingMethodId']>();
 
   const collapseShippingSections = () => {
     setToggledSectionId(undefined);
@@ -53,7 +53,7 @@ const ShippingSection = () => {
 
     if (input.length < 6)
       setError({
-        shippingMethodId: toggledSectionId,
+        shippingMethodId: toggledSectionId ?? '',
         message: formatMessage({ id: 'postcode.invalid', defaultMessage: 'The postcode is not valid.' }),
       });
     else {
@@ -66,7 +66,7 @@ const ShippingSection = () => {
   const getRateToUse = (rates: ShippingMethod['rates']) => {
     const DEFAULT_SHIPPING_RATE_ID =
       locale == 'GB' ? 'f51d093a-07a4-43ac-90a2-ae072a4aabf5' : '34717e18-4b4d-41f9-af68-158142015ea3';
-    return rates.find(({ shippingRateId }) => shippingRateId === DEFAULT_SHIPPING_RATE_ID);
+    return rates?.find(({ shippingRateId }) => shippingRateId === DEFAULT_SHIPPING_RATE_ID);
   };
 
   return (
@@ -99,7 +99,7 @@ const ShippingSection = () => {
                     onChange={handleInput}
                     value={input}
                     autoFocus
-                    error={error?.shippingMethodId == shippingMethodId && error?.message}
+                    error={error?.shippingMethodId == shippingMethodId ? error?.message : ''}
                   />
                   <XMarkIcon
                     className="absolute top-18 right-18 h-20 w-20 stroke-neutral-800 hover:cursor-pointer"
@@ -140,7 +140,7 @@ const ShippingSection = () => {
                 lineHeight="loose"
                 medium
               >
-                {CurrencyHelpers.formatForCurrency(getRateToUse(rates).price, locale)}
+                {CurrencyHelpers.formatForCurrency(getRateToUse(rates)?.price ?? 0, locale)}
               </Typography>
             )}
           </div>

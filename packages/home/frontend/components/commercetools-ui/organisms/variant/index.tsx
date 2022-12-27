@@ -7,7 +7,7 @@ type VariantProps = {
   className?: string;
   currentVariant: VariantType;
   variants: VariantType[];
-  attribute: keyof VariantType['attributes'];
+  attribute: string;
   onClick?: (sku: string) => void;
 };
 
@@ -41,7 +41,7 @@ const Variant: FC<VariantProps> = ({ className, currentVariant, variants, attrib
             className={`h-20 w-20 rounded-full ${
               id == currentVariant.id ? 'border-2 border-neutral-800' : 'border border-neutral-300'
             } border border-neutral-300 ${variantsToUse.length > 1 ? 'hover:cursor-pointer' : 'pointer-events-none'} `}
-            style={{ backgroundColor: attributes[attribute] }}
+            style={{ backgroundColor: attributes?.[attribute] }}
             onClick={() => onClick?.(sku)}
           />
         ))}

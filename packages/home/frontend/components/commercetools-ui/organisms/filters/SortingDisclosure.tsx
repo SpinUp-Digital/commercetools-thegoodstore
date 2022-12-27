@@ -13,7 +13,7 @@ type sortingParamID = 'asc' | 'desc';
 
 const SortingDisclosure: FC<SortingDisclosureProps> = ({ updateSortingParams }) => {
   const router = useRouter();
-  const [currentSortingParam, setCurrentSortingParam] = useState<sortingParamID>(undefined);
+  const [currentSortingParam, setCurrentSortingParam] = useState<sortingParamID>();
   const { formatMessage } = useFormat({ name: 'product' });
 
   const handleChange = (e: ChangeEvent) => {

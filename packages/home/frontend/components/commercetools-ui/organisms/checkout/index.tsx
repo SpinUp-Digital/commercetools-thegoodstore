@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { Account } from '@commercetools/frontend-domain-types/account/Account';
 import { Address } from '@commercetools/frontend-domain-types/account/Address';
+import { ShippingMethod } from '@commercetools/frontend-domain-types/cart/ShippingMethod';
 import * as yup from 'yup';
 import { ObjectShape } from 'yup/lib/object';
-import EmptyCart from 'components/commercetools-ui/organisms/old_cart/emptyCart';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useI18n from 'helpers/hooks/useI18n';
@@ -40,7 +41,7 @@ const Checkout = ({ shippingCountryOptions }: Props) => {
   const router = useRouter();
 
   //some products are out of stock?
-  const someOutOfStock = !!data?.lineItems?.find((item) => !item.variant.isOnStock);
+  const someOutOfStock = !!data?.lineItems?.find((item) => !item.variant?.isOnStock);
 
   //checkout data
   const [checkoutData, setCheckoutData] = useState({
@@ -61,8 +62,8 @@ const Checkout = ({ shippingCountryOptions }: Props) => {
     shippingCity: '',
     shippingPostalCode: '',
     shippingCountry: '',
-    billingAddress: account?.addresses.find((address) => address.isDefaultBillingAddress)?.addressId ?? '',
-    shippingAddress: account?.addresses.find((address) => address.isDefaultShippingAddress)?.addressId ?? '',
+    billingAddress: account?.addresses?.find((address) => address.isDefaultBillingAddress)?.addressId ?? '',
+    shippingAddress: account?.addresses?.find((address) => address.isDefaultShippingAddress)?.addressId ?? '',
     invoiceId: '',
     pay: 'cc',
   });
@@ -156,7 +157,7 @@ const Checkout = ({ shippingCountryOptions }: Props) => {
       !!checkoutData.shippingStreetNumber;
 
     const shippingAddress = loggedIn
-      ? account.addresses.find((address) => address.addressId === checkoutData.shippingAddress)
+      ? account?.addresses?.find((address) => address.addressId === checkoutData.shippingAddress)
       : ((isValidShippingAddress
           ? {
               firstName: checkoutData.firstName,
@@ -170,7 +171,7 @@ const Checkout = ({ shippingCountryOptions }: Props) => {
           : null) as Address);
 
     const billingAddress: Address = loggedIn
-      ? account.addresses.find((address) => address.addressId === checkoutData.billingAddress)
+      ? (account?.addresses?.find((address) => address.addressId === checkoutData.billingAddress) as Address)
       : ({
           firstName: checkoutData.firstName,
           lastName: checkoutData.lastName,
@@ -188,14 +189,14 @@ const Checkout = ({ shippingCountryOptions }: Props) => {
       billing: billingAddress,
       shipping: shippingAddress || billingAddress,
     });
-    await setShippingMethod(shippingMethods.data?.[0].shippingMethodId);
+    await setShippingMethod(shippingMethods.data?.[0].shippingMethodId as string);
     await orderCart();
     //TODO: figure out logic here
     router.push('/thank-you');
   };
 
   if (!data?.lineItems || data.lineItems.length < 1) {
-    return <EmptyCart />;
+    return <></>;
   }
 
   return (
@@ -207,7 +208,7 @@ const Checkout = ({ shippingCountryOptions }: Props) => {
         editCartItem={editLineItem}
         goToProductPage={goToProductPage}
         removeCartItem={removeLineItem}
-        selectedShipping={shippingMethods.data?.[0]}
+        selectedShipping={shippingMethods.data?.[0] as ShippingMethod}
         someOutOfStock={someOutOfStock}
       />
       <DesktopOrderSummary
@@ -215,7 +216,7 @@ const Checkout = ({ shippingCountryOptions }: Props) => {
         editCartItem={editLineItem}
         goToProductPage={goToProductPage}
         removeCartItem={removeLineItem}
-        selectedShipping={shippingMethods.data?.[0]}
+        selectedShipping={shippingMethods.data?.[0] as ShippingMethod}
         someOutOfStock={someOutOfStock}
       />
 
@@ -240,9 +241,9 @@ const Checkout = ({ shippingCountryOptions }: Props) => {
               submitForm={submitForm}
               data={checkoutData}
               isFormValid={isValid()}
-              account={account}
+              account={account as Account}
               loggedIn={loggedIn}
-              shippingCountryOptions={shippingCountryOptions}
+              shippingCountryOptions={shippingCountryOptions ?? []}
             />
           ) : (
             <GuestCheckoutForm
@@ -259,7 +260,7 @@ const Checkout = ({ shippingCountryOptions }: Props) => {
               submitForm={submitForm}
               data={checkoutData}
               isFormValid={isValid()}
-              shippingCountryOptions={shippingCountryOptions}
+              shippingCountryOptions={shippingCountryOptions ?? []}
             />
           )}
         </div>

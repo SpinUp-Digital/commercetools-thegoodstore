@@ -120,7 +120,7 @@ const CheckoutForm = ({
           name="country"
           label={formatMessage({ id: 'country', defaultMessage: 'Country' })}
           options={shippingCountryOptions}
-          selectedOptionValue={(data.country as string) || undefined}
+          selectedOptionValue={(data.country as string) || ''}
           onChange={updateFormInput}
           containerClassName="col-span-full sm:col-span-4"
         />
@@ -166,7 +166,7 @@ const CheckoutForm = ({
               name="shippingCountry"
               label={formatMessage({ id: 'country', defaultMessage: 'Country' })}
               options={shippingCountryOptions}
-              selectedOptionValue={(data.shippingCountry as string) || undefined}
+              selectedOptionValue={(data.shippingCountry as string) || ''}
               onChange={updateFormInput}
               containerClassName="col-span-full sm:col-span-4"
             />

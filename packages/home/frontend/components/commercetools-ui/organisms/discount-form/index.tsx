@@ -21,7 +21,7 @@ const DiscountForm: React.FC<Props> = ({ className }) => {
   const [processing, setProcessing] = useState(false);
 
   useEffect(() => {
-    setDiscounts(data.discountCodes);
+    setDiscounts(data?.discountCodes ?? []);
   }, [data]);
 
   const inputClassName = useClassNames([
@@ -39,7 +39,7 @@ const DiscountForm: React.FC<Props> = ({ className }) => {
 
     setProcessing(true);
 
-    redeemDiscountCode(code)
+    redeemDiscountCode?.(code)
       .then(() => setCode(''))
       .catch(() => {
         setCodeIsInvalid(true);
@@ -50,13 +50,13 @@ const DiscountForm: React.FC<Props> = ({ className }) => {
       });
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCode(e.target.value);
     setCodeIsInvalid(false);
   };
 
-  const handleRemove = (discount) => {
-    removeDiscountCode(discount);
+  const handleRemove = (discount: Discount) => {
+    removeDiscountCode?.(discount);
   };
 
   const handleSubmit = (e: React.FormEvent) => {

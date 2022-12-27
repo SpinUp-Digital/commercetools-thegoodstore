@@ -36,7 +36,7 @@ const SliderNavigation: FC<SliderNavigationProps> = ({
       <div className="mt-10 flex justify-center gap-16">
         <ChevronLeftIcon {...compactNavigationArrowsStyle} onClick={() => swiperRef?.slidePrev()} />
         <div className="flex font-body text-14 font-regular leading-loose text-secondary-black">
-          <span>{swiperRef?.realIndex + 1}</span>
+          <span>{(swiperRef?.realIndex ?? 0) + 1}</span>
           <span>/</span>
           <span>{totalSlides}</span>
         </div>

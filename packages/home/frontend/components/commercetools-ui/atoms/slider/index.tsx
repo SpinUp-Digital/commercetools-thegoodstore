@@ -21,15 +21,15 @@ export type SliderProps = SliderNavigationProps & {
 } & SwiperProps;
 
 const Slider: FC<SliderProps> = ({
-  className,
-  slideWidth,
-  slidesPerView,
+  className = '',
+  slideWidth = 300,
+  slidesPerView = 1,
   fitToSlides = false,
   arrows = false,
   innerArrows = false,
   dots = true,
   spaceBetween = 20,
-  withThumbs,
+  withThumbs = false,
   children,
   onSwiper,
   onInit,
@@ -54,7 +54,7 @@ const Slider: FC<SliderProps> = ({
   const navigationPrevRef = useRef<HTMLDivElement>(null);
   const navigationNextRef = useRef<HTMLDivElement>(null);
 
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType>();
 
   const swiperRef = useRef<SwiperType>();
 

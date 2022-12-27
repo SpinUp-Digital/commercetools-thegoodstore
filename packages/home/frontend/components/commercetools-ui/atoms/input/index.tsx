@@ -7,7 +7,7 @@ export interface InputProps extends Omit<ComponentProps<'input'>, 'onChange'> {
   onChange?: (target: ChangeEvent<HTMLInputElement>) => void;
   variant?: 'primary' | 'secondary';
   labelPosition?: 'top' | 'inline';
-  innerRef?: MutableRefObject<undefined>;
+  innerRef?: MutableRefObject<HTMLInputElement>;
   error?: string;
 }
 

@@ -9,7 +9,8 @@ export const requiredDataIsValid = (data: FormData, billingIsSameAsShipping: boo
     'shippingCity',
     'shippingPostalCode',
     'shippingCountry',
-  ];
+  ] as Array<keyof FormData>;
+
   if (!billingIsSameAsShipping) {
     requiredInput.push('billingStreetName', 'billingCity', 'billingPostalCode', 'billingCountry');
   }

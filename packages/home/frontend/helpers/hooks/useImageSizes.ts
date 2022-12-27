@@ -1,5 +1,5 @@
-import * as screensizes from 'helpers/utils/screensizes';
 import { useCallback } from 'react';
+import * as screensizes from 'helpers/utils/screensizes';
 
 export interface UseImageSizesParams {
   sm?: number;
@@ -21,7 +21,7 @@ const useImageSizes = ({ sm, md, lg, defaultSize = 1 }: UseImageSizesParams) => 
     imageSizes = stackImageSizes(imageSizes, screensizes.mobile, sm ?? md ?? lg ?? defaultSize);
 
     return imageSizes;
-  }, [sm, md, lg, defaultSize]);
+  }, [sm, md, lg, defaultSize, stackImageSizes]);
 
   return calculateSizes();
 };

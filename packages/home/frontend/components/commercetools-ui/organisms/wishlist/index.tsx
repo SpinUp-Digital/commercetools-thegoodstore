@@ -13,11 +13,16 @@ export interface Props {
   emptyWishlistImage: NextFrontasticImage;
   emptyWishlistCategories: FooterLink[];
 }
-const Wishlist = ({ emptyWishlistTitle, emptyWishlistSubtitle, emptyWishlistImage, emptyWishlistCategories }) => {
+const Wishlist: React.FC<Props> = ({
+  emptyWishlistTitle,
+  emptyWishlistSubtitle,
+  emptyWishlistImage,
+  emptyWishlistCategories,
+}) => {
   const { formatMessage: formatWishlistMessage } = useFormat({ name: 'wishlist' });
   const { data: wishlistData, clearWishlist } = useWishlist();
   const handleClearWishlist = async () => {
-    await clearWishlist(wishlistData);
+    if (wishlistData) await clearWishlist(wishlistData);
   };
 
   return (

@@ -16,9 +16,7 @@ interface Props {
 const DesktopFacets: React.FC<Props> = ({ facetsConfiguration }) => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
-  const {
-    results: { nbHits, renderingContent },
-  } = useHits();
+  const { results } = useHits();
 
   const transitionDisclosures = useMemo(
     () => ({
@@ -34,7 +32,7 @@ const DesktopFacets: React.FC<Props> = ({ facetsConfiguration }) => {
 
   const facets = useDynamicFacets({
     configuration: facetsConfiguration,
-    ordering: renderingContent?.facetOrdering?.facets?.order,
+    ordering: results?.renderingContent?.facetOrdering?.facets?.order,
     render: ({ attribute, Component }) => (
       <Menu as="div" className="relative" key={attribute}>
         {({ open }) => (
@@ -99,7 +97,7 @@ const DesktopFacets: React.FC<Props> = ({ facetsConfiguration }) => {
       <div className="flex items-center gap-12">{facets}</div>
       <div className="flex items-center gap-16">
         <span>
-          {nbHits} {formatProductMessage({ id: 'items', defaultMessage: 'Items' })}
+          {results?.nbHits ?? 0} {formatProductMessage({ id: 'items', defaultMessage: 'Items' })}
         </span>
         <div>{sortFacet}</div>
       </div>

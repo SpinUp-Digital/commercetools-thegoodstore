@@ -6,7 +6,7 @@ import {
 import { searchClient } from 'algolia/searchClient';
 
 const InstantSearch: React.FC<Partial<ReactInstantSearchProps>> = ({ indexName, children, ...props }) => (
-  <ReactInstantSearch searchClient={searchClient} indexName={indexName} {...props}>
+  <ReactInstantSearch searchClient={searchClient} indexName={indexName as string} {...props}>
     {children}
   </ReactInstantSearch>
 );

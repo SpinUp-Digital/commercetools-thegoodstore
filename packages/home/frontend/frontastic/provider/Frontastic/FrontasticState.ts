@@ -1,3 +1,5 @@
+import { Cart } from '@commercetools/frontend-domain-types/cart/Cart';
+import { Wishlist } from '@commercetools/frontend-domain-types/wishlist/Wishlist';
 import {
   getAccount,
   changePassword,
@@ -17,6 +19,7 @@ import {
   setDefaultBillingAddress,
   setDefaultShippingAddress,
 } from '../../actions/account';
+import { createSession, adyenCheckout } from '../../actions/adyen';
 import {
   cartItems,
   addItem,
@@ -31,16 +34,13 @@ import {
   removeDiscountCode,
   getProjectSettings,
 } from '../../actions/cart';
-import { getWishlist, addToWishlist, removeLineItem, clearWishlist, updateLineItem } from '../../actions/wishlist';
 import { queryCategories } from '../../actions/product';
-import { createSession, adyenCheckout } from '../../actions/adyen';
+import { getWishlist, addToWishlist, removeLineItem, clearWishlist, updateLineItem } from '../../actions/wishlist';
 import { UseAccount } from './UseAccount';
-import { UseCart } from './UseCart';
-import { UseWishlist } from './UseWishlist';
-import { UseProduct } from './UseProduct';
 import { UseAdyen } from './UseAdyen';
-import { Cart } from '@commercetools/frontend-domain-types/cart/Cart';
-import { Wishlist } from '@commercetools/frontend-domain-types/wishlist/Wishlist';
+import { UseCart } from './UseCart';
+import { UseProduct } from './UseProduct';
+import { UseWishlist } from './UseWishlist';
 
 export interface FrontasticState {
   useCart: UseCart;
@@ -52,14 +52,15 @@ export interface FrontasticState {
 
 export const getFrontasticState = (): FrontasticState => {
   const cartData = cartItems();
-  const totalCartItems = (cartData.data as Cart)?.lineItems?.reduce((acc, curr) => acc + curr.count, 0) ?? 0;
+  const totalCartItems =
+    (cartData.data as Cart)?.lineItems?.reduce((acc, curr) => acc + (curr.count as number), 0) ?? 0;
 
   const accountData = getAccount();
 
   const wishlistData = getWishlist();
 
   const totalWishlistItems =
-    (wishlistData.data as Wishlist)?.lineItems?.reduce((acc, curr) => acc + curr.count, 0) ?? 0;
+    (wishlistData.data as Wishlist)?.lineItems?.reduce((acc, curr) => acc + (curr.count as number), 0) ?? 0;
 
   const categoriesData = queryCategories();
 

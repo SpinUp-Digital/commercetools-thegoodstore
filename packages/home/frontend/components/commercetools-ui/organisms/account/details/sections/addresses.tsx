@@ -24,16 +24,16 @@ const Addresses = () => {
 
   const { mapPropsToAddress } = usePropsToAddressType();
 
-  const handleSubmit = (address: AddressFormData) => {
+  const handleSubmit = (address: Partial<AddressFormData>) => {
     if (defaultValues) {
       if (defaultValues.addressType !== address.addressType) {
-        const { addAddress } = mapPropsToAddress(address);
+        const { addAddress } = mapPropsToAddress(address as AddressFormData);
         removeAddress(defaultValues.addressId).then(addAddress).then(closeModal);
       } else {
         updateAddress(address).then(closeModal);
       }
     } else {
-      const { addAddress } = mapPropsToAddress(address);
+      const { addAddress } = mapPropsToAddress(address as AddressFormData);
       addAddress().then(closeModal);
     }
   };
