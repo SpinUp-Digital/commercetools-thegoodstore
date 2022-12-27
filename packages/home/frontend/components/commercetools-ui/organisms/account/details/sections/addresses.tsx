@@ -74,7 +74,7 @@ const Addresses = () => {
           </div>
 
           <div className="mt-32 grid gap-20">
-            {addresses.map((address) => (
+            {addresses?.map((address) => (
               <Address key={address.addressId} address={address} onEdit={handleEdit} />
             ))}
           </div>

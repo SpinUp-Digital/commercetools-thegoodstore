@@ -32,6 +32,7 @@ type AddressTypeOptions = Array<{ label: string; value: AddressType }>;
 const AddressForm: React.FC<AddressFormProps> = ({ defaultValues, onClose, onSubmit }) => {
   //i18n messages
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
+  const { formatMessage: formatCheckoutMessage } = useFormat({ name: 'checkout' });
   const { formatMessage } = useFormat({ name: 'common' });
 
   //account data
@@ -52,8 +53,8 @@ const AddressForm: React.FC<AddressFormProps> = ({ defaultValues, onClose, onSub
   }, [defaultData]);
 
   const addressTypes: AddressTypeOptions = [
-    { label: 'Shipping Address', value: 'shipping' },
-    { label: 'billing Address', value: 'billing' },
+    { label: formatCheckoutMessage({ id: 'shippingAddress', defaultMessage: 'Shipping Address' }), value: 'shipping' },
+    { label: formatCheckoutMessage({ id: 'billingAddress', defaultMessage: 'Billing Address' }), value: 'billing' },
   ];
 
   const resetData = useCallback(() => {
@@ -181,7 +182,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ defaultValues, onClose, onSub
             <Checkbox
               name="isDefaultAddress"
               id="is-default-address"
-              checked={data?.isDefaultAddress ?? false}
+              defaultChecked={data?.isDefaultAddress ?? false}
               onChange={handleChange}
               className="h-16 w-16 rounded-sm border-neutral-500"
             />
