@@ -1,23 +1,24 @@
 import { useEffect, useMemo } from 'react';
-import ProductList from 'components/commercetools-ui/organisms/products/product-list';
-import InstantSearch from 'components/HOC/InstantSearch';
-import { InstantSearchServerState, InstantSearchSSRProvider, useClearRefinements } from 'react-instantsearch-hooks';
+import { useRouter } from 'next/router';
+import { UiState } from 'instantsearch.js';
 import { history } from 'instantsearch.js/es/lib/routers/index.js';
-import { productsIndex } from 'helpers/constants/algolia';
+import { InstantSearchServerState, InstantSearchSSRProvider, useClearRefinements } from 'react-instantsearch-hooks';
+import ProductList from 'components/commercetools-ui/organisms/products/product-list';
+import ProductListProvider, {
+  useProductList,
+} from 'components/commercetools-ui/organisms/products/product-list/context';
 import {
   FacetConfiguration,
   PriceConfiguration,
 } from 'components/commercetools-ui/organisms/products/product-list/types';
-import ProductListProvider, {
-  useProductList,
-} from 'components/commercetools-ui/organisms/products/product-list/context';
-import { UiState } from 'instantsearch.js';
-import { useRouter } from 'next/router';
+import InstantSearch from 'components/HOC/InstantSearch';
+import { productsIndex } from 'helpers/constants/algolia';
+import { Category } from 'types/category';
 
 export interface Props {
   serverUrl: string;
   serverState?: InstantSearchServerState;
-  categories: any;
+  categories: Category[];
   data: {
     categoryId?: string;
     searchQuery?: string;
@@ -60,7 +61,7 @@ function ProductListTastic({ categories, data }: Props) {
 
   useEffect(() => {
     updatePricesConfiguration(pricesConfiguration);
-  }, [pricesConfiguration]);
+  }, [pricesConfiguration, updatePricesConfiguration]);
 
   useEffect(() => {
     if (!router) return;

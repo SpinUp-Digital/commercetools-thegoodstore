@@ -36,9 +36,9 @@ const RangeFacet: React.FC<FacetProps> = ({ attribute }) => {
       max: Math.min(start[1], range.max) / 100,
       applied: false,
     }),
-    [range.min, range.max, start[0], start[1]],
+    [range.min, range.max, start],
   );
-
+  console.log(start, range, activePriceRange);
   const [priceRange, setPriceRange] = useState(activePriceRange);
 
   useEffect(() => {
@@ -152,7 +152,7 @@ const RangeFacet: React.FC<FacetProps> = ({ attribute }) => {
         </div>
       )),
     };
-  }, [configuration, handleRangeOptionChange, currencySymbol, formatProductMessage, disjunctiveFacet, appliedOptions]);
+  }, [configuration, handleRangeOptionChange, currencySymbol, disjunctiveFacet, appliedOptions]);
 
   useEffect(() => {
     if (priceRange.applied) refine([priceRange.min * 100, priceRange.max * 100]);
