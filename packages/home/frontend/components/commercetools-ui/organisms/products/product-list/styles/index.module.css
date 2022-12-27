@@ -16,4 +16,5 @@
 }
 .desktop_facet_container::-webkit-scrollbar-thumb:hover {
   background: #bbb9b9;
+  background-clip: padding-box;
 }
