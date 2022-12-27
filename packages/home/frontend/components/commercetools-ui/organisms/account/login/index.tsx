@@ -208,12 +208,7 @@ const Login: React.FC<LoginProps> = ({ signInLink, accountLink }) => {
           </Button>
 
           {resendPasswordReset && (
-            <Link
-              variant="menu-item"
-              className="mx-auto block w-fit border-b-[1px]"
-              link={signInLink}
-              onClick={backToLogin}
-            >
+            <Link variant="menu-item" className="mx-auto block w-fit text-14" link={signInLink} onClick={backToLogin}>
               {formatAccountMessage({ id: 'account.back.sign', defaultMessage: 'Back to sign in' })}
             </Link>
           )}
