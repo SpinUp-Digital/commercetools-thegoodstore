@@ -1,15 +1,31 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Popover } from '@headlessui/react';
 import { UserIcon } from '@heroicons/react/24/outline';
+import Typography from 'components/commercetools-ui/atoms/typography';
 import AccountDropdown from 'components/commercetools-ui/organisms/account/dropdown';
+import { useFormat } from 'helpers/hooks/useFormat';
+import { useAccount } from 'frontastic';
 
 const AccountButton = () => {
+  const { account, loggedIn } = useAccount();
+  const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
+  const userName = useMemo(() => {
+    return formatAccountMessage({ id: 'hello', defaultMessage: 'Hi, ' }) + account?.firstName;
+  }, [account?.firstName]);
+
   return (
     <Popover className="relative mx-5 lg:mx-10">
       {() => (
         <>
           <Popover.Button>
-            <UserIcon className="w-24 text-secondary-black" />
+            <div className="flex whitespace-nowrap">
+              {loggedIn && (
+                <Typography fontSize={16} className="hidden py-2 pr-16 text-secondary-black lg:flex">
+                  {userName}
+                </Typography>
+              )}
+              <UserIcon className="w-24 text-secondary-black" />
+            </div>
           </Popover.Button>
           <Popover.Overlay className="fixed inset-0 z-10 bg-secondary-black opacity-30" />
           <Popover.Panel className="absolute -left-105 top-50 z-10 animate-[appearDropdown_0.15s_ease-in-out] rounded-sm bg-white shadow-400">

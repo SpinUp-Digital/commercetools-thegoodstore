@@ -27,7 +27,12 @@ const FAQ: React.FC<Props> = ({ faqs }) => {
               closedSectionTitle={faq.question}
               buttonClassName="font-medium text-16 py-20 px-16 text-primary-black"
             >
-              <Typography fontSize={16} fontFamily="inter" className="pl-16 pr-24  pb-20 text-secondary-black">
+              <Typography
+                fontSize={16}
+                fontFamily="inter"
+                lineHeight="loose"
+                className="pl-16 pr-24 pb-20 text-secondary-black"
+              >
                 {faq.answer}
               </Typography>
             </AccordionBtn>

@@ -4,6 +4,7 @@
   "customer.support": "Customer support",
   "sign.out": "Sign out",
   "account": "Account",
+  "account.details":"Account details",
   "account.desc": "Manage how information is displayed on your account.",
   "address.create.headline": "New Address",
   "address.create.desc": "Add a new address here to associate it with your account",
