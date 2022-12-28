@@ -13,6 +13,7 @@ import {
 } from 'components/commercetools-ui/organisms/products/product-list/types';
 import InstantSearch from 'components/HOC/InstantSearch';
 import { productsIndex } from 'helpers/constants/algolia';
+import Error404 from 'pages/404';
 import { Category } from 'types/category';
 
 export interface Props {
@@ -70,6 +71,8 @@ function ProductListTastic({ categories, data }: Props) {
 
     return () => router.events.off('routeChangeComplete', clearAllRefinements);
   }, [clearAllRefinements, router]);
+
+  return <Error404 />;
 
   return (
     <ProductList
