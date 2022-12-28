@@ -72,7 +72,13 @@ function ProductListTastic({ categories, data }: Props) {
     return () => router.events.off('routeChangeComplete', clearAllRefinements);
   }, [clearAllRefinements, router]);
 
-  return <Error404 />;
+  const isCategoryFoundOrSearchQueryExists = useMemo(() => {
+    if (data.searchQuery) return true;
+
+    return data.categoryId && !!categories?.find((category) => category.categoryId === data.categoryId);
+  }, [data, categories]);
+
+  if (!isCategoryFoundOrSearchQueryExists) return <Error404 />;
 
   return (
     <ProductList
