@@ -64,7 +64,7 @@ const performFetchApiHub = async (
   endpointPath: string,
   locale: string,
   init: RequestInit,
-  payload: object = {},
+  payload: object | undefined,
   cookieManager: CookieManager,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): Promise<any> => {
@@ -100,7 +100,7 @@ const performFetchApiHub = async (
   });
 };
 
-export const rawFetchApiHub: FetchFunction = async (endpointPath, locale: string, init = {}, payload = {}) => {
+export const rawFetchApiHub: FetchFunction = async (endpointPath, locale: string, init = {}, payload) => {
   return await performFetchApiHub(endpointPath, locale, init, payload, {
     getCookie: (cookieIdenfier) => {
       return cookieCutter.get(cookieIdenfier);
@@ -147,7 +147,7 @@ export const handleApiHubResponse = (fetchApiHubPromise: Promise<Response | Resp
     });
 };
 
-export const fetchApiHub: FetchFunction = async (endpointPath, locale: string, init = {}, payload = {}) => {
+export const fetchApiHub: FetchFunction = async (endpointPath, locale: string, init = {}, payload) => {
   return handleApiHubResponse(rawFetchApiHub(endpointPath, locale, init, payload));
 };
 
@@ -158,20 +158,14 @@ export const rawFetchApiHubServerSide = async (
   headers: HeadersInit = [],
 ) => {
   const cookies = new ServerCookies(expressMessages.req, expressMessages.res);
-  return await performFetchApiHub(
-    endpointPath,
-    locale,
-    { headers },
-    {},
-    {
-      getCookie: (cookieIdentifier) => {
-        return cookies.get(cookieIdentifier);
-      },
-      setCookie: () => {
-        // Do nothing. Only actions are eligible to set the session.
-      },
+  return await performFetchApiHub(endpointPath, locale, { headers }, undefined, {
+    getCookie: (cookieIdentifier) => {
+      return cookies.get(cookieIdentifier);
     },
-  );
+    setCookie: () => {
+      // Do nothing. Only actions are eligible to set the session.
+    },
+  });
 };
 
 export const fetchApiHubServerSide = async (
