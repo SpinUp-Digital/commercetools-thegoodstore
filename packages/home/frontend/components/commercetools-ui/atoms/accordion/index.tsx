@@ -2,10 +2,11 @@ import React from 'react';
 import { Disclosure, Transition } from '@headlessui/react';
 import { ChevronDownIcon, PlusIcon, MinusIcon } from '@heroicons/react/24/outline';
 import useClassNames from 'helpers/hooks/useClassNames';
+import Typography from '../typography';
 
 export interface AccordionProps {
   index?: number;
-  variant: 'plusAndMinus' | 'arrow';
+  variant?: 'arrow' | 'plusAndMinus';
   accordionListLength?: number;
   className?: string;
   openSectionTitle?: string;
@@ -16,7 +17,7 @@ export interface AccordionProps {
 }
 
 const Accordion: React.FC<AccordionProps> = ({
-  variant,
+  variant = 'arrow',
   closedSectionTitle,
   openSectionTitle = closedSectionTitle,
   iconColor,
@@ -36,7 +37,9 @@ const Accordion: React.FC<AccordionProps> = ({
           <>
             <Disclosure.Button className={buttonClassNames}>
               <div className="flex justify-between">
-                <p className="self-center transition">{open ? openSectionTitle : closedSectionTitle}</p>
+                <Typography className="self-center transition">
+                  {open ? openSectionTitle : closedSectionTitle}
+                </Typography>
                 {variant === 'arrow' ? (
                   <ChevronDownIcon
                     width={17.5}

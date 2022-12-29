@@ -105,10 +105,10 @@ export const requestConfirmationEmail = async (email: string, password: string):
   await extensions.account.requestConfirmationEmail(payload);
 };
 
-export const changePassword = async (token: string, newPassword: string): Promise<Account> => {
+export const changePassword = async (oldPassword: string, newPassword: string): Promise<Account> => {
   const extensions = SDK.getExtensions();
 
-  const res = await extensions.account.resetPassword({ token, newPassword });
+  const res = await extensions.account.changePassword({ oldPassword, newPassword });
 
   return res.isError ? ({} as Account) : res.data;
 };

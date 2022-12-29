@@ -98,7 +98,7 @@ function parseBirthday(accountRegisterBody: AccountRegisterBody): Date | undefin
 }
 
 function mapRequestToAccount(request: Request): Account {
-  const accountRegisterBody: AccountRegisterBody = JSON.parse(request.body).account;
+  const accountRegisterBody: AccountRegisterBody = JSON.parse(request.body);
 
   const account: Account = {
     email: accountRegisterBody?.email,

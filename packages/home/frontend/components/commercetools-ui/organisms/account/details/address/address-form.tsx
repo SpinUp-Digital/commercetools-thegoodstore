@@ -100,7 +100,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ defaultValues, onClose, onSub
 
         <form onSubmit={handleSubmit} className="grid max-w-[450px] gap-12">
           <Input
-            label={`${formatMessage({ id: 'name', defaultMessage: 'Name' })} *`}
+            label={formatMessage({ id: 'name', defaultMessage: 'Name' })}
             required
             type="text"
             name="firstName"
@@ -112,7 +112,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ defaultValues, onClose, onSub
           />
 
           <Input
-            label={`${formatMessage({ id: 'address', defaultMessage: 'Address' })} *`}
+            label={formatMessage({ id: 'address', defaultMessage: 'Address' })}
             required
             type="text"
             name="streetName"
@@ -137,7 +137,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ defaultValues, onClose, onSub
           <div className="grid grid-cols-3 gap-12">
             <div className="col-span-3 md:col-span-1">
               <Input
-                label={`${formatMessage({ id: 'zipCode', defaultMessage: 'Postal Code' })} *`}
+                label={formatMessage({ id: 'zipCode', defaultMessage: 'Postal Code' })}
                 required
                 type="text"
                 name="postalCode"
@@ -151,7 +151,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ defaultValues, onClose, onSub
 
             <div className="col-span-3 md:col-span-2">
               <Input
-                label={`${formatMessage({ id: 'city', defaultMessage: 'City' })} *`}
+                label={formatMessage({ id: 'city', defaultMessage: 'City' })}
                 required
                 type="text"
                 name="city"

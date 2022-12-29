@@ -15,10 +15,14 @@ const PasswordInput: FC<InputProps> = (props) => {
 
   return (
     <div className="relative">
-      <span className="absolute top-13 right-13 z-10 hover:cursor-pointer" onClick={toggleHidden}>
-        {hidden ? <EyeSlashIcon className={iconsClassName} /> : <EyeIcon className={iconsClassName} />}
-      </span>
-      <Input type={type} {...props} />
+      <Input type={type} {...props}>
+        <span
+          className="absolute top-[50%] right-12 z-10 translate-y-[-50%] hover:cursor-pointer"
+          onClick={toggleHidden}
+        >
+          {hidden ? <EyeSlashIcon className={iconsClassName} /> : <EyeIcon className={iconsClassName} />}
+        </span>
+      </Input>
     </div>
   );
 };

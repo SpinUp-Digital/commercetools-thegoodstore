@@ -1,14 +1,18 @@
-import React, { ChangeEvent, ComponentProps, FC, MutableRefObject, useCallback, useMemo, useState } from 'react';
+import React, { ComponentProps, FC, MutableRefObject, useCallback, useEffect, useMemo, useState } from 'react';
+import { CheckIcon } from '@heroicons/react/24/outline';
 import useClassNames from 'helpers/hooks/useClassNames';
 import Typography from '../typography';
 
 export interface InputProps extends Omit<ComponentProps<'input'>, 'onChange'> {
   label?: string;
-  onChange?: (target: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (target: React.ChangeEvent<HTMLInputElement>) => void;
   variant?: 'primary' | 'secondary';
   labelPosition?: 'top' | 'inline';
   innerRef?: MutableRefObject<HTMLInputElement>;
   error?: string;
+  errorMessage?: string;
+  isValid?: boolean;
+  validation?: (valueToValidate: string) => boolean;
 }
 
 const Input: FC<InputProps> = ({
@@ -21,14 +25,30 @@ const Input: FC<InputProps> = ({
   className = '',
   innerRef,
   value,
-  error,
+  errorMessage,
+  validation,
+  children,
   ...props
 }) => {
   const [isFocused, setIsFocused] = useState(false);
+  const [isTouched, setIsTouched] = useState(false);
+  const [isValid, setIsValid] = useState(false);
+  const [isErrored, setIsErrored] = useState(false);
+  const [isEdited, setIsEdited] = useState(false);
+
+  useEffect(() => {
+    if (validation) {
+      const shouldBeValidated = isTouched && isEdited;
+      const validated = validation?.(value as string);
+      setIsValid(shouldBeValidated && !!validated);
+      setIsErrored(shouldBeValidated && !validated);
+    }
+  }, [isEdited, isTouched, validation, value]);
 
   const handleChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
+    (event: React.ChangeEvent<HTMLInputElement>) => {
       onChange?.(event);
+      setIsEdited(true);
     },
     [onChange],
   );
@@ -43,6 +63,7 @@ const Input: FC<InputProps> = ({
   const handleBlur = useCallback(
     (e: React.FocusEvent<HTMLInputElement>) => {
       setIsFocused(false);
+      setIsTouched(true);
       onBlur?.(e);
     },
     [onBlur],
@@ -71,6 +92,8 @@ const Input: FC<InputProps> = ({
     'h-40 w-full rounded-sm border border-neutral-300 px-12 text-primary-black placeholder:text-14 placeholder:leading-normal placeholder:text-secondary-black focus:outline-none disabled:cursor-not-allowed disabled:bg-neutral-400',
     bgClassName,
     isInActiveState && label && labelPosition == 'inline' ? 'pt-[20px] pb-[4px]' : 'py-10',
+    { 'border-red-500': (!!props.error && isInActiveState) || isErrored },
+    { 'border-green-500': (!!props.isValid && isInActiveState) || isValid },
     className,
   ]);
 
@@ -83,21 +106,27 @@ const Input: FC<InputProps> = ({
           as="label"
           className={labelClassName}
         >
-          {label}
+          {props.required ? `${label} *` : label}
         </Typography>
       )}
-      <input
-        className={inputClassName}
-        onChange={handleChange}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        ref={innerRef}
-        value={value}
-        {...props}
-      />
-      {error && (
+      <div className="relative">
+        <input
+          className={inputClassName}
+          onChange={handleChange}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          ref={innerRef}
+          value={value}
+          {...props}
+        />
+        {(isValid || (props.isValid && !isInActiveState)) && props.type !== 'password' && (
+          <CheckIcon className="absolute top-[50%] right-12 h-16 w-16 translate-y-[-50%] text-green-500" />
+        )}
+        {children}
+      </div>
+      {(isErrored || props.error) && (
         <Typography className="mt-12 leading-[16px] text-red-500" medium fontSize={12} as="span">
-          {error}
+          {props.error ?? errorMessage}
         </Typography>
       )}
     </div>

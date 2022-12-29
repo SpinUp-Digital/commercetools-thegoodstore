@@ -14,6 +14,7 @@
   "street.name": "Straßenname",
   "stateOrProvince": "Bundesland oder Provinz",
   "fieldIsRequired": "Dieses Feld ist erforderlich",
+  "field.required": "* Pflichtfeld",
   "edit": "Bearbeiten",
   "remove": "Entfernen",
   "update": "Aktualisieren",

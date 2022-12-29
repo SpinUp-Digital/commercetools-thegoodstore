@@ -6,6 +6,7 @@ import Link from 'components/commercetools-ui/atoms/link';
 import PasswordInput from 'components/commercetools-ui/atoms/password-input';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { useFormat } from 'helpers/hooks/useFormat';
+import useValidate from 'helpers/hooks/useValidate';
 import Redirect from 'helpers/redirect';
 import { Reference } from 'types/reference';
 import { useAccount } from 'frontastic';
@@ -21,6 +22,8 @@ const Register: React.FC<RegisterProps> = ({ termsOfUseLink }) => {
   const { formatMessage: formatErrorMessage } = useFormat({ name: 'error' });
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
   const { formatMessage } = useFormat({ name: 'common' });
+
+  const { validatePassword } = useValidate();
 
   //account actions
   const { register, loggedIn, login } = useAccount();
@@ -44,8 +47,7 @@ const Register: React.FC<RegisterProps> = ({ termsOfUseLink }) => {
 
   //data validation
   const validate = () => {
-    const passwordRules = new RegExp('((?=.{8,})(?=.*[A-Z]))');
-    const validPassword = passwordRules.test(data.password);
+    const validPassword = validatePassword(data.password);
 
     //UI error messages
     if (!validPassword)
