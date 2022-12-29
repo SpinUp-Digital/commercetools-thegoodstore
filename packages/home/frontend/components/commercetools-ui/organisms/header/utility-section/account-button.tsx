@@ -10,7 +10,8 @@ const AccountButton = () => {
   const { account, loggedIn } = useAccount();
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
   const userName = useMemo(() => {
-    return formatAccountMessage({ id: 'hello', defaultMessage: 'Hi, ' }) + account?.firstName;
+    if (account?.firstName) return formatAccountMessage({ id: 'hello', defaultMessage: 'Hi, ' }) + account?.firstName;
+    else return formatAccountMessage({ id: 'hello', defaultMessage: 'Hi, ' }) + 'User';
   }, [account?.firstName, formatAccountMessage]);
 
   return (
