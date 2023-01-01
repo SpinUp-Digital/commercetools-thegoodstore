@@ -57,8 +57,11 @@ const Accordion: React.FC<AccordionProps> = ({
               leave="transition duration-100 ease-out"
               leaveFrom="transform scale-y-100 opacity-100"
               leaveTo="transform scale-y-95 opacity-0"
+              unmount={false}
             >
-              <Disclosure.Panel className={panelClassNames}>{children}</Disclosure.Panel>
+              <Disclosure.Panel className={panelClassNames} unmount={false}>
+                {children}
+              </Disclosure.Panel>
             </Transition>
           </>
         )}

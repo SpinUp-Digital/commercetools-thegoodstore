@@ -66,7 +66,7 @@ const RangeFacet: React.FC<FacetProps> = ({ attribute }) => {
 
       setPriceRange({ ...appliedRange, applied: true });
     },
-    [appliedOptions, range, configuration.ranges],
+    [appliedOptions, range, configuration],
   );
 
   const clearAppliedOptions = useCallback(() => {
