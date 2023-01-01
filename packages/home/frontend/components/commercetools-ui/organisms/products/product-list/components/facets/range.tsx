@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { useHits, useRange } from 'react-instantsearch-hooks-web';
+import { useHits, useInstantSearch, useRange } from 'react-instantsearch-hooks-web';
+import aa from 'search-insights';
 import Checkbox from 'components/commercetools-ui/atoms/checkbox';
+import { FILTER_APPLIED } from 'helpers/constants/events';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useI18n from 'helpers/hooks/useI18n';
 import { useProductList } from '../../context';
@@ -22,26 +24,35 @@ const RangeFacet: React.FC<FacetProps> = ({ attribute }) => {
 
   const { range, refine, start } = useRange({ attribute });
 
+  const {
+    results: { index },
+  } = useInstantSearch();
+
   const { currencySymbol } = useI18n();
 
   const configuration = useMemo(() => pricesConfiguration[attribute], [pricesConfiguration, attribute]);
 
   const [appliedOptions, setAppliedOptions] = useState<Array<number>>([]);
 
-  const activePriceRange = useMemo(
-    () => ({
-      min: Math.max(start[0] as number, range.min as number) / 100,
-      max: Math.min(start[1] as number, range.max as number) / 100,
-      applied: false,
-    }),
-    [range.min, range.max, start],
-  );
-
-  const [priceRange, setPriceRange] = useState(activePriceRange);
+  const [priceRange, setPriceRange] = useState({ min: 0, max: 0 });
 
   useEffect(() => {
-    setPriceRange(activePriceRange);
-  }, [activePriceRange]);
+    setPriceRange({
+      min: Math.max(start[0] as number, range.min as number) / 100,
+      max: Math.min(start[1] as number, range.max as number) / 100,
+    });
+  }, [range.min, range.max, start]);
+
+  const sendEvent = useCallback(
+    (range: typeof priceRange) => {
+      aa('clickedFilters', {
+        eventName: FILTER_APPLIED,
+        filters: [`${attribute}:${range.min} TO ${range.max}`],
+        index,
+      });
+    },
+    [index, attribute],
+  );
 
   const handleRangeOptionChange = useCallback(
     (index: number, checked: boolean) => {
@@ -62,11 +73,15 @@ const RangeFacet: React.FC<FacetProps> = ({ attribute }) => {
             )
           : { min: (range.min as number) / 100, max: (range.max as number) / 100 };
 
+      refine([appliedRange.min * 100, appliedRange.max * 100]);
+
+      sendEvent({ min: appliedRange.min * 100, max: appliedRange.max * 100 });
+
       setAppliedOptions(newAppliedOptions);
 
-      setPriceRange({ ...appliedRange, applied: true });
+      setPriceRange({ ...appliedRange });
     },
-    [appliedOptions, range, configuration],
+    [appliedOptions, range, configuration, refine, sendEvent],
   );
 
   const clearAppliedOptions = useCallback(() => {
@@ -96,7 +111,7 @@ const RangeFacet: React.FC<FacetProps> = ({ attribute }) => {
 
   const handleRangeInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setPriceRange({ ...priceRange, [e.target.name]: +e.target.value, applied: false });
+      setPriceRange({ ...priceRange, [e.target.name]: +e.target.value });
     },
     [priceRange],
   );
@@ -105,10 +120,13 @@ const RangeFacet: React.FC<FacetProps> = ({ attribute }) => {
     (e: React.FormEvent) => {
       e.preventDefault();
 
+      refine([priceRange.min * 100, priceRange.max * 100]);
+
+      sendEvent({ min: priceRange.min * 100, max: priceRange.max * 100 });
+
       clearAppliedOptions();
-      setPriceRange({ ...priceRange, applied: true });
     },
-    [priceRange, clearAppliedOptions],
+    [priceRange, clearAppliedOptions, refine, sendEvent],
   );
 
   const rangeOptions = useMemo(() => {
@@ -151,10 +169,6 @@ const RangeFacet: React.FC<FacetProps> = ({ attribute }) => {
       )),
     };
   }, [configuration, handleRangeOptionChange, currencySymbol, disjunctiveFacet, appliedOptions]);
-
-  useEffect(() => {
-    if (priceRange.applied) refine([priceRange.min * 100, priceRange.max * 100]);
-  }, [priceRange, refine]);
 
   return (
     <div>

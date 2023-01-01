@@ -9,6 +9,7 @@ import useTouchDevice from 'helpers/hooks/useTouchDevice';
 import { mediumDesktop, tablet } from 'helpers/utils/screensizes';
 import { Reference } from 'types/reference';
 import Tile from '../tile';
+import useTrack from './useTrack';
 
 export interface Props {
   products: Product[];
@@ -21,6 +22,8 @@ export interface Props {
 
 export default function ProductSlider({ products, title, subline, ctaLabel, ctaLink, subtitleVariant = 'lg' }: Props) {
   const { isTouchDevice } = useTouchDevice();
+
+  const { trackClick } = useTrack();
 
   return (
     <Wrapper background="neutral-200" variant="left-padding-only">
@@ -71,8 +74,8 @@ export default function ProductSlider({ products, title, subline, ctaLabel, ctaL
               },
             }}
           >
-            {products.map((product) => (
-              <Tile product={product} key={product.productId} />
+            {products.map((product, index) => (
+              <Tile key={product.productId} product={product} onClick={() => trackClick(product, index + 1)} />
             ))}
           </Slider>
         </div>

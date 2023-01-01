@@ -39,7 +39,7 @@ const ProductDetailsAdapter: FC<ProductDetailsAdapterProps> = ({ product, inModa
       setVariant(product?.variants[0]);
     } else {
       const currentVariantPath = router.asPath.split('/');
-      const currentVariantSKU = currentVariantPath[3];
+      const currentVariantSKU = currentVariantPath[3]?.split('?')[0];
       const currentVariantIndex = product?.variants.findIndex(({ sku }) => sku == currentVariantSKU);
       setVariant(product.variants[currentVariantIndex]);
     }
@@ -60,16 +60,14 @@ const ProductDetailsAdapter: FC<ProductDetailsAdapterProps> = ({ product, inModa
   if (!product || !variant) return <></>;
 
   return (
-    <>
-      <ProductDetails
-        product={mappedProduct as UIProduct}
-        variant={variant}
-        url={product._url}
-        inModalVersion={inModalVersion}
-        onChangeVariant={handleChangeVariant}
-        setIsOpen={setIsOpen}
-      />
-    </>
+    <ProductDetails
+      product={mappedProduct as UIProduct}
+      variant={variant}
+      url={product._url}
+      inModalVersion={inModalVersion}
+      onChangeVariant={handleChangeVariant}
+      setIsOpen={setIsOpen}
+    />
   );
 };
 

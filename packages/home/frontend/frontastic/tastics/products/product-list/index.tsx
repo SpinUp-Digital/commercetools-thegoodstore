@@ -111,8 +111,11 @@ function ProductListTasticWrapper({ serverUrl, serverState, ...props }: Props) {
             },
             routeToState(routeState) {
               return {
-                [productsIndex]: routeState,
-              };
+                [productsIndex]: {
+                  ...routeState,
+                  query: routeState.q ?? '',
+                },
+              } as UiState;
             },
           },
         }}
