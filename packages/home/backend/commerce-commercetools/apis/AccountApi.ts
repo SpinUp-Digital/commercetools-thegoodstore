@@ -246,6 +246,10 @@ export class AccountApi extends BaseApi {
       customerUpdateActions.push({ action: 'setLastName', lastName: account.lastName });
     }
 
+    if (account.email) {
+      customerUpdateActions.push({ action: 'changeEmail', email: account.email });
+    }
+
     if (account.salutation) {
       customerUpdateActions.push({ action: 'setSalutation', salutation: account.salutation });
     }

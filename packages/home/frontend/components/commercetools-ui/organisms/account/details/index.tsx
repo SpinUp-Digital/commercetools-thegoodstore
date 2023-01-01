@@ -14,6 +14,10 @@ import {
   AddressesSection,
   CustomerSupportSection,
 } from './sections/exporter';
+import ChangePasswordForm from './sections/general/forms/change-password-form';
+import DeleteAccountForm from './sections/general/forms/delete-account-form';
+import PersonalInfoForm from './sections/general/forms/personal-info-form';
+import SubscribeForm from './sections/general/forms/subscribe-form';
 
 export interface FAQ {
   question: string;
@@ -80,6 +84,10 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
 
   const mapping = {
     '#': <MyAccountSection />,
+    '#edit-personal-info': <PersonalInfoForm />,
+    '#edit-newsletter': <SubscribeForm />,
+    '#change-password': <ChangePasswordForm />,
+    '#delete-account': <DeleteAccountForm />,
     '#orders': <OrdersHistorySection />,
     '#payment': <PaymentMethodsSection />,
     '#addresses': <AddressesSection />,
@@ -100,7 +108,7 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
   const Content = mapping[hash as keyof typeof mapping];
 
   return (
-    <div className="min-h-[80vh] bg-neutral-200 md:h-[80vh] xl:py-[68px]">
+    <div className="bg-neutral-200 md:h-[80vh] xl:py-[68px]">
       <div className="mx-auto grid h-full w-full max-w-[1116px] grid-cols-4 bg-white">
         <div className="hidden h-full flex-col justify-between border-r border-neutral-400  pt-24 md:flex xl:pt-36">
           <div className="grid gap-36 px-24">

@@ -32,7 +32,6 @@ const AdditionalInfo: FC<AdditionalInfoProps> = ({ productspec, description }) =
       </style>
 
       <AccordionBtn
-        variant="arrow"
         className="col-span-2 mt-24 border-y border-neutral-400 md:mt-0"
         closedSectionTitle={formatMessage({ id: 'product.desc', defaultMessage: 'Product Description' })}
         buttonClassName="py-21 font-body text-16 leading-tight text-primary-black pl-0 md:pr-12"
@@ -44,7 +43,6 @@ const AdditionalInfo: FC<AdditionalInfoProps> = ({ productspec, description }) =
         />
       </AccordionBtn>
       <AccordionBtn
-        variant="arrow"
         className="col-span-2 border-b border-neutral-400 md:mt-0"
         closedSectionTitle={formatMessage({ id: 'details.additional', defaultMessage: 'Additional Details' })}
         buttonClassName="py-21 font-body text-16 leading-tight text-primary-black pl-0 md:pr-12"
