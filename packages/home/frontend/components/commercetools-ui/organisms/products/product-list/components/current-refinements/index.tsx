@@ -39,7 +39,7 @@ const CurrentRefinements = () => {
           ));
         })
         .flat()}
-      <div className="flex items-center justify-center gap-8 rounded-md border border-neutral-500 bg-white p-8">
+      <div className="flex items-center justify-center gap-8 rounded-md border-neutral-500 bg-white p-8">
         <span className="text-14 text-secondary-black">
           {formatProductMessage({ id: 'clear.all', defaultMessage: 'Clear All' })}
         </span>
