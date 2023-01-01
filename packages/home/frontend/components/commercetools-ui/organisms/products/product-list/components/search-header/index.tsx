@@ -15,7 +15,7 @@ const SearchHeader: React.FC<Props> = ({ query }) => {
 
   return (
     <div>
-      <h1 className="text-26">
+      <h1 className="text-28">
         {formatProductMessage({
           id: 'search.results.for',
           defaultMessage: 'Search results for “{query}”',

@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from 'components/commercetools-ui/atoms/button';
+import Link from 'components/commercetools-ui/atoms/link';
 import { useFormat } from 'helpers/hooks/useFormat';
 import Image404 from 'public/images/shy-lens.png';
 import Image from 'frontastic/lib/image';
@@ -23,9 +24,11 @@ const Error404 = () => {
                 "The page you were looking for couldn't be found. It may have been deleted, renamed, or doesn't exist.",
             })}
           </p>
-          <Button variant="primary" className="mt-28 px-48 py-12 text-16 font-medium">
-            {formatCheckoutMessage({ id: 'page.notFound.cta', defaultMessage: 'Go back home' })}
-          </Button>
+          <Link link="/">
+            <Button variant="primary" className="mt-28 px-48 py-12 text-16 font-medium">
+              {formatCheckoutMessage({ id: 'page.notFound.cta', defaultMessage: 'Go back home' })}
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

@@ -12,6 +12,7 @@ import AdditionalInfo from './additional-info';
 import ProductInformation from './product-information';
 import ShippingSection from './shipping-section';
 import { UIProduct } from './types';
+import useTrack from './useTrack';
 
 export interface ProductDetailsProps {
   product: UIProduct;
@@ -37,11 +38,13 @@ const ProductDetails: FC<ProductDetailsProps> = ({
   const [loading, setLoading] = useState(false);
   const [added, setAdded] = useState(false);
 
+  const { trackAddToCart } = useTrack({ product, inModalVersion });
+
   const handleQuantityChange = (e: React.FormEvent) => {
     setQuantity(+(e.target as HTMLSelectElement).value);
   };
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     setLoading(true);
     addItem(variant, quantity).then(() => {
       setLoading(false);
@@ -51,6 +54,8 @@ const ProductDetails: FC<ProductDetailsProps> = ({
         setAdded(false);
       }, 1000);
     });
+
+    trackAddToCart();
   };
 
   const wrapperClassName = inModalVersion

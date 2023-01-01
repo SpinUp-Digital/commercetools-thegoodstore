@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Hits, Configure, SearchBox } from 'react-instantsearch-hooks-web';
 import InstantSearch from 'components/HOC/InstantSearch';
+import GoogleAnalyticsMiddleware from 'components/HOC/InstantSearch/middlewares/GoogleAnalyticsMiddleware';
 import { productsIndex } from 'helpers/constants/algolia';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useScrollBlock from 'helpers/hooks/useScrollBlock';
@@ -38,6 +39,7 @@ const Search: React.FC = () => {
 
   return (
     <InstantSearch indexName={productsIndex}>
+      <GoogleAnalyticsMiddleware />
       <Configure hitsPerPage={5} />
       <SearchBox
         onFocus={onFocus}

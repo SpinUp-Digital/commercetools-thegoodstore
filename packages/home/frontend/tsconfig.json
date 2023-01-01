@@ -16,7 +16,7 @@
     "strictBindCallApply": true,
     "baseUrl": ".",
     "incremental": true,
-    "typeRoots": ["./node_modules/@types", "./node_modules/@headlessui/react/dist/index.d.ts"]
+    "typeRoots": ["./node_modules/@types", "./node_modules/@headlessui/react/dist/index.d.ts", "./types"]
   },
   "include": ["."],
   "exclude": ["node_modules"]

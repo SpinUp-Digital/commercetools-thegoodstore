@@ -6,6 +6,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 //@ts-ignore
 import { renderToString } from 'react-dom/server';
 import { getServerState } from 'react-instantsearch-hooks-server';
+import GASnippet from 'components/headless/GASnippet';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { SDK } from 'sdk';
 import { createClient, PageDataResponse, ResponseError } from 'frontastic';
@@ -55,6 +56,7 @@ export default function Slug({ data }: SlugProps) {
           content={formatMessage({ id: 'meta.desc', defaultMessage: 'Find largest home collections here!' })}
         />
       </Head>
+      <GASnippet />
       <FrontasticRenderer data={data} tastics={tastics} wrapperClassName={styles.gridWrapper} />
     </>
   );
@@ -113,6 +115,7 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({
   }
 
   const protocol = req.headers.referer?.split('://')[0] || 'https';
+
   const serverUrl = `${protocol}://${req.headers.host}${resolvedUrl}`;
 
   /* Algolia */

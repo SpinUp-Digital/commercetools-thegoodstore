@@ -11,13 +11,18 @@ import usePreloadImages from 'helpers/hooks/usePreloadImages';
 import useVariantWithDiscount from 'helpers/hooks/useVariantWithDiscount';
 import { desktop } from 'helpers/utils/screensizes';
 import Image from 'frontastic/lib/image';
+import useTrack from './useTrack';
 
 interface ProductTileProps {
   product: Product;
+  onClick?: () => void;
+  isSearchResult?: boolean;
 }
 
-const ProductTile: FC<ProductTileProps> = ({ product }) => {
+const ProductTile: FC<ProductTileProps> = ({ product, onClick, isSearchResult = false }) => {
   const [isDesktopSize] = useMediaQuery(desktop);
+
+  const { ref } = useTrack({ product });
 
   usePreloadImages(
     product.variants.map((variant) => variant.images?.[0] ?? ''),
@@ -61,10 +66,17 @@ const ProductTile: FC<ProductTileProps> = ({ product }) => {
     }
   }, [product, selectedVariant]);
 
+  const productUrl = useMemo(() => {
+    if (!product._url) return '#';
+
+    if (isSearchResult) return `${product._url}?sr=1`;
+    return product._url;
+  }, [product._url, isSearchResult]);
+
   return (
-    <div>
+    <div onClick={onClick} ref={ref}>
       <div className="relative">
-        <NextLink href={product._url ?? '#'}>
+        <NextLink href={productUrl}>
           <a>
             <div
               className="relative w-full"
@@ -114,7 +126,7 @@ const ProductTile: FC<ProductTileProps> = ({ product }) => {
         </div>
       </div>
 
-      <NextLink href={product._url ?? '#'}>
+      <NextLink href={productUrl}>
         <a>
           <div>
             <div className="mt-4 block max-w-[80%] overflow-hidden text-ellipsis whitespace-pre text-12 uppercase leading-loose md:mt-12 md:text-14">

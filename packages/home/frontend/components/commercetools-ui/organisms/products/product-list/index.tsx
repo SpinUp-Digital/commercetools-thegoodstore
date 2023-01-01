@@ -1,7 +1,7 @@
 import React from 'react';
 import { Product } from '@commercetools/frontend-domain-types/product/Product';
-import { Hit } from 'instantsearch.js';
 import { Configure, InfiniteHits } from 'react-instantsearch-hooks-web';
+import { PLP_PRODUCT_CLICKED } from 'helpers/constants/events';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import { desktop } from 'helpers/utils/screensizes';
@@ -47,7 +47,16 @@ const ProductList: React.FC<Props> = ({ categoryId, searchQuery, categories, fac
 
         <InfiniteHits
           showPrevious={false}
-          hitComponent={({ hit }: { hit: Hit<Partial<Product>> }) => <ProductTile product={hit as Product} />}
+          hitComponent={({ hit, sendEvent }) => (
+            <ProductTile
+              product={hit as unknown as Product}
+              isSearchResult={!!searchQuery}
+              onClick={() => {
+                sendEvent('click', hit, PLP_PRODUCT_CLICKED);
+                gtag('event', PLP_PRODUCT_CLICKED, hit);
+              }}
+            />
+          )}
           classNames={{
             root: 'pt-32',
             list: 'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-24',
