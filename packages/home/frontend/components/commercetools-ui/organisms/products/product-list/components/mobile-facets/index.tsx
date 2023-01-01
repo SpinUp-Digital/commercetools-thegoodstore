@@ -100,7 +100,7 @@ const MobileFacets: React.FC<Props> = ({ facetsConfiguration }) => {
           <h3 className="text-18">{formatProductMessage({ id: 'sortAndFilter', defaultMessage: 'Filter & Sort' })}</h3>
           <CloseIcon className="w-24 stroke-secondary-black" onClick={() => setIsOpen(false)} />
         </div>
-        <div>
+        <div className="max-h-[75vh] overflow-auto">
           {facets}
           {sortFacet}
         </div>
