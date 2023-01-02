@@ -116,7 +116,6 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
               <a key={tab.name} href={tab.href} className="whitespace-nowrap">
                 <Typography
                   className={`hover:underline ${tab.href === hash ? 'text-primary-black' : 'text-secondary-black'}`}
-                  color="neutral-400"
                   fontSize={16}
                   medium={tab.href === hash}
                 >

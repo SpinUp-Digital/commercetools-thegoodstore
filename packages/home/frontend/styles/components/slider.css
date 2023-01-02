@@ -1,81 +1,81 @@
 .slider {
-  position: static;
+    position: static;
 }
 .slider__container {
-  position: relative;
-  overflow: visible;
+    position: relative;
+    overflow: visible;
 }
 
 .slider-main-container {
-  position: relative;
-  overflow: visible;
+    position: relative;
+    overflow: visible;
 }
 
 .slider__container--fit {
-  width: fit-content;
+    width: fit-content;
 }
 .slider__container--with-thumbs {
-  display: grid;
-  grid-template-columns: 1fr 5fr;
-  gap: 25px;
-  height: 480px;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    gap: 25px;
+    height: 480px;
 }
 
 .slider__slides {
-  position: relative;
-  overflow: hidden;
-  padding: 0 20px;
+    position: relative;
+    overflow: hidden;
+    padding: 0 20px;
 }
 .slider__thumbs {
-  position: relative;
-  box-sizing: border-box;
-  height: 480px;
-  width: 80px;
+    position: relative;
+    box-sizing: border-box;
+    height: 480px;
+    width: 80px;
 }
 .swiper-pagination-bullet.slider__bullet--active {
-  background: gray;
-  opacity: 1;
+    background: gray;
+    opacity: 1;
 }
 .slider__thumb {
-  height: 80px;
-  width: 80px;
+    height: 80px;
+    width: 80px;
 }
 
 .slider_arrow {
-  border: solid #494949;
-  border-width: 0 1.5px 1.5px 0;
-  padding: 10px;
-  width: 0;
-  height: 0;
-  position: absolute;
-  top: 50%;
-  z-index: 10;
-  cursor: pointer;
+    border: solid #494949;
+    border-width: 0 1.5px 1.5px 0;
+    padding: 10px;
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 50%;
+    z-index: 10;
+    cursor: pointer;
 }
 
 .slider_arrow_prev {
-  left: -40px;
-  transform: translateY(-50%) rotateZ(135deg);
+    left: -40px;
+    transform: translateY(-50%) rotateZ(135deg);
 }
 
 .slider_arrow_next {
-  right: -40px;
-  transform: translateY(-50%) rotateZ(-45deg);
+    right: -40px;
+    transform: translateY(-50%) rotateZ(-45deg);
 }
 
 .slider_arrow_prev.slider_arrow_inner {
-  left: 10px;
+    left: 10px;
 }
 
 .slider_arrow_next.slider_arrow_inner {
-  right: 10px;
+    right: 10px;
 }
 
 .swiper-button-disabled {
-  display: none;
+    display: none;
 }
 
 .swiper-slide {
-  -webkit-backface-visibility: hidden;
-  -webkit-transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
 }
