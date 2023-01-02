@@ -3,7 +3,6 @@ import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
 import Button from 'components/commercetools-ui/atoms/button';
 import Dropdown from 'components/commercetools-ui/atoms/dropdown';
 import Link from 'components/commercetools-ui/atoms/link';
-import Wrapper from 'components/commercetools-ui/organisms/content/wrapper';
 import Gallery from 'components/commercetools-ui/organisms/gallery';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
@@ -60,7 +59,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({
 
   const wrapperClassName = inModalVersion
     ? 'md:grid grid-cols-12 pt-70 pb-35 px-20 md:pr-36'
-    : 'pt-16 pb-32 md:grid md:grid-cols-12 md:items-start md:px-24 px-16';
+    : 'max-w-[1280px] mx-auto pt-16 pb-32 md:grid md:grid-cols-12 md:items-start md:px-24 px-16';
 
   const galleryContainerClassName = useClassNames([
     inModalVersion ? 'col-span-6' : 'md:col-span-7 lg:col-span-8',
@@ -73,7 +72,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({
   ]);
 
   return (
-    <Wrapper className={wrapperClassName} clearDefaultStyles={inModalVersion}>
+    <div className={wrapperClassName}>
       <div className={galleryContainerClassName}>
         <Gallery images={variant?.images ?? []} inModalVersion={inModalVersion} />
       </div>
@@ -131,7 +130,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({
           <AdditionalInfo productspec={variant?.attributes?.productspec} description={product?.description} />
         </div>
       )}
-    </Wrapper>
+    </div>
   );
 };
 
