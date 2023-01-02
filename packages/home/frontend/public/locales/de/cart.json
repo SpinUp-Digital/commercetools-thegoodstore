@@ -38,5 +38,6 @@
   "delivery.standard": "Standard Lieferung",
   "delivery.express": "Expresszustellung",
   "add.postcode": "Postleitzahl für Verfügbarkeit hinzufügen",
-  "postcode.invalid": "Die Postleitzahl ist ungültig."
+  "postcode.invalid": "Die Postleitzahl ist ungültig.",
+  "more.details": "Mehr Details"
 }
