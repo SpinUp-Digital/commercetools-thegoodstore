@@ -35,7 +35,6 @@ const Gallery: FC<GalleryProps> = ({ images, inModalVersion }) => {
   return (
     <div className="gap-y-34 px-4 md:mb-50">
       <Slider
-        className={inModalVersion ? 'w-[300px]' : ''}
         onSlideChange={handleSlide}
         onSwiper={(swiper) => {
           swiperRef.current = swiper;

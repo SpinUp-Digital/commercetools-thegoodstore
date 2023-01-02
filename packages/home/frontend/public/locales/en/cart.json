@@ -45,5 +45,6 @@
   "delivery.standard": "Standard Delivery",
   "delivery.express": "Express Delivery",
   "add.postcode": "Add postcode for availability",
-  "postcode.invalid": "The postcode is not valid."
+  "postcode.invalid": "The postcode is not valid.",
+  "more.details": "More details"
 }

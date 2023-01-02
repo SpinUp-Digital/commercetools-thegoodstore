@@ -59,12 +59,12 @@ const ProductDetails: FC<ProductDetailsProps> = ({
   };
 
   const wrapperClassName = inModalVersion
-    ? 'md:grid grid-cols-12 pt-70 pb-35 px-20 gap-58 md:pr-36'
+    ? 'md:grid grid-cols-12 pt-70 pb-35 px-20 md:pr-36'
     : 'pt-16 pb-32 md:grid md:grid-cols-12 md:items-start md:px-24 px-16';
 
   const galleryContainerClassName = useClassNames([
     inModalVersion ? 'col-span-6' : 'md:col-span-7 lg:col-span-8',
-    'md:pr-26 lg:pr-96',
+    'md:pr-26 lg:pr-60',
   ]);
 
   const informationContainerClassName = useClassNames([
@@ -116,15 +116,13 @@ const ProductDetails: FC<ProductDetailsProps> = ({
         {!inModalVersion && <ShippingSection />}
 
         {inModalVersion && (
-          <div>
-            <Link
-              link={url}
-              className="mx-auto mt-30 block w-fit border-b border-secondary-black text-center text-14 leading-loose text-secondary-black"
-              onClick={() => setIsOpen?.(false)}
-            >
-              <a>More details</a>
-            </Link>
-          </div>
+          <Link
+            link={url}
+            className="mx-auto mt-28 block w-fit border-b border-transparent text-center text-14 leading-loose text-secondary-black hover:border-secondary-black"
+            onClick={() => setIsOpen?.(false)}
+          >
+            <a>{formatMessage({ id: 'more.details', defaultMessage: 'More details' })}</a>
+          </Link>
         )}
       </div>
 
