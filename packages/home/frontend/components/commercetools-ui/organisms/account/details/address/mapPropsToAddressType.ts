@@ -6,6 +6,7 @@ import {
   addShippingAddress,
   setDefaultBillingAddress,
   setDefaultShippingAddress,
+  updateAddress,
 } from 'frontastic/actions/account';
 import { AddressFormData } from './address-form';
 
@@ -33,6 +34,9 @@ const usePropsToAddressType = () => {
           addAddress: async () => {
             await addBillingAddress({ ...address, country, isDefaultBillingAddress: address.isDefaultAddress });
           },
+          updateAddress: async () => {
+            await updateAddress({ ...address, isDefaultBillingAddress: address.isDefaultAddress });
+          },
         },
         shipping: {
           checked: address.isDefaultShippingAddress,
@@ -43,6 +47,9 @@ const usePropsToAddressType = () => {
           },
           addAddress: async () => {
             await addShippingAddress({ ...address, country, isDefaultShippingAddress: address.isDefaultAddress });
+          },
+          updateAddress: async () => {
+            await updateAddress({ ...address, isDefaultShippingAddress: address.isDefaultAddress });
           },
         },
       };

@@ -80,7 +80,7 @@ const ResetPassword: FC<ResetPasswordProps> = ({ token, accountLink, signInLink 
   };
 
   return (
-    <div className="m-auto grid max-w-[480px]">
+    <div className="m-auto grid max-w-[480px] px-16">
       <Typography as="h3" fontFamily="libre" className="mb-16 text-16 md:mb-24 md:text-20 lg:text-24">
         {formatAccountMessage({ id: 'password.reset.headline', defaultMessage: 'Reset your password' })}
       </Typography>

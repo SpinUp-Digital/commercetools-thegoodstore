@@ -1,5 +1,6 @@
 import React, { ChangeEvent, ComponentProps, FC, useState } from 'react';
 import useClassNames from 'helpers/hooks/useClassNames';
+import dropdownIcon from './select.png';
 
 export interface DropdownProps extends ComponentProps<'select'> {
   className?: string;
@@ -34,7 +35,13 @@ const Dropdown: FC<DropdownProps> = ({
   return (
     <label className={labelClassName}>
       {label}
-      <select className={selectClassName} value={value || selectedValue} onChange={handleChange} {...props}>
+      <select
+        className={selectClassName}
+        style={{ backgroundImage: `url(${dropdownIcon.src})`, backgroundSize: '30px 20px' }}
+        value={value || selectedValue}
+        onChange={handleChange}
+        {...props}
+      >
         {items.map(({ label, value }, index) => (
           <option key={index} value={value}>
             {label}

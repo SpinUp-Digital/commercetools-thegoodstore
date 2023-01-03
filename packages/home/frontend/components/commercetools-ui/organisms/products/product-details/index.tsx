@@ -88,7 +88,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({
         <div className="flex gap-8 pt-25">
           <Dropdown
             containerClassName="w-72"
-            className="rounded-sm"
+            className="h-full rounded-sm"
             defaultValue="1"
             items={Array(10)
               .fill(0)
