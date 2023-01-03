@@ -25,7 +25,7 @@ const MenuDropdown: FC<Props> = ({ show, links, tileContent, onClick }) => {
   const linksClassNames = useClassNames(['grid grid-cols-4 gap-x-116 gap-y-28', tileContent ? 'pr-116' : '']);
 
   return (
-    <div className={wrapperClassNames} style={{ display: show ? 'flex' : 'none' }}>
+    <div className={wrapperClassNames}>
       <div className={linksClassNames}>
         {links?.map((link) => (
           <div key={link.categoryId}>

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import Link from 'components/commercetools-ui/atoms/link';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import MenuDropdown from 'components/commercetools-ui/organisms/header/header-navigation/header-navigation-desktop/menu-dropdown';
@@ -14,8 +14,16 @@ export interface Props {
 }
 
 const HeaderNavigationButtonDesktop: FC<Props> = ({ show, link, tiles, updateSubMenu }) => {
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+
   const linkClassNames = useClassNames(['border-secondary-grey py-8', show ? 'border-b-[1.5px]' : '']);
   const tileContent = tiles.filter((tile) => tile.tileCategory === link.name);
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
+
+  if (!isLoaded) return <></>;
 
   return (
     <>
