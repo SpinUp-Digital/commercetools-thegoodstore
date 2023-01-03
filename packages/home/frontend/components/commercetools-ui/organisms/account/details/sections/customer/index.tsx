@@ -29,14 +29,14 @@ const CustomerSupport: React.FC<Props> = ({
   const { formatMessage: formatCustomerSupportMessage } = useFormat({ name: 'customer-support' });
   return (
     <>
-      <div className="pb-12">
+      <div className="pb-12 pt-16">
         <Typography as="h2" fontSize={24} fontFamily="libre" className="text-primary-black">
           {formatCustomerSupportMessage({ id: 'customer.support', defaultMessage: 'Customer Support' })}
         </Typography>
       </div>
 
-      <div className="py-12">
-        <Typography as="h3" fontSize={16} fontFamily="inter" className="text-primary-black">
+      <div className="py-16">
+        <Typography as="h3" fontSize={16} fontFamily="inter" className="text-secondary-black">
           {formatCustomerSupportMessage({ id: 'help.question', defaultMessage: 'How can we help you today?' })}
         </Typography>
       </div>
