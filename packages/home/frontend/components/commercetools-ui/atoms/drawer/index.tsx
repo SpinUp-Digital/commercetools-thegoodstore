@@ -51,7 +51,7 @@ const Drawer: FC<DrawerProps> = ({ className = '', isOpen, direction, blockScrol
 
   const drawerClassName = useClassNames([
     className,
-    'fixed z-50 bg-neutral-200 shadow-lg',
+    'fixed z-50 shadow-lg',
     directionStyles[direction],
     getTransitionStyles(),
     transitionClassNames,
@@ -66,9 +66,7 @@ const Drawer: FC<DrawerProps> = ({ className = '', isOpen, direction, blockScrol
       {isOpen && <div className="fixed top-0 left-0 z-10 h-full w-full bg-secondary-black opacity-30" />}
 
       <div ref={ref} style={{ display: isOpen ? 'block' : 'none' }} className={drawerClassName}>
-        <div className="flex flex-col items-stretch">
-          <>{children}</>
-        </div>
+        <div className="flex h-full flex-col items-stretch">{children}</div>
       </div>
     </>
   );

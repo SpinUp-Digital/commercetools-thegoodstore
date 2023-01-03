@@ -4,15 +4,13 @@ import Head from 'next/head';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 //@ts-ignore
-import { renderToString } from 'react-dom/server';
-import { getServerState } from 'react-instantsearch-hooks-server';
 import GASnippet from 'components/headless/GASnippet';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { SDK } from 'sdk';
 import { createClient, PageDataResponse, ResponseError } from 'frontastic';
 import { FrontasticRenderer } from 'frontastic/lib/renderer';
 import { tastics } from 'frontastic/tastics';
-import ProductList, { Props as ProductListTasticProps } from 'frontastic/tastics/products/product-list';
+import { Props as ProductListTasticProps } from 'frontastic/tastics/products/product-list';
 import { Log } from '../helpers/errorLogger';
 import styles from './slug.module.css';
 
@@ -134,23 +132,9 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({
   if (categoryId) plpConfiguration.categoryId = categoryId;
   if (searchQuery) plpConfiguration.searchQuery = searchQuery;
 
-  const serverState = await getServerState(
-    <ProductList
-      serverUrl={serverUrl}
-      categories={[]}
-      data={{
-        categoryId,
-        searchQuery,
-        facetsConfiguration: plpConfiguration.facetsConfiguration ?? [],
-        pricesConfiguration: plpConfiguration.pricesConfiguration ?? [],
-      }}
-    />,
-    { renderToString },
-  );
-
   return {
     props: {
-      data: { ...data, categories, serverState, serverUrl } || null,
+      data: { ...data, categories, serverUrl } || null,
       locale: locale,
       ...(await serverSideTranslations(locale as string, [
         'common',

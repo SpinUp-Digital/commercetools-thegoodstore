@@ -7,7 +7,7 @@ const ColorFacet: React.FC<FacetProps> = ({ attribute }) => {
   const { items, refine } = useRefinementList({ attribute });
 
   return (
-    <div className="grid grid-cols-3 items-center justify-start gap-x-54 gap-y-36">
+    <div className="grid grid-cols-3 items-center justify-start gap-x-54 gap-y-36 lg:min-w-[340px]">
       {items.map(({ label, value, isRefined, count }) => (
         <div
           key={value}

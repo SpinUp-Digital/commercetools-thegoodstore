@@ -1,4 +1,4 @@
-import { useLayoutEffect } from 'react';
+import { useEffect } from 'react';
 import { createInsightsMiddleware } from 'instantsearch.js/es/middlewares';
 import { Configure, useInstantSearch } from 'react-instantsearch-hooks-web';
 import aa from 'search-insights';
@@ -14,7 +14,7 @@ const InsightsMiddleware: React.FC = () => {
 
   const { account } = useAccount();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const middleware = createInsightsMiddleware({
       insightsClient: aa,
       onEvent({ insightsMethod, payload }, insightsClient) {
@@ -29,7 +29,7 @@ const InsightsMiddleware: React.FC = () => {
     return use(middleware);
   }, [use]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (account?.accountId) aa('setUserToken', account.accountId);
     else {
       const token = window.localStorage.getItem(ANONYMOUS_USER_TOKEN);
@@ -43,7 +43,7 @@ const InsightsMiddleware: React.FC = () => {
     }
   }, [account?.accountId]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (queryID) window.localStorage.setItem(LAST_ALGOLIA_QUERY_ID, queryID);
   }, [queryID]);
 
