@@ -31,30 +31,30 @@ const ContactUs: React.FC<Props> = ({
         </Typography>
       </div>
 
-      <div className="hidden w-full border-b border-neutral-400 pb-20 lg:flex">
+      <div className="hidden w-full border-b border-neutral-400 px-12 pb-20 lg:flex">
         <div className="flex w-[30%] ">
           <PhoneIcon className="w-20" />
-          <Typography as="h5" fontSize={14} fontFamily="inter" medium className="py-1 pl-14 text-primary-black">
+          <Typography as="h5" fontSize={14} fontFamily="inter" medium className="py-1 pl-16 text-primary-black">
             {formatCustomerSupportMessage({ id: 'phone', defaultMessage: 'Phone' })}
           </Typography>
         </div>
 
         <div className="flex w-[30%]">
           <EnvelopeIcon className="w-20" />
-          <Typography as="h5" fontSize={14} fontFamily="inter" medium className="py-1 pl-14 text-primary-black">
+          <Typography as="h5" fontSize={14} fontFamily="inter" medium className="py-1 pl-16 text-primary-black">
             {formatCustomerSupportMessage({ id: 'email', defaultMessage: 'Email' })}
           </Typography>
         </div>
 
         <div className="flex w-[30%]">
           <MapPinIcon className="w-20" />
-          <Typography as="h5" fontSize={14} fontFamily="inter" medium className="py-1 pl-14 text-primary-black">
+          <Typography as="h5" fontSize={14} fontFamily="inter" medium className="py-1 pl-16 text-primary-black">
             {formatCustomerSupportMessage({ id: 'address', defaultMessage: 'Address' })}
           </Typography>
         </div>
       </div>
 
-      <div className="flex w-full flex-col lg:flex-row lg:pt-20">
+      <div className="flex w-full flex-col lg:flex-row lg:pt-16">
         <div className="flex w-[30%] py-20 lg:hidden">
           <PhoneIcon className="w-20" />
           <Typography as="h5" fontSize={14} fontFamily="inter" medium className="py-1 pl-14 text-primary-black">
@@ -62,7 +62,7 @@ const ContactUs: React.FC<Props> = ({
           </Typography>
         </div>
 
-        <div className="flex flex-col border-b pb-20 pl-0 lg:w-[30%] lg:border-b-0 lg:pl-34">
+        <div className="flex flex-col border-b pb-20 pl-0 lg:w-[30%] lg:border-b-0 lg:pl-48">
           <Typography fontSize={14} fontFamily="inter" className="py-1 text-secondary-black">
             {phoneNumber}
           </Typography>
@@ -94,7 +94,7 @@ const ContactUs: React.FC<Props> = ({
             {formatCustomerSupportMessage({ id: 'email', defaultMessage: 'Email' })}
           </Typography>
         </div>
-        <div className="flex border-b pb-20 pl-0 lg:w-[30%] lg:border-b-0 lg:pl-34">
+        <div className="flex border-b pb-20 pl-0 lg:w-[30%] lg:border-b-0 lg:pl-42">
           <Typography fontSize={14} fontFamily="inter" className="py-1 text-secondary-black">
             {email}
           </Typography>
