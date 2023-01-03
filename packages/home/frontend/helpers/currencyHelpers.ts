@@ -22,7 +22,7 @@ export class CurrencyHelpers {
     return CurrencyHelpers.formatNumberForCurrency(parseInt(costInCents, 10), locale);
   };
 
-  private static getLocaleFromShorthenedLocale = function (locale: string) {
+  private static getLocaleFromShortenedLocale = function (locale: string) {
     return (
       {
         en: 'en-GB',
@@ -32,7 +32,7 @@ export class CurrencyHelpers {
   };
 
   private static formatMoneyCurrency = function (price: Money, locale?: string) {
-    return Intl.NumberFormat(CurrencyHelpers.getLocaleFromShorthenedLocale(locale as string), {
+    return Intl.NumberFormat(CurrencyHelpers.getLocaleFromShortenedLocale(locale as string), {
       style: 'currency',
       currency: price?.currencyCode ?? 'EUR',
       maximumFractionDigits: price?.fractionDigits ?? 2,

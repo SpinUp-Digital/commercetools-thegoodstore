@@ -65,7 +65,7 @@ const ShippingSection = () => {
 
   const getRateToUse = (rates: ShippingMethod['rates']) => {
     const DEFAULT_SHIPPING_RATE_ID =
-      locale == 'GB' ? 'f51d093a-07a4-43ac-90a2-ae072a4aabf5' : '34717e18-4b4d-41f9-af68-158142015ea3';
+      locale == 'en' ? 'f51d093a-07a4-43ac-90a2-ae072a4aabf5' : '34717e18-4b4d-41f9-af68-158142015ea3';
     return rates?.find(({ shippingRateId }) => shippingRateId === DEFAULT_SHIPPING_RATE_ID);
   };
 

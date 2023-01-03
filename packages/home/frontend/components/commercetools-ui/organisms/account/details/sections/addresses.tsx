@@ -3,7 +3,7 @@ import Button from 'components/commercetools-ui/atoms/button';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useAccount } from 'frontastic';
-import { removeAddress, updateAddress } from 'frontastic/actions/account';
+import { removeAddress } from 'frontastic/actions/account';
 import Address from '../address';
 import AddressForm, { AddressFormData } from '../address/address-form';
 import usePropsToAddressType from '../address/mapPropsToAddressType';
@@ -26,11 +26,12 @@ const Addresses = () => {
 
   const handleSubmit = (address: Partial<AddressFormData>) => {
     if (defaultValues) {
+      const { addAddress, updateAddress } = mapPropsToAddress(address as AddressFormData);
+
       if (defaultValues.addressType !== address.addressType) {
-        const { addAddress } = mapPropsToAddress(address as AddressFormData);
         removeAddress(defaultValues.addressId).then(addAddress).then(closeModal);
       } else {
-        updateAddress(address).then(closeModal);
+        updateAddress().then(closeModal);
       }
     } else {
       const { addAddress } = mapPropsToAddress(address as AddressFormData);
