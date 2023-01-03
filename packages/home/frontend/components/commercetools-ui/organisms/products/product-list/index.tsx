@@ -3,8 +3,6 @@ import { Product } from '@commercetools/frontend-domain-types/product/Product';
 import { Configure, InfiniteHits } from 'react-instantsearch-hooks-web';
 import { PLP_PRODUCT_CLICKED } from 'helpers/constants/events';
 import { useFormat } from 'helpers/hooks/useFormat';
-import useMediaQuery from 'helpers/hooks/useMediaQuery';
-import { desktop } from 'helpers/utils/screensizes';
 import { Category } from 'types/category';
 import ProductTile from '../tile';
 import AccumalativeTrace from './components/accumalative-trace';
@@ -25,8 +23,6 @@ interface Props {
 const ProductList: React.FC<Props> = ({ categoryId, searchQuery, categories, facetsConfiguration }) => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
-  const [isDesktop] = useMediaQuery(desktop);
-
   if (!searchQuery && !categoryId) return <></>;
 
   return (
@@ -37,11 +33,8 @@ const ProductList: React.FC<Props> = ({ categoryId, searchQuery, categories, fac
         <Breadcrumbs categories={categories} categoryId={categoryId} />
         <SearchHeader query={searchQuery ?? ''} />
 
-        {isDesktop ? (
-          <DesktopFacets facetsConfiguration={facetsConfiguration} />
-        ) : (
-          <MobileFacets facetsConfiguration={facetsConfiguration} />
-        )}
+        <MobileFacets facetsConfiguration={facetsConfiguration} />
+        <DesktopFacets facetsConfiguration={facetsConfiguration} />
 
         <CurrentRefinements />
 

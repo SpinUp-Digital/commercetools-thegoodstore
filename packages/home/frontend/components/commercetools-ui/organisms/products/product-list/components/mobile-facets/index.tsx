@@ -77,7 +77,7 @@ const MobileFacets: React.FC<Props> = ({ facetsConfiguration }) => {
 
   return (
     <>
-      <div className="flex items-center justify-between border-b border-neutral-400 pb-16 pt-56">
+      <div className="flex items-center justify-between border-b border-neutral-400 pb-16 pt-56 lg:hidden">
         <div>
           <button
             className="flex min-w-[80px] cursor-pointer items-center gap-8 rounded-md border border-transparent bg-white px-12 py-6 text-14 leading-[20px] transition hover:border-gray-500"
@@ -95,28 +95,38 @@ const MobileFacets: React.FC<Props> = ({ facetsConfiguration }) => {
           </span>
         </div>
       </div>
-      <Drawer isOpen={isOpen} onClose={() => setIsOpen(false)} direction="left" className="w-[90%] max-w-[400px]">
+      <Drawer
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        direction="left"
+        className="w-[90%] max-w-[400px] bg-white"
+      >
         <div className="flex items-center justify-between border-b border-neutral-400 px-12 py-16">
           <h3 className="text-18">{formatProductMessage({ id: 'sortAndFilter', defaultMessage: 'Filter & Sort' })}</h3>
           <CloseIcon className="w-24 stroke-secondary-black" onClick={() => setIsOpen(false)} />
         </div>
-        <div className="max-h-[75vh] overflow-auto">
+        <div className="grow overflow-auto">
           {facets}
           {sortFacet}
         </div>
-        <div className="absolute bottom-0 flex w-full flex-col items-center gap-18 px-14 py-18">
-          <button
-            className="w-full rounded-md bg-primary-black py-8 text-14 font-medium text-white transition hover:bg-gray-500"
-            onClick={() => setIsOpen(false)}
-          >
-            {formatProductMessage({ id: 'done', defaultMessage: 'Done' })}
-          </button>
-          <div className="w-full overflow-hidden rounded-md border border-transparent transition hover:border-primary-black">
+        <div className="w-full bg-white py-18">
+          <div className="border-t border-neutral-400 py-12 text-center text-14 text-secondary-black">
+            {results?.nbHits ?? 0} {formatProductMessage({ id: 'products', defaultMessage: 'Products' })}
+          </div>
+          <div className="flex items-center gap-18 px-14">
+            <div className="w-full overflow-hidden rounded-md border border-transparent transition hover:border-primary-black">
+              <button
+                onClick={removeAllRefinements}
+                className="w-full cursor-pointer border border-primary-black py-6 text-14 font-medium"
+              >
+                {formatProductMessage({ id: 'clear.all', defaultMessage: 'Clear All' })}
+              </button>
+            </div>
             <button
-              onClick={removeAllRefinements}
-              className="w-full cursor-pointer border border-primary-black py-6 text-14 font-medium"
+              className="w-full rounded-md bg-primary-black py-8 text-14 font-medium text-white transition hover:bg-gray-500"
+              onClick={() => setIsOpen(false)}
             >
-              {formatProductMessage({ id: 'clear.all', defaultMessage: 'Clear All' })}
+              {formatProductMessage({ id: 'done', defaultMessage: 'Done' })}
             </button>
           </div>
         </div>

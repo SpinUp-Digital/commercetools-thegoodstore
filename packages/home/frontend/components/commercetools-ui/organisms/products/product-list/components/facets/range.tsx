@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { useHits, useInstantSearch, useRange } from 'react-instantsearch-hooks-web';
+import { useHits, useRange } from 'react-instantsearch-hooks-web';
 import aa from 'search-insights';
 import Checkbox from 'components/commercetools-ui/atoms/checkbox';
 import { FILTER_APPLIED } from 'helpers/constants/events';
@@ -24,10 +24,6 @@ const RangeFacet: React.FC<FacetProps> = ({ attribute }) => {
 
   const { range, refine, start } = useRange({ attribute });
 
-  const {
-    results: { index },
-  } = useInstantSearch();
-
   const { currencySymbol } = useI18n();
 
   const configuration = useMemo(() => pricesConfiguration[attribute], [pricesConfiguration, attribute]);
@@ -48,10 +44,10 @@ const RangeFacet: React.FC<FacetProps> = ({ attribute }) => {
       aa('clickedFilters', {
         eventName: FILTER_APPLIED,
         filters: [`${attribute}:${range.min} TO ${range.max}`],
-        index,
+        index: results?.index as string,
       });
     },
-    [index, attribute],
+    [results?.index, attribute],
   );
 
   const handleRangeOptionChange = useCallback(

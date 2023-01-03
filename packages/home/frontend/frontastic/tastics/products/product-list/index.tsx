@@ -1,8 +1,7 @@
 import { useEffect, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { UiState } from 'instantsearch.js';
-import { history } from 'instantsearch.js/es/lib/routers/index.js';
-import { InstantSearchServerState, InstantSearchSSRProvider, useClearRefinements } from 'react-instantsearch-hooks';
+import { InstantSearchServerState, useClearRefinements } from 'react-instantsearch-hooks';
 import ProductList from 'components/commercetools-ui/organisms/products/product-list';
 import ProductListProvider, {
   useProductList,
@@ -92,39 +91,33 @@ function ProductListTastic({ categories, data }: Props) {
 
 function ProductListTasticWrapper({ serverUrl, serverState, ...props }: Props) {
   return (
-    <InstantSearchSSRProvider {...(serverState ?? {})}>
-      <InstantSearch
-        indexName={productsIndex}
-        routing={{
-          router: history({
-            getLocation: () =>
-              typeof window === 'undefined' ? (new URL(serverUrl) as unknown as Location) : window.location,
-          }),
-          stateMapping: {
-            stateToRoute(uiState) {
-              const indexUiState = uiState[productsIndex];
+    <InstantSearch
+      indexName={productsIndex}
+      routing={{
+        stateMapping: {
+          stateToRoute(uiState) {
+            const indexUiState = uiState[productsIndex];
 
-              return {
-                ...indexUiState,
-                q: indexUiState.configure?.query,
-              } as UiState;
-            },
-            routeToState(routeState) {
-              return {
-                [productsIndex]: {
-                  ...routeState,
-                  query: routeState.q ?? '',
-                },
-              } as UiState;
-            },
+            return {
+              ...indexUiState,
+              q: indexUiState.configure?.query,
+            } as UiState;
           },
-        }}
-      >
-        <ProductListProvider>
-          <ProductListTastic serverUrl={serverUrl} serverState={serverState} {...props} />
-        </ProductListProvider>
-      </InstantSearch>
-    </InstantSearchSSRProvider>
+          routeToState(routeState) {
+            return {
+              [productsIndex]: {
+                ...routeState,
+                query: routeState.q ?? '',
+              },
+            } as UiState;
+          },
+        },
+      }}
+    >
+      <ProductListProvider>
+        <ProductListTastic serverUrl={serverUrl} serverState={serverState} {...props} />
+      </ProductListProvider>
+    </InstantSearch>
   );
 }
 

@@ -93,7 +93,7 @@ const DesktopFacets: React.FC<Props> = ({ facetsConfiguration }) => {
   );
 
   return (
-    <div className="flex items-center justify-between border-b border-neutral-400 pb-16 pt-56">
+    <div className="hidden items-center justify-between border-b border-neutral-400 pb-16 pt-56 lg:flex">
       <div className="flex items-center gap-12">{facets}</div>
       <div className="flex items-center gap-16">
         <span>
