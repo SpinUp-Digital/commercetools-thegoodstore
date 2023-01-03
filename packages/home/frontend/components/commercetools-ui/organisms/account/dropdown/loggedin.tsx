@@ -12,8 +12,7 @@ const LoggedIn = () => {
   const { logout } = useAccount();
 
   const handleLogout = () => {
-    logout();
-    router.push('login');
+    logout().then(() => router.push('login'));
   };
 
   return (

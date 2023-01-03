@@ -55,23 +55,24 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
 
   //update associated cart data using account data
   useEffect(() => {
-    if (!account) return;
+    if (!account) {
+      router.push('login');
+    } else {
+      const email = account.email;
+      const addresses = account.addresses?.filter((address) => address.country === country);
+      const shippingAddress = addresses?.find((address) => address.isDefaultShippingAddress) || addresses?.[0];
+      const billingAddress = addresses?.find((address) => address.isDefaultBillingAddress) || addresses?.[0];
 
-    const email = account.email;
-    const addresses = account.addresses?.filter((address) => address.country === country);
-    const shippingAddress = addresses?.find((address) => address.isDefaultShippingAddress) || addresses?.[0];
-    const billingAddress = addresses?.find((address) => address.isDefaultBillingAddress) || addresses?.[0];
-
-    updateCart({
-      account: { email },
-      shipping: shippingAddress,
-      billing: billingAddress,
-    });
+      updateCart({
+        account: { email },
+        shipping: shippingAddress,
+        billing: billingAddress,
+      });
+    }
   }, [account, country, updateCart]);
 
   const handleLogout = () => {
-    logout();
-    router.push('login');
+    logout().then(() => router.push('login'));
   };
 
   const tabs = [
