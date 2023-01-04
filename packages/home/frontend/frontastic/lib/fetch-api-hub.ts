@@ -26,8 +26,8 @@ export function resolveApiHubUrl(): string {
 }
 
 type ExpressMessages = {
-  req: IncomingMessage;
-  res: ServerResponse;
+  req?: IncomingMessage;
+  res?: ServerResponse;
 };
 
 type CookieManager = {
@@ -157,6 +157,14 @@ export const rawFetchApiHubServerSide = async (
   expressMessages: ExpressMessages,
   headers: HeadersInit = [],
 ) => {
+  if (!expressMessages?.req || !expressMessages?.res)
+    return await performFetchApiHub(endpointPath, locale, { headers }, undefined, {
+      getCookie() {
+        return '';
+      },
+      setCookie() {},
+    });
+
   const cookies = new ServerCookies(expressMessages.req, expressMessages.res);
   return await performFetchApiHub(endpointPath, locale, { headers }, undefined, {
     getCookie: (cookieIdentifier) => {

@@ -9,7 +9,8 @@ import Tile from './content/tile';
 import TilesGroupTastic from './content/tiles-group';
 import Footer from './footer';
 import Header from './header';
-import NotFound from './not-found';
+import Missing from './missing';
+import NotFoundTastic from './not-found';
 import ProductSlider from './products/slider';
 import SpacerTastic from './spacer';
 
@@ -51,5 +52,6 @@ export const tastics = {
   'commercetools/ui/content/announcement-bar': AnnouncementBarTastic,
   'commercetools/ui/content/content-slider': ContentSliderTastic,
   'commercetools/ui/content/tiles-group': TilesGroupTastic,
-  default: NotFound,
+  'commercetools/ui/not-found': NotFoundTastic,
+  default: Missing,
 };

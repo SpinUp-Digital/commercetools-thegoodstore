@@ -1,8 +1,8 @@
-import { Category } from 'types/category';
 import { IncomingMessage, ServerResponse } from 'http';
+import { Category } from 'types/category';
+import { mapLanguage } from '../../../project.config';
 import { fetchApiHubServerSide } from '../fetch-api-hub';
 import { PageDataResponse, PagePreviewDataResponse, RedirectResponse } from '../types';
-import { mapLanguage } from '../../../project.config';
 
 type UrlParams = {
   slug?: Array<string>;
@@ -34,8 +34,8 @@ export const getRouteData =
     urlParams: UrlParams,
     locale: string,
     query: QueryParams,
-    nextJsReq: IncomingMessage,
-    nextJsRes: ServerResponse,
+    nextJsReq?: IncomingMessage,
+    nextJsRes?: ServerResponse,
   ): Promise<RedirectResponse | PageDataResponse> => {
     // Remove slug from query since it's not needed as part of the query.
     delete query.slug;
@@ -59,7 +59,7 @@ export const getRouteData =
       },
       headers,
     )) as RedirectResponse | PageDataResponse;
-
+    console.log('D', data);
     return data;
   };
 
