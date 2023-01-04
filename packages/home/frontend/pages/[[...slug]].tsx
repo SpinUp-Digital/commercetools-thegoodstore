@@ -1,16 +1,20 @@
 import React from 'react';
 import { GetServerSideProps, Redirect } from 'next';
 import Head from 'next/head';
+import { Result } from '@commercetools/frontend-domain-types/product/Result';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 //@ts-ignore
+import { renderToString } from 'react-dom/server';
+import { getServerState } from 'react-instantsearch-hooks-server';
 import GASnippet from 'components/headless/GASnippet';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { SDK } from 'sdk';
+import { Category } from 'types/category';
 import { createClient, PageDataResponse, ResponseError } from 'frontastic';
 import { FrontasticRenderer } from 'frontastic/lib/renderer';
 import { tastics } from 'frontastic/tastics';
-import { Props as ProductListTasticProps } from 'frontastic/tastics/products/product-list';
+import ProductListTastic, { Props as ProductListTasticProps } from 'frontastic/tastics/products/product-list';
 import { Log } from '../helpers/errorLogger';
 import styles from './slug.module.css';
 
@@ -75,7 +79,7 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({
   const frontastic = createClient();
   const [data, categories] = await Promise.all([
     frontastic.getRouteData(params ?? {}, locale as string, query, req, res),
-    extensions.product.queryCategories({ query: { limit: 99 } }).then((res) => (res.isError ? [] : res.data)),
+    extensions.product.queryCategories({ query: { limit: 99 } }).then((res) => (res.isError ? [] : res.data) as Result),
   ]);
 
   if (data) {
@@ -132,9 +136,23 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({
   if (categoryId) plpConfiguration.categoryId = categoryId;
   if (searchQuery) plpConfiguration.searchQuery = searchQuery;
 
+  const serverState = await getServerState(
+    <ProductListTastic
+      serverUrl={serverUrl}
+      categories={(categories.items as Category[]) ?? []}
+      data={{
+        categoryId,
+        searchQuery,
+        facetsConfiguration: plpConfiguration.facetsConfiguration ?? [],
+        pricesConfiguration: plpConfiguration.pricesConfiguration ?? [],
+      }}
+    />,
+    { renderToString },
+  );
+
   return {
     props: {
-      data: { ...data, categories, serverUrl } || null,
+      data: { ...data, categories, serverUrl, serverState } || null,
       locale: locale,
       ...(await serverSideTranslations(locale as string, [
         'common',
