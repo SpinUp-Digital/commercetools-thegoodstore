@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { UiState } from 'instantsearch.js';
 import { history } from 'instantsearch.js/es/lib/routers/index.js';
 import { InstantSearchServerState, InstantSearchSSRProvider, useClearRefinements } from 'react-instantsearch-hooks';
+import NotFound from 'components/commercetools-ui/organisms/not-found';
 import ProductList from 'components/commercetools-ui/organisms/products/product-list';
 import ProductListProvider, {
   useProductList,
@@ -13,7 +14,6 @@ import {
 } from 'components/commercetools-ui/organisms/products/product-list/types';
 import InstantSearch from 'components/HOC/InstantSearch';
 import { productsIndex } from 'helpers/constants/algolia';
-import Error404 from 'pages/404';
 import { Category } from 'types/category';
 
 export interface Props {
@@ -78,7 +78,7 @@ function ProductListTastic({ categories, data }: Props) {
     return data.categoryId && !!categories?.find((category) => category.categoryId === data.categoryId);
   }, [data, categories]);
 
-  if (!isCategoryFoundOrSearchQueryExists) return <Error404 />;
+  if (!isCategoryFoundOrSearchQueryExists) return <NotFound />;
 
   return (
     <ProductList

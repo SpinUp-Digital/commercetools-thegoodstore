@@ -5,7 +5,7 @@ import { useFormat } from 'helpers/hooks/useFormat';
 import Image404 from 'public/images/shy-lens.png';
 import Image from 'frontastic/lib/image';
 
-const Error404 = () => {
+const NotFound = () => {
   const { formatMessage } = useFormat({ name: 'common' });
   const { formatMessage: formatCheckoutMessage } = useFormat({ name: 'checkout' });
 
@@ -35,4 +35,4 @@ const Error404 = () => {
   );
 };
 
-export default Error404;
+export default NotFound;

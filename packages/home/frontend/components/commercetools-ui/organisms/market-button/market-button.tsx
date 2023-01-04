@@ -38,7 +38,12 @@ const MarketButton = () => {
         </Button>
       )}
 
-      <Drawer isOpen={showMarket} direction="left" className="w-[90%] max-w-[380px]" onClose={hideMarketMenu}>
+      <Drawer
+        isOpen={showMarket}
+        direction="left"
+        className="w-[90%] max-w-[380px] bg-neutral-200"
+        onClose={hideMarketMenu}
+      >
         <div className="flex w-full items-center justify-between border-b-[1px] border-neutral-400 py-20">
           <Typography as="h5" fontFamily="libre" fontSize={22} className=" pl-15 text-secondary-black">
             {formatMarketMessage({ id: 'select.market', defaultMessage: 'Select your market' })}

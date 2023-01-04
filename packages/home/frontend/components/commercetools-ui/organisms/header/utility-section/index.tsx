@@ -73,7 +73,7 @@ const UtilitySection: React.FC<Props> = ({
       <Drawer
         isOpen={isDrawerOpen}
         direction="right"
-        className="w-[90%] max-w-[380px]"
+        className="w-[90%] max-w-[380px] bg-neutral-200"
         onClose={() => setIsDrawerOpen(false)}
       >
         <Slideout
