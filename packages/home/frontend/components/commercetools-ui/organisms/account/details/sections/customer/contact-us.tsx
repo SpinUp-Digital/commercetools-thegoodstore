@@ -77,7 +77,7 @@ const ContactUs: React.FC<Props> = ({
             </div>
           )}
           {workingHoursWeekends && (
-            <div className="pt-5">
+            <div>
               <Typography as="span" fontSize={14} fontFamily="inter" className="text-secondary-black">
                 {formatCustomerSupportMessage({ id: 'weekends', defaultMessage: 'Sat- Sun: ' })}
               </Typography>
@@ -107,13 +107,13 @@ const ContactUs: React.FC<Props> = ({
           </Typography>
         </div>
         <div className="flex flex-col border-b pb-20 pl-0 lg:w-[30%] lg:border-b-0 lg:pl-34">
-          <Typography as="span" fontSize={14} fontFamily="inter" className="pb-2 text-secondary-black">
+          <Typography as="span" fontSize={14} fontFamily="inter" className="pb-4 text-secondary-black">
             {addressLine}
           </Typography>
-          <Typography as="span" fontSize={14} fontFamily="inter" className="pb-2 text-secondary-black">
+          <Typography as="span" fontSize={14} fontFamily="inter" className="pb-4 text-secondary-black">
             {cityAndPostalCode}
           </Typography>
-          <Typography as="span" fontSize={14} fontFamily="inter" className="pb-2 text-secondary-black">
+          <Typography as="span" fontSize={14} fontFamily="inter" className=" text-secondary-black">
             {country}
           </Typography>
         </div>
