@@ -1,5 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { Variant as VariantType } from '@commercetools/frontend-domain-types/product/Variant';
+import Typography from 'components/commercetools-ui/atoms/typography';
+import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { discardRepeatedValues } from 'helpers/utils/discardRepeatedValues';
 
@@ -8,15 +10,18 @@ type VariantProps = {
   currentVariant: VariantType;
   variants: VariantType[];
   attribute: string;
+  inModalVersion?: boolean;
   onClick?: (sku: string) => void;
 };
 
-const Variant: FC<VariantProps> = ({ className, currentVariant, variants, attribute, onClick }) => {
+const Variant: FC<VariantProps> = ({ className, currentVariant, variants, attribute, inModalVersion, onClick }) => {
   const { formatMessage } = useFormat({ name: 'product' });
 
   const [variantsToUse, setVariantsToUse] = useState<VariantType[]>();
 
   const attributeString = attribute.toString();
+
+  const labelClassName = useClassNames(['capitalize', `text-${inModalVersion ? 12 : 14}`]);
 
   useEffect(() => {
     const filteredVariants: VariantType[] = discardRepeatedValues(variants, attribute.toString());
@@ -26,12 +31,12 @@ const Variant: FC<VariantProps> = ({ className, currentVariant, variants, attrib
   return (
     <div className={className}>
       <div>
-        <p className="font-body text-14 font-medium capitalize leading-loose">
+        <Typography medium lineHeight="loose" className={labelClassName}>
           {formatMessage({ id: attributeString, defaultMessage: attributeString })}
-        </p>
-        <p className="font-body text-12 font-regular leading-loose">
+        </Typography>
+        <Typography lineHeight="loose" fontSize={12}>
           {currentVariant?.attributes?.[`${attribute}label`]}
-        </p>
+        </Typography>
       </div>
 
       <div className="mt-15 flex gap-24">
