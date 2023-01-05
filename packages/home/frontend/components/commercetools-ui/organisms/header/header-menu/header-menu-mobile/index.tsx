@@ -44,12 +44,7 @@ const HeaderMenuMobile: FC<Props> = ({ links }) => {
         <MenuIcon className="" />
       </Button>
 
-      <Drawer
-        isOpen={showMenu}
-        direction="left"
-        className="w-[90%] max-w-[380px] bg-neutral-200"
-        onClose={hideHeaderMenu}
-      >
+      <Drawer isOpen={showMenu} direction="left" className="w-[90%] max-w-[380px] bg-white" onClose={hideHeaderMenu}>
         <div className="flex h-83 w-full justify-between bg-neutral-300">
           {selected.length > 0 && (
             <button
