@@ -97,9 +97,7 @@ function parseBirthday(accountRegisterBody: AccountRegisterBody): Date | undefin
   return null;
 }
 
-function mapRequestToAccount(request: Request): Account {
-  const accountRegisterBody: AccountRegisterBody = JSON.parse(request.body);
-
+function mapRequestToAccount(accountRegisterBody: AccountRegisterBody): Account {
   const account: Account = {
     email: accountRegisterBody?.email,
     password: accountRegisterBody?.password,
@@ -158,20 +156,21 @@ export const register: ActionHook = async (request: Request, actionContext: Acti
   const locale = getLocale(request);
 
   const accountApi = new AccountApi(actionContext.frontasticContext, locale);
-  const accountData = mapRequestToAccount(request);
+  const accountData = mapRequestToAccount(JSON.parse(request.body).account);
 
   const cart = await CartFetcher.fetchCart(request, actionContext);
 
   const account = await accountApi.create(accountData, cart);
-
+/*
   const emailApi = EmailApiFactory.getDefaultApi(actionContext.frontasticContext, locale);
+*/
+  //emailApi.sendWelcomeCustomerEmail(account);
 
-  emailApi.sendWelcomeCustomerEmail(account);
-
-  emailApi.sendAccountVerificationEmail(account);
+  //emailApi.sendAccountVerificationEmail(account);
 
   const response: Response = {
     statusCode: 200,
+    //body: JSON.stringify(account),
     body: JSON.stringify(account),
     sessionData: {
       ...request.sessionData,
@@ -355,7 +354,7 @@ export const update: ActionHook = async (request: Request, actionContext: Action
 
   account = {
     ...account,
-    ...mapRequestToAccount(request),
+    ...mapRequestToAccount(JSON.parse(request.body)),
   };
 
   account = await accountApi.update(account);
