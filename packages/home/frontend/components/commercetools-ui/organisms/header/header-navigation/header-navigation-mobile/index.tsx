@@ -37,7 +37,7 @@ const HeaderNavigationMobile: FC<Props> = ({ links }) => {
         <Bars3Icon className="w-30 text-secondary-black" />
       </Button>
 
-      <Drawer isOpen={showMenu} direction="left" className="w-4/5 bg-neutral-200" onClose={hideHeaderMenu}>
+      <Drawer isOpen={showMenu} direction="left" className="w-4/5 bg-white" onClose={hideHeaderMenu}>
         <MobileMenu links={links} hideHeaderMenu={hideHeaderMenu} category={category} setCategory={setCategory} />
         {category.length <= 0 && <MarketButtonMobile />}
       </Drawer>

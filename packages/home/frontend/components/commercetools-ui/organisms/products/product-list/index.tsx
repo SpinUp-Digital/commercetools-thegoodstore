@@ -26,12 +26,15 @@ const ProductList: React.FC<Props> = ({ categoryId, searchQuery, categories, fac
   if (!searchQuery && !categoryId) return <></>;
 
   return (
-    <div className="min-h-screen bg-neutral-200 py-52">
+    <div className="min-h-screen bg-neutral-200 py-48">
       <Configure query={searchQuery} filters={!searchQuery ? `categories.categoryId:${categoryId}` : ''} />
 
-      <div className="relative mx-auto mt-52 max-w-[1150px] px-12 md:px-24 2xl:max-w-[1248px]">
-        <Breadcrumbs categories={categories} categoryId={categoryId} />
-        <SearchHeader query={searchQuery ?? ''} />
+      <div className="relative mx-auto max-w-[1150px] px-12 md:px-24 2xl:max-w-[1248px]">
+        {searchQuery ? (
+          <SearchHeader query={searchQuery ?? ''} />
+        ) : (
+          <Breadcrumbs categories={categories} categoryId={categoryId} />
+        )}
 
         <MobileFacets facetsConfiguration={facetsConfiguration} />
         <DesktopFacets facetsConfiguration={facetsConfiguration} />

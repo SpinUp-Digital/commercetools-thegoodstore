@@ -102,7 +102,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({
             onChange={handleQuantityChange}
           />
           <Button
-            className="w-full text-14 font-bold"
+            className="w-full rounded-sm text-14 font-medium"
             variant="primary"
             onClick={handleAddToCart}
             loading={loading}
@@ -126,7 +126,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({
       </div>
 
       {!inModalVersion && (
-        <div className="grid gap-y-34 md:col-span-7 md:mb-50 md:pr-26">
+        <div className="grid gap-y-34 md:col-span-7 md:mb-50 md:pr-20 lg:col-span-8 lg:pr-52">
           <AdditionalInfo productspec={variant?.attributes?.productspec} description={product?.description} />
         </div>
       )}

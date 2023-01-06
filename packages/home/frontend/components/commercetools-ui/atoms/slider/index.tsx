@@ -11,6 +11,7 @@ import useTouchDevice from 'helpers/hooks/useTouchDevice';
 import SliderNavigation, { SliderNavigationProps } from './slider-navigation';
 
 export type SliderProps = SliderNavigationProps & {
+  allowArrowsOnTouchDevice?: boolean;
   className?: string;
   spaceBetween?: number;
   slidesPerView?: number;
@@ -18,12 +19,13 @@ export type SliderProps = SliderNavigationProps & {
   fitToSlides?: boolean;
   slideWidth?: number;
   withThumbs?: boolean;
+  slideWidthIsFlexible?: boolean;
 } & SwiperProps;
 
 const Slider: FC<SliderProps> = ({
   className = '',
   slideWidth = 300,
-  slidesPerView = 1,
+  slidesPerView,
   fitToSlides = false,
   arrows = false,
   innerArrows = false,
@@ -37,6 +39,8 @@ const Slider: FC<SliderProps> = ({
   prevButtonStyles = {},
   nextButtonStyles = {},
   compactNavigation,
+  slideWidthIsFlexible,
+  allowArrowsOnTouchDevice = false,
   ...props
 }) => {
   const { isTouchDevice } = useTouchDevice();
@@ -59,9 +63,8 @@ const Slider: FC<SliderProps> = ({
   const swiperRef = useRef<SwiperType>();
 
   const validToFit: boolean = !!fitToSlides && !!slideWidth && !!slidesPerView;
-  const sliderWidth: CSSProperties['width'] = validToFit
-    ? `${spaceBetween * (slidesPerView - 1) + slideWidth * slidesPerView}px`
-    : '';
+  const sliderWidth: CSSProperties['width'] =
+    validToFit && slidesPerView ? `${spaceBetween * (slidesPerView - 1) + slideWidth * slidesPerView}px` : '';
 
   const containerClassName = useClassNames([
     'slider_container relative',
@@ -74,13 +77,10 @@ const Slider: FC<SliderProps> = ({
 
   const slideProps = {
     visibility: init ? 'visible' : 'hidden',
+    width: slideWidthIsFlexible ? 'fit-content' : `${slideWidth}px`,
   } as React.CSSProperties;
 
-  const slides = Children.map(children, (child) => (
-    <SwiperSlide style={slideWidth ? { width: `${slideWidth}px`, ...slideProps } : { ...slideProps }}>
-      {child}
-    </SwiperSlide>
-  ));
+  const slides = Children.map(children, (child) => <SwiperSlide style={slideProps}>{child}</SwiperSlide>);
 
   const handleOnSwiper = (swiper: SwiperType) => {
     swiperRef.current = swiper;
@@ -123,7 +123,7 @@ const Slider: FC<SliderProps> = ({
       </Swiper>
       <SliderNavigation
         compactNavigation={compactNavigation}
-        arrows={arrows && !isTouchDevice}
+        arrows={allowArrowsOnTouchDevice ? arrows : arrows && !isTouchDevice}
         prevButtonStyles={prevButtonStyles}
         nextButtonStyles={nextButtonStyles}
         navigationPrevRef={navigationPrevRef}

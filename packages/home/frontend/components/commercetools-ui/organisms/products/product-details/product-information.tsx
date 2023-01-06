@@ -5,6 +5,7 @@ import Typography from 'components/commercetools-ui/atoms/typography';
 import Variant from 'components/commercetools-ui/organisms/variant';
 import WishlistButton from 'components/commercetools-ui/organisms/wishlist-button';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
+import useClassNames from 'helpers/hooks/useClassNames';
 import { ProductDetailsProps } from '.';
 
 type ProductInformationProps = Omit<ProductDetailsProps, 'onAddToCart'>;
@@ -38,10 +39,23 @@ const ProductInformation: FC<ProductInformationProps> = ({ product, variant, onC
     };
   }, [product, variant]);
 
+  const titleClassName = useClassNames(['break-normal mb-12', { '2xl:text-18': !inModalVersion }]);
+  const priceClassName = useClassNames([
+    'block leading-loose',
+    { 'line-through text-gray-500': !!discountPercentage },
+    { '2xl:text-20': !inModalVersion },
+    { 'text-14': !!inModalVersion && !discountPercentage },
+    { 'text-12': !!inModalVersion && !!discountPercentage },
+  ]);
+  const discountedPriceClassName = useClassNames([
+    'block font-regular leading-loose text-accent-red',
+    { '2xl:text-18': !inModalVersion },
+  ]);
+
   return (
     <div>
       <div className="relative flex pr-40">
-        <Typography as="h3" lineHeight="loose" medium fontSize={16} className="break-normal lg:text-18">
+        <Typography as="h3" lineHeight="loose" medium fontSize={16} className={titleClassName}>
           {product?.name}
         </Typography>
 
@@ -49,11 +63,11 @@ const ProductInformation: FC<ProductInformationProps> = ({ product, variant, onC
       </div>
       {discountPercentage ? (
         <div className="flex flex-row justify-between">
-          <div className="mt-10 flex items-center gap-8">
-            <Typography fontSize={16} className="block font-regular leading-loose text-accent-red lg:text-18">
+          <div className="flex items-center gap-8">
+            <Typography fontSize={16} className={discountedPriceClassName}>
               {CurrencyHelpers.formatForCurrency(variant.discountedPrice as number, router.locale)}
             </Typography>
-            <Typography fontSize={16} className="block leading-loose text-gray-500 line-through lg:text-18">
+            <Typography className={priceClassName}>
               {CurrencyHelpers.formatForCurrency(variant.price ?? 0, router.locale)}
             </Typography>
           </div>
@@ -65,9 +79,9 @@ const ProductInformation: FC<ProductInformationProps> = ({ product, variant, onC
           }
         </div>
       ) : (
-        <span className="mt-10 block font-body text-16 font-regular leading-loose">
+        <Typography className={priceClassName}>
           {CurrencyHelpers.formatForCurrency(variant.price as number, router.locale)}
-        </span>
+        </Typography>
       )}
       {attributesToDisplay.map((attribute, index) => {
         if (variant?.attributes?.[attribute]) {
@@ -78,6 +92,7 @@ const ProductInformation: FC<ProductInformationProps> = ({ product, variant, onC
               variants={product?.variants}
               currentVariant={variant}
               attribute={attribute}
+              inModalVersion={inModalVersion}
               onClick={inModalVersion ? onChangeVariant : updateVariantSKU}
             />
           );

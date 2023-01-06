@@ -1,0 +1,14 @@
+{
+    "orders": "Orders",
+    "orders.subtitle": "Check status of recent orders, manage your returns and download invoices.",
+    "all.orders": "All orders",
+    "registered": "Registered",
+    "delivered": "Delivered",
+    "returned": "Returned",
+    "order.id": "Order ID:",
+    "order.date": "Date:",
+    "total": "Total",
+    "status": "Status",
+    "create.return": "Create return",
+    "articles": "articles"
+}

@@ -15,14 +15,14 @@ const SearchHeader: React.FC<Props> = ({ query }) => {
 
   return (
     <div>
-      <h1 className="text-28">
+      <h1 className="font-body text-18 font-medium md:text-26 lg:text-28">
         {formatProductMessage({
           id: 'search.results.for',
           defaultMessage: 'Search results for “{query}”',
           values: { query },
         })}
       </h1>
-      <h4 className="mt-24">
+      <h4 className="mt-24 font-body text-14 md:text-16">
         {formatProductMessage({
           id: 'found.products',
           defaultMessage: 'We found {count} products',

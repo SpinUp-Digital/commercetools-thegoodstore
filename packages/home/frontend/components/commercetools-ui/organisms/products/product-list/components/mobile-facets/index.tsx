@@ -77,7 +77,7 @@ const MobileFacets: React.FC<Props> = ({ facetsConfiguration }) => {
 
   return (
     <>
-      <div className="flex items-center justify-between border-b border-neutral-400 pb-16 pt-56 lg:hidden">
+      <div className="flex items-center justify-between border-b border-neutral-400 pb-16 pt-40 lg:hidden">
         <div>
           <button
             className="flex min-w-[80px] cursor-pointer items-center gap-8 rounded-md border border-transparent bg-white px-12 py-6 text-14 leading-[20px] transition hover:border-gray-500"
@@ -90,7 +90,7 @@ const MobileFacets: React.FC<Props> = ({ facetsConfiguration }) => {
           </button>
         </div>
         <div className="flex items-center gap-16">
-          <span>
+          <span className="text-14 text-secondary-black">
             {results?.nbHits ?? 0} {formatProductMessage({ id: 'items', defaultMessage: 'Items' })}
           </span>
         </div>

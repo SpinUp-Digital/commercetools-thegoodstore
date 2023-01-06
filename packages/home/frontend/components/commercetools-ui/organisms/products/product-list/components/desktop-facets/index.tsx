@@ -64,7 +64,9 @@ const DesktopFacets: React.FC<Props> = ({ facetsConfiguration }) => {
           <>
             <Menu.Button>
               <div className="flex items-center gap-8">
-                <span className="text-14">{formatProductMessage({ id: 'sortBy', defaultMessage: 'Sort by' })}</span>
+                <span className="text-14 text-secondary-black">
+                  {formatProductMessage({ id: 'sortBy', defaultMessage: 'Sort by' })}
+                </span>
                 <ArrowIcon className="mt-2 w-16 stroke-secondary-black" />
               </div>
             </Menu.Button>
@@ -93,10 +95,10 @@ const DesktopFacets: React.FC<Props> = ({ facetsConfiguration }) => {
   );
 
   return (
-    <div className="hidden items-center justify-between border-b border-neutral-400 pb-16 pt-56 lg:flex">
+    <div className="hidden items-center justify-between border-b border-neutral-400 pb-16 pt-48 lg:flex">
       <div className="flex items-center gap-12">{facets}</div>
-      <div className="flex items-center gap-16">
-        <span>
+      <div className="flex items-center gap-18">
+        <span className="text-14 text-secondary-black">
           {results?.nbHits ?? 0} {formatProductMessage({ id: 'items', defaultMessage: 'Items' })}
         </span>
         <div>{sortFacet}</div>
