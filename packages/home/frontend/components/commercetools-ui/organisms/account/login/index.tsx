@@ -178,21 +178,19 @@ const Login: React.FC<LoginProps> = ({ signInLink, accountLink }) => {
             </div>
           ) : (
             <div className="mb-30 flex items-center justify-between">
-              <div className="flex items-center gap-8">
-                <Checkbox
-                  className="h-16 w-16 rounded-sm"
-                  id="remember-me"
-                  name="rememberMe"
-                  type="checkbox"
-                  onChange={handleCheckboxChange}
-                />
+              <Checkbox
+                className="cursor-pointer rounded-sm"
+                id="remember-me"
+                name="rememberMe"
+                onChange={handleCheckboxChange}
+              >
                 <Typography fontSize={12} className="text-secondary-black md:text-14" as="label">
                   {formatMessage({ id: 'rememberMe', defaultMessage: 'Remember me' })}
                 </Typography>
-              </div>
+              </Checkbox>
 
               <Typography
-                className="cursor-pointer text-secondary-black md:text-14"
+                className="cursor-pointer text-secondary-black hover:underline md:text-14"
                 fontSize={12}
                 onClick={toResendPassword}
               >
@@ -201,7 +199,12 @@ const Login: React.FC<LoginProps> = ({ signInLink, accountLink }) => {
             </div>
           )}
 
-          <Button size="full" type="submit" className="mb-16 text-16 leading-tight md:mb-20" disabled={loading}>
+          <Button
+            size="full"
+            type="submit"
+            className="mb-16 text-16 font-medium leading-tight md:mb-20"
+            disabled={loading}
+          >
             {resendPasswordReset
               ? formatAccountMessage({ id: 'account.reset.link', defaultMessage: 'Get reset link' })
               : formatAccountMessage({ id: 'sign.in', defaultMessage: 'Sign in' })}
