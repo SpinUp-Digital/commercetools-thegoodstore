@@ -30,7 +30,7 @@
   "min": "Min",
   "max": "Max",
   "go": "GO",
-  "search.results.for": "Search results for “{query}”",
+  "search.results.for": "Search results for",
   "found.products": "We found {count} products",
   "clear.all": "Clear All",
   "view": "View",

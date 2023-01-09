@@ -15,12 +15,12 @@ const SearchHeader: React.FC<Props> = ({ query }) => {
 
   return (
     <div>
-      <h1 className="font-body text-18 font-medium md:text-26 lg:text-28">
+      <h1 className="font-body text-18 md:text-26 lg:text-28">
         {formatProductMessage({
           id: 'search.results.for',
-          defaultMessage: 'Search results for “{query}”',
-          values: { query },
-        })}
+          defaultMessage: 'Search results for',
+        })}{' '}
+        <span className="font-medium">“{query}”</span>
       </h1>
       <h4 className="mt-24 font-body text-14 md:text-16">
         {formatProductMessage({
