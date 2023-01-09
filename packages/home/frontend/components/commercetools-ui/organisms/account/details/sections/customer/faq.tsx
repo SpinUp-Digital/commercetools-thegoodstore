@@ -2,10 +2,10 @@ import React from 'react';
 import AccordionBtn from 'components/commercetools-ui/atoms/accordion';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { FAQ } from '../..';
+import { FAQ as FAQShape } from '../..';
 
 interface Props {
-  faqs: FAQ[];
+  faqs: FAQShape[];
 }
 
 const FAQ: React.FC<Props> = ({ faqs }) => {

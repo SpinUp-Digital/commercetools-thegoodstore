@@ -25,7 +25,7 @@ export interface Tile {
 }
 
 export interface HeaderProps {
-  links: Category[];
+  categories: Category[];
   logo: NextFrontasticImage;
   logoLink: Reference;
   tiles?: Tile[];

@@ -29,8 +29,6 @@ const HeaderTastic = ({ data, categories }: Props) => {
 
   useResizeObserver(headerRef, setPaddingTop);
 
-  const flattenedCategories = categories?.filter((category) => category.depth === 0);
-
   const announcementBarData = {
     text: data.text,
     highlightedSubstring: data.highlightedSubstring,
@@ -42,7 +40,7 @@ const HeaderTastic = ({ data, categories }: Props) => {
       <div className="fixed top-0 z-50 w-full" ref={headerRef}>
         {announcementBarData && <AnnouncementBar {...announcementBarData} />}
         <Header
-          links={flattenedCategories}
+          categories={categories}
           logo={data.logo}
           logoLink={data.logoLink}
           tiles={data.tiles}
