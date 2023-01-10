@@ -23,7 +23,7 @@ const DeleteAccountForm = () => {
         <PasswordInput label="Password confirmation" required />
 
         <div className="mt-32 grid grid-cols-2 gap-12">
-          <Button type="button" variant="ghost" className="h-40 w-full p-0" onClick={discardForm}>
+          <Button type="button" variant="secondary" className="h-40 w-full p-0 text-14" onClick={discardForm}>
             {formatCommonMessage({ id: 'cancel', defaultMessage: 'Cancel' })}
           </Button>
           <Button type="submit" className="h-40 w-full bg-accent-red px-0 text-14">
