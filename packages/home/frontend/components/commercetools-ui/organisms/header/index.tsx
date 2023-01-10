@@ -9,7 +9,7 @@ import MarketButton from 'components/commercetools-ui/organisms/market-button/ma
 import { Category } from 'types/category';
 
 const Header: React.FC<HeaderProps> = ({
-  links,
+  categories,
   logo,
   logoLink,
   tiles,
@@ -22,6 +22,8 @@ const Header: React.FC<HeaderProps> = ({
   emptyWishlistImage,
   emptyWishlistCategories,
 }) => {
+  const links = categories?.filter((category) => category.depth === 0);
+
   const [activeCategory, setActiveCategory] = useState<Category>();
 
   const showSubMenu = (category?: Category) => {
@@ -68,7 +70,7 @@ const Header: React.FC<HeaderProps> = ({
       </div>
 
       <div className="relative border-t border-neutral-400 px-15 py-12 md:px-32 lg:px-20 xl:px-60">
-        <Search />
+        <Search categories={categories} />
       </div>
 
       <HeaderNavigationDesktop

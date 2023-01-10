@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Product } from '@commercetools/frontend-domain-types/product/Product';
 import { Configure, InfiniteHits } from 'react-instantsearch-hooks-web';
 import { PLP_PRODUCT_CLICKED } from 'helpers/constants/events';
@@ -23,11 +23,16 @@ interface Props {
 const ProductList: React.FC<Props> = ({ categoryId, searchQuery, categories, facetsConfiguration }) => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
+  const isValidCategoryId = useMemo(
+    () => !!categories.find((category) => category.categoryId === categoryId),
+    [categories, categoryId],
+  );
+
   if (!searchQuery && !categoryId) return <></>;
 
   return (
     <div className="min-h-screen bg-neutral-200 py-48">
-      <Configure query={searchQuery} filters={!searchQuery ? `categories.categoryId:${categoryId}` : ''} />
+      <Configure query={searchQuery} filters={isValidCategoryId ? `categories.categoryId:${categoryId}` : ''} />
 
       <div className="relative mx-auto max-w-[1150px] px-12 md:px-24 2xl:max-w-[1248px]">
         {searchQuery ? (

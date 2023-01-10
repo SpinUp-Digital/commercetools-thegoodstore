@@ -1,14 +1,26 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
-import { Hits, Configure, SearchBox } from 'react-instantsearch-hooks-web';
+import { Transition } from '@headlessui/react';
+import { Hits, Configure, SearchBox, Index } from 'react-instantsearch-hooks-web';
 import InstantSearch from 'components/HOC/InstantSearch';
 import GoogleAnalyticsMiddleware from 'components/HOC/InstantSearch/middlewares/GoogleAnalyticsMiddleware';
-import { productsIndex } from 'helpers/constants/algolia';
+import { productsIndex, productsQuerySuggestionsIndex } from 'helpers/constants/algolia';
 import { useFormat } from 'helpers/hooks/useFormat';
+import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import useScrollBlock from 'helpers/hooks/useScrollBlock';
+import { desktop } from 'helpers/utils/screensizes';
+import { Category } from 'types/category';
+import Overlay from '../overlay';
 import SearchItem from '../search-item';
+import SearchSuggestion, { Props as SearchSuggestionProps } from '../search-suggestion';
 
-const Search: React.FC = () => {
+interface Props {
+  categories: Category[];
+}
+
+const Search: React.FC<Props> = ({ categories }) => {
+  const form = useRef<HTMLFormElement>(null);
+
   const [focused, setFocused] = useState(false);
 
   const onFocus = useCallback(() => setFocused(true), []);
@@ -18,53 +30,101 @@ const Search: React.FC = () => {
 
   const { blockScroll } = useScrollBlock();
 
-  useEffect(() => {
-    blockScroll(focused);
-  }, [blockScroll, focused]);
+  const [isDesktop] = useMediaQuery(desktop);
 
   const router = useRouter();
 
   const [query, setQuery] = useState('');
 
+  useEffect(() => {
+    blockScroll(focused);
+  }, [blockScroll, focused]);
+
   const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value), []);
 
-  const onSubmit = useCallback(
-    (e: React.FormEvent) => {
-      router.push(`/search?q=${query}`);
-      setQuery('');
-      (e.target as HTMLFormElement).reset();
-    },
-    [query, router],
-  );
+  const cleanUp = useCallback(() => {
+    setQuery('');
+  }, []);
+
+  const onSubmit = useCallback(() => {
+    router.push(`/search?q=${query}`);
+    cleanUp();
+  }, [query, router, cleanUp]);
 
   return (
     <InstantSearch indexName={productsIndex}>
       <GoogleAnalyticsMiddleware />
-      <Configure hitsPerPage={5} />
-      <SearchBox
-        onFocus={onFocus}
-        onBlur={onBlur}
-        placeholder={`${formatMessage({ id: 'search.placeholder', defaultMessage: 'TYPE TO SEARCH' })}...`}
-        classNames={{
-          form: 'flex flex-row-reverse items-center gap-40 w-full quick-search',
-          input:
-            'placeholder:text-14 placeholder:text-secondary-black border-none grow focus:outline-none focus:border-accent-red',
-          submitIcon: 'stroke-secondary-black w-18 h-18',
-          reset: 'hidden',
-          loadingIndicator: 'hidden',
-        }}
-        onInput={onChange}
-        onSubmit={onSubmit}
-      />
-      {focused && (
-        <Hits
-          hitComponent={({ hit }) => <SearchItem hit={hit} onClick={onBlur} />}
+      <Configure enablePersonalization={!query} />
+
+      {focused && <Overlay />}
+
+      <div className="relative z-[300]">
+        <SearchBox
+          onFocus={onFocus}
+          onBlur={onBlur}
+          placeholder={`${formatMessage({ id: 'search.placeholder', defaultMessage: 'Type to search' })}...`}
           classNames={{
-            root: 'absolute left-0 w-full bottom-0 translate-y-full bg-white shadow-sm',
-            list: 'overflow-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-72 max-h-[60vh] py-36 px-20 lg:px-24 xl:px-64 md:px-32',
+            root: `relative z-50 bg-white border-neutral-400 lg:border ${
+              focused ? 'border-b' : 'border'
+            } lg:w-[calc(100%-24px)] mx-auto`,
+            form: 'relative flex items-stretch w-full quick-search',
+            input:
+              'placeholder:text-14 placeholder:text-secondary-black box-content border-none grow focus:outline-none transition p-0 px-12 py-10',
+            submit: `border-l transition border-neutral-400 px-16 py-10 shrink-0 ${
+              focused ? 'bg-primary-black' : 'bg-white'
+            }`,
+            submitIcon: `w-18 h-18 stroke-0 ${focused ? 'fill-white' : 'fill-secondary-black'}`,
+            reset: 'absolute right-[70px] top-1/2 -translate-y-1/2',
+            resetIcon: 'w-10 w-10 fill-primary-black',
+            loadingIndicator: 'hidden',
           }}
+          onInput={onChange}
+          onSubmit={onSubmit}
+          formRef={form}
         />
-      )}
+
+        <Transition
+          show={focused}
+          className="absolute bottom-0 left-0 max-h-[60vh] w-full translate-y-full overflow-auto bg-white px-20 py-28 lg:max-h-[unset] lg:translate-y-[calc(100%-56px)] lg:rounded-md lg:pt-84"
+          enter="transition duration-75"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="transition duration-150"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+        >
+          <div className="flex">
+            <Index indexName={productsQuerySuggestionsIndex}>
+              <Configure hitsPerPage={4} />
+              <Hits
+                hitComponent={({ hit }) => (
+                  <SearchSuggestion
+                    hit={hit as SearchSuggestionProps['hit']}
+                    categories={categories}
+                    onClick={cleanUp}
+                  />
+                )}
+                classNames={{
+                  root: 'flex-1',
+                  list: 'flex flex-col gap-30',
+                }}
+              />
+            </Index>
+            {isDesktop && (
+              <Index indexName={productsIndex}>
+                <Configure hitsPerPage={3} />
+                <Hits
+                  hitComponent={({ hit }) => <SearchItem hit={hit} categories={categories} onClick={cleanUp} />}
+                  classNames={{
+                    root: 'flex-1 border-l border-neutral-400 box-border pl-30',
+                    list: 'flex flex-col gap-30',
+                  }}
+                />
+              </Index>
+            )}
+          </div>
+        </Transition>
+      </div>
     </InstantSearch>
   );
 };
