@@ -1,13 +1,14 @@
 import Button from 'components/commercetools-ui/atoms/button';
 import PasswordInput from 'components/commercetools-ui/atoms/password-input';
 import { useFormat } from 'helpers/hooks/useFormat';
-import AccountForm from '../atoms/account-form';
-import useDiscardForm from '../useDiscardForm';
+import AccountForm from '../../../../account-atoms/account-form';
+import useDiscardForm from '../../../../useDiscardForm';
 
 const DeleteAccountForm = () => {
   const { discardForm } = useDiscardForm();
   const { formatMessage: formatCommonMessage } = useFormat({ name: 'common' });
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
+
   return (
     <AccountForm
       title={formatAccountMessage({ id: 'delete.your.account', defaultMessage: 'Delete your account' })}
@@ -22,12 +23,7 @@ const DeleteAccountForm = () => {
         <PasswordInput label="Password confirmation" required />
 
         <div className="mt-32 grid grid-cols-2 gap-12">
-          <Button
-            type="button"
-            variant="secondary"
-            className="h-40 w-full rounded-md border border-primary-black p-0"
-            onClick={discardForm}
-          >
+          <Button type="button" variant="ghost" className="h-40 w-full p-0" onClick={discardForm}>
             {formatCommonMessage({ id: 'cancel', defaultMessage: 'Cancel' })}
           </Button>
           <Button type="submit" className="h-40 w-full bg-accent-red px-0 text-14">

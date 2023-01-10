@@ -131,15 +131,15 @@ const Register: React.FC<RegisterProps> = ({ termsOfUseLink }) => {
             onChange={handleChange}
           />
 
-          <div className="mb-20 flex gap-8">
-            <Checkbox className="h-16 w-16 rounded-sm" id="agree-on-terms" name="agree-on-terms" type="checkbox" />
-            <Typography fontSize={12} className="text-secondary-black md:text-14" as="label">
-              {formatMessage({
-                id: 'receive.emails',
-                defaultMessage: 'I wish to receive emails about special offers, new products and promotions.',
-              })}
-            </Typography>
-          </div>
+          <Checkbox
+            id="agree-on-terms"
+            name="agree-on-terms"
+            containerClassName="mb-20"
+            label={formatMessage({
+              id: 'receive.emails',
+              defaultMessage: 'I wish to receive emails about special offers, new products and promotions.',
+            })}
+          />
 
           <Button size="full" type="submit" className="mb-16 text-16 leading-tight md:mb-20" disabled={loading}>
             {formatAccountMessage({ id: 'account.register', defaultMessage: 'Register' })}

@@ -8,6 +8,7 @@ import useHash from 'helpers/hooks/useHash';
 import useI18n from 'helpers/hooks/useI18n';
 import { Reference } from 'types/reference';
 import { useAccount, useCart } from 'frontastic';
+import AddressForm from './sections/addresses/address-form';
 import {
   MyAccountSection,
   OrdersHistorySection,
@@ -51,7 +52,7 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
   const { account, logout } = useAccount();
   const { updateCart } = useCart();
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
-  const hash = useHash();
+  const [hash, id] = useHash();
   const { country } = useI18n();
 
   //update associated cart data using account data
@@ -70,7 +71,7 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
         billing: billingAddress,
       });
     }
-  }, [account, country, updateCart]);
+  }, [account, country, router, updateCart]);
 
   const handleLogout = () => {
     logout().then(() => router.push('login'));
@@ -93,6 +94,7 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
     '#orders': <OrdersHistorySection />,
     '#payment': <PaymentMethodsSection />,
     '#addresses': <AddressesSection />,
+    '#edit-address': <AddressForm editedAddressId={id} />,
     '#support': (
       <CustomerSupportSection
         phoneNumber={phoneNumber}

@@ -1,5 +1,5 @@
 import { useFormat } from 'helpers/hooks/useFormat';
-import InfoCard, { InfoField } from '../atoms/info-card';
+import InfoCard, { InfoField } from '../../../../account-atoms/info-card';
 
 const Newsletter = () => {
   const { formatMessage } = useFormat({ name: 'account' });

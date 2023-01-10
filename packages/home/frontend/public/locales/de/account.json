@@ -76,5 +76,8 @@
   "subscribe.update": "Abonnement aktualisieren",
   "integrity": "Integrität",
   "personal.info": "Persönliche Informationen",
-  "personal.info.edit": "Bearbeiten Sie persönliche Informationen"
+  "personal.info.edit": "Bearbeiten Sie persönliche Informationen",
+  "delete.address": "Adresse löschen",
+  "action.warning": "Diese Aktion kann nicht rückgängig gemacht werden.",
+  "address.deleted": "Adresse erfolgreich gelöscht"
 }

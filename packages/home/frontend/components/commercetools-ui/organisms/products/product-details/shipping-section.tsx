@@ -7,7 +7,7 @@ import Typography from 'components/commercetools-ui/atoms/typography';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart } from 'frontastic';
-import { clearSpaces, getEstimationPhrase, isValidPostalCode } from './helpers';
+import { clearSpaces, getEstimationPhrase } from './helpers';
 
 type Error = {
   message: string;
@@ -37,8 +37,6 @@ const ShippingSection = () => {
   const handleInput = (e: React.FormEvent) => {
     const displayedValue = (e.target as HTMLInputElement).value;
     let value = clearSpaces(displayedValue);
-
-    if (!isValidPostalCode(value)) return;
 
     if (value.length > 3) {
       value = `${value.slice(0, 3)} ${value.slice(3, value.length)}`;

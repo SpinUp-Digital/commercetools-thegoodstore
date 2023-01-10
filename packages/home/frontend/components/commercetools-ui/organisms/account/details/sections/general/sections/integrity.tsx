@@ -1,7 +1,7 @@
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { useFormat } from 'helpers/hooks/useFormat';
-import InfoCard, { InfoField } from '../atoms/info-card';
+import InfoCard, { InfoField } from '../../../../account-atoms/info-card';
 
 const Integrity = () => {
   const { formatMessage } = useFormat({ name: 'account' });

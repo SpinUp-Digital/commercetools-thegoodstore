@@ -41,7 +41,7 @@ const HeaderNavigationMobile: FC<Props> = ({ links, logo, logoLink }) => {
   return (
     <div className="flex border border-neutral-400 md:w-109 lg:hidden">
       <Button
-        variant="secondary"
+        variant="ghost"
         size="icon"
         onClick={showHeaderMenu}
         title={formatMessage({ id: 'header.menu.open', defaultMessage: 'Open side menu' })}

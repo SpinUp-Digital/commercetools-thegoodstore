@@ -42,7 +42,7 @@ const AlterForm: FC<AlterFormProps> = ({ page }) => {
           {title}
         </Typography>
         <Button
-          className="mt-16 h-32 border border-secondary-black py-0 font-medium hover:border-[1.5px] md:mt-24 md:h-40 md:text-16"
+          className="mt-16 h-32 py-0 font-medium  md:mt-24 md:h-40 md:text-16"
           variant="secondary"
           onClick={handleClick}
         >

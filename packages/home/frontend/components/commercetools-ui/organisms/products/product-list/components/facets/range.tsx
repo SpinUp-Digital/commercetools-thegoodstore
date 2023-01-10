@@ -181,14 +181,12 @@ const RangeFacet: React.FC<FacetProps> = ({ attribute }) => {
             {CurrencyHelpers.formatForCurrency(max * 100, router?.locale, currency)}
           </div>
           <div className="flex items-center gap-12">
-            <span className="text-14 text-secondary-black">{refinements}</span>
-            <div className="w-fit rounded-sm border border-neutral-500 transition hover:border-secondary-black">
-              <Checkbox
-                checked={appliedOptions.includes(index)}
-                className="border-none opacity-30"
-                onChange={(e) => handleRangeOptionChange(index, e.target.checked)}
-              />
-            </div>
+            <Checkbox
+              checked={appliedOptions.includes(index)}
+              onChange={(e) => handleRangeOptionChange(index, e.target.checked)}
+              label={refinements?.toString()}
+              labelPosition="on-left"
+            />
           </div>
         </div>
       )),

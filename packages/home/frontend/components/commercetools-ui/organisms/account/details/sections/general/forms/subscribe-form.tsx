@@ -1,7 +1,7 @@
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { useFormat } from 'helpers/hooks/useFormat';
-import AccountForm from '../atoms/account-form';
-import useDiscardForm from '../useDiscardForm';
+import AccountForm from '../../../../account-atoms/account-form';
+import useDiscardForm from '../../../../useDiscardForm';
 
 const SubscribeForm = () => {
   const { discardForm } = useDiscardForm();

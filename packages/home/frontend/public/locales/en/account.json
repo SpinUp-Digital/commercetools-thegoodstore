@@ -75,5 +75,8 @@
   "subscribe.update": "Update Subscription",
   "integrity": "Integrity",
   "personal.info": "Personal information",
-  "personal.info.edit": "Edit personal information"
+  "personal.info.edit": "Edit personal information",
+  "delete.address": "Delete address",
+  "action.warning": "This action can not be undone.",
+  "address.deleted": "Address deleted successfully"
 }

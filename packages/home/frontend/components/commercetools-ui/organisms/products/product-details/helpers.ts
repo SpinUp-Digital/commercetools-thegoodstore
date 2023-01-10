@@ -1,6 +1,5 @@
 import moment from 'moment';
 
-export const isValidPostalCode = (value: string) => Number.isInteger(Number(value)) && value.length <= 5;
 export const clearSpaces = (value: string) => value.split(' ').join('');
 
 export const getEstimationPhrase = (days: number) => {
