@@ -15,8 +15,8 @@ const useI18n = () => {
 
   const currency = useMemo(() => {
     const map = {
-      de: 'eur',
-      en: 'sterling',
+      de: 'EUR',
+      en: 'GBP',
     };
 
     return map[router?.locale as keyof typeof map];
@@ -24,8 +24,8 @@ const useI18n = () => {
 
   const currencySymbol = useMemo(() => {
     const map = {
-      eur: '€',
-      sterling: '£',
+      EUR: '€',
+      GBP: '£',
     };
 
     return map[currency as keyof typeof map];

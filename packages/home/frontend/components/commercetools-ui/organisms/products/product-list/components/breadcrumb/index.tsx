@@ -49,12 +49,12 @@ const Breadcrumbs: React.FC<Props> = ({ categoryId, categories }) => {
           </Link>
         )}
       </Breadcrumb>
-      <h1 className="mt-20 text-28 leading-[35px]">{currentCategory.name}</h1>
+      <h1 className="mt-20 text-22 leading-[35px] md:text-26 lg:text-28">{currentCategory.name}</h1>
       {subCategories?.length > 0 && (
         <Breadcrumb className="mt-32">
           <Link
             link={currentCategory.path}
-            className="mr-8 rounded-md border border-gray-700 bg-gray-700 py-8 px-16 text-12 leading-[16px] text-white"
+            className="mr-8 rounded-md border border-gray-700 bg-gray-700 py-8 px-16 text-12 leading-[16px] text-white lg:text-16"
           >
             {formatProductMessage({ id: 'items.all', defaultMessage: 'All items' })}
           </Link>
@@ -62,7 +62,7 @@ const Breadcrumbs: React.FC<Props> = ({ categoryId, categories }) => {
             <Link
               key={category.categoryId}
               link={category.path}
-              className="mr-8 rounded-md border border-gray-700 bg-transparent py-8 px-16 text-12 leading-[16px] text-primary-black transition hover:bg-gray-700 hover:text-white"
+              className="mr-8 rounded-md border border-gray-700 bg-transparent py-8 px-16 text-12 leading-[16px] text-primary-black transition hover:bg-gray-700 hover:text-white lg:text-16"
             >
               {category.name}
             </Link>

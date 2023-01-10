@@ -7,6 +7,8 @@ import { ProductListContextShape, RefinementRemovedEvent } from './types';
 
 export const ProductListContext = createContext<ProductListContextShape>({
   pricesConfiguration: {},
+  numericRanges: {},
+  updateNumericRange() {},
   updatePricesConfiguration() {},
   removeRefinement() {},
   removeAllRefinements() {},
@@ -14,17 +16,34 @@ export const ProductListContext = createContext<ProductListContextShape>({
 
 const ProductListProvider: React.FC = ({ children }) => {
   const [pricesConfiguration, setPricesConfiguration] = useState<Record<string, PriceConfiguration>>({});
+  const [numericRanges, setNumericRanges] = useState<Record<string, [number, number]>>({});
 
-  const { refine } = useCurrentRefinements();
+  const { items, refine } = useCurrentRefinements();
   const { refine: clearAllRefinements } = useClearRefinements();
 
   const updatePricesConfiguration = useCallback((newPricesConfiguration: Record<string, PriceConfiguration>) => {
     setPricesConfiguration(newPricesConfiguration);
   }, []);
 
+  const updateNumericRange = useCallback((attribute: string, range: [number, number]) => {
+    setNumericRanges((numericRanges) => ({ ...numericRanges, [attribute]: range }));
+  }, []);
+
+  const removeNumericRefinement = useCallback(
+    (refinement: CurrentRefinementsConnectorParamsRefinement) => {
+      items.forEach((item) => {
+        item.refinements.forEach((r) => {
+          if (r.attribute === refinement.attribute) refine(r);
+        });
+      });
+    },
+    [items, refine],
+  );
+
   const removeRefinement = useCallback(
     (refinement: CurrentRefinementsConnectorParamsRefinement) => {
-      refine(refinement);
+      if (refinement.type === 'numeric') removeNumericRefinement(refinement);
+      else refine(refinement);
 
       window.dispatchEvent(
         new CustomEvent<RefinementRemovedEvent>(refinementRemovedEventName, {
@@ -32,7 +51,7 @@ const ProductListProvider: React.FC = ({ children }) => {
         }),
       );
     },
-    [refine],
+    [refine, removeNumericRefinement],
   );
 
   const removeAllRefinements = useCallback(() => {
@@ -44,11 +63,20 @@ const ProductListProvider: React.FC = ({ children }) => {
   const value = useMemo(
     () => ({
       pricesConfiguration,
+      numericRanges,
+      updateNumericRange,
       updatePricesConfiguration,
       removeRefinement,
       removeAllRefinements,
     }),
-    [pricesConfiguration, updatePricesConfiguration, removeRefinement, removeAllRefinements],
+    [
+      pricesConfiguration,
+      numericRanges,
+      updateNumericRange,
+      updatePricesConfiguration,
+      removeRefinement,
+      removeAllRefinements,
+    ],
   );
 
   return <ProductListContext.Provider value={value}>{children}</ProductListContext.Provider>;

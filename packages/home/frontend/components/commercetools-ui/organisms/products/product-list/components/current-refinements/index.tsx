@@ -1,48 +1,79 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
+import { useRouter } from 'next/router';
 import { XMarkIcon as CloseIcon } from '@heroicons/react/24/solid';
 import { CurrentRefinementsConnectorParamsRefinement } from 'instantsearch.js/es/connectors/current-refinements/connectCurrentRefinements';
 import { useCurrentRefinements } from 'react-instantsearch-hooks';
+import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
+import useI18n from 'helpers/hooks/useI18n';
 import { useProductList } from '../../context';
 
 const CurrentRefinements = () => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
-  const { removeRefinement, removeAllRefinements } = useProductList();
+  const router = useRouter();
+
+  const { numericRanges, removeRefinement, removeAllRefinements } = useProductList();
+
+  const { currency } = useI18n();
 
   const { items } = useCurrentRefinements();
 
-  const refinementsApplied = useMemo(() => items.length, [items]);
+  const nonNumericRefinements = useMemo(
+    () => items.map((item) => item.refinements.filter((refinement) => refinement.type !== 'numeric')).flat(),
+    [items],
+  );
 
-  const getRefinementLabel = useCallback((refinement: CurrentRefinementsConnectorParamsRefinement) => {
-    if (refinement.type === 'numeric') return `${refinement.operator} ${(refinement.value as number) / 100}`;
-    return refinement.label;
-  }, []);
+  const numericRefinements = useMemo(() => {
+    const refinements = items
+      .map((item) => item.refinements.filter((refinement) => refinement.type === 'numeric'))
+      .flat();
 
-  if (!refinementsApplied) return <></>;
+    const refinementsMap = refinements.reduce<Record<string, [number, number]>>(
+      (acc, curr) => ({
+        ...acc,
+        [curr.attribute]: [
+          curr.operator?.includes('>') ? +curr.value : acc[curr.attribute]?.[0] ?? numericRanges[curr.attribute]?.[0],
+          curr.operator?.includes('<') ? +curr.value : acc[curr.attribute]?.[1] ?? numericRanges[curr.attribute]?.[1],
+        ],
+      }),
+      {},
+    );
+
+    const finalRefinements = Object.entries(refinementsMap).map<CurrentRefinementsConnectorParamsRefinement>(
+      ([attribute, range]) =>
+        ({
+          type: 'numeric',
+          attribute,
+          label: `${CurrencyHelpers.formatForCurrency(
+            range[0],
+            router?.locale,
+            currency,
+          )} - ${CurrencyHelpers.formatForCurrency(range[1], router?.locale, currency)}`,
+        } as CurrentRefinementsConnectorParamsRefinement),
+    );
+
+    return finalRefinements;
+  }, [items, numericRanges, currency, router?.locale]);
+
+  if (!nonNumericRefinements.length && !numericRefinements.length) return <></>;
 
   return (
     <div className="flex flex-wrap items-center justify-start gap-14 pt-16">
-      {items
-        .map((item) => {
-          return item.refinements.map((refinement) => (
-            <div
-              key={refinement.label}
-              className="flex items-center justify-center gap-8 rounded-md border border-neutral-500 bg-white p-8"
-            >
-              <span className="text-14 text-secondary-black">{getRefinementLabel(refinement)}</span>
-              <CloseIcon
-                className="w-20 cursor-pointer fill-secondary-black stroke-0"
-                onClick={() => removeRefinement(refinement)}
-              />
-            </div>
-          ));
-        })
-        .flat()}
-      <div className="flex items-center justify-center gap-8 rounded-md border-neutral-500 bg-white p-8">
-        <span className="text-14 text-secondary-black">
-          {formatProductMessage({ id: 'clear.all', defaultMessage: 'Clear All' })}
-        </span>
+      {[...numericRefinements, ...nonNumericRefinements].map((refinement) => (
+        <div
+          key={refinement.label}
+          className="flex cursor-default items-center justify-center gap-8 rounded-md border border-neutral-500 bg-white px-8 py-6 transition hover:border-primary-black"
+        >
+          <span className="text-14 leading-[20px] text-secondary-black">{refinement.label}</span>
+          <CloseIcon
+            className="w-20 cursor-pointer fill-secondary-black stroke-0"
+            onClick={() => removeRefinement(refinement)}
+          />
+        </div>
+      ))}
+      <div className="flex cursor-default items-center justify-center gap-8 rounded-md border border-transparent bg-white py-6 px-8 transition hover:border-primary-black">
+        <span className="text-14">{formatProductMessage({ id: 'clear.all', defaultMessage: 'Clear All' })}</span>
         <CloseIcon className="w-20 cursor-pointer fill-secondary-black stroke-0" onClick={removeAllRefinements} />
       </div>
     </div>

@@ -7,7 +7,9 @@ export interface RefinementRemovedEvent {
 
 export interface ProductListContextShape {
   pricesConfiguration: Record<string, PriceConfiguration>;
+  numericRanges: Record<string, [number, number]>;
+  updateNumericRange: (attribute: string, range: [number, number]) => void;
   updatePricesConfiguration: (newPricesConfiguration: Record<string, PriceConfiguration>) => void;
-  removeRefinement: (efinement: CurrentRefinementsConnectorParamsRefinement) => void;
+  removeRefinement: (refinement: CurrentRefinementsConnectorParamsRefinement) => void;
   removeAllRefinements: () => void;
 }
