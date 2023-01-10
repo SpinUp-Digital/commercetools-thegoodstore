@@ -6,15 +6,13 @@ import Image, { NextFrontasticImage } from 'frontastic/lib/image';
 export interface Props {
   logo: NextFrontasticImage;
   logoLink: Reference;
+  imageClassName?: string;
 }
 
-const HeaderLogo: FC<Props> = ({ logoLink, logo }) => {
+const HeaderLogo: FC<Props> = ({ logoLink, logo, imageClassName }) => {
   return (
     <div className="relative px-10 md:mt-0">
-      <Link
-        className="flex h-95 w-125 justify-center text-center text-16 font-bold md:h-76 md:w-214 md:text-28"
-        link={logoLink}
-      >
+      <Link className={imageClassName} link={logoLink}>
         <Image media={logo.media} layout="fill" objectFit="contain" alt={logo.title} />
       </Link>
     </div>

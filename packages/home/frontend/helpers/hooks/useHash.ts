@@ -14,8 +14,8 @@ const useHash = () => {
   }, []);
 
   useEffect(() => {
-    window.addEventListener('hashchange', updateWindowHash);
-    return () => window.removeEventListener('hashchange', updateWindowHash);
+    router.events.on('hashChangeComplete', updateWindowHash);
+    return () => router.events.off('hashChangeComplete', updateWindowHash);
   }, [updateWindowHash, router.events]);
 
   return hash;

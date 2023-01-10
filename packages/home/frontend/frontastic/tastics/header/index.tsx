@@ -43,6 +43,8 @@ const HeaderTastic = ({ data, categories }: Props) => {
           categories={categories}
           logo={data.logo}
           logoLink={data.logoLink}
+          logoMobile={data.logoMobile}
+          logoLinkMobile={data.logoLinkMobile}
           tiles={data.tiles}
           emptyCartTitle={data.emptyCartTitle}
           emptyCartSubtitle={data.emptyCartSubtitle}

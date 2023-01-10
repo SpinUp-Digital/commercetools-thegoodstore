@@ -11,7 +11,9 @@ import { Category } from 'types/category';
 const Header: React.FC<HeaderProps> = ({
   categories,
   logo,
+  logoMobile,
   logoLink,
+  logoLinkMobile,
   tiles,
   emptyCartTitle,
   emptyCartSubtitle,
@@ -53,9 +55,13 @@ const Header: React.FC<HeaderProps> = ({
       <div aria-label="Top" className="mx-5 flex h-60 items-center justify-between md:mx-22 md:h-80 lg:mx-10 xl:mx-50">
         <MarketButton />
 
-        <HeaderNavigationMobile links={links} />
+        <HeaderNavigationMobile logo={logoMobile} links={links} logoLink={logoLinkMobile} />
 
-        <HeaderLogo logo={logo} logoLink={logoLink} />
+        <HeaderLogo
+          logo={logo}
+          logoLink={logoLink}
+          imageClassName="flex h-95 w-200 justify-center text-center text-16 font-bold md:h-76 md:w-214 md:text-28"
+        />
 
         <UtilitySection
           emptyCartTitle={emptyCartTitle}

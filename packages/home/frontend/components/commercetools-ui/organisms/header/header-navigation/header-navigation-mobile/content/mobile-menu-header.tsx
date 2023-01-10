@@ -1,0 +1,57 @@
+import React, { FC } from 'react';
+import { ChevronLeftIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import Button from 'components/commercetools-ui/atoms/button';
+import Typography from 'components/commercetools-ui/atoms/typography';
+import HeaderLogo from 'components/commercetools-ui/organisms/header/header-logo';
+import { useFormat } from 'helpers/hooks/useFormat';
+import { Category } from 'types/category';
+import { Reference } from 'types/reference';
+import { NextFrontasticImage } from 'frontastic/lib/image';
+
+export interface Props {
+  logo: NextFrontasticImage;
+  logoLink: Reference;
+  categories: Category[];
+  onArrowClick: () => void;
+  hideHeaderMenu: () => void;
+}
+
+const MobileMenuHeader: FC<Props> = ({ onArrowClick, logo, logoLink, hideHeaderMenu, categories }) => {
+  const { formatMessage } = useFormat({ name: 'common' });
+  return (
+    <div className="flex h-52 w-full justify-between border-b border-neutral-400 px-20">
+      {categories.length > 0 && (
+        <div className="flex h-full items-center justify-start">
+          <Button variant="ghost" onClick={onArrowClick} className="px-0">
+            <ChevronLeftIcon className="w-20 text-secondary-black" />
+          </Button>
+        </div>
+      )}
+      {categories.length <= 0 ? (
+        <HeaderLogo
+          logo={logo}
+          logoLink={logoLink}
+          imageClassName="flex h-95 w-160 justify-center text-center text-16 font-bold md:text-28"
+        />
+      ) : (
+        <div className="flex w-full items-center justify-center whitespace-nowrap">
+          <Typography align="center" medium fontSize={16}>
+            {categories[categories.length - 1].name}
+          </Typography>
+        </div>
+      )}
+      <div className="flex h-full items-center justify-end">
+        <Button
+          variant="ghost"
+          onClick={hideHeaderMenu}
+          title={formatMessage({ id: 'close', defaultMessage: 'Close' })}
+          className="px-0"
+        >
+          <XMarkIcon className="w-24 text-secondary-black" />
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+export default MobileMenuHeader;

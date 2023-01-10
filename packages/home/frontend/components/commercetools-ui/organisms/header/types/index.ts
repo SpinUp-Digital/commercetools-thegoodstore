@@ -27,7 +27,9 @@ export interface Tile {
 export interface HeaderProps {
   categories: Category[];
   logo: NextFrontasticImage;
+  logoMobile: NextFrontasticImage;
   logoLink: Reference;
+  logoLinkMobile: Reference;
   tiles?: Tile[];
   emptyCartTitle: string;
   emptyCartSubtitle: string;

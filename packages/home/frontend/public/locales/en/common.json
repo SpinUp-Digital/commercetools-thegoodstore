@@ -64,5 +64,6 @@
   "meta.desc": "Find largest home collections here!",
   "header.menu.open": "Open side menu",
   "select.country": "Select your country",
-  "select.market": "Select your market"
+  "select.market": "Select your market",
+  "help.and.support":"Help & Customer Service"
 }

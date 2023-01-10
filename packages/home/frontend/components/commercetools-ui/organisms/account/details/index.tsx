@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Button from 'components/commercetools-ui/atoms/button';
+import Link from 'components/commercetools-ui/atoms/link';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useHash from 'helpers/hooks/useHash';
@@ -114,7 +115,7 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
         <div className="hidden h-full flex-col justify-between border-r border-neutral-400  pt-24 md:flex xl:pt-36">
           <div className="grid gap-36 px-24">
             {tabs.map((tab) => (
-              <a key={tab.name} href={tab.href} className="whitespace-nowrap">
+              <Link link={tab.href} key={tab.name} className="whitespace-nowrap">
                 <Typography
                   className={`hover:underline ${tab.href === hash ? 'text-primary-black' : 'text-secondary-black'}`}
                   fontSize={16}
@@ -122,7 +123,7 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
                 >
                   {tab.name}
                 </Typography>
-              </a>
+              </Link>
             ))}
           </div>
           <div className="p-16">
