@@ -88,7 +88,7 @@ const Cart: FC<Props> = ({ emptyStateImage, emptyStateTitle, emptyStateSubtitle,
     <>
       {isEmpty ? (
         <EmptyState
-          className="grow bg-neutral-200"
+          className="grow"
           categories={emptyStateCategories}
           image={emptyStateImage}
           title={emptyStateTitle}

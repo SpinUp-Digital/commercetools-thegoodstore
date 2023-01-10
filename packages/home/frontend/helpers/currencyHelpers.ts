@@ -3,23 +3,33 @@ import { Log } from './errorLogger';
 import { StringHelpers } from './stringHelpers';
 
 export class CurrencyHelpers {
-  private static formatNumberForCurrency = function (costInCents: number, locale?: string) {
+  private static formatNumberForCurrency = function (
+    costInCents: number,
+    locale?: string,
+    currencyCode = 'EUR',
+    fractionDigits = 0,
+  ) {
     return CurrencyHelpers.formatMoneyCurrency(
       {
         centAmount: costInCents,
-        currencyCode: 'EUR',
-        fractionDigits: 2,
+        currencyCode: currencyCode,
+        fractionDigits: fractionDigits,
       },
       locale,
     );
   };
 
-  private static formatStringForCurrency = function (costInCents: string, locale?: string) {
+  private static formatStringForCurrency = function (
+    costInCents: string,
+    locale?: string,
+    currencyCode = 'EUR',
+    fractionDigits = 0,
+  ) {
     if (!StringHelpers.isNumeric(costInCents)) {
       Log.error(new Error(`Value (${costInCents}) passed for currency formatting cannot be parsed to a number`));
       return '';
     }
-    return CurrencyHelpers.formatNumberForCurrency(parseInt(costInCents, 10), locale);
+    return CurrencyHelpers.formatNumberForCurrency(parseInt(costInCents, 10), locale, currencyCode, fractionDigits);
   };
 
   private static getLocaleFromShortenedLocale = function (locale: string) {
@@ -35,8 +45,8 @@ export class CurrencyHelpers {
     return Intl.NumberFormat(CurrencyHelpers.getLocaleFromShortenedLocale(locale as string), {
       style: 'currency',
       currency: price?.currencyCode ?? 'EUR',
-      maximumFractionDigits: price?.fractionDigits ?? 2,
-      minimumFractionDigits: price?.fractionDigits ?? 2,
+      maximumFractionDigits: price?.fractionDigits ?? 0,
+      minimumFractionDigits: price?.fractionDigits ?? 0,
     }).format((price?.centAmount ?? 0) / 100);
   };
 
@@ -44,11 +54,16 @@ export class CurrencyHelpers {
    * formatForCurrency formats a string of number into a cost representation. If
    * passing a string it must be numeric only.
    */
-  static formatForCurrency = (costInCents: string | number | Money, locale?: string) =>
+  static formatForCurrency = (
+    costInCents: string | number | Money,
+    locale?: string,
+    currencyCode = 'EUR',
+    fractionDigits = 0,
+  ) =>
     typeof costInCents === 'string'
-      ? CurrencyHelpers.formatStringForCurrency(costInCents, locale)
+      ? CurrencyHelpers.formatStringForCurrency(costInCents, locale, currencyCode, fractionDigits)
       : typeof costInCents === 'number'
-      ? CurrencyHelpers.formatNumberForCurrency(costInCents, locale)
+      ? CurrencyHelpers.formatNumberForCurrency(costInCents, locale, currencyCode, fractionDigits)
       : CurrencyHelpers.formatMoneyCurrency(costInCents, locale);
 
   static addCurrency: (value1?: Money, value2?: Money) => Money = (value1?: Money, value2?: Money) => {

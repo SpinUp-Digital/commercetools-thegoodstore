@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { CheckIcon } from '@heroicons/react/24/outline';
 import useClassNames from 'helpers/hooks/useClassNames';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
@@ -23,6 +23,10 @@ const Checkbox: React.FC<Props> = ({
   const [isChecked, setIsChecked] = useState(checked ?? false);
 
   const [isDesktopSize] = useMediaQuery(desktop);
+
+  useEffect(() => {
+    if (typeof checked !== 'undefined') setIsChecked(checked);
+  }, [checked]);
 
   const handleContainerClick = () => {
     if (!isDesktopSize) setIsChecked(!isChecked);
