@@ -71,7 +71,7 @@ const Orders = () => {
   const orderHistoryContent = useMemo(() => {
     if (selectedTab === 'allOrders') return orders;
     else return orders.filter((order) => order.status === selectedTab);
-  }, [orders, selectedTab]);
+  }, [selectedTab]);
 
   return (
     <>

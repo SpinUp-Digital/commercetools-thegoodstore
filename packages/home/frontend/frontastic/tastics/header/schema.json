@@ -42,6 +42,24 @@
 			]
 		},
 		{
+			"name": "Header Menu Mobile",
+			"fields": [
+				{
+					"label": "Logo mobile view",
+					"field": "logoMobile",
+					"type": "media",
+					"required": true,
+					"options": {}
+				},
+				{
+					"label": "Logo link mobile view",
+					"field": "logoLinkMobile",
+					"type": "reference",
+					"required": true
+				}
+			]
+		},
+		{
 			"name": "Utility Links",
 			"fields": [
 				{

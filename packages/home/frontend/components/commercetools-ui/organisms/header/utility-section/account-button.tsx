@@ -11,9 +11,9 @@ const AccountButton = () => {
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
   const userName = useMemo(() => {
     return `${account?.salutation ?? formatAccountMessage({ id: 'hello', defaultMessage: 'Hi, ' })} ${
-      account?.firstName
+      account?.firstName ?? formatAccountMessage({ id: 'user', defaultMessage: 'User' })
     }`;
-  }, [account?.firstName, formatAccountMessage]);
+  }, [account?.firstName, account?.salutation, formatAccountMessage]);
 
   return (
     <Popover className="relative mx-5 lg:mx-10">
