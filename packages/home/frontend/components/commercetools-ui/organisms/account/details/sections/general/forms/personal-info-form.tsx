@@ -1,19 +1,20 @@
 import { useState } from 'react';
 import { Account } from '@commercetools/frontend-domain-types/account/Account';
-import toast from 'react-hot-toast';
 import Input, { InputProps } from 'components/commercetools-ui/atoms/input';
+import useFeedbackToasts from 'components/commercetools-ui/organisms/account/hooks/useFeedbackToasts';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useValidate from 'helpers/hooks/useValidate';
 import { useAccount } from 'frontastic';
-import AccountForm from '../atoms/account-form';
-import useDiscardForm from '../useDiscardForm';
+import AccountForm from '../../../../account-atoms/account-form';
+import useDiscardForm from '../../../../useDiscardForm';
 
 const PersonalInfoForm = () => {
   const { account, update } = useAccount();
   const { discardForm } = useDiscardForm();
   const [data, setData] = useState<Account>(account as Account);
 
-  const { validateEmail, validateName } = useValidate();
+  const { validateEmail, validateTextExists } = useValidate();
+  const { notifyDataUpdated, notifyWentWrong } = useFeedbackToasts();
 
   const { formatMessage: formatErrorMessage } = useFormat({ name: 'error' });
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
@@ -31,18 +32,14 @@ const PersonalInfoForm = () => {
 
   const handleSubmit = () => {
     update(data)
-      .then(() => {
-        toast.success(formatAccountMessage({ id: 'data.updated', defaultMessage: 'Data updated successfully.' }));
-      })
-      .catch(() => {
-        toast.error(formatErrorMessage({ id: 'wentWrong', defaultMessage: 'Sorry, something went wrong..' }));
-      });
+      .then(() => notifyDataUpdated())
+      .catch(() => notifyWentWrong());
 
     discardForm();
   };
 
   const inputFields: Array<InputProps> = [
-    { label: 'Name', name: 'firstName', errorMessage: invalidNameErrorMessage, validation: validateName },
+    { label: 'Name', name: 'firstName', errorMessage: invalidNameErrorMessage, validation: validateTextExists },
     { label: 'Email', name: 'email', errorMessage: invalidEmailErrorMessage, validation: validateEmail },
   ];
 
@@ -59,7 +56,7 @@ const PersonalInfoForm = () => {
             key={index}
             {...fieldProps}
             onChange={handleChange}
-            value={data[fieldProps.name as 'firstName' | 'email']}
+            value={data?.[fieldProps.name as 'firstName' | 'email'] ?? ''}
             required
           />
         ))}

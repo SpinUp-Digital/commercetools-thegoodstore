@@ -3,12 +3,13 @@ import ReactModal, { Props as ReactModalProps } from 'react-modal';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import { desktop } from 'helpers/utils/screensizes';
 
-const Modal: FC<ReactModalProps> = ({ children, ...props }) => {
+const Modal: FC<ReactModalProps> = ({ children, style, ...props }) => {
   const [isDesktopSize] = useMediaQuery(desktop);
 
   const modalStyle: ReactModalProps['style'] = {
     overlay: {
       zIndex: 51,
+      ...style?.overlay,
     },
     content: {
       top: '50%',
@@ -20,6 +21,7 @@ const Modal: FC<ReactModalProps> = ({ children, ...props }) => {
       maxWidth: isDesktopSize ? 800 : 650,
       position: 'relative',
       padding: 0,
+      ...style?.content,
     },
   };
 
@@ -28,7 +30,7 @@ const Modal: FC<ReactModalProps> = ({ children, ...props }) => {
   }, [props.isOpen]);
 
   return (
-    <ReactModal style={modalStyle} {...props}>
+    <ReactModal {...props} style={modalStyle}>
       {children}
     </ReactModal>
   );

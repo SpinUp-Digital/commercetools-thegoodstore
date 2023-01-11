@@ -1,7 +1,8 @@
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
+import Link from 'components/commercetools-ui/atoms/link';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { useFormat } from 'helpers/hooks/useFormat';
-import InfoCard, { InfoField } from '../atoms/info-card';
+import InfoCard, { InfoField } from '../../../../account-atoms/info-card';
 
 const Integrity = () => {
   const { formatMessage } = useFormat({ name: 'account' });
@@ -21,7 +22,7 @@ const Integrity = () => {
   return (
     <InfoCard title={formatMessage({ id: 'integrity', defaultMessage: 'Integrity' })} clearPadding cardClassName="grid">
       {integrityButtons.map(({ label, value }, index) => (
-        <a key={index} href={value} className="hover:cursor-pointer">
+        <Link key={index} link={value} className="hover:cursor-pointer">
           <div className="flex items-center justify-between pr-32 md:pr-36">
             <Typography fontSize={14} medium className="py-24 pl-16 pr-32 text-primary-black md:pl-24">
               {label}
@@ -31,7 +32,7 @@ const Integrity = () => {
           </div>
 
           {index === 0 && <hr />}
-        </a>
+        </Link>
       ))}
     </InfoCard>
   );

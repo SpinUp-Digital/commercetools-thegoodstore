@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 const useValidate = () => {
-  const validateName = useCallback((name: string) => name.length >= 2, []);
+  const validateTextExists = useCallback((name: string) => name.length >= 1, []);
 
   const validatePassword = useCallback((password: string) => {
     const passwordRules = new RegExp('((?=.{8,})(?=.*[A-Z]))');
@@ -14,7 +14,9 @@ const useValidate = () => {
     return emailRules.test(email);
   }, []);
 
-  return { validatePassword, validateEmail, validateName };
+  const validatePostalCode = useCallback((value: string) => Number.isInteger(Number(value)) && value.length === 5, []);
+
+  return { validatePassword, validateEmail, validateTextExists, validatePostalCode };
 };
 
 export default useValidate;

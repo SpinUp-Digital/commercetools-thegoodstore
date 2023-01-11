@@ -179,15 +179,11 @@ const Login: React.FC<LoginProps> = ({ signInLink, accountLink }) => {
           ) : (
             <div className="mb-30 flex items-center justify-between">
               <Checkbox
-                className="cursor-pointer rounded-sm"
                 id="remember-me"
                 name="rememberMe"
                 onChange={handleCheckboxChange}
-              >
-                <Typography fontSize={12} className="text-secondary-black md:text-14" as="label">
-                  {formatMessage({ id: 'rememberMe', defaultMessage: 'Remember me' })}
-                </Typography>
-              </Checkbox>
+                label={formatMessage({ id: 'rememberMe', defaultMessage: 'Remember me' })}
+              />
 
               <Typography
                 className="cursor-pointer text-secondary-black hover:underline md:text-14"

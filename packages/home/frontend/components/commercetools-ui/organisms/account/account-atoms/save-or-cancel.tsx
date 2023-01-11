@@ -18,7 +18,7 @@ const SaveOrCancel: FC<SaveOrCancelProps> = ({ className, onSave, onCancel }) =>
       <Button
         type="button"
         variant="secondary"
-        className="h-40 w-112 rounded-md border border-primary-black p-0"
+        className="flex h-40 w-112 items-center justify-center p-0"
         onClick={onCancel}
       >
         {formatMessage({ id: 'cancel', defaultMessage: 'Cancel' })}

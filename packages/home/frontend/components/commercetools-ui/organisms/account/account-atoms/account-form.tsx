@@ -1,13 +1,15 @@
 import { ComponentProps, FC } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import Typography from 'components/commercetools-ui/atoms/typography';
+import SaveOrCancel from 'components/commercetools-ui/organisms/account/account-atoms/save-or-cancel';
+import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useDiscardForm from '../useDiscardForm';
-import SaveOrCancel from './save-or-cancel';
 
 export interface AccountFormProps extends ComponentProps<'form'> {
   title: string;
   subtitle?: string;
+  containerClassName?: string;
   requiredLabelIsVisible?: boolean;
   defaultCTASection?: boolean;
   onSubmit: (e: React.FormEvent) => void;
@@ -15,6 +17,7 @@ export interface AccountFormProps extends ComponentProps<'form'> {
 
 const AccountForm: FC<AccountFormProps> = ({
   className,
+  containerClassName,
   title,
   subtitle,
   requiredLabelIsVisible,
@@ -30,6 +33,8 @@ const AccountForm: FC<AccountFormProps> = ({
     e.preventDefault();
     onSubmit(e);
   };
+
+  const containerClassNames = useClassNames(['max-w-[372px]', containerClassName]);
 
   return (
     <form className={className} onSubmit={handleSubmit}>
@@ -49,7 +54,7 @@ const AccountForm: FC<AccountFormProps> = ({
           </Typography>
         )}
 
-        <div className="max-w-[372px]">
+        <div className={containerClassNames}>
           {children}
 
           {defaultCTASection && (

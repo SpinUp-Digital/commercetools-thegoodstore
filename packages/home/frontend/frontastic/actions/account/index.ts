@@ -30,6 +30,10 @@ export interface RegisterAccount extends UpdateAccount {
   shippingAddress?: Address;
 }
 
+export const mutateAccount = () => {
+  mutate('/action/account/getAccount');
+};
+
 export const getAccount = (): GetAccountResult => {
   const extensions = SDK.getExtensions();
 
@@ -39,7 +43,9 @@ export const getAccount = (): GetAccountResult => {
 
   const account = (result.data?.data as GetAccountResult)?.account as Account;
 
-  if (account?.accountId) return { account, loggedIn: true };
+  if (account?.accountId) {
+    return { account, loggedIn: true };
+  }
 
   return {
     loggedIn: false,
@@ -59,7 +65,7 @@ export const login = async (email: string, password: string, remember?: boolean)
 
   const res = await extensions.account.login(payload);
 
-  mutate('/action/account/getAccount', res);
+  mutateAccount();
   mutate('/action/cart/getCart');
   mutate('/action/wishlist/getWishlist');
 
@@ -67,11 +73,7 @@ export const login = async (email: string, password: string, remember?: boolean)
 };
 
 export const logout = async () => {
-  const extensions = SDK.getExtensions();
-
-  const res = await extensions.account.logout();
-
-  mutate('/action/account/getAccount', res);
+  mutateAccount();
   mutate('/action/cart/getCart');
   mutate('/action/wishlist/getWishlist');
 };
@@ -89,7 +91,7 @@ export const confirm = async (token: string): Promise<Account> => {
 
   const res = await extensions.account.confirm({ token });
 
-  mutate('/action/account/getAccount', res);
+  mutateAccount();
 
   return res.isError ? ({} as Account) : res.data;
 };
@@ -128,7 +130,7 @@ export const resetPassword = async (token: string, newPassword: string): Promise
 
   const res = await extensions.account.resetPassword({ token, newPassword });
 
-  mutate('/action/account/getAccount', res);
+  mutateAccount();
 
   return res.isError ? ({} as Account) : res.data;
 };
@@ -138,7 +140,7 @@ export const update = async (account: UpdateAccount): Promise<Account> => {
 
   const res = await extensions.account.updateAccount(account);
 
-  mutate('/action/account/getAccount', res);
+  mutateAccount();
 
   return res.isError ? ({} as Account) : res.data;
 };
@@ -148,7 +150,7 @@ export const addAddress = async (address: Omit<Address, 'addressId'>): Promise<A
 
   const res = await extensions.account.addAddress({ address });
 
-  mutate('/action/account/getAccount', res);
+  mutateAccount();
 
   return res.isError ? ({} as Account) : res.data;
 };
@@ -165,7 +167,7 @@ export const addShippingAddress = async (address: Omit<Address, 'addressId'>): P
     payload: { account: response.data.account, address },
   });
 
-  mutate('/action/account/getAccount', res);
+  mutateAccount();
 
   return res.isError ? ({} as Account) : res.data;
 };
@@ -182,7 +184,7 @@ export const addBillingAddress = async (address: Omit<Address, 'addressId'>): Pr
     payload: { account: response.data.account, address },
   });
 
-  mutate('/action/account/getAccount', res);
+  mutateAccount();
 
   return res.isError ? ({} as Account) : res.data;
 };
@@ -192,7 +194,7 @@ export const updateAddress = async (address: Address): Promise<Account> => {
 
   const res = await extensions.account.updateAddress({ address });
 
-  mutate('/action/account/getAccount', res);
+  mutateAccount();
 
   return res.isError ? ({} as Account) : res.data;
 };
@@ -202,7 +204,7 @@ export const removeAddress = async (addressId: string): Promise<Account> => {
 
   const res = await extensions.account.removeAddress({ addressId });
 
-  mutate('/action/account/getAccount', res);
+  mutateAccount();
 
   return res.isError ? ({} as Account) : res.data;
 };
@@ -212,7 +214,7 @@ export const setDefaultBillingAddress = async (addressId: string): Promise<Accou
 
   const res = await extensions.account.setDefaultBillingAddress({ addressId });
 
-  mutate('/action/account/getAccount', res);
+  mutateAccount();
 
   return res.isError ? ({} as Account) : res.data;
 };
@@ -222,7 +224,7 @@ export const setDefaultShippingAddress = async (addressId: string): Promise<Acco
 
   const res = await extensions.account.setDefaultShippingAddress({ addressId });
 
-  mutate('/action/account/getAccount', res);
+  mutateAccount();
 
   return res.isError ? ({} as Account) : res.data;
 };

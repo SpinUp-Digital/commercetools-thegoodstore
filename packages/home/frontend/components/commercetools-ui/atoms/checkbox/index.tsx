@@ -3,8 +3,11 @@ import { CheckIcon } from '@heroicons/react/24/outline';
 import useClassNames from 'helpers/hooks/useClassNames';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import { desktop } from 'helpers/utils/screensizes';
+import Typography from '../typography';
 
 export interface Props extends Omit<React.ComponentProps<'input'>, 'onChange'> {
+  label?: string;
+  labelPosition?: 'on-left' | 'on-right';
   containerClassName?: string;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
@@ -16,7 +19,8 @@ const Checkbox: React.FC<Props> = ({
   onMouseOver,
   onMouseLeave,
   containerClassName,
-  children,
+  label,
+  labelPosition = 'on-right',
   ...props
 }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -47,31 +51,39 @@ const Checkbox: React.FC<Props> = ({
     onChange?.(e);
   };
 
-  const containerClassNames = useClassNames([
-    'h-20 w-20 rounded-sm relative outline outline-1',
+  const containerClassNames = useClassNames(['flex items-center gap-8', containerClassName]);
+  const buttonClassName = useClassNames([
+    'h-20 w-20 min-w-[20px] rounded-sm relative outline outline-1 cursor-pointer',
     isHovered ? 'outline-secondary-black' : 'outline-neutral-500',
-    containerClassName,
   ]);
 
   const inputClassName = useClassNames([
-    'absolute w-full h-full checked:bg-none bg-transparent text-transparent border-transparent',
+    'absolute w-full h-full z-[2] checked:bg-none bg-transparent text-transparent border-transparent',
     className,
   ]);
 
   const iconClassName = useClassNames([
-    'absolute top-[50%] left-[50%] z-[-1] h-16 w-16 translate-y-[-50%] translate-x-[-50%] stroke-[1.5px]',
+    'absolute top-[50%] z-[1] left-[50%] h-16 w-16 translate-y-[-50%] translate-x-[-50%] stroke-[1.5px]',
     isChecked || isHovered ? 'block' : 'hidden',
     isChecked ? 'text-white' : 'text-secondary-black',
   ]);
 
   const backgroundClassName = useClassNames([
-    'absolute z-[-2] h-full w-full rounded-sm',
+    'absolute z-0 h-20 w-20 rounded-sm',
     { 'bg-secondary-black': !!isChecked },
   ]);
 
+  const LabelElement = (
+    <Typography as="label" className="text-secondary-black" fontSize={14}>
+      {label}
+    </Typography>
+  );
+
   return (
-    <div className="flex items-center gap-8" onClick={handleContainerClick}>
-      <div className={containerClassNames}>
+    <div className={containerClassNames} onClick={handleContainerClick}>
+      {label && labelPosition === 'on-left' && LabelElement}
+
+      <div className={buttonClassName}>
         <input
           type="checkbox"
           checked={isChecked}
@@ -87,7 +99,7 @@ const Checkbox: React.FC<Props> = ({
         <div className={backgroundClassName} />
       </div>
 
-      {children}
+      {label && labelPosition === 'on-right' && LabelElement}
     </div>
   );
 };

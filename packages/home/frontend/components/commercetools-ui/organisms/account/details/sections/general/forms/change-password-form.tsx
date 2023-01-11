@@ -5,8 +5,8 @@ import PasswordInput from 'components/commercetools-ui/atoms/password-input';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useValidate from 'helpers/hooks/useValidate';
 import { useAccount } from 'frontastic';
-import AccountForm from '../atoms/account-form';
-import useDiscardForm from '../useDiscardForm';
+import AccountForm from '../../../../account-atoms/account-form';
+import useDiscardForm from '../../../../useDiscardForm';
 
 type ChangePasswordFormData = {
   password: string;

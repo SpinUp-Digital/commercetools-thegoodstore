@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Account } from '@commercetools/frontend-domain-types/account/Account';
 import { useFormat } from 'helpers/hooks/useFormat';
-import InfoCard from '../atoms/info-card';
+import InfoCard from '../../../../account-atoms/info-card';
 
 interface PersonalInformation {
   account: Account;

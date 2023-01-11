@@ -89,7 +89,7 @@ const Input: FC<InputProps> = ({
   ]);
 
   const inputClassName = useClassNames([
-    'h-40 w-full rounded-sm border border-neutral-300 px-12 text-primary-black placeholder:text-14 placeholder:leading-normal placeholder:text-secondary-black focus:outline-none disabled:cursor-not-allowed disabled:bg-neutral-400',
+    'h-40 focus:border-gray-500 focus:ring-0 w-full rounded-sm border border-neutral-500 px-12 text-primary-black placeholder:text-14 placeholder:leading-normal placeholder:text-secondary-black focus:outline-none disabled:cursor-not-allowed disabled:bg-neutral-400',
     bgClassName,
     isInActiveState && label && labelPosition == 'inline' ? 'pt-[20px] pb-[4px]' : 'py-10',
     { 'border-red-500': (!!props.error && isInActiveState) || isErrored },
@@ -104,6 +104,7 @@ const Input: FC<InputProps> = ({
           lineHeight={labelPosition ? 'loose' : 'normal'}
           fontSize={labelPosition === 'top' ? 14 : 10}
           as="label"
+          medium
           className={labelClassName}
         >
           {props.required ? `${label} *` : label}
@@ -119,7 +120,7 @@ const Input: FC<InputProps> = ({
           value={value}
           {...props}
         />
-        {(isValid || (props.isValid && !isInActiveState)) && props.type !== 'password' && (
+        {(isValid || (props.isValid && !isInActiveState)) && !isFocused && props.type !== 'password' && (
           <CheckIcon className="absolute top-[50%] right-12 h-16 w-16 translate-y-[-50%] text-green-500" />
         )}
         {children}

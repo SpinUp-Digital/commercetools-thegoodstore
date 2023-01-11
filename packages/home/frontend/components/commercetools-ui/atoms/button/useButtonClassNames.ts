@@ -24,8 +24,8 @@ const useButtonClassNames: UseButtonClassNames = ({ variant, size, className = '
   ]);
 
   const secondaryClassName = useClassNames([
-    'bg-white-100 text-gray-700 bg-white',
-    'hover:shadow-inset',
+    'bg-white-100 text-gray-700 bg-white rounded-md border border-secondary-black',
+    'hover:shadow-bottom',
     'active:outline-2 active:shadow-button active:outline-1 active:outline-gray-300 active:outline-offset-0',
     'focus-visible:outline focus-visible:border-white-100 focus-visible:border focus-visible:outline-offset-[3px]',
     'disabled:text-neutral-100 disabled:bg-neutral-400',
@@ -47,7 +47,7 @@ const useButtonClassNames: UseButtonClassNames = ({ variant, size, className = '
     variantClassNames[variant as ButtonVariant] as string,
     { 'rounded-md': variant !== 'ghost' },
     { 'flex gap-10 items-center': includesIcon },
-    'relative text-12 leading-4 transition overflow-hidden',
+    'relative text-12 leading-4 transition overflow-hidden font-medium',
     className,
   ]);
 

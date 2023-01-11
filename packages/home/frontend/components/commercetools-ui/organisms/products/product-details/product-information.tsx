@@ -73,7 +73,7 @@ const ProductInformation: FC<ProductInformationProps> = ({ product, variant, onC
           </div>
 
           {
-            <span className="ml-8 mt-10 mb-8 flex h-[25px] w-[45px] items-center justify-center bg-accent-red text-12 text-neutral-100">
+            <span className="ml-8 mt-10 mb-8 flex h-[25px] w-[45px] items-center justify-center bg-accent-red text-11 text-neutral-100">
               {Math.round(discountPercentage)}%
             </span>
           }
