@@ -30,10 +30,6 @@ export interface RegisterAccount extends UpdateAccount {
   shippingAddress?: Address;
 }
 
-export const mutateAccount = () => {
-  mutate('/action/account/getAccount');
-};
-
 export const getAccount = (): GetAccountResult => {
   const extensions = SDK.getExtensions();
 
@@ -65,7 +61,7 @@ export const login = async (email: string, password: string, remember?: boolean)
 
   const res = await extensions.account.login(payload);
 
-  mutateAccount();
+  mutate('/action/account/getAccount');
   mutate('/action/cart/getCart');
   mutate('/action/wishlist/getWishlist');
 
@@ -73,7 +69,11 @@ export const login = async (email: string, password: string, remember?: boolean)
 };
 
 export const logout = async () => {
-  mutateAccount();
+  const extensions = SDK.getExtensions();
+
+  await extensions.account.logout();
+
+  mutate('/action/account/getAccount');
   mutate('/action/cart/getCart');
   mutate('/action/wishlist/getWishlist');
 };
@@ -91,7 +91,7 @@ export const confirm = async (token: string): Promise<Account> => {
 
   const res = await extensions.account.confirm({ token });
 
-  mutateAccount();
+  mutate('/action/account/getAccount');
 
   return res.isError ? ({} as Account) : res.data;
 };
@@ -130,7 +130,7 @@ export const resetPassword = async (token: string, newPassword: string): Promise
 
   const res = await extensions.account.resetPassword({ token, newPassword });
 
-  mutateAccount();
+  mutate('/action/account/getAccount');
 
   return res.isError ? ({} as Account) : res.data;
 };
@@ -140,7 +140,7 @@ export const update = async (account: UpdateAccount): Promise<Account> => {
 
   const res = await extensions.account.updateAccount(account);
 
-  mutateAccount();
+  mutate('/action/account/getAccount');
 
   return res.isError ? ({} as Account) : res.data;
 };
@@ -150,7 +150,7 @@ export const addAddress = async (address: Omit<Address, 'addressId'>): Promise<A
 
   const res = await extensions.account.addAddress({ address });
 
-  mutateAccount();
+  mutate('/action/account/getAccount');
 
   return res.isError ? ({} as Account) : res.data;
 };
@@ -167,7 +167,7 @@ export const addShippingAddress = async (address: Omit<Address, 'addressId'>): P
     payload: { account: response.data.account, address },
   });
 
-  mutateAccount();
+  mutate('/action/account/getAccount');
 
   return res.isError ? ({} as Account) : res.data;
 };
@@ -184,7 +184,7 @@ export const addBillingAddress = async (address: Omit<Address, 'addressId'>): Pr
     payload: { account: response.data.account, address },
   });
 
-  mutateAccount();
+  mutate('/action/account/getAccount');
 
   return res.isError ? ({} as Account) : res.data;
 };
@@ -194,7 +194,7 @@ export const updateAddress = async (address: Address): Promise<Account> => {
 
   const res = await extensions.account.updateAddress({ address });
 
-  mutateAccount();
+  mutate('/action/account/getAccount');
 
   return res.isError ? ({} as Account) : res.data;
 };
@@ -204,7 +204,7 @@ export const removeAddress = async (addressId: string): Promise<Account> => {
 
   const res = await extensions.account.removeAddress({ addressId });
 
-  mutateAccount();
+  mutate('/action/account/getAccount');
 
   return res.isError ? ({} as Account) : res.data;
 };
@@ -214,7 +214,7 @@ export const setDefaultBillingAddress = async (addressId: string): Promise<Accou
 
   const res = await extensions.account.setDefaultBillingAddress({ addressId });
 
-  mutateAccount();
+  mutate('/action/account/getAccount');
 
   return res.isError ? ({} as Account) : res.data;
 };
@@ -224,7 +224,7 @@ export const setDefaultShippingAddress = async (addressId: string): Promise<Acco
 
   const res = await extensions.account.setDefaultShippingAddress({ addressId });
 
-  mutateAccount();
+  mutate('/action/account/getAccount');
 
   return res.isError ? ({} as Account) : res.data;
 };
