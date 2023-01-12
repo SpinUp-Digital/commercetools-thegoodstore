@@ -64,7 +64,7 @@ const Search: React.FC<Props> = ({ categories }) => {
           onBlur={onBlur}
           placeholder={`${formatMessage({ id: 'search.placeholder', defaultMessage: 'Type to search' })}...`}
           classNames={{
-            root: `relative z-50 bg-white border-neutral-400 lg:border ${
+            root: `relative z-50 bg-white lg:rounded-sm border-neutral-400 lg:border ${
               focused ? 'border-b' : 'border'
             } lg:w-[calc(100%-24px)] mx-auto`,
             form: 'relative flex items-stretch w-full quick-search',
