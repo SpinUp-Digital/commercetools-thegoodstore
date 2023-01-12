@@ -19,7 +19,7 @@ const MenuDropdown: FC<Props> = ({ show, links, tileContent, onClick }) => {
     'absolute bottom-0 left-0 z-20 min-h-[300px] w-full translate-y-full',
     'justify-between',
     show ? 'flex' : 'hidden',
-    'border-b-[1.5px] border-t-[1.5px] border-b-secondary-grey border-t-neutral-400 bg-white px-50 py-34 xl:pl-143 2xl:pr-195',
+    'border-b-[1.5px] border-t-[1.5px] border-b-secondary-grey border-t-neutral-400 bg-white pl-56 pr-48 py-32',
   ]);
 
   const linksClassNames = useClassNames(['grid grid-cols-4 gap-x-116 gap-y-28', tileContent ? 'pr-116' : '']);
