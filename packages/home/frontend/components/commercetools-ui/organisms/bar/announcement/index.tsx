@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Link from 'components/commercetools-ui/atoms/link';
+import MarketButton from 'components/commercetools-ui/organisms/market-button/market-button';
 import { Reference } from 'types/reference';
 
 export interface Props {
@@ -33,7 +34,7 @@ const AnnouncementBar: React.FC<Props> = ({ text, highlightedSubstring, target }
   }, [processHighlighting]);
 
   return (
-    <div className="w-full bg-primary-dark py-16">
+    <div className="relative w-full bg-primary-dark py-16">
       <p className="text-center text-12 leading-loose text-white">
         {previewText.prefix}
         <Link link={target} className="underline underline-offset-2">
@@ -41,6 +42,9 @@ const AnnouncementBar: React.FC<Props> = ({ text, highlightedSubstring, target }
         </Link>
         {previewText.suffix}
       </p>
+      <div className="absolute right-0 top-1/2 -translate-y-1/2">
+        <MarketButton />
+      </div>
     </div>
   );
 };

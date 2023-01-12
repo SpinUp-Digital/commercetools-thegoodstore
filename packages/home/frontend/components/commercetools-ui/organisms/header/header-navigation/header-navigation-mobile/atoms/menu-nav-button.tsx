@@ -6,23 +6,24 @@ import { Category } from 'types/category';
 
 export interface Props {
   link: Category;
+  categories?: Category[];
   onClick: () => void;
   hideHeaderMenu: () => void;
 }
 
-const MobileMenuNavButton: FC<Props> = ({ link, onClick, hideHeaderMenu }) => {
+const MobileMenuNavButton: FC<Props> = ({ categories, link, onClick, hideHeaderMenu }) => {
   return (
     <div key={link.categoryId} className="cursor-pointer">
       {link?.subCategories?.length > 0 ? (
-        <div onClick={onClick} className="flex justify-between py-22">
-          <Typography fontSize={16} className="text-primary-black">
+        <div onClick={onClick} className="flex justify-between py-24">
+          <Typography fontSize={categories && categories?.length >= 1 ? 14 : 16} className="text-primary-black">
             {link.name}
           </Typography>
           <ChevronRightIcon className="w-20 text-secondary-black" />
         </div>
       ) : (
         <div onClick={hideHeaderMenu}>
-          <Link link={link.slug ?? link.path} className=" flex justify-between py-14">
+          <Link link={link.slug ?? link.path} className="flex justify-between py-24">
             <Typography fontSize={14} className="text-primary-black">
               {link.name}
             </Typography>

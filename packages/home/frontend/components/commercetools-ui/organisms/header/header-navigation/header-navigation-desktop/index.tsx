@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import HeaderNavigationButtonDesktop from 'components/commercetools-ui/organisms/header/header-navigation/header-navigation-desktop/header-navigation-button';
 import { Tile } from 'components/commercetools-ui/organisms/header/types';
 import useClassNames from 'helpers/hooks/useClassNames';
@@ -7,25 +7,38 @@ import { Category } from 'types/category';
 
 export interface Props {
   links: Category[];
-  handleMouseIn: (category: Category) => void;
-  handleMouseOut: () => void;
-  activeCategory: Category;
   tiles: Tile[];
-  hideSubMenu: () => void;
 }
 
-const HeaderNavigationDesktop: React.FC<Props> = ({
-  links,
-  handleMouseIn,
-  handleMouseOut,
-  activeCategory,
-  tiles,
-  hideSubMenu,
-}) => {
+const HeaderNavigationDesktop: React.FC<Props> = ({ links, tiles }) => {
+  const [activeCategory, setActiveCategory] = useState<Category>();
+
+  const showSubMenu = (category?: Category) => {
+    setActiveCategory(category);
+  };
+  const hideSubMenu = () => {
+    setActiveCategory(undefined);
+  };
+
+  const showTimeout = useRef<NodeJS.Timer | null>(null) as React.MutableRefObject<NodeJS.Timer | null>;
+
+  const handleMouseIn = (category: Category) => {
+    if (activeCategory) showSubMenu(category); //Already opened do not delay
+    else showTimeout.current = setTimeout(() => showSubMenu(category), 300);
+  };
+
+  const handleMouseOut = () => {
+    if (showTimeout.current) {
+      clearTimeout(showTimeout.current);
+      showTimeout.current = null;
+    }
+    hideSubMenu();
+  };
+
   const scrollDirection = useScrollDirection(5, -1);
   const navigationClassNames = useClassNames([
-    'relative hidden items-center justify-center lg:flex transition-all duration-150',
-    scrollDirection === 'down' ? 'h-0 opacity-0 pointer-events-none' : 'h-64 opacity-1 pointer-events-auto',
+    'relative hidden items-center justify-start lg:flex transition-all duration-150',
+    scrollDirection === 'down' ? 'h-0 opacity-0 pointer-events-none' : 'h-fit opacity-1 pointer-events-auto',
   ]);
 
   return (

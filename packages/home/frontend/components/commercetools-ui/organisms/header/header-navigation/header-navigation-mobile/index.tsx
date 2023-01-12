@@ -39,12 +39,13 @@ const HeaderNavigationMobile: FC<Props> = ({ links, logo, logoLink }) => {
   };
 
   return (
-    <div className="flex border border-neutral-400 md:w-109 lg:hidden">
+    <div className="flex lg:hidden">
       <Button
         variant="ghost"
         size="icon"
         onClick={showHeaderMenu}
         title={formatMessage({ id: 'header.menu.open', defaultMessage: 'Open side menu' })}
+        className="py-20 pl-0 pr-20"
       >
         <Bars3Icon className="w-30 text-secondary-black" />
       </Button>
@@ -66,7 +67,7 @@ const HeaderNavigationMobile: FC<Props> = ({ links, logo, logoLink }) => {
         <MobileMenu
           links={links}
           hideHeaderMenu={hideHeaderMenu}
-          category={categories}
+          categories={categories}
           insertCategory={insertCategory}
         />
 

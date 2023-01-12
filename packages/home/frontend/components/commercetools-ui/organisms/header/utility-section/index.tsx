@@ -49,13 +49,13 @@ const UtilitySection: React.FC<Props> = ({
   };
 
   return (
-    <div className="flex h-30 w-109 items-center justify-between lg:mr-12 lg:w-200 xl:w-300">
-      <div className="flex w-full justify-center lg:w-210">
+    <div className="flex h-30 items-center">
+      <div className="flex w-full justify-center">
         <AccountButton />
 
         <div
           title={formatWishlistMessage({ id: 'wishlist', defaultMessage: 'Wishlist' })}
-          className="relative mx-5 h-30  cursor-pointer lg:mx-10"
+          className="relative ml-12 mr-20 cursor-pointer md:mx-24 lg:mx-32"
           onClick={onWishlistClicked}
         >
           <WishlistIcon totalWishlistItems={totalWishlistItems} className="w-25 text-secondary-black" />
@@ -63,7 +63,7 @@ const UtilitySection: React.FC<Props> = ({
 
         <div
           title={formatCartMessage({ id: 'myCart', defaultMessage: 'My Cart' })}
-          className="relative mx-5 cursor-pointer lg:mx-10"
+          className="relative cursor-pointer"
           onClick={onCartClicked}
         >
           <CartIcon className="w-23 text-secondary-black" totalCartItems={totalCartItems} />

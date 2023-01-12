@@ -27,18 +27,23 @@ const MarketButton = () => {
     setShowMarket(false);
   };
 
-  const marketButtonLabel = `${selectedMarket?.region} | ${selectedMarket?.currency} ${selectedMarket?.currencyCode}`;
-
   return (
-    <div className="ml-10 hidden justify-center md:w-109 lg:flex lg:w-200 xl:w-300">
+    <div className="mx-48 hidden justify-center lg:flex">
       {selectedMarket && (
-        <Button variant="ghost" onClick={showMarketMenu} className="flex w-full items-center justify-center p-3">
+        <Button variant="ghost" onClick={showMarketMenu} className="flex w-fit items-center px-0 py-4">
           <FlagIcons flagName={selectedMarket?.flag} className="mr-3 w-30" />
-          <span className="ml-5 mr-20 text-14 font-normal text-secondary-black">{marketButtonLabel}</span>
+          <Typography fontSize={14} className="ml-5 text-neutral-100 hover:border-b">
+            {selectedMarket?.region}
+          </Typography>
         </Button>
       )}
 
-      <Drawer isOpen={showMarket} direction="left" className="w-[90%] max-w-[380px] bg-white" onClose={hideMarketMenu}>
+      <Drawer
+        isOpen={showMarket}
+        direction="left"
+        className="w-[90%] max-w-[380px] bg-neutral-100"
+        onClose={hideMarketMenu}
+      >
         <div className="flex w-full items-center justify-between border-b-[1px] border-neutral-400 py-20">
           <Typography as="h5" fontFamily="libre" fontSize={22} className=" pl-15 text-secondary-black">
             {formatMarketMessage({ id: 'select.market', defaultMessage: 'Select your market' })}
