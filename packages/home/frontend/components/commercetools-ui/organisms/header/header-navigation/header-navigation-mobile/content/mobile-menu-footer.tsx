@@ -48,33 +48,33 @@ const MobileMenuFooter: FC<Props> = ({ hideHeaderMenu, insertCategory }) => {
   };
   return (
     <>
-      <div className="my-14 w-full border border-neutral-400" />
+      <div className="my-12 w-full border border-neutral-400" />
 
-      <div className="ml-24 mr-20">
-        {account ? (
+      {account ? (
+        <div className="ml-24 mr-20 block md:hidden">
           <MobileMenuNavButton
             link={accountButton}
             onClick={() => insertCategory(accountButton)}
             hideHeaderMenu={hideHeaderMenu}
           />
-        ) : (
-          <Link link="/help" onClick={hideHeaderMenu}>
-            <Typography fontSize={16}>
-              {formatMessage({ id: 'help.and.support', defaultMessage: 'Help & Customer Service' })}
-            </Typography>
-          </Link>
-        )}
-      </div>
+        </div>
+      ) : (
+        <Link link="/help" onClick={hideHeaderMenu} className="ml-24 mr-20 py-24">
+          <Typography fontSize={16}>
+            {formatMessage({ id: 'help.and.support', defaultMessage: 'Help & Customer Service' })}
+          </Typography>
+        </Link>
+      )}
 
-      <div className="mx-24 flex justify-between py-20">
+      <div className="mx-24 flex">
         {account ? (
-          <Button variant="ghost" onClick={handleLogout} className="px-0">
+          <Button variant="ghost" onClick={handleLogout} className="px-0 py-24">
             <Typography fontSize={16}>
               {formatAccountMessage({ id: 'sign.out', defaultMessage: 'Sign out' })}
             </Typography>
           </Button>
         ) : (
-          <Link link="/login" onClick={hideHeaderMenu}>
+          <Link link="/login" onClick={hideHeaderMenu} className="px-0 py-16">
             <Typography fontSize={16}>{formatAccountMessage({ id: 'sign.in', defaultMessage: 'Sign in' })}</Typography>
           </Link>
         )}

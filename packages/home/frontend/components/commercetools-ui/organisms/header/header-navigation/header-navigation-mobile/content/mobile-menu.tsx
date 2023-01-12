@@ -6,18 +6,19 @@ import MobileMenuNavButton from '../atoms/menu-nav-button';
 export interface Props {
   links: Category[];
   hideHeaderMenu: () => void;
-  category: Category[];
+  categories: Category[]; //This is a navigator where you push a subcategory to show it's contents
   insertCategory: (category: Category) => void;
 }
 
-const MobileMenu: FC<Props> = ({ links, category, insertCategory, hideHeaderMenu }) => {
-  const linksWrapperClassNames = useClassNames(['mx-20 pt-2', category.length <= 0 ? 'pl-4' : 'pl-12']);
+const MobileMenu: FC<Props> = ({ links, categories, insertCategory, hideHeaderMenu }) => {
+  const linksWrapperClassNames = useClassNames(['mx-20', categories.length <= 0 ? 'pl-4' : 'pl-12']);
   return (
     <div className={linksWrapperClassNames}>
-      {category.length <= 0 ? (
+      {categories.length <= 0 ? (
         links?.map((link) => (
           <MobileMenuNavButton
             key={link.categoryId}
+            categories={categories}
             link={link}
             onClick={() => insertCategory(link)}
             hideHeaderMenu={hideHeaderMenu}
@@ -25,9 +26,10 @@ const MobileMenu: FC<Props> = ({ links, category, insertCategory, hideHeaderMenu
         ))
       ) : (
         <div className="pt-12">
-          {category[category.length - 1].subCategories.map((nav) => (
+          {categories[categories.length - 1].subCategories.map((nav) => (
             <MobileMenuNavButton
               key={nav.categoryId}
+              categories={categories}
               link={nav}
               onClick={() => insertCategory(nav)}
               hideHeaderMenu={hideHeaderMenu}
