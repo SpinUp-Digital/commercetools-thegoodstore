@@ -57,9 +57,7 @@ const Header: React.FC<HeaderProps> = ({
         <Search categories={categories} />
       </div>
 
-      <div className="px-24 md:px-36 lg:px-56">
-        <HeaderNavigationDesktop links={links} tiles={tiles ?? []} />
-      </div>
+      <HeaderNavigationDesktop links={links} tiles={tiles ?? []} />
     </header>
   );
 };
