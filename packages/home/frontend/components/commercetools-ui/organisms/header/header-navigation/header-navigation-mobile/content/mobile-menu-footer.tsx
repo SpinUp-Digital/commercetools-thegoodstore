@@ -38,7 +38,7 @@ const MobileMenuFooter: FC<Props> = ({ hideHeaderMenu, insertCategory }) => {
     categoryId: 'myAccount',
     name: formatAccountMessage({ id: 'my.account', defaultMessage: 'My Account' }),
     subCategories: tabs.map((tab) => {
-      return { categoryId: tab.href, name: tab.name, slug: tab.href, subCategories: [] };
+      return { categoryId: tab.href, name: tab.name, slug: tab.href, subCategories: [], depth: 1 };
     }),
   };
 

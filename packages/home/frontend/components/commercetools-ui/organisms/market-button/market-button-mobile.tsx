@@ -56,7 +56,7 @@ const MarketButtonMobile = () => {
                   <Menu.Item key={index}>
                     <div className="overflow-y-scroll">
                       <Button
-                        variant="secondary"
+                        variant="ghost"
                         size="full"
                         onClick={() => handleMarketClick(market)}
                         className="flex w-full items-center justify-start px-10"
