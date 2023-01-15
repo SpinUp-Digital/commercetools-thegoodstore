@@ -1,10 +1,10 @@
 import React, { FC, ReactNode } from 'react';
 import useTouchDevice from 'helpers/hooks/useTouchDevice';
 
-type WrapperVariant = 'none' | 'left-padding-only' | 'full-padding-small' | 'full-padding';
-type WrapperBackground = 'white' | 'neutral-200';
+export type WrapperVariant = 'none' | 'left-padding-only' | 'full-padding-small' | 'full-padding';
+export type WrapperBackground = 'white' | 'neutral-200';
 
-type WrapperProps = {
+export type WrapperProps = {
   children: ReactNode;
   background?: WrapperBackground;
   variant?: WrapperVariant;
