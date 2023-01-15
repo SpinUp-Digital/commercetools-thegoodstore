@@ -18,6 +18,7 @@
   "cart.shopping": "Shopping Cart",
   "cart.shopping.items": "Items in your shopping cart",
   "order.summary": "Order Summary",
+  "order.summary.login": "Log in to use your personal offers!",
   "shipping.estimate": "Est. Shipping",
   "shipping.calculation.learnMore": "Learn more about how shipping is calculated",
   "discounts": "Discounts",
@@ -46,5 +47,9 @@
   "delivery.express": "Express Delivery",
   "add.postcode": "Add postcode for availability",
   "postcode.invalid": "The postcode is not valid.",
-  "more.details": "More details"
+  "more.details": "More details",
+  "cart": "Cart",
+  "items": "Items",
+  "we.accept": "We accept",
+  "cart.empty.ask": "Your cart is empty. Continue shopping?"
 }

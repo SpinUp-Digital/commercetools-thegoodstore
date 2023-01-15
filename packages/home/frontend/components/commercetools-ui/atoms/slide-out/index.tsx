@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import CloseIcon from '@heroicons/react/24/outline/XMarkIcon';
-import Cart from 'components/commercetools-ui/organisms/cart';
+import Cart from 'components/commercetools-ui/organisms/cart-slideout';
 import { Link } from 'components/commercetools-ui/organisms/header/types';
 import Wishlist from 'components/commercetools-ui/organisms/wishlist';
 import CartIcon from 'components/icons/cart';

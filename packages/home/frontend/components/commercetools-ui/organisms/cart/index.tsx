@@ -1,162 +1,116 @@
-import React, { FC, useMemo } from 'react';
-import { useRouter } from 'next/router';
-import AccordionBtn from 'components/commercetools-ui/atoms/accordion';
-import { CurrencyHelpers } from 'helpers/currencyHelpers';
+import React from 'react';
+import Button from 'components/commercetools-ui/atoms/button';
+import CartItem from 'components/commercetools-ui/atoms/cart-item';
+import Link from 'components/commercetools-ui/atoms/link';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { useCart } from 'frontastic';
-import { NextFrontasticImage } from 'frontastic/lib/image';
-import DiscountForm from '../discount-form';
-import { EmptyState } from '../empty-state';
-import { Link } from '../header/types';
-import CartItem from './item';
+import useMediaQuery from 'helpers/hooks/useMediaQuery';
+import { tablet } from 'helpers/utils/screensizes';
+import { Category } from 'types/category';
+import { useAccount, useCart } from 'frontastic';
+import OrderSummary, { PaymentMethod } from '../order-summary';
 
 export interface Props {
-  emptyStateImage: NextFrontasticImage;
-  emptyStateTitle: string;
-  emptyStateSubtitle: string;
-  emptyStateCategories: Link[];
+  paymentMethods: Array<PaymentMethod>;
+  categories: Category[];
 }
 
-const Cart: FC<Props> = ({ emptyStateImage, emptyStateTitle, emptyStateSubtitle, emptyStateCategories }) => {
-  const { locale } = useRouter();
-
-  //i18n messages
+const Cart: React.FC<Props> = ({ categories, paymentMethods }) => {
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
+  const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
 
-  const { data } = useCart();
+  const [isTablet] = useMediaQuery(tablet);
 
-  const isEmpty = data?.lineItems?.length === 0;
+  const { isEmpty, totalItems, data } = useCart();
 
-  const transaction = useMemo(() => {
-    if (!data?.lineItems)
-      return {
-        subtotal: { centAmount: 0 },
-        discount: { centAmount: 0 },
-        tax: { centAmount: 0 },
-        shipping: { centAmount: 0 },
-        total: { centAmount: 0 },
-      };
-
-    const currencyCode = data.sum?.currencyCode;
-    const fractionDigits = data.sum?.fractionDigits;
-
-    const totalAmount = data.sum?.centAmount as number;
-    const subTotalAmount = data.lineItems.reduce(
-      (acc, curr) => acc + (curr.price?.centAmount || 0) * (curr.count as number),
-      0,
-    );
-    const discountedAmount = data.lineItems.reduce(
-      (acc, curr) =>
-        acc + ((curr.price?.centAmount || 0) * (curr.count as number) - (curr.totalPrice?.centAmount || 0)),
-      0,
-    );
-
-    const totalTax = data.taxed?.taxPortions?.reduce((acc, curr) => acc + (curr.amount?.centAmount as number), 0) ?? 0;
-    const totalShipping =
-      (data.sum?.centAmount as number) > 0 ? data.availableShippingMethods?.[0]?.rates?.[0]?.price?.centAmount ?? 0 : 0;
-
-    return {
-      subtotal: {
-        centAmount: subTotalAmount,
-        currencyCode,
-        fractionDigits,
-      },
-      discount: {
-        centAmount: discountedAmount,
-        currencyCode,
-        fractionDigits,
-      },
-      shipping: {
-        centAmount: totalShipping,
-        currencyCode,
-        fractionDigits,
-      },
-      tax: {
-        centAmount: totalTax,
-        currencyCode,
-        fractionDigits,
-      },
-      total: {
-        centAmount: totalAmount + totalTax + totalShipping,
-        currencyCode,
-        fractionDigits,
-      },
-    };
-  }, [data]);
+  const { loggedIn } = useAccount();
 
   return (
-    <>
-      {isEmpty ? (
-        <EmptyState
-          className="grow"
-          categories={emptyStateCategories}
-          image={emptyStateImage}
-          title={emptyStateTitle}
-          subtitle={emptyStateSubtitle}
-        />
-      ) : (
-        <div className="h-[65vh] grow divide-y divide-neutral-400 overflow-auto px-12 md:px-22">
-          {data?.lineItems?.map((lineItem) => (
-            <CartItem key={lineItem.lineItemId} item={lineItem} />
-          ))}
-        </div>
-      )}
-      <div className="absolute bottom-0 w-full">
-        {!isEmpty && (
-          <div className="border-t border-neutral-400 px-12 py-24 md:px-22">
-            <AccordionBtn
-              closedSectionTitle={formatCartMessage({ id: 'discount.apply', defaultMessage: 'Apply a discount' })}
-              buttonClassName="text-14 text-secondary-black"
-            >
-              <DiscountForm />
-            </AccordionBtn>
+    <div className="relative bg-neutral-200">
+      <div className="flex flex-col lg:flex-row lg:items-start lg:gap-26 lg:p-50">
+        <div className="bg-white px-16 py-12 md:px-36 md:py-12 lg:w-[70%] lg:rounded-md lg:px-48 lg:py-36">
+          <div className="flex items-center justify-between">
+            <h3 className="text-16 md:text-18 lg:text-22">
+              {formatCartMessage({ id: 'cart', defaultMessage: 'Cart' })}
+              {!isEmpty && ': '}
+              {!isEmpty && (
+                <span className="text-secondary-black">
+                  ({totalItems} {formatCartMessage({ id: 'items', defaultMessage: 'Items' })})
+                </span>
+              )}
+            </h3>
+
+            {!loggedIn && (
+              <Link link="/login">
+                <button className="rounded-md border border-primary-black py-6 px-24 text-14 font-medium transition hover:border-secondary-black hover:text-secondary-black md:px-36 lg:hidden">
+                  {formatAccountMessage({ id: 'sign.in', defaultMessage: ' Login in' })}
+                </button>
+              </Link>
+            )}
           </div>
-        )}
-        <div className="border-t  border-neutral-400 bg-white px-12 pt-16 pb-18 md:px-22">
-          {!isEmpty && (
-            <>
-              <div className="flex items-center justify-between text-14">
-                <span>{formatCartMessage({ id: 'subtotal', defaultMessage: 'Subtotal' })} </span>
-                <span>{CurrencyHelpers.formatForCurrency(transaction.subtotal, locale)}</span>
-              </div>
 
-              {transaction.discount.centAmount > 0 && (
-                <div className="flex items-center justify-between text-14">
-                  <span>{formatCartMessage({ id: 'discount', defaultMessage: 'Discount' })} </span>
-                  <span>{CurrencyHelpers.formatForCurrency(transaction.discount, locale)}</span>
+          {!isEmpty ? (
+            <div className="mt-12 divide-y divide-neutral-400 border-t border-neutral-400 lg:mt-34 lg:border-none">
+              {data?.lineItems?.map((lineItem) => (
+                <div key={lineItem.lineItemId}>
+                  <CartItem item={lineItem} />
                 </div>
-              )}
-
-              <div className="flex items-center justify-between text-14">
-                <span>{formatCartMessage({ id: 'tax', defaultMessage: 'Tax' })} </span>
-                <span>{CurrencyHelpers.formatForCurrency(transaction.tax, locale)}</span>
-              </div>
-
-              {transaction.shipping.centAmount > 0 && (
-                <div className="flex items-center justify-between text-14">
-                  <span>{formatCartMessage({ id: 'shipping.estimate', defaultMessage: 'Est. Shipping' })} </span>
-                  <span>{CurrencyHelpers.formatForCurrency(transaction.shipping, locale)}</span>
-                </div>
-              )}
-            </>
+              ))}
+            </div>
+          ) : (
+            <div className="mt-28">
+              <p>
+                {formatCartMessage({ id: 'cart.empty.ask', defaultMessage: 'Your cart is empty. Continue shopping?' })}
+              </p>
+              <ul className="mt-48 flex flex-col items-center gap-y-20 pb-8 lg:items-start">
+                {categories
+                  .filter((category) => category.depth === 0)
+                  .map((category) => (
+                    <li key={category.name}>
+                      <Link link={category.path}>
+                        <Button
+                          className="w-200 rounded-md border border-primary-black text-16 text-secondary-black"
+                          variant="ghost"
+                        >
+                          {category.name}
+                        </Button>
+                      </Link>
+                    </li>
+                  ))}
+              </ul>
+            </div>
           )}
+        </div>
 
-          <div className="mt-26 flex items-center justify-between font-medium">
-            <span>{formatCartMessage({ id: 'total', defaultMessage: 'Total' })}: </span>
-            <span>{CurrencyHelpers.formatForCurrency(transaction.total, locale)}</span>
+        <div className="bg-white pt-24 pb-12 md:py-12 lg:mt-0 lg:w-[30%] lg:rounded-md lg:py-36">
+          <div className="hidden px-48 pb-32 lg:block">
+            <h4 className="text-18">{formatCartMessage({ id: 'order.summary', defaultMessage: 'Order Summary' })}</h4>
+            <p className="mt-34 leading-[20px] text-secondary-black">
+              {formatCartMessage({ id: 'order.summary.login', defaultMessage: 'Log in to use your personal offers!' })}
+            </p>
+            {!loggedIn && (
+              <Link link="/login">
+                <button className="mt-18 w-full rounded-md border border-primary-black py-6 px-24 text-14 font-medium transition hover:border-secondary-black hover:text-secondary-black md:px-36">
+                  {formatAccountMessage({ id: 'sign.in', defaultMessage: ' Login in' })}
+                </button>
+              </Link>
+            )}
           </div>
-
-          <div className="mt-16">
-            <button
-              disabled={isEmpty}
-              className="w-full rounded-md bg-primary-black py-12 font-medium text-white transition hover:bg-gray-500 disabled:cursor-not-allowed disabled:bg-neutral-400"
-            >
-              {formatCartMessage({ id: 'checkout.go', defaultMessage: 'Go to checkout' })}
-            </button>
+          <div className="lg:px-26">
+            <OrderSummary hideCheckoutButton={!isTablet} paymentMethods={paymentMethods} />
           </div>
         </div>
       </div>
-    </>
+
+      <div className="sticky bottom-0 w-full border-t border-neutral-400 bg-white p-16 md:hidden">
+        <button
+          disabled={isEmpty}
+          className="w-full rounded-md bg-primary-black py-12 font-medium text-white transition hover:bg-gray-500 disabled:cursor-not-allowed disabled:bg-neutral-400"
+        >
+          {formatCartMessage({ id: 'checkout.go', defaultMessage: 'Go to checkout' })}
+        </button>
+      </div>
+    </div>
   );
 };
+
 export default Cart;
