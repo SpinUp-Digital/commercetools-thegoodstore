@@ -8,6 +8,7 @@ import useHash from 'helpers/hooks/useHash';
 import useI18n from 'helpers/hooks/useI18n';
 import { Reference } from 'types/reference';
 import { useAccount, useCart } from 'frontastic';
+import AccountTabsMobile from '../account-atoms/account-tabs-mobile';
 import AddressForm from './sections/addresses/address-form';
 import {
   MyAccountSection,
@@ -21,11 +22,14 @@ import DeleteAccountForm from './sections/general/forms/delete-account-form';
 import PersonalInfoForm from './sections/general/forms/personal-info-form';
 import SubscribeForm from './sections/general/forms/subscribe-form';
 
+export interface AccountTab {
+  name: string;
+  href: string;
+}
 export interface FAQ {
   question: string;
   answer: string;
 }
-
 export interface AccountDetailsProps {
   loginLink?: Reference;
   phoneNumber: string;
@@ -77,8 +81,8 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
     logout().then(() => router.push('login'));
   };
 
-  const tabs = [
-    { name: formatAccountMessage({ id: 'account.details', defaultMessage: 'Account details' }), href: '#' },
+  const tabs: AccountTab[] = [
+    { name: formatAccountMessage({ id: 'my.account', defaultMessage: 'My Account' }), href: '#' },
     { name: formatAccountMessage({ id: 'addresses', defaultMessage: 'Addresses' }), href: '#addresses' },
     { name: formatAccountMessage({ id: 'orders', defaultMessage: 'Orders' }), href: '#orders' },
     { name: formatAccountMessage({ id: 'payment.methods', defaultMessage: 'Payment methods' }), href: '#payment' },
@@ -109,6 +113,7 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
     ),
   };
 
+  const contentTitle = tabs[tabs?.findIndex((tab) => tab?.href === hash)].name;
   const Content = mapping[hash as keyof typeof mapping];
 
   return (
@@ -141,6 +146,15 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
           </div>
         </div>
         <div className="col-span-4 py-20 px-16 md:col-span-3 md:overflow-auto md:p-24 2xl:px-44 2xl:py-28 ">
+          <div className="block pb-12 pt-16 md:hidden">
+            {contentTitle && (
+              <Typography as="h2" fontFamily="libre" className="text-18 text-primary-black md:text-22 lg:text-24">
+                {contentTitle}
+              </Typography>
+            )}
+          </div>
+
+          <AccountTabsMobile contentTitle={contentTitle} tabs={tabs} />
           {Content && Content}
         </div>
       </div>
