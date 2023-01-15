@@ -4,7 +4,7 @@ import Slider from 'components/commercetools-ui/atoms/slider';
 import Subtitle, { SubtitleProps } from 'components/commercetools-ui/atoms/subtitle';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import Link from 'components/commercetools-ui/organisms/content/link';
-import Wrapper from 'components/commercetools-ui/organisms/content/wrapper';
+import Wrapper, { WrapperVariant } from 'components/commercetools-ui/organisms/content/wrapper';
 import useTouchDevice from 'helpers/hooks/useTouchDevice';
 import { mediumDesktop, tablet } from 'helpers/utils/screensizes';
 import { Reference } from 'types/reference';
@@ -18,15 +18,26 @@ export interface Props {
   subtitleVariant?: SubtitleProps['variant'];
   ctaLabel: string;
   ctaLink: Reference;
+  wrapperVariant?: WrapperVariant;
+  clearDefaultWrapperStyles?: boolean;
 }
 
-export default function ProductSlider({ products, title, subline, ctaLabel, ctaLink, subtitleVariant = 'lg' }: Props) {
+export default function ProductSlider({
+  products,
+  title,
+  subline,
+  ctaLabel,
+  ctaLink,
+  subtitleVariant = 'lg',
+  wrapperVariant = 'left-padding-only',
+  clearDefaultWrapperStyles = false,
+}: Props) {
   const { isTouchDevice } = useTouchDevice();
 
   const { trackClick } = useTrack();
 
   return (
-    <Wrapper background="neutral-200" variant="left-padding-only">
+    <Wrapper background="neutral-200" variant={wrapperVariant} clearDefaultStyles={clearDefaultWrapperStyles}>
       <div>
         <Typography className="mb-12 md:text-22 lg:text-28" fontSize={20} as="h3" fontFamily="libre">
           {title}

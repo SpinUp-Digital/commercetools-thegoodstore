@@ -5,7 +5,11 @@ import { Tastic } from 'types/tastic';
 function OtherProductsTastic({ data }: Tastic<{ items: Product[] }, ProductSliderProps>) {
   if (!data?.data?.dataSource?.items) return <p>No products found.</p>;
 
-  return <ProductSlider {...data} products={data.data.dataSource.items} />;
+  return (
+    <div className="bg-neutral-200 px-[48px] pb-64 md:px-[104px]">
+      <ProductSlider {...data} products={data.data.dataSource.items} wrapperVariant="none" clearDefaultWrapperStyles />
+    </div>
+  );
 }
 
 export default OtherProductsTastic;
