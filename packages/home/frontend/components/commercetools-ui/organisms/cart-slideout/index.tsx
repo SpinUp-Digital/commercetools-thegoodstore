@@ -37,6 +37,10 @@ const CartSlideout: FC<Props> = ({ emptyStateImage, emptyStateTitle, emptyStateS
         </div>
       )}
       <OrderSummary
+        classNames={{
+          applyDiscountButton: 'px-12 py-24 md:px-22',
+          infoContainer: 'px-12 pt-16 pb-18 md:px-22',
+        }}
         button={{
           text: formatCartMessage({ id: 'cart.go', defaultMessage: 'Go to cart' }),
           link: '/cart',

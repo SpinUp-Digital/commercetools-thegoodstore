@@ -19,13 +19,25 @@ export interface ButtonProps {
   disabled?: boolean;
 }
 
+export interface ClassNames {
+  button?: string;
+  applyDiscountButton?: string;
+  infoContainer?: string;
+}
+
 export interface Props {
   hideCheckoutButton?: boolean;
   paymentMethods?: Array<PaymentMethod>;
   button?: ButtonProps;
+  classNames?: ClassNames;
 }
 
-const OrderSummary: React.FC<Props> = ({ hideCheckoutButton = false, paymentMethods = [], button = {} }) => {
+const OrderSummary: React.FC<Props> = ({
+  hideCheckoutButton = false,
+  paymentMethods = [],
+  button = {},
+  classNames = {},
+}) => {
   const { locale } = useRouter();
 
   //i18n messages
@@ -43,7 +55,7 @@ const OrderSummary: React.FC<Props> = ({ hideCheckoutButton = false, paymentMeth
   return (
     <div>
       {!isEmpty && (
-        <div className="border-t border-neutral-400 px-12 py-24 md:px-22">
+        <div className={`border-t border-neutral-400 ${classNames.applyDiscountButton ?? ''}`}>
           <AccordionBtn
             closedSectionTitle={formatCartMessage({ id: 'discount.apply', defaultMessage: 'Apply a discount' })}
             buttonClassName="text-14 text-secondary-black"
@@ -52,7 +64,7 @@ const OrderSummary: React.FC<Props> = ({ hideCheckoutButton = false, paymentMeth
           </AccordionBtn>
         </div>
       )}
-      <div className="border-t border-neutral-400 bg-white px-12 pt-16 pb-18 md:px-22">
+      <div className={`border-t border-neutral-400 bg-white ${classNames.infoContainer}`}>
         {!isEmpty && (
           <>
             <div className="flex items-center justify-between text-14">
