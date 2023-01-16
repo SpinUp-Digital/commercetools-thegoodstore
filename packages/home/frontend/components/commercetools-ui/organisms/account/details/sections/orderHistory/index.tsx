@@ -75,12 +75,6 @@ const Orders = () => {
 
   return (
     <>
-      <div className="pb-12">
-        <Typography as="h2" fontSize={24} fontFamily="libre" className="text-primary-black">
-          {formatOrdersMessage({ id: 'orders', defaultMessage: 'Orders' })}
-        </Typography>
-      </div>
-
       <div className="pt-12 pb-16">
         <Typography as="h3" fontSize={16} fontFamily="inter" className="text-primary-black">
           {formatOrdersMessage({

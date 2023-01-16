@@ -14,14 +14,6 @@ const Addresses = () => {
   return (
     <div>
       <div>
-        <Typography
-          as="h2"
-          className="mb-20 text-primary-black md:text-22 2xl:mb-28 2xl:text-24"
-          fontFamily="libre"
-          fontSize={18}
-        >
-          {formatAccountMessage({ id: 'addresses', defaultMessage: 'Addresses' })}
-        </Typography>
         <Typography fontSize={14} lineHeight="loose" className="mb-24 text-secondary-black md:text-14 2xl:text-16">
           {formatAccountMessage({
             id: 'address.desc',
