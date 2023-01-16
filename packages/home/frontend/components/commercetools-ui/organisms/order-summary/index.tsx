@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useRouter } from 'next/router';
 import AccordionBtn from 'components/commercetools-ui/atoms/accordion';
+import Link from 'components/commercetools-ui/atoms/link';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart } from 'frontastic';
@@ -12,18 +13,32 @@ export interface PaymentMethod {
   image: NextFrontasticImage;
 }
 
+export interface ButtonProps {
+  text?: string;
+  link?: string;
+  disabled?: boolean;
+}
+
 export interface Props {
   hideCheckoutButton?: boolean;
   paymentMethods?: Array<PaymentMethod>;
+  button?: ButtonProps;
 }
 
-const OrderSummary: React.FC<Props> = ({ hideCheckoutButton = false, paymentMethods = [] }) => {
+const OrderSummary: React.FC<Props> = ({ hideCheckoutButton = false, paymentMethods = [], button = {} }) => {
   const { locale } = useRouter();
 
   //i18n messages
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
 
   const { isEmpty, transaction } = useCart();
+
+  const closeActiveFlyouts = useCallback(() => {
+    //Trigger an `ESC` key click to close any active flyouts
+    const event = new Event('keyup') as KeyboardEvent;
+    (event.key as string) = 'Escape';
+    document.dispatchEvent(event);
+  }, []);
 
   return (
     <div>
@@ -73,12 +88,15 @@ const OrderSummary: React.FC<Props> = ({ hideCheckoutButton = false, paymentMeth
 
         {!hideCheckoutButton && (
           <div className="mt-16">
-            <button
-              disabled={isEmpty}
-              className="w-full rounded-md bg-primary-black py-12 font-medium text-white transition hover:bg-gray-500 disabled:cursor-not-allowed disabled:bg-neutral-400"
-            >
-              {formatCartMessage({ id: 'checkout.go', defaultMessage: 'Go to checkout' })}
-            </button>
+            <Link link={button.link}>
+              <button
+                disabled={button.disabled}
+                className="w-full rounded-md bg-primary-black py-12 font-medium text-white transition hover:bg-gray-500 disabled:cursor-not-allowed disabled:bg-neutral-400"
+                onClick={closeActiveFlyouts}
+              >
+                {button.text}
+              </button>
+            </Link>
           </div>
         )}
 

@@ -84,19 +84,32 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods }) => {
         <div className="bg-white pt-24 pb-12 md:py-12 lg:mt-0 lg:w-[30%] lg:rounded-md lg:py-36">
           <div className="hidden px-48 pb-32 lg:block">
             <h4 className="text-18">{formatCartMessage({ id: 'order.summary', defaultMessage: 'Order Summary' })}</h4>
-            <p className="mt-34 leading-[20px] text-secondary-black">
-              {formatCartMessage({ id: 'order.summary.login', defaultMessage: 'Log in to use your personal offers!' })}
-            </p>
             {!loggedIn && (
-              <Link link="/login">
-                <button className="mt-18 w-full rounded-md border border-primary-black py-6 px-24 text-14 font-medium transition hover:border-secondary-black hover:text-secondary-black md:px-36">
-                  {formatAccountMessage({ id: 'sign.in', defaultMessage: ' Login in' })}
-                </button>
-              </Link>
+              <>
+                <p className="mt-34 leading-[20px] text-secondary-black">
+                  {formatCartMessage({
+                    id: 'order.summary.login',
+                    defaultMessage: 'Log in to use your personal offers!',
+                  })}
+                </p>
+                <Link link="/login">
+                  <button className="mt-18 w-full rounded-md border border-primary-black py-6 px-24 text-14 font-medium transition hover:border-secondary-black hover:text-secondary-black md:px-36">
+                    {formatAccountMessage({ id: 'sign.in', defaultMessage: ' Login in' })}
+                  </button>
+                </Link>
+              </>
             )}
           </div>
           <div className="lg:px-26">
-            <OrderSummary hideCheckoutButton={!isTablet} paymentMethods={paymentMethods} />
+            <OrderSummary
+              hideCheckoutButton={!isTablet}
+              paymentMethods={paymentMethods}
+              button={{
+                text: formatCartMessage({ id: 'checkout.go', defaultMessage: 'Go to checkout' }),
+                link: '/checkout',
+                disabled: isEmpty,
+              }}
+            />
           </div>
         </div>
       </div>

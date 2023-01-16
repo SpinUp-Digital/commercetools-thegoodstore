@@ -43,6 +43,7 @@
   "cart.add": "Add to cart",
   "move.to.wishlist": "Move to wishlist",
   "checkout.go": "Go to checkout",
+  "cart.go": "Go to cart",
   "delivery.standard": "Standard Delivery",
   "delivery.express": "Express Delivery",
   "add.postcode": "Add postcode for availability",
