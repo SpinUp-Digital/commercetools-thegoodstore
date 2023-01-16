@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useRouter } from 'next/router';
 import AccordionBtn from 'components/commercetools-ui/atoms/accordion';
+import Link from 'components/commercetools-ui/atoms/link';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart } from 'frontastic';
@@ -12,12 +13,31 @@ export interface PaymentMethod {
   image: NextFrontasticImage;
 }
 
+export interface ButtonProps {
+  text?: string;
+  link?: string;
+  disabled?: boolean;
+}
+
+export interface ClassNames {
+  button?: string;
+  applyDiscountButton?: string;
+  infoContainer?: string;
+}
+
 export interface Props {
   hideCheckoutButton?: boolean;
   paymentMethods?: Array<PaymentMethod>;
+  button?: ButtonProps;
+  classNames?: ClassNames;
 }
 
-const OrderSummary: React.FC<Props> = ({ hideCheckoutButton = false, paymentMethods = [] }) => {
+const OrderSummary: React.FC<Props> = ({
+  hideCheckoutButton = false,
+  paymentMethods = [],
+  button = {},
+  classNames = {},
+}) => {
   const { locale } = useRouter();
 
   //i18n messages
@@ -25,10 +45,17 @@ const OrderSummary: React.FC<Props> = ({ hideCheckoutButton = false, paymentMeth
 
   const { isEmpty, transaction } = useCart();
 
+  const closeActiveFlyouts = useCallback(() => {
+    //Trigger an `ESC` key click to close any active flyouts
+    const event = new Event('keyup') as KeyboardEvent;
+    (event.key as string) = 'Escape';
+    document.dispatchEvent(event);
+  }, []);
+
   return (
     <div>
       {!isEmpty && (
-        <div className="border-t border-neutral-400 px-12 py-24 md:px-22">
+        <div className={`border-t border-neutral-400 ${classNames.applyDiscountButton ?? ''}`}>
           <AccordionBtn
             closedSectionTitle={formatCartMessage({ id: 'discount.apply', defaultMessage: 'Apply a discount' })}
             buttonClassName="text-14 text-secondary-black"
@@ -37,7 +64,7 @@ const OrderSummary: React.FC<Props> = ({ hideCheckoutButton = false, paymentMeth
           </AccordionBtn>
         </div>
       )}
-      <div className="border-t border-neutral-400 bg-white px-12 pt-16 pb-18 md:px-22">
+      <div className={`border-t border-neutral-400 bg-white ${classNames.infoContainer}`}>
         {!isEmpty && (
           <>
             <div className="flex items-center justify-between text-14">
@@ -73,12 +100,15 @@ const OrderSummary: React.FC<Props> = ({ hideCheckoutButton = false, paymentMeth
 
         {!hideCheckoutButton && (
           <div className="mt-16">
-            <button
-              disabled={isEmpty}
-              className="w-full rounded-md bg-primary-black py-12 font-medium text-white transition hover:bg-gray-500 disabled:cursor-not-allowed disabled:bg-neutral-400"
-            >
-              {formatCartMessage({ id: 'checkout.go', defaultMessage: 'Go to checkout' })}
-            </button>
+            <Link link={button.link}>
+              <button
+                disabled={button.disabled}
+                className="w-full rounded-md bg-primary-black py-12 font-medium text-white transition hover:bg-gray-500 disabled:cursor-not-allowed disabled:bg-neutral-400"
+                onClick={closeActiveFlyouts}
+              >
+                {button.text}
+              </button>
+            </Link>
           </div>
         )}
 

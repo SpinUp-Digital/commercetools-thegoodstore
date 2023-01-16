@@ -67,10 +67,10 @@ const CartItem: React.FC<Props> = ({ item }) => {
           <Image src={item.variant?.images?.[0]} suffix="small" objectFit="contain" />
         </div>
       </div>
-      <div className="grow">
-        <div className="flex max-w-full items-center justify-between">
+      <div className="max-w-full grow overflow-hidden">
+        <div className="flex items-center justify-between">
           <p
-            className="max-w-[150px] overflow-hidden text-ellipsis whitespace-pre text-14 uppercase leading-loose"
+            className="max-w-[85%] overflow-hidden text-ellipsis whitespace-pre text-14 uppercase leading-loose"
             title={item.name}
           >
             {item.name}

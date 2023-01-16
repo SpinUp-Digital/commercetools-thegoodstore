@@ -27,7 +27,7 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods }) => {
   return (
     <div className="relative bg-neutral-200">
       <div className="flex flex-col lg:flex-row lg:items-start lg:gap-26 lg:p-50">
-        <div className="bg-white px-16 py-12 md:px-36 md:py-12 lg:w-[70%] lg:rounded-md lg:px-48 lg:py-36">
+        <div className="bg-white px-16 py-12 md:px-24 md:py-12 lg:w-[70%] lg:rounded-md lg:px-48 lg:py-36">
           <div className="flex items-center justify-between">
             <h3 className="text-16 md:text-18 lg:text-22">
               {formatCartMessage({ id: 'cart', defaultMessage: 'Cart' })}
@@ -82,21 +82,38 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods }) => {
         </div>
 
         <div className="bg-white pt-24 pb-12 md:py-12 lg:mt-0 lg:w-[30%] lg:rounded-md lg:py-36">
-          <div className="hidden px-48 pb-32 lg:block">
+          <div className="hidden px-36 pb-32 lg:block">
             <h4 className="text-18">{formatCartMessage({ id: 'order.summary', defaultMessage: 'Order Summary' })}</h4>
-            <p className="mt-34 leading-[20px] text-secondary-black">
-              {formatCartMessage({ id: 'order.summary.login', defaultMessage: 'Log in to use your personal offers!' })}
-            </p>
             {!loggedIn && (
-              <Link link="/login">
-                <button className="mt-18 w-full rounded-md border border-primary-black py-6 px-24 text-14 font-medium transition hover:border-secondary-black hover:text-secondary-black md:px-36">
-                  {formatAccountMessage({ id: 'sign.in', defaultMessage: ' Login in' })}
-                </button>
-              </Link>
+              <>
+                <p className="mt-34 leading-[20px] text-secondary-black">
+                  {formatCartMessage({
+                    id: 'order.summary.login',
+                    defaultMessage: 'Log in to use your personal offers!',
+                  })}
+                </p>
+                <Link link="/login">
+                  <button className="mt-18 w-full rounded-md border border-primary-black py-6 px-24 text-14 font-medium transition hover:border-secondary-black hover:text-secondary-black md:px-36">
+                    {formatAccountMessage({ id: 'sign.in', defaultMessage: ' Login in' })}
+                  </button>
+                </Link>
+              </>
             )}
           </div>
-          <div className="lg:px-26">
-            <OrderSummary hideCheckoutButton={!isTablet} paymentMethods={paymentMethods} />
+          <div className="px-16 md:px-24 lg:px-36">
+            <OrderSummary
+              classNames={{
+                applyDiscountButton: 'px-8 lg:px-0 py-14',
+                infoContainer: 'px-8 lg:px-0 pt-16 pb-18',
+              }}
+              hideCheckoutButton={!isTablet}
+              paymentMethods={paymentMethods}
+              button={{
+                text: formatCartMessage({ id: 'checkout.go', defaultMessage: 'Go to checkout' }),
+                link: '/checkout',
+                disabled: isEmpty,
+              }}
+            />
           </div>
         </div>
       </div>

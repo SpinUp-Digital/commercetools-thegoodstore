@@ -14,18 +14,18 @@ function useOnClickOutside<T extends HTMLElement = HTMLElement>(
       }
     };
 
-    function handleKeyDown(event: KeyboardEvent) {
+    function handleKeyUp(event: KeyboardEvent) {
       if (event.key === 'Escape') {
         handler();
       }
     }
 
     document.addEventListener('mousedown', handleMouseDown);
-    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('keyup', handleKeyUp);
 
     return () => {
       document.removeEventListener('mousedown', handleMouseDown);
-      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('keyup', handleKeyUp);
     };
   }, [ref, handler, enabled]);
 }

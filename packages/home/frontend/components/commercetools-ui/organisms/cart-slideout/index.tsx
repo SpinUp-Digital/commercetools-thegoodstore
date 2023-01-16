@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart } from 'frontastic';
 import { NextFrontasticImage } from 'frontastic/lib/image';
 import CartItem from '../../atoms/cart-item';
@@ -14,6 +15,8 @@ export interface Props {
 }
 
 const CartSlideout: FC<Props> = ({ emptyStateImage, emptyStateTitle, emptyStateSubtitle, emptyStateCategories }) => {
+  const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
+
   const { data, isEmpty } = useCart();
 
   return (
@@ -33,7 +36,16 @@ const CartSlideout: FC<Props> = ({ emptyStateImage, emptyStateTitle, emptyStateS
           ))}
         </div>
       )}
-      <OrderSummary />
+      <OrderSummary
+        classNames={{
+          applyDiscountButton: 'px-12 py-24 md:px-22',
+          infoContainer: 'px-12 pt-16 pb-18 md:px-22',
+        }}
+        button={{
+          text: formatCartMessage({ id: 'cart.go', defaultMessage: 'Go to cart' }),
+          link: '/cart',
+        }}
+      />
     </>
   );
 };
