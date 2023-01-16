@@ -18,7 +18,6 @@ const MobileMenu: FC<Props> = ({ links, categories, insertCategory, hideHeaderMe
         links?.map((link) => (
           <MobileMenuNavButton
             key={link.categoryId}
-            categories={categories}
             link={link}
             onClick={() => insertCategory(link)}
             hideHeaderMenu={hideHeaderMenu}
@@ -29,7 +28,6 @@ const MobileMenu: FC<Props> = ({ links, categories, insertCategory, hideHeaderMe
           {categories[categories.length - 1].subCategories.map((nav) => (
             <MobileMenuNavButton
               key={nav.categoryId}
-              categories={categories}
               link={nav}
               onClick={() => insertCategory(nav)}
               hideHeaderMenu={hideHeaderMenu}

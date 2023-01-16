@@ -16,7 +16,10 @@ export interface Props {
 
 const HeaderNavigationButtonDesktop: FC<Props> = ({ show, link, tiles, updateSubMenu }) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const navIconLinkClassNames = useClassNames(['flex border-primary-black py-4', show ? 'border-b-[1.5px]' : '']);
+  const navLinkClassNames = useClassNames([
+    'flex border-primary-black py-4 cursor-pointer',
+    show ? 'border-b-[1.5px]' : '',
+  ]);
   const tileContent = tiles.filter((tile) => tile.tileCategory === link.name);
 
   useEffect(() => {
@@ -27,18 +30,18 @@ const HeaderNavigationButtonDesktop: FC<Props> = ({ show, link, tiles, updateSub
 
   return (
     <>
-      <div onClick={updateSubMenu} className="py-12 pr-20">
-        <div className={navIconLinkClassNames}>
-          <Link link={link.slug ?? link.path} title={link?.name} className="cursor-pointer pr-10">
-            <Typography as="span" fontSize={16}>
-              {link?.name}
-            </Typography>
-          </Link>
-          <ChevronDownIcon className="w-20 text-secondary-black" />
-        </div>
+      <div onClick={updateSubMenu} className="h-52 py-12 pr-20">
+        <Link link={link.slug ?? link.path} title={link?.name} className={navLinkClassNames}>
+          <Typography as="span" fontSize={16}>
+            {link?.name}
+          </Typography>
+          {link?.subCategories.length > 0 && <ChevronDownIcon className="ml-10 w-20 text-secondary-black" />}
+        </Link>
       </div>
 
-      <MenuDropdown show={show} onClick={updateSubMenu} links={link?.subCategories} tileContent={tileContent[0]} />
+      {link?.subCategories.length > 0 && (
+        <MenuDropdown show={show} onClick={updateSubMenu} links={link.subCategories} tileContent={tileContent[0]} />
+      )}
     </>
   );
 };
