@@ -34,19 +34,21 @@ const AnnouncementBar: React.FC<Props> = ({ text, highlightedSubstring, target }
   }, [processHighlighting]);
 
   return (
-    <div className="relative w-full bg-primary-dark py-16">
-      <p className="text-center text-12 leading-loose text-white">
-        {previewText.prefix}
-        <Link link={target} className="underline underline-offset-2">
-          {previewText.middle}
-        </Link>
-        {previewText.suffix}
-      </p>
-      <div className="absolute right-0 top-1/2 -translate-y-1/2">
+    <div className="relative h-32 w-full bg-primary-dark md:h-40 lg:h-44">
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+        <p className="whitespace-nowrap text-center text-12 leading-loose text-white">
+          {previewText.prefix}
+          <Link link={target} className="underline underline-offset-2">
+            {previewText.middle}
+          </Link>
+          {previewText.suffix}
+        </p>
+      </div>
+
+      <div className="flex h-full w-full items-center justify-end pr-48">
         <MarketButton />
       </div>
     </div>
   );
 };
-
 export default AnnouncementBar;

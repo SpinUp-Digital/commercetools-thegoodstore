@@ -13,6 +13,14 @@ const Addresses = () => {
 
   return (
     <div>
+      <div className="hidden pb-12 md:block">
+        <Typography as="h2" fontFamily="libre" className="text-22 text-primary-black lg:text-24">
+          {formatAccountMessage({
+            id: 'addresses',
+            defaultMessage: 'Addresses',
+          })}
+        </Typography>
+      </div>
       <div>
         <Typography fontSize={14} lineHeight="loose" className="mb-24 text-secondary-black md:text-14 2xl:text-16">
           {formatAccountMessage({

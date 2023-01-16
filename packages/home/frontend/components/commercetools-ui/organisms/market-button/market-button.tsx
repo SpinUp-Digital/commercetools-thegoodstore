@@ -28,7 +28,7 @@ const MarketButton = () => {
   };
 
   return (
-    <div className="mx-48 hidden justify-center lg:flex">
+    <div className="hidden justify-center lg:flex">
       {selectedMarket && (
         <Button variant="ghost" onClick={showMarketMenu} className="flex w-fit items-center px-0 py-4">
           <FlagIcons flagName={selectedMarket?.flag} className="mr-3 w-30" />
