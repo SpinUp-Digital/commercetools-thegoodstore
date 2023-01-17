@@ -19,7 +19,7 @@ const MyAccount = () => {
         <Typography as="h3" fontFamily="libre" fontSize={20} className="hidden text-primary-black md:block lg:text-24">
           {`${formatMessage({ id: 'hello', defaultMessage: 'Hi, ' })}${account?.firstName ?? ''}`}
         </Typography>
-        <Typography as="h3" fontFamily="libre" fontSize={18} className="hidden text-primary-black md:block">
+        <Typography as="h3" fontFamily="libre" className="hidden text-22 text-primary-black md:block lg:text-24">
           {formatMessage({ id: 'my.account', defaultMessage: 'My Account' })}
         </Typography>
         <Typography fontSize={14} className="text-secondary-black md:text-16">

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import Button from 'components/commercetools-ui/atoms/button';
 import Link from 'components/commercetools-ui/atoms/link';
@@ -113,7 +113,11 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
     ),
   };
 
-  const contentTitle = tabs[tabs?.findIndex((tab) => tab?.href === hash)].name;
+  const contentTitle = useMemo(() => {
+    const tabIndex = tabs?.findIndex((tab) => tab?.href === hash);
+    if (tabs[tabIndex]) return tabs[tabIndex].name;
+    else return '';
+  }, [hash, tabs]);
   const Content = mapping[hash as keyof typeof mapping];
 
   return (
@@ -148,7 +152,7 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
         <div className="col-span-4 py-20 px-16 md:col-span-3 md:overflow-auto md:p-24 2xl:px-44 2xl:py-28 ">
           <div className="block pb-12 pt-16 md:hidden">
             {contentTitle && (
-              <Typography as="h2" fontFamily="libre" className="text-18 text-primary-black md:text-22 lg:text-24">
+              <Typography as="h2" fontFamily="libre" className="text-18 text-primary-black">
                 {contentTitle}
               </Typography>
             )}
