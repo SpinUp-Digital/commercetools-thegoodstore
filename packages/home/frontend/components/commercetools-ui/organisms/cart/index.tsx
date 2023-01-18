@@ -107,7 +107,7 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods, emptyStateDescripti
           <div className="px-16 md:px-24 lg:px-36">
             <OrderSummary
               classNames={{
-                applyDiscountButton: 'px-8 lg:px-0 py-14',
+                applyDiscountButton: 'px-8 lg:px-0 py-14 text-16',
                 infoContainer: 'px-8 lg:px-0 pt-16 pb-18 text-16',
                 totalAmountContainer: 'text-18',
               }}

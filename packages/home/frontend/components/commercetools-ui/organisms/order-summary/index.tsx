@@ -56,10 +56,10 @@ const OrderSummary: React.FC<Props> = ({
   return (
     <div>
       {!isEmpty && (
-        <div className={`border-t border-neutral-400 ${classNames.applyDiscountButton ?? ''}`}>
+        <div className={`border-t border-neutral-400 text-14 ${classNames.applyDiscountButton ?? ''}`}>
           <AccordionBtn
             closedSectionTitle={formatCartMessage({ id: 'discount.apply', defaultMessage: 'Apply a discount' })}
-            buttonClassName="text-14 text-secondary-black"
+            buttonClassName="text-secondary-black"
           >
             <DiscountForm />
           </AccordionBtn>
