@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
+import { useRouter } from 'next/router';
 import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 import Button from 'components/commercetools-ui/atoms/button';
 import Checkbox from 'components/commercetools-ui/atoms/checkbox';
@@ -24,6 +25,8 @@ const Login: React.FC<LoginProps> = ({ signInLink, accountLink }) => {
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
   const { formatMessage } = useFormat({ name: 'common' });
 
+  const router = useRouter();
+
   //account actions
   const { login, loggedIn, requestConfirmationEmail, requestPasswordReset } = useAccount();
 
@@ -47,6 +50,12 @@ const Login: React.FC<LoginProps> = ({ signInLink, accountLink }) => {
 
   //not on default login modal
   const subModal = resendVerification || resendPasswordReset;
+
+  //redirection link after user is logged in
+  const redirectLink = useMemo(() => {
+    const lastVisitedPage = router.query.lvp ? `/${router.query.lvp}` : accountLink;
+    return lastVisitedPage;
+  }, [accountLink, router]);
 
   const resetFeedback = () => {
     setError('');
@@ -135,7 +144,7 @@ const Login: React.FC<LoginProps> = ({ signInLink, accountLink }) => {
     setLoading(false);
   };
 
-  if (loggedIn) return <Redirect target={accountLink} />;
+  if (loggedIn) return <Redirect target={redirectLink} />;
 
   return (
     <>

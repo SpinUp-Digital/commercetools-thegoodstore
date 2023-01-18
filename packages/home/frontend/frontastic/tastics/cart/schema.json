@@ -29,6 +29,16 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Empty State",
+      "fields": [
+        {
+          "label": "Description",
+          "field": "emptyStateDescription",
+          "type": "string"
+        }
+      ]
     }
   ]
 }

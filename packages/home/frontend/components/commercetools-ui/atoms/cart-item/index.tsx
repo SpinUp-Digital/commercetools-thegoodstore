@@ -9,11 +9,16 @@ import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart, useWishlist } from 'frontastic';
 import Image from 'frontastic/lib/image';
 
-export interface Props {
-  item: LineItem;
+interface ClassNames {
+  moveToWishlist?: string;
 }
 
-const CartItem: React.FC<Props> = ({ item }) => {
+export interface Props {
+  item: LineItem;
+  classNames?: ClassNames;
+}
+
+const CartItem: React.FC<Props> = ({ item, classNames = {} }) => {
   const { locale } = useRouter();
 
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
@@ -114,7 +119,7 @@ const CartItem: React.FC<Props> = ({ item }) => {
         </div>
         <div className="mt-16 text-12 leading-normal">
           <p
-            className="cursor-pointer text-secondary-black decoration-secondary-black hover:underline"
+            className={`cursor-pointer text-secondary-black decoration-secondary-black hover:underline ${classNames.moveToWishlist}`}
             onClick={moveToWishlist}
           >
             {formatCartMessage({ id: 'move.to.wishlist', defaultMessage: 'Move to wishlist' })}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Product } from '@commercetools/frontend-domain-types/product/Product';
 import Slider from 'components/commercetools-ui/atoms/slider';
 import Subtitle, { SubtitleProps } from 'components/commercetools-ui/atoms/subtitle';
@@ -14,6 +14,7 @@ import useTrack from './useTrack';
 export interface Props {
   products: Product[];
   title: string;
+  titleVariant: 'sm' | 'lg';
   subline?: string;
   subtitleVariant?: SubtitleProps['variant'];
   ctaLabel: string;
@@ -28,6 +29,7 @@ export default function ProductSlider({
   subline,
   ctaLabel,
   ctaLink,
+  titleVariant = 'lg',
   subtitleVariant = 'lg',
   wrapperVariant = 'left-padding-only',
   clearDefaultWrapperStyles = false,
@@ -36,10 +38,17 @@ export default function ProductSlider({
 
   const { trackClick } = useTrack();
 
+  const titleClassName = useMemo(() => {
+    return {
+      sm: 'md:text-18 lg:text-22',
+      lg: 'md:text-22 lg:text-28',
+    }[titleVariant ?? 'lg'];
+  }, [titleVariant]);
+
   return (
     <Wrapper background="neutral-200" variant={wrapperVariant} clearDefaultStyles={clearDefaultWrapperStyles}>
       <div>
-        <Typography className="mb-12 md:text-22 lg:text-28" fontSize={20} as="h3" fontFamily="libre">
+        <Typography className={`mb-12 ${titleClassName}`} fontSize={20} as="h3" fontFamily="libre">
           {title}
         </Typography>
         {(subline || ctaLink) && (

@@ -12,9 +12,10 @@ import OrderSummary, { PaymentMethod } from '../order-summary';
 export interface Props {
   paymentMethods: Array<PaymentMethod>;
   categories: Category[];
+  emptyStateDescription?: string;
 }
 
-const Cart: React.FC<Props> = ({ categories, paymentMethods }) => {
+const Cart: React.FC<Props> = ({ categories, paymentMethods, emptyStateDescription }) => {
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
 
@@ -23,6 +24,8 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods }) => {
   const { isEmpty, totalItems, data } = useCart();
 
   const { loggedIn } = useAccount();
+
+  const loginLink = '/login?lvp=cart';
 
   return (
     <div className="relative bg-neutral-200">
@@ -40,8 +43,8 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods }) => {
             </h3>
 
             {!loggedIn && (
-              <Link link="/login">
-                <button className="rounded-md border border-primary-black py-6 px-24 text-14 font-medium transition hover:border-secondary-black hover:text-secondary-black md:px-36 lg:hidden">
+              <Link link={loginLink}>
+                <button className="rounded-md border border-primary-black py-6 px-24 font-medium transition hover:border-secondary-black hover:text-secondary-black md:px-36 lg:hidden">
                   {formatAccountMessage({ id: 'sign.in', defaultMessage: ' Login in' })}
                 </button>
               </Link>
@@ -52,14 +55,15 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods }) => {
             <div className="mt-12 divide-y divide-neutral-400 border-t border-neutral-400 lg:mt-34 lg:border-none">
               {data?.lineItems?.map((lineItem) => (
                 <div key={lineItem.lineItemId}>
-                  <CartItem item={lineItem} />
+                  <CartItem item={lineItem} classNames={{ moveToWishlist: 'text-14' }} />
                 </div>
               ))}
             </div>
           ) : (
             <div className="mt-28">
               <p>
-                {formatCartMessage({ id: 'cart.empty.ask', defaultMessage: 'Your cart is empty. Continue shopping?' })}
+                {emptyStateDescription ??
+                  formatCartMessage({ id: 'cart.empty.ask', defaultMessage: 'Your cart is empty. Continue shopping?' })}
               </p>
               <ul className="mt-48 flex flex-col items-center gap-y-20 pb-8 lg:items-start">
                 {categories
@@ -92,8 +96,8 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods }) => {
                     defaultMessage: 'Log in to use your personal offers!',
                   })}
                 </p>
-                <Link link="/login">
-                  <button className="mt-18 w-full rounded-md border border-primary-black py-6 px-24 text-14 font-medium transition hover:border-secondary-black hover:text-secondary-black md:px-36">
+                <Link link={loginLink}>
+                  <button className="mt-18 w-full rounded-md border border-primary-black py-6 px-24 font-medium transition hover:border-secondary-black hover:text-secondary-black md:px-36">
                     {formatAccountMessage({ id: 'sign.in', defaultMessage: ' Login in' })}
                   </button>
                 </Link>
@@ -104,7 +108,8 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods }) => {
             <OrderSummary
               classNames={{
                 applyDiscountButton: 'px-8 lg:px-0 py-14',
-                infoContainer: 'px-8 lg:px-0 pt-16 pb-18',
+                infoContainer: 'px-8 lg:px-0 pt-16 pb-18 text-16',
+                totalAmountContainer: 'text-18',
               }}
               hideCheckoutButton={!isTablet}
               paymentMethods={paymentMethods}

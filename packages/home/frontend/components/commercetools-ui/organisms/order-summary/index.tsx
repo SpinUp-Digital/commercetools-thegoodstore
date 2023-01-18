@@ -23,6 +23,7 @@ export interface ClassNames {
   button?: string;
   applyDiscountButton?: string;
   infoContainer?: string;
+  totalAmountContainer?: string;
 }
 
 export interface Props {
@@ -64,28 +65,28 @@ const OrderSummary: React.FC<Props> = ({
           </AccordionBtn>
         </div>
       )}
-      <div className={`border-t border-neutral-400 bg-white ${classNames.infoContainer}`}>
+      <div className={`border-t border-neutral-400 bg-white text-14 ${classNames.infoContainer}`}>
         {!isEmpty && (
           <>
-            <div className="flex items-center justify-between text-14">
+            <div className="flex items-center justify-between">
               <span>{formatCartMessage({ id: 'subtotal', defaultMessage: 'Subtotal' })} </span>
               <span>{CurrencyHelpers.formatForCurrency(transaction.subtotal, locale)}</span>
             </div>
 
             {transaction.discount.centAmount > 0 && (
-              <div className="flex items-center justify-between text-14">
+              <div className="flex items-center justify-between">
                 <span>{formatCartMessage({ id: 'discount', defaultMessage: 'Discount' })} </span>
                 <span>{CurrencyHelpers.formatForCurrency(transaction.discount, locale)}</span>
               </div>
             )}
 
-            <div className="flex items-center justify-between text-14">
+            <div className="flex items-center justify-between">
               <span>{formatCartMessage({ id: 'tax', defaultMessage: 'Tax' })} </span>
               <span>{CurrencyHelpers.formatForCurrency(transaction.tax, locale)}</span>
             </div>
 
             {transaction.shipping.centAmount > 0 && (
-              <div className="flex items-center justify-between text-14">
+              <div className="flex items-center justify-between">
                 <span>{formatCartMessage({ id: 'shipping.estimate', defaultMessage: 'Est. Shipping' })} </span>
                 <span>{CurrencyHelpers.formatForCurrency(transaction.shipping, locale)}</span>
               </div>
@@ -93,7 +94,11 @@ const OrderSummary: React.FC<Props> = ({
           </>
         )}
 
-        <div className="mt-26 flex items-center justify-between font-medium">
+        <div
+          className={`mt-26 flex items-center justify-between text-16 font-medium ${
+            classNames.totalAmountContainer ?? ''
+          }`}
+        >
           <span>{formatCartMessage({ id: 'total', defaultMessage: 'Total' })} </span>
           <span>{CurrencyHelpers.formatForCurrency(transaction.total, locale)}</span>
         </div>
