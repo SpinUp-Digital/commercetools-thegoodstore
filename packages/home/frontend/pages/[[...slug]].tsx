@@ -127,7 +127,7 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({
 
   const plpTasticKey = 'commercetools/ui/products/product-list';
 
-  const plpConfiguration = ((data as PageDataResponse).page.sections.main.layoutElements
+  const plpConfiguration = ((data as PageDataResponse).page?.sections.main.layoutElements
     .find((layoutElement) => layoutElement.tastics.find((tastic) => tastic.tasticType === plpTasticKey))
     ?.tastics.find((tastic) => tastic.tasticType === plpTasticKey)?.configuration ?? {}) as Partial<
     ProductListTasticProps['data']

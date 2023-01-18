@@ -119,9 +119,9 @@ export class ProductApi extends BaseApi {
         .get(methodArgs)
         .execute()
         .then((response) => {
-          const items = response.body.results.map((product) =>
-            ProductMapper.commercetoolsProductProjectionToProduct(product, locale),
-          );
+          const items = response.body.results
+            .map((product) => ProductMapper.commercetoolsProductProjectionToProduct(product, locale))
+            .filter((item) => !!item.name);
 
           const result: Result = {
             total: response.body.total,

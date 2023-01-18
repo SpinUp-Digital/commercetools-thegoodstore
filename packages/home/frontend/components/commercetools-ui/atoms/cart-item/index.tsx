@@ -117,9 +117,11 @@ const CartItem: React.FC<Props> = ({ item, classNames = {} }) => {
             </button>
           </div>
         </div>
-        <div className="mt-16 text-12 leading-normal">
+        <div className="mt-16 text-12">
           <p
-            className={`cursor-pointer text-secondary-black decoration-secondary-black hover:underline ${classNames.moveToWishlist}`}
+            className={`cursor-pointer text-secondary-black decoration-secondary-black decoration-solid hover:underline hover:underline-offset-2 ${
+              classNames.moveToWishlist ?? ''
+            }`}
             onClick={moveToWishlist}
           >
             {formatCartMessage({ id: 'move.to.wishlist', defaultMessage: 'Move to wishlist' })}
