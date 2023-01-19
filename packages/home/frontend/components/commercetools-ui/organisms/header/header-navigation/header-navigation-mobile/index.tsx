@@ -18,7 +18,7 @@ export interface Props {
 
 const HeaderNavigationMobile: FC<Props> = ({ links, logo, logoLink }) => {
   const { formatMessage } = useFormat({ name: 'common' });
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [categoriesNavigator, setCategoriesNavigator] = useState<Category[]>([]);
   const [showMenu, setShowMenu] = useState(false);
 
   const showHeaderMenu = () => {
@@ -27,15 +27,15 @@ const HeaderNavigationMobile: FC<Props> = ({ links, logo, logoLink }) => {
 
   const hideHeaderMenu = () => {
     setShowMenu(false);
-    setCategories([]);
+    setCategoriesNavigator([]);
   };
 
   const removeCategory = () => {
-    setCategories((array) => array.slice(0, -1));
+    setCategoriesNavigator((array) => array.slice(0, -1));
   };
 
   const insertCategory = (category: Category) => {
-    setCategories((array) => [...array, category]);
+    setCategoriesNavigator((array) => [...array, category]);
   };
 
   return (
@@ -57,7 +57,7 @@ const HeaderNavigationMobile: FC<Props> = ({ links, logo, logoLink }) => {
         onClose={hideHeaderMenu}
       >
         <MobileMenuHeader
-          categories={categories}
+          categories={categoriesNavigator}
           hideHeaderMenu={hideHeaderMenu}
           logo={logo}
           logoLink={logoLink}
@@ -67,11 +67,13 @@ const HeaderNavigationMobile: FC<Props> = ({ links, logo, logoLink }) => {
         <MobileMenu
           links={links}
           hideHeaderMenu={hideHeaderMenu}
-          categories={categories}
+          categoriesNavigator={categoriesNavigator}
           insertCategory={insertCategory}
         />
 
-        {categories.length <= 0 && <MobileMenuFooter hideHeaderMenu={hideHeaderMenu} insertCategory={insertCategory} />}
+        {categoriesNavigator.length <= 0 && (
+          <MobileMenuFooter hideHeaderMenu={hideHeaderMenu} insertCategory={insertCategory} />
+        )}
       </Drawer>
     </div>
   );

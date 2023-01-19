@@ -12,7 +12,7 @@ const MarketButton = () => {
   const [showMarket, setShowMarket] = useState(false);
   const { market: selectedMarket, markets, handleMarket } = useContext(MarketContext);
 
-  const { formatMessage: formatMarketMessage } = useFormat({ name: 'common' });
+  const { formatMessage } = useFormat({ name: 'common' });
 
   const showMarketMenu = () => {
     setShowMarket(true);
@@ -44,14 +44,14 @@ const MarketButton = () => {
         className="w-[90%] max-w-[380px] bg-neutral-100"
         onClose={hideMarketMenu}
       >
-        <div className="flex w-full items-center justify-between border-b-[1px] border-neutral-400 py-20">
-          <Typography as="h5" fontFamily="libre" fontSize={22} className=" pl-15 text-secondary-black">
-            {formatMarketMessage({ id: 'select.market', defaultMessage: 'Select your market' })}
+        <div className="flex w-full items-center justify-between border-b border-neutral-400 py-20">
+          <Typography as="h5" fontFamily="libre" fontSize={22} className="pl-15 text-secondary-black">
+            {formatMessage({ id: 'select.country', defaultMessage: 'Select your country' })}
           </Typography>
           <Button
             variant="ghost"
             onClick={hideMarketMenu}
-            title={formatMarketMessage({ id: 'close', defaultMessage: 'Close' })}
+            title={formatMessage({ id: 'close', defaultMessage: 'Close' })}
           >
             <XMarkIcon className="w-25" />
           </Button>

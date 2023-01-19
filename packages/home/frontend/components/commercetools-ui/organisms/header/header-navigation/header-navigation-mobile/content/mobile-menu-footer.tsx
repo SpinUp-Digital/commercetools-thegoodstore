@@ -21,13 +21,13 @@ const MobileMenuFooter: FC<Props> = ({ hideHeaderMenu, insertCategory }) => {
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
 
   const tabs = [
-    { name: formatAccountMessage({ id: 'account.details', defaultMessage: 'Account details' }), href: '/account#' },
-    { name: formatAccountMessage({ id: 'addresses', defaultMessage: 'Addresses' }), href: '/account#addresses' },
+    { name: formatAccountMessage({ id: 'my.account', defaultMessage: 'My Account' }), href: '/account#' },
     { name: formatAccountMessage({ id: 'orders', defaultMessage: 'Orders' }), href: '/account#orders' },
     {
       name: formatAccountMessage({ id: 'payment.methods', defaultMessage: 'Payment methods' }),
       href: '/account#payment',
     },
+    { name: formatAccountMessage({ id: 'addresses', defaultMessage: 'Addresses' }), href: '/account#addresses' },
     {
       name: formatAccountMessage({ id: 'customer.support', defaultMessage: 'Customer support' }),
       href: '/account#support',
@@ -37,6 +37,7 @@ const MobileMenuFooter: FC<Props> = ({ hideHeaderMenu, insertCategory }) => {
   const accountButton: Category = {
     categoryId: 'myAccount',
     name: formatAccountMessage({ id: 'my.account', defaultMessage: 'My Account' }),
+    depth: 1,
     subCategories: tabs.map((tab) => {
       return { categoryId: tab.href, name: tab.name, slug: tab.href, subCategories: [], depth: 1 };
     }),
@@ -48,38 +49,40 @@ const MobileMenuFooter: FC<Props> = ({ hideHeaderMenu, insertCategory }) => {
   };
   return (
     <>
-      <div className="my-12 w-full border border-neutral-400" />
+      <div className="mt-12 mb-16 w-full border border-neutral-400" />
 
-      {account ? (
-        <div className="ml-24 mr-20 block md:hidden">
+      <div className="ml-24 mr-22 block pt-16 md:hidden">
+        {account ? (
           <MobileMenuNavButton
             link={accountButton}
             onClick={() => insertCategory(accountButton)}
             hideHeaderMenu={hideHeaderMenu}
           />
-        </div>
-      ) : (
-        <Link link="/help" onClick={hideHeaderMenu} className="ml-24 mr-20 py-24">
-          <Typography fontSize={16}>
-            {formatMessage({ id: 'help.and.support', defaultMessage: 'Help & Customer Service' })}
-          </Typography>
-        </Link>
-      )}
+        ) : (
+          <Link link="/help" onClick={hideHeaderMenu}>
+            <Typography fontSize={14} className="text-primary-black">
+              {formatMessage({ id: 'help.and.support', defaultMessage: 'Help & Customer Service' })}
+            </Typography>
+          </Link>
+        )}
+      </div>
 
-      <div className="mx-24 flex">
+      <div className="mx-24 flex py-16">
         {account ? (
-          <Button variant="ghost" onClick={handleLogout} className="px-0 py-24">
-            <Typography fontSize={16}>
+          <Button variant="ghost" onClick={handleLogout} className="p-0">
+            <Typography fontSize={14} className="font-normal text-primary-black">
               {formatAccountMessage({ id: 'sign.out', defaultMessage: 'Sign out' })}
             </Typography>
           </Button>
         ) : (
-          <Link link="/login" onClick={hideHeaderMenu} className="px-0 py-16">
-            <Typography fontSize={16}>{formatAccountMessage({ id: 'sign.in', defaultMessage: 'Sign in' })}</Typography>
+          <Link link="/login" onClick={hideHeaderMenu} className="px-0">
+            <Typography fontSize={14} className="text-primary-black">
+              {formatAccountMessage({ id: 'sign.in', defaultMessage: 'Sign in' })}
+            </Typography>
           </Link>
         )}
       </div>
-      <div className="py-12">
+      <div className="py-16">
         <MarketButtonMobile />
       </div>
     </>

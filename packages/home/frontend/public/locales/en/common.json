@@ -65,5 +65,6 @@
   "header.menu.open": "Open side menu",
   "select.country": "Select your country",
   "select.market": "Select your market",
-  "help.and.support":"Help & Customer Service"
+  "help.and.support":"Help & Customer Service",
+  "view.all": "View All"
 }
