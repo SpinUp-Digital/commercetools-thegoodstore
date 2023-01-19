@@ -23,6 +23,7 @@ const Checkout = dynamic(() => import('./checkout'));
 const ThankYou = dynamic(() => import('./checkout/thank-you'));
 const ProductDetails = dynamic(() => import('./products/details'));
 const ProductList = dynamic(() => import('./products/product-list'));
+const ProductListAlgolia = dynamic(() => import('./products/product-list-algolia'));
 const SimilarProducts = dynamic(() => import('./products/similar-products'));
 const OtherProducts = dynamic(() => import('./products/other-products'));
 const Showcase = dynamic(() => import('./showcase'));
@@ -42,6 +43,7 @@ export const tastics = {
   'commercetools/ui/cart': Cart,
   'commercetools/ui/products/details': ProductDetails,
   'commercetools/ui/products/product-list': ProductList,
+  'commercetools/ui/products/product-list-algolia': ProductListAlgolia,
   'commercetools/ui/products/slider': ProductSlider,
   'commercetools/ui/products/similar-products': SimilarProducts,
   'commercetools/ui/products/other-products': OtherProducts,
