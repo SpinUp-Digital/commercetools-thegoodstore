@@ -1,39 +1,62 @@
 import React, { FC } from 'react';
-import useClassNames from 'helpers/hooks/useClassNames';
+import Link from 'components/commercetools-ui/atoms/link';
+import Typography from 'components/commercetools-ui/atoms/typography';
+import { useFormat } from 'helpers/hooks/useFormat';
 import { Category } from 'types/category';
 import MobileMenuNavButton from '../atoms/menu-nav-button';
 
 export interface Props {
   links: Category[];
   hideHeaderMenu: () => void;
-  categories: Category[]; //This is a navigator where you push a subcategory to show it's contents
+  categoriesNavigator?: Category[]; //This is a navigator where you push a subcategory to show it's contents
   insertCategory: (category: Category) => void;
 }
 
-const MobileMenu: FC<Props> = ({ links, categories, insertCategory, hideHeaderMenu }) => {
-  const linksWrapperClassNames = useClassNames(['mx-20', categories.length <= 0 ? 'pl-4' : 'pl-12']);
+const MobileMenu: FC<Props> = ({ links, categoriesNavigator, insertCategory, hideHeaderMenu }) => {
+  const { formatMessage } = useFormat({ name: 'common' });
   return (
-    <div className={linksWrapperClassNames}>
-      {categories.length <= 0 ? (
+    <div className="ml-24 mr-22">
+      {categoriesNavigator && categoriesNavigator?.length > 0 && (
+        <div className="pt-24">
+          {categoriesNavigator[categoriesNavigator.length - 1]?.categoryId != 'myAccount' && (
+            <div className="pb-24" onClick={hideHeaderMenu}>
+              <Link
+                link={
+                  categoriesNavigator[categoriesNavigator.length - 1]?.path ??
+                  categoriesNavigator[categoriesNavigator.length - 1]?.slug
+                }
+              >
+                <Typography fontSize={14} className="text-primary-black">
+                  {formatMessage({ id: 'view.all', defaultMessage: 'View All' })}
+                </Typography>
+              </Link>
+            </div>
+          )}
+        </div>
+      )}
+      {categoriesNavigator && categoriesNavigator.length <= 0 ? (
         links?.map((link) => (
           <MobileMenuNavButton
             key={link.categoryId}
+            categoriesNavigator={categoriesNavigator}
             link={link}
             onClick={() => insertCategory(link)}
             hideHeaderMenu={hideHeaderMenu}
           />
         ))
       ) : (
-        <div className="pt-12">
-          {categories[categories.length - 1].subCategories.map((nav) => (
-            <MobileMenuNavButton
-              key={nav.categoryId}
-              link={nav}
-              onClick={() => insertCategory(nav)}
-              hideHeaderMenu={hideHeaderMenu}
-            />
-          ))}
-        </div>
+        <>
+          {categoriesNavigator &&
+            categoriesNavigator[categoriesNavigator.length - 1].subCategories.map((nav) => (
+              <MobileMenuNavButton
+                key={nav.categoryId}
+                categoriesNavigator={categoriesNavigator}
+                link={nav}
+                onClick={() => insertCategory(nav)}
+                hideHeaderMenu={hideHeaderMenu}
+              />
+            ))}
+        </>
       )}
     </div>
   );
