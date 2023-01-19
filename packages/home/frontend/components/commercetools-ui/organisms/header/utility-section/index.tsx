@@ -55,7 +55,7 @@ const UtilitySection: React.FC<Props> = ({
 
         <div
           title={formatWishlistMessage({ id: 'wishlist', defaultMessage: 'Wishlist' })}
-          className="relative cursor-pointer px-20 md:mx-24 lg:mx-32"
+          className="relative cursor-pointer px-16 md:mx-24 lg:mx-32"
           onClick={onWishlistClicked}
         >
           <WishlistIcon totalWishlistItems={totalWishlistItems} className="w-25 text-secondary-black" />

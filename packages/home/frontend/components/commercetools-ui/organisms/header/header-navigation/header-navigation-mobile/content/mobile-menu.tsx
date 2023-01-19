@@ -19,14 +19,14 @@ const MobileMenu: FC<Props> = ({ links, categoriesNavigator, insertCategory, hid
       {categoriesNavigator && categoriesNavigator?.length > 0 && (
         <div className="pt-24">
           {categoriesNavigator[categoriesNavigator.length - 1]?.categoryId != 'myAccount' && (
-            <div className="pb-24" onClick={hideHeaderMenu}>
+            <div className="pb-36" onClick={hideHeaderMenu}>
               <Link
                 link={
                   categoriesNavigator[categoriesNavigator.length - 1]?.path ??
                   categoriesNavigator[categoriesNavigator.length - 1]?.slug
                 }
               >
-                <Typography fontSize={14} className="text-primary-black">
+                <Typography fontSize={16} className="text-primary-black">
                   {formatMessage({ id: 'view.all', defaultMessage: 'View All' })}
                 </Typography>
               </Link>

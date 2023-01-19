@@ -44,13 +44,14 @@ const HeaderNavigationDesktop: React.FC<Props> = ({ links, tiles }) => {
   return (
     <>
       {links && (
-        <div onMouseLeave={handleMouseOut} className={navigationClassNames}>
+        <div className={navigationClassNames}>
           {links.map((link) => (
             <div
               key={link?.categoryId}
               onMouseEnter={() => {
                 handleMouseIn(link);
               }}
+              onMouseLeave={handleMouseOut}
             >
               <HeaderNavigationButtonDesktop
                 show={link.categoryId === activeCategory?.categoryId}

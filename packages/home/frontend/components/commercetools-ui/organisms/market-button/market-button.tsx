@@ -40,30 +40,31 @@ const MarketButton = () => {
 
       <Drawer
         isOpen={showMarket}
-        direction="left"
+        direction="right"
         className="w-[90%] max-w-[380px] bg-neutral-100"
         onClose={hideMarketMenu}
       >
-        <div className="flex w-full items-center justify-between border-b border-neutral-400 py-20">
-          <Typography as="h5" fontFamily="libre" fontSize={22} className="pl-15 text-secondary-black">
+        <div className="flex w-full items-center justify-between border-b border-neutral-400 py-20 px-16">
+          <Typography as="h5" fontFamily="libre" fontSize={22} className="text-primary-black">
             {formatMessage({ id: 'select.country', defaultMessage: 'Select your country' })}
           </Typography>
           <Button
             variant="ghost"
             onClick={hideMarketMenu}
             title={formatMessage({ id: 'close', defaultMessage: 'Close' })}
+            className="p-0"
           >
-            <XMarkIcon className="w-25" />
+            <XMarkIcon className="w-25 text-secondary-black" />
           </Button>
         </div>
 
-        <div className="py-35">
+        <div className="py-32">
           {markets.map((market) => (
             <Button
               key={market.flag}
               variant="ghost"
               onClick={() => handleMarketClick(market)}
-              className="ml-5 flex w-full items-center justify-start py-15 text-16"
+              className="ml-5 flex w-full items-center justify-start py-14 text-16"
             >
               {selectedMarket?.region === market?.region && <CheckIcon className="ml-5 mr-11 w-20" />}
               <FlagIcons flagName={market.flag} className="mr-8 w-30" />
