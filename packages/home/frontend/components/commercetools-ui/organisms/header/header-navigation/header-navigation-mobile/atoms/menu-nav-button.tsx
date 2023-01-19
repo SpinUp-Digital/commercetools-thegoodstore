@@ -15,13 +15,13 @@ export interface Props {
 const MobileMenuNavButton: FC<Props> = ({ link, categoriesNavigator, onClick, hideHeaderMenu }) => {
   const linkClassNames = useClassNames([
     'flex justify-between',
-    categoriesNavigator?.length === 0 ? 'py-24' : link?.categoryId === 'myAccount' ? 'pb-16' : 'pb-24',
+    categoriesNavigator?.length === 0 ? 'py-24' : link?.categoryId === 'myAccount' ? 'pb-16' : 'pb-36',
   ]);
   return (
     <div key={link.categoryId} className="cursor-pointer">
       {link?.subCategories?.length > 0 ? (
         <div onClick={onClick} className={linkClassNames}>
-          <Typography fontSize={link?.depth && link?.depth > 0 ? 14 : 16} className="text-primary-black">
+          <Typography fontSize={16} className="text-primary-black">
             {link.name}
           </Typography>
           <ChevronRightIcon className="w-20 text-secondary-black" />
@@ -29,7 +29,7 @@ const MobileMenuNavButton: FC<Props> = ({ link, categoriesNavigator, onClick, hi
       ) : (
         <div onClick={hideHeaderMenu} className={linkClassNames}>
           <Link link={link.slug ?? link.path}>
-            <Typography fontSize={link?.depth && link?.depth > 0 ? 14 : 16} className="text-primary-black">
+            <Typography fontSize={16} className="text-primary-black">
               {link.name}
             </Typography>
           </Link>

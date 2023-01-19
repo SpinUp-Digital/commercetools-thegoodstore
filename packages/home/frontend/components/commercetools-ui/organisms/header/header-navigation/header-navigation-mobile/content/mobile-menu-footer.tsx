@@ -69,14 +69,14 @@ const MobileMenuFooter: FC<Props> = ({ hideHeaderMenu, insertCategory }) => {
 
       <div className="mx-24 flex py-16">
         {account ? (
-          <Button variant="ghost" onClick={handleLogout} className="p-0">
-            <Typography fontSize={14} className="font-normal text-primary-black">
+          <Button variant="ghost" onClick={handleLogout} className="px-0">
+            <Typography fontSize={16} className="font-normal text-primary-black">
               {formatAccountMessage({ id: 'sign.out', defaultMessage: 'Sign out' })}
             </Typography>
           </Button>
         ) : (
           <Link link="/login" onClick={hideHeaderMenu} className="px-0">
-            <Typography fontSize={14} className="text-primary-black">
+            <Typography fontSize={16} className="text-primary-black">
               {formatAccountMessage({ id: 'sign.in', defaultMessage: 'Sign in' })}
             </Typography>
           </Link>
