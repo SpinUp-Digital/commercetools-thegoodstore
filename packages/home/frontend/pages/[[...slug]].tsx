@@ -14,7 +14,7 @@ import { Category } from 'types/category';
 import { createClient, PageDataResponse, ResponseError } from 'frontastic';
 import { FrontasticRenderer } from 'frontastic/lib/renderer';
 import { tastics } from 'frontastic/tastics';
-import ProductListTastic, { Props as ProductListTasticProps } from 'frontastic/tastics/products/product-list';
+import ProductListTastic, { Props as ProductListTasticProps } from 'frontastic/tastics/products/product-list-algolia';
 import { Log } from '../helpers/errorLogger';
 import styles from './slug.module.css';
 
@@ -125,7 +125,7 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({
 
   const searchQuery = (query.q as string) ?? '';
 
-  const plpTasticKey = 'commercetools/ui/products/product-list';
+  const plpTasticKey = 'commercetools/ui/products/product-list-algolia';
 
   const plpConfiguration = ((data as PageDataResponse).page?.sections.main.layoutElements
     .find((layoutElement) => layoutElement.tastics.find((tastic) => tastic.tasticType === plpTasticKey))
