@@ -30,7 +30,7 @@ const CartItem: React.FC<Props> = ({ item, classNames = {} }) => {
   const [processing, setProcessing] = useState(false);
 
   const counterClassName = useClassNames([
-    'flex w-fit items-center gap-12 rounded-sm border border-neutral-400',
+    'flex w-fit items-center gap-12 rounded-sm border border-neutral-400 transition hover:border-neutral-800',
     processing ? 'cursor-not-allowed bg-neutral-300' : 'cursor-pointer bg-white',
   ]);
 

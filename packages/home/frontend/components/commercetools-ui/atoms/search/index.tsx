@@ -8,7 +8,7 @@ import { productsIndex, productsQuerySuggestionsIndex } from 'helpers/constants/
 import { useFormat } from 'helpers/hooks/useFormat';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import useScrollBlock from 'helpers/hooks/useScrollBlock';
-import { desktop } from 'helpers/utils/screensizes';
+import { mediumDesktop } from 'helpers/utils/screensizes';
 import { Category } from 'types/category';
 import Overlay from '../overlay';
 import SearchItem from '../search-item';
@@ -30,7 +30,7 @@ const Search: React.FC<Props> = ({ categories }) => {
 
   const { blockScroll } = useScrollBlock();
 
-  const [isDesktop] = useMediaQuery(desktop);
+  const [isDesktop] = useMediaQuery(mediumDesktop);
 
   const router = useRouter();
 
@@ -95,7 +95,7 @@ const Search: React.FC<Props> = ({ categories }) => {
         >
           <div className="flex">
             <Index indexName={productsQuerySuggestionsIndex}>
-              <Configure hitsPerPage={4} />
+              <Configure hitsPerPage={isDesktop ? 3 : 4} />
               <Hits
                 hitComponent={({ hit }) => (
                   <SearchSuggestion

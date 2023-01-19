@@ -43,15 +43,15 @@ const SearchItem: React.FC<Props> = ({ hit, categories, onClick }) => {
   return (
     <Link link={hit._url} onMouseUp={handleClick}>
       <div className="flex items-start gap-12">
-        <div className="shrink-0 p-8 shadow-md">
+        <div className="shrink-0 p-8">
           <div className="relative h-90 w-80">
             <Image src={variant?.images?.[0]} objectFit="contain" />
           </div>
         </div>
         <div>
-          <h5 className="text-16 text-primary-black">
+          <p className="text-16 uppercase text-primary-black">
             <Highlight attribute="name" hit={hit} highlightedTagName="span" />
-          </h5>
+          </p>
           <div className="mt-5">
             <span className="text-14 text-secondary-black">{primaryCategory?.name}</span>
             {/* <Prices price={discountedVariant?.price ?? variant?.price} discountedPrice={discountedVariant?.price} /> */}
