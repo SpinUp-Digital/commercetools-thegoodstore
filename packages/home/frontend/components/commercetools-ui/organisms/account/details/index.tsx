@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 import { useRouter } from 'next/router';
+import Skeleton from 'react-loading-skeleton';
 import Button from 'components/commercetools-ui/atoms/button';
 import Link from 'components/commercetools-ui/atoms/link';
 import Typography from 'components/commercetools-ui/atoms/typography';
@@ -59,6 +60,8 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
   const [hash, id] = useHash();
   const { country } = useI18n();
 
+  const isLoading = useMemo(() => !!router.query.verify, [router]);
+
   //update associated cart data using account data
   useEffect(() => {
     if (!account) {
@@ -81,16 +84,18 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
     logout().then(() => router.push('login'));
   };
 
-  const tabs: AccountTab[] = [
-    { name: formatAccountMessage({ id: 'my.account', defaultMessage: 'My Account' }), href: '#' },
-    { name: formatAccountMessage({ id: 'addresses', defaultMessage: 'Addresses' }), href: '#addresses' },
-    { name: formatAccountMessage({ id: 'orders', defaultMessage: 'Orders' }), href: '#orders' },
-    { name: formatAccountMessage({ id: 'payment.methods', defaultMessage: 'Payment methods' }), href: '#payment' },
-    { name: formatAccountMessage({ id: 'customer.support', defaultMessage: 'Customer support' }), href: '#support' },
-  ];
+  const tabs = useMemo<AccountTab[]>(() => {
+    return [
+      { name: formatAccountMessage({ id: 'my.account', defaultMessage: 'My Account' }), href: '#' },
+      { name: formatAccountMessage({ id: 'addresses', defaultMessage: 'Addresses' }), href: '#addresses' },
+      { name: formatAccountMessage({ id: 'orders', defaultMessage: 'Orders' }), href: '#orders' },
+      { name: formatAccountMessage({ id: 'payment.methods', defaultMessage: 'Payment methods' }), href: '#payment' },
+      { name: formatAccountMessage({ id: 'customer.support', defaultMessage: 'Customer support' }), href: '#support' },
+    ];
+  }, [formatAccountMessage]);
 
   const mapping = {
-    '#': <MyAccountSection />,
+    '#': <MyAccountSection isLoading={isLoading} />,
     '#edit-personal-info': <PersonalInfoForm />,
     '#edit-newsletter': <SubscribeForm />,
     '#change-password': <ChangePasswordForm />,
@@ -118,6 +123,7 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
     if (tabs[tabIndex]) return tabs[tabIndex].name;
     else return '';
   }, [hash, tabs]);
+
   const Content = mapping[hash as keyof typeof mapping];
 
   return (
@@ -126,26 +132,38 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
         <div className="hidden h-full flex-col justify-between border-r border-neutral-400  pt-24 md:flex xl:pt-36">
           <div className="grid gap-36 px-24">
             {tabs.map((tab) => (
-              <Link link={tab.href} key={tab.name} className="whitespace-nowrap">
-                <Typography
-                  className={`hover:underline ${tab.href === hash ? 'text-primary-black' : 'text-secondary-black'}`}
-                  fontSize={16}
-                  medium={tab.href === hash}
-                >
-                  {tab.name}
-                </Typography>
+              <Link
+                link={isLoading ? '' : tab.href}
+                key={tab.name}
+                className={`whitespace-nowrap ${isLoading ? 'cursor-default' : ''}`}
+              >
+                {isLoading ? (
+                  <Skeleton />
+                ) : (
+                  <Typography
+                    className={`hover:underline ${tab.href === hash ? 'text-primary-black' : 'text-secondary-black'}`}
+                    fontSize={16}
+                    medium={tab.href === hash}
+                  >
+                    {tab.name}
+                  </Typography>
+                )}
               </Link>
             ))}
           </div>
           <div className="p-16">
             <div className="overflow-hidden rounded-md border-[0.5px] border-transparent hover:border-primary-black">
-              <Button
-                onClick={handleLogout}
-                variant="ghost"
-                className="w-full rounded-md border border-primary-black py-8 px-0 text-14"
-              >
-                {formatAccountMessage({ id: 'sign.out', defaultMessage: 'Sign out' })}
-              </Button>
+              {isLoading ? (
+                <Skeleton className="h-[30px]" />
+              ) : (
+                <Button
+                  onClick={handleLogout}
+                  variant="ghost"
+                  className="w-full rounded-md border border-primary-black py-8 px-0 text-14"
+                >
+                  {formatAccountMessage({ id: 'sign.out', defaultMessage: 'Sign out' })}
+                </Button>
+              )}
             </div>
           </div>
         </div>
