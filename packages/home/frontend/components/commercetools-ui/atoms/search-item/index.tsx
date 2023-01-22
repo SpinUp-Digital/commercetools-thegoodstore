@@ -42,7 +42,7 @@ const SearchItem: React.FC<Props> = ({ hit, categories, onClick }) => {
 
   return (
     <Link link={hit._url} onMouseUp={handleClick}>
-      <div className="flex items-start gap-12">
+      <div className="flex items-center gap-12">
         <div className="shrink-0 p-8">
           <div className="relative h-90 w-80">
             <Image src={variant?.images?.[0]} objectFit="contain" />

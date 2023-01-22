@@ -60,7 +60,13 @@ const SearchSuggestion: React.FC<Props> = ({ hit, categories, onClick }) => {
       <SearchIcon className="h-24 w-24 stroke-secondary-black" />
       <div className="flex flex-col gap-24">
         <Link link={`/search?q=${hit.query}`} onMouseUp={handleQuerySuggestionClick}>
-          <Highlight hit={hit} attribute="query" nonHighlightedTagName="b" highlightedTagName="span" />
+          <Highlight
+            hit={hit}
+            attribute="query"
+            nonHighlightedTagName="b"
+            highlightedTagName="span"
+            classNames={{ nonHighlighted: 'font-semibold' }}
+          />
         </Link>
         {categoryOptions.map(({ categoryId, name, path }) => (
           <Link key={categoryId} link={`${path}?q=${hit.query}`} onMouseUp={() => handleCategoryOptionClick({ path })}>
