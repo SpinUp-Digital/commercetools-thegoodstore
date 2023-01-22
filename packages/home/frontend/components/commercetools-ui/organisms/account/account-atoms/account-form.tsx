@@ -1,5 +1,4 @@
 import { ComponentProps, FC } from 'react';
-import { XMarkIcon } from '@heroicons/react/24/outline';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import SaveOrCancel from 'components/commercetools-ui/organisms/account/account-atoms/save-or-cancel';
 import useClassNames from 'helpers/hooks/useClassNames';
@@ -43,11 +42,6 @@ const AccountForm: FC<AccountFormProps> = ({
       </Typography>
 
       <div className="relative border-neutral-400 py-24 md:border md:px-32 md:pr-68">
-        <XMarkIcon
-          className="absolute top-24 right-24 hidden h-24 w-24 stroke-secondary-black stroke-1 hover:cursor-pointer md:block"
-          onClick={discardForm}
-        />
-
         {subtitle && (
           <Typography fontSize={16} lineHeight="loose" className="mb-40 text-secondary-black">
             {subtitle}

@@ -54,13 +54,12 @@ const ChangePasswordForm = () => {
       changePassword(data.password, data.newPassword)
         .then(() => {
           toast.success(formatAccountMessage({ id: 'data.updated', defaultMessage: 'Data updated successfully.' }));
+          discardForm();
         })
         .catch(() => {
           toast.error(formatErrorMessage({ id: 'wentWrong', defaultMessage: 'Sorry, something went wrong..' }));
         });
     }
-
-    discardForm();
   };
 
   const inputFields: Array<InputProps> = [
