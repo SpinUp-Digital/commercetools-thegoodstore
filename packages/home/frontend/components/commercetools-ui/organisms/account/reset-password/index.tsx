@@ -9,6 +9,7 @@ import { useFormat } from 'helpers/hooks/useFormat';
 import { resolveReferenceTarget } from 'helpers/reference';
 import { Reference } from 'types/reference';
 import { useAccount } from 'frontastic';
+import AlterForm from '../alter-form';
 
 export interface ResetPasswordProps {
   token?: string | string[];
@@ -80,47 +81,50 @@ const ResetPassword: FC<ResetPasswordProps> = ({ token, accountLink, signInLink 
   };
 
   return (
-    <div className="m-auto grid max-w-[480px] px-16">
-      <Typography as="h3" fontFamily="libre" className="mb-16 text-16 md:mb-24 md:text-20 lg:text-24">
-        {formatAccountMessage({ id: 'password.reset.headline', defaultMessage: 'Reset your password' })}
-      </Typography>
+    <>
+      <div className="m-auto grid max-w-[480px] px-16">
+        <Typography as="h3" fontFamily="libre" className="mb-16 text-16 md:mb-24 md:text-20 lg:text-24">
+          {formatAccountMessage({ id: 'password.reset.headline', defaultMessage: 'Reset your password' })}
+        </Typography>
 
-      <form onSubmit={handleSubmit}>
-        {error && (
-          <Typography fontSize={12} className="mb-12 capitalize text-accent-red">
-            {error}
-          </Typography>
-        )}
+        <form onSubmit={handleSubmit}>
+          {error && (
+            <Typography fontSize={12} className="mb-12 capitalize text-accent-red">
+              {error}
+            </Typography>
+          )}
 
-        <PasswordInput
-          required
-          id="password"
-          name="password"
-          autoComplete="current-password"
-          placeholder={formatAccountMessage({ id: 'password', defaultMessage: 'Password' })}
-          className="mb-16 md:mb-20"
-          onChange={handleChange}
-        />
+          <PasswordInput
+            required
+            id="password"
+            name="password"
+            autoComplete="current-password"
+            placeholder={formatAccountMessage({ id: 'password', defaultMessage: 'Password' })}
+            className="mb-16 md:mb-20"
+            onChange={handleChange}
+          />
 
-        <PasswordInput
-          required
-          id="confirm-password"
-          name="confirmPassword"
-          autoComplete="current-password"
-          placeholder={formatAccountMessage({ id: 'password.confirm', defaultMessage: 'Confirm Password' })}
-          className="mb-16 md:mb-20"
-          onChange={handleChange}
-        />
+          <PasswordInput
+            required
+            id="confirm-password"
+            name="confirmPassword"
+            autoComplete="current-password"
+            placeholder={formatAccountMessage({ id: 'password.confirm', defaultMessage: 'Confirm Password' })}
+            className="mb-16 md:mb-20"
+            onChange={handleChange}
+          />
 
-        <Button size="full" type="submit" className="mb-16 text-16 leading-tight md:mb-20" disabled={loading}>
-          {formatAccountMessage({ id: 'password.reset.keyword', defaultMessage: 'Reset' })}
-        </Button>
+          <Button size="full" type="submit" className="mb-16 text-16 leading-tight md:mb-20" disabled={loading}>
+            {formatAccountMessage({ id: 'password.reset.keyword', defaultMessage: 'Reset' })}
+          </Button>
 
-        <Link variant="menu-item" className="mx-auto block w-fit text-14" link={signInLink}>
-          {formatAccountMessage({ id: 'account.back.sign', defaultMessage: 'Back to sign in' })}
-        </Link>
-      </form>
-    </div>
+          <Link variant="menu-item" className="mx-auto block w-fit text-14" link={signInLink}>
+            {formatAccountMessage({ id: 'account.back.sign', defaultMessage: 'Back to sign in' })}
+          </Link>
+        </form>
+      </div>
+      <AlterForm page="register" />
+    </>
   );
 };
 

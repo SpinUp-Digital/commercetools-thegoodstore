@@ -18,12 +18,12 @@ const SaveOrCancel: FC<SaveOrCancelProps> = ({ className, onSave, onCancel }) =>
       <Button
         type="button"
         variant="secondary"
-        className="flex h-40 w-112 items-center justify-center p-0"
+        className="flex h-40 w-112 items-center justify-center p-0 text-14"
         onClick={onCancel}
       >
         {formatMessage({ id: 'cancel', defaultMessage: 'Cancel' })}
       </Button>
-      <Button type="submit" className="h-40 w-112 p-0" onClick={onSave}>
+      <Button type="submit" className="h-40 w-112 p-0 text-14" onClick={onSave}>
         {formatMessage({ id: 'save', defaultMessage: 'Save' })}
       </Button>
     </div>

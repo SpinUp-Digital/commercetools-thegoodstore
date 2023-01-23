@@ -12,7 +12,7 @@ type FeedbackIconLayerProps = {
 const FeedbackIconLayer: FC<FeedbackIconLayerProps> = ({ loading, variant }) => {
   const layerClassName = useClassNames([
     'absolute top-0 left-0 grid h-full w-full items-center justify-center',
-    variant == 'primary' ? 'bg-gray-700' : 'bg-white',
+    variant == 'primary' ? 'bg-secondary-black' : 'bg-white',
   ]);
 
   const checkIconClassName = useClassNames(['w-20', { 'text-white': variant == 'primary' }]);
