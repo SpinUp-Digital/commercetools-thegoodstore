@@ -32,7 +32,7 @@ const MarketButton = () => {
       {selectedMarket && (
         <Button variant="ghost" onClick={showMarketMenu} className="flex w-fit items-center px-0 py-4">
           <FlagIcons flagName={selectedMarket?.flag} className="mr-3 w-30" />
-          <Typography fontSize={14} className="ml-5 text-neutral-100 hover:border-b">
+          <Typography fontSize={14} className="ml-5 text-neutral-100 hover:underline">
             {selectedMarket?.region}
           </Typography>
         </Button>
