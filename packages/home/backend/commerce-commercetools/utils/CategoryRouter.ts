@@ -1,7 +1,5 @@
 import { Context, Request } from '@frontastic/extension-types';
 import { ProductApi } from '../apis/ProductApi';
-import { CategoryQuery } from '@commercetools/frontend-domain-types/query/CategoryQuery';
-import { Category } from '@commercetools/frontend-domain-types/product/Category';
 import { getLocale, getPath } from './Request';
 import { Result } from '@commercetools/frontend-domain-types/product/Result';
 import { ProductQueryFactory } from './ProductQueryFactory';
@@ -17,17 +15,13 @@ export class CategoryRouter {
 
   static loadFor = async (request: Request, frontasticContext: Context): Promise<Result> => {
     const productApi = new ProductApi(frontasticContext, getLocale(request));
-    const urlMatches = getPath(request)?.match(/[^\/]+/);
 
-    if (urlMatches) {
-      const categoryQuery: CategoryQuery = {
-        slug: urlMatches[0],
-      };
+    const chunks = getPath(request)?.split('/');
 
-      const categoryQueryResult = await productApi.queryCategories(categoryQuery);
+    if (chunks) {
+      const categoryId = chunks[chunks.length - 1];
 
-      if (categoryQueryResult.items.length == 0) return null;
-      request.query.category = (categoryQueryResult.items[0] as Category).categoryId;
+      request.query.category = categoryId;
 
       const productQuery = ProductQueryFactory.queryFromParams({
         ...request,

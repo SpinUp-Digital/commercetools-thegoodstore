@@ -116,7 +116,10 @@ const MobileFacets: React.FC<Props> = ({ facetsConfiguration }) => {
           <div className="flex items-center gap-18 px-14">
             <div className="w-full overflow-hidden rounded-md border border-transparent transition hover:border-primary-black">
               <button
-                onClick={removeAllRefinements}
+                onClick={() => {
+                  removeAllRefinements();
+                  setIsOpen(false);
+                }}
                 className="w-full cursor-pointer border border-primary-black py-6 text-14 font-medium"
               >
                 {formatProductMessage({ id: 'clear.all', defaultMessage: 'Clear All' })}
