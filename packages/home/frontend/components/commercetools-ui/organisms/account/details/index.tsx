@@ -127,58 +127,56 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
   const Content = mapping[hash as keyof typeof mapping];
 
   return (
-    <div className="bg-neutral-200 md:h-[80vh] xl:py-[68px]">
-      <div className="mx-auto grid h-full w-full max-w-[1116px] grid-cols-4 bg-white">
-        <div className="hidden h-full flex-col justify-between border-r border-neutral-400  pt-24 md:flex xl:pt-36">
-          <div className="grid gap-36 px-24">
-            {tabs.map((tab) => (
-              <Link
-                link={isLoading ? '' : tab.href}
-                key={tab.name}
-                className={`whitespace-nowrap ${isLoading ? 'cursor-default' : ''}`}
-              >
-                {isLoading ? (
-                  <Skeleton />
-                ) : (
-                  <Typography
-                    className={`hover:underline ${tab.href === hash ? 'text-primary-black' : 'text-secondary-black'}`}
-                    fontSize={16}
-                    medium={tab.href === hash}
-                  >
-                    {tab.name}
-                  </Typography>
-                )}
-              </Link>
-            ))}
-          </div>
-          <div className="p-16">
-            <div className="overflow-hidden rounded-md border-[0.5px] border-transparent hover:border-primary-black">
+    <div className="mx-auto grid h-full w-full grid-cols-4 bg-white md:h-[70vh] 2xl:grid-cols-5">
+      <div className="hidden h-full flex-col justify-between border-r border-neutral-400 pt-24 md:flex 2xl:pt-48">
+        <div className="grid gap-36 px-28 2xl:px-56">
+          {tabs.map((tab) => (
+            <Link
+              link={isLoading ? '' : tab.href}
+              key={tab.name}
+              className={`whitespace-nowrap ${isLoading ? 'cursor-default' : ''}`}
+            >
               {isLoading ? (
-                <Skeleton className="h-[30px]" />
+                <Skeleton />
               ) : (
-                <Button
-                  onClick={handleLogout}
-                  variant="ghost"
-                  className="w-full rounded-md border border-primary-black py-8 px-0 text-14"
+                <Typography
+                  className={`hover:underline ${tab.href === hash ? 'text-primary-black' : 'text-secondary-black'}`}
+                  fontSize={16}
+                  medium={tab.href === hash}
                 >
-                  {formatAccountMessage({ id: 'sign.out', defaultMessage: 'Sign out' })}
-                </Button>
+                  {tab.name}
+                </Typography>
               )}
-            </div>
-          </div>
+            </Link>
+          ))}
         </div>
-        <div className="col-span-4 py-20 px-16 md:col-span-3 md:overflow-auto md:p-24 2xl:px-44 2xl:py-28 ">
-          <div className="block pb-12 pt-16 md:hidden">
-            {contentTitle && (
-              <Typography as="h2" fontFamily="libre" className="text-18 text-primary-black">
-                {contentTitle}
-              </Typography>
+        <div className="p-16">
+          <div className="overflow-hidden rounded-md border-[0.5px] border-transparent hover:border-primary-black">
+            {isLoading ? (
+              <Skeleton className="h-[30px]" />
+            ) : (
+              <Button
+                onClick={handleLogout}
+                variant="ghost"
+                className="w-full rounded-md border border-primary-black py-8 px-0 text-14"
+              >
+                {formatAccountMessage({ id: 'sign.out', defaultMessage: 'Sign out' })}
+              </Button>
             )}
           </div>
-
-          <AccountTabsMobile contentTitle={contentTitle} tabs={tabs} />
-          {Content && Content}
         </div>
+      </div>
+      <div className="col-span-3 py-20 px-16 md:overflow-auto md:p-24 2xl:col-span-4 2xl:px-44 2xl:py-48 2xl:pr-[136px]">
+        <div className="block pb-12 pt-16 md:hidden">
+          {contentTitle && (
+            <Typography as="h2" fontFamily="libre" className="text-18 text-primary-black">
+              {contentTitle}
+            </Typography>
+          )}
+        </div>
+
+        <AccountTabsMobile contentTitle={contentTitle} tabs={tabs} />
+        {Content && Content}
       </div>
     </div>
   );

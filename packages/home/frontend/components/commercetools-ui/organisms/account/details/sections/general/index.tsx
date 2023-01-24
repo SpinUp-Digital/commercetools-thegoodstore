@@ -34,13 +34,6 @@ const MyAccount: React.FC<Props> = ({ isLoading }) => {
           </Typography>
         )}
         {isLoading ? (
-          <Skeleton className="h-[30px] max-w-[300px]" />
-        ) : (
-          <Typography as="h3" fontFamily="libre" className="hidden text-22 text-primary-black md:block lg:text-24">
-            {formatMessage({ id: 'my.account', defaultMessage: 'My Account' })}
-          </Typography>
-        )}
-        {isLoading ? (
           <Skeleton className="max-w-[400px]" />
         ) : (
           <Typography fontSize={14} className="text-secondary-black md:text-16">
