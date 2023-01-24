@@ -61,18 +61,61 @@ export default {
 
     // Identify Search
     if (SearchRouter.identifyFrom(request)) {
-      return {
-        dynamicPageType: 'frontastic/category',
-        dataSourcePayload: {},
-      };
+      return SearchRouter.loadFor(request, context.frontasticContext).then((result: Result) => {
+        if (result) {
+          return {
+            dynamicPageType: 'frontastic/search',
+            dataSourcePayload: {
+              totalItems: result.total,
+              items: result.items,
+              facets: result.facets,
+              previousCursor: result.previousCursor,
+              nextCursor: result.nextCursor,
+              category: getPath(request),
+            },
+            pageMatchingPayload: {
+              query: result.query,
+              totalItems: result.total,
+              items: result.items,
+              facets: result.facets,
+              previousCursor: result.previousCursor,
+              nextCursor: result.nextCursor,
+            },
+          };
+        }
+
+        // FIXME: Return proper error result
+        return null;
+      });
     }
 
-    // Identify Category
     if (CategoryRouter.identifyFrom(request)) {
-      return {
-        dynamicPageType: 'frontastic/category',
-        dataSourcePayload: {},
-      };
+      return CategoryRouter.loadFor(request, context.frontasticContext).then((result: Result) => {
+        if (result) {
+          return {
+            dynamicPageType: 'frontastic/category',
+            dataSourcePayload: {
+              totalItems: result.total,
+              items: result.items,
+              facets: result.facets,
+              previousCursor: result.previousCursor,
+              nextCursor: result.nextCursor,
+              category: getPath(request),
+            },
+            pageMatchingPayload: {
+              totalItems: result.total,
+              items: result.items,
+              facets: result.facets,
+              previousCursor: result.previousCursor,
+              nextCursor: result.nextCursor,
+              category: getPath(request),
+            },
+          };
+        }
+
+        // FIXME: Return proper error result
+        return null;
+      });
     }
 
     return null;

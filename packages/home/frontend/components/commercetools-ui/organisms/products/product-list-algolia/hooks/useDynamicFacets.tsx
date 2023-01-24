@@ -8,11 +8,10 @@ import { FacetConfiguration } from '../types';
 interface Options {
   configuration?: Record<string, FacetConfiguration>;
   ordering?: string[];
-  pricesConfiguration?: FacetProps['pricesConfiguration'];
   render?: (result: { attribute: string; Component: JSX.Element }) => JSX.Element;
 }
 
-const useDynamicFacets = ({ configuration, ordering, pricesConfiguration, render }: Options = {}) => {
+const useDynamicFacets = ({ configuration, ordering, render }: Options = {}) => {
   const facetMapping = useMemo<Record<FacetConfiguration['type'], React.ComponentType<FacetProps>>>(
     () => ({
       range: RangeFacet,
@@ -29,14 +28,7 @@ const useDynamicFacets = ({ configuration, ordering, pricesConfiguration, render
       const facet = configuration[attribute];
 
       const Component = facetMapping[facet.type];
-      const FinalComponent = (
-        <Component
-          key={attribute}
-          label={facet.label}
-          attribute={attribute}
-          pricesConfiguration={pricesConfiguration}
-        />
-      );
+      const FinalComponent = <Component key={attribute} label={facet.label} attribute={attribute} />;
 
       return {
         attribute,
@@ -47,7 +39,7 @@ const useDynamicFacets = ({ configuration, ordering, pricesConfiguration, render
     if (ordering) facets.sort((a, b) => ordering.indexOf(a.attribute) - ordering.indexOf(b.attribute));
 
     return facets.map((facet) => facet.Component);
-  }, [facetMapping, configuration, ordering, pricesConfiguration, render]);
+  }, [facetMapping, configuration, ordering, render]);
 
   return dynamicFacets;
 };

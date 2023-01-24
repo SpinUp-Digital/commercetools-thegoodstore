@@ -34,5 +34,9 @@
   "found.products": "We found {count} products",
   "clear.all": "Clear All",
   "view": "View",
-  "done": "Done"
+  "done": "Done",
+  "asc": "Ascending",
+  "desc": "Descending",
+  "best-selling": "Best-Selling",
+  "newest": "Newest"
 }

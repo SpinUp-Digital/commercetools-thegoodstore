@@ -51,7 +51,7 @@ const Checkbox: React.FC<Props> = ({
     onChange?.(e);
   };
 
-  const containerClassNames = useClassNames(['flex items-center gap-8', containerClassName]);
+  const containerClassNames = useClassNames(['flex items-center gap-12', containerClassName]);
   const buttonClassName = useClassNames([
     'h-20 w-20 min-w-[20px] rounded-sm relative outline outline-1 cursor-pointer',
     isHovered ? 'outline-secondary-black' : 'outline-neutral-500',

@@ -36,7 +36,7 @@ import {
   removeDiscountCode,
   getProjectSettings,
 } from '../../actions/cart';
-import { queryCategories } from '../../actions/product';
+import { queryCategories, query as queryProducts } from '../../actions/product';
 import { getWishlist, addToWishlist, removeLineItem, clearWishlist, updateLineItem } from '../../actions/wishlist';
 import { UseAccount } from './UseAccount';
 import { UseAdyen } from './UseAdyen';
@@ -189,6 +189,7 @@ export const getFrontasticState = (): FrontasticState => {
     },
     useProduct: {
       ...(categoriesData as unknown as UseProduct),
+      query: queryProducts,
     },
     useAdyen: {
       createSession,
