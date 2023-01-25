@@ -21,6 +21,7 @@ type AccountRegisterBody = {
   birthdayDay?: string;
   billingAddress?: Address;
   shippingAddress?: Address;
+  isSubscribed?: boolean;
 };
 
 type AccountLoginBody = {
@@ -105,6 +106,7 @@ function mapRequestToAccount(accountRegisterBody: AccountRegisterBody): Account 
     firstName: accountRegisterBody?.firstName,
     lastName: accountRegisterBody?.lastName,
     birthday: parseBirthday(accountRegisterBody),
+    isSubscribed: accountRegisterBody?.isSubscribed,
     addresses: [],
   };
 
@@ -125,7 +127,7 @@ function mapRequestToAccount(accountRegisterBody: AccountRegisterBody): Account 
   return account;
 }
 
-export const getAccount: ActionHook = async (request: Request, actionContext: ActionContext) => {
+export const getAccount: ActionHook = async (request: Request) => {
   const account = fetchAccountFromSession(request);
 
   if (account === undefined) {
@@ -161,7 +163,7 @@ export const register: ActionHook = async (request: Request, actionContext: Acti
   const cart = await CartFetcher.fetchCart(request, actionContext);
 
   const account = await accountApi.create(accountData, cart);
-/*
+  /*
   const emailApi = EmailApiFactory.getDefaultApi(actionContext.frontasticContext, locale);
 */
   //emailApi.sendWelcomeCustomerEmail(account);
@@ -257,7 +259,7 @@ export const login: ActionHook = async (request: Request, actionContext: ActionC
   return await loginAccount(request, actionContext, account);
 };
 
-export const logout: ActionHook = async (request: Request, actionContext: ActionContext) => {
+export const logout: ActionHook = async (request: Request) => {
   return {
     statusCode: 200,
     body: JSON.stringify({}),
@@ -358,6 +360,49 @@ export const update: ActionHook = async (request: Request, actionContext: Action
   };
 
   account = await accountApi.update(account);
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify(account),
+    sessionData: {
+      ...request.sessionData,
+      account,
+    },
+  } as Response;
+};
+
+export const addIsSubscribedType: ActionHook = async (request: Request, actionContext: ActionContext) => {
+  assertIsAuthenticated(request);
+
+  let account = fetchAccountFromSession(request);
+  const accountApi = new AccountApi(actionContext.frontasticContext, getLocale(request));
+
+  account = await accountApi.addIsSubscribedType(account);
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify(account),
+    sessionData: {
+      ...request.sessionData,
+      account,
+    },
+  } as Response;
+};
+
+export const updateSubscription: ActionHook = async (request: Request, actionContext: ActionContext) => {
+  assertIsAuthenticated(request);
+
+  let account = fetchAccountFromSession(request);
+
+  if (!account.isSubscribed) {
+    await addIsSubscribedType(request, actionContext);
+  }
+
+  const isSubscribed: Account['isSubscribed'] = JSON.parse(request.body).isSubscribed;
+
+  const accountApi = new AccountApi(actionContext.frontasticContext, getLocale(request));
+
+  account = await accountApi.updateSubscription(account, isSubscribed);
 
   return {
     statusCode: 200,

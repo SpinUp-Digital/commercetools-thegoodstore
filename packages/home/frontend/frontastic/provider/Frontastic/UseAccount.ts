@@ -12,6 +12,7 @@ export interface UseAccount extends GetAccountResult {
   requestPasswordReset: (email: string) => Promise<void>;
   resetPassword: (token: string, newPassword: string) => Promise<Account>;
   update: (account: UpdateAccount) => Promise<Account>;
+  updateSubscription: (isSubscribed: boolean) => Promise<Account>;
   addAddress: (address: Omit<Address, 'addressId'>) => Promise<Account>;
   addShippingAddress: (address: Omit<Address, 'addressId'>) => Promise<Account>;
   addBillingAddress: (address: Omit<Address, 'addressId'>) => Promise<Account>;
