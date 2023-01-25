@@ -145,6 +145,23 @@ export const update = async (account: UpdateAccount): Promise<Account> => {
   return res.isError ? ({} as Account) : res.data;
 };
 
+export const updateSubscription = async (isSubscribed: boolean) => {
+  const extensions = SDK.getExtensions();
+
+  const response = await extensions.account.getAccount();
+
+  if (response.isError) return {} as Account;
+
+  const res = await sdk.callAction<Account>({
+    actionName: 'account/updateSubscription',
+    payload: { account: response.data.account, isSubscribed },
+  });
+
+  mutate('/action/account/getAccount');
+
+  return res.isError ? ({} as Account) : res.data;
+};
+
 export const addAddress = async (address: Omit<Address, 'addressId'>): Promise<Account> => {
   const extensions = SDK.getExtensions();
 
