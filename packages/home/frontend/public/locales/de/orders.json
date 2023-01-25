@@ -10,5 +10,6 @@
     "total": "Gesamt",
     "status": "Status",
     "create.return": "Retoure erstellen",
-    "articles": "Artikel"
+    "articles": "Artikel",
+    "return.success": "Retoure erstellt"
 }
