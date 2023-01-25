@@ -21,10 +21,9 @@ const Dropdown: FC<DropdownProps> = ({
   items,
   onChange,
   value,
-  defaultValue,
   ...props
 }) => {
-  const [selectedValue, setSelectedValue] = useState(defaultValue);
+  const [selectedValue, setSelectedValue] = useState(value);
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;

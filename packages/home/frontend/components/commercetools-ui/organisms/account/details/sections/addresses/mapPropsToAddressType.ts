@@ -15,8 +15,8 @@ const usePropsToAddressType = () => {
   const { formatMessage } = useFormat({ name: 'checkout' });
 
   const getAddressType = useCallback((address: AddressFormData) => {
-    if (address.addressType) return address.addressType;
-    return address.isBillingAddress ? 'billing' : 'shipping';
+    if (address?.addressType) return address?.addressType;
+    return address?.isBillingAddress ? 'billing' : 'shipping';
   }, []);
 
   const mapPropsToAddress = useCallback(
@@ -25,31 +25,31 @@ const usePropsToAddressType = () => {
 
       const typeBasedProps = {
         billing: {
-          checked: address.isDefaultBillingAddress,
+          checked: address?.isDefaultBillingAddress,
           label: formatMessage({ id: 'billing', defaultMessage: 'Billing' }),
           addressType: addressType,
           setAsDefault: async () => {
-            await setDefaultBillingAddress(address.addressId);
+            await setDefaultBillingAddress(address?.addressId);
           },
           addAddress: async () => {
-            await addBillingAddress({ ...address, country, isDefaultBillingAddress: address.isDefaultAddress });
+            await addBillingAddress({ ...address, country, isDefaultBillingAddress: address?.isDefaultAddress });
           },
           updateAddress: async () => {
-            await updateAddress({ ...address, isDefaultBillingAddress: address.isDefaultAddress });
+            await updateAddress({ ...address, isDefaultBillingAddress: address?.isDefaultAddress });
           },
         },
         shipping: {
-          checked: address.isDefaultShippingAddress,
+          checked: address?.isDefaultShippingAddress,
           label: formatMessage({ id: 'shipping', defaultMessage: 'Shipping' }),
           addressType: addressType,
           setAsDefault: async () => {
-            await setDefaultShippingAddress(address.addressId);
+            await setDefaultShippingAddress(address?.addressId);
           },
           addAddress: async () => {
-            await addShippingAddress({ ...address, country, isDefaultShippingAddress: address.isDefaultAddress });
+            await addShippingAddress({ ...address, country, isDefaultShippingAddress: address?.isDefaultAddress });
           },
           updateAddress: async () => {
-            await updateAddress({ ...address, isDefaultShippingAddress: address.isDefaultAddress });
+            await updateAddress({ ...address, isDefaultShippingAddress: address?.isDefaultAddress });
           },
         },
       };
