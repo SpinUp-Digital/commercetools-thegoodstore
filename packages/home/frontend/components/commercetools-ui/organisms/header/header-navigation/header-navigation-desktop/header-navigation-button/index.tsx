@@ -35,7 +35,7 @@ const HeaderNavigationButtonDesktop: FC<Props> = ({ show, link, tiles, updateSub
           <Typography as="span" fontSize={16}>
             {link?.name}
           </Typography>
-          {link?.subCategories.length > 0 && <ChevronDownIcon className="ml-10 w-20 text-secondary-black" />}
+          {link?.subCategories.length > 0 && <ChevronDownIcon className="ml-10 w-16 text-secondary-black" />}
         </Link>
       </div>
 
