@@ -31,7 +31,7 @@ const MarketButton = () => {
     <div className="hidden justify-center lg:flex">
       {selectedMarket && (
         <Button variant="ghost" onClick={showMarketMenu} className="flex w-fit items-center px-0 py-4">
-          <FlagIcons flagName={selectedMarket?.flag} className="mr-3 w-30" />
+          <FlagIcons flagName={selectedMarket?.flag} className="mr-3 h-16 w-24" />
           <Typography fontSize={14} className="ml-5 text-neutral-100 hover:underline">
             {selectedMarket?.region}
           </Typography>
@@ -41,7 +41,7 @@ const MarketButton = () => {
       <Drawer
         isOpen={showMarket}
         direction="right"
-        className="w-[90%] max-w-[380px] bg-neutral-100"
+        className="w-[90%] max-w-[380px] bg-neutral-200"
         onClose={hideMarketMenu}
       >
         <div className="flex w-full items-center justify-between border-b border-neutral-400 py-20 px-16">
@@ -54,21 +54,23 @@ const MarketButton = () => {
             title={formatMessage({ id: 'close', defaultMessage: 'Close' })}
             className="p-0"
           >
-            <XMarkIcon className="w-25 text-secondary-black" />
+            <XMarkIcon className="w-28 text-secondary-black" />
           </Button>
         </div>
 
-        <div className="py-32">
+        <div className="pt-20">
           {markets.map((market) => (
             <Button
               key={market.flag}
               variant="ghost"
               onClick={() => handleMarketClick(market)}
-              className="ml-5 flex w-full items-center justify-start py-14 text-16"
+              className="ml-5 flex w-full items-center justify-start py-14"
             >
               {selectedMarket?.region === market?.region && <CheckIcon className="ml-5 mr-11 w-20" />}
-              <FlagIcons flagName={market.flag} className="mr-8 w-30" />
-              {market.region}
+              <FlagIcons flagName={market.flag} className="mr-8 h-20 w-32" />
+              <Typography fontSize={16} className="text-primary-black">
+                {market.region}
+              </Typography>
             </Button>
           ))}
         </div>

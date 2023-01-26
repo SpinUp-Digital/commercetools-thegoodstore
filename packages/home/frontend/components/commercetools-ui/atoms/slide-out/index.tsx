@@ -111,7 +111,7 @@ const Slideout: React.FC<Props> = ({
           >
             <div className={wishlistClassName} />
             {totalWishlistItems > 0 && (
-              <span className="absolute top-[-5px] right-[-5px] h-8 w-8 rounded-full bg-green-500" />
+              <span className="absolute top-[-3px] right-[-8px] h-10 w-10 rounded-full bg-green-500" />
             )}
             <HeartIcon className="w-28" stroke="#494949" />
           </div>

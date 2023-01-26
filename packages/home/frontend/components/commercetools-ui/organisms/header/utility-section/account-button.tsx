@@ -28,12 +28,12 @@ const AccountButton = () => {
               <div className="flex w-fit whitespace-nowrap">
                 <div className="mr-16 hidden w-104 py-2 lg:inline-block">
                   {loggedIn && (
-                    <Typography as={'p'} fontSize={16} className="hidden truncate text-secondary-black lg:block">
+                    <Typography fontSize={16} className="hidden truncate text-secondary-black lg:block">
                       {userName}
                     </Typography>
                   )}
                 </div>
-                <UserIcon className="w-24 text-secondary-black" />
+                <UserIcon className="w-28 text-secondary-black" />
               </div>
             </Popover.Button>
             <Popover.Overlay className="fixed inset-0 z-[310] bg-secondary-black opacity-30" />

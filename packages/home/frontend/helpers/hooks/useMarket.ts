@@ -11,9 +11,9 @@ const useMarket = () => {
   const getCountryAndCurrency = (country: string) => {
     switch (country) {
       case 'en-GB':
-        return { countryName: 'GB', currency: 'GBP', currencyCode: '£' };
+        return { countryCode: 'GB', countryName: 'Great Britain', currency: 'GBP', currencyCode: '£' };
       default:
-        return { countryName: 'DE', currency: 'EUR', currencyCode: '€' };
+        return { countryCode: 'DE', countryName: 'Germany', currency: 'EUR', currencyCode: '€' };
     }
   };
 
@@ -26,7 +26,7 @@ const useMarket = () => {
   useEffect(() => {
     const initialMarkets = router.locales?.map((locale) => ({
       region: getCountryAndCurrency(mapSDKLanguage(locale)).countryName,
-      flag: getCountryAndCurrency(mapSDKLanguage(locale)).countryName,
+      flag: getCountryAndCurrency(mapSDKLanguage(locale)).countryCode,
       locale: mapSDKLanguage(locale),
       currency: getCountryAndCurrency(mapSDKLanguage(locale)).currency,
       currencyCode: getCountryAndCurrency(mapSDKLanguage(locale)).currencyCode,

@@ -55,18 +55,22 @@ const UtilitySection: React.FC<Props> = ({
 
         <div
           title={formatWishlistMessage({ id: 'wishlist', defaultMessage: 'Wishlist' })}
-          className="relative cursor-pointer px-16 md:mx-24 lg:mx-32"
+          className="relative cursor-pointer px-16 md:mx-24 lg:mx-28"
           onClick={onWishlistClicked}
         >
-          <WishlistIcon totalWishlistItems={totalWishlistItems} className="w-25 text-secondary-black" />
+          <WishlistIcon totalWishlistItems={totalWishlistItems} className="w-28 text-secondary-black" />
         </div>
 
         <div
           title={formatCartMessage({ id: 'myCart', defaultMessage: 'My Cart' })}
-          className="relative cursor-pointer"
+          className="cursor-pointer"
           onClick={onCartClicked}
         >
-          <CartIcon className="w-23 text-secondary-black" totalCartItems={totalCartItems} />
+          <CartIcon
+            className="w-28 text-secondary-black"
+            totalCartItems={totalCartItems}
+            counterClassName="-translate-y-1/4"
+          />
         </div>
       </div>
 
