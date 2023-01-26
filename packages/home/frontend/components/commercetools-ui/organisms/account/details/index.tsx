@@ -4,6 +4,7 @@ import Skeleton from 'react-loading-skeleton';
 import Button from 'components/commercetools-ui/atoms/button';
 import Link from 'components/commercetools-ui/atoms/link';
 import Typography from 'components/commercetools-ui/atoms/typography';
+import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useHash from 'helpers/hooks/useHash';
 import useI18n from 'helpers/hooks/useI18n';
@@ -126,10 +127,17 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
 
   const Content = mapping[hash as keyof typeof mapping];
 
+  const contentClassNames = useClassNames([
+    hash != '#orders' ? 'px-16' : '',
+    'col-span-3 py-20 md:overflow-auto md:p-24 2xl:col-span-4 2xl:px-44 2xl:py-48 2xl:pr-[136px]',
+  ]);
+
+  const contentTitleClassNames = useClassNames([hash === '#orders' ? 'px-16' : '', 'block pb-12 pt-16 md:hidden']);
+
   return (
-    <div className="mx-auto grid h-full w-full grid-cols-4 bg-white md:h-[70vh] 2xl:grid-cols-5">
+    <div className="mx-auto grid h-full w-full grid-cols-3 bg-white md:h-[70vh] md:grid-cols-4 2xl:grid-cols-5">
       <div className="hidden h-full flex-col justify-between border-r border-neutral-400 pt-24 md:flex 2xl:pt-48">
-        <div className="grid gap-36 px-28 2xl:px-56">
+        <div className="grid gap-36 px-28 lg:px-56">
           {tabs.map((tab) => (
             <Link
               link={isLoading ? '' : tab.href}
@@ -150,7 +158,7 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
             </Link>
           ))}
         </div>
-        <div className="p-16">
+        <div className="py-16 px-28 lg:px-52">
           <div className="overflow-hidden rounded-md border-[0.5px] border-transparent hover:border-primary-black">
             {isLoading ? (
               <Skeleton className="h-[30px]" />
@@ -166,8 +174,8 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
           </div>
         </div>
       </div>
-      <div className="col-span-4 py-20 px-16 md:col-span-3 md:overflow-auto md:p-24 2xl:col-span-4 2xl:px-44 2xl:py-48 2xl:pr-[136px]">
-        <div className="block pb-12 pt-16 md:hidden">
+      <div className={contentClassNames}>
+        <div className={contentTitleClassNames}>
           {contentTitle && (
             <Typography as="h2" fontFamily="libre" className="text-18 text-primary-black">
               {contentTitle}
@@ -175,7 +183,7 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
           )}
         </div>
 
-        <AccountTabsMobile contentTitle={contentTitle} tabs={tabs} />
+        <AccountTabsMobile contentTitle={contentTitle} hash={hash} tabs={tabs} />
         {Content && Content}
       </div>
     </div>

@@ -10,5 +10,6 @@
     "total": "Total",
     "status": "Status",
     "create.return": "Create return",
-    "articles": "articles"
+    "articles": "articles",
+    "return.success":"Return created"
 }

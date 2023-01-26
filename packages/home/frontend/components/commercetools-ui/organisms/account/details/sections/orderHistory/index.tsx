@@ -1,66 +1,73 @@
 import React, { useMemo, useState } from 'react';
+import { useRouter } from 'next/router';
 import Slider from 'components/commercetools-ui/atoms/slider';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import Wrapper from 'components/commercetools-ui/organisms/content/wrapper';
 import { useFormat } from 'helpers/hooks/useFormat';
 import OrderItem from './OrderItem';
 
-export const orders = [
-  {
-    id: '334455 6644',
-    date: '2022-03-12',
-    total: '145, 90 E',
-    status: 'registered',
-  },
-  {
-    id: '334455 6644',
-    date: '2022-03-12',
-    total: '145, 90 E',
-    status: 'registered',
-  },
-
-  {
-    id: '334455 6644',
-    date: '2022-03-12',
-    total: '145, 90 E',
-    status: 'delivered',
-  },
-  {
-    id: '334455 6644',
-    date: '2022-03-12',
-    total: '145, 90 E',
-    status: 'delivered',
-  },
-  {
-    id: '334455 6644',
-    date: '2022-03-12',
-    total: '145, 90 E',
-    status: 'delivered',
-  },
-  {
-    id: '334455 6644',
-    date: '2022-03-12',
-    total: '145, 90 E',
-    status: 'delivered',
-  },
-  {
-    id: '334455 6644',
-    date: '2022-03-12',
-    total: '145, 90 E',
-    status: 'returned',
-  },
-  {
-    id: '334455 6644',
-    date: '2022-03-12',
-    total: '145, 90 E',
-    status: 'returned',
-  },
-];
+export interface StatusTab {
+  name: string;
+  slug: string;
+}
 
 const Orders = () => {
+  const router = useRouter();
+
+  const orders = [
+    {
+      id: '334455 6639',
+      date: '2022-03-12',
+      total: { fractionDigits: 2, centAmount: 10033, currencyCode: router.locale === 'de' ? 'EUR' : 'GBP' },
+      status: 'registered',
+    },
+    {
+      id: '334455 6640',
+      date: '2022-03-12',
+      total: { fractionDigits: 2, centAmount: 10033, currencyCode: router.locale === 'de' ? 'EUR' : 'GBP' },
+      status: 'registered',
+    },
+    {
+      id: '334455 6641',
+      date: '2022-03-12',
+      total: { fractionDigits: 2, centAmount: 10033, currencyCode: router.locale === 'de' ? 'EUR' : 'GBP' },
+      status: 'delivered',
+    },
+    {
+      id: '334455 6642',
+      date: '2022-03-12',
+      total: { fractionDigits: 2, centAmount: 10033, currencyCode: router.locale === 'de' ? 'EUR' : 'GBP' },
+      status: 'delivered',
+    },
+    {
+      id: '334455 6643',
+      date: '2022-03-12',
+      total: { fractionDigits: 2, centAmount: 10033, currencyCode: router.locale === 'de' ? 'EUR' : 'GBP' },
+      status: 'delivered',
+    },
+    {
+      id: '334455 6644',
+      date: '2022-03-12',
+      total: { fractionDigits: 2, centAmount: 10033, currencyCode: router.locale === 'de' ? 'EUR' : 'GBP' },
+      status: 'delivered',
+    },
+    {
+      id: '334455 6645',
+      date: '2022-03-12',
+      total: { fractionDigits: 2, centAmount: 30033, currencyCode: router.locale === 'de' ? 'EUR' : 'GBP' },
+      status: 'returned',
+    },
+    {
+      id: '334455 6646',
+      date: '2022-03-12',
+      total: { fractionDigits: 2, centAmount: 50033, currencyCode: router.locale === 'de' ? 'EUR' : 'GBP' },
+      status: 'returned',
+    },
+  ];
+
   const { formatMessage: formatOrdersMessage } = useFormat({ name: 'orders' });
 
-  const statusTabs = [
+  const statusTabs: StatusTab[] = [
     { name: formatOrdersMessage({ id: 'all.orders', defaultMessage: 'All orders' }), slug: 'allOrders' },
     { name: formatOrdersMessage({ id: 'registered', defaultMessage: 'Registered' }), slug: 'registered' },
     { name: formatOrdersMessage({ id: 'delivered', defaultMessage: 'Delivered' }), slug: 'delivered' },
@@ -71,7 +78,13 @@ const Orders = () => {
   const orderHistoryContent = useMemo(() => {
     if (selectedTab === 'allOrders') return orders;
     else return orders.filter((order) => order.status === selectedTab);
-  }, [selectedTab]);
+  }, [selectedTab, orders]);
+
+  const tabTextClassNames = (tab: StatusTab) => {
+    return `border-primary-black pb-12 ${
+      tab.slug === selectedTab ? 'border-b-[1.5px] text-primary-black' : 'text-secondary-black'
+    }`;
+  };
 
   return (
     <>
@@ -83,8 +96,8 @@ const Orders = () => {
           })}
         </Typography>
       </div>
-      <div className="pt-12 pb-16">
-        <Typography as="h3" fontSize={16} fontFamily="inter" className="text-primary-black">
+      <div className="px-16 pt-12 pb-16 md:px-0">
+        <Typography as="h3" fontSize={16} fontFamily="inter" className="text-secondary-black">
           {formatOrdersMessage({
             id: 'help.question',
             defaultMessage: 'Check status of recent orders, manage your returns and download invoices.',
@@ -92,8 +105,8 @@ const Orders = () => {
         </Typography>
       </div>
 
-      <Wrapper className="flex border-b-[1.5px] border-neutral-400 pt-12 md:hidden">
-        <div className="mx-auto h-fit w-[85%]">
+      <Wrapper className="relative flex h-57 w-full border-b-[1.5px] border-neutral-400 pt-12 md:hidden">
+        <div className="absolute left-1/2 h-fit w-[85%] -translate-x-1/2 px-8">
           <Slider
             slideWidthIsFlexible
             dots={false}
@@ -133,27 +146,25 @@ const Orders = () => {
         </div>
       </Wrapper>
 
-      <div className="hidden w-full border-b-[1.5px] border-neutral-400 pt-12 md:flex">
-        {statusTabs.map((tab) => (
-          <div
-            key={tab.slug}
-            onClick={() => setSelectedTab(tab.slug)}
-            className="w-fit cursor-pointer whitespace-nowrap pr-36"
-          >
-            <Typography
-              fontSize={16}
-              medium={tab.slug === selectedTab}
-              className={`border-primary-black py-12 ${
-                tab.slug === selectedTab ? 'border-b-[1.5px] text-primary-black' : 'text-secondary-black'
-              }`}
-            >
-              {tab.name}
-            </Typography>
+      <div className="px-16 md:px-0">
+        <div className="relative hidden h-57 w-full border-b-[1.5px] border-neutral-400 pt-24 md:flex">
+          <div className="absolute flex h-fit w-[40%] justify-between">
+            {statusTabs.map((tab) => (
+              <div
+                key={tab.slug}
+                onClick={() => setSelectedTab(tab.slug)}
+                className="cursor-pointer whitespace-nowrap pr-36"
+              >
+                <Typography fontSize={16} medium={tab.slug === selectedTab} className={tabTextClassNames(tab)}>
+                  {tab.name}
+                </Typography>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
 
-      <div className="h-[75%] overflow-auto py-24">
+      <div className=" overflow-auto py-24 px-16 md:px-0">
         {orderHistoryContent.map((order) => (
           <OrderItem key={order.id} order={order} />
         ))}

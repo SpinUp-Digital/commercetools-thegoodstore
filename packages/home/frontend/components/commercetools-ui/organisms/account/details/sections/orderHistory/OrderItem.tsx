@@ -1,13 +1,16 @@
 import React, { FC } from 'react';
+import { useRouter } from 'next/router';
+import { Money } from '@commercetools/frontend-domain-types/product/Money';
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
+import toast from 'react-hot-toast';
 import Button from 'components/commercetools-ui/atoms/button';
 import Typography from 'components/commercetools-ui/atoms/typography';
+import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
-
 export interface OrderItem {
   id: string;
   date: string;
-  total: string;
+  total: Money;
   status: string;
 }
 
@@ -16,10 +19,15 @@ interface Props {
 }
 
 const OrderItem: FC<Props> = ({ order }) => {
+  const router = useRouter();
   const { formatMessage: formatOrdersMessage } = useFormat({ name: 'orders' });
+  const handleReturnClick = () => {
+    toast.success(formatOrdersMessage({ id: 'return.success', defaultMessage: 'Return created' }));
+  };
+
   return (
     <div className="mb-24 h-170 w-full rounded-md border-[1.5px] border-neutral-300">
-      <div className="flex h-110 items-center justify-between rounded-t-md bg-neutral-150 px-24">
+      <div className="grid h-110 grid-cols-1 items-center rounded-t-md bg-neutral-150 px-24 md:grid-cols-4">
         <div className="flex-col">
           <div className="flex pb-15">
             <Typography fontSize={16} medium className="text-primary-black">
@@ -45,7 +53,7 @@ const OrderItem: FC<Props> = ({ order }) => {
             {formatOrdersMessage({ id: 'total', defaultMessage: 'Total' })}
           </Typography>
           <Typography fontSize={14} className="text-secondary-black">
-            {order.total}
+            {CurrencyHelpers.formatForCurrency(order.total as number, router.locale)}
           </Typography>
         </div>
 
@@ -57,9 +65,11 @@ const OrderItem: FC<Props> = ({ order }) => {
             {formatOrdersMessage({ id: order.status, defaultMessage: 'All orders' })}
           </Typography>
         </div>
-        <div className="hidden lg:flex">
-          <Button variant="primary" size="s" className="text-14 font-medium">
-            {formatOrdersMessage({ id: 'create.return', defaultMessage: 'Create return' })}
+        <div className="hidden justify-end lg:flex">
+          <Button variant="primary" size="s" onClick={handleReturnClick} className="rounded-sm">
+            <Typography fontSize={14} medium>
+              {formatOrdersMessage({ id: 'create.return', defaultMessage: 'Create return' })}
+            </Typography>
           </Button>
         </div>
       </div>
