@@ -1,5 +1,6 @@
 import { BaseApi } from './BaseApi';
-import { Account } from '@commercetools/frontend-domain-types/account/Account';
+//import { Account } from '@commercetools/frontend-domain-types/account/Account';
+import { AccountExtended as Account } from '../interfaces/AccountExtended';
 import { AccountToken } from '@commercetools/frontend-domain-types/account/AccountToken';
 import {
   CustomerDraft,

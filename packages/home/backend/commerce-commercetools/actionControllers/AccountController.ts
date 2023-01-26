@@ -1,7 +1,8 @@
 import { Request, Response } from '@frontastic/extension-types';
 import { ActionContext } from '@frontastic/extension-types';
 import { AccountApi } from '../apis/AccountApi';
-import { Account } from '@commercetools/frontend-domain-types/account/Account';
+//import { Account } from '@commercetools/frontend-domain-types/account/Account';
+import { AccountExtended as Account } from '../interfaces/AccountExtended';
 import { Address } from '@commercetools/frontend-domain-types/account/Address';
 import { CartFetcher } from '../utils/CartFetcher';
 import { getLocale } from '../utils/Request';
