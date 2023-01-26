@@ -166,7 +166,7 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
           </div>
         </div>
       </div>
-      <div className="col-span-3 py-20 px-16 md:overflow-auto md:p-24 2xl:col-span-4 2xl:px-44 2xl:py-48 2xl:pr-[136px]">
+      <div className="col-span-4 py-20 px-16 md:col-span-3 md:overflow-auto md:p-24 2xl:col-span-4 2xl:px-44 2xl:py-48 2xl:pr-[136px]">
         <div className="block pb-12 pt-16 md:hidden">
           {contentTitle && (
             <Typography as="h2" fontFamily="libre" className="text-18 text-primary-black">
