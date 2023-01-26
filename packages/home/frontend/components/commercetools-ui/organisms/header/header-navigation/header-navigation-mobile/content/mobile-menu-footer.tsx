@@ -51,21 +51,23 @@ const MobileMenuFooter: FC<Props> = ({ hideHeaderMenu, insertCategory }) => {
     <>
       <div className="mt-12 mb-16 w-full border border-neutral-400" />
 
-      <div className="ml-24 mr-22 block pt-16 md:hidden">
-        {account ? (
+      {account ? (
+        <div className="ml-24 mr-22 block pt-16 md:hidden">
           <MobileMenuNavButton
             link={accountButton}
             onClick={() => insertCategory(accountButton)}
             hideHeaderMenu={hideHeaderMenu}
           />
-        ) : (
-          <Link link="/help" onClick={hideHeaderMenu}>
-            <Typography fontSize={14} className="text-primary-black">
+        </div>
+      ) : (
+        <div className="ml-24 mr-22 block py-16 md:hidden">
+          <Link link="/help" onClick={hideHeaderMenu} className="py-16">
+            <Typography fontSize={16} className="text-primary-black">
               {formatMessage({ id: 'help.and.support', defaultMessage: 'Help & Customer Service' })}
             </Typography>
-          </Link>
-        )}
-      </div>
+          </Link>{' '}
+        </div>
+      )}
 
       <div className="mx-24 flex py-16">
         {account ? (
@@ -76,7 +78,7 @@ const MobileMenuFooter: FC<Props> = ({ hideHeaderMenu, insertCategory }) => {
           </Button>
         ) : (
           <Link link="/login" onClick={hideHeaderMenu} className="px-0">
-            <Typography fontSize={16} className="text-primary-black">
+            <Typography fontSize={16} className="font-normal text-primary-black">
               {formatAccountMessage({ id: 'sign.in', defaultMessage: 'Sign in' })}
             </Typography>
           </Link>

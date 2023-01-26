@@ -13,7 +13,7 @@ const Addresses = () => {
 
   return (
     <div>
-      <div className="hidden pb-12 md:block">
+      <div className="hidden pb-12 md:block md:pb-20 2xl:pb-36">
         <Typography as="h2" fontFamily="libre" className="text-22 text-primary-black lg:text-24">
           {formatAccountMessage({
             id: 'addresses',
@@ -22,7 +22,11 @@ const Addresses = () => {
         </Typography>
       </div>
       <div>
-        <Typography fontSize={14} lineHeight="loose" className="mb-24 text-secondary-black md:text-14 2xl:text-16">
+        <Typography
+          fontSize={14}
+          lineHeight="loose"
+          className="mb-28 text-secondary-black md:mb-24 md:text-14 2xl:mb-36 2xl:text-16"
+        >
           {formatAccountMessage({
             id: 'address.desc',
             defaultMessage: 'Manage or add addresses for your account.',
@@ -36,7 +40,7 @@ const Addresses = () => {
         </Link>
       </div>
 
-      <div className="mt-32 grid gap-20">
+      <div className="mt-24 grid gap-20 md:mt-28 2xl:mt-32">
         {addresses?.map((address) => (
           <Address key={address.addressId} address={address} />
         ))}

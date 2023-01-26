@@ -51,9 +51,11 @@ const AddressForm: React.FC<AddressFormProps> = ({ editedAddressId }) => {
   //new address data
   const defaultData = useMemo(
     () =>
-      editedAddressId ? account?.addresses?.find((address) => address.addressId === editedAddressId) : { country },
+      (editedAddressId
+        ? account?.addresses?.find((address) => address.addressId === editedAddressId)
+        : { country }) as AddressFormData,
     [account?.addresses, country, editedAddressId],
-  ) as AddressFormData;
+  );
 
   const [data, setData] = useState<AddressFormData>(defaultData);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -82,7 +84,8 @@ const AddressForm: React.FC<AddressFormProps> = ({ editedAddressId }) => {
   };
 
   const discardFormAndNotify = (promise: Promise<Account | void>) => {
-    promise.then(notifyDataUpdated).catch(notifyWentWrong).finally(discardForm);
+    discardForm();
+    promise.then(notifyDataUpdated).catch(notifyWentWrong);
   };
 
   const handleDelete = () => {
@@ -90,7 +93,8 @@ const AddressForm: React.FC<AddressFormProps> = ({ editedAddressId }) => {
       .then(closeModal)
       .then(() =>
         toast.success(formatAccountMessage({ id: 'address.deleted', defaultMessage: 'Account deleted successfully' })),
-      );
+      )
+      .then(discardForm);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -186,7 +190,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ editedAddressId }) => {
         items={addressTypes}
         className="w-full border-neutral-500"
         onChange={handleChange}
-        value={data?.addressType ?? addressTypes[0].value}
+        value={editedAddressId ? mapPropsToAddress(data).addressType : addressTypes[0].value}
         label={formatAccountMessage({
           id: 'address.type',
           defaultMessage: 'Address type',
@@ -196,7 +200,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ editedAddressId }) => {
       <Checkbox
         name="isDefaultAddress"
         id="is-default-address"
-        defaultChecked={data?.isDefaultAddress ?? false}
+        checked={data?.isDefaultAddress ?? false}
         onChange={handleChange}
         containerClassName="mt-4 mb-20"
         label={formatAccountMessage({

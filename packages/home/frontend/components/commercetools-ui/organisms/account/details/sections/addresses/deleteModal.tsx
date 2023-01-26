@@ -19,7 +19,7 @@ const DeleteModal: FC<DeleteModalProps> = ({ modalIsOpen, closeModal, handleDele
     <Modal
       shouldCloseOnOverlayClick
       isOpen={modalIsOpen}
-      style={{ content: { width: 400, height: 280, padding: '72px 76px' } }}
+      style={{ content: { width: 400, height: 280, overflow: 'hidden' } }}
       contentLabel={formatMessage({ id: 'quick.view', defaultMessage: 'Quick view' })}
       onRequestClose={closeModal}
     >
@@ -31,15 +31,15 @@ const DeleteModal: FC<DeleteModalProps> = ({ modalIsOpen, closeModal, handleDele
           onClick={closeModal}
         />
 
-        <div>
-          <Typography as="h3" align="center" fontSize={20} medium className="mb-24 text-primary-black">
+        <div className="m-auto grid h-full place-content-center gap-24">
+          <Typography as="h3" align="center" fontSize={20} medium className="text-primary-black">
             {formatAccountMessage({ id: 'delete.address', defaultMessage: 'Delete address' })}
           </Typography>
-          <Typography as="p" fontSize={16} className="mb-24 text-secondary-black">
+          <Typography align="center" as="p" fontSize={16} className="text-secondary-black">
             {formatAccountMessage({ id: 'action.warning', defaultMessage: 'This action can not be undone.' })}
           </Typography>
 
-          <div className="mt-32 grid grid-cols-2 gap-12">
+          <div className="grid w-[244px] grid-cols-2 gap-12">
             <Button type="button" variant="secondary" className="h-40 w-full p-0" onClick={closeModal}>
               {formatMessage({ id: 'cancel', defaultMessage: 'Cancel' })}
             </Button>
