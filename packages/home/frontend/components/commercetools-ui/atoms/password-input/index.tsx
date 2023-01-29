@@ -15,7 +15,7 @@ const PasswordInput: FC<InputProps> = (props) => {
 
   return (
     <div className="relative">
-      <Input type={type} {...props}>
+      <Input type={type} hideCheckIcon {...props}>
         <span className="absolute top-20 right-12 z-10 translate-y-[-50%] hover:cursor-pointer" onClick={toggleHidden}>
           {hidden ? <EyeSlashIcon className={iconsClassName} /> : <EyeIcon className={iconsClassName} />}
         </span>

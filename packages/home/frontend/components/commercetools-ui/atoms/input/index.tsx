@@ -12,6 +12,7 @@ export interface InputProps extends Omit<ComponentProps<'input'>, 'onChange'> {
   error?: string;
   errorMessage?: string;
   isValid?: boolean;
+  hideCheckIcon?: boolean;
   validation?: (valueToValidate: string) => boolean;
 }
 
@@ -28,6 +29,7 @@ const Input: FC<InputProps> = ({
   errorMessage,
   validation,
   children,
+  hideCheckIcon,
   ...props
 }) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -120,7 +122,7 @@ const Input: FC<InputProps> = ({
           value={value}
           {...props}
         />
-        {(isValid || (props.isValid && !isInActiveState)) && !isFocused && props.type !== 'password' && (
+        {(isValid || (props.isValid && !isInActiveState)) && !isFocused && !hideCheckIcon && (
           <CheckIcon className="absolute top-[50%] right-12 h-16 w-16 translate-y-[-50%] text-green-500" />
         )}
         {children}
