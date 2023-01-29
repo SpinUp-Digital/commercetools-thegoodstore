@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Account } from '@commercetools/frontend-domain-types/account/Account';
 import Input, { InputProps } from 'components/commercetools-ui/atoms/input';
 import useFeedbackToasts from 'components/commercetools-ui/organisms/account/hooks/useFeedbackToasts';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useValidate from 'helpers/hooks/useValidate';
+import { Account } from 'types/account';
 import { useAccount } from 'frontastic';
 import AccountForm from '../../../../account-atoms/account-form';
 import useDiscardForm from '../../../../useDiscardForm';

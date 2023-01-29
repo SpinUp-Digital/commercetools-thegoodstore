@@ -1,4 +1,4 @@
-import { Account } from '@commercetools/frontend-domain-types/account/Account';
+import { Account } from 'types/account';
 import { AccountToken } from '@commercetools/frontend-domain-types/account/AccountToken';
 import { Address } from '@commercetools/frontend-domain-types/account/Address';
 import { Group } from '@commercetools/frontend-domain-types/account/Group';

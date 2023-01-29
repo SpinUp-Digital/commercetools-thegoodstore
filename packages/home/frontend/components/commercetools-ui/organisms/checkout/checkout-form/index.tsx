@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Account } from '@commercetools/frontend-domain-types/account/Account';
 import { useFormat } from 'helpers/hooks/useFormat';
+import { Account } from 'types/account';
 import FormButton from './fields/formButton';
 import FormCheckbox from './fields/formCheckbox';
 import FormInput from './fields/formInput';
