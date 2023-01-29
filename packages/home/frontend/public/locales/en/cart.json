@@ -52,5 +52,6 @@
   "cart": "Cart",
   "items": "Items",
   "we.accept": "We accept",
-  "cart.empty.ask": "Your cart is empty. Continue shopping?"
+  "cart.empty.ask": "Your cart is empty. Continue shopping?",
+  "continue.shopping": "Continue shopping"
 }

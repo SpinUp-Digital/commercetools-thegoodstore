@@ -8,6 +8,7 @@ export const toUIProduct = (product: Product, variant: Variant, colors: UIColor[
     name: product?.name ?? '',
     variants: product?.variants,
     price: variant?.price ?? {},
+    categories: product?.categories,
     images:
       variant?.images?.map((img: string, id: number) => ({
         id: `${variant?.sku}-${id}`,

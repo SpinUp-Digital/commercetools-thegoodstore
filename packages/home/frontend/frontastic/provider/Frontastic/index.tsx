@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { SWRConfig } from 'swr';
+import AddToCartOverlayProvider from 'context/add-to-cart-overlay';
 import { FrontasticState, getFrontasticState } from './FrontasticState';
 
 const initialState: FrontasticState = {
@@ -16,7 +17,9 @@ export const FrontasticProvider: React.FC = ({ children }) => {
   const state: FrontasticState = getFrontasticState();
   return (
     <SWRConfig>
-      <FrontasticContext.Provider value={state}>{children}</FrontasticContext.Provider>
+      <FrontasticContext.Provider value={state}>
+        <AddToCartOverlayProvider>{children}</AddToCartOverlayProvider>
+      </FrontasticContext.Provider>
     </SWRConfig>
   );
 };

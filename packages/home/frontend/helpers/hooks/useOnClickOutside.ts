@@ -20,11 +20,11 @@ function useOnClickOutside<T extends HTMLElement = HTMLElement>(
       }
     }
 
-    document.addEventListener('mousedown', handleMouseDown);
+    document.addEventListener('mouseup', handleMouseDown);
     document.addEventListener('keyup', handleKeyUp);
 
     return () => {
-      document.removeEventListener('mousedown', handleMouseDown);
+      document.removeEventListener('mouseup', handleMouseDown);
       document.removeEventListener('keyup', handleKeyUp);
     };
   }, [ref, handler, enabled]);

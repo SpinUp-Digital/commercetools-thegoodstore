@@ -1,8 +1,9 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import AccordionBtn from 'components/commercetools-ui/atoms/accordion';
 import Link from 'components/commercetools-ui/atoms/link';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
+import useCloseFlyouts from 'helpers/hooks/useCloseFlyouts';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart } from 'frontastic';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
@@ -46,12 +47,7 @@ const OrderSummary: React.FC<Props> = ({
 
   const { isEmpty, transaction } = useCart();
 
-  const closeActiveFlyouts = useCallback(() => {
-    //Trigger an `ESC` key click to close any active flyouts
-    const event = new Event('keyup') as KeyboardEvent;
-    (event.key as string) = 'Escape';
-    document.dispatchEvent(event);
-  }, []);
+  const closeFlyouts = useCloseFlyouts();
 
   return (
     <div>
@@ -109,7 +105,7 @@ const OrderSummary: React.FC<Props> = ({
               <button
                 disabled={button.disabled}
                 className="w-full rounded-md bg-primary-black py-12 font-medium text-white transition hover:bg-gray-500 disabled:cursor-not-allowed disabled:bg-neutral-400"
-                onClick={closeActiveFlyouts}
+                onClick={closeFlyouts}
               >
                 {button.text}
               </button>
