@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { Product } from '@commercetools/frontend-domain-types/product/Product';
+import { SwiperOptions } from 'swiper';
 import Slider from 'components/commercetools-ui/atoms/slider';
 import Subtitle, { SubtitleProps } from 'components/commercetools-ui/atoms/subtitle';
 import Typography from 'components/commercetools-ui/atoms/typography';
@@ -11,16 +12,17 @@ import { Reference } from 'types/reference';
 import Tile from '../tile';
 import useTrack from './useTrack';
 
-export interface Props {
+export interface Props extends Partial<SwiperOptions> {
   products: Product[];
   title: string;
-  titleVariant: 'sm' | 'lg';
+  titleVariant?: 'sm' | 'lg';
   subline?: string;
   subtitleVariant?: SubtitleProps['variant'];
-  ctaLabel: string;
-  ctaLink: Reference;
+  ctaLabel?: string;
+  ctaLink?: Reference;
   wrapperVariant?: WrapperVariant;
   clearDefaultWrapperStyles?: boolean;
+  slidesPerView?: number;
 }
 
 export default function ProductSlider({
@@ -33,6 +35,8 @@ export default function ProductSlider({
   subtitleVariant = 'lg',
   wrapperVariant = 'left-padding-only',
   clearDefaultWrapperStyles = false,
+  breakpoints = {},
+  ...props
 }: Props) {
   const { isTouchDevice } = useTouchDevice();
 
@@ -86,13 +90,16 @@ export default function ProductSlider({
               [tablet]: {
                 slidesPerView: 2.3,
                 spaceBetween: 25,
+                ...(breakpoints[tablet] ?? {}),
               },
               [mediumDesktop]: {
                 slidesPerView: 4,
                 slidesPerGroup: 4,
                 spaceBetween: 25,
+                ...(breakpoints[mediumDesktop] ?? {}),
               },
             }}
+            {...props}
           >
             {products.map((product, index) => (
               <Tile key={product.productId} product={product} onClick={() => trackClick(product, index + 1)} />

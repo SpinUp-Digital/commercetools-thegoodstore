@@ -38,5 +38,7 @@
   "asc": "Ascending",
   "desc": "Descending",
   "best-selling": "Best-Selling",
-  "newest": "Newest"
+  "newest": "Newest",
+  "cart.added": "Added to cart",
+  "bought.together": "Frequenty bought together"
 }

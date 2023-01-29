@@ -1,9 +1,10 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
 import Button from 'components/commercetools-ui/atoms/button';
 import Dropdown from 'components/commercetools-ui/atoms/dropdown';
 import Link from 'components/commercetools-ui/atoms/link';
 import Gallery from 'components/commercetools-ui/organisms/gallery';
+import { useAddToCartOverlay } from 'context/add-to-cart-overlay';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart } from 'frontastic';
@@ -39,6 +40,8 @@ const ProductDetails: FC<ProductDetailsProps> = ({
 
   const { trackAddToCart } = useTrack({ product, inModalVersion });
 
+  const { show, fetchRelatedProducts } = useAddToCartOverlay();
+
   const handleQuantityChange = (e: React.FormEvent) => {
     setQuantity(+(e.target as HTMLSelectElement).value);
   };
@@ -54,8 +57,14 @@ const ProductDetails: FC<ProductDetailsProps> = ({
       }, 1000);
     });
 
+    show(product, variant, quantity);
+
     trackAddToCart();
   };
+
+  useEffect(() => {
+    fetchRelatedProducts(product);
+  }, [product, fetchRelatedProducts]);
 
   const wrapperClassName = inModalVersion
     ? 'md:grid grid-cols-12 pt-70 pb-35 px-20 md:pr-36'

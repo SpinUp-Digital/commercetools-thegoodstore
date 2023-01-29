@@ -1,9 +1,10 @@
-import { FC, useState } from 'react';
+import { FC, useRef, useState } from 'react';
 import { Product } from '@commercetools/frontend-domain-types/product/Product';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import Modal from 'components/commercetools-ui/atoms/modal';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
+import useOnClickOutside from 'helpers/hooks/useOnClickOutside';
 import ProductDetailsAdapter from '../product-details/adapter';
 
 type QuickViewProps = {
@@ -13,6 +14,8 @@ type QuickViewProps = {
 
 const QuickView: FC<QuickViewProps> = ({ showButton, product }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
+
+  const ref = useRef<HTMLDivElement>(null);
 
   const { formatMessage } = useFormat({ name: 'product' });
   const classNames = useClassNames([
@@ -28,6 +31,8 @@ const QuickView: FC<QuickViewProps> = ({ showButton, product }) => {
     setIsOpen(false);
   };
 
+  useOnClickOutside(ref, closeModal);
+
   return (
     <>
       {!modalIsOpen && (
@@ -42,7 +47,7 @@ const QuickView: FC<QuickViewProps> = ({ showButton, product }) => {
         contentLabel={formatMessage({ id: 'quick.view', defaultMessage: 'Quick view' })}
         onRequestClose={closeModal}
       >
-        <>
+        <div ref={ref}>
           <XMarkIcon
             className="absolute top-15 right-15 h-24 w-24 hover:cursor-pointer"
             strokeWidth={1}
@@ -50,7 +55,7 @@ const QuickView: FC<QuickViewProps> = ({ showButton, product }) => {
             onClick={closeModal}
           />
           <ProductDetailsAdapter product={product} inModalVersion={true} setIsOpen={setIsOpen} />
-        </>
+        </div>
       </Modal>
     </>
   );
