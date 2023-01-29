@@ -26,10 +26,11 @@ const Register: React.FC<RegisterProps> = ({ termsOfUseLink }) => {
   const { validatePassword } = useValidate();
 
   //account actions
-  const { register, loggedIn, login } = useAccount();
+  const { register, loggedIn, login, updateSubscription } = useAccount();
 
   //register data
-  const [data, setData] = useState({ email: '', password: '' });
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const [data, setData] = useState({ name: '', email: '', password: '' });
 
   //error
   const [error, setError] = useState('');
@@ -71,14 +72,14 @@ const Register: React.FC<RegisterProps> = ({ termsOfUseLink }) => {
     setLoading(true);
     //try registering the user with given credentials
     try {
-      const response = await register({ email: data.email, password: data.password });
+      const response = await register({ firstName: data.name, email: data.email, password: data.password });
       if (!response.accountId) {
         setError(
           formatErrorMessage({ id: 'account.create.fail', defaultMessage: "Sorry. We couldn't create your account.." }),
         );
         setSuccess('');
       } else {
-        login(data.email, data.password);
+        login(data.email, data.password).then(() => updateSubscription(isSubscribed));
       }
     } catch (err) {
       setError(formatErrorMessage({ id: 'wentWrong', defaultMessage: 'Sorry. Something went wrong..' }));
@@ -132,9 +133,10 @@ const Register: React.FC<RegisterProps> = ({ termsOfUseLink }) => {
           />
 
           <Checkbox
-            id="agree-on-terms"
-            name="agree-on-terms"
+            id="is-subscribed"
+            name="isSubscribed"
             containerClassName="mb-20"
+            onChange={(e) => setIsSubscribed(e.target.checked)}
             label={formatMessage({
               id: 'receive.emails',
               defaultMessage: 'I wish to receive emails about special offers, new products and promotions.',
