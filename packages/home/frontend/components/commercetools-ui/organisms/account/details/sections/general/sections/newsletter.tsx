@@ -1,7 +1,7 @@
 import InfoCard, { InfoField } from 'components/commercetools-ui/organisms/account/account-atoms/info-card';
 import { useFormat } from 'helpers/hooks/useFormat';
+import { Account } from 'types/account';
 import { useAccount } from 'frontastic';
-import { AccountWithSubscription } from '../forms/subscribe-form';
 
 const Newsletter = () => {
   const { formatMessage } = useFormat({ name: 'account' });
@@ -12,7 +12,7 @@ const Newsletter = () => {
 
   const subscriptionField: InfoField = {
     label: formatMessage({ id: 'subscription', defaultMessage: 'Subscription' }),
-    value: (account as AccountWithSubscription)?.isSubscribed ? subscribed : unsubscribed,
+    value: (account as Account)?.isSubscribed ? subscribed : unsubscribed,
   };
   return <InfoCard isEditable title="Newsletter" infoFields={[subscriptionField]} editHref="#edit-newsletter" />;
 };

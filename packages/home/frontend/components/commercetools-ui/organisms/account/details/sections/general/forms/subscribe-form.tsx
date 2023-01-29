@@ -1,15 +1,11 @@
 import { useState } from 'react';
-import { Account } from '@commercetools/frontend-domain-types/account/Account';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import AccountForm from 'components/commercetools-ui/organisms/account/account-atoms/account-form';
 import useFeedbackToasts from 'components/commercetools-ui/organisms/account/hooks/useFeedbackToasts';
 import useDiscardForm from 'components/commercetools-ui/organisms/account/useDiscardForm';
 import { useFormat } from 'helpers/hooks/useFormat';
+import { Account } from 'types/account';
 import { useAccount } from 'frontastic';
-
-export interface AccountWithSubscription extends Account {
-  isSubscribed?: boolean;
-}
 
 const SubscribeForm = () => {
   const { account, updateSubscription } = useAccount();
@@ -17,7 +13,7 @@ const SubscribeForm = () => {
   const { notifyDataUpdated, notifyWentWrong } = useFeedbackToasts();
   const { discardForm } = useDiscardForm();
 
-  const [subscribed, setSubscribed] = useState((account as AccountWithSubscription)?.isSubscribed ?? false);
+  const [subscribed, setSubscribed] = useState((account as Account)?.isSubscribed ?? false);
 
   const values = ['subscribe', 'unsubscribe'];
 

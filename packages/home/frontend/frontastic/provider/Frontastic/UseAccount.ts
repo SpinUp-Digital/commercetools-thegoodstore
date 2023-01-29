@@ -1,4 +1,4 @@
-import { Account } from '@commercetools/frontend-domain-types/account/Account';
+import { Account } from 'types/account';
 import { Address } from '@commercetools/frontend-domain-types/account/Address';
 import { GetAccountResult, RegisterAccount, UpdateAccount } from 'frontastic/actions/account';
 

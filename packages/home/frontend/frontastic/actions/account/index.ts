@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks*/
 
-import { Account } from '@commercetools/frontend-domain-types/account/Account';
+import { Account } from 'types/account';
 import { Address } from '@commercetools/frontend-domain-types/account/Address';
 import useSWR, { mutate } from 'swr';
 import { SDK, sdk } from 'sdk';

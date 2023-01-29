@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { Account } from '@commercetools/frontend-domain-types/account/Account';
 import Toast from 'react-hot-toast';
 import { useFormat } from 'helpers/hooks/useFormat';
+import { Account } from 'types/account';
 import { useAccount } from 'frontastic';
 
 const Verify: NextPage = () => {
