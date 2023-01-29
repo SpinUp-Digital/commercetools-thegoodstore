@@ -2,9 +2,8 @@
 
 import { LineItem } from '@commercetools/frontend-domain-types/wishlist/LineItem';
 import { Wishlist } from '@commercetools/frontend-domain-types/wishlist/Wishlist';
-import { sdk } from '@commercetools/frontend-sdk';
 import useSWR, { mutate } from 'swr';
-import { SDK } from 'sdk';
+import { SDK, sdk } from 'sdk';
 import { revalidateOptions } from 'frontastic';
 
 export const getWishlist = () => {

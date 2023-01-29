@@ -110,6 +110,7 @@ export class ProductApi extends BaseApi {
           'filter.facets': filterFacets.length > 0 ? filterFacets : undefined,
           'filter.query': filterQuery.length > 0 ? filterQuery : undefined,
           [`text.${locale.language}`]: productQuery.query,
+          fuzzy: true,
         },
       };
 
