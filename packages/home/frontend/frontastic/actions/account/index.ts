@@ -2,9 +2,8 @@
 
 import { Account } from '@commercetools/frontend-domain-types/account/Account';
 import { Address } from '@commercetools/frontend-domain-types/account/Address';
-import { sdk } from '@commercetools/frontend-sdk';
 import useSWR, { mutate } from 'swr';
-import { SDK } from 'sdk';
+import { SDK, sdk } from 'sdk';
 import { revalidateOptions } from 'frontastic';
 import { ResponseError } from 'frontastic/lib/fetch-api-hub';
 
