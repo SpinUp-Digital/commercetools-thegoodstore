@@ -26,29 +26,32 @@ const OrderItem: FC<Props> = ({ order }) => {
   };
 
   return (
-    <div className="mb-24 h-170 w-full rounded-md border-[1.5px] border-neutral-300">
-      <div className="grid h-110 grid-cols-1 items-center rounded-t-md bg-neutral-150 px-24 md:grid-cols-4">
+    <div className="mb-24 w-full rounded-md border-[1.5px] border-neutral-300">
+      <div className="grid grid-cols-1 items-center rounded-t-md bg-neutral-150 p-12 md:grid-cols-3 md:p-16 lg:grid-cols-4 lg:py-32 lg:px-24">
         <div className="flex-col">
-          <div className="flex pb-15">
-            <Typography fontSize={16} medium className="text-primary-black">
+          <div className="flex pb-16">
+            <Typography fontSize={14} medium className="text-primary-black lg:text-16">
               {formatOrdersMessage({ id: 'order.id', defaultMessage: 'Order ID: ' })}
             </Typography>
-            <Typography fontSize={16} className="pl-5 text-primary-black">
+            <Typography fontSize={14} className="pl-5 text-primary-black lg:text-16">
               {order.id}
             </Typography>
           </div>
 
           <div className="flex">
-            <Typography fontSize={16} medium className="flex text-primary-black md:hidden">
+            <Typography fontSize={14} medium className="flex text-primary-black md:hidden">
               {formatOrdersMessage({ id: 'order.date', defaultMessage: 'Date:' })}
             </Typography>
-            <Typography fontSize={14} className="pl-5 pt-2 text-secondary-black md:pl-0">
+            <Typography
+              fontSize={14}
+              className="pl-5 pt-2 text-primary-black md:pl-0 md:text-secondary-black lg:text-16"
+            >
               {order.date}
             </Typography>
           </div>
         </div>
 
-        <div className="hidden md:flex md:flex-col">
+        <div className="ml-48 hidden md:flex md:flex-col">
           <Typography fontSize={16} medium className="pb-15 text-primary-black">
             {formatOrdersMessage({ id: 'total', defaultMessage: 'Total' })}
           </Typography>
@@ -66,14 +69,14 @@ const OrderItem: FC<Props> = ({ order }) => {
           </Typography>
         </div>
         <div className="hidden justify-end lg:flex">
-          <Button variant="primary" size="s" onClick={handleReturnClick} className="rounded-sm">
+          <Button variant="primary" size="s" onClick={handleReturnClick} className="rounded-md py-8 px-16">
             <Typography fontSize={14} medium>
               {formatOrdersMessage({ id: 'create.return', defaultMessage: 'Create return' })}
             </Typography>
           </Button>
         </div>
       </div>
-      <div className="flex h-60 w-full cursor-pointer items-center justify-between px-24">
+      <div className="flex w-full cursor-pointer items-center justify-between px-12 py-16 md:px-16 lg:py-20 lg:px-24">
         <div className="flex">
           <Typography fontSize={14} className="text-primary-black">
             4
@@ -83,7 +86,7 @@ const OrderItem: FC<Props> = ({ order }) => {
           </Typography>
         </div>
 
-        <ChevronRightIcon strokeWidth={2} className="w-15 pt-3 text-secondary-black" />
+        <ChevronRightIcon strokeWidth={2} className="w-24 text-secondary-black" />
       </div>
     </div>
   );

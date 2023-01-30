@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import Slider from 'components/commercetools-ui/atoms/slider';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import Wrapper from 'components/commercetools-ui/organisms/content/wrapper';
+import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
 import OrderItem from './OrderItem';
 
@@ -77,6 +78,7 @@ const Orders = () => {
     { name: formatOrdersMessage({ id: 'returned', defaultMessage: 'Returned' }), slug: 'returned' },
   ];
   const [selectedTab, setSelectedTab] = useState(statusTabs[0].slug);
+  const [leftArrowAppeared, setLeftArrowAppeared] = useState(false);
 
   const orderHistoryContent = useMemo(() => {
     if (selectedTab === 'allOrders') return orders;
@@ -88,6 +90,8 @@ const Orders = () => {
       tab.slug === selectedTab ? 'border-b-[1.5px] text-primary-black' : 'text-secondary-black'
     }`;
   };
+
+  const mobileStatusWrapper = useClassNames(['h-fit w-[100%]', leftArrowAppeared ? 'pl-36 pr-16' : 'pl-16 pr-36']);
 
   return (
     <>
@@ -108,9 +112,11 @@ const Orders = () => {
         </Typography>
       </div>
 
-      <Wrapper className="relative flex h-57 w-full border-b-[1.5px] border-neutral-400 pt-12 md:hidden">
-        <div className="absolute left-1/2 h-fit w-[85%] -translate-x-1/2 px-8">
+      <Wrapper className="h-57 w-full border-b-[1.5px] border-neutral-400 pt-12 md:hidden">
+        <div className={mobileStatusWrapper}>
           <Slider
+            onReachEnd={() => setLeftArrowAppeared(true)}
+            onReachBeginning={() => setLeftArrowAppeared(false)}
             slideWidthIsFlexible
             dots={false}
             prevButtonStyles={{
