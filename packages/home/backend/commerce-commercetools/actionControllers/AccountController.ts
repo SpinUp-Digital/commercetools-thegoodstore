@@ -402,8 +402,10 @@ export const updateSubscription: ActionHook = async (request: Request, actionCon
   const isSubscribed: Account['isSubscribed'] = JSON.parse(request.body).isSubscribed;
 
   const accountApi = new AccountApi(actionContext.frontasticContext, getLocale(request));
+  const emailApi = EmailApiFactory.getDefaultApi(actionContext.frontasticContext, getLocale(request));
 
   account = await accountApi.updateSubscription(account, isSubscribed);
+  await (isSubscribed ? emailApi.subscribe(account, ['newsletter']) : emailApi.unsubscribe(account));
 
   return {
     statusCode: 200,
