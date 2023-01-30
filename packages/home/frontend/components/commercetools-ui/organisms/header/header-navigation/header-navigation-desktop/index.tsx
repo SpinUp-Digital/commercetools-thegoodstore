@@ -40,15 +40,15 @@ const HeaderNavigationDesktop: React.FC<Props> = ({ links, tiles }) => {
 
   const scrollDirection = useScrollDirection(5, -1);
   const navigationClassNames = useClassNames([
-    'hidden items-center lg:flex duration-150 transition-all px-24 md:px-36 lg:px-56',
+    'hidden items-center lg:flex duration-150 transition-all pl-56 w-fit',
     scrollDirection === 'down' ? 'h-0 opacity-0 pointer-events-none' : 'h-52 opacity-1 pointer-events-auto',
   ]);
 
   return (
     <div>
       {links && (
-        <div className={navigationClassNames}>
-          <div className="flex w-fit justify-start" onMouseLeave={handleMouseOut}>
+        <div className={navigationClassNames} onMouseLeave={handleMouseOut}>
+          <div className="flex w-fit justify-start">
             {links.map((link) => (
               <div key={link?.categoryId} onMouseEnter={() => handleMouseIn(link)}>
                 <HeaderNavigationButtonDesktop

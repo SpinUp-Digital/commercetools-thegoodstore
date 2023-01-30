@@ -14,56 +14,59 @@ export interface StatusTab {
 const Orders = () => {
   const router = useRouter();
 
-  const orders = [
-    {
-      id: '334455 6639',
-      date: '2022-03-12',
-      total: { fractionDigits: 2, centAmount: 10033, currencyCode: router.locale === 'de' ? 'EUR' : 'GBP' },
-      status: 'registered',
-    },
-    {
-      id: '334455 6640',
-      date: '2022-03-12',
-      total: { fractionDigits: 2, centAmount: 10033, currencyCode: router.locale === 'de' ? 'EUR' : 'GBP' },
-      status: 'registered',
-    },
-    {
-      id: '334455 6641',
-      date: '2022-03-12',
-      total: { fractionDigits: 2, centAmount: 10033, currencyCode: router.locale === 'de' ? 'EUR' : 'GBP' },
-      status: 'delivered',
-    },
-    {
-      id: '334455 6642',
-      date: '2022-03-12',
-      total: { fractionDigits: 2, centAmount: 10033, currencyCode: router.locale === 'de' ? 'EUR' : 'GBP' },
-      status: 'delivered',
-    },
-    {
-      id: '334455 6643',
-      date: '2022-03-12',
-      total: { fractionDigits: 2, centAmount: 10033, currencyCode: router.locale === 'de' ? 'EUR' : 'GBP' },
-      status: 'delivered',
-    },
-    {
-      id: '334455 6644',
-      date: '2022-03-12',
-      total: { fractionDigits: 2, centAmount: 10033, currencyCode: router.locale === 'de' ? 'EUR' : 'GBP' },
-      status: 'delivered',
-    },
-    {
-      id: '334455 6645',
-      date: '2022-03-12',
-      total: { fractionDigits: 2, centAmount: 30033, currencyCode: router.locale === 'de' ? 'EUR' : 'GBP' },
-      status: 'returned',
-    },
-    {
-      id: '334455 6646',
-      date: '2022-03-12',
-      total: { fractionDigits: 2, centAmount: 50033, currencyCode: router.locale === 'de' ? 'EUR' : 'GBP' },
-      status: 'returned',
-    },
-  ];
+  const orders = useMemo(
+    () => [
+      {
+        id: '334455 6639',
+        date: '2022-03-12',
+        total: { fractionDigits: 2, centAmount: 10033, currencyCode: router.locale === 'de' ? 'EUR' : 'GBP' },
+        status: 'registered',
+      },
+      {
+        id: '334455 6640',
+        date: '2022-03-12',
+        total: { fractionDigits: 2, centAmount: 10033, currencyCode: router.locale === 'de' ? 'EUR' : 'GBP' },
+        status: 'registered',
+      },
+      {
+        id: '334455 6641',
+        date: '2022-03-12',
+        total: { fractionDigits: 2, centAmount: 10033, currencyCode: router.locale === 'de' ? 'EUR' : 'GBP' },
+        status: 'delivered',
+      },
+      {
+        id: '334455 6642',
+        date: '2022-03-12',
+        total: { fractionDigits: 2, centAmount: 10033, currencyCode: router.locale === 'de' ? 'EUR' : 'GBP' },
+        status: 'delivered',
+      },
+      {
+        id: '334455 6643',
+        date: '2022-03-12',
+        total: { fractionDigits: 2, centAmount: 10033, currencyCode: router.locale === 'de' ? 'EUR' : 'GBP' },
+        status: 'delivered',
+      },
+      {
+        id: '334455 6644',
+        date: '2022-03-12',
+        total: { fractionDigits: 2, centAmount: 10033, currencyCode: router.locale === 'de' ? 'EUR' : 'GBP' },
+        status: 'delivered',
+      },
+      {
+        id: '334455 6645',
+        date: '2022-03-12',
+        total: { fractionDigits: 2, centAmount: 30033, currencyCode: router.locale === 'de' ? 'EUR' : 'GBP' },
+        status: 'returned',
+      },
+      {
+        id: '334455 6646',
+        date: '2022-03-12',
+        total: { fractionDigits: 2, centAmount: 50033, currencyCode: router.locale === 'de' ? 'EUR' : 'GBP' },
+        status: 'returned',
+      },
+    ],
+    [router.locale],
+  );
 
   const { formatMessage: formatOrdersMessage } = useFormat({ name: 'orders' });
 
