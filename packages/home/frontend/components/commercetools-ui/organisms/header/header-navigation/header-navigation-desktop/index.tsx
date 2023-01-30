@@ -4,6 +4,7 @@ import { Tile } from 'components/commercetools-ui/organisms/header/types';
 import useClassNames from 'helpers/hooks/useClassNames';
 import useScrollDirection from 'helpers/hooks/useScrollDirection';
 import { Category } from 'types/category';
+import MenuDropdown from './menu-dropdown';
 
 export interface Props {
   links: Category[];
@@ -12,6 +13,8 @@ export interface Props {
 
 const HeaderNavigationDesktop: React.FC<Props> = ({ links, tiles }) => {
   const [activeCategory, setActiveCategory] = useState<Category>();
+
+  const tileContent = tiles.filter((tile) => tile.tileCategory === activeCategory?.name);
 
   const showSubMenu = (category?: Category) => {
     setActiveCategory(category);
@@ -37,33 +40,34 @@ const HeaderNavigationDesktop: React.FC<Props> = ({ links, tiles }) => {
 
   const scrollDirection = useScrollDirection(5, -1);
   const navigationClassNames = useClassNames([
-    'relative hidden items-center justify-start lg:flex transition-all duration-150 px-24 md:px-36 lg:px-56',
-    scrollDirection === 'down' ? 'h-0 opacity-0 pointer-events-none' : 'h-fit opacity-1 pointer-events-auto',
+    'hidden items-center lg:flex duration-150 transition-all px-24 md:px-36 lg:px-56',
+    scrollDirection === 'down' ? 'h-0 opacity-0 pointer-events-none' : 'h-52 opacity-1 pointer-events-auto',
   ]);
 
   return (
-    <>
+    <div>
       {links && (
         <div className={navigationClassNames}>
-          {links.map((link) => (
-            <div
-              key={link?.categoryId}
-              onMouseEnter={() => {
-                handleMouseIn(link);
-              }}
-              onMouseLeave={handleMouseOut}
-            >
-              <HeaderNavigationButtonDesktop
-                show={link.categoryId === activeCategory?.categoryId}
-                link={link}
-                updateSubMenu={hideSubMenu}
-                tiles={tiles}
-              />
-            </div>
-          ))}
+          <div className="flex w-fit justify-start" onMouseLeave={handleMouseOut}>
+            {links.map((link) => (
+              <div key={link?.categoryId} onMouseEnter={() => handleMouseIn(link)}>
+                <HeaderNavigationButtonDesktop
+                  show={link.categoryId === activeCategory?.categoryId}
+                  link={link}
+                  updateSubMenu={hideSubMenu}
+                />
+              </div>
+            ))}
+          </div>
+          <MenuDropdown
+            show={!!activeCategory && activeCategory.subCategories.length > 0}
+            onClick={hideSubMenu}
+            links={activeCategory?.subCategories ?? []}
+            tileContent={tileContent[0]}
+          />
         </div>
       )}
-    </>
+    </div>
   );
 };
 

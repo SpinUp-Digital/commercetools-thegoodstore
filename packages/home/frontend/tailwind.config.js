@@ -13,17 +13,6 @@ module.exports = {
   theme: {
     extend: {
       keyframes: {
-        appear: {
-          '0%': {
-            opacity: 0,
-          },
-          '50%': {
-            opacity: 0,
-          },
-          '100%': {
-            opacity: 1,
-          },
-        },
         appearDropdown: {
           '0%': {
             opacity: 0,
@@ -40,7 +29,6 @@ module.exports = {
         },
       },
       animation: {
-        appear: 'appear 1s ease-in-out',
         appearDropdown: 'appearDropdown 0.15s ease-in-out',
       },
       fontFamily: {
