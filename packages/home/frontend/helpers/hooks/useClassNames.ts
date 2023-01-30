@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 
 // Hook can take an array of either simple strings or conditioned classnames
 // example: ['firstClassName', {'secondClassName': BooleanToCheck}]
@@ -10,8 +10,6 @@ type UseClassNamesOptions = { prefix?: string };
 type UseClassNames = (classNames: ClassName[], options?: UseClassNamesOptions) => string;
 
 const useClassNames: UseClassNames = (classNames, options) => {
-  const [result, setResult] = useState('');
-
   const resolveClassNameOptions = useCallback(
     (className: string) => {
       return `${options?.prefix ?? ''}${className}`;
@@ -52,11 +50,7 @@ const useClassNames: UseClassNames = (classNames, options) => {
     },
     [resolveClassName],
   );
-
-  useEffect(() => {
-    const resolvedClassNames = resolveClassNames(classNames);
-    setResult(resolvedClassNames.join(' '));
-  }, [classNames, resolveClassNames]);
+  const result = useMemo(() => resolveClassNames(classNames).join(' '), [resolveClassNames, classNames]);
 
   return result;
 };

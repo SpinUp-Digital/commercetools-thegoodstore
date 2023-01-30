@@ -15,10 +15,8 @@ export interface Props {
 
 const MenuDropdown: FC<Props> = ({ show, links, tileContent, onClick }) => {
   const wrapperClassNames = useClassNames([
-    'animate-[appear_1s_ease-in-out]',
-    'absolute bottom-0 left-0 z-20 min-h-[300px] w-full translate-y-full',
-    'justify-between',
-    show ? 'flex' : 'hidden',
+    'transition absolute flex justify-between bottom-0 left-0 duration-500 ease-in-out min-h-[300px] w-[100%] translate-y-full',
+    show ? 'opacity-1 z-20 delay-500' : 'opacity-0 z-[-999] pointer-events-none',
     'border-b-[1.5px] border-t-[1.5px] border-b-secondary-grey border-t-neutral-400 bg-white pl-56 pr-48 py-32',
   ]);
 
@@ -32,7 +30,7 @@ const MenuDropdown: FC<Props> = ({ show, links, tileContent, onClick }) => {
             {link.depth === 1 ? (
               <>
                 <div className="w-min pb-8">
-                  <Link link={link.slug ?? link.path} variant="menu-header" className="whitespace-nowrap text-14">
+                  <Link link={link.slug ?? link.path} variant="menu-header" className="whitespace-nowrap">
                     <Typography fontSize={14}>{link.name}</Typography>
                   </Link>
                 </div>
