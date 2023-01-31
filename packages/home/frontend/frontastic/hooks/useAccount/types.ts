@@ -1,8 +1,30 @@
-import { Account } from 'types/account';
 import { Address } from '@commercetools/frontend-domain-types/account/Address';
-import { GetAccountResult, RegisterAccount, UpdateAccount } from 'frontastic/actions/account';
+import { Account } from 'types/account';
+import { ResponseError } from 'frontastic/lib/fetch-api-hub';
 
-export interface UseAccount extends GetAccountResult {
+export interface GetAccountResult {
+  loggedIn: boolean;
+  account?: Account;
+  error?: ResponseError;
+}
+
+export interface UpdateAccount {
+  firstName?: string;
+  lastName?: string;
+  salutation?: string;
+  birthdayYear?: number;
+  birthdayMonth?: number;
+  birthdayDay?: number;
+}
+
+export interface RegisterAccount extends UpdateAccount {
+  email: string;
+  password: string;
+  billingAddress?: Address;
+  shippingAddress?: Address;
+}
+
+export interface UseAccountReturn extends GetAccountResult {
   login: (email: string, password: string, remember?: boolean) => Promise<Account>;
   logout: () => Promise<void>;
   register: (account: RegisterAccount) => Promise<Account>;

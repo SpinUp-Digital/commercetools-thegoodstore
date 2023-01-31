@@ -21,3 +21,4 @@ export * from './lib/component';
 export * from './lib/notifier';
 export * from './lib/fetch-api-hub';
 export * from './provider';
+export * from './hooks';

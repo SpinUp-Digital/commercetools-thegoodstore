@@ -2,9 +2,9 @@ import React, { createContext, useCallback, useRef } from 'react';
 import AnnouncementBar, { Props as AnnouncementBarProps } from 'components/commercetools-ui/organisms/bar/announcement';
 import Header from 'components/commercetools-ui/organisms/header';
 import { HeaderProps, Market } from 'components/commercetools-ui/organisms/header/types';
+import { MarketProvider } from 'context/market';
 import useResizeObserver from 'helpers/hooks/useResizeObserver';
 import { Category } from 'types/category';
-import { MarketProvider } from 'frontastic/provider/marketProvider';
 
 const initialMarketState = {
   market: {} as Market,

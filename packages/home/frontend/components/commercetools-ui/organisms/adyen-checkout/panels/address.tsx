@@ -4,7 +4,7 @@ import { ProjectSettings } from '@commercetools/frontend-domain-types/ProjectSet
 import { countryOptions, CountryOption } from 'helpers/countryOptions';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { getTaxedCountries } from 'helpers/utils/getTaxedCountries';
-import { useCart } from 'frontastic/provider';
+import { useCart } from 'frontastic';
 import { FormData } from '..';
 
 type AddressProps = {
