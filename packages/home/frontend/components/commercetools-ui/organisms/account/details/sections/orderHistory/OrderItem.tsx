@@ -39,13 +39,10 @@ const OrderItem: FC<Props> = ({ order }) => {
           </div>
 
           <div className="flex">
-            <Typography fontSize={14} medium className="flex text-primary-black md:hidden">
+            <Typography fontSize={14} medium className="text-primary-black md:hidden">
               {formatOrdersMessage({ id: 'order.date', defaultMessage: 'Date:' })}
             </Typography>
-            <Typography
-              fontSize={14}
-              className="pl-5 pt-2 text-primary-black md:pl-0 md:text-secondary-black lg:text-16"
-            >
+            <Typography fontSize={14} className="pl-5 text-primary-black md:pl-0 md:text-secondary-black lg:text-16">
               {order.date}
             </Typography>
           </div>
@@ -86,7 +83,7 @@ const OrderItem: FC<Props> = ({ order }) => {
           </Typography>
         </div>
 
-        <ChevronRightIcon strokeWidth={2} className="w-24 text-secondary-black" />
+        <ChevronRightIcon strokeWidth={1.5} className="w-24 text-secondary-black" />
       </div>
     </div>
   );

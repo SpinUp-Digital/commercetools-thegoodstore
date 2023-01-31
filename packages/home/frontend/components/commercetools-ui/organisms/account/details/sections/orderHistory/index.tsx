@@ -104,7 +104,7 @@ const Orders = () => {
         </Typography>
       </div>
       <div className="px-16 pt-12 pb-16 md:px-0">
-        <Typography as="h3" fontSize={16} fontFamily="inter" className="text-secondary-black">
+        <Typography as="h3" fontSize={14} fontFamily="inter" className="text-secondary-black md:text-16">
           {formatOrdersMessage({
             id: 'help.question',
             defaultMessage: 'Check status of recent orders, manage your returns and download invoices.',
@@ -112,7 +112,7 @@ const Orders = () => {
         </Typography>
       </div>
 
-      <Wrapper className="h-57 w-full border-b-[1.5px] border-neutral-400 pt-12 md:hidden">
+      <Wrapper className="h-56 w-full border-b-2 border-neutral-400 pt-12 md:hidden">
         <div className={mobileStatusWrapper}>
           <Slider
             onReachEnd={() => setLeftArrowAppeared(true)}
@@ -141,10 +141,10 @@ const Orders = () => {
                 className="w-fit cursor-pointer whitespace-nowrap"
               >
                 <Typography
-                  fontSize={16}
+                  fontSize={14}
                   medium={tab.slug === selectedTab}
                   className={`border-primary-black py-12 ${
-                    tab.slug === selectedTab ? 'border-b-[1.5px] text-primary-black' : 'text-secondary-black'
+                    tab.slug === selectedTab ? 'border-b-2 text-primary-black' : 'text-secondary-black'
                   }`}
                 >
                   {tab.name}
