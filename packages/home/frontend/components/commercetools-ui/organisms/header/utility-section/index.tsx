@@ -5,8 +5,8 @@ import { Link } from 'components/commercetools-ui/organisms/header/types';
 import CartIcon from 'components/icons/cart';
 import WishlistIcon from 'components/icons/wishlist';
 import { useFormat } from 'helpers/hooks/useFormat';
+import { useCart, useWishlist } from 'frontastic';
 import { NextFrontasticImage } from 'frontastic/lib/image';
-import { useCart, useWishlist } from 'frontastic/provider';
 import AccountButton from './account-button';
 
 export interface Props {

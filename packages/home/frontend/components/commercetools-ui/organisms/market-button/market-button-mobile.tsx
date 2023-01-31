@@ -4,8 +4,8 @@ import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import Button from 'components/commercetools-ui/atoms/button';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import FlagIcons from 'components/icons/flags';
+import { MarketContext } from 'context/market';
 import useClassNames from 'helpers/hooks/useClassNames';
-import { MarketContext } from 'frontastic/provider/marketProvider';
 import { Market } from '../header/types';
 
 const MarketButtonMobile = () => {

@@ -1,4 +1,4 @@
-import { useAccount } from 'frontastic/provider';
+import { useAccount } from 'frontastic';
 
 function AccountTestTastic() {
   const {

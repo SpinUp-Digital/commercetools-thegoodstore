@@ -1,5 +1,5 @@
 import { Cart } from '@commercetools/frontend-domain-types/cart/Cart';
-import { CartDetails } from 'frontastic/actions/cart';
+import { CartDetails } from 'frontastic/hooks/useCart/types';
 import { FormData } from '.';
 
 export const mapToCartStructure = (data: FormData, billingIsSameAsShipping: boolean): CartDetails => {
