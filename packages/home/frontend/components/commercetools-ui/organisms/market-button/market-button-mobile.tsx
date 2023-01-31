@@ -13,10 +13,10 @@ const MarketButtonMobile = () => {
 
   const marketButtonClassNames = useCallback((open?: boolean) => {
     return `flex h-40 w-full items-center justify-between border ${
-      open
-        ? 'rounded-t-sm border-x-neutral-500 border-t-neutral-500 border-b-neutral-400'
-        : 'rounded-sm border-neutral-500'
-    } bg-white px-16 focus:border-gray-500`;
+        open
+          ? 'rounded-t-sm border-x-neutral-500 border-t-neutral-500 border-b-neutral-400'
+          : 'rounded-sm border-neutral-500'
+      } bg-white px-16 py-12 active:border-gray-500 focus:border-gray-500 focus:shadow-md`;
   }, []);
 
   const marketMenuWrapperClassNames = useClassNames([
@@ -27,7 +27,7 @@ const MarketButtonMobile = () => {
   const marketMenuClassNames = useCallback((open?: boolean) => {
     return `max-h-300 overflow-scroll rounded-b-sm border ${
       open ? 'border-x-neutral-500 border-b-neutral-500' : 'border-neutral-400'
-    } bg-white shadow-sm`;
+    } bg-white`;
   }, []);
 
   const handleMarketClick = (market: Market) => {
@@ -70,17 +70,23 @@ const MarketButtonMobile = () => {
               <div className={marketMenuClassNames(open)}>
                 {markets.map((market, index) => (
                   <Menu.Item key={index}>
-                    <div className="overflow-y-scroll">
+                    <div className="overflow-y-scroll py-12 hover:bg-neutral-200 active:bg-neutral-200">
                       <Button
                         variant="ghost"
                         size="full"
                         onClick={() => handleMarketClick(market)}
                         className="flex w-full items-center justify-start py-12 px-16"
                       >
-                        <FlagIcons flagName={market.flag} className="mr-8" />
-                        <Typography fontSize={14} className="mb-1 text-primary-black">
-                          {market.region}
-                        </Typography>
+                        <div className="flex w-fit items-center justify-start">
+                          <FlagIcons flagName={market.flag} className="mr-8" />
+                          <Typography as='span' fontSize={14} className="text-primary-black font-normal">
+                            {`${market?.region} | ${market?.currency}`}
+                          </Typography>
+                          <span
+                            dangerouslySetInnerHTML={{ __html: market?.currencyCode }}
+                            className="ml-5 text-14 text-primary-black"
+                          />
+                        </div>
                       </Button>
                     </div>
                   </Menu.Item>
