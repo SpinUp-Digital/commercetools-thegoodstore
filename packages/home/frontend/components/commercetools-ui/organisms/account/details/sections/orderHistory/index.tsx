@@ -91,7 +91,7 @@ const Orders = () => {
     }`;
   };
 
-  const mobileStatusWrapper = useClassNames(['h-fit w-[100%]', leftArrowAppeared ? 'pl-36 pr-16' : 'pl-16 pr-36']);
+  const mobileStatusWrapper = useClassNames(['h-fit w-[100%] pl-16 pr-36', leftArrowAppeared && 'pl-36 pr-16']);
 
   return (
     <>

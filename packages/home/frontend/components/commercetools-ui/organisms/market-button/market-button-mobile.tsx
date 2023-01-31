@@ -13,10 +13,10 @@ const MarketButtonMobile = () => {
 
   const marketButtonClassNames = useCallback((open?: boolean) => {
     return `flex h-40 w-full items-center justify-between border ${
-        open
-          ? 'rounded-t-sm border-x-neutral-500 border-t-neutral-500 border-b-neutral-400'
-          : 'rounded-sm border-neutral-500'
-      } bg-white px-16 py-12 active:border-gray-500 focus:border-gray-500 focus:shadow-md`;
+      open
+        ? 'rounded-t-sm border-x-neutral-500 border-t-neutral-500 border-b-neutral-400'
+        : 'rounded-sm border-neutral-500'
+    } bg-white px-16 py-12 active:border-gray-500 focus:border-gray-500 focus:shadow-md`;
   }, []);
 
   const marketMenuWrapperClassNames = useClassNames([
@@ -79,7 +79,7 @@ const MarketButtonMobile = () => {
                       >
                         <div className="flex w-fit items-center justify-start">
                           <FlagIcons flagName={market.flag} className="mr-8" />
-                          <Typography as='span' fontSize={14} className="text-primary-black font-normal">
+                          <Typography as="span" fontSize={14} className="font-normal text-primary-black">
                             {`${market?.region} | ${market?.currency}`}
                           </Typography>
                           <span
