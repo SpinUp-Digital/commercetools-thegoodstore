@@ -1,18 +1,15 @@
 import { useCallback } from 'react';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useI18n from 'helpers/hooks/useI18n';
-import {
-  addBillingAddress,
-  addShippingAddress,
-  setDefaultBillingAddress,
-  setDefaultShippingAddress,
-  updateAddress,
-} from 'frontastic/actions/account';
+import { useAccount } from 'frontastic';
 import { AddressFormData } from './address-form';
 
 const usePropsToAddressType = () => {
   const { country } = useI18n();
   const { formatMessage } = useFormat({ name: 'checkout' });
+
+  const { addBillingAddress, addShippingAddress, setDefaultBillingAddress, setDefaultShippingAddress, updateAddress } =
+    useAccount();
 
   const getAddressType = useCallback((address: AddressFormData) => {
     if (address?.addressType) return address?.addressType;
@@ -56,7 +53,16 @@ const usePropsToAddressType = () => {
 
       return typeBasedProps[addressType];
     },
-    [country, formatMessage, getAddressType],
+    [
+      country,
+      formatMessage,
+      getAddressType,
+      addBillingAddress,
+      addShippingAddress,
+      setDefaultBillingAddress,
+      setDefaultShippingAddress,
+      updateAddress,
+    ],
   );
 
   return { mapPropsToAddress };

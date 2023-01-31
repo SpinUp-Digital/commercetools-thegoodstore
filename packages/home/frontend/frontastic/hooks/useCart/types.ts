@@ -1,3 +1,4 @@
+import { Address } from '@commercetools/frontend-domain-types/account/Address';
 import { Cart } from '@commercetools/frontend-domain-types/cart/Cart';
 import { Discount } from '@commercetools/frontend-domain-types/cart/Discount';
 import { Order } from '@commercetools/frontend-domain-types/cart/Order';
@@ -5,9 +6,14 @@ import { ShippingMethod } from '@commercetools/frontend-domain-types/cart/Shippi
 import { Money } from '@commercetools/frontend-domain-types/product/Money';
 import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
 import { ProjectSettings } from '@commercetools/frontend-domain-types/ProjectSettings';
-import { CartDetails } from 'frontastic/actions/cart';
 
-export interface UseCart {
+export interface CartDetails {
+  account?: { email: string };
+  shipping?: Address;
+  billing?: Address;
+}
+
+export interface UseCartReturn {
   data?: Cart;
   totalItems: number;
   isEmpty: boolean;
