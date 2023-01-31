@@ -19,7 +19,7 @@ const AccountButton = () => {
   return (
     <>
       <Link link={account ? '/account' : '/login'}>
-        <UserIcon className="hidden w-24 text-secondary-black md:flex lg:hidden" />
+        <UserIcon className="hidden w-28 text-secondary-black md:flex lg:hidden" />
       </Link>
       <Popover className="relative hidden lg:flex">
         {() => (
