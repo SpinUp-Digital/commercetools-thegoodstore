@@ -51,14 +51,14 @@ const ChangePasswordForm = () => {
       toast.error(confirmPasswordErrorMessage);
     } else {
       // Request update password
-      changePassword(data.password, data.newPassword)
-        .then(() => {
+      changePassword(data.password, data.newPassword).then((account) => {
+        if (account.accountId) {
           toast.success(formatAccountMessage({ id: 'data.updated', defaultMessage: 'Data updated successfully.' }));
           discardForm();
-        })
-        .catch(() => {
+        } else {
           toast.error(formatErrorMessage({ id: 'wentWrong', defaultMessage: 'Sorry, something went wrong..' }));
-        });
+        }
+      });
     }
   };
 
