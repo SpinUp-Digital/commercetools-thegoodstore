@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import type { Address as AddressType } from '@commercetools/frontend-domain-types/account/Address';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { TypographyProps } from 'components/commercetools-ui/atoms/typography/types';
@@ -12,7 +12,13 @@ export interface AddressProps {
 
 const Address: React.FC<AddressProps> = ({ address }) => {
   const { mapPropsToAddress } = usePropsToAddressType();
-  const { checked, label, setAsDefault } = mapPropsToAddress(address as AddressFormData);
+  const { checked: defaultChecked, label, setAsDefault } = mapPropsToAddress(address as AddressFormData);
+
+  const [checked, setChecked] = useState(defaultChecked);
+
+  useEffect(() => {
+    setChecked(defaultChecked);
+  }, [defaultChecked]);
 
   const addressInfoTypographyProps: TypographyProps = {
     fontSize: 14,
@@ -26,6 +32,11 @@ const Address: React.FC<AddressProps> = ({ address }) => {
     `${address.postalCode} ${address.city}`,
   ];
 
+  const handleChange = (e: React.ChangeEvent) => {
+    setChecked((e.target as HTMLInputElement).checked);
+    setAsDefault();
+  };
+
   return (
     <div className="flex items-center justify-between border border-neutral-400 p-28" key={address.addressId}>
       <div className="flex items-center gap-28">
@@ -33,8 +44,8 @@ const Address: React.FC<AddressProps> = ({ address }) => {
           className="hover:cursor-pointer"
           type="radio"
           name={label}
-          defaultChecked={checked}
-          onClick={!checked ? () => setAsDefault : undefined}
+          checked={checked ?? false}
+          onChange={handleChange}
         />
 
         <div className="grid">
