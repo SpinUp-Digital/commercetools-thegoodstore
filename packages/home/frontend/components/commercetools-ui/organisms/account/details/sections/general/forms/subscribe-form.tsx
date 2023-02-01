@@ -18,15 +18,15 @@ const SubscribeForm = () => {
   const values = ['subscribe', 'unsubscribe'];
 
   const handleSubmit = () => {
-    updateSubscription(subscribed)
-      .then(() => {
+    updateSubscription(subscribed).then((account) => {
+      if (account.accountId) {
         notifyDataUpdated();
         discardForm();
-      })
-      .catch(() => {
+      } else {
         notifyWentWrong();
         discardForm();
-      });
+      }
+    });
   };
 
   return (
