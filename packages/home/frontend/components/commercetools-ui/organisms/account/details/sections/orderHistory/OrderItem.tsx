@@ -29,7 +29,7 @@ const OrderItem: FC<Props> = ({ order }) => {
     <div className="mb-24 w-full rounded-md border-[1.5px] border-neutral-300">
       <div className="grid grid-cols-1 items-center rounded-t-md bg-neutral-150 p-12 md:grid-cols-3 md:p-16 lg:grid-cols-4 lg:py-32 lg:px-24">
         <div className="flex-col">
-          <div className="flex pb-16">
+          <div className="flex pb-16 whitespace-nowrap">
             <Typography fontSize={14} medium className="text-primary-black lg:text-16">
               {formatOrdersMessage({ id: 'order.id', defaultMessage: 'Order ID: ' })}
             </Typography>
@@ -42,7 +42,7 @@ const OrderItem: FC<Props> = ({ order }) => {
             <Typography fontSize={14} medium className="text-primary-black md:hidden">
               {formatOrdersMessage({ id: 'order.date', defaultMessage: 'Date:' })}
             </Typography>
-            <Typography fontSize={14} className="pl-5 text-primary-black md:pl-0 md:text-secondary-black lg:text-16">
+            <Typography fontSize={14} className="pl-5 text-primary-black md:pl-0 md:text-secondary-black">
               {order.date}
             </Typography>
           </div>

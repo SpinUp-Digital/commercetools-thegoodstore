@@ -78,7 +78,8 @@ const Orders = () => {
     { name: formatOrdersMessage({ id: 'returned', defaultMessage: 'Returned' }), slug: 'returned' },
   ];
   const [selectedTab, setSelectedTab] = useState(statusTabs[0].slug);
-  const [leftArrowAppeared, setLeftArrowAppeared] = useState(false);
+  const [leftArrowAppear, setLeftArrowAppear] = useState(false);
+  const [rightArrowAppear, setRightArrowAppear] = useState(true);
 
   const orderHistoryContent = useMemo(() => {
     if (selectedTab === 'allOrders') return orders;
@@ -91,7 +92,11 @@ const Orders = () => {
     }`;
   };
 
-  const mobileStatusWrapper = useClassNames(['h-fit w-[100%] pl-16 pr-36', leftArrowAppeared && 'pl-36 pr-16']);
+  const mobileStatusWrapper = useClassNames([
+    'h-fit w-[100%]',
+    leftArrowAppear ? 'pl-36' : 'pl-16',
+    rightArrowAppear ? 'pr-36' : 'pr-16',
+  ]);
 
   return (
     <>
@@ -115,8 +120,14 @@ const Orders = () => {
       <Wrapper className="h-56 w-full border-b-2 border-neutral-400 pt-12 md:hidden">
         <div className={mobileStatusWrapper}>
           <Slider
-            onReachEnd={() => setLeftArrowAppeared(true)}
-            onReachBeginning={() => setLeftArrowAppeared(false)}
+            onReachEnd={() => {
+              setLeftArrowAppear(true);
+              setRightArrowAppear(false);
+            }}
+            onReachBeginning={() => {
+              setLeftArrowAppear(false);
+              setRightArrowAppear(true);
+            }}
             slideWidthIsFlexible
             dots={false}
             prevButtonStyles={{
