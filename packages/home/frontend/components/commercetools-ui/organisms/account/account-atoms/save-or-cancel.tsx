@@ -3,12 +3,13 @@ import Button from 'components/commercetools-ui/atoms/button';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
 
-interface SaveOrCancelProps extends ComponentProps<'div'> {
+export interface SaveOrCancelProps extends ComponentProps<'div'> {
+  variant?: 'save' | 'delete';
   onSave?: (e: React.FormEvent) => void;
   onCancel: () => void;
 }
 
-const SaveOrCancel: FC<SaveOrCancelProps> = ({ className, onSave, onCancel }) => {
+const SaveOrCancel: FC<SaveOrCancelProps> = ({ variant, className, onSave, onCancel }) => {
   const { formatMessage } = useFormat({ name: 'common' });
 
   const containerClassName = useClassNames(['flex gap-12', className]);
@@ -23,9 +24,16 @@ const SaveOrCancel: FC<SaveOrCancelProps> = ({ className, onSave, onCancel }) =>
       >
         {formatMessage({ id: 'cancel', defaultMessage: 'Cancel' })}
       </Button>
-      <Button type="submit" className="h-40 w-112 p-0 text-14" onClick={onSave}>
-        {formatMessage({ id: 'save', defaultMessage: 'Save' })}
-      </Button>
+
+      {variant == 'save' ? (
+        <Button type="submit" className="h-40 w-112 p-0 text-14" onClick={onSave}>
+          {formatMessage({ id: 'save', defaultMessage: 'Save' })}
+        </Button>
+      ) : (
+        <Button type="submit" className="h-40 w-112 bg-accent-red px-0 text-14">
+          {formatMessage({ id: 'delete', defaultMessage: 'Delete' })}
+        </Button>
+      )}
     </div>
   );
 };
