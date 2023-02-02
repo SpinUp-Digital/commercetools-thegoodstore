@@ -34,6 +34,7 @@ export interface UseAccountReturn extends GetAccountResult {
   requestPasswordReset: (email: string) => Promise<void>;
   resetPassword: (token: string, newPassword: string) => Promise<Account>;
   update: (account: UpdateAccount) => Promise<Account>;
+  addIsSubscribedType: () => Promise<Account>;
   updateSubscription: (isSubscribed: boolean) => Promise<Account>;
   addAddress: (address: Omit<Address, 'addressId'>) => Promise<Account>;
   addShippingAddress: (address: Omit<Address, 'addressId'>) => Promise<Account>;

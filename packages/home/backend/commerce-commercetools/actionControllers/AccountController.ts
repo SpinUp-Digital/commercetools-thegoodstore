@@ -395,10 +395,6 @@ export const updateSubscription: ActionHook = async (request: Request, actionCon
 
   let account = fetchAccountFromSession(request);
 
-  if (!account.isSubscribed) {
-    await addIsSubscribedType(request, actionContext);
-  }
-
   const isSubscribed: Account['isSubscribed'] = JSON.parse(request.body).isSubscribed;
 
   const accountApi = new AccountApi(actionContext.frontasticContext, getLocale(request));

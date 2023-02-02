@@ -120,6 +120,23 @@ const useAccount = (): UseAccountReturn => {
     return res.isError ? ({} as Account) : res.data;
   }, []);
 
+  const addIsSubscribedType = useCallback(async () => {
+    const extensions = SDK.getExtensions();
+
+    const response = await extensions.account.getAccount();
+
+    if (response.isError) return {} as Account;
+
+    const res = await sdk.callAction<Account>({
+      actionName: 'account/addIsSubscribedType',
+      payload: { account: response.data.account },
+    });
+
+    mutate('/action/account/getAccount');
+
+    return res.isError ? ({} as Account) : res.data;
+  }, []);
+
   const updateSubscription = useCallback(async (isSubscribed: boolean) => {
     const extensions = SDK.getExtensions();
 
@@ -232,6 +249,7 @@ const useAccount = (): UseAccountReturn => {
     requestPasswordReset,
     resetPassword,
     update,
+    addIsSubscribedType,
     updateSubscription,
     addAddress,
     addBillingAddress,

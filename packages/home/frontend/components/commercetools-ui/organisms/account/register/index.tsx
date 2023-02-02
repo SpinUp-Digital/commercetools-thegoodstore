@@ -26,7 +26,7 @@ const Register: React.FC<RegisterProps> = ({ termsOfUseLink }) => {
   const { validatePassword } = useValidate();
 
   //account actions
-  const { register, loggedIn, login, updateSubscription } = useAccount();
+  const { register, loggedIn, login, addIsSubscribedType, updateSubscription } = useAccount();
 
   //register data
   const [isSubscribed, setIsSubscribed] = useState(false);
@@ -79,7 +79,9 @@ const Register: React.FC<RegisterProps> = ({ termsOfUseLink }) => {
         );
         setSuccess('');
       } else {
-        login(data.email, data.password).then(() => updateSubscription(isSubscribed));
+        login(data.email, data.password).then(() => {
+          addIsSubscribedType().then(() => updateSubscription(isSubscribed));
+        });
       }
     } catch (err) {
       setError(formatErrorMessage({ id: 'wentWrong', defaultMessage: 'Sorry. Something went wrong..' }));
