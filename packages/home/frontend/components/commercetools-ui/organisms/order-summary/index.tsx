@@ -7,7 +7,7 @@ import useCloseFlyouts from 'helpers/hooks/useCloseFlyouts';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart } from 'frontastic';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
-import DiscountForm from '../discount-form';
+import DiscountForm from './discount-form';
 
 export interface PaymentMethod {
   name: string;

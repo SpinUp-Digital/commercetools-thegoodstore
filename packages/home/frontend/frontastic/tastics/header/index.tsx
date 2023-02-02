@@ -1,5 +1,5 @@
 import React, { createContext, useCallback, useRef } from 'react';
-import AnnouncementBar, { Props as AnnouncementBarProps } from 'components/commercetools-ui/organisms/bar/announcement';
+import AnnouncementBar, { Props as AnnouncementBarProps } from 'components/commercetools-ui/organisms/announcement-bar';
 import Header from 'components/commercetools-ui/organisms/header';
 import { HeaderProps, Market } from 'components/commercetools-ui/organisms/header/types';
 import { MarketProvider } from 'context/market';

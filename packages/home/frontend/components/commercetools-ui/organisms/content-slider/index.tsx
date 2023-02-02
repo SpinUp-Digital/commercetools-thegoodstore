@@ -8,10 +8,10 @@ import { CurrentBreakpoint } from 'helpers/utils/breakpoints';
 import * as screensizes from 'helpers/utils/screensizes';
 import { Reference } from 'types/reference';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
+import Wrapper from '../../../HOC/wrapper';
 import Link from '../../atoms/link';
 import Slider from '../../atoms/slider';
 import Subtitle from '../../atoms/subtitle';
-import Wrapper from '../content/wrapper';
 
 type ContentSliderSlide = {
   image: NextFrontasticImage;

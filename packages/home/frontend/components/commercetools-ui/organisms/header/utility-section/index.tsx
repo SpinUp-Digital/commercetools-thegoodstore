@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import Drawer from 'components/commercetools-ui/atoms/drawer';
-import Slideout, { State as MenuState } from 'components/commercetools-ui/atoms/slide-out';
 import { Link } from 'components/commercetools-ui/organisms/header/types';
+import Slideout, { MenuState } from 'components/commercetools-ui/organisms/header/utility-section/components/slide-out';
 import CartIcon from 'components/icons/cart';
 import WishlistIcon from 'components/icons/wishlist';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart, useWishlist } from 'frontastic';
 import { NextFrontasticImage } from 'frontastic/lib/image';
-import AccountButton from './account-button';
+import AccountButton from './components/account-button';
 
 export interface Props {
   emptyCartTitle: string;

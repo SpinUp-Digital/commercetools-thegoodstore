@@ -4,7 +4,7 @@ import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import Link from 'components/commercetools-ui/atoms/link';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import useClassNames from 'helpers/hooks/useClassNames';
-import { AccountTab } from '../details';
+import { AccountTab } from '..';
 
 export interface Props {
   contentTitle: string;

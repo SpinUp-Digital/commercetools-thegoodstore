@@ -5,7 +5,7 @@ import { FooterLink } from 'components/commercetools-ui/organisms/footer/column'
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useWishlist } from 'frontastic';
 import { NextFrontasticImage } from 'frontastic/lib/image';
-import WishlistItem from './wishlist-item';
+import WishlistItem from './components/wishlist-item';
 
 export interface Props {
   emptyWishlistTitle: string;

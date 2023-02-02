@@ -1,6 +1,6 @@
 import { Product } from '@commercetools/frontend-domain-types/product/Product';
 import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
-import { UISize } from 'components/commercetools-ui/organisms/products/product-details/types';
+import { UISize } from 'components/commercetools-ui/organisms/product/product-details/types';
 
 export const toUISize = (product: Product) => {
   const mappedSizes: UISize[] = [

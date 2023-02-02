@@ -5,7 +5,7 @@ import SaveOrCancel, {
 } from 'components/commercetools-ui/organisms/account/account-atoms/save-or-cancel';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
-import useDiscardForm from '../useDiscardForm';
+import useDiscardForm from '../hooks/useDiscardForm';
 
 export interface AccountFormProps extends ComponentProps<'form'> {
   title: string;

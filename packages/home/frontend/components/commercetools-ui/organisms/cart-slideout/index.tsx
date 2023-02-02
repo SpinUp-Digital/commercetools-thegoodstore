@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart } from 'frontastic';
 import { NextFrontasticImage } from 'frontastic/lib/image';
-import CartItem from '../../atoms/cart-item';
+import CartItem from '../cart/cart-item';
 import { EmptyState } from '../empty-state';
 import { Link } from '../header/types';
 import OrderSummary from '../order-summary';

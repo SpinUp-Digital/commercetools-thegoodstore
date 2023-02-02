@@ -1,5 +1,5 @@
 import React from 'react';
-import Login, { LoginProps } from 'components/commercetools-ui/organisms/account/login';
+import Login, { LoginProps } from 'components/commercetools-ui/organisms/authentication/login';
 
 export interface Props {
   data: LoginProps;

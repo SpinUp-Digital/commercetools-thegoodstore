@@ -1,5 +1,5 @@
 import { Product } from '@commercetools/frontend-domain-types/product/Product';
-import ProductSlider, { Props as ProductSliderProps } from 'components/commercetools-ui/organisms/products/slider';
+import ProductSlider, { ProductSliderProps } from 'components/commercetools-ui/organisms/product/product-slider';
 import { Tastic } from 'types/tastic';
 
 function SimilarProductsTastic({ data }: Tastic<{ items: Product[] }, ProductSliderProps>) {
