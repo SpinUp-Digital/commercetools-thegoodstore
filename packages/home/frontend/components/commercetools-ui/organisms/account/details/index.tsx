@@ -99,12 +99,12 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
     '#': <MyAccountSection isLoading={isLoading} />,
     '#edit-personal-info': <PersonalInfoForm />,
     '#edit-newsletter': <SubscribeForm />,
+    '#edit-address': <AddressForm editedAddressId={id} />,
     '#change-password': <ChangePasswordForm />,
     '#delete-account': <DeleteAccountForm />,
     '#orders': <OrdersHistorySection />,
     '#payment': <PaymentMethodsSection />,
     '#addresses': <AddressesSection />,
-    '#edit-address': <AddressForm editedAddressId={id} />,
     '#support': (
       <CustomerSupportSection
         phoneNumber={phoneNumber}
@@ -129,7 +129,7 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
 
   const contentClassNames = useClassNames([
     hash != '#orders' ? 'px-16' : '',
-    'col-span-3 py-20 md:overflow-auto md:p-24 2xl:col-span-4 2xl:px-44 2xl:py-48 2xl:pr-[136px]',
+    'col-span-3 py-24 md:overflow-auto md:p-24 2xl:col-span-4 2xl:px-44 2xl:py-48 2xl:pr-[136px]',
   ]);
 
   const contentTitleClassNames = useClassNames([hash === '#orders' ? 'px-16' : '', 'block pb-12 pt-16 md:hidden']);
@@ -175,13 +175,13 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
         </div>
       </div>
       <div className={contentClassNames}>
-        <div className={contentTitleClassNames}>
-          {contentTitle && (
+        {contentTitle && (
+          <div className={contentTitleClassNames}>
             <Typography as="h2" fontFamily="libre" className="text-18 text-primary-black">
               {contentTitle}
             </Typography>
-          )}
-        </div>
+          </div>
+        )}
 
         <AccountTabsMobile contentTitle={contentTitle} hash={hash} tabs={tabs} />
         {Content && Content}

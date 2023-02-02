@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
-import Button from 'components/commercetools-ui/atoms/button';
 import Modal from 'components/commercetools-ui/atoms/modal';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { useFormat } from 'helpers/hooks/useFormat';
+import SaveOrCancel from '../../../account-atoms/save-or-cancel';
 
 type DeleteModalProps = {
   modalIsOpen: boolean;
@@ -39,14 +39,7 @@ const DeleteModal: FC<DeleteModalProps> = ({ modalIsOpen, closeModal, handleDele
             {formatAccountMessage({ id: 'action.warning', defaultMessage: 'This action can not be undone.' })}
           </Typography>
 
-          <div className="grid w-[244px] grid-cols-2 gap-12">
-            <Button type="button" variant="secondary" className="h-40 w-full p-0" onClick={closeModal}>
-              {formatMessage({ id: 'cancel', defaultMessage: 'Cancel' })}
-            </Button>
-            <Button type="button" className="h-40 w-full bg-accent-red px-0 text-14" onClick={handleDelete}>
-              {formatMessage({ id: 'delete', defaultMessage: 'Delete' })}
-            </Button>
-          </div>
+          <SaveOrCancel onCancel={closeModal} variant="delete" />
         </div>
       </>
     </Modal>

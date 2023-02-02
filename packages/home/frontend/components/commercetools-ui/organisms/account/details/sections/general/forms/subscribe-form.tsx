@@ -31,7 +31,7 @@ const SubscribeForm = () => {
 
   return (
     <AccountForm
-      title={formatMessage({ id: 'subscribe.update', defaultMessage: 'Update Subscription' })}
+      title={formatMessage({ id: 'subscribe.update', defaultMessage: 'Edit newsletter subscription' })}
       defaultCTASection
       onSubmit={handleSubmit}
     >

@@ -1,6 +1,8 @@
 import { ComponentProps, FC } from 'react';
 import Typography from 'components/commercetools-ui/atoms/typography';
-import SaveOrCancel from 'components/commercetools-ui/organisms/account/account-atoms/save-or-cancel';
+import SaveOrCancel, {
+  SaveOrCancelProps,
+} from 'components/commercetools-ui/organisms/account/account-atoms/save-or-cancel';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useDiscardForm from '../useDiscardForm';
@@ -11,6 +13,7 @@ export interface AccountFormProps extends ComponentProps<'form'> {
   containerClassName?: string;
   requiredLabelIsVisible?: boolean;
   defaultCTASection?: boolean;
+  ctaVariant?: SaveOrCancelProps['variant'];
   onSubmit: (e: React.FormEvent) => void;
 }
 
@@ -20,6 +23,7 @@ const AccountForm: FC<AccountFormProps> = ({
   title,
   subtitle,
   requiredLabelIsVisible,
+  ctaVariant,
   defaultCTASection,
   onSubmit,
   children,
@@ -41,9 +45,9 @@ const AccountForm: FC<AccountFormProps> = ({
         {title}
       </Typography>
 
-      <div className="relative border-neutral-400 py-24 md:border md:px-32 md:pr-68">
+      <div className="relative border-neutral-400 py-44 md:border md:p-32 md:pr-68">
         {subtitle && (
-          <Typography fontSize={16} lineHeight="loose" className="mb-40 text-secondary-black">
+          <Typography fontSize={14} lineHeight="loose" className="mb-28 text-secondary-black md:mb-40 md:text-16">
             {subtitle}
           </Typography>
         )}
@@ -59,7 +63,7 @@ const AccountForm: FC<AccountFormProps> = ({
                 </Typography>
               )}
 
-              <SaveOrCancel onCancel={discardForm} onSave={handleSubmit} />
+              <SaveOrCancel onCancel={discardForm} onSave={handleSubmit} variant={ctaVariant} />
             </div>
           )}
         </div>
