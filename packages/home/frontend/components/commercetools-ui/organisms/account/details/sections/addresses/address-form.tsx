@@ -49,13 +49,19 @@ const AddressForm: React.FC<AddressFormProps> = ({ editedAddressId }) => {
   const { country } = useI18n();
 
   //new address data
-  const defaultData = useMemo(
-    () =>
-      (editedAddressId
-        ? account?.addresses?.find((address) => address.addressId === editedAddressId)
-        : { country }) as AddressFormData,
-    [account?.addresses, country, editedAddressId],
-  );
+  const defaultData = useMemo(() => {
+    if (!editedAddressId) return { country } as AddressFormData;
+
+    const accountAddress = account?.addresses?.find(
+      (address) => address.addressId === editedAddressId,
+    ) as AddressFormData;
+
+    if (accountAddress) {
+      accountAddress.addressType = mapPropsToAddress(accountAddress).addressType;
+    }
+
+    return accountAddress;
+  }, [account?.addresses, country, editedAddressId, mapPropsToAddress]);
 
   const [data, setData] = useState<AddressFormData>(defaultData);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -84,8 +90,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ editedAddressId }) => {
   };
 
   const discardFormAndNotify = (promise: Promise<Account | void>) => {
-    discardForm();
-    promise.then(notifyDataUpdated).catch(notifyWentWrong);
+    promise.then(discardForm).then(notifyDataUpdated).catch(notifyWentWrong);
   };
 
   const handleDelete = () => {
@@ -190,7 +195,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ editedAddressId }) => {
         items={addressTypes}
         className="w-full border-neutral-500"
         onChange={handleChange}
-        value={editedAddressId ? mapPropsToAddress(data).addressType : addressTypes[0].value}
+        defaultValue={editedAddressId ? mapPropsToAddress(data).addressType : addressTypes[0].value}
         label={formatAccountMessage({
           id: 'address.type',
           defaultMessage: 'Address type',
@@ -200,7 +205,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ editedAddressId }) => {
       <Checkbox
         name="isDefaultAddress"
         id="is-default-address"
-        checked={data?.isDefaultAddress ?? false}
+        checked={data?.isDefaultBillingAddress || data?.isDefaultShippingAddress || false}
         onChange={handleChange}
         containerClassName="mt-4 mb-20"
         label={formatAccountMessage({
