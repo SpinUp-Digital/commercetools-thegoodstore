@@ -142,7 +142,7 @@ const Orders = () => {
             }}
             allowTouchMove
             allowArrowsOnTouchDevice
-            arrows
+            arrows={leftArrowAppear !== rightArrowAppear}
             spaceBetween={20}
           >
             {statusTabs.map((tab) => (
