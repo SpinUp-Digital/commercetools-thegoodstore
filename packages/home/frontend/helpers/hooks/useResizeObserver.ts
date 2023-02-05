@@ -1,6 +1,10 @@
 import React, { useCallback, useEffect } from 'react';
 
-const useResizeObserver = (ref: React.RefObject<HTMLElement>, callback: (entry?: ResizeObserverEntry) => void) => {
+const useResizeObserver = (
+  ref: React.RefObject<HTMLElement>,
+  callback: (entry?: ResizeObserverEntry) => void,
+  cleanup?: () => void,
+) => {
   const resizeCallback = useCallback(
     (entries: ResizeObserverEntry[]) => {
       callback(entries[0]);
@@ -11,9 +15,14 @@ const useResizeObserver = (ref: React.RefObject<HTMLElement>, callback: (entry?:
   useEffect(() => {
     callback();
     const observer = new ResizeObserver(resizeCallback);
+
     if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [ref, callback, resizeCallback]);
+
+    return () => {
+      observer.disconnect();
+      cleanup?.();
+    };
+  }, [ref, callback, resizeCallback, cleanup]);
 };
 
 export default useResizeObserver;

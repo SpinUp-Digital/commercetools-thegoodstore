@@ -50,7 +50,7 @@ const Footer: React.FC<Props> = ({ columns, logo, socialMedia }) => {
                 closedSectionTitle={column.header ?? ''}
                 openSectionTitle={column.header}
                 buttonClassName="h-48 text-14 font-medium text-neutral-100 px-12 text-neutral-150"
-                iconColor="text-neutral-100"
+                iconClassName="text-neutral-100"
               >
                 <div className="mb-16 ml-20 flex flex-row text-14 md:ml-24" key={index}>
                   <Column links={column.links ?? []} className="px-0" />

@@ -20,11 +20,12 @@ const Checkbox: React.FC<Props> = ({
   onMouseLeave,
   containerClassName,
   label,
+  defaultChecked = false,
   labelPosition = 'on-right',
   ...props
 }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [isChecked, setIsChecked] = useState(checked ?? false);
+  const [isChecked, setIsChecked] = useState(checked ?? defaultChecked ?? false);
 
   const [isDesktopSize] = useMediaQuery(desktop);
 
@@ -37,7 +38,7 @@ const Checkbox: React.FC<Props> = ({
   };
 
   const handleMouseOver = (e: React.MouseEvent<HTMLInputElement>) => {
-    setIsHovered(true);
+    setIsHovered(isDesktopSize);
     onMouseOver?.(e);
   };
 

@@ -1,14 +1,12 @@
 import React from 'react';
-import CheckoutAdyen, { CheckoutAdyenProps } from 'components/commercetools-ui/organisms/checkout-adyen';
+import Checkout, { Props as CheckoutProps } from 'components/commercetools-ui/organisms/checkout';
 
 interface Props {
-  data: CheckoutAdyenProps;
+  data: CheckoutProps;
 }
 
 const CheckoutTastic = ({ data }: Props) => {
-  return (
-    <CheckoutAdyen termsLink={data.termsLink} cancellationLink={data.cancellationLink} privacyLink={data.privacyLink} />
-  );
+  return <Checkout {...data} />;
 };
 
 export default CheckoutTastic;
