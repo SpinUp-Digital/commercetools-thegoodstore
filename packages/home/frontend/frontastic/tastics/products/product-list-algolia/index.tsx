@@ -4,14 +4,14 @@ import { UiState } from 'instantsearch.js';
 import { history } from 'instantsearch.js/es/lib/routers/index.js';
 import { InstantSearchServerState, InstantSearchSSRProvider, useClearRefinements } from 'react-instantsearch-hooks';
 import NotFound from 'components/commercetools-ui/organisms/not-found';
-import ProductList from 'components/commercetools-ui/organisms/products/product-list-algolia';
+import ProductList from 'components/commercetools-ui/organisms/product/product-list-algolia';
 import ProductListProvider, {
   useProductList,
-} from 'components/commercetools-ui/organisms/products/product-list-algolia/context';
+} from 'components/commercetools-ui/organisms/product/product-list-algolia/context';
 import {
   FacetConfiguration,
   PriceConfiguration,
-} from 'components/commercetools-ui/organisms/products/product-list-algolia/types';
+} from 'components/commercetools-ui/organisms/product/product-list-algolia/types';
 import InstantSearch from 'components/HOC/InstantSearch';
 import { productsIndex } from 'helpers/constants/algolia';
 import { Category } from 'types/category';

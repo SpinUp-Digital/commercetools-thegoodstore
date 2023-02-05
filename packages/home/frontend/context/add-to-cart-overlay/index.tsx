@@ -6,7 +6,7 @@ import { Transition } from '@headlessui/react';
 import { XMarkIcon as CloseIcon } from '@heroicons/react/24/solid';
 import Link from 'components/commercetools-ui/atoms/link';
 import Overlay from 'components/commercetools-ui/atoms/overlay';
-import ProductSlider from 'components/commercetools-ui/organisms/products/slider';
+import ProductSlider from 'components/commercetools-ui/organisms/product/product-slider';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useTouchDevice from 'helpers/hooks/useTouchDevice';

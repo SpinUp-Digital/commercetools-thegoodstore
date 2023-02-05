@@ -1,7 +1,7 @@
 import React from 'react';
+import Wrapper from 'components/HOC/wrapper';
 import useImageSizes from 'helpers/hooks/useImageSizes';
 import Tile, { TileProps } from '../tile';
-import Wrapper from '../wrapper';
 
 export interface Props {
   tiles: TileProps[];

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Product } from '@commercetools/frontend-domain-types/product/Product';
-import ProductDetailsAdapter from 'components/commercetools-ui/organisms/products/product-details/adapter';
+import ProductDetailsAdapter from 'components/commercetools-ui/organisms/product/product-details/helpers/adapter';
 import { Tastic } from 'types/tastic';
 
 type ProductDetailsTasticProps = Tastic<{ product: Product }>;

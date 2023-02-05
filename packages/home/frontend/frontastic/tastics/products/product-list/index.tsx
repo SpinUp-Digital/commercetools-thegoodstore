@@ -3,14 +3,14 @@ import { useRouter } from 'next/router';
 import { Product } from '@commercetools/frontend-domain-types/product/Product';
 import { Facet } from '@commercetools/frontend-domain-types/result/Facet';
 import NotFound from 'components/commercetools-ui/organisms/not-found';
-import ProductList, { Props as ProductListProps } from 'components/commercetools-ui/organisms/products/product-list';
+import ProductList, { Props as ProductListProps } from 'components/commercetools-ui/organisms/product/product-list';
 import ProductListProvider, {
   useProductList,
-} from 'components/commercetools-ui/organisms/products/product-list/context';
+} from 'components/commercetools-ui/organisms/product/product-list/context';
 import {
   FacetConfiguration,
   PriceConfiguration,
-} from 'components/commercetools-ui/organisms/products/product-list/types';
+} from 'components/commercetools-ui/organisms/product/product-list/types';
 import { Category } from 'types/category';
 import { Tastic } from 'types/tastic';
 

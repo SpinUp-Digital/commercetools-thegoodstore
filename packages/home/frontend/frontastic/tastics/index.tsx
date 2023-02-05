@@ -20,7 +20,7 @@ const AccountOrdersHistory = dynamic(() => import('./account/orders'));
 const AccountRegister = dynamic(() => import('./account/register'));
 const ResetPassword = dynamic(() => import('./account/reset-password'));
 const Checkout = dynamic(() => import('./checkout'));
-const ThankYou = dynamic(() => import('./checkout/thank-you'));
+const ThankYou = dynamic(() => import('./thank-you'));
 const ProductDetails = dynamic(() => import('./products/details'));
 const ProductList = dynamic(() => import('./products/product-list'));
 const ProductListAlgolia = dynamic(() => import('./products/product-list-algolia'));

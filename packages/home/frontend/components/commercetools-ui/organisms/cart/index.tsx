@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from 'components/commercetools-ui/atoms/button';
-import CartItem from 'components/commercetools-ui/atoms/cart-item';
 import Link from 'components/commercetools-ui/atoms/link';
+import CartItem from 'components/commercetools-ui/organisms/cart/cart-item';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import { tablet } from 'helpers/utils/screensizes';

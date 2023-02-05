@@ -2,7 +2,7 @@ import React from 'react';
 import { GiCycle as CycleIcon } from 'react-icons/gi';
 import { HiOutlineLockClosed as LockIcon } from 'react-icons/hi';
 import { IoRocketOutline as RocketIcon } from 'react-icons/io5';
-import HighlightBar from 'components/commercetools-ui/organisms/bar/highlight';
+import HighlightBar from 'components/commercetools-ui/organisms/highlight-bar';
 import { useFormat } from 'helpers/hooks/useFormat';
 
 const Highlights = () => {
