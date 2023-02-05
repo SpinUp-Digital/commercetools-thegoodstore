@@ -1,7 +1,7 @@
 import PasswordInput from 'components/commercetools-ui/atoms/input-password';
-import AccountForm from 'components/commercetools-ui/organisms/account/account-atoms/account-form';
-import useDiscardForm from 'components/commercetools-ui/organisms/account/hooks/useDiscardForm';
 import { useFormat } from 'helpers/hooks/useFormat';
+import AccountForm from '../../../account-atoms/account-form';
+import useDiscardForm from '../../../hooks/useDiscardForm';
 
 const DeleteAccountForm = () => {
   const { discardForm } = useDiscardForm();

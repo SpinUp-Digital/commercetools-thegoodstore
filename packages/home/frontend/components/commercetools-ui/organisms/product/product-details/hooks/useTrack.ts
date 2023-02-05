@@ -31,11 +31,13 @@ const useTrack = ({ product, inModalVersion }: Options) => {
     if (product && product.productId !== lastProductId.current) {
       const hit = await getHitByProduct(product);
 
-      aa('viewedObjectIDs', {
-        eventName: PRODUCT_VIEWED,
-        objectIDs: [hit.objectID],
-        index: productsIndex,
-      });
+      try {
+        aa('viewedObjectIDs', {
+          eventName: PRODUCT_VIEWED,
+          objectIDs: [hit.objectID],
+          index: productsIndex,
+        });
+      } catch (err) {}
 
       gtag('event', query.sr ? PDP_VIEWED_AFTER_SEARCH : PDP_VIEWED, { product });
 
@@ -55,16 +57,22 @@ const useTrack = ({ product, inModalVersion }: Options) => {
     if (inModalVersion) {
       const eventName = query.sr ? QUICK_VIEW_PRODUCT_ADDED_TO_CART_AFTER_SEARCH : QUICK_VIEW_PRODUCT_ADDED_TO_CART;
 
-      aa('sendEvents', [
-        { eventType: 'conversion', eventName, objectIDs: [hit.objectID], queryID, index: productsIndex },
-      ]);
+      try {
+        aa('sendEvents', [
+          { eventType: 'conversion', eventName, objectIDs: [hit.objectID], queryID, index: productsIndex },
+        ]);
+      } catch (err) {}
+
       gtag('event', eventName, product);
     } else {
       const eventName = query.sr ? PDP_PRODUCT_ADDED_TO_CART_AFTER_SEARCH : PDP_PRODUCT_ADDED_TO_CART;
 
-      aa('sendEvents', [
-        { eventType: 'conversion', eventName, objectIDs: [hit.objectID], queryID, index: productsIndex },
-      ]);
+      try {
+        aa('sendEvents', [
+          { eventType: 'conversion', eventName, objectIDs: [hit.objectID], queryID, index: productsIndex },
+        ]);
+      } catch (err) {}
+
       gtag('event', eventName, product);
     }
   }, [product, getHitByProduct, query, inModalVersion]);

@@ -23,7 +23,7 @@ const FAQ: React.FC<Props> = ({ faqs }) => {
           <div key={index} className="rounded-md border border-neutral-400">
             <AccordionBtn
               variant="plusAndMinus"
-              iconColor="text-primary-black"
+              iconClassName="text-primary-black"
               closedSectionTitle={faq.question}
               buttonClassName="font-medium text-16 py-20 px-16 text-primary-black"
             >

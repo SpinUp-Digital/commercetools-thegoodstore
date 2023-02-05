@@ -5,11 +5,12 @@ import { useFormat } from 'helpers/hooks/useFormat';
 
 export interface SaveOrCancelProps extends ComponentProps<'div'> {
   variant?: 'save' | 'delete';
+  loading?: boolean;
   onSave?: (e: React.FormEvent) => void;
   onCancel: () => void;
 }
 
-const SaveOrCancel: FC<SaveOrCancelProps> = ({ variant, className, onSave, onCancel }) => {
+const SaveOrCancel: FC<SaveOrCancelProps> = ({ variant = 'save', loading, className, onSave, onCancel }) => {
   const { formatMessage } = useFormat({ name: 'common' });
 
   const containerClassName = useClassNames(['flex gap-12', className]);
@@ -26,11 +27,11 @@ const SaveOrCancel: FC<SaveOrCancelProps> = ({ variant, className, onSave, onCan
       </Button>
 
       {variant == 'save' ? (
-        <Button type="submit" className="h-40 w-112 p-0 text-14" onClick={onSave}>
+        <Button loading={loading} type="submit" className="h-40 w-112 p-0 text-14" onClick={onSave}>
           {formatMessage({ id: 'save', defaultMessage: 'Save' })}
         </Button>
       ) : (
-        <Button type="submit" className="h-40 w-112 bg-accent-red px-0 text-14">
+        <Button loading={loading} type="submit" className="h-40 w-112 bg-accent-red px-0 text-14" onClick={onSave}>
           {formatMessage({ id: 'delete', defaultMessage: 'Delete' })}
         </Button>
       )}

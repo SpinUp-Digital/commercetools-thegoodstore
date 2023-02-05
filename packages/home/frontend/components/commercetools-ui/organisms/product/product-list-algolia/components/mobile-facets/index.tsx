@@ -44,7 +44,7 @@ const MobileFacets: React.FC<Props> = ({ facetsConfiguration }) => {
         buttonClassName={accordionClassNames.button}
         closedSectionTitle={facetsConfiguration[attribute].label}
         variant="arrow"
-        iconColor={accordionClassNames.icon}
+        iconClassName={accordionClassNames.icon}
       >
         <div className="py-28 px-16">{Component}</div>
       </Accordion>
@@ -58,7 +58,7 @@ const MobileFacets: React.FC<Props> = ({ facetsConfiguration }) => {
         buttonClassName={accordionClassNames.button}
         closedSectionTitle={formatProductMessage({ id: 'sortBy', defaultMessage: 'Sory by' })}
         variant="arrow"
-        iconColor={accordionClassNames.icon}
+        iconClassName={accordionClassNames.icon}
       >
         <div className="py-28 px-16">
           <SortFacet

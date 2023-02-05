@@ -12,6 +12,7 @@ const PersonalInfoForm = () => {
   const { account, update } = useAccount();
   const { discardForm } = useDiscardForm();
   const [data, setData] = useState<Account>(account as Account);
+  const [loading, setLoading] = useState(false);
 
   const { validateEmail, validateTextExists } = useValidate();
   const { notifyDataUpdated, notifyWentWrong } = useFeedbackToasts();
@@ -31,9 +32,11 @@ const PersonalInfoForm = () => {
   };
 
   const handleSubmit = () => {
+    setLoading(true);
     update(data)
       .then(() => notifyDataUpdated())
-      .catch(() => notifyWentWrong());
+      .catch(() => notifyWentWrong())
+      .finally(() => setLoading(false));
 
     discardForm();
   };
@@ -48,6 +51,7 @@ const PersonalInfoForm = () => {
       title={formatAccountMessage({ id: 'personal.info.edit', defaultMessage: 'Edit personal information' })}
       requiredLabelIsVisible
       defaultCTASection
+      loading={loading}
       onSubmit={handleSubmit}
     >
       <div className="grid gap-12">

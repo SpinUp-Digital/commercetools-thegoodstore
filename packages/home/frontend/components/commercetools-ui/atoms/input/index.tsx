@@ -5,7 +5,8 @@ import Typography from '../typography';
 
 export interface InputProps extends Omit<ComponentProps<'input'>, 'onChange'> {
   label?: string;
-  onChange?: (target: React.ChangeEvent<HTMLInputElement>) => void;
+  labelDesc?: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   variant?: 'primary' | 'secondary';
   labelPosition?: 'top' | 'inline';
   innerRef?: MutableRefObject<HTMLInputElement>;
@@ -18,6 +19,7 @@ export interface InputProps extends Omit<ComponentProps<'input'>, 'onChange'> {
 
 const Input: FC<InputProps> = ({
   label,
+  labelDesc,
   onChange,
   onBlur,
   onFocus,
@@ -83,10 +85,16 @@ const Input: FC<InputProps> = ({
   const isInActiveState = useMemo(() => isFocused || !!value, [isFocused, value]);
 
   const labelClassName = useClassNames([
-    { ['block text-secondary-black mb-8']: labelPosition === 'top' },
+    { ['text-secondary-black']: labelPosition === 'top' },
     { [isInActiveState && label ? 'opacity-1 scale-100' : 'scale-0 opacity-0']: labelPosition === 'inline' },
     {
       ['absolute top-[6px] left-[12px] font-medium block transition duration-150 ease-out']: labelPosition === 'inline',
+    },
+  ]);
+
+  const labelContainerClassName = useClassNames([
+    {
+      'mb-8': labelPosition === 'top',
     },
   ]);
 
@@ -101,17 +109,29 @@ const Input: FC<InputProps> = ({
 
   return (
     <div className="relative">
-      {label && (
-        <Typography
-          lineHeight={labelPosition ? 'loose' : 'normal'}
-          fontSize={labelPosition === 'top' ? 14 : 10}
-          as="label"
-          medium
-          className={labelClassName}
-        >
-          {props.required ? `${label} *` : label}
-        </Typography>
-      )}
+      <div className={labelContainerClassName}>
+        {label && (
+          <Typography
+            lineHeight={labelPosition ? 'loose' : 'normal'}
+            fontSize={labelPosition === 'top' ? 14 : 10}
+            as="label"
+            medium
+            className={labelClassName}
+          >
+            {props.required ? `${label} *` : label}
+          </Typography>
+        )}
+        {labelDesc && (
+          <Typography
+            lineHeight={labelPosition ? 'loose' : 'normal'}
+            fontSize={labelPosition === 'top' ? 14 : 10}
+            as="label"
+            className={labelClassName}
+          >
+            {` (${labelDesc})`}
+          </Typography>
+        )}
+      </div>
       <div className="relative">
         <input
           className={inputClassName}
