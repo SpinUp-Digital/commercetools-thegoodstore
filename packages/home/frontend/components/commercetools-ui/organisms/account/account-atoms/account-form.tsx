@@ -14,6 +14,7 @@ export interface AccountFormProps extends ComponentProps<'form'> {
   requiredLabelIsVisible?: boolean;
   defaultCTASection?: boolean;
   ctaVariant?: SaveOrCancelProps['variant'];
+  loading?: boolean;
   onSubmit: (e: React.FormEvent) => void;
 }
 
@@ -22,6 +23,7 @@ const AccountForm: FC<AccountFormProps> = ({
   containerClassName,
   title,
   subtitle,
+  loading,
   requiredLabelIsVisible,
   ctaVariant,
   defaultCTASection,
@@ -47,7 +49,7 @@ const AccountForm: FC<AccountFormProps> = ({
 
       <div className="relative border-neutral-400 py-44 md:border md:p-32 md:pr-68">
         {subtitle && (
-          <Typography fontSize={14} lineHeight="loose" className="mb-28 text-secondary-black md:mb-40 md:text-16">
+          <Typography fontSize={14} lineHeight="loose" className="mb-28 text-primary-black md:mb-40 md:text-16">
             {subtitle}
           </Typography>
         )}
@@ -63,7 +65,7 @@ const AccountForm: FC<AccountFormProps> = ({
                 </Typography>
               )}
 
-              <SaveOrCancel onCancel={discardForm} onSave={handleSubmit} variant={ctaVariant} />
+              <SaveOrCancel onCancel={discardForm} onSave={handleSubmit} loading={loading} variant={ctaVariant} />
             </div>
           )}
         </div>

@@ -23,6 +23,7 @@ const ChangePasswordForm = () => {
 
   const defaultData: ChangePasswordFormData = { password: '', newPassword: '', confirmPassword: '' };
   const [data, setData] = useState<ChangePasswordFormData>(defaultData);
+  const [loading, setLoading] = useState(false);
 
   const newPasswordIsNotValidMessage = formatErrorMessage({
     id: 'password.not.valid',
@@ -50,12 +51,15 @@ const ChangePasswordForm = () => {
     } else if (data.newPassword !== data.confirmPassword) {
       toast.error(confirmPasswordErrorMessage);
     } else {
+      setLoading(true);
       // Request update password
       changePassword(data.password, data.newPassword).then((account) => {
         if (account.accountId) {
           toast.success(formatAccountMessage({ id: 'data.updated', defaultMessage: 'Data updated successfully.' }));
+          setLoading(false);
           discardForm();
         } else {
+          setLoading(false);
           toast.error(formatErrorMessage({ id: 'wentWrong', defaultMessage: 'Sorry, something went wrong..' }));
         }
       });
@@ -83,6 +87,7 @@ const ChangePasswordForm = () => {
       title={formatAccountMessage({ id: 'password.change', defaultMessage: 'Change your password' })}
       requiredLabelIsVisible
       defaultCTASection
+      loading={loading}
       onSubmit={handleSubmit}
     >
       <div className="grid gap-12">
