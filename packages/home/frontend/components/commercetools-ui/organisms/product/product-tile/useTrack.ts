@@ -21,11 +21,13 @@ const useTrack = ({ product }: Options) => {
     if (inView && !trackedView.current) {
       const hit = await getHitByProduct(product);
 
-      aa('viewedObjectIDs', {
-        eventName: PRODUCT_VIEWED,
-        objectIDs: [hit.objectID],
-        index: productsIndex,
-      });
+      try {
+        aa('viewedObjectIDs', {
+          eventName: PRODUCT_VIEWED,
+          objectIDs: [hit.objectID],
+          index: productsIndex,
+        });
+      } catch (err) {}
 
       gtag('event', PRODUCT_VIEWED, product);
 

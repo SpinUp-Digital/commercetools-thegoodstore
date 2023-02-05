@@ -124,12 +124,14 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods, emptyStateDescripti
       </div>
 
       <div className="sticky bottom-0 w-full border-t border-neutral-400 bg-white p-16 md:hidden">
-        <button
-          disabled={isEmpty}
-          className="w-full rounded-md bg-primary-black py-12 font-medium text-white transition hover:bg-gray-500 disabled:cursor-not-allowed disabled:bg-neutral-400"
-        >
-          {formatCartMessage({ id: 'checkout.go', defaultMessage: 'Go to checkout' })}
-        </button>
+        <Link link="/checkout">
+          <button
+            disabled={isEmpty}
+            className="w-full rounded-md bg-primary-black py-12 font-medium text-white transition hover:bg-gray-500 disabled:cursor-not-allowed disabled:bg-neutral-400"
+          >
+            {formatCartMessage({ id: 'checkout.go', defaultMessage: 'Go to checkout' })}
+          </button>
+        </Link>
       </div>
     </div>
   );

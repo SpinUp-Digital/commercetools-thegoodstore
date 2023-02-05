@@ -5,7 +5,7 @@ import { Order } from '@commercetools/frontend-domain-types/cart/Order';
 import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
 import useSWR, { mutate } from 'swr';
 import useI18n from 'helpers/hooks/useI18n';
-import { SDK } from 'sdk';
+import { SDK, sdk } from 'sdk';
 import { revalidateOptions } from 'frontastic';
 import { CartDetails, UseCartReturn } from './types';
 
@@ -107,10 +107,8 @@ const useCart = (): UseCartReturn => {
   }, []);
 
   const orderCart = useCallback(async () => {
-    const extensions = SDK.getExtensions();
-
-    const res = await extensions.cart.checkout();
-    mutate('/action/cart/getCart', res);
+    await sdk.callAction({ actionName: 'cart/checkout' });
+    mutate('/action/cart/getCart');
   }, []);
 
   const orderHistory = useCallback(async () => {

@@ -15,16 +15,18 @@ const useTrack = () => {
 
       const queryID = window.localStorage.getItem(LAST_ALGOLIA_QUERY_ID) as string;
 
-      aa('sendEvents', [
-        {
-          eventType: 'click',
-          eventName: SLIDER_PRODUCT_CLICKED,
-          objectIDs: [hit.objectID],
-          queryID,
-          positions: [position],
-          index: productsIndex,
-        },
-      ]);
+      try {
+        aa('sendEvents', [
+          {
+            eventType: 'click',
+            eventName: SLIDER_PRODUCT_CLICKED,
+            objectIDs: [hit.objectID],
+            queryID,
+            positions: [position],
+            index: productsIndex,
+          },
+        ]);
+      } catch (err) {}
 
       gtag('event', SLIDER_PRODUCT_CLICKED, product);
     },

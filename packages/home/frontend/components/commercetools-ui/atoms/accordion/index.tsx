@@ -11,22 +11,26 @@ export interface AccordionProps {
   className?: string;
   openSectionTitle?: string;
   closedSectionTitle: string;
-  iconColor?: string;
+  iconClassName?: string;
   buttonClassName?: string;
+  buttonWrapperClassName?: string;
   panelClassName?: string;
+  collapsedLabel?: string;
 }
 
 const Accordion: React.FC<AccordionProps> = ({
   variant = 'arrow',
   closedSectionTitle,
   openSectionTitle = closedSectionTitle,
-  iconColor,
   children,
-  className,
+  className = '',
+  iconClassName = '',
   buttonClassName = '',
+  buttonWrapperClassName = '',
   panelClassName = '',
+  collapsedLabel,
 }) => {
-  const buttonClassNames = useClassNames(['w-full', buttonClassName]);
+  const buttonClassNames = useClassNames(['w-full flex justify-between', buttonClassName]);
 
   const panelClassNames = useClassNames([panelClassName]);
 
@@ -35,22 +39,25 @@ const Accordion: React.FC<AccordionProps> = ({
       <Disclosure>
         {({ open }) => (
           <>
-            <Disclosure.Button className={buttonClassNames}>
-              <div className="flex justify-between">
+            <Disclosure.Button className={`${buttonWrapperClassName} w-full`}>
+              <div className={buttonClassNames}>
                 <Typography className="self-center transition">
                   {open ? openSectionTitle : closedSectionTitle}
                 </Typography>
-                {variant === 'arrow' ? (
-                  <ChevronDownIcon
-                    width={17.5}
-                    strokeWidth={1}
-                    className={`${open ? 'rotate-180 transform' : ''} ${iconColor} transition`}
-                  />
-                ) : !open ? (
-                  <PlusIcon width={17.5} strokeWidth={2} className={iconColor} />
-                ) : (
-                  <MinusIcon width={17.5} strokeWidth={2} className={iconColor} />
-                )}
+                <div className="flex items-center gap-8">
+                  {!open && collapsedLabel && <p className="font-medium text-primary-black">{collapsedLabel}</p>}
+                  {variant === 'arrow' ? (
+                    <ChevronDownIcon
+                      width={17.5}
+                      strokeWidth={1}
+                      className={`${open ? 'rotate-180 transform' : ''} ${iconClassName} transition`}
+                    />
+                  ) : !open ? (
+                    <PlusIcon width={17.5} strokeWidth={2} className={iconClassName} />
+                  ) : (
+                    <MinusIcon width={17.5} strokeWidth={2} className={iconClassName} />
+                  )}
+                </div>
               </div>
             </Disclosure.Button>
             <Transition

@@ -19,9 +19,13 @@ const useClassNames: UseClassNames = (classNames, options) => {
 
   const resolveObject = useCallback(
     (className) => {
-      const value = Object.keys(className)[0];
-      const condition = Object.values(className)[0];
-      return condition ? resolveClassNameOptions(value) : '';
+      const classNames = [] as string[];
+
+      Object.keys(className).forEach((key) => {
+        if (className[key]) classNames.push(resolveClassNameOptions(key));
+      });
+
+      return classNames.join(' ');
     },
     [resolveClassNameOptions],
   );

@@ -27,7 +27,9 @@ const HeaderTastic = ({ data, categories }: Props) => {
     }
   }, []);
 
-  useResizeObserver(headerRef, setPaddingTop);
+  const removePaddingTop = useCallback(() => (document.body.style.paddingTop = '0px'), []);
+
+  useResizeObserver(headerRef, setPaddingTop, removePaddingTop);
 
   const announcementBarData = {
     text: data.text,
