@@ -94,8 +94,8 @@ const Orders = () => {
 
   const mobileStatusWrapper = useClassNames([
     'h-fit w-[100%]',
-    leftArrowAppear ? 'pl-36' : 'pl-16',
-    rightArrowAppear ? 'pr-36' : 'pr-16',
+    leftArrowAppear ? 'pl-36 pr-16' : 'pl-16 pr-36',
+    rightArrowAppear ? 'pr-36 pl-16' : 'pr-16 pl-36',
   ]);
 
   return (
