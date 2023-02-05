@@ -96,7 +96,7 @@ const AddToCartOverlayProvider: React.FC = ({ children }) => {
               </div>
               <div className="flex grow items-start justify-between overflow-hidden">
                 <div className="max-w-full overflow-hidden">
-                  <span className="block max-w-full truncate text-12 md:text-14">{product?.name}</span>
+                  <span className="block max-w-full truncate text-12 uppercase md:text-14">{product?.name}</span>
                   <span className="mt-8 block text-12 font-medium md:hidden">
                     {CurrencyHelpers.formatForCurrency(product?.discountedPrice ?? product?.price ?? {}, router.locale)}
                   </span>
@@ -129,6 +129,8 @@ const AddToCartOverlayProvider: React.FC = ({ children }) => {
             products={relatedProducts}
             title={formatProductMessage({ id: 'bought.together', defaultMessage: 'Frequently bought together' })}
             titleVariant="sm"
+            disableProductQuickView
+            onProductClick={hide}
             breakpoints={{
               [tablet]: {
                 slidesPerView: 3.4,

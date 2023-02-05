@@ -23,6 +23,8 @@ export interface ProductSliderProps extends Partial<SwiperOptions> {
   wrapperVariant?: WrapperVariant;
   clearDefaultWrapperStyles?: boolean;
   slidesPerView?: number;
+  disableProductQuickView?: boolean;
+  onProductClick?: (product: Product) => void;
 }
 
 const ProductSlider: FC<ProductSliderProps> = ({
@@ -31,10 +33,12 @@ const ProductSlider: FC<ProductSliderProps> = ({
   subline,
   ctaLabel,
   ctaLink,
+  onProductClick,
   titleVariant = 'lg',
   subtitleVariant = 'lg',
   wrapperVariant = 'left-padding-only',
   clearDefaultWrapperStyles = false,
+  disableProductQuickView = false,
   breakpoints = {},
   ...props
 }) => {
@@ -102,7 +106,15 @@ const ProductSlider: FC<ProductSliderProps> = ({
             {...props}
           >
             {products.map((product, index) => (
-              <Tile key={product.productId} product={product} onClick={() => trackClick(product, index + 1)} />
+              <Tile
+                key={product.productId}
+                disableQuickView={disableProductQuickView}
+                product={product}
+                onClick={() => {
+                  trackClick(product, index + 1);
+                  onProductClick?.(product);
+                }}
+              />
             ))}
           </Slider>
         </div>

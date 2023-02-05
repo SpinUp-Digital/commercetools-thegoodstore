@@ -17,9 +17,10 @@ interface ProductTileProps {
   product: Product;
   onClick?: () => void;
   isSearchResult?: boolean;
+  disableQuickView?: boolean;
 }
 
-const ProductTile: FC<ProductTileProps> = ({ product, onClick, isSearchResult = false }) => {
+const ProductTile: FC<ProductTileProps> = ({ product, onClick, isSearchResult = false, disableQuickView = false }) => {
   const [isDesktopSize] = useMediaQuery(desktop);
 
   const { ref } = useTrack({ product });
@@ -122,7 +123,7 @@ const ProductTile: FC<ProductTileProps> = ({ product, onClick, isSearchResult = 
               </span>
             )}
           </div>
-          <QuickView showButton={showButton} product={product} />
+          <QuickView showButton={showButton && !disableQuickView} product={product} />
         </div>
       </div>
 
