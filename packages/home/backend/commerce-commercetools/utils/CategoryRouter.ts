@@ -16,7 +16,7 @@ export class CategoryRouter {
   static loadFor = async (request: Request, frontasticContext: Context): Promise<Result> => {
     const productApi = new ProductApi(frontasticContext, getLocale(request));
 
-    const chunks = getPath(request)?.split('/');
+    const chunks = getPath(request)?.split('/').filter(Boolean);
 
     if (chunks) {
       const categoryId = chunks[chunks.length - 1];
