@@ -7,6 +7,8 @@
 @import url('./components/quick-search.css');
 
 body {
+  width: 100%;
+
   @apply font-body;
   @apply text-primary-black;
 }
