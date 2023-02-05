@@ -7,11 +7,12 @@ import SaveOrCancel from '../../account-atoms/save-or-cancel';
 
 type DeleteModalProps = {
   modalIsOpen: boolean;
+  loading: boolean;
   closeModal: () => void;
   handleDelete: () => void;
 };
 
-const DeleteModal: FC<DeleteModalProps> = ({ modalIsOpen, closeModal, handleDelete }) => {
+const DeleteModal: FC<DeleteModalProps> = ({ modalIsOpen, loading, closeModal, handleDelete }) => {
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
   const { formatMessage } = useFormat({ name: 'common' });
 
@@ -39,7 +40,7 @@ const DeleteModal: FC<DeleteModalProps> = ({ modalIsOpen, closeModal, handleDele
             {formatAccountMessage({ id: 'action.warning', defaultMessage: 'This action can not be undone.' })}
           </Typography>
 
-          <SaveOrCancel onCancel={closeModal} variant="delete" onSave={handleDelete} />
+          <SaveOrCancel loading={loading} onCancel={closeModal} variant="delete" onSave={handleDelete} />
         </div>
       </>
     </Modal>
