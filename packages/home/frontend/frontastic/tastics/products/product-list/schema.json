@@ -5,6 +5,54 @@
   "category": "Products",
   "schema": [
     {
+      "name": "Facets configuration",
+      "fields": [
+        {
+          "label": "Facet Configuration",
+          "field": "facetsConfiguration",
+          "type": "group",
+          "min": 0,
+          "itemLabelField": "key",
+          "fields": [
+            {
+              "label": "Key",
+              "field": "key",
+              "type": "string",
+              "required": true,
+              "translatable": false
+            },
+            {
+              "label": "Type",
+              "field": "type",
+              "type": "enum",
+              "default": "term",
+              "required": true,
+              "values": [
+                {
+                  "name": "Range",
+                  "value": "range"
+                },
+                {
+                  "name": "Color",
+                  "value": "color"
+                },
+                {
+                  "name": "Term",
+                  "value": "term"
+                }
+              ]
+            },
+            {
+              "label": "Label",
+              "field": "label",
+              "type": "string",
+              "required": true
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "Prices Configuration",
       "fields": [
         {

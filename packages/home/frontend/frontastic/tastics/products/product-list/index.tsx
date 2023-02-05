@@ -15,6 +15,7 @@ import { Category } from 'types/category';
 import { Tastic } from 'types/tastic';
 
 interface TasticProps {
+  facetsConfiguration: FacetConfiguration[];
   pricesConfiguration: PriceConfiguration[];
 }
 
@@ -38,6 +39,16 @@ const ProductListWrapped: React.FC<Props> = ({ data, categories }) => {
   const { updatePricesConfiguration, updateFacetsConfiguration, updateUiState, categoryId, searchQuery } =
     useProductList();
 
+  const externalFacetsConfiguration = useMemo<Record<string, FacetConfiguration>>(() => {
+    return (data.facetsConfiguration ?? []).reduce(
+      (acc, configuration) => ({
+        ...acc,
+        [configuration.key]: configuration as FacetConfiguration,
+      }),
+      {},
+    );
+  }, [data.facetsConfiguration]);
+
   const pricesConfiguration = useMemo<Record<string, PriceConfiguration>>(() => {
     return (data.pricesConfiguration ?? []).reduce(
       (acc, configuration) => ({
@@ -55,14 +66,20 @@ const ProductListWrapped: React.FC<Props> = ({ data, categories }) => {
   }, [pricesConfiguration, updatePricesConfiguration]);
 
   const facetsConfiguration = useMemo<Record<string, FacetConfiguration>>(() => {
-    return (data.data?.dataSource?.facets ?? []).reduce(
-      (acc, configuration) => ({
-        ...acc,
-        [configuration.key]: configuration,
-      }),
-      {},
-    );
-  }, [data.data?.dataSource?.facets]);
+    return (data.data?.dataSource?.facets ?? [])
+      .filter((facet) => facet.key in externalFacetsConfiguration)
+      .reduce(
+        (acc, configuration) => ({
+          ...acc,
+          [configuration.key]: {
+            ...configuration,
+            label: externalFacetsConfiguration[configuration.key].label,
+            type: externalFacetsConfiguration[configuration.key].type,
+          } as FacetConfiguration,
+        }),
+        {},
+      );
+  }, [data.data?.dataSource?.facets, externalFacetsConfiguration]);
 
   useEffect(() => {
     updateFacetsConfiguration(facetsConfiguration);
