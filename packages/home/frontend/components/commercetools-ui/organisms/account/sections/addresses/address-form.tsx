@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from 'react';
 import { Address } from '@commercetools/frontend-domain-types/account/Address';
 import { TrashIcon } from '@heroicons/react/24/outline';
 import toast from 'react-hot-toast';
-import Button from 'components/commercetools-ui/atoms/button';
 import Checkbox from 'components/commercetools-ui/atoms/checkbox';
 import Dropdown from 'components/commercetools-ui/atoms/dropdown';
 import Input from 'components/commercetools-ui/atoms/input';
@@ -13,6 +12,7 @@ import useValidate from 'helpers/hooks/useValidate';
 import { Account } from 'types/account';
 import { useAccount } from 'frontastic';
 import AccountForm from '../../account-atoms/account-form';
+import SaveOrCancel from '../../account-atoms/save-or-cancel';
 import useDiscardForm from '../../hooks/useDiscardForm';
 import useFeedbackToasts from '../../hooks/useFeedbackToasts';
 import DeleteModal from './deleteModal';
@@ -47,6 +47,12 @@ const AddressForm: React.FC<AddressFormProps> = ({ editedAddressId }) => {
   const { discardForm } = useDiscardForm();
   const { notifyDataUpdated, notifyWentWrong } = useFeedbackToasts();
   const { country } = useI18n();
+
+  const [loading, setLoading] = useState(false);
+  const [loadingDelete, setLoadingDelete] = useState(false);
+
+  const toggleLoadingOn = () => setLoading(true);
+  const toggleLoadingOff = () => setLoading(false);
 
   //new address data
   const defaultData = useMemo(() => {
@@ -90,11 +96,14 @@ const AddressForm: React.FC<AddressFormProps> = ({ editedAddressId }) => {
   };
 
   const discardFormAndNotify = (promise: Promise<Account | void>) => {
-    promise.then(discardForm).then(notifyDataUpdated).catch(notifyWentWrong);
+    promise.then(toggleLoadingOff).then(discardForm).then(notifyDataUpdated).catch(notifyWentWrong);
   };
 
   const handleDelete = () => {
+    setLoadingDelete(true);
+
     removeAddress(data.addressId)
+      .then(() => setLoadingDelete(false))
       .then(closeModal)
       .then(() =>
         toast.success(formatAccountMessage({ id: 'address.deleted', defaultMessage: 'Account deleted successfully' })),
@@ -104,6 +113,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ editedAddressId }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    toggleLoadingOn();
 
     const { addAddress, updateAddress } = mapPropsToAddress(data);
 
@@ -119,8 +129,12 @@ const AddressForm: React.FC<AddressFormProps> = ({ editedAddressId }) => {
     discardFormAndNotify(addAddress());
   };
 
+  useEffect(() => {
+    console.log(loading);
+  }, [loading]);
+
   return (
-    <AccountForm onSubmit={handleSubmit} title={formTitle} containerClassName="grid gap-12">
+    <AccountForm onSubmit={handleSubmit} title={formTitle} loading={loading} containerClassName="grid gap-12">
       <Input
         label={formatMessage({ id: 'name', defaultMessage: 'Name' })}
         required
@@ -227,22 +241,15 @@ const AddressForm: React.FC<AddressFormProps> = ({ editedAddressId }) => {
           </div>
         )}
 
-        <div className="flex gap-12">
-          <Button
-            type="button"
-            onClick={discardForm}
-            variant="secondary"
-            className="h-40 w-112 border border-primary-black"
-          >
-            {formatMessage({ id: 'cancel', defaultMessage: 'Cancel' })}
-          </Button>
-          <Button type="submit" className="h-40 w-112">
-            {formatMessage({ id: 'save', defaultMessage: 'Save' })}
-          </Button>
-        </div>
+        <SaveOrCancel onCancel={discardForm} loading={loading} />
       </div>
 
-      <DeleteModal modalIsOpen={modalIsOpen} closeModal={closeModal} handleDelete={handleDelete} />
+      <DeleteModal
+        modalIsOpen={modalIsOpen}
+        loading={loadingDelete}
+        closeModal={closeModal}
+        handleDelete={handleDelete}
+      />
     </AccountForm>
   );
 };

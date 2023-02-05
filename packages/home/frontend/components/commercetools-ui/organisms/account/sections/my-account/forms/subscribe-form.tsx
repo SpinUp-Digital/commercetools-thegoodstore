@@ -14,16 +14,20 @@ const SubscribeForm = () => {
   const { discardForm } = useDiscardForm();
 
   const [subscribed, setSubscribed] = useState((account as Account)?.isSubscribed ?? false);
+  const [loading, setLoading] = useState(false);
 
   const values = ['subscribe', 'unsubscribe'];
 
   const handleSubmit = () => {
+    setLoading(true);
     updateSubscription(subscribed).then((account) => {
       if (account.accountId) {
         notifyDataUpdated();
+        setLoading(false);
         discardForm();
       } else {
         notifyWentWrong();
+        setLoading(false);
         discardForm();
       }
     });
@@ -33,6 +37,7 @@ const SubscribeForm = () => {
     <AccountForm
       title={formatMessage({ id: 'subscribe.update', defaultMessage: 'Edit newsletter subscription' })}
       defaultCTASection
+      loading={loading}
       onSubmit={handleSubmit}
     >
       <div className="mb-44 grid gap-24">
