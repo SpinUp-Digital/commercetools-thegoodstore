@@ -92,6 +92,18 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Configuration",
+      "fields": [
+        {
+          "label": "Products",
+          "field": "data",
+          "type": "dataSource",
+          "dataSourceType": "frontastic/product-list",
+          "required": true
+        }
+      ]
     }
   ]
 }
