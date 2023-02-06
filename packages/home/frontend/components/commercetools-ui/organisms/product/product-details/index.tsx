@@ -50,15 +50,14 @@ const ProductDetails: FC<ProductDetailsProps> = ({
     setLoading(true);
     addItem(variant, quantity).then(() => {
       setLoading(false);
-      setAdded(true);
 
+      setAdded(true);
       setTimeout(() => {
         setAdded(false);
       }, 1000);
+
+      show(product, variant, quantity);
     });
-
-    show(product, variant, quantity);
-
     trackAddToCart();
   };
 

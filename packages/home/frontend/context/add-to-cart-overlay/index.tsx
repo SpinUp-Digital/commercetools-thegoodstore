@@ -65,7 +65,7 @@ const AddToCartOverlayProvider: React.FC = ({ children }) => {
       {product && <Overlay onClick={hide} />}
       <Transition
         show={!!product}
-        className="fixed bottom-0 z-[9999] w-full rounded-[20px_20px_0_0] bg-white md:left-1/2 md:bottom-[unset] md:top-1/2 md:w-[90%] md:max-w-[800px] md:-translate-x-1/2 md:-translate-y-1/2 md:rounded-lg"
+        className="fixed bottom-0 z-[9999] w-full overflow-hidden rounded-[20px_20px_0_0] bg-white md:left-1/2 md:bottom-[unset] md:top-1/2 md:w-[90%] md:max-w-[800px] md:-translate-x-1/2 md:-translate-y-1/2 md:rounded-lg"
         enter="transition md:transition-opacity duration-75"
         enterFrom="opacity-0 translate-y-full"
         enterTo="opacity-100 translate-y-0"
@@ -74,7 +74,7 @@ const AddToCartOverlayProvider: React.FC = ({ children }) => {
         leaveTo="opacity-0 translate-y-full"
       >
         <div className="bg-white p-16 md:py-24 md:px-48">
-          <h4 className="text-18 leading-[27px] lg:text-22">
+          <h4 className="text-18 leading-[27px] lg:text-22 lg:leading-[33px]">
             {formatProductMessage({ id: 'cart.added', defaultMessage: 'Added to cart' })}
           </h4>
 
@@ -115,11 +115,11 @@ const AddToCartOverlayProvider: React.FC = ({ children }) => {
                 {formatCartMessage({ id: 'cart.go', defaultMessage: 'Go to cart' })}
               </button>
             </Link>
-            <Link link="/" onClick={hide} className="md:flex-1">
+            <div onClick={hide} className="md:flex-1">
               <button className="w-full rounded-sm border border-primary-black p-12 text-14 font-medium text-primary-black transition hover:border-secondary-black hover:text-secondary-black">
                 {formatCartMessage({ id: 'continue.shopping', defaultMessage: 'Continue shopping' })}
               </button>
-            </Link>
+            </div>
           </div>
         </div>
         <div className={`mt-36 hidden bg-neutral-200 py-24 md:block ${isTouchDevice ? 'px-48' : 'px-96'}`}>
