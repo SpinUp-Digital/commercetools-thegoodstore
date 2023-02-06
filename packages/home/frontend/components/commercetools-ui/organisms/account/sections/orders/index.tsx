@@ -1,10 +1,11 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import Slider from 'components/commercetools-ui/atoms/slider';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import Wrapper from 'components/HOC/wrapper';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
+import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import OrderItem from './OrderItem';
 
 export interface StatusTab {
@@ -14,6 +15,23 @@ export interface StatusTab {
 
 const Orders = () => {
   const router = useRouter();
+  const [isLargeMobileScreen] = useMediaQuery(325);
+  const { formatMessage: formatOrdersMessage } = useFormat({ name: 'orders' });
+
+  const statusTabs: StatusTab[] = [
+    { name: formatOrdersMessage({ id: 'all.orders', defaultMessage: 'All orders' }), slug: 'allOrders' },
+    { name: formatOrdersMessage({ id: 'registered', defaultMessage: 'Registered' }), slug: 'registered' },
+    { name: formatOrdersMessage({ id: 'delivered', defaultMessage: 'Delivered' }), slug: 'delivered' },
+    { name: formatOrdersMessage({ id: 'returned', defaultMessage: 'Returned' }), slug: 'returned' },
+  ];
+  const [selectedTab, setSelectedTab] = useState(statusTabs[0].slug);
+  const [leftArrowAppear, setLeftArrowAppear] = useState<boolean | undefined>(undefined);
+  const [rightArrowAppear, setRightArrowAppear] = useState<boolean | undefined>(undefined);
+  useEffect(() => {
+    if (!isLargeMobileScreen) {
+      setRightArrowAppear(true);
+    }
+  }, [leftArrowAppear, rightArrowAppear, isLargeMobileScreen]);
 
   const orders = useMemo(
     () => [
@@ -69,18 +87,6 @@ const Orders = () => {
     [router.locale],
   );
 
-  const { formatMessage: formatOrdersMessage } = useFormat({ name: 'orders' });
-
-  const statusTabs: StatusTab[] = [
-    { name: formatOrdersMessage({ id: 'all.orders', defaultMessage: 'All orders' }), slug: 'allOrders' },
-    { name: formatOrdersMessage({ id: 'registered', defaultMessage: 'Registered' }), slug: 'registered' },
-    { name: formatOrdersMessage({ id: 'delivered', defaultMessage: 'Delivered' }), slug: 'delivered' },
-    { name: formatOrdersMessage({ id: 'returned', defaultMessage: 'Returned' }), slug: 'returned' },
-  ];
-  const [selectedTab, setSelectedTab] = useState(statusTabs[0].slug);
-  const [leftArrowAppear, setLeftArrowAppear] = useState(false);
-  const [rightArrowAppear, setRightArrowAppear] = useState(true);
-
   const orderHistoryContent = useMemo(() => {
     if (selectedTab === 'allOrders') return orders;
     else return orders.filter((order) => order.status === selectedTab);
@@ -93,9 +99,10 @@ const Orders = () => {
   };
 
   const mobileStatusWrapper = useClassNames([
-    'h-fit w-[100%]',
-    leftArrowAppear ? 'pl-36 pr-16' : 'pl-16 pr-36',
-    rightArrowAppear ? 'pr-36 pl-16' : 'pr-16 pl-36',
+    'h-fit w-full pl-16 pr-16',
+    leftArrowAppear === true ? 'pl-36' : 'pl-16',
+    rightArrowAppear === true ? 'pr-36' : 'pr-16',
+    isLargeMobileScreen ? 'flex justify-center' : '',
   ]);
 
   return (
@@ -121,12 +128,12 @@ const Orders = () => {
         <div className={mobileStatusWrapper}>
           <Slider
             onReachEnd={() => {
-              setLeftArrowAppear(true);
+              isLargeMobileScreen ? setLeftArrowAppear(false) : setLeftArrowAppear(true);
               setRightArrowAppear(false);
             }}
             onReachBeginning={() => {
+              isLargeMobileScreen ? setRightArrowAppear(false) : setRightArrowAppear(true);
               setLeftArrowAppear(false);
-              setRightArrowAppear(true);
             }}
             slideWidthIsFlexible
             dots={false}
@@ -142,7 +149,7 @@ const Orders = () => {
             }}
             allowTouchMove
             allowArrowsOnTouchDevice
-            arrows={leftArrowAppear !== rightArrowAppear}
+            arrows={!isLargeMobileScreen}
             spaceBetween={20}
           >
             {statusTabs.map((tab) => (
