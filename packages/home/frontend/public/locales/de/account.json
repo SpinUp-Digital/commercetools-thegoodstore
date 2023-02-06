@@ -79,5 +79,6 @@
   "personal.info.edit": "Bearbeiten Sie persönliche Informationen",
   "delete.address": "Adresse löschen",
   "action.warning": "Diese Aktion kann nicht rückgängig gemacht werden.",
-  "address.deleted": "Adresse erfolgreich gelöscht"
+  "address.deleted": "Adresse erfolgreich gelöscht",
+  "default": "Default"
 }

@@ -78,5 +78,6 @@
   "personal.info.edit": "Edit personal information",
   "delete.address": "Delete address",
   "action.warning": "This action can not be undone.",
-  "address.deleted": "Address deleted successfully"
+  "address.deleted": "Address deleted successfully",
+  "default": "Default"
 }
