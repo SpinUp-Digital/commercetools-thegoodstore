@@ -127,43 +127,43 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
 
   const contentClassNames = useClassNames([
     hash != '#orders' ? 'px-16' : '',
-    'col-span-3 py-24 md:overflow-auto md:p-24 2xl:col-span-4 2xl:px-44 2xl:py-48 2xl:pr-[136px]',
+    'w-full flex flex-col lg:items-start md:border-l border-neutral-400 md:px-24 lg:px-44 lg:py-48 md:py-24',
   ]);
 
   const contentTitleClassNames = useClassNames([hash === '#orders' ? 'px-16' : '', 'block pb-12 pt-16 md:hidden']);
 
   return (
-    <div className="mx-auto grid h-full w-full grid-cols-3 bg-white md:h-[70vh] md:grid-cols-4 2xl:grid-cols-5">
-      <div className="hidden h-full flex-col justify-between border-r border-neutral-400 pt-24 md:flex 2xl:pt-48">
-        <div className="grid gap-36 px-28 lg:px-56">
-          {tabs.map((tab) => (
-            <Link
-              link={isLoading ? '' : tab.href}
-              key={tab.name}
-              className={`whitespace-nowrap ${isLoading ? 'cursor-default' : ''}`}
-            >
-              {isLoading ? (
-                <Skeleton />
-              ) : (
-                <Typography
-                  className={`hover:underline ${tab.href === hash ? 'text-primary-black' : 'text-secondary-black'}`}
-                  fontSize={16}
-                  medium={tab.href === hash}
-                >
-                  {tab.name}
-                </Typography>
-              )}
-            </Link>
-          ))}
-        </div>
-        <div className="py-16 px-28 lg:px-52">
-          <div className="overflow-hidden rounded-md border-[0.5px] border-transparent hover:border-primary-black">
+    <div className="relative flex bg-neutral-100">
+      <div className="sticky top-[172px] h-[calc(100vh-172px)] w-0 self-start md:w-[25%]">
+        <div className="hidden h-full w-full flex-col justify-between pt-24 md:flex 2xl:pt-48">
+          <div className="grid gap-36 px-28 lg:px-56">
+            {tabs.map((tab) => (
+              <Link
+                link={isLoading ? '' : tab.href}
+                key={tab.name}
+                className={`whitespace-nowrap ${isLoading ? 'cursor-default' : ''}`}
+              >
+                {isLoading ? (
+                  <Skeleton />
+                ) : (
+                  <Typography
+                    className={`hover:underline ${tab.href === hash ? 'text-primary-black' : 'text-secondary-black'}`}
+                    fontSize={16}
+                    medium={tab.href === hash}
+                  >
+                    {tab.name}
+                  </Typography>
+                )}
+              </Link>
+            ))}
+          </div>
+          <div className="py-16 px-20 lg:px-40">
             {isLoading ? (
               <Skeleton className="h-[30px]" />
             ) : (
               <Button
                 onClick={handleLogout}
-                variant="ghost"
+                variant="secondary"
                 className="w-full rounded-md border border-primary-black py-8 px-0 text-14"
               >
                 {formatAccountMessage({ id: 'sign.out', defaultMessage: 'Sign out' })}
@@ -173,16 +173,18 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
         </div>
       </div>
       <div className={contentClassNames}>
-        {contentTitle && (
-          <div className={contentTitleClassNames}>
-            <Typography as="h2" fontFamily="libre" className="text-18 text-primary-black">
-              {contentTitle}
-            </Typography>
-          </div>
-        )}
+        <div className="w-full">
+          {contentTitle && (
+            <div className={contentTitleClassNames}>
+              <Typography as="h2" fontFamily="libre" className="text-18 text-primary-black">
+                {contentTitle}
+              </Typography>
+            </div>
+          )}
 
-        <AccountTabsMobile contentTitle={contentTitle} hash={hash} tabs={tabs} />
-        {Content && Content}
+          <AccountTabsMobile contentTitle={contentTitle} hash={hash} tabs={tabs} />
+          {Content && Content}
+        </div>
       </div>
     </div>
   );
