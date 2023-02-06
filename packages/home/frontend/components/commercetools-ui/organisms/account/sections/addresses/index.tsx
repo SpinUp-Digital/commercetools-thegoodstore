@@ -34,7 +34,7 @@ const Addresses = () => {
         </Typography>
         <Link
           link="#edit-address"
-          className="block w-full rounded-md bg-gray-700 py-8 px-16 text-center text-14 font-medium leading-[114%] text-neutral-150 hover:cursor-pointer md:w-fit 2xl:p-12"
+          className="block w-full rounded-md bg-gray-700 py-8 px-16 text-center text-14 font-medium leading-[114%] text-neutral-150 hover:cursor-pointer md:w-fit 2xl:py-12 2xl:px-40"
         >
           {formatAccountMessage({ id: 'address.add', defaultMessage: 'Add an address' })}
         </Link>

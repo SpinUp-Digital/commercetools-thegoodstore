@@ -129,10 +129,6 @@ const AddressForm: React.FC<AddressFormProps> = ({ editedAddressId }) => {
     discardFormAndNotify(addAddress());
   };
 
-  useEffect(() => {
-    console.log(loading);
-  }, [loading]);
-
   return (
     <AccountForm onSubmit={handleSubmit} title={formTitle} loading={loading} containerClassName="grid gap-12">
       <Input
@@ -221,14 +217,14 @@ const AddressForm: React.FC<AddressFormProps> = ({ editedAddressId }) => {
         id="is-default-address"
         checked={data?.isDefaultBillingAddress || data?.isDefaultShippingAddress || false}
         onChange={handleChange}
-        containerClassName="mt-4 mb-20"
+        containerClassName="mt-4 md:mb-20 mb-12"
         label={formatAccountMessage({
           id: 'address.setDefault',
           defaultMessage: 'Save as default address',
         })}
       />
 
-      <div className="mt-20 flex h-fit items-center justify-between">
+      <div className="grid h-fit items-center justify-between gap-32 md:mt-20 md:flex md:gap-0">
         {editedAddressId && (
           <div
             className="flex items-center gap-8 hover:cursor-pointer hover:opacity-[0.7]"
