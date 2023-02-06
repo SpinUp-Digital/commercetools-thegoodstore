@@ -59,7 +59,6 @@ export const getRouteData =
       },
       headers,
     )) as RedirectResponse | PageDataResponse;
-    console.log('D', data);
     return data;
   };
 
