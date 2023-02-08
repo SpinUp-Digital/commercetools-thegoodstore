@@ -1,4 +1,4 @@
-import { ComponentProps, FC } from 'react';
+import { ComponentProps, FC, useEffect } from 'react';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import SaveOrCancel, {
   SaveOrCancelProps,
@@ -33,6 +33,10 @@ const AccountForm: FC<AccountFormProps> = ({
   const { discardForm } = useDiscardForm();
 
   const { formatMessage } = useFormat({ name: 'common' });
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
