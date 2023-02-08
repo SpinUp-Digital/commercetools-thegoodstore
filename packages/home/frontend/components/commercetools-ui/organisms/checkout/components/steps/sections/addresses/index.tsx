@@ -8,6 +8,7 @@ import Checkbox from 'components/commercetools-ui/atoms/checkbox';
 import Input from 'components/commercetools-ui/atoms/input';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useI18n from 'helpers/hooks/useI18n';
+import useProcessing from 'helpers/hooks/useProcessing';
 import { useAccount, useCart } from 'frontastic';
 import { CartDetails } from 'frontastic/hooks/useCart/types';
 import { Address } from './types';
@@ -134,8 +135,12 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
     [billingAddress],
   );
 
+  const { processing, startProcessing, stopProcessing } = useProcessing();
+
   const submit = useCallback(async () => {
-    if (!isValidShippingAddress || !isValidBillingAddress) return;
+    if (!isValidShippingAddress || !isValidBillingAddress || processing) return;
+
+    startProcessing();
 
     const data = {
       account: { email: account?.email || shippingAddress.email || currentBillingAddress.email },
@@ -144,6 +149,8 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
     } as CartDetails;
 
     const res = await updateCart(data);
+
+    stopProcessing();
 
     if (res.cartId) goToNextStep();
     else
@@ -164,6 +171,9 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
     updateCart,
     goToNextStep,
     formatCheckoutMessage,
+    processing,
+    startProcessing,
+    stopProcessing,
   ]);
 
   const fields = useCallback(
@@ -336,11 +346,12 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
             variant="primary"
             className="w-full min-w-[200px] lg:w-fit lg:px-36"
             disabled={!isValidShippingAddress || !isValidBillingAddress}
+            loading={processing}
             type="submit"
             onClick={submit}
           >
-            {formatCheckoutMessage({ id: 'continue.to', defaultMessage: 'Continue to' })}{' '}
-            {formatCartMessage({ id: 'shipping', defaultMessage: 'Shipping' })}
+            {formatCartMessage({ id: 'continue.to', defaultMessage: 'Continue to' })}{' '}
+            <span className="lowercase">{formatCartMessage({ id: 'shipping', defaultMessage: 'Shipping' })}</span>
           </Button>
         </div>
       </div>

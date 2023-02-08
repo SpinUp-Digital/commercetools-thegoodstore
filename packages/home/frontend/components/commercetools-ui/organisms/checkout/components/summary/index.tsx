@@ -30,7 +30,7 @@ const Summary: React.FC<Props> = ({ isFinalStep, onPurchase }) => {
   return (
     <div className="bg-white py-16 md:mt-24 lg:mt-0 lg:min-w-[35%] lg:p-36">
       <div className="px-16 md:px-24 lg:px-0">
-        <h3 className="text-16 md:text-18">
+        <h3 className="text-16 leading-[22px] md:text-18">
           {formatCartMessage({ id: 'order.summary', defaultMessage: 'Order summary' })}
         </h3>
       </div>
@@ -38,7 +38,7 @@ const Summary: React.FC<Props> = ({ isFinalStep, onPurchase }) => {
         <div className={`grid grid-cols-3 gap-16 overflow-hidden ${!isSummaryExpanded ? 'max-h-[104px]' : ''}`}>
           {data?.lineItems?.map((lineItem) => (
             <div key={lineItem.lineItemId} className="relative h-[104px] w-[88px] shrink-0">
-              <Image layout="fill" src={lineItem.variant?.images?.[0]} objectFit="contain" />
+              <Image layout="fill" src={lineItem.variant?.images?.[0]} objectFit="contain" suffix="small" />
             </div>
           ))}
         </div>
@@ -69,7 +69,7 @@ const Summary: React.FC<Props> = ({ isFinalStep, onPurchase }) => {
           <CartSummary />
         </Accordion>
       </div>
-      <div className="mt-16 hidden bg-white py-16 pb-24 text-16 lg:block">
+      <div className="mt-16 hidden bg-white py-16 pb-24 text-16 lg:block lg:pb-0">
         {!isEmpty && (
           <div className="border-b border-neutral-400 pb-18">
             <div className="flex items-center justify-between">

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
 
@@ -24,7 +24,7 @@ const Step: React.FC<Props> = ({ number, label, isExpanded, isCompleted, onEdit,
   ]);
 
   const numberClassName = useClassNames([
-    'rounded-full bg-white text-primary-black w-24 h-24 flex items-center justify-center border text-14 font-medium transition lg:border-primary-black',
+    'rounded-full bg-white text-primary-black w-24 h-24 flex items-center justify-center border text-14 font-medium transition lg:border-primary-black leading-[38px]',
     {
       'border-white lg:bg-primary-black lg:text-white': isExpanded,
       'border-primary-black': !isExpanded,
@@ -32,20 +32,12 @@ const Step: React.FC<Props> = ({ number, label, isExpanded, isCompleted, onEdit,
   ]);
 
   const labelClassName = useClassNames([
-    'transition lg:text-primary-black',
+    'transition lg:text-primary-black lg:text-18',
     {
       'text-white': isExpanded,
       'text-primary-black': !isExpanded,
     },
   ]);
-
-  const render = useCallback(() => {
-    if (!isExpanded && !isCompleted) return <></>;
-
-    if (isExpanded) return Component;
-
-    return Preview;
-  }, [Component, Preview, isExpanded, isCompleted]);
 
   return (
     <div className="bg-white">
@@ -63,7 +55,10 @@ const Step: React.FC<Props> = ({ number, label, isExpanded, isCompleted, onEdit,
           </p>
         )}
       </div>
-      <div className="overflow-hidden">{render()}</div>
+      <div className="overflow-hidden">
+        <div className={isCompleted && !isExpanded ? 'block' : 'hidden'}>{Preview}</div>
+        <div className={isExpanded ? 'block' : 'hidden'}>{Component}</div>
+      </div>
     </div>
   );
 };

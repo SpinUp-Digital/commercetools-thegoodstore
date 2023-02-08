@@ -15,7 +15,7 @@ const Payment: React.FC<Props> = ({ goToNextStep }) => {
 
   return (
     <div className="lg:px-36 lg:pt-0 lg:pb-36">
-      <div className="mt-24">
+      <div className="mt-24 lg:mt-0">
         <Button variant="primary" className="w-full min-w-[200px] lg:w-fit lg:px-36" type="submit" onClick={submit}>
           {formatCheckoutMessage({ id: 'review.order', defaultMessage: 'Review order' })}
         </Button>
