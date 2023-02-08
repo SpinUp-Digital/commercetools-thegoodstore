@@ -21,15 +21,22 @@ const Button: FC<ButtonProps> = ({
   loading,
   children,
   className,
+  disabled,
   variant = 'primary',
   iconPosition = 'middle',
   size = children ? 's' : 'icon',
   ...props
 }) => {
-  const buttonClassName = useButtonClassNames({ variant, size, className, includesIcon: !!icon && !!children });
+  const buttonClassName = useButtonClassNames({
+    variant,
+    size,
+    className,
+    includesIcon: !!icon && !!children,
+    loading,
+  });
 
   return (
-    <button {...props} className={buttonClassName}>
+    <button {...props} className={buttonClassName} disabled={disabled || loading}>
       {(loading || added) && <FeedbackIconLayer loading={loading} variant={variant} />}
       {icon && iconPosition !== 'right' && icon}
       {children}

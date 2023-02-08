@@ -4,6 +4,7 @@ import Button from 'components/commercetools-ui/atoms/button';
 import Radio from 'components/commercetools-ui/atoms/radio';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
+import useProcessing from 'helpers/hooks/useProcessing';
 import { useCart } from 'frontastic';
 
 export interface Props {
@@ -23,8 +24,8 @@ const Shipping: React.FC<Props> = ({ goToNextStep }) => {
   const shippingMethods = useMemo(() => data?.availableShippingMethods ?? [], [data?.availableShippingMethods]);
 
   useEffect(() => {
-    if (shippingMethods?.[0]) setSelectedId(shippingMethods[0].shippingMethodId);
-  }, [shippingMethods]);
+    if (!selectedId && shippingMethods?.[0]) setSelectedId(shippingMethods[0].shippingMethodId);
+  }, [shippingMethods, selectedId]);
 
   const getEstimatedDate = useCallback((days: number) => {
     if (isNaN(days)) return '';
@@ -36,27 +37,30 @@ const Shipping: React.FC<Props> = ({ goToNextStep }) => {
     return date.toLocaleDateString().replace(/\//g, '-');
   }, []);
 
+  const { processing, startProcessing, stopProcessing } = useProcessing();
+
   const submit = useCallback(async () => {
-    if (!selectedId) return;
+    if (!selectedId || processing) return;
+
+    startProcessing();
 
     await setShippingMethod(selectedId);
+
+    stopProcessing();
     goToNextStep();
-  }, [goToNextStep, setShippingMethod, selectedId]);
+  }, [goToNextStep, setShippingMethod, selectedId, processing, startProcessing, stopProcessing]);
 
   return (
     <div className="lg:px-36 lg:pt-0 lg:pb-36">
-      <div className="mt-24 border-x border-t border-neutral-400 border-neutral-400 bg-white">
+      <div className="mt-24 border-x border-t border-neutral-400 border-neutral-400 bg-white lg:mt-0">
         {shippingMethods.map((shippingMethod) => (
           <div
             key={shippingMethod.shippingMethodId}
-            className="flex items-center justify-between border-b border-neutral-400 p-16"
+            className="flex cursor-pointer items-center justify-between border-b border-neutral-400 p-16"
+            onClick={() => setSelectedId(shippingMethod.shippingMethodId)}
           >
             <div className="flex items-center gap-16">
-              <Radio
-                name="checkout-shipping-method"
-                checked={shippingMethod.shippingMethodId === selectedId}
-                onChecked={() => setSelectedId(shippingMethod.shippingMethodId)}
-              />
+              <Radio name="checkout-shipping-method" checked={shippingMethod.shippingMethodId === selectedId} />
               <div>
                 <p className="text-14 font-medium">{shippingMethod.name}</p>
                 <p className="mt-4 text-14 text-secondary-black">
@@ -72,7 +76,13 @@ const Shipping: React.FC<Props> = ({ goToNextStep }) => {
         ))}
       </div>
       <div className="mt-24">
-        <Button variant="primary" className="w-full min-w-[200px] lg:w-fit lg:px-36" type="submit" onClick={submit}>
+        <Button
+          variant="primary"
+          className="w-full min-w-[200px] lg:w-fit lg:px-36"
+          loading={processing}
+          type="submit"
+          onClick={submit}
+        >
           {formatCheckoutMessage({ id: 'continue.to', defaultMessage: 'Continue to' })}{' '}
           {formatCartMessage({ id: 'payment', defaultMessage: 'Payment' })}
         </Button>
