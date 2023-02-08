@@ -48,5 +48,6 @@
   "for.other.updates": "for other updates",
   "add.adress": "Add another address line",
   "update.addresses.error": "Couldn't update your addresses information, please try again later.",
-  "secure.checkout": "Secure checkout"
+  "secure.checkout": "Secure checkout",
+  "enter.associated.address.with.payment": "Enter the address that is associated with your payment method"
 }

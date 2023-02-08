@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Address as AccountAddress } from '@commercetools/frontend-domain-types/account/Address';
-import { InformationCircleIcon as InfoIcon } from '@heroicons/react/24/outline';
 import toast from 'react-hot-toast';
 import * as yup from 'yup';
 import Button from 'components/commercetools-ui/atoms/button';
 import Checkbox from 'components/commercetools-ui/atoms/checkbox';
+import Info from 'components/commercetools-ui/atoms/info';
 import Input from 'components/commercetools-ui/atoms/input';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useI18n from 'helpers/hooks/useI18n';
@@ -301,9 +301,11 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
           <h5 className="text-16 capitalize">
             {formatCheckoutMessage({ id: 'billingAddress', defaultMessage: 'Billing Address' })}
           </h5>
-          <InfoIcon
-            className="h-24 w-24 cursor-default stroke-secondary-black"
-            title={formatCheckoutMessage({ id: 'billingAddress', defaultMessage: 'Billing address' })}
+          <Info
+            message={`${formatCheckoutMessage({
+              id: 'enter.associated.address.with.payment',
+              defaultMessage: 'Enter the address that is associated with your payment method',
+            })}.`}
           />
         </div>
 

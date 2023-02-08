@@ -12,7 +12,6 @@ export interface Props {
 }
 
 const Shipping: React.FC<Props> = ({ goToNextStep }) => {
-  const { formatMessage: formatCheckoutMessage } = useFormat({ name: 'checkout' });
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
 
   const { locale } = useRouter();
@@ -83,8 +82,8 @@ const Shipping: React.FC<Props> = ({ goToNextStep }) => {
           type="submit"
           onClick={submit}
         >
-          {formatCheckoutMessage({ id: 'continue.to', defaultMessage: 'Continue to' })}{' '}
-          {formatCartMessage({ id: 'payment', defaultMessage: 'Payment' })}
+          {formatCartMessage({ id: 'continue.to', defaultMessage: 'Continue to' })}{' '}
+          <span className="lowercase">{formatCartMessage({ id: 'payment', defaultMessage: 'Payment' })}</span>
         </Button>
       </div>
     </div>
