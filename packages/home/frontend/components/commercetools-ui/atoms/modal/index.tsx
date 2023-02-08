@@ -9,6 +9,7 @@ const Modal: FC<ReactModalProps> = ({ children, style, ...props }) => {
   const modalStyle: ReactModalProps['style'] = {
     overlay: {
       zIndex: 51,
+      backgroundColor: 'rgba(127 ,127, 127, .3)',
       ...style?.overlay,
     },
     content: {
