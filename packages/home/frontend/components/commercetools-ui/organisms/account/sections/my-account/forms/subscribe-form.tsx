@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Radio from 'components/commercetools-ui/atoms/radio';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import AccountForm from 'components/commercetools-ui/organisms/account/account-atoms/account-form';
 import useDiscardForm from 'components/commercetools-ui/organisms/account/hooks/useDiscardForm';
@@ -43,13 +44,12 @@ const SubscribeForm = () => {
       <div className="mb-44 grid gap-24">
         {values.map((value, index) => (
           <div key={index} className="flex items-center gap-12">
-            <input
-              className="hover:cursor-pointer"
+            <Radio
               type="radio"
               name="subscription"
               value={value}
-              onChange={(e) => setSubscribed(e.target.value === 'subscribe')}
-              defaultChecked={!!subscribed ? value == 'subscribe' : value == 'unsubscribe'}
+              onChecked={() => setSubscribed(value === 'subscribe')}
+              checked={!!subscribed ? value === 'subscribe' : value === 'unsubscribe'}
             />
             <Typography as="label" fontSize={14} className="text-secondary-black">
               {formatMessage({ id: value, defaultMessage: value })}
