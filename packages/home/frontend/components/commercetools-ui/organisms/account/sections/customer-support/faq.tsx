@@ -11,7 +11,7 @@ interface Props {
 const FAQ: React.FC<Props> = ({ faqs }) => {
   const { formatMessage: formatCustomerSupportMessage } = useFormat({ name: 'customer-support' });
   return (
-    <>
+    <div className="pb-24 md:pb-36 lg:pb-0">
       <div className="py-24">
         <Typography fontSize={18} fontFamily="libre">
           {formatCustomerSupportMessage({ id: 'faq', defaultMessage: 'FAQ' })}
@@ -39,7 +39,7 @@ const FAQ: React.FC<Props> = ({ faqs }) => {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 
