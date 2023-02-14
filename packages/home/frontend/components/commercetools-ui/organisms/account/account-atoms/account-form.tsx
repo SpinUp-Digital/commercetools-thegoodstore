@@ -43,10 +43,12 @@ const AccountForm: FC<AccountFormProps> = ({
     onSubmit(e);
   };
 
+  const formClassName = useClassNames(['pt-24', className]);
+
   const containerClassNames = useClassNames(['max-w-[372px]', containerClassName]);
 
   return (
-    <form className={className} onSubmit={handleSubmit}>
+    <form className={formClassName} onSubmit={handleSubmit}>
       <Typography fontFamily="libre" fontSize={16} className="text-primary-black md:mb-28 md:text-24">
         {title}
       </Typography>
