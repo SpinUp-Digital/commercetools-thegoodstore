@@ -1,11 +1,11 @@
 import { Address } from '@commercetools/frontend-domain-types/account/Address';
-import { Cart } from '@commercetools/frontend-domain-types/cart/Cart';
 import { Discount } from '@commercetools/frontend-domain-types/cart/Discount';
 import { Order } from '@commercetools/frontend-domain-types/cart/Order';
 import { ShippingMethod } from '@commercetools/frontend-domain-types/cart/ShippingMethod';
 import { Money } from '@commercetools/frontend-domain-types/product/Money';
 import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
 import { ProjectSettings } from '@commercetools/frontend-domain-types/ProjectSettings';
+import { Cart } from 'types/cart';
 
 export interface CartDetails {
   account?: { email: string };
@@ -17,6 +17,8 @@ export interface UseCartReturn {
   data?: Cart;
   totalItems: number;
   isEmpty: boolean;
+  isShippingAccurate: boolean;
+  hasOutOfStockItems: boolean;
   transaction: {
     subtotal: Required<Money>;
     discount: Required<Money>;
@@ -32,7 +34,7 @@ export interface UseCartReturn {
   removeDiscountCode?: (discount: Discount) => Promise<void>;
   redeemDiscountCode?: (code: string) => Promise<void>;
   shippingMethods: { data?: ShippingMethod[] };
-  orderCart: () => Promise<void>;
+  orderCart: () => Promise<Order>;
   orderHistory?: () => Promise<Order[]>;
   getProjectSettings?: () => Promise<ProjectSettings>;
 }

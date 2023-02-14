@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import Button from 'components/commercetools-ui/atoms/button';
 import { useFormat } from 'helpers/hooks/useFormat';
+import { useCheckout } from '../../provider';
 import Step from '../step';
 import AddressesPreview from './previews/addresses';
 import PaymentPreview from './previews/payment';
@@ -17,6 +18,8 @@ interface Props {
 const Steps: React.FC<Props> = ({ onPurchase, onFinalStepChange }) => {
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
   const { formatMessage: formatCheckoutMessage } = useFormat({ name: 'checkout' });
+
+  const { processing } = useCheckout();
 
   const [active, setActive] = useState<number>(0);
   const [completed, setCompleted] = useState<Array<number>>([]);
@@ -57,10 +60,10 @@ const Steps: React.FC<Props> = ({ onPurchase, onFinalStepChange }) => {
   return (
     <div className="px-16 md:px-24 lg:grow lg:px-0">
       <div className="flex flex-col gap-24 lg:bg-neutral-200">
-        {steps.map(({ Component, Preview, ...step }, index) => (
+        {steps.map(({ Component, Preview, label }, index) => (
           <Step
             key={index}
-            {...step}
+            label={label}
             number={index + 1}
             isExpanded={index === active}
             isCompleted={completed.includes(index)}
@@ -72,7 +75,7 @@ const Steps: React.FC<Props> = ({ onPurchase, onFinalStepChange }) => {
       </div>
       {isFinalStep && (
         <div className="mt-24 lg:hidden">
-          <Button variant="primary" className="w-full" type="submit" onClick={onPurchase}>
+          <Button variant="primary" className="w-full" type="submit" onClick={onPurchase} loading={processing}>
             {formatCheckoutMessage({ id: 'complete.purchase', defaultMessage: 'Complete purchase' })}
           </Button>
         </div>

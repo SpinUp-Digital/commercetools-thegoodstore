@@ -10,7 +10,7 @@ const CartSummary = () => {
 
   const { locale } = useRouter();
 
-  const { data, transaction, isEmpty } = useCart();
+  const { data, transaction, isEmpty, isShippingAccurate } = useCart();
 
   return (
     <div>
@@ -54,7 +54,11 @@ const CartSummary = () => {
 
             {transaction.shipping.centAmount > 0 && (
               <div className="mt-8 flex items-center justify-between">
-                <span>{formatCartMessage({ id: 'shipping.estimate', defaultMessage: 'Est. Shipping' })} </span>
+                <span>
+                  {isShippingAccurate
+                    ? formatCartMessage({ id: 'shippingCosts', defaultMessage: 'Shipping costs' })
+                    : formatCartMessage({ id: 'shipping.estimate', defaultMessage: 'Est. Shipping' })}{' '}
+                </span>
                 <span>{CurrencyHelpers.formatForCurrency(transaction.shipping, locale)}</span>
               </div>
             )}

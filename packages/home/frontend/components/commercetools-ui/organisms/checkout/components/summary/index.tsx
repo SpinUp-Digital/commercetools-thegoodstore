@@ -8,6 +8,7 @@ import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart } from 'frontastic';
 import Image from 'frontastic/lib/image';
+import { useCheckout } from '../../provider';
 import CartSummary from '../cart-summary';
 
 interface Props {
@@ -19,7 +20,9 @@ const Summary: React.FC<Props> = ({ isFinalStep, onPurchase }) => {
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
   const { formatMessage: formatCheckoutMessage } = useFormat({ name: 'checkout' });
 
-  const { data, transaction, isEmpty } = useCart();
+  const { data, transaction, isEmpty, isShippingAccurate } = useCart();
+
+  const { processing } = useCheckout();
 
   const { locale } = useRouter();
 
@@ -86,7 +89,11 @@ const Summary: React.FC<Props> = ({ isFinalStep, onPurchase }) => {
 
             {transaction.shipping.centAmount > 0 && (
               <div className="mt-8 flex items-center justify-between">
-                <span>{formatCartMessage({ id: 'shipping.estimate', defaultMessage: 'Est. Shipping' })} </span>
+                <span>
+                  {isShippingAccurate
+                    ? formatCartMessage({ id: 'shippingCosts', defaultMessage: 'Shipping costs' })
+                    : formatCartMessage({ id: 'shipping.estimate', defaultMessage: 'Est. Shipping' })}{' '}
+                </span>
                 <span>{CurrencyHelpers.formatForCurrency(transaction.shipping, locale)}</span>
               </div>
             )}
@@ -104,7 +111,14 @@ const Summary: React.FC<Props> = ({ isFinalStep, onPurchase }) => {
         </div>
 
         <div className="mt-20 hidden lg:block">
-          <Button variant="primary" disabled={!isFinalStep} className="w-full" type="submit" onClick={onPurchase}>
+          <Button
+            variant="primary"
+            disabled={!isFinalStep}
+            className="w-full"
+            type="submit"
+            onClick={onPurchase}
+            loading={processing}
+          >
             {formatCheckoutMessage({ id: 'complete.purchase', defaultMessage: 'Complete purchase' })}
           </Button>
         </div>

@@ -346,7 +346,7 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
         <div className="mt-24">
           <Button
             variant="primary"
-            className="w-full min-w-[200px] lg:w-fit lg:px-36"
+            className="w-full min-w-[200px] md:text-16 lg:w-fit lg:px-36"
             disabled={!isValidShippingAddress || !isValidBillingAddress}
             loading={processing}
             type="submit"

@@ -1,21 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { useAdyen } from 'frontastic';
 import Image from 'frontastic/lib/image';
 
 const ThankYou = () => {
   //i18n messages
   const { formatMessage: formatCheckoutMessage } = useFormat({ name: 'checkout' });
 
-  const { adyenCheckout } = useAdyen();
   const router = useRouter();
-
-  useEffect(() => {
-    const { sessionId, redirectResult } = router.query;
-
-    adyenCheckout(sessionId as string, redirectResult as string, router.locale as string);
-  }, [router.query, router.locale, adyenCheckout]);
 
   return (
     <main className="relative lg:min-h-full">

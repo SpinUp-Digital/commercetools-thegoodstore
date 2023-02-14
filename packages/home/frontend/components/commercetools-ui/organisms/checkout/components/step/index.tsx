@@ -24,7 +24,7 @@ const Step: React.FC<Props> = ({ number, label, isExpanded, isCompleted, onEdit,
   ]);
 
   const numberClassName = useClassNames([
-    'rounded-full bg-white text-primary-black w-24 h-24 flex items-center justify-center border text-14 font-medium transition lg:border-primary-black leading-[38px]',
+    'rounded-full bg-white text-primary-black w-24 h-24 flex items-center justify-center border text-14 md:text-16 font-medium transition lg:border-primary-black leading-[38px] md:w-30 md:h-30',
     {
       'border-white lg:bg-primary-black lg:text-white': isExpanded,
       'border-primary-black': !isExpanded,
@@ -55,7 +55,7 @@ const Step: React.FC<Props> = ({ number, label, isExpanded, isCompleted, onEdit,
           </p>
         )}
       </div>
-      <div className="overflow-hidden">
+      <div>
         <div className={isCompleted && !isExpanded ? 'block' : 'hidden'}>{Preview}</div>
         <div className={isExpanded ? 'block' : 'hidden'}>{Component}</div>
       </div>

@@ -1,49 +1,35 @@
 import { useCallback } from 'react';
-import { mutate } from 'swr';
-import { fetchApiHub } from 'frontastic';
-import { UseAdyenReturn } from './types';
+import { sdk } from 'sdk';
+import { PaymentMethod, PaymentResponse, PaymentRequestPayload, KlarnaPaymentRequestPayload } from 'types/payment';
 
-const useAdyen = (): UseAdyenReturn => {
-  const createSession = useCallback(async (value: number, currency: string, returnUrl: string, locale: string) => {
-    const payload = {
-      amount: {
-        value: value,
-        currency: currency,
-      },
-      returnUrl,
-    };
+const useAdyen = () => {
+  const getPaymentMethods = useCallback(async () => {
+    const response = await sdk.callAction({
+      actionName: 'adyen/getPaymentMethods',
+    });
 
-    const res = await fetchApiHub('/action/adyen/createSession', locale, { method: 'POST' }, payload);
-
-    return res;
+    return response.isError ? [] : (response.data as PaymentMethod[]);
   }, []);
 
-  const adyenCheckout = useCallback(
-    async (sessionId: string | string[], redirectResult: string | string[], locale: string): Promise<void> => {
-      const payload = {
-        sessionId: sessionId,
-        redirectResult: redirectResult,
-      };
+  const makePayment = useCallback(async (data: PaymentRequestPayload | KlarnaPaymentRequestPayload) => {
+    const response = await sdk.callAction({
+      actionName: 'adyen/makePayment',
+      payload: data,
+    });
 
-      const res = await fetchApiHub(
-        '/action/adyen/checkout',
-        locale,
-        {
-          headers: {
-            accept: 'application/json',
-          },
-          credentials: 'include',
-          method: 'POST',
-        },
-        payload,
-      );
-      mutate('/action/cart/getCart', null);
-      return res;
-    },
-    [],
-  );
+    return (response.isError ? {} : response.data) as PaymentResponse;
+  }, []);
 
-  return { createSession, adyenCheckout };
+  const paymentDetails = useCallback(async (data: Record<string, string>) => {
+    const response = await sdk.callAction({
+      actionName: 'adyen/paymentDetails',
+      payload: data,
+    });
+
+    return (response.isError ? {} : response.data) as PaymentResponse;
+  }, []);
+
+  return { getPaymentMethods, makePayment, paymentDetails };
 };
 
 export default useAdyen;

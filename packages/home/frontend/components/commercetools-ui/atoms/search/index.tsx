@@ -45,7 +45,7 @@ const Search: React.FC<Props> = ({ categories }) => {
 
     if (results.isError) return;
 
-    setItems(results.data.items as Product[]);
+    setItems((results.data.items as Product[]) ?? []);
   }, [query, queryProducts]);
 
   //eslint-disable-next-line react-hooks/exhaustive-deps

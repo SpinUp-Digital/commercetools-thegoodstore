@@ -168,19 +168,17 @@ export const checkout: ActionHook = async (request: Request, actionContext: Acti
   const locale = getLocale(request);
 
   const cartApi = new CartApi(actionContext.frontasticContext, locale);
-  const emailApi = EmailApiFactory.getDefaultApi(actionContext.frontasticContext, locale);
 
   const cart = await updateCartFromRequest(request, actionContext);
-  const order = await cartApi.order(cart);
 
-  emailApi.sendOrderConfirmationEmail({ ...order, email: order.email || cart.email });
+  const order = await cartApi.order(cart);
 
   // Unset the cartId
   const cartId: string = undefined;
 
   const response: Response = {
     statusCode: 200,
-    body: JSON.stringify(cart),
+    body: JSON.stringify(order),
     sessionData: {
       ...request.sessionData,
       cartId,

@@ -21,7 +21,7 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods, emptyStateDescripti
 
   const [isTablet] = useMediaQuery(tablet);
 
-  const { isEmpty, totalItems, data } = useCart();
+  const { isEmpty, totalItems, data, hasOutOfStockItems } = useCart();
 
   const { loggedIn } = useAccount();
 
@@ -126,7 +126,7 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods, emptyStateDescripti
       <div className="sticky bottom-0 w-full border-t border-neutral-400 bg-white p-16 md:hidden">
         <Link link="/checkout">
           <button
-            disabled={isEmpty}
+            disabled={isEmpty || hasOutOfStockItems}
             className="w-full rounded-md bg-primary-black py-12 font-medium text-white transition hover:bg-gray-500 disabled:cursor-not-allowed disabled:bg-neutral-400"
           >
             {formatCartMessage({ id: 'checkout.go', defaultMessage: 'Go to checkout' })}
