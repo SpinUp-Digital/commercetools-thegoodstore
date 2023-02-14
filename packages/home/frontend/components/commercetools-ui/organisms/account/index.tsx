@@ -134,7 +134,7 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
 
   return (
     <div className="relative flex bg-neutral-100">
-      <div className="sticky top-[172px] h-[calc(100vh-172px)] w-0 self-start md:w-[25%]">
+      <div className="sticky top-[172px] w-0 self-start md:h-[calc(100vh-172px)] md:w-[25%]">
         <div className="hidden h-full w-full flex-col justify-between pt-24 md:flex 2xl:pt-48">
           <div className="grid gap-36 px-28 lg:px-56">
             {tabs.map((tab) => (

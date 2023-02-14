@@ -43,7 +43,7 @@ const AccountForm: FC<AccountFormProps> = ({
     onSubmit(e);
   };
 
-  const formClassName = useClassNames(['pt-24', className]);
+  const formClassName = useClassNames(['pt-24 pb-40', className]);
 
   const containerClassNames = useClassNames(['max-w-[372px]', containerClassName]);
 

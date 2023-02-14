@@ -1,6 +1,6 @@
-import { Category } from 'types/category';
 import React from 'react';
 import { InstantSearchServerState } from 'react-instantsearch-hooks';
+import { Category } from 'types/category';
 import { Cell as LayoutElement } from './cell';
 import { highlightClassNames, TasticWrapper } from './component';
 import { Errors } from './errors';
@@ -11,7 +11,6 @@ export function FrontasticRenderer({
   data,
   tastics = {},
   gridClassName,
-  wrapperClassName,
   currentHighlight,
 }: {
   data: PageDataResponse & {
@@ -25,7 +24,7 @@ export function FrontasticRenderer({
   currentHighlight?: string;
 }) {
   return (
-    <div className="flex min-h-screen flex-col items-stretch justify-start">
+    <div className="flex min-h-[calc(100vh-138px)] flex-col items-stretch justify-start">
       {process && process.env.NODE_ENV !== 'production' && <Errors />}
       <Grid
         gridClassName={gridClassName}
