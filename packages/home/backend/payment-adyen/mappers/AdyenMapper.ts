@@ -1,11 +1,13 @@
-import { SessionResponse, PaymentDetailsResponse } from '../Session';
+import { AdyenPaymentResponse } from 'payment-adyen/types/payment';
+import { AdyenPaymentMethod } from '../types/paymentMethod';
+import { PaymentMethod, PaymentResponse } from '../../types/payment';
 
 export class AdyenMapper {
-  static adyenSessionResponseToSessionResponse(sessionResponse: SessionResponse) {
-    return sessionResponse;
+  static adyenPaymentMethodToPaymentMethod(adyenPaymentMethod: AdyenPaymentMethod) {
+    return adyenPaymentMethod as PaymentMethod;
   }
 
-  static adyenPaymentDetailsToDetails(paymentDetails: PaymentDetailsResponse) {
-    return paymentDetails;
+  static adyenPaymentResponseToPaymentResponse(adyenPaymentResponse: AdyenPaymentResponse) {
+    return adyenPaymentResponse as PaymentResponse;
   }
 }

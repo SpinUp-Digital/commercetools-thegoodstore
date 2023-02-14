@@ -49,5 +49,10 @@
   "add.adress": "Add another address line",
   "update.addresses.error": "Couldn't update your addresses information, please try again later.",
   "secure.checkout": "Secure checkout",
-  "enter.associated.address.with.payment": "Enter the address that is associated with your payment method"
+  "enter.associated.address.with.payment": "Enter the address that is associated with your payment method",
+  "card.holder": "Card holder",
+  "card.number": "Card number",
+  "card.securityNumber": "Security number",
+  "items.outOfStock": "One or more items are out of stock",
+  "payment.failed": "We could not process your payment, please try again later."
 }

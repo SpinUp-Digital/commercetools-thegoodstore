@@ -14,6 +14,10 @@ export const getLocale = (request: Request): string => {
   throw new Error(`Locale is missing from request ${request}`);
 };
 
+export const getCountry = (locale: string) => {
+  return { de_DE: 'DE', en_GB: 'GB', 'de_DE@EUR': 'DE', 'en_GB@GBP': 'GB' }[locale];
+};
+
 const getHeader = (request: Request, header: string): string | null => {
   if (header in request.headers) {
     const foundHeader = request.headers[header];

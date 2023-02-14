@@ -72,6 +72,8 @@ export class CartMapper {
           locale,
         ),
         totalPrice: ProductMapper.commercetoolsMoneyToMoney(commercetoolsLineItem.totalPrice),
+        //@ts-expect-error
+        taxedPrice: ProductMapper.commercetoolsMoneyToMoney(commercetoolsLineItem.taxedPrice?.totalGross),
         variant: ProductMapper.commercetoolsProductVariantToVariant(commercetoolsLineItem.variant, locale),
         isGift:
           commercetoolsLineItem?.lineItemMode !== undefined && commercetoolsLineItem.lineItemMode === 'GiftLineItem',
@@ -245,7 +247,7 @@ export class CartMapper {
     locale: Locale,
   ) => {
     return {
-      id: commercetoolsPayment.key ?? null,
+      id: commercetoolsPayment.id ?? null,
       paymentId: commercetoolsPayment.interfaceId ?? null,
       paymentProvider: commercetoolsPayment.paymentMethodInfo.paymentInterface ?? null,
       paymentMethod: commercetoolsPayment.paymentMethodInfo.method ?? null,

@@ -87,7 +87,14 @@ export class EmailApi implements BaseEmailApi {
               })),
               shippingInfo: {
                 ...order.shippingInfo,
-                formattedPrice: formatPrice(order.shippingInfo?.price, locale),
+                formattedPrice: formatPrice(
+                  order.shippingInfo?.price ?? {
+                    centAmount: 0,
+                    currencyCode: order.sum.currencyCode,
+                    fractionDigits: 2,
+                  },
+                  locale,
+                ),
               },
             },
           },

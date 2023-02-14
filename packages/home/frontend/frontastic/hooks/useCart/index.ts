@@ -1,11 +1,11 @@
 import { useCallback, useMemo } from 'react';
-import { Cart } from '@commercetools/frontend-domain-types/cart/Cart';
 import { Discount } from '@commercetools/frontend-domain-types/cart/Discount';
 import { Order } from '@commercetools/frontend-domain-types/cart/Order';
 import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
 import useSWR, { mutate } from 'swr';
 import useI18n from 'helpers/hooks/useI18n';
 import { SDK, sdk } from 'sdk';
+import { Cart } from 'types/cart';
 import { revalidateOptions } from 'frontastic';
 import { CartDetails, UseCartReturn } from './types';
 
@@ -22,18 +22,22 @@ const useCart = (): UseCartReturn => {
     revalidateOptions,
   );
 
-  const data = result.data?.isError ? {} : { data: result.data?.data };
+  const data = result.data?.isError ? {} : { data: result.data?.data as unknown as Cart };
 
   const shippingMethods = shippingMethodsResults.data?.isError ? {} : { data: shippingMethodsResults.data?.data };
 
-  const totalCartItems = (data.data as Cart)?.lineItems?.reduce((acc, curr) => acc + (curr.count as number), 0) ?? 0;
+  const totalItems = (data.data as Cart)?.lineItems?.reduce((acc, curr) => acc + (curr.count as number), 0) ?? 0;
 
-  const isCartEmpty = !data?.data?.lineItems?.length;
+  const isEmpty = !data?.data?.lineItems?.length;
+
+  const isShippingAccurate = !!data?.data?.shippingInfo;
+
+  const hasOutOfStockItems = !!data?.data?.lineItems?.some((lineItem) => !lineItem.variant?.isOnStock);
 
   const transaction = useMemo(() => {
     const cartData = data.data;
 
-    if (!cartData?.lineItems)
+    if (!cartData?.lineItems?.length)
       return {
         subtotal: { centAmount: 0, currencyCode: currency, fractionDigits: 2 },
         discount: { centAmount: 0, currencyCode: currency, fractionDigits: 2 },
@@ -50,6 +54,7 @@ const useCart = (): UseCartReturn => {
       (acc, curr) => acc + (curr.price?.centAmount || 0) * (curr.count as number),
       0,
     );
+
     const discountedAmount = cartData.lineItems.reduce(
       (acc, curr) =>
         acc + ((curr.price?.centAmount || 0) * (curr.count as number) - (curr.totalPrice?.centAmount || 0)),
@@ -57,10 +62,15 @@ const useCart = (): UseCartReturn => {
     );
 
     const totalTax =
-      cartData.taxed?.taxPortions?.reduce((acc, curr) => acc + (curr.amount?.centAmount as number), 0) ?? 0;
+      totalAmount > 0
+        ? cartData.taxed?.taxPortions?.reduce((acc, curr) => acc + (curr.amount?.centAmount as number), 0) ?? 0
+        : 0;
+
     const totalShipping =
-      (cartData.sum?.centAmount as number) > 0
-        ? cartData.availableShippingMethods?.[0]?.rates?.[0]?.price?.centAmount ?? 0
+      totalAmount > 0
+        ? cartData.shippingInfo?.price?.centAmount ??
+          cartData.availableShippingMethods?.[0]?.rates?.[0]?.price?.centAmount ??
+          0
         : 0;
 
     return {
@@ -85,7 +95,7 @@ const useCart = (): UseCartReturn => {
         fractionDigits,
       },
       total: {
-        centAmount: totalAmount + totalTax + totalShipping,
+        centAmount: totalAmount + totalTax,
         currencyCode,
         fractionDigits,
       },
@@ -107,8 +117,10 @@ const useCart = (): UseCartReturn => {
   }, []);
 
   const orderCart = useCallback(async () => {
-    await sdk.callAction({ actionName: 'cart/checkout' });
+    const res = await sdk.callAction({ actionName: 'cart/checkout' });
     mutate('/action/cart/getCart');
+
+    return (res.isError ? {} : res.data) as Order;
   }, []);
 
   const orderHistory = useCallback(async () => {
@@ -158,7 +170,7 @@ const useCart = (): UseCartReturn => {
 
     mutate('/action/cart/getCart', res);
 
-    return res.isError ? ({} as Cart) : res.data;
+    return (res.isError ? {} : res.data) as Cart;
   }, []);
 
   const setShippingMethod = useCallback(async (shippingMethodId: string) => {
@@ -200,8 +212,10 @@ const useCart = (): UseCartReturn => {
 
   return {
     ...data,
-    totalItems: totalCartItems,
-    isEmpty: isCartEmpty,
+    totalItems,
+    isEmpty,
+    isShippingAccurate,
+    hasOutOfStockItems,
     transaction,
     addItem,
     updateCart,

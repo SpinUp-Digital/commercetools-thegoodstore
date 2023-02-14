@@ -1,125 +1,103 @@
 import { ActionContext, Request, Response } from '@frontastic/extension-types/src/ts/index';
-import { CreateSessionDTO, CreateSessionPayload } from './../Session';
-import AdyenApi from '../BaseApi';
 import { CartApi } from '../../commerce-commercetools/apis/CartApi';
-import { Guid } from '../utils/Guid';
-import { getLocale } from '../utils/Request';
-import { CartFetcher } from '../utils/CartFetcher';
 import { Account } from '@commercetools/frontend-domain-types/account/Account';
 import { Payment, PaymentStatuses } from '@commercetools/frontend-domain-types/cart/Payment';
+import { hmacValidator } from '@adyen/api-library';
+import BaseApi from '../apis/BaseApi';
+import { getCountry, getLocale } from 'commerce-commercetools/utils/Request';
+import { EmailApiFactory } from 'commerce-commercetools/utils/EmailApiFactory';
 
-import { hmacValidator } from '@adyen/api-library'; 
+export const getPaymentMethods = async (request: Request, actionContext: ActionContext) => {
+  const locale = getLocale(request);
 
-export const createSession = async (request: Request, actionContext: ActionContext) => {
-  const adyenApi = new AdyenApi(actionContext.frontasticContext.project.configuration.payment.adyen);
-  const cartApi = new CartApi(actionContext.frontasticContext, getLocale(request));
+  const adyenApi = new BaseApi(actionContext.frontasticContext.project.configuration.adyen);
 
-  let cart = await CartFetcher.fetchCart(request, actionContext);
+  const paymentMethods = await adyenApi.getPaymentMethods({ locale, country: getCountry(locale) });
 
-  if (cart?.payments?.length == 0) {
-    const payment: Payment = {
-      id: Guid.newGuid(),
-      paymentId: Guid.newGuid(),
-      paymentStatus: PaymentStatuses.INIT,
-      paymentMethod: '',
-      paymentProvider: '',
-      amountPlanned: {
-        centAmount: 0,
-        currencyCode: 'EUR',
-      },
-    };
-
-    cart = await cartApi.addPayment(cart, payment);
-  }
-
-  const account = (request.sessionData?.account ?? {}) as Account;
-  const sessionDTO = JSON.parse(request.body) as CreateSessionDTO;
-  const sessionPayload = {
-    reference: cart.payments[0].paymentId, //request.sessionData.cartId,
-    shopperEmail: account.email,
-    shopperLocale: getLocale(request),
-    shopperReference: account.accountId,
-    ...sessionDTO,
-  } as CreateSessionPayload;
-
-  const data = await adyenApi.createSession(sessionPayload);
-
-  const response: Response = {
+  const response = {
     statusCode: 200,
-    body: JSON.stringify(data),
     sessionData: request.sessionData,
-  };
+    body: JSON.stringify(paymentMethods),
+  } as Response;
+
   return response;
 };
 
-/*
-const createOrderWithPayment = async (request: Request, actionContext: ActionContext, notification: any) => {
-  const cartApi = new CartApi(actionContext.frontasticContext, actionContext.frontasticContext.project.defaultLocale);
-  const emailApi = new EmailApi(actionContext.frontasticContext);
+export const makePayment = async (request: Request, actionContext: ActionContext) => {
+  const adyenApi = new BaseApi(actionContext.frontasticContext.project.configuration.adyen);
 
-  let cart = await cartApi.getById(notification.merchantReference);
+  const data = JSON.parse(request.body);
 
-  const payment: Payment = {
-    id: Guid.newGuid(),
-    paymentId: notification.merchantReference,
-    paymentMethod: notification.paymentMethod,
-    paymentStatus: PaymentStatuses.PENDING,
-    paymentProvider: notification.pspReference,
-    amountPlanned: {
-      centAmount: Number(notification.amount.value),
-      currencyCode: notification.amount.currency,
-    }
-  };
+  const paymentResponse = await adyenApi.makePayment(data);
 
-  cart = await cartApi.addPayment(cart, payment);
+  const response = {
+    statusCode: 200,
+    sessionData: request.sessionData,
+    body: JSON.stringify(paymentResponse),
+  } as Response;
 
-  const order = await cartApi.order(cart);
-  await emailApi.sendPaymentConfirmationEmail(order.email);
-};
-*/
-
-const updateOrderPayment = async (request: Request, actionContext: ActionContext, notification: any) => {
-  const cartApi = new CartApi(actionContext.frontasticContext, actionContext.frontasticContext.project.defaultLocale);
-  //const emailApi = new EmailApi(actionContext.frontasticContext);
-
-  const paymentDraft: Payment = {
-    id: '',
-    paymentId: notification.merchantReference,
-    paymentMethod: notification.paymentMethod,
-    paymentStatus: PaymentStatuses.PENDING,
-    paymentProvider: notification.pspReference,
-    amountPlanned: {
-      centAmount: Number(notification.amount.value),
-      currencyCode: notification.amount.currency,
-    },
-  };
-
-  let payment = await cartApi.getPayment(notification.merchantReference);
-
-  payment = await cartApi.updateOrderPayment(payment.id, paymentDraft);
-
-  //await emailApi.sendPaymentConfirmationEmail(email);
+  return response;
 };
 
-export const notifications = async (request: Request, actionContext: ActionContext) => {
+export const paymentDetails = async (request: Request, actionContext: ActionContext) => {
+  const adyenApi = new BaseApi(actionContext.frontasticContext.project.configuration.adyen);
+
+  const data = JSON.parse(request.body);
+
+  const paymentResponse = await adyenApi.paymentDetails(data);
+
+  const response = {
+    statusCode: 200,
+    sessionData: request.sessionData,
+    body: JSON.stringify(paymentResponse),
+  } as Response;
+
+  return response;
+};
+
+export const notify = async (request: Request, actionContext: ActionContext) => {
   const { notificationItems } = JSON.parse(request.body);
-  const hmacKey = actionContext.frontasticContext.project.configuration.payment.adyen.hmacKey;
+
+  const hmacKey = actionContext.frontasticContext.project.configuration.adyen.hmacKey;
 
   const validator = new hmacValidator();
 
   // @ts-ignore
-  notificationItems.forEach(({ NotificationRequestItem }: any) => {
-    if (validator.validateHMAC(NotificationRequestItem, hmacKey)) {
-      if (NotificationRequestItem.eventCode === 'AUTHORISATION' && NotificationRequestItem.success === 'true') {
-        updateOrderPayment(request, actionContext, NotificationRequestItem);
-      }
-    } else {
-      const response: Response = {
-        statusCode: 401,
-        body: 'Invalid or no HMAC signature',
-        sessionData: request.sessionData,
-      };
-      return response;
+  notificationItems.forEach(({ NotificationRequestItem }) => {
+    if (!validator.validateHMAC(NotificationRequestItem, hmacKey)) throw new Error('Invalid or no HMAC signature');
+
+    const {
+      merchantReference,
+      paymentMethod,
+      amount,
+      success,
+      eventCode,
+      additionalData: { shopperLocale },
+    } = NotificationRequestItem;
+
+    const emailApi = EmailApiFactory.getDefaultApi(actionContext.frontasticContext, shopperLocale ?? 'en_GB');
+    const cartApi = new CartApi(actionContext.frontasticContext, shopperLocale ?? 'en_GB');
+
+    if (eventCode === 'AUTHORISATION' && success) {
+      cartApi
+        .createPayment({
+          amountPlanned: { centAmount: amount.value, currencyCode: amount.currency },
+          paymentMethodInfo: {
+            paymentInterface: 'ADYEN',
+            method: paymentMethod,
+          },
+        })
+        .then((payment) => {
+          cartApi
+            .updateOrderByNumber(merchantReference, {
+              orderState: 'Confirmed',
+              payments: [payment],
+              paymentState: 'Paid',
+            })
+            .then((order) => {
+              emailApi.sendOrderConfirmationEmail({ ...order });
+            });
+        });
     }
   });
 
@@ -128,5 +106,6 @@ export const notifications = async (request: Request, actionContext: ActionConte
     body: '[accepted]',
     sessionData: request.sessionData,
   };
+
   return response;
 };

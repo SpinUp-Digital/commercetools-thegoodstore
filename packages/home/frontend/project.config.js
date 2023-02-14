@@ -8,6 +8,11 @@ export const SDKLanguageMapper = {
   de: 'de-DE',
 };
 
+export const localeMapper = {
+  en: 'en_GB',
+  de: 'de_DE',
+};
+
 export const mapLanguage = (lang) => {
   if (!languageMapper[lang]) {
     console.error(`Language mapper is missing language ${lang}`);
@@ -19,9 +24,17 @@ export const mapLanguage = (lang) => {
 
 export const mapSDKLanguage = (lang) => {
   if (!SDKLanguageMapper[lang]) {
-    console.error(`Language mapper is missing language ${lang}`);
+    console.error(`SDK language mapper is missing language ${lang}`);
   }
 
   //If language is not defined in SDKLanguageMapper then select first locale
   return SDKLanguageMapper[lang] || SDKLanguageMapper[Object.keys(SDKLanguageMapper)[0]];
+};
+
+export const mapLocaleLanguage = (lang) => {
+  if (!localeMapper[lang]) {
+    console.error(`Locale language mapper is missing language ${lang}`);
+  }
+
+  return localeMapper[lang] || localeMapper[Object.keys(SDKLanguageMapper)[0]];
 };
