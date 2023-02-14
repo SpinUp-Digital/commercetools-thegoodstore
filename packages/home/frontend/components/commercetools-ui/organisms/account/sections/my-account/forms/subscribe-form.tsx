@@ -43,12 +43,15 @@ const SubscribeForm = () => {
     >
       <div className="mb-44 grid gap-24">
         {values.map((value, index) => (
-          <div key={index} className="flex items-center gap-12">
+          <div
+            key={index}
+            className="flex cursor-pointer items-center gap-12"
+            onClick={() => setSubscribed(value === 'subscribe')}
+          >
             <Radio
               type="radio"
               name="subscription"
               value={value}
-              onChecked={() => setSubscribed(value === 'subscribe')}
               checked={!!subscribed ? value === 'subscribe' : value === 'unsubscribe'}
             />
             <Typography as="label" fontSize={14} className="text-secondary-black">

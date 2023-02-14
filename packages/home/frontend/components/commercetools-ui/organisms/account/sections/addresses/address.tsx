@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import type { Address as AddressType } from '@commercetools/frontend-domain-types/account/Address';
+import Radio from 'components/commercetools-ui/atoms/radio';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { TypographyProps } from 'components/commercetools-ui/atoms/typography/types';
 import { useFormat } from 'helpers/hooks/useFormat';
@@ -35,24 +36,20 @@ const Address: React.FC<AddressProps> = ({ address }) => {
     `${address.postalCode} ${address.city}`,
   ];
 
-  const handleChange = (e: React.ChangeEvent) => {
-    setChecked((e.target as HTMLInputElement).checked);
+  const handleChecked = () => {
+    console.log('Im clicked');
+    setChecked(true);
     setAsDefault();
   };
 
   return (
     <div
-      className="flex items-center justify-between rounded-md border border-neutral-400 p-12 md:py-24 md:px-20 2xl:px-24"
+      className="flex cursor-pointer items-center justify-between rounded-md border border-neutral-400 p-12 md:py-24 md:px-20 2xl:px-24"
       key={address.addressId}
+      onClick={handleChecked}
     >
       <div className="flex items-center gap-28">
-        <input
-          className="hidden hover:cursor-pointer md:block"
-          type="radio"
-          name={label}
-          checked={checked ?? false}
-          onChange={handleChange}
-        />
+        <Radio className="hidden md:block" name={label} checked={checked ?? false} />
 
         <div className="grid">
           <div className="flex gap-5">
@@ -72,7 +69,9 @@ const Address: React.FC<AddressProps> = ({ address }) => {
         </div>
       </div>
 
-      <EditCTA editHref={`#edit-address/${address.addressId}`} />
+      <div onClick={(e) => e.stopPropagation()}>
+        <EditCTA editHref={`#edit-address/${address.addressId}`} />
+      </div>
     </div>
   );
 };
