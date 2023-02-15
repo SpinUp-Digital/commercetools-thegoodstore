@@ -72,7 +72,7 @@ export const notify = async (request: Request, actionContext: ActionContext) => 
       amount,
       success,
       eventCode,
-      additionalData: { shopperLocale },
+      additionalData: { shopperLocale, cardSummary },
     } = NotificationRequestItem;
 
     const emailApi = EmailApiFactory.getDefaultApi(actionContext.frontasticContext, shopperLocale ?? 'en_GB');
@@ -85,6 +85,13 @@ export const notify = async (request: Request, actionContext: ActionContext) => 
           paymentMethodInfo: {
             paymentInterface: 'ADYEN',
             method: paymentMethod,
+          },
+          custom: {
+            type: {
+              key: 'paymenttype',
+              typeId: 'type',
+            },
+            fields: { cardSummary },
           },
         })
         .then((payment) => {
