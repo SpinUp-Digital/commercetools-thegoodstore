@@ -7,11 +7,12 @@ export interface Props {
   logo: NextFrontasticImage;
   logoLink: Reference;
   imageClassName?: string;
+  onClick?: () => void;
 }
 
-const HeaderLogo: FC<Props> = ({ logoLink, logo, imageClassName }) => {
+const HeaderLogo: FC<Props> = ({ logoLink, logo, imageClassName, onClick }) => {
   return (
-    <div className="relative px-10 md:mt-0">
+    <div className="relative px-10 md:mt-0" onClick={onClick}>
       <Link className={imageClassName} link={logoLink}>
         <Image media={logo.media} layout="fill" objectFit="contain" alt={logo.title} />
       </Link>

@@ -31,7 +31,8 @@ const MobileMenuHeader: FC<Props> = ({ onArrowClick, logo, logoLink, hideHeaderM
         <HeaderLogo
           logo={logo}
           logoLink={logoLink}
-          imageClassName="flex h-95 w-160 justify-center text-center text-16 font-bold md:text-28"
+          onClick={hideHeaderMenu}
+          imageClassName="flex h-full w-160 justify-center text-center text-16 font-bold md:text-28"
         />
       ) : (
         <div className="flex w-full items-center justify-center whitespace-nowrap">
