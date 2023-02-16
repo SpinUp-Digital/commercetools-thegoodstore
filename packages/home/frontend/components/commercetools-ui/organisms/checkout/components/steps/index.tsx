@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import Button from 'components/commercetools-ui/atoms/button';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useCheckout } from '../../provider';
+import CreateAddressModal from '../create-address-modal';
 import Step from '../step';
 import AddressesPreview from './previews/addresses';
 import PaymentPreview from './previews/payment';
@@ -37,6 +38,7 @@ const Steps: React.FC<Props> = ({ onPurchase, onFinalStepChange }) => {
         label: formatCartMessage({ id: 'addresses', defaultMessage: 'Addresses' }),
         Component: <Addresses goToNextStep={goToNextStep} />,
         Preview: <AddressesPreview />,
+        CTA: <CreateAddressModal />,
       },
       {
         label: formatCartMessage({ id: 'shipping', defaultMessage: 'Shipping' }),
@@ -60,7 +62,7 @@ const Steps: React.FC<Props> = ({ onPurchase, onFinalStepChange }) => {
   return (
     <div className="px-16 md:px-24 lg:grow lg:px-0">
       <div className="flex flex-col gap-24 lg:bg-neutral-200">
-        {steps.map(({ Component, Preview, label }, index) => (
+        {steps.map(({ Component, Preview, label, CTA }, index) => (
           <Step
             key={index}
             label={label}
@@ -70,6 +72,7 @@ const Steps: React.FC<Props> = ({ onPurchase, onFinalStepChange }) => {
             onEdit={() => onEdit(index)}
             Component={Component}
             Preview={Preview}
+            CTA={CTA}
           />
         ))}
       </div>

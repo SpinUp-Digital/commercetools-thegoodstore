@@ -61,7 +61,32 @@ const CheckoutWrapped: React.FC<Props> = ({ logo }) => {
   );
 
   const purchase = useCallback(async () => {
-    if (!transaction.total.centAmount || !paymentDataIsValid || hasOutOfStockItems) return;
+    if (hasOutOfStockItems) {
+      const outOfStockItems = data?.lineItems.filter((lineItem) => lineItem.variant?.isOnStock) ?? [];
+
+      toast.error(
+        `
+        ${formatCheckoutMessage({
+          id: 'items.outOfStock',
+          defaultMessage: 'The following items are out of stock',
+        })}:\n\n
+        ${outOfStockItems.map((item) => `- ${item.name} \n\n`)}
+      `,
+        { style: { alignItems: 'flex-end', flexDirection: 'row-reverse' } },
+      );
+      return;
+    }
+
+    if (!transaction.total.centAmount || !paymentDataIsValid) {
+      toast.error(
+        `${formatCheckoutMessage({
+          id: 'payment.failed',
+          defaultMessage: 'We could not process your payment, please try again later.',
+        })}`,
+      );
+
+      return;
+    }
 
     setProcessing(true);
 
@@ -132,6 +157,7 @@ const CheckoutWrapped: React.FC<Props> = ({ logo }) => {
     data?.lineItems,
     paymentDataIsValid,
     handlePaymentResponse,
+    formatCheckoutMessage,
   ]);
 
   return (

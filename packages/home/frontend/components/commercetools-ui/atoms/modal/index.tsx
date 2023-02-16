@@ -1,10 +1,13 @@
 import { FC, useEffect } from 'react';
 import ReactModal, { Props as ReactModalProps } from 'react-modal';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
+import useScrollBlock from 'helpers/hooks/useScrollBlock';
 import { desktop } from 'helpers/utils/screensizes';
 
 const Modal: FC<ReactModalProps> = ({ children, style, ...props }) => {
   const [isDesktopSize] = useMediaQuery(desktop);
+
+  const { blockScroll } = useScrollBlock();
 
   const modalStyle: ReactModalProps['style'] = {
     overlay: {
@@ -26,8 +29,8 @@ const Modal: FC<ReactModalProps> = ({ children, style, ...props }) => {
   };
 
   useEffect(() => {
-    document.body.style.overflow = props.isOpen ? 'hidden' : 'auto';
-  }, [props.isOpen]);
+    blockScroll(props.isOpen);
+  }, [props.isOpen, blockScroll]);
 
   return (
     <ReactModal {...props} style={modalStyle}>

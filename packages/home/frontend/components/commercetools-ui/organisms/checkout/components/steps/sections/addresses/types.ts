@@ -1,4 +1,5 @@
 export interface Address {
+  addressId: string;
   name: string;
   email: string;
   phone?: string;
@@ -6,4 +7,5 @@ export interface Address {
   line2?: string;
   postalCode: string;
   city: string;
+  addressType?: 'shipping' | 'billing';
 }

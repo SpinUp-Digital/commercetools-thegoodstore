@@ -1,16 +1,17 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { Address as AccountAddress } from '@commercetools/frontend-domain-types/account/Address';
+import React, { useCallback, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
 import * as yup from 'yup';
 import Button from 'components/commercetools-ui/atoms/button';
 import Checkbox from 'components/commercetools-ui/atoms/checkbox';
 import Info from 'components/commercetools-ui/atoms/info';
-import Input from 'components/commercetools-ui/atoms/input';
 import { useFormat } from 'helpers/hooks/useFormat';
-import useI18n from 'helpers/hooks/useI18n';
 import useProcessing from 'helpers/hooks/useProcessing';
 import { useAccount, useCart } from 'frontastic';
 import { CartDetails } from 'frontastic/hooks/useCart/types';
+import AccountAddresses from './components/account-addresses';
+import AddressForm from './components/address-form';
+import { Fields, FieldsOptions } from './components/address-form/types';
+import useMappers from './hooks/useMappers';
 import { Address } from './types';
 
 export interface Props {
@@ -22,13 +23,11 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
   const { formatMessage: formatCheckoutMessage } = useFormat({ name: 'checkout' });
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
 
-  const { account } = useAccount();
+  const { account, loggedIn } = useAccount();
 
   const { updateCart } = useCart();
 
-  const { country } = useI18n();
-
-  const [enableAddress2, setEnableAddress2] = useState({ shipping: false, billing: false });
+  const { addressToAccountAddress } = useMappers();
 
   const initialAddressData = {
     name: '',
@@ -43,48 +42,6 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
   const [shippingAddress, setShippingAddress] = useState(initialAddressData);
   const [billingAddress, setBillingAddress] = useState(initialAddressData);
   const [sameShippingAddress, setSameShippingAddress] = useState(true);
-
-  const accountAddressToAddress = useCallback(
-    (address: AccountAddress) => {
-      return {
-        name: `${address.firstName ?? ''} ${address.lastName ?? ''}`,
-        email: account?.email ?? '',
-        phone: address.phone,
-        line1: address.streetName ?? '',
-        line2: address.additionalAddressInfo,
-        postalCode: address.postalCode ?? '',
-        city: address.city ?? '',
-      } as Address;
-    },
-    [account],
-  );
-
-  const addressToAccountAddress = useCallback(
-    (address: Address) => {
-      const [firstName, lastName] = address.name.split(' ');
-      return {
-        firstName: firstName ?? '',
-        lastName: lastName ?? '',
-        phone: address.phone,
-        streetName: address.line1,
-        additionalAddressInfo: address.line2,
-        postalCode: address.postalCode,
-        city: address.city,
-        country,
-      } as AccountAddress;
-    },
-    [country],
-  );
-
-  useEffect(() => {
-    if (account) {
-      const defaultShippingAddress = account.addresses?.find((address) => address.isDefaultShippingAddress);
-      const defaultBillingAddress = account.addresses?.find((address) => address.isDefaultBillingAddress);
-
-      if (defaultShippingAddress) setShippingAddress(accountAddressToAddress(defaultShippingAddress));
-      if (defaultBillingAddress) setBillingAddress(accountAddressToAddress(defaultBillingAddress));
-    }
-  }, [account, accountAddressToAddress]);
 
   const currentBillingAddress = useMemo(
     () => (sameShippingAddress ? shippingAddress : billingAddress),
@@ -177,7 +134,7 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
   ]);
 
   const fields = useCallback(
-    (address: 'shipping' | 'billing') => {
+    ({ enableAddress2, onEnableAddress2 }: FieldsOptions) => {
       return [
         {
           name: 'name',
@@ -186,9 +143,6 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
           required: true,
           type: 'string',
           className: 'col-span-3',
-          render() {
-            return <></>;
-          },
         },
         {
           name: 'email',
@@ -197,9 +151,6 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
           required: true,
           type: 'email',
           className: 'col-span-3',
-          render() {
-            return <></>;
-          },
         },
         {
           name: 'phone',
@@ -210,9 +161,6 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
           }),
           type: 'string',
           className: 'col-span-3',
-          render() {
-            return <></>;
-          },
         },
         {
           name: 'line1',
@@ -222,21 +170,18 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
           type: 'string',
           className: 'col-span-3',
           render() {
-            if (enableAddress2[address]) return <></>;
+            if (enableAddress2) return <></>;
 
             return (
-              <div className="col-span-3 mt-16">
-                <p
-                  className="w-fit text-14 text-secondary-black"
-                  onClick={() => setEnableAddress2({ ...enableAddress2, [address]: true })}
-                >
+              <div className="col-span-3 mt-16 cursor-pointer">
+                <p className="w-fit text-14 text-secondary-black" onClick={onEnableAddress2}>
                   + {formatCheckoutMessage({ id: 'add.address', defaultMessage: 'Add another address line' })}
                 </p>
               </div>
             );
           },
         },
-        ...(enableAddress2[address]
+        ...(enableAddress2
           ? [
               {
                 name: 'line2',
@@ -244,9 +189,6 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
                 labelDesc: '',
                 type: 'string',
                 className: 'col-span-3',
-                render() {
-                  return <></>;
-                },
               },
             ]
           : []),
@@ -256,9 +198,6 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
           labelDesc: '',
           required: true,
           className: 'col-span-1 mt-12',
-          render() {
-            return <></>;
-          },
         },
         {
           name: 'city',
@@ -266,36 +205,34 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
           labelDesc: '',
           required: true,
           className: 'col-span-2 mt-12',
-          render() {
-            return <></>;
-          },
         },
-      ];
+      ] as Fields[];
     },
-    [formatMessage, formatCheckoutMessage, enableAddress2],
+    [formatMessage, formatCheckoutMessage],
   );
 
   return (
     <div className="bg-white pt-16 lg:px-36 lg:pt-0 lg:pb-36">
-      <form className="grid grid-cols-3 gap-12 md:max-w-[400px]">
-        {fields('shipping').map(({ name, label, labelDesc, type, required, className, render }) => (
-          <React.Fragment key={name}>
-            <div className={className}>
-              <Input
-                name={name}
-                label={label}
-                labelDesc={labelDesc}
-                type={type}
-                required={required}
-                value={shippingAddress[name as keyof Address]}
-                labelPosition="top"
-                onChange={handleShippingAddressChange}
-              />
-              {render()}
-            </div>
-          </React.Fragment>
-        ))}
-      </form>
+      {loggedIn ? (
+        <div className="mt-20">
+          <h5 className="text-16 capitalize">
+            {formatCheckoutMessage({ id: 'shippingAddress', defaultMessage: 'Shipping Address' })}
+          </h5>
+          <AccountAddresses
+            className="mt-20"
+            type="shipping"
+            onSelectAddress={(address) => setShippingAddress(address)}
+          />
+        </div>
+      ) : (
+        <AddressForm
+          className="md:max-w-[400px]"
+          fields={fields}
+          address={shippingAddress}
+          onChange={handleShippingAddressChange}
+        />
+      )}
+
       <div className="mt-48">
         <div className="flex items-center gap-8">
           <h5 className="text-16 capitalize">
@@ -318,30 +255,25 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
             labelPosition="on-right"
             checked={sameShippingAddress}
             onChange={(e) => setSameShippingAddress(e.target.checked)}
+            disableBackground
           />
         </div>
 
-        {!sameShippingAddress && (
-          <form className="mt-28 grid grid-cols-3 gap-12">
-            {fields('billing').map(({ name, label, labelDesc, type, required, className, render }) => (
-              <React.Fragment key={name}>
-                <div className={className}>
-                  <Input
-                    name={name}
-                    label={label}
-                    labelDesc={labelDesc}
-                    type={type}
-                    required={required}
-                    value={billingAddress[name as keyof Address]}
-                    labelPosition="top"
-                    onChange={handleBillingAddressChange}
-                  />
-                  {render()}
-                </div>
-              </React.Fragment>
-            ))}
-          </form>
-        )}
+        {!sameShippingAddress &&
+          (loggedIn ? (
+            <AccountAddresses
+              type="billing"
+              className="mt-28"
+              onSelectAddress={(address) => setBillingAddress(address)}
+            />
+          ) : (
+            <AddressForm
+              className="mt-28 md:max-w-[400px]"
+              fields={fields}
+              address={billingAddress}
+              onChange={handleBillingAddressChange}
+            />
+          ))}
 
         <div className="mt-24">
           <Button
