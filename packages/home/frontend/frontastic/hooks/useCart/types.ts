@@ -1,11 +1,11 @@
 import { Address } from '@commercetools/frontend-domain-types/account/Address';
 import { Discount } from '@commercetools/frontend-domain-types/cart/Discount';
-import { Order } from '@commercetools/frontend-domain-types/cart/Order';
 import { ShippingMethod } from '@commercetools/frontend-domain-types/cart/ShippingMethod';
 import { Money } from '@commercetools/frontend-domain-types/product/Money';
 import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
 import { ProjectSettings } from '@commercetools/frontend-domain-types/ProjectSettings';
 import { Cart } from 'types/cart';
+import { Order } from 'types/order';
 
 export interface CartDetails {
   account?: { email: string };
@@ -35,6 +35,7 @@ export interface UseCartReturn {
   redeemDiscountCode?: (code: string) => Promise<void>;
   shippingMethods: { data?: ShippingMethod[] };
   orderCart: () => Promise<Order>;
+  getOrder: (orderId: Order['orderId']) => Promise<Order>;
   orderHistory?: () => Promise<Order[]>;
   getProjectSettings?: () => Promise<ProjectSettings>;
 }

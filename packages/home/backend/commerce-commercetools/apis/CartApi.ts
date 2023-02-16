@@ -354,6 +354,30 @@ export class CartApi extends BaseApi {
       });
   };
 
+  getOrder: (orderId: Order['orderId']) => Promise<Order> = async (orderId: Order['orderId']) => {
+    const locale = await this.getCommercetoolsLocal();
+
+    return await this.getApiForProject()
+      .orders()
+      .withOrderNumber({ orderNumber: orderId })
+      .get({
+        queryArgs: {
+          expand: [
+            'lineItems[*].discountedPrice.includedDiscounts[*].discount',
+            'discountCodes[*].discountCode',
+            'paymentInfo.payments[*]',
+          ],
+        },
+      })
+      .execute()
+      .then((response) => {
+        return CartMapper.commercetoolsOrderToOrder(response.body, locale);
+      })
+      .catch((error) => {
+        throw new ExternalError({ status: error.code, message: error.message, body: error.body });
+      });
+  };
+
   getOrders: (account: Account) => Promise<Order[]> = async (account: Account) => {
     const locale = await this.getCommercetoolsLocal();
 

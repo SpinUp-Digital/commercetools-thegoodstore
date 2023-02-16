@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Disclosure, Transition } from '@headlessui/react';
-import { ChevronDownIcon, PlusIcon, MinusIcon } from '@heroicons/react/24/outline';
 import useClassNames from 'helpers/hooks/useClassNames';
-import Typography from '../typography';
+import AccordionButton from './AccordionButton';
 
 export interface AccordionProps {
   index?: number;
@@ -10,22 +9,20 @@ export interface AccordionProps {
   accordionListLength?: number;
   className?: string;
   openSectionTitle?: string;
-  openSectionElement?: JSX.Element;
   closedSectionTitle?: string;
-  closedSectionElement?: JSX.Element;
   iconClassName?: string;
   buttonClassName?: string;
   buttonWrapperClassName?: string;
   panelClassName?: string;
   collapsedLabel?: string;
+  customOpenButton?: ReactNode;
+  customCloseButton?: ReactNode;
 }
 
 const Accordion: React.FC<AccordionProps> = ({
   variant = 'arrow',
   closedSectionTitle,
-  closedSectionElement,
   openSectionTitle = closedSectionTitle,
-  openSectionElement = closedSectionElement,
   children,
   className = '',
   iconClassName = '',
@@ -33,11 +30,9 @@ const Accordion: React.FC<AccordionProps> = ({
   buttonWrapperClassName = '',
   panelClassName = '',
   collapsedLabel,
+  customOpenButton,
+  customCloseButton,
 }) => {
-  const buttonWrapperClassNames = useClassNames(['w-full', buttonWrapperClassName]);
-
-  const buttonClassNames = useClassNames(['w-full flex justify-between', buttonClassName]);
-
   const panelClassNames = useClassNames([panelClassName]);
 
   return (
@@ -45,33 +40,21 @@ const Accordion: React.FC<AccordionProps> = ({
       <Disclosure>
         {({ open }) => (
           <>
-            <Disclosure.Button className={buttonWrapperClassNames}>
-              {closedSectionTitle || collapsedLabel ? (
-                <div className={buttonClassNames}>
-                  <Typography className="self-center transition">
-                    {open ? openSectionTitle : closedSectionTitle}
-                  </Typography>
-                  <div className="flex items-center gap-8">
-                    {!open && collapsedLabel && <p className="font-medium text-primary-black">{collapsedLabel}</p>}
-                    {variant === 'arrow' ? (
-                      <ChevronDownIcon
-                        width={17.5}
-                        strokeWidth={1}
-                        className={`${open ? 'rotate-180 transform' : ''} ${iconClassName} transition`}
-                      />
-                    ) : !open ? (
-                      <PlusIcon width={17.5} strokeWidth={2} className={iconClassName} />
-                    ) : (
-                      <MinusIcon width={17.5} strokeWidth={2} className={iconClassName} />
-                    )}
-                  </div>
-                </div>
-              ) : open ? (
-                openSectionElement
-              ) : (
-                closedSectionElement
-              )}
-            </Disclosure.Button>
+            {(open && !customOpenButton) || (!open && !customCloseButton) ? (
+              <AccordionButton
+                open={open}
+                variant={variant}
+                collapsedLabel={collapsedLabel}
+                buttonClassName={buttonClassName}
+                iconClassName={iconClassName}
+                openSectionTitle={openSectionTitle}
+                closedSectionTitle={openSectionTitle}
+                buttonWrapperClassName={buttonWrapperClassName}
+              />
+            ) : (
+              <Disclosure.Button>{open ? customOpenButton : customCloseButton}</Disclosure.Button>
+            )}
+
             <Transition
               enter="transition duration-150 ease-out"
               enterFrom="transform scale-y-95 opacity-0"

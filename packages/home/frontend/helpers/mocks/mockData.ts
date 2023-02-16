@@ -1,15 +1,16 @@
-import { Account } from 'types/account';
 import { AccountToken } from '@commercetools/frontend-domain-types/account/AccountToken';
 import { Address } from '@commercetools/frontend-domain-types/account/Address';
 import { Group } from '@commercetools/frontend-domain-types/account/Group';
 import { Cart } from '@commercetools/frontend-domain-types/cart/Cart';
 import { LineItem as CartLineItem } from '@commercetools/frontend-domain-types/cart/LineItem';
-import { Order } from '@commercetools/frontend-domain-types/cart/Order';
 import { ShippingMethod } from '@commercetools/frontend-domain-types/cart/ShippingMethod';
+import { Money } from '@commercetools/frontend-domain-types/product/Money';
 import { Product } from '@commercetools/frontend-domain-types/product/Product';
 import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
 import { LineItem } from '@commercetools/frontend-domain-types/wishlist/LineItem';
 import { Wishlist } from '@commercetools/frontend-domain-types/wishlist/Wishlist';
+import { Account } from 'types/account';
+import { Order, ShippingInfo } from 'types/order';
 import { NextFrontasticImage } from 'frontastic/lib/image';
 
 export const accordionMockItems = [
@@ -88,28 +89,30 @@ export const lineItemsOrderHistory: CartLineItem[] = [
     price: { centAmount: 71820, currencyCode: 'EUR', fractionDigits: 2 },
   },
 ];
-export const orderHistoryMock: Order[] = [
-  {
-    cartId: '4981a058-d32d-4120-bac9-c7b2ff862e36',
-    orderId: 'a480b136-db0c-40d7-111d-d4a1f98fcfba',
-    orderState: 'Open',
-    orderVersion: '1',
-    billingAddress: billingAddress,
-    shippingAddress: shippingAddress,
-    email: 'ahmed.amir@frontastic.cloud',
-    lineItems: lineItemsOrderHistory,
-  },
-  {
-    cartId: '4981a058-d32d-4120-bac9-c7b2ff862e36',
-    orderId: 'a480b136-db0c-40d7-111d-d4a1f98fcfba',
-    orderState: 'Open',
-    orderVersion: '1',
-    billingAddress: billingAddress,
-    shippingAddress: shippingAddress,
-    email: 'ahmed.amir@frontastic.cloud',
-    lineItems: lineItemsOrderHistory,
-  },
-];
+
+export const moneyMock: Required<Money> = { centAmount: 71820, currencyCode: 'EUR', fractionDigits: 2 };
+
+export const shippingInfoMock: ShippingInfo = {
+  shippingMethodId: 'shipping-method-mock-id',
+  price: moneyMock,
+  discountedPrice: moneyMock,
+};
+
+const orderMock: Order = {
+  cartId: '4981a058-d32d-4120-bac9-c7b2ff862e36',
+  orderId: 'a480b136-db0c-40d7-111d-d4a1f98fcfba',
+  orderState: 'Open',
+  orderVersion: '1',
+  billingAddress: billingAddress,
+  shippingAddress: shippingAddress,
+  email: 'ahmed.amir@frontastic.cloud',
+  lineItems: lineItemsOrderHistory,
+  shippingInfo: shippingInfoMock,
+  subtotal: moneyMock,
+  sum: moneyMock,
+};
+
+export const orderHistoryMock: Order[] = [orderMock, orderMock];
 
 const lineItems: LineItem[] = [
   {
@@ -310,22 +313,7 @@ export const cart: Cart = {
     },
   ],
 };
-export const orders: Order[] = [
-  {
-    orderId: 'ord-101',
-    orderVersion: '25',
-    orderState: 'ORDER STATE',
-    createdAt: new Date(),
-    ...cart,
-  },
-  {
-    orderId: 'ord-102',
-    orderVersion: '26',
-    orderState: 'ORDER STATE',
-    createdAt: new Date(),
-    ...cart,
-  },
-];
+export const orders: Order[] = [orderMock, orderMock];
 
 export const frontasticImage: NextFrontasticImage = {
   media: {
