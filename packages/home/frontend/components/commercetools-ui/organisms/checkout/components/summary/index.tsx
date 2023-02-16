@@ -37,18 +37,27 @@ const Summary: React.FC<Props> = ({ isFinalStep, onPurchase }) => {
           {formatCartMessage({ id: 'order.summary', defaultMessage: 'Order summary' })}
         </h3>
       </div>
-      <div className="mt-30 hidden gap-20 lg:flex">
+      <div className="relative mt-30 hidden gap-20 pr-[65px] lg:block">
         <div className={`grid grid-cols-3 gap-16 overflow-hidden ${!isSummaryExpanded ? 'max-h-[104px]' : ''}`}>
           {data?.lineItems?.map((lineItem) => (
-            <div key={lineItem.lineItemId} className="relative h-[104px] w-[88px] shrink-0">
+            <div key={lineItem.lineItemId} className="relative h-[104px]">
               <Image layout="fill" src={lineItem.variant?.images?.[0]} objectFit="contain" suffix="small" />
             </div>
           ))}
         </div>
-        {!isSummaryExpanded && hiddenItemsCount > 0 && (
-          <div className="flex cursor-pointer items-center" onClick={() => setIsSummaryExpanded(true)}>
-            <span className="text-14 text-secondary-black">+{hiddenItemsCount}</span>
-            <ChevronDownIcon strokeWidth={1} className="w-24" />
+        {hiddenItemsCount > 0 && (
+          <div
+            className="absolute right-0 top-[40px] flex cursor-pointer items-center"
+            onClick={() => setIsSummaryExpanded(!isSummaryExpanded)}
+          >
+            <span className={`text-14 text-secondary-black ${isSummaryExpanded ? 'opacity-0' : ''}`}>
+              + {hiddenItemsCount}
+            </span>
+            <ChevronDownIcon
+              strokeWidth={1}
+              className="w-24 transition"
+              style={{ transform: isSummaryExpanded ? 'rotateZ(-180deg)' : '' }}
+            />
           </div>
         )}
       </div>

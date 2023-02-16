@@ -116,7 +116,7 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods, emptyStateDescripti
               button={{
                 text: formatCartMessage({ id: 'checkout.go', defaultMessage: 'Go to checkout' }),
                 link: '/checkout',
-                disabled: isEmpty,
+                disabled: isEmpty || hasOutOfStockItems,
               }}
             />
           </div>

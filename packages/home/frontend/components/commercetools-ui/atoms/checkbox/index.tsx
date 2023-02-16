@@ -10,6 +10,7 @@ export interface Props extends Omit<React.ComponentProps<'input'>, 'onChange'> {
   labelPosition?: 'on-left' | 'on-right';
   containerClassName?: string;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  disableBackground?: boolean;
 }
 
 const Checkbox: React.FC<Props> = ({
@@ -22,6 +23,7 @@ const Checkbox: React.FC<Props> = ({
   label,
   defaultChecked = false,
   labelPosition = 'on-right',
+  disableBackground = false,
   ...props
 }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -66,7 +68,7 @@ const Checkbox: React.FC<Props> = ({
   const iconClassName = useClassNames([
     'absolute top-[50%] z-[1] left-[50%] h-16 w-16 translate-y-[-50%] translate-x-[-50%] stroke-[1.5px]',
     isChecked || isHovered ? 'block' : 'hidden',
-    isChecked ? 'text-white' : 'text-secondary-black',
+    isChecked && !disableBackground ? 'text-white' : 'text-secondary-black',
   ]);
 
   const backgroundClassName = useClassNames([
@@ -97,7 +99,7 @@ const Checkbox: React.FC<Props> = ({
 
         <CheckIcon className={iconClassName} />
 
-        <div className={backgroundClassName} />
+        {!disableBackground && <div className={backgroundClassName} />}
       </div>
 
       {label && labelPosition === 'on-right' && LabelElement}

@@ -1,5 +1,4 @@
-import { Address } from '@commercetools/frontend-domain-types/account/Address';
-import { Account } from 'types/account';
+import { Account, Address } from 'types/account';
 import { ResponseError } from 'frontastic/lib/fetch-api-hub';
 
 export interface GetAccountResult {

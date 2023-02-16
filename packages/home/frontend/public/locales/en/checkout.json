@@ -53,6 +53,6 @@
   "card.holder": "Card holder",
   "card.number": "Card number",
   "card.securityNumber": "Security number",
-  "items.outOfStock": "One or more items are out of stock",
+  "items.outOfStock": "The following items are out of stock",
   "payment.failed": "We could not process your payment, please try again later."
 }

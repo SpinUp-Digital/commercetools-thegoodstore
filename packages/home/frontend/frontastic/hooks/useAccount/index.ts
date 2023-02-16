@@ -1,8 +1,7 @@
 import { useMemo, useCallback } from 'react';
-import { Address } from '@commercetools/frontend-domain-types/account/Address';
 import useSWR, { mutate } from 'swr';
 import { SDK, sdk } from 'sdk';
-import { Account } from 'types/account';
+import { Account, Address } from 'types/account';
 import { revalidateOptions } from 'frontastic';
 import { GetAccountResult, RegisterAccount, UpdateAccount, UseAccountReturn } from './types';
 

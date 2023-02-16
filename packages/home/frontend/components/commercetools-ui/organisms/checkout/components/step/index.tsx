@@ -10,9 +10,10 @@ interface Props {
   onEdit: () => void;
   Component: JSX.Element;
   Preview: JSX.Element;
+  CTA?: JSX.Element;
 }
 
-const Step: React.FC<Props> = ({ number, label, isExpanded, isCompleted, onEdit, Component, Preview }) => {
+const Step: React.FC<Props> = ({ number, label, isExpanded, isCompleted, onEdit, Component, Preview, CTA }) => {
   const { formatMessage } = useFormat({ name: 'common' });
 
   const headerClassName = useClassNames([
@@ -24,10 +25,10 @@ const Step: React.FC<Props> = ({ number, label, isExpanded, isCompleted, onEdit,
   ]);
 
   const numberClassName = useClassNames([
-    'rounded-full bg-white text-primary-black w-24 h-24 flex items-center justify-center border text-14 md:text-16 font-medium transition lg:border-primary-black leading-[38px] md:w-30 md:h-30',
+    'rounded-full bg-white w-24 h-24 flex items-center justify-center border text-14 md:text-16 font-medium transition lg:border-primary-black leading-[38px] md:w-30 md:h-30',
     {
-      'border-white lg:bg-primary-black lg:text-white': isExpanded,
-      'border-primary-black': !isExpanded,
+      'border-white bg-primary-black text-white': isExpanded,
+      'border-primary-black text-primary-black': !isExpanded,
     },
   ]);
 
@@ -54,6 +55,7 @@ const Step: React.FC<Props> = ({ number, label, isExpanded, isCompleted, onEdit,
             {formatMessage({ id: 'edit', defaultMessage: 'Edit' })}
           </p>
         )}
+        {isExpanded && CTA}
       </div>
       <div>
         <div className={isCompleted && !isExpanded ? 'block' : 'hidden'}>{Preview}</div>
