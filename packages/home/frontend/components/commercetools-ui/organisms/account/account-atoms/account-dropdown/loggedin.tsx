@@ -28,7 +28,7 @@ const LoggedIn = () => {
       <Popover.Button className="w-full">
         <Link link="/account#support" className="mt-32 block w-fit">
           <Typography fontSize={16} fontFamily="inter" className="text-primary-black hover:underline">
-            {formatAccountMessage({ id: 'customer.support', defaultMessage: 'Membership info' })}
+            {formatAccountMessage({ id: 'customer.support', defaultMessage: 'Customer support' })}
           </Typography>
         </Link>
       </Popover.Button>
@@ -36,7 +36,7 @@ const LoggedIn = () => {
       <Popover.Button className="mt-32 block w-full pb-10">
         <div onClick={handleLogout} className="w-fit">
           <Typography fontSize={16} fontFamily="inter" className="text-primary-black hover:underline">
-            {formatAccountMessage({ id: 'sign.out', defaultMessage: 'Membership info' })}
+            {formatAccountMessage({ id: 'sign.out', defaultMessage: 'Sign out' })}
           </Typography>
         </div>
       </Popover.Button>

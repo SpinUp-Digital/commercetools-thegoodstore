@@ -40,7 +40,7 @@ const HeaderNavigationDesktop: React.FC<Props> = ({ links, tiles }) => {
 
   const scrollDirection = useScrollDirection(5, -1);
   const navigationClassNames = useClassNames([
-    'hidden items-center lg:flex duration-150 transition-all pl-56 w-fit',
+    'hidden items-center lg:flex duration-150 transition-all pl-52 w-fit',
     scrollDirection === 'down' ? 'h-0 opacity-0 pointer-events-none' : 'h-52 opacity-1 pointer-events-auto',
   ]);
 
