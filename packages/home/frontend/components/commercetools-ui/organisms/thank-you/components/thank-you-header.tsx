@@ -22,21 +22,27 @@ const ThankYouHeader: FC<ThankYouHeaderProps> = ({ email, onPrint }) => {
   return (
     <div className="grid justify-items-center gap-24 border-b border-neutral-400 pt-16 pb-24 md:border-b-0 lg:justify-items-start lg:p-0">
       {/* Title */}
-      <Typography className="leading-[22px] text-primary-black md:text-18 lg:text-22" fontSize={16} fontFamily="libre">
+      <Typography
+        asSkeleton={!email}
+        className="text-primary-black md:text-18 lg:text-22"
+        fontSize={16}
+        lineHeight={!email ? 'loose' : 'tight'}
+        fontFamily="libre"
+      >
         {formatMessage({ id: 'thank.for.order', defaultMessage: 'Thank you for your order' })}
       </Typography>
 
       {/* Subtitle */}
       <div className="flex flex-col items-center gap-5 md:flex-row">
-        <Typography {...subtitleProps}>
+        <Typography asSkeleton={!email} {...subtitleProps}>
           {formatMessage({ id: 'email.sent', defaultMessage: 'An email confirmation has been sent to' })}
         </Typography>
-        <Typography medium {...subtitleProps}>
-          {email}
+        <Typography asSkeleton={!email} medium {...subtitleProps}>
+          {email ?? 'example@email.com'}
         </Typography>
       </div>
 
-      <PrintButton onPrint={onPrint} className="w-full py-8 md:w-fit md:px-68 lg:hidden" />
+      <PrintButton asSkeleton={!email} onPrint={onPrint} className="w-full py-8 md:w-fit md:px-68 lg:hidden" />
     </div>
   );
 };

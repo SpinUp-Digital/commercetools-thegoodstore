@@ -17,10 +17,10 @@ const useBottomSectionText = (loggedIn: boolean) => {
       guest: {
         title: formatMessage({ id: 'guest.title', defaultMessage: 'Save your details' }),
         subtitle: formatMessage({
-          id: 'guest.title',
+          id: 'guest.subtitle',
           defaultMessage: 'Enjoy faster checkout, order history and personal offers.',
         }),
-        cta: formatMessage({ id: 'guest.title', defaultMessage: 'Create account' }),
+        cta: formatMessage({ id: 'guest.cta', defaultMessage: 'Create account' }),
       },
     };
   }, [formatMessage]);

@@ -8,6 +8,7 @@ type PrintButtonProps = ButtonProps & {
 
 const PrintButton: FC<PrintButtonProps> = ({ onPrint, ...props }) => {
   const { formatMessage } = useFormat({ name: 'thank-you' });
+
   return (
     <Button type="submit" variant="secondary" onClick={onPrint} {...props}>
       {formatMessage({ id: 'print.invoice', defaultMessage: 'Print invoice' })}

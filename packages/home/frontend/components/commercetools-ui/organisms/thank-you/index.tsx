@@ -28,7 +28,7 @@ const ThankYou = () => {
         <div className="bg-white px-16 md:px-24 lg:w-[70%] lg:rounded-md lg:py-36">
           <ThankYouHeader email={order.email} onPrint={handlePrint} />
           <ThankYouOrderInfo firstName={order.shippingAddress?.firstName} order={order} />
-          <ThankYouFooter />
+          <ThankYouFooter loading={!order.sum} />
         </div>
 
         <OrderSummary order={order} onPrint={handlePrint} />

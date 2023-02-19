@@ -11,10 +11,21 @@ type ThankYouOrderInfoProps = {
 };
 
 type OrderInfoType = Array<{ label: string; value: string; subValue?: string }>;
+const skeletonPlaceholder: OrderInfoType = [
+  { label: 'Order number', value: '3737 3737 73737' },
+  { label: 'Delivery by', value: 'Express' },
+  {
+    label: 'Delivery to',
+    value: 'Guest User',
+    subValue: 'street, city, 11 111',
+  },
+  { label: 'Payment by', value: 'VISA **111' },
+];
 
 const ThankYouOrderInfo: FC<ThankYouOrderInfoProps> = ({ firstName, order }) => {
   const { formatMessage } = useFormat({ name: 'thank-you' });
-  const [orderInfo, setOrderInfo] = useState<OrderInfoType>([]);
+  const [orderInfo, setOrderInfo] = useState<OrderInfoType>(skeletonPlaceholder);
+  const [loading, setLoading] = useState(true);
 
   const { orderNumber, deliveryMethod, shippingAddress, paymentInfo } = useOrderInfoData(order);
 
@@ -30,6 +41,8 @@ const ThankYouOrderInfo: FC<ThankYouOrderInfoProps> = ({ firstName, order }) => 
         },
         { label: formatMessage({ id: 'payment.by', defaultMessage: 'Payment by' }), value: paymentInfo },
       ]);
+
+      setLoading(false);
     }
   }, [firstName, deliveryMethod, orderNumber, shippingAddress, paymentInfo, formatMessage]);
 
@@ -38,16 +51,36 @@ const ThankYouOrderInfo: FC<ThankYouOrderInfoProps> = ({ firstName, order }) => 
       {orderInfo.map(({ label, value, subValue }, index) => (
         <div key={index}>
           <div className="flex flex-wrap gap-5 md:gap-0">
-            <Typography className="text-secondary-black md:w-136 md:text-16" fontSize={14} lineHeight="loose">
-              {label + ':'}
-            </Typography>
-            <Typography className="text-primary-black md:text-16" fontSize={14} lineHeight="loose" medium>
+            <div className="md:w-136">
+              <Typography
+                className="w-fit text-secondary-black md:text-16"
+                fontSize={14}
+                lineHeight="loose"
+                asSkeleton={loading}
+              >
+                {label + ':'}
+              </Typography>
+            </div>
+            <Typography
+              className="text-primary-black md:text-16"
+              fontSize={14}
+              lineHeight="loose"
+              medium
+              asSkeleton={loading}
+            >
               {value}
             </Typography>
           </div>
-          <Typography className="text-primary-black md:ml-136 md:text-16" fontSize={14} lineHeight="loose">
-            {subValue}
-          </Typography>
+          {subValue && (
+            <Typography
+              className="mt-4 w-fit text-primary-black md:ml-136 md:text-16"
+              fontSize={14}
+              lineHeight="loose"
+              asSkeleton={loading}
+            >
+              {subValue}
+            </Typography>
+          )}
         </div>
       ))}
     </div>

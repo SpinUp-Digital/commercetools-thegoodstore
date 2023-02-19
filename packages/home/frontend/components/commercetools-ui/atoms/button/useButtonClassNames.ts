@@ -4,10 +4,17 @@ import { ButtonProps, ButtonSize, ButtonVariant } from '.';
 type variantBasedClassName = { [key in ButtonVariant]?: string };
 type IncludesIcon = { includesIcon: boolean };
 type UseButtonClassNames = (
-  props: Pick<ButtonProps, 'variant' | 'size' | 'className' | 'loading'> & IncludesIcon,
+  props: Pick<ButtonProps, 'variant' | 'size' | 'className' | 'loading' | 'asSkeleton'> & IncludesIcon,
 ) => string;
 
-const useButtonClassNames: UseButtonClassNames = ({ variant, size, className = '', includesIcon, loading }) => {
+const useButtonClassNames: UseButtonClassNames = ({
+  variant,
+  size,
+  className = '',
+  includesIcon,
+  loading,
+  asSkeleton = false,
+}) => {
   const sizeClassNames: { [key in ButtonSize]: string } = {
     xs: 'p-8',
     s: 'py-12 px-24',
@@ -46,11 +53,11 @@ const useButtonClassNames: UseButtonClassNames = ({ variant, size, className = '
 
   const buttonClassName = useClassNames([
     sizeClassNames[size as ButtonSize],
-    variantClassNames[variant as ButtonVariant] as string,
     { 'rounded-md': variant !== 'ghost' },
     { 'flex gap-10 items-center': includesIcon },
     { 'cursor-not-allowed': !!loading },
     'relative text-14 leading-4 transition overflow-hidden font-medium',
+    asSkeleton ? 'relative' : (variantClassNames[variant as ButtonVariant] as string),
     className,
   ]);
 

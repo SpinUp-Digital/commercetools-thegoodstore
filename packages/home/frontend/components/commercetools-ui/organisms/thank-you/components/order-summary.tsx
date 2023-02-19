@@ -43,14 +43,17 @@ const OrderSummary: FC<OrderSummaryProps> = ({ order, onPrint }) => {
 
   return (
     <div className="grow bg-white px-16 md:px-24 lg:p-36">
-      <Typography
-        as="h4"
-        fontFamily="libre"
-        fontSize={16}
-        className="my-16 leading-[20px] text-primary-black md:mb-0 md:border-b md:border-neutral-400 md:pb-16 md:text-18 lg:m-0 lg:border-b-0 lg:pb-28"
-      >
-        {formatMessage({ id: 'order.details', defaultMessage: 'Order details' })}
-      </Typography>
+      <div className="my-16 md:mb-0 md:border-b md:border-neutral-400 md:pb-16 md:text-18 lg:m-0 lg:border-b-0 lg:pb-28">
+        <Typography
+          as="h4"
+          fontFamily="libre"
+          fontSize={16}
+          asSkeleton={!order.sum}
+          className="w-fit leading-[20px] text-primary-black"
+        >
+          {formatMessage({ id: 'order.details', defaultMessage: 'Order details' })}
+        </Typography>
+      </div>
 
       <OrderSummaryList
         className={useClassNames([{ 'lg:hidden': !!order.lineItems && order.lineItems.length > 1 }])}
@@ -60,9 +63,9 @@ const OrderSummary: FC<OrderSummaryProps> = ({ order, onPrint }) => {
       {order.lineItems && order.lineItems.length > 1 && (
         <Accordion
           closedSectionTitle={formatMessage({ id: 'your.order', defaultMessage: 'Your order' })}
-          className="divide-y divide-neutral-400 lg:pt-0"
+          className="hidden divide-y divide-neutral-400 lg:block lg:pt-0"
           buttonClassName="py-16 border-y border-neutral-400"
-          customCloseButton={<OrdersAccordionButton order={order} />}
+          customClosedButton={<OrdersAccordionButton order={order} />}
         >
           <OrderSummaryList className="max-h-316 divide-y divide-neutral-400 overflow-scroll" order={order} />
         </Accordion>
@@ -71,30 +74,40 @@ const OrderSummary: FC<OrderSummaryProps> = ({ order, onPrint }) => {
       {/* Order summary info */}
       <div className="grid gap-8 border-t border-neutral-400 bg-white py-16 lg:pt-32">
         {summaryInfo.map(({ label, value }, index) => {
-          if (!value || value <= 0) return <></>;
-          return (
-            <div key={index} className="flex items-center justify-between">
-              <Typography fontSize={14} className=" text-primary-black md:text-16">
-                {label}
-              </Typography>
-              <Typography fontSize={14} className="text-primary-black md:text-16">
-                {CurrencyHelpers.formatForCurrency(value, locale)}
-              </Typography>
-            </div>
-          );
+          if ((value?.centAmount && value.centAmount > 0 && !!order.sum) || !order.sum)
+            return (
+              <div key={index} className="flex items-center justify-between">
+                <Typography asSkeleton={!order.sum} fontSize={14} className=" text-primary-black md:text-16">
+                  {label}
+                </Typography>
+                <Typography asSkeleton={!order.sum} fontSize={14} className="text-primary-black md:text-16">
+                  {CurrencyHelpers.formatForCurrency(value ?? 99999, locale)}
+                </Typography>
+              </div>
+            );
         })}
 
         <div className="mt-16 flex items-center justify-between lg:mt-12 lg:border-t lg:border-neutral-400 lg:pt-12">
-          <Typography fontSize={16} className="text-primary-black md:text-18 lg:leading-loose" medium>
+          <Typography
+            asSkeleton={!order.sum}
+            fontSize={16}
+            className="text-primary-black md:text-18 lg:leading-loose"
+            medium
+          >
             {formatCartMessage({ id: 'total', defaultMessage: 'Total' }) + ':'}
           </Typography>
-          <Typography fontSize={16} className="text-primary-black md:text-18 lg:leading-loose" medium>
-            {CurrencyHelpers.formatForCurrency(order?.sum, locale)}
+          <Typography
+            asSkeleton={!order.sum}
+            fontSize={16}
+            className="text-primary-black md:text-18 lg:leading-loose"
+            medium
+          >
+            {CurrencyHelpers.formatForCurrency(order?.sum ?? 999999, locale)}
           </Typography>
         </div>
       </div>
 
-      <PrintButton onPrint={onPrint} className="hidden w-full lg:block" />
+      <PrintButton asSkeleton={!order.sum} onPrint={onPrint} className="hidden w-full lg:block" />
     </div>
   );
 };
