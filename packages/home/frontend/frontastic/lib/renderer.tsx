@@ -1,11 +1,12 @@
 import React from 'react';
+import cx from 'classnames';
 import { InstantSearchServerState } from 'react-instantsearch-hooks';
 import { Category } from 'types/category';
 import { Cell as LayoutElement } from './cell';
 import { highlightClassNames, TasticWrapper } from './component';
 import { Errors } from './errors';
 import { Grid } from './grid';
-import { Cell as LayoutElementType, Tastic, TasticRegistry, PageDataResponse } from './types';
+import { Cell as LayoutElementType, Tastic, TasticRegistry, PageDataResponse, CellConfiguration } from './types';
 
 export function FrontasticRenderer({
   data,
@@ -23,6 +24,12 @@ export function FrontasticRenderer({
   wrapperClassName?: string;
   currentHighlight?: string;
 }) {
+  function deviceVisibility(conf: CellConfiguration) {
+    return `${conf.mobile ? 'block' : 'hidden'} ${conf.tablet ? 'md:block' : 'md:hidden'} ${
+      conf.desktop ? 'lg:block' : 'lg:hidden'
+    }`;
+  }
+
   return (
     <div className="flex min-h-[calc(100vh-138px)] flex-col items-stretch justify-start">
       {process && process.env.NODE_ENV !== 'production' && <Errors />}
@@ -33,7 +40,10 @@ export function FrontasticRenderer({
         {data?.page?.sections?.head?.layoutElements.map((layoutElement: LayoutElementType) => (
           <LayoutElement
             size={layoutElement.configuration.size}
-            className={highlightClassNames(currentHighlight === layoutElement.layoutElementId)}
+            className={cx(
+              highlightClassNames(currentHighlight === layoutElement.layoutElementId),
+              deviceVisibility(layoutElement.configuration),
+            )}
             key={layoutElement.layoutElementId}
           >
             {layoutElement.tastics.map((t) => (
@@ -59,7 +69,10 @@ export function FrontasticRenderer({
         {data?.page?.sections?.main?.layoutElements.map((layoutElement: LayoutElementType) => (
           <LayoutElement
             size={layoutElement.configuration.size}
-            className={highlightClassNames(currentHighlight === layoutElement.layoutElementId)}
+            className={cx(
+              highlightClassNames(currentHighlight === layoutElement.layoutElementId),
+              deviceVisibility(layoutElement.configuration),
+            )}
             key={layoutElement.layoutElementId}
           >
             {layoutElement.tastics.map((t: Tastic) => (
@@ -85,7 +98,10 @@ export function FrontasticRenderer({
         {data?.page?.sections?.footer?.layoutElements.map((layoutElement: LayoutElementType) => (
           <LayoutElement
             size={layoutElement.configuration.size}
-            className={highlightClassNames(currentHighlight === layoutElement.layoutElementId)}
+            className={cx(
+              highlightClassNames(currentHighlight === layoutElement.layoutElementId),
+              deviceVisibility(layoutElement.configuration),
+            )}
             key={layoutElement.layoutElementId}
           >
             {layoutElement.tastics.map((t: Tastic) => (

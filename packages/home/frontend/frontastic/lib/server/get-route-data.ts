@@ -2,7 +2,7 @@ import { IncomingMessage, ServerResponse } from 'http';
 import { Category } from 'types/category';
 import { mapLanguage } from '../../../project.config';
 import { fetchApiHubServerSide } from '../fetch-api-hub';
-import { PageDataResponse, PagePreviewDataResponse, RedirectResponse } from '../types';
+import { PageDataResponse, PagePreviewDataResponse, RedirectResponse, PageFolderStructureResponse } from '../types';
 
 type UrlParams = {
   slug?: Array<string>;
@@ -106,5 +106,31 @@ export const getCategories =
       headers,
     )) as Category[];
 
+    return data;
+  };
+
+export const getStructure =
+  () =>
+  async (
+    path: string,
+    depth: string,
+    locale: string,
+    nextJsReq: IncomingMessage,
+    nextJsRes: ServerResponse,
+  ): Promise<PageFolderStructureResponse> => {
+    const endpoint = `/structure?locale=${locale}`;
+
+    if (path) {
+      endpoint.concat(`&path=${path}`);
+    }
+
+    if (depth) {
+      endpoint.concat(`&depth=${depth}`);
+    }
+
+    const data: PageFolderStructureResponse = (await fetchApiHubServerSide(endpoint, locale, {
+      req: nextJsReq,
+      res: nextJsRes,
+    })) as PageFolderStructureResponse;
     return data;
   };
