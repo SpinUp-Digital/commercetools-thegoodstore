@@ -25,7 +25,7 @@ const Addresses = () => {
         <Typography
           fontSize={14}
           lineHeight="loose"
-          className="mb-28 text-secondary-black md:mb-24 md:text-14 2xl:mb-36 2xl:text-16"
+          className="mb-28 text-secondary-black md:mb-24 md:text-16 2xl:mb-36"
         >
           {formatAccountMessage({
             id: 'address.desc',
@@ -40,7 +40,7 @@ const Addresses = () => {
         </Link>
       </div>
 
-      <div className="mt-24 grid gap-20 md:mt-28 2xl:mt-32">
+      <div className="mt-24 grid gap-20 pb-28 md:mt-28 2xl:mt-32">
         {addresses?.map((address) => (
           <Address key={address.addressId} address={address} />
         ))}
