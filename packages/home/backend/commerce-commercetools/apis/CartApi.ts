@@ -322,11 +322,7 @@ export class CartApi extends BaseApi {
     const orderFromCartDraft: OrderFromCartDraft = {
       id: cart.cartId,
       version: +cart.cartVersion,
-      orderNumber: Guid.newGuid(),
-      cart: {
-        typeId: 'cart',
-        id: cart.cartId,
-      },
+      orderNumber: Guid.newGuid(false, ['','xxxx-xxxx-yxxx']),
     };
 
     if (!isReadyForCheckout(cart)) {
