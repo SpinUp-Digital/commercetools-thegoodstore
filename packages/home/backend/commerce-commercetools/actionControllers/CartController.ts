@@ -8,7 +8,6 @@ import { ShippingMethod } from '@commercetools/frontend-domain-types/cart/Shippi
 import { Payment, PaymentStatuses } from '@commercetools/frontend-domain-types/cart/Payment';
 import { CartApi } from '../apis/CartApi';
 import { getLocale } from '../utils/Request';
-import { EmailApiFactory } from '../utils/EmailApiFactory';
 import { AccountAuthenticationError } from '../errors/AccountAuthenticationError';
 import { CartRedeemDiscountCodeError } from '../errors/CartRedeemDiscountCodeError';
 
@@ -185,6 +184,23 @@ export const checkout: ActionHook = async (request: Request, actionContext: Acti
     },
   };
 
+  return response;
+};
+
+export const getOrder: ActionHook = async (request: Request, actionContext: ActionContext) => {
+  const cartApi = new CartApi(actionContext.frontasticContext, getLocale(request));
+
+  const orderId = JSON.parse(request.body).orderId;
+
+  const order = await cartApi.getOrder(orderId);
+
+  const response: Response = {
+    statusCode: 200,
+    body: JSON.stringify(order),
+    sessionData: {
+      ...request.sessionData,
+    },
+  };
   return response;
 };
 

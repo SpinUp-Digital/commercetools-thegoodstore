@@ -166,6 +166,7 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({
         'wishlist',
         'newsletter',
         'orders',
+        'thank-you',
       ])),
     },
   };

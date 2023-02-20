@@ -1,11 +1,11 @@
 import { useCallback, useMemo } from 'react';
 import { Discount } from '@commercetools/frontend-domain-types/cart/Discount';
-import { Order } from '@commercetools/frontend-domain-types/cart/Order';
 import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
 import useSWR, { mutate } from 'swr';
 import useI18n from 'helpers/hooks/useI18n';
 import { SDK, sdk } from 'sdk';
 import { Cart } from 'types/cart';
+import { Order } from 'types/order';
 import { revalidateOptions } from 'frontastic';
 import { CartDetails, UseCartReturn } from './types';
 
@@ -123,12 +123,19 @@ const useCart = (): UseCartReturn => {
     return (res.isError ? {} : res.data) as Order;
   }, []);
 
+  const getOrder = useCallback(async (orderId: Order['orderId']) => {
+    const res = await sdk.callAction({ actionName: 'cart/getOrder', payload: { orderId: orderId } });
+    mutate('/action/cart/getCart');
+
+    return (res.isError ? {} : res.data) as Order;
+  }, []);
+
   const orderHistory = useCallback(async () => {
     const extensions = SDK.getExtensions();
 
     const res = await extensions.cart.getOrderHistory();
 
-    return res.isError ? ([] as Order[]) : res.data;
+    return res.isError ? ([] as Order[]) : (res.data as Order[]);
   }, []);
 
   const getProjectSettings = useCallback(async () => {
@@ -224,6 +231,7 @@ const useCart = (): UseCartReturn => {
     updateItem,
     shippingMethods,
     orderCart,
+    getOrder,
     orderHistory,
     getProjectSettings,
     redeemDiscountCode,

@@ -1,48 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useFormat } from 'helpers/hooks/useFormat';
-import Image from 'frontastic/lib/image';
+import { Order } from 'types/order';
+import { useCart } from 'frontastic';
+import ThankYouOrderInfo from './components/order-info';
+import OrderSummary from './components/order-summary';
+import ThankYouFooter from './components/thank-you-footer';
+import ThankYouHeader from './components/thank-you-header';
 
 const ThankYou = () => {
-  //i18n messages
-  const { formatMessage: formatCheckoutMessage } = useFormat({ name: 'checkout' });
-
   const router = useRouter();
+  const { orderId } = router.query;
+  const [order, setOrder] = useState<Order>(Object);
+
+  const { getOrder } = useCart();
+
+  const handlePrint = () => {
+    window.print();
+  };
+
+  useEffect(() => {
+    getOrder(orderId as string).then((res) => setOrder(res));
+  }, [getOrder, orderId]);
 
   return (
-    <main className="relative lg:min-h-full">
-      <div className="h-80 overflow-hidden lg:absolute lg:h-full lg:w-1/2 lg:pr-4 xl:pr-12">
-        <Image
-          src="https://tailwindui.com/img/ecommerce-images/confirmation-page-06-hero.jpg"
-          alt="TODO"
-          className="h-full w-full object-cover object-center"
-        />
-      </div>
-
-      <div>
-        <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:py-32 lg:px-8 xl:gap-x-24">
-          <div className="lg:col-start-2">
-            <p className="mt-2 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
-              {formatCheckoutMessage({ id: 'order.thanks', defaultMessage: 'Thanks for ordering' })}
-            </p>
-            <p className="mt-2 text-base text-gray-500">
-              {formatCheckoutMessage({
-                id: 'order.appreciate',
-                defaultMessage:
-                  ' We appreciate your order, we’re currently processing it. So hang tight and we’ll send you confirmation very soon!',
-              })}
-            </p>
-
-            <div className="mt-16 border-t border-gray-200 py-6 text-right">
-              <p className="cursor-pointer text-sm font-medium" onClick={() => router.push('/')}>
-                {formatCheckoutMessage({ id: 'continueShopping', defaultMessage: 'Continue Shopping' })}
-                <span aria-hidden="true"> &rarr;</span>
-              </p>
-            </div>
-          </div>
+    <div className="bg-neutral-200 lg:gap-26 lg:p-50">
+      <div className="items-start bg-white lg:flex lg:gap-24 lg:bg-neutral-200">
+        <div className="bg-white px-16 md:px-24 lg:w-[70%] lg:rounded-md lg:py-36">
+          <ThankYouHeader email={order.email} onPrint={handlePrint} />
+          <ThankYouOrderInfo firstName={order.shippingAddress?.firstName} order={order} />
+          <ThankYouFooter loading={!order.sum} />
         </div>
+
+        <OrderSummary order={order} onPrint={handlePrint} />
       </div>
-    </main>
+    </div>
   );
 };
 

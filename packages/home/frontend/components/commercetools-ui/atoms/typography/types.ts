@@ -23,4 +23,5 @@ export interface TypographyProps extends HTMLAttributes<HTMLHeadingElement | HTM
   underline?: boolean;
   fontFamily?: 'inter' | 'libre';
   align?: HTMLElement['style']['textAlign'];
+  asSkeleton?: boolean;
 }

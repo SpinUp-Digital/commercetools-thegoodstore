@@ -132,16 +132,15 @@ export class CartMapper {
       orderState: commercetoolsOrder.orderState,
       orderId: commercetoolsOrder.orderNumber,
       orderVersion: commercetoolsOrder.version.toString(),
-      // createdAt:
       lineItems: CartMapper.commercetoolsLineItemsToLineItems(commercetoolsOrder.lineItems, locale),
       email: commercetoolsOrder?.customerEmail,
       shippingAddress: CartMapper.commercetoolsAddressToAddress(commercetoolsOrder.shippingAddress),
+      shippingInfo: CartMapper.commercetoolsShippingInfoToShippingInfo(commercetoolsOrder.shippingInfo, locale),
       billingAddress: CartMapper.commercetoolsAddressToAddress(commercetoolsOrder.billingAddress),
-      sum: ProductMapper.commercetoolsMoneyToMoney(commercetoolsOrder.totalPrice),
-      //sum: commercetoolsOrder.totalPrice.centAmount,
-      // payments:
-      // discountCodes:
-      // taxed:
+      sum: ProductMapper.commercetoolsMoneyToMoney(commercetoolsOrder.taxedPrice.totalGross),
+      subtotal: ProductMapper.commercetoolsMoneyToMoney(commercetoolsOrder.taxedPrice.totalNet),
+      taxed: commercetoolsOrder.taxedPrice.taxPortions[0],
+      payments: CartMapper.commercetoolsPaymentInfoToPayments(commercetoolsOrder.paymentInfo, locale),
     } as Order;
   };
 
@@ -255,6 +254,7 @@ export class CartMapper {
       debug: JSON.stringify(commercetoolsPayment),
       paymentStatus: commercetoolsPayment.paymentStatus.interfaceCode ?? null,
       version: commercetoolsPayment.version ?? 0,
+      cardSummary: commercetoolsPayment.custom?.fields?.cardSummary,
     };
   };
 

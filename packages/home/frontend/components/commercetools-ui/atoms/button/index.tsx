@@ -1,4 +1,5 @@
 import { ComponentProps, FC, ReactElement } from 'react';
+import Skeleton from '../skeleton';
 import FeedbackIconLayer from './feedbackIconLayer';
 import useButtonClassNames from './useButtonClassNames';
 
@@ -13,6 +14,7 @@ export interface ButtonProps extends ComponentProps<'button'> {
   icon?: ReactElement;
   loading?: boolean;
   added?: boolean;
+  asSkeleton?: boolean;
 }
 
 const Button: FC<ButtonProps> = ({
@@ -22,6 +24,7 @@ const Button: FC<ButtonProps> = ({
   children,
   className,
   disabled,
+  asSkeleton = false,
   variant = 'primary',
   iconPosition = 'middle',
   size = children ? 's' : 'icon',
@@ -33,6 +36,7 @@ const Button: FC<ButtonProps> = ({
     className,
     includesIcon: !!icon && !!children,
     loading,
+    asSkeleton,
   });
 
   return (
@@ -41,6 +45,7 @@ const Button: FC<ButtonProps> = ({
       {icon && iconPosition !== 'right' && icon}
       {children}
       {icon && iconPosition == 'right' && icon}
+      {asSkeleton && <Skeleton />}
     </button>
   );
 };
