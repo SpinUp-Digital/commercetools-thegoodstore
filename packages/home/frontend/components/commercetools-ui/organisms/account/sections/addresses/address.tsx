@@ -26,7 +26,7 @@ const Address: React.FC<AddressProps> = ({ address }) => {
 
   const addressInfoTypographyProps: TypographyProps = {
     fontSize: 14,
-    lineHeight: 'loose',
+    lineHeight: 'tight',
     className: 'text-secondary-black',
   };
 
@@ -52,20 +52,24 @@ const Address: React.FC<AddressProps> = ({ address }) => {
         <Radio className="hidden md:block" name={label} checked={checked ?? false} />
 
         <div className="grid">
-          <div className="flex gap-5">
-            <Typography className="mb-24 md:mb-4 md:text-16" medium fontSize={14}>
+          <div className="mb-24 flex gap-5 md:mb-4">
+            <Typography className="md:text-16" medium fontSize={14}>
               {label}
             </Typography>
-            <Typography fontSize={14} className="text-secondary-black md:hidden">
-              {'- ' + formatMessage({ id: 'default', defaultMessage: 'Default' })}
-            </Typography>
+            {checked && (
+              <Typography fontSize={14} className="text-secondary-black md:hidden">
+                {'- ' + formatMessage({ id: 'default', defaultMessage: 'Default' })}
+              </Typography>
+            )}
           </div>
 
-          {addressInfoTypographyElements.map((element) => (
-            <Typography key={element} {...addressInfoTypographyProps}>
-              {element}
-            </Typography>
-          ))}
+          <div className="grid gap-12">
+            {addressInfoTypographyElements.map((element) => (
+              <Typography key={element} {...addressInfoTypographyProps}>
+                {element}
+              </Typography>
+            ))}
+          </div>
         </div>
       </div>
 
