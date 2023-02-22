@@ -3,7 +3,7 @@ import Skeleton from '../skeleton';
 import FeedbackIconLayer from './feedbackIconLayer';
 import useButtonClassNames from './useButtonClassNames';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'underlined' | 'ghost';
+export type ButtonVariant = 'primary' | 'secondary' | 'warning' | 'underlined' | 'ghost';
 export type ButtonSize = 'xs' | 's' | 'm' | 'l' | 'full' | 'icon';
 export type ButtonIconPosition = 'left' | 'middle' | 'right';
 

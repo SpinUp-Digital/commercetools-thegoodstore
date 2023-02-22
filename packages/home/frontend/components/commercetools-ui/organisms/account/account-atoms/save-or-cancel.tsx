@@ -31,7 +31,7 @@ const SaveOrCancel: FC<SaveOrCancelProps> = ({ variant = 'save', loading, classN
           {formatMessage({ id: 'save', defaultMessage: 'Save' })}
         </Button>
       ) : (
-        <Button loading={loading} type="submit" className="h-40 w-112 bg-accent-red px-0 text-14" onClick={onSave}>
+        <Button loading={loading} variant="warning" type="submit" className="h-40 w-112 px-0 text-14" onClick={onSave}>
           {formatMessage({ id: 'delete', defaultMessage: 'Delete' })}
         </Button>
       )}
