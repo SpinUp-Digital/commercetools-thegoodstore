@@ -127,7 +127,7 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
 
   const contentClassNames = useClassNames([
     hash != '#orders' ? 'px-16' : '',
-    'w-full flex flex-col lg:items-start md:border-l border-neutral-400 md:px-24 lg:px-44 lg:py-48 md:py-24',
+    'w-full flex flex-col lg:items-start md:border-l border-neutral-400 md:px-24 lg:px-44 lg:pt-48 md:pt-24',
   ]);
 
   const contentTitleClassNames = useClassNames([hash === '#orders' ? 'px-16' : '', 'block pb-12 pt-16 md:hidden']);
@@ -173,7 +173,7 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
         </div>
       </div>
       <div className={contentClassNames}>
-        <div className="w-full">
+        <div className="w-full pb-48">
           {contentTitle && (
             <div className={contentTitleClassNames}>
               <Typography as="h2" fontFamily="libre" className="text-18 text-primary-black">
