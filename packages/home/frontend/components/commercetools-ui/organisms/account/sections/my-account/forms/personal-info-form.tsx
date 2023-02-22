@@ -35,10 +35,9 @@ const PersonalInfoForm = () => {
     setLoading(true);
     update(data)
       .then(() => notifyDataUpdated())
-      .catch(() => notifyWentWrong())
-      .finally(() => setLoading(false));
-
-    discardForm();
+      .then(() => discardForm())
+      .then(() => setLoading(false))
+      .catch(() => notifyWentWrong());
   };
 
   const inputFields: Array<InputProps> = [

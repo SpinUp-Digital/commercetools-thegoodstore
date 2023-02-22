@@ -40,6 +40,14 @@ const useButtonClassNames: UseButtonClassNames = ({
     'disabled:text-neutral-100 disabled:bg-neutral-400',
   ]);
 
+  const warningClassName = useClassNames([
+    'bg-red-500 text-neutral-100 outline-offset-0',
+    'hover:bg-red-600',
+    'active:shadow-button active:bg-red-500',
+    'focus-visible:outline focus-visible:bg-red-700 focus-visible:outline-gray-700 focus-visible:border-red-700 focus-visible:border focus-visible:outline-offset-[3px]',
+    'disabled:bg-neutral-400 disabled:text-neutral-100',
+  ]);
+
   const underlineClassName = 'pb-2 text-gray-700 hover:underline disabled:text-neutral-400';
 
   const ghostClassName = 'disabled:text-neutral-400';
@@ -49,6 +57,7 @@ const useButtonClassNames: UseButtonClassNames = ({
     secondary: secondaryClassName,
     underlined: underlineClassName,
     ghost: ghostClassName,
+    warning: warningClassName,
   };
 
   const buttonClassName = useClassNames([
