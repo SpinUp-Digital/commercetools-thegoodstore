@@ -130,7 +130,10 @@ const AddToCartOverlayProvider: React.FC = ({ children }) => {
             title={formatProductMessage({ id: 'bought.together', defaultMessage: 'Frequently bought together' })}
             titleVariant="sm"
             disableProductQuickView
+            disableProductWishlistButton
+            disableProductVariants
             onProductClick={hide}
+            classNames={{ title: 'text-center' }}
             breakpoints={{
               [tablet]: {
                 slidesPerView: 3.4,

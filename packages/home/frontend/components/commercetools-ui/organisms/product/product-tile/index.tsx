@@ -18,9 +18,18 @@ interface ProductTileProps {
   onClick?: () => void;
   isSearchResult?: boolean;
   disableQuickView?: boolean;
+  disableWishlistButton?: boolean;
+  disableVariants?: boolean;
 }
 
-const ProductTile: FC<ProductTileProps> = ({ product, onClick, isSearchResult = false, disableQuickView = false }) => {
+const ProductTile: FC<ProductTileProps> = ({
+  product,
+  onClick,
+  isSearchResult = false,
+  disableQuickView = false,
+  disableWishlistButton = false,
+  disableVariants = false,
+}) => {
   const [isDesktopSize] = useMediaQuery(desktop);
 
   const { ref } = useTrack({ product });
@@ -100,7 +109,7 @@ const ProductTile: FC<ProductTileProps> = ({ product, onClick, isSearchResult = 
                 className="absolute right-0 top-0 z-10 flex h-[32px] w-[32px] cursor-pointer items-center justify-center md:h-[48px] md:w-[48px]"
                 onClick={(e) => e.preventDefault()}
               >
-                {productToWishlistLineItem && (
+                {!disableWishlistButton && productToWishlistLineItem && (
                   <WishlistButton
                     lineItem={productToWishlistLineItem}
                     className="h-[16px] w-[16px] md:h-[20px] md:w-[20px] lg:h-[24px] lg:w-[24px]"
@@ -133,22 +142,24 @@ const ProductTile: FC<ProductTileProps> = ({ product, onClick, isSearchResult = 
             <div className="mt-4 block max-w-[80%] overflow-hidden text-ellipsis whitespace-pre text-12 uppercase leading-loose md:mt-12 md:text-14">
               {product?.name}
             </div>
-            <div className="my-8 flex items-center gap-4 md:my-12">
-              {product?.variants.map((variant, index) => (
-                <span
-                  key={index}
-                  className={`block cursor-pointer rounded-full border p-[6px] ${
-                    variant.sku !== selectedVariant.sku ? 'border-neutral-300' : 'border-neutral-500'
-                  }`}
-                  style={{ backgroundColor: variant.attributes?.color || variant.attributes?.finish }}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setSelectedVariant(variant);
-                  }}
-                ></span>
-              ))}
-            </div>
-            <div>
+            {!disableVariants && (
+              <div className="mt-8 flex items-center gap-4 md:mt-12">
+                {product?.variants.map((variant, index) => (
+                  <span
+                    key={index}
+                    className={`block cursor-pointer rounded-full border p-[6px] ${
+                      variant.sku !== selectedVariant.sku ? 'border-neutral-300' : 'border-neutral-500'
+                    }`}
+                    style={{ backgroundColor: variant.attributes?.color || variant.attributes?.finish }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setSelectedVariant(variant);
+                    }}
+                  ></span>
+                ))}
+              </div>
+            )}
+            <div className="mt-8 md:mt-12">
               <Prices
                 price={variantWithDiscount?.price ?? selectedVariant?.price}
                 discountedPrice={variantWithDiscount?.discountedPrice}

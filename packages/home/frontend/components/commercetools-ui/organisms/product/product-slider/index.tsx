@@ -24,7 +24,12 @@ export interface ProductSliderProps extends Partial<SwiperOptions> {
   clearDefaultWrapperStyles?: boolean;
   slidesPerView?: number;
   disableProductQuickView?: boolean;
+  disableProductWishlistButton?: boolean;
+  disableProductVariants?: boolean;
   onProductClick?: (product: Product) => void;
+  classNames?: {
+    title?: string;
+  };
 }
 
 const ProductSlider: FC<ProductSliderProps> = ({
@@ -39,7 +44,10 @@ const ProductSlider: FC<ProductSliderProps> = ({
   wrapperVariant = 'left-padding-only',
   clearDefaultWrapperStyles = false,
   disableProductQuickView = false,
+  disableProductWishlistButton = false,
+  disableProductVariants = false,
   breakpoints = {},
+  classNames = {},
   ...props
 }) => {
   const { isTouchDevice } = useTouchDevice();
@@ -56,7 +64,12 @@ const ProductSlider: FC<ProductSliderProps> = ({
   return (
     <Wrapper background="neutral-200" variant={wrapperVariant} clearDefaultStyles={clearDefaultWrapperStyles}>
       <div>
-        <Typography className={`mb-12 ${titleClassName}`} fontSize={20} as="h3" fontFamily="libre">
+        <Typography
+          className={`mb-12 ${titleClassName} ${classNames.title ?? ''}`}
+          fontSize={20}
+          as="h3"
+          fontFamily="libre"
+        >
           {title}
         </Typography>
         {(subline || ctaLink) && (
@@ -109,6 +122,8 @@ const ProductSlider: FC<ProductSliderProps> = ({
               <Tile
                 key={product.productId}
                 disableQuickView={disableProductQuickView}
+                disableWishlistButton={disableProductWishlistButton}
+                disableVariants={disableProductVariants}
                 product={product}
                 onClick={() => {
                   trackClick(product, index + 1);
