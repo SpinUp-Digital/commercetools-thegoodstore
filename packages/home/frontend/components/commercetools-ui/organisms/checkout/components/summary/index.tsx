@@ -65,7 +65,6 @@ const Summary: React.FC<Props> = ({ isFinalStep, onPurchase }) => {
         closedSectionTitle={formatCheckoutMessage({ id: 'discount.apply', defaultMessage: 'Apply a discount' })}
         buttonClassName="text-secondary-black border-y border-neutral-400 py-16 mt-16 md:mt-24 lg:mt-28"
         buttonWrapperClassName="px-16 md:px-24 lg:px-0"
-        panelClassName="px-16 md:px-24"
         iconClassName="w-24"
       >
         <DiscountForm />

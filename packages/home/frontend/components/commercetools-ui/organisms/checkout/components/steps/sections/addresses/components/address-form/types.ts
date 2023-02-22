@@ -5,6 +5,7 @@ export interface Fields {
   type: React.ComponentProps<'input'>['type'];
   className: string;
   required?: boolean;
+  validate?: (value: string) => boolean;
   render?: () => JSX.Element;
 }
 
