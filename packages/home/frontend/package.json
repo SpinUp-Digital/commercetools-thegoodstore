@@ -21,9 +21,9 @@
   },
   "dependencies": {
     "@adyen/adyen-web": "^5.33.0",
-    "@commercetools/frontend-composable-commerce": "^1.0.3",
+    "@commercetools/frontend-composable-commerce": "^1.1.0",
     "@commercetools/frontend-domain-types": "^1.0.3",
-    "@commercetools/frontend-sdk": "^1.0.4",
+    "@commercetools/frontend-sdk": "^1.1.2",
     "@emotion/react": "^11.9.0",
     "@headlessui/react": "^1.4.3",
     "@heroicons/react": "^2.0.13",

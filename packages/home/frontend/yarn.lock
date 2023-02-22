@@ -1848,20 +1848,20 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@commercetools/frontend-composable-commerce@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@commercetools/frontend-composable-commerce/-/frontend-composable-commerce-1.0.3.tgz#4199aec77a16c793e22fc7750bd79ab735878ea3"
-  integrity sha512-qNhjEMcFEu6AUpdmkvOyOGtaStJbceDg9ZD4IAdeR9uGsjTAVuENptptfZA7WyUcRpISgKCaAODOC/LMcnwk+A==
+"@commercetools/frontend-composable-commerce@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@commercetools/frontend-composable-commerce/-/frontend-composable-commerce-1.1.0.tgz#c73773dda48451e1cd62f1e42c05c4d8a81ab1db"
+  integrity sha512-pWu/hPXsq8l4szSJYMZJ8qrqlPNhYnfKBIrNe3+Z907YbZx9Xhwcl7/NlUbrZ9nGwQQZ8MQ/zQGzhIB50yYW6g==
 
 "@commercetools/frontend-domain-types@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@commercetools/frontend-domain-types/-/frontend-domain-types-1.0.3.tgz#8eae385ad672e8acdffb65c63b6a2af110567327"
   integrity sha512-ENsvOvUyY6jdjgdUWn33Jvig+hcLxFaZN/6FNrnA9rz4nGClLhzJE9DT/NlOBryqSLxuw00FJC8NGRnnNzZ8Dg==
 
-"@commercetools/frontend-sdk@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@commercetools/frontend-sdk/-/frontend-sdk-1.0.4.tgz#85751eb901591f67693f4cb5249e8333c157911b"
-  integrity sha512-3Nao7TgWgUo7rWJqox588559Uv0THO3srnHKyTqCwCSAdET5KYSTXBuW1pM1nrm/sPvbS1BynYTo2x9a1ITfPQ==
+"@commercetools/frontend-sdk@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@commercetools/frontend-sdk/-/frontend-sdk-1.1.2.tgz#5e69434e3a1172409fa519959e00a50a736d3de4"
+  integrity sha512-ZEs2QIKSNqXll0uePLpXt7wfzhx4woAbtePnY+RWIrH4znJmzMiLqmsQ4ACdypbV1Lioy9JljpYEKA73yF5QCA==
   dependencies:
     js-cookie "3.0.1"
 
