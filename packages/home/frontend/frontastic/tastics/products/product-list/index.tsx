@@ -34,6 +34,7 @@ export type Props = Tastic<
 };
 
 const ProductListWrapped: React.FC<Props> = ({ data, categories }) => {
+  console.log(data);
   const { query } = useRouter();
 
   const { updatePricesConfiguration, updateFacetsConfiguration, updateUiState, categoryId, searchQuery } =
