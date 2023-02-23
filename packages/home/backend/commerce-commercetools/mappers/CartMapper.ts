@@ -138,10 +138,11 @@ export class CartMapper {
       shippingAddress: CartMapper.commercetoolsAddressToAddress(commercetoolsOrder.shippingAddress),
       shippingInfo: CartMapper.commercetoolsShippingInfoToShippingInfo(commercetoolsOrder.shippingInfo, locale),
       billingAddress: CartMapper.commercetoolsAddressToAddress(commercetoolsOrder.billingAddress),
-      sum: ProductMapper.commercetoolsMoneyToMoney(commercetoolsOrder.taxedPrice.totalGross),
+      sum: ProductMapper.commercetoolsMoneyToMoney(commercetoolsOrder.totalPrice),
       subtotal: ProductMapper.commercetoolsMoneyToMoney(commercetoolsOrder.taxedPrice.totalNet),
       taxed: commercetoolsOrder.taxedPrice.taxPortions[0],
       payments: CartMapper.commercetoolsPaymentInfoToPayments(commercetoolsOrder.paymentInfo, locale),
+      shipmentState: commercetoolsOrder.shipmentState ?? 'Pending',
     } as Order;
   };
 
