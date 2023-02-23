@@ -6,11 +6,10 @@ const useScrollBlock = () => {
   const [isBlocked, setIsBlocked] = useState<boolean>(false);
   const { isTouchDevice } = useTouchDevice();
 
-  const header = document.querySelector('header') as HTMLDivElement;
-
   const blockScrolling = () => {
-    const header = document.querySelector('header') as HTMLDivElement;
     const scrollbarWidth = getScrollbarWidth();
+
+    const header = document.querySelector('#header-container') as HTMLDivElement;
 
     if (!isTouchDevice) {
       document.body.style.paddingRight = `${scrollbarWidth}px`;
@@ -21,6 +20,8 @@ const useScrollBlock = () => {
   };
 
   const allowScrolling = () => {
+    const header = document.querySelector('#header-container') as HTMLDivElement;
+
     document.body.style.paddingRight = '0px';
     header.style.paddingRight = '0px';
     document.body.style.overflowY = 'auto';
