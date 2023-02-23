@@ -11,12 +11,13 @@ const useProduct = (): UseProductReturn => {
   const extensions = SDK.getExtensions();
 
   const categoriesResults = useSWR(
-    '/action/product/queryCategories?limit=10',
-    extensions.product.queryCategories,
+    '/action/product/queryCategories',
+    () => extensions.product.queryCategories({ query: { limit: 99 } }),
     revalidateOptions,
   );
 
   const categories = (categoriesResults.data?.isError ? [] : (categoriesResults.data?.data?.items as Category[])) ?? [];
+
   const query = useCallback(async (productQuery: ProductQuery) => {
     /* To Do: Use SDK instead of current workaround */
 

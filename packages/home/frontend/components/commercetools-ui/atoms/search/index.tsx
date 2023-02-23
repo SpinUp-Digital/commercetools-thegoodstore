@@ -70,10 +70,10 @@ const Search: React.FC<Props> = ({ categories }) => {
   const onSubmit = useCallback(
     (e: React.FormEvent) => {
       e.preventDefault();
-      router.push(`/search?q=${query}`);
+      router.push(`/search?q=${value}`);
       cleanUp();
     },
-    [query, router, cleanUp],
+    [value, router, cleanUp],
   );
 
   useEffect(() => {
