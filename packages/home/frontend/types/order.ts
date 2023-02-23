@@ -4,6 +4,8 @@ import { ShippingInfo as ShippingInfoType } from '@commercetools/frontend-domain
 import { Tax as TaxType } from '@commercetools/frontend-domain-types/cart/Tax';
 import { Money } from '@commercetools/frontend-domain-types/product/Money';
 
+export type ShipmentState = 'Backorder' | 'Delayed' | 'Partial' | 'Pending' | 'Ready' | 'Shipped';
+
 export interface Tax extends TaxType {
   amount: Required<Money>;
 }
@@ -21,4 +23,5 @@ export interface Order extends OrderType {
   subtotal: Money;
   shippingInfo: ShippingInfo;
   payments?: Array<Payment>;
+  shipmentState: ShipmentState;
 }

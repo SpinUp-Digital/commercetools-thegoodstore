@@ -1,29 +1,26 @@
 import React, { FC } from 'react';
-import { useRouter } from 'next/router';
-import { Money } from '@commercetools/frontend-domain-types/product/Money';
+import { Order } from '@commercetools/frontend-domain-types/cart/Order';
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
 import toast from 'react-hot-toast';
 import Button from 'components/commercetools-ui/atoms/button';
+import Link from 'components/commercetools-ui/atoms/link';
 import Typography from 'components/commercetools-ui/atoms/typography';
-import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
-export interface OrderItem {
-  id: string;
-  date: string;
-  total: Money;
-  status: string;
-}
+import useOrderTransactions from './helper-hooks/useOrderTransaction';
 
 interface Props {
-  order: OrderItem;
+  order?: Order;
 }
 
 const OrderItem: FC<Props> = ({ order }) => {
-  const router = useRouter();
   const { formatMessage: formatOrdersMessage } = useFormat({ name: 'orders' });
+  const { total: getTotal } = useOrderTransactions(order);
+
   const handleReturnClick = () => {
     toast.success(formatOrdersMessage({ id: 'return.success', defaultMessage: 'Return created' }));
   };
+
+  const orderDate = order?.createdAt && new Date(order?.createdAt).toISOString().split('T')[0];
 
   return (
     <div className="mb-24 w-full rounded-md border-[1.5px] border-neutral-300">
@@ -34,7 +31,7 @@ const OrderItem: FC<Props> = ({ order }) => {
               {formatOrdersMessage({ id: 'order.id', defaultMessage: 'Order ID: ' })}
             </Typography>
             <Typography fontSize={14} className="pl-5 text-primary-black lg:text-16">
-              {order.id}
+              {order?.orderId?.replaceAll('-', ' ')}
             </Typography>
           </div>
 
@@ -43,7 +40,7 @@ const OrderItem: FC<Props> = ({ order }) => {
               {formatOrdersMessage({ id: 'order.date', defaultMessage: 'Date:' })}
             </Typography>
             <Typography fontSize={14} className="pl-5 text-primary-black md:pl-0 md:text-secondary-black">
-              {order.date}
+              {orderDate}
             </Typography>
           </div>
         </div>
@@ -53,7 +50,7 @@ const OrderItem: FC<Props> = ({ order }) => {
             {formatOrdersMessage({ id: 'total', defaultMessage: 'Total' })}
           </Typography>
           <Typography fontSize={14} className="text-secondary-black">
-            {CurrencyHelpers.formatForCurrency(order.total as number, router.locale)}
+            {getTotal}
           </Typography>
         </div>
 
@@ -62,7 +59,7 @@ const OrderItem: FC<Props> = ({ order }) => {
             {formatOrdersMessage({ id: 'status', defaultMessage: 'Status' })}
           </Typography>
           <Typography fontSize={14} className="text-secondary-black">
-            {formatOrdersMessage({ id: order.status, defaultMessage: 'All orders' })}
+            {formatOrdersMessage({ id: order?.orderState as string, defaultMessage: order?.orderState })}
           </Typography>
         </div>
         <div className="hidden justify-end lg:flex">
@@ -73,18 +70,20 @@ const OrderItem: FC<Props> = ({ order }) => {
           </Button>
         </div>
       </div>
-      <div className="flex w-full cursor-pointer items-center justify-between px-12 py-16 md:px-16 lg:py-20 lg:px-24">
-        <div className="flex">
-          <Typography fontSize={14} className="text-primary-black">
-            4
-          </Typography>
-          <Typography fontSize={14} className="pl-7 text-primary-black">
-            {formatOrdersMessage({ id: 'articles', defaultMessage: 'articles' })}
-          </Typography>
-        </div>
+      <Link link={`/account#order/${order?.orderId}`}>
+        <div className="flex w-full cursor-pointer items-center justify-between px-12 py-16 md:px-16 lg:py-20 lg:px-24">
+          <div className="flex">
+            <Typography fontSize={14} className="text-primary-black">
+              {order?.lineItems?.length.toString()}
+            </Typography>
+            <Typography fontSize={14} className="pl-7 text-primary-black">
+              {formatOrdersMessage({ id: 'articles', defaultMessage: 'articles' })}
+            </Typography>
+          </div>
 
-        <ChevronRightIcon strokeWidth={1.5} className="w-24 text-secondary-black" />
-      </div>
+          <ChevronRightIcon strokeWidth={1.5} className="w-24 text-secondary-black" />
+        </div>
+      </Link>
     </div>
   );
 };
