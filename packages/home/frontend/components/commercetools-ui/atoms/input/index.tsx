@@ -102,8 +102,13 @@ const Input: FC<InputProps> = ({
     'h-40 focus:border-gray-500 focus:ring-0 w-full rounded-sm border border-neutral-500 px-12 text-primary-black placeholder:text-14 placeholder:leading-normal placeholder:text-secondary-black focus:outline-none disabled:cursor-not-allowed disabled:bg-neutral-400',
     bgClassName,
     isInActiveState && label && labelPosition == 'inline' ? 'pt-[20px] pb-[4px]' : 'py-10',
-    { 'border-red-500': (!!props.error && isInActiveState) || isErrored },
-    { 'border-green-500': (!!props.isValid && isInActiveState) || isValid },
+    {
+      'border-red-500 focus:border-red-500':
+        (!!props.error && isInActiveState) ||
+        isErrored ||
+        (typeof props.isValid !== 'undefined' && !props.isValid && isTouched),
+    },
+    { 'border-green-500 focus:border-green-500': (!!props.isValid && isInActiveState) || isValid },
     className,
   ]);
 

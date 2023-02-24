@@ -20,7 +20,7 @@ const CreateAddressModal = () => {
 
   const { addressToAccountAddress } = useMappers();
 
-  const { addShippingAddress, addBillingAddress } = useAccount();
+  const { addShippingAddress, addBillingAddress, loggedIn } = useAccount();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -133,6 +133,8 @@ const CreateAddressModal = () => {
     },
     [formatMessage, formatCheckoutMessage],
   );
+
+  if (!loggedIn) return <></>;
 
   return (
     <>

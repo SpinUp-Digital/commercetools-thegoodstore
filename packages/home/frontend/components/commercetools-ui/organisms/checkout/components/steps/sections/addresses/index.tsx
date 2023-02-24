@@ -6,6 +6,7 @@ import Checkbox from 'components/commercetools-ui/atoms/checkbox';
 import Info from 'components/commercetools-ui/atoms/info';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useProcessing from 'helpers/hooks/useProcessing';
+import useValidate from 'helpers/hooks/useValidate';
 import { useAccount, useCart } from 'frontastic';
 import { CartDetails } from 'frontastic/hooks/useCart/types';
 import AccountAddresses from './components/account-addresses';
@@ -28,6 +29,8 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
   const { updateCart } = useCart();
 
   const { addressToAccountAddress } = useMappers();
+
+  const { validateEmail } = useValidate();
 
   const initialAddressData = {
     name: '',
@@ -151,6 +154,9 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
           required: true,
           type: 'email',
           className: 'col-span-3',
+          validate(value) {
+            return validateEmail(value);
+          },
         },
         {
           name: 'phone',
@@ -208,7 +214,7 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
         },
       ] as Fields[];
     },
-    [formatMessage, formatCheckoutMessage],
+    [formatMessage, formatCheckoutMessage, validateEmail],
   );
 
   return (

@@ -20,6 +20,7 @@ import DeleteAccountForm from './sections/my-account/forms/delete-account-form';
 import PersonalInfoForm from './sections/my-account/forms/personal-info-form';
 import SubscribeForm from './sections/my-account/forms/subscribe-form';
 import Orders from './sections/orders';
+import OrderPage from './sections/orders/order-page';
 import PaymentMethods from './sections/payment-methods';
 
 export interface AccountTab {
@@ -58,7 +59,6 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
   const [hash, id] = useHash();
   const { country } = useI18n();
-
   const isLoading = useMemo(() => !!router.query.verify, [router]);
 
   //update associated cart data using account data
@@ -101,6 +101,7 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
     '#change-password': <ChangePasswordForm />,
     '#delete-account': <DeleteAccountForm />,
     '#orders': <Orders />,
+    '#order': <OrderPage orderId={id} />,
     '#payment': <PaymentMethods />,
     '#addresses': <Addresses />,
     '#support': (
@@ -126,16 +127,16 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
   const Content = mapping[hash as keyof typeof mapping];
 
   const contentClassNames = useClassNames([
-    hash != '#orders' ? 'px-16' : '',
-    'w-full flex flex-col lg:items-start md:border-l border-neutral-400 md:px-24 lg:px-44 lg:py-48 md:py-24',
+    contentTitle && hash != '#orders' ? 'px-16' : 'md:px-0',
+    'w-full flex flex-col lg:items-start md:border-l border-neutral-400 lg:px-44 lg:py-48 md:py-24',
   ]);
 
   const contentTitleClassNames = useClassNames([hash === '#orders' ? 'px-16' : '', 'block pb-12 pt-16 md:hidden']);
 
   return (
     <div className="relative flex bg-neutral-100">
-      <div className="sticky top-[172px] w-0 self-start md:h-[calc(100vh-172px)] md:w-[25%]">
-        <div className="hidden h-full w-full flex-col justify-between pt-24 md:flex 2xl:pt-48">
+      <div className="sticky top-[175px] w-0 self-start md:h-[calc(100vh-200px)] md:w-[25%]">
+        <div className="hidden h-full w-full flex-col justify-between pt-24 md:flex lg:pt-44">
           <div className="grid gap-36 px-28 lg:px-56">
             {tabs.map((tab) => (
               <Link
@@ -173,7 +174,7 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
         </div>
       </div>
       <div className={contentClassNames}>
-        <div className="w-full">
+        <div className="w-full pb-48">
           {contentTitle && (
             <div className={contentTitleClassNames}>
               <Typography as="h2" fontFamily="libre" className="text-18 text-primary-black">
@@ -182,7 +183,7 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
             </div>
           )}
 
-          <AccountTabsMobile contentTitle={contentTitle} hash={hash} tabs={tabs} />
+          {contentTitle && <AccountTabsMobile contentTitle={contentTitle} hash={hash} tabs={tabs} />}
           {Content && Content}
         </div>
       </div>

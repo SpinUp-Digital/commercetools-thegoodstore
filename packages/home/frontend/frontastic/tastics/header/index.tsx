@@ -39,7 +39,7 @@ const HeaderTastic = ({ data, categories }: Props) => {
 
   return (
     <MarketProvider>
-      <div className="fixed top-0 z-50 w-full" ref={headerRef}>
+      <div id="header-container" className="fixed top-0 z-50 w-full" ref={headerRef}>
         {announcementBarData && <AnnouncementBar {...announcementBarData} />}
         <Header
           categories={categories}

@@ -35,7 +35,7 @@ const AddressForm: React.FC<Props> = ({
     <form onSubmit={handleSubmit}>
       <div className={`grid grid-cols-3 gap-12 ${containerClassName}`}>
         {fields({ enableAddress2, onEnableAddress2 }).map(
-          ({ name, label, labelDesc, type, required, className, render }) => (
+          ({ name, label, labelDesc, type, required, className, render, validate }) => (
             <React.Fragment key={name}>
               <div className={className}>
                 <Input
@@ -46,7 +46,12 @@ const AddressForm: React.FC<Props> = ({
                   required={required}
                   value={address[name as keyof Address]}
                   labelPosition="top"
+                  isValid={
+                    (!required || (required && !!address[name as keyof Address])) &&
+                    (validate ? validate(address[name as keyof Address] as string) : true)
+                  }
                   onChange={onChange}
+                  hideCheckIcon
                 />
                 {render?.()}
               </div>

@@ -17,6 +17,7 @@ export interface AccordionProps {
   collapsedLabel?: string;
   customOpenButton?: ReactNode;
   customClosedButton?: ReactNode;
+  onClick?: () => void;
 }
 
 const Accordion: React.FC<AccordionProps> = ({
@@ -30,13 +31,14 @@ const Accordion: React.FC<AccordionProps> = ({
   buttonWrapperClassName = '',
   panelClassName = '',
   collapsedLabel,
-  customOpenButton,
   customClosedButton,
+  customOpenButton = customClosedButton,
+  onClick,
 }) => {
   const panelClassNames = useClassNames([panelClassName]);
 
   return (
-    <div className={className}>
+    <div className={className} onClick={onClick}>
       <Disclosure>
         {({ open }) => (
           <>
@@ -52,7 +54,9 @@ const Accordion: React.FC<AccordionProps> = ({
                 buttonWrapperClassName={buttonWrapperClassName}
               />
             ) : (
-              <Disclosure.Button>{open ? customOpenButton : customClosedButton}</Disclosure.Button>
+              <Disclosure.Button className={buttonClassName}>
+                {open ? customOpenButton : customClosedButton}
+              </Disclosure.Button>
             )}
 
             <Transition

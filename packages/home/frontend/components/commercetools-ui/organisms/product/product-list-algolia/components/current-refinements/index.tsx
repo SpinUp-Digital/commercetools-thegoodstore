@@ -7,6 +7,7 @@ import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useI18n from 'helpers/hooks/useI18n';
 import { useProductList } from '../../context';
+import useRefinementHelpers from '../../hooks/useRefinementHelpers';
 
 const CurrentRefinements = () => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
@@ -18,6 +19,8 @@ const CurrentRefinements = () => {
   const { currency } = useI18n();
 
   const { items } = useCurrentRefinements();
+
+  const { resolveLabel } = useRefinementHelpers();
 
   const nonNumericRefinements = useMemo(
     () => items.map((item) => item.refinements.filter((refinement) => refinement.type !== 'numeric')).flat(),
@@ -62,10 +65,12 @@ const CurrentRefinements = () => {
     <div className="flex flex-wrap items-center justify-start gap-14 pt-16">
       {[...numericRefinements, ...nonNumericRefinements].map((refinement) => (
         <div
-          key={refinement.label}
+          key={refinement.value}
           className="flex cursor-default items-center justify-center gap-8 rounded-md border border-neutral-500 bg-white px-8 py-6 transition hover:border-primary-black"
         >
-          <span className="text-14 leading-[20px] text-secondary-black">{refinement.label}</span>
+          <span className="text-14 leading-[20px] text-secondary-black">
+            {resolveLabel(refinement.attribute, refinement.label)}
+          </span>
           <CloseIcon
             className="w-20 cursor-pointer fill-secondary-black stroke-0"
             onClick={() => removeRefinement(refinement)}

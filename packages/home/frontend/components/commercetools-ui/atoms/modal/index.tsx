@@ -37,7 +37,7 @@ const Modal: FC<ReactModalProps> = ({ children, style, ...props }) => {
   }, [props.isOpen, blockScroll]);*/
 
   return (
-    <ReactModal {...props} style={modalStyle}>
+    <ReactModal {...props} ariaHideApp={false} style={modalStyle}>
       {children}
     </ReactModal>
   );

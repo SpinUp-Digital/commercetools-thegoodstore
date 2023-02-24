@@ -98,22 +98,6 @@ export const shippingInfoMock: ShippingInfo = {
   discountedPrice: moneyMock,
 };
 
-const orderMock: Order = {
-  cartId: '4981a058-d32d-4120-bac9-c7b2ff862e36',
-  orderId: 'a480b136-db0c-40d7-111d-d4a1f98fcfba',
-  orderState: 'Open',
-  orderVersion: '1',
-  billingAddress: billingAddress,
-  shippingAddress: shippingAddress,
-  email: 'ahmed.amir@frontastic.cloud',
-  lineItems: lineItemsOrderHistory,
-  shippingInfo: shippingInfoMock,
-  subtotal: moneyMock,
-  sum: moneyMock,
-};
-
-export const orderHistoryMock: Order[] = [orderMock, orderMock];
-
 const lineItems: LineItem[] = [
   {
     lineItemId: '0',
@@ -313,7 +297,6 @@ export const cart: Cart = {
     },
   ],
 };
-export const orders: Order[] = [orderMock, orderMock];
 
 export const frontasticImage: NextFrontasticImage = {
   media: {
