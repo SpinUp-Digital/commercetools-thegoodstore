@@ -19,7 +19,7 @@ const SearchItem: React.FC<Props> = ({ hit, categories, onClick }) => {
   const router = useRouter();
 
   const primaryCategory = useMemo(
-    () => categories.find((category) => category.categoryId === hit.categories?.[0].categoryId),
+    () => categories.find((category) => category.categoryId === hit.categories?.[0]?.categoryId),
     [categories, hit],
   );
 
