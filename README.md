@@ -108,12 +108,12 @@ Next step depends wether you want to work on the backend or the frontend.
 │   └── utils     # Utility functions
 ├── pages
 │   ├── __preview			# Preview
-│   ├── sitemap-categories.xml	   # Ctageories sitemap
+│   ├── sitemap-categories.xml	      # Ctageories sitemap
 │   ├── sitemap-products.xml		# Products sitemap
 │   ├── sitemap-static.xml		# Structure sitemap
 │   └── verify				# Account verification
 ├── public	# Public assets
-├── sdk	   # SDK instance
+├── sdk	      # SDK instance
 ├── styles	# Global styling
 └── types	# Types
 ```
