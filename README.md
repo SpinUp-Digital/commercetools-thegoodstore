@@ -99,7 +99,7 @@ Next step depends wether you want to work on the backend or the frontend.
 │   ├── lib	   # Library sepcific code
 │   ├── provider
 │   │   └── Frontastic	# Main provider
-│   └── tastics   # Tastic components
+│   └── tastics    # Tastic components
 ├── helpers
 │   ├── constants # Constants
 │   ├── hooks     # Custom hooks
