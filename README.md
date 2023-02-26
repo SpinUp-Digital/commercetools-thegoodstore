@@ -88,18 +88,18 @@ Next step depends wether you want to work on the backend or the frontend.
 
 ```bash
 .
-├── algolia # Algolia related configurations
+├── algolia	# Algolia related configurations
 ├── components
 │   ├── commercetools-ui	# UI components
-│   ├── headless		      # Components with no UI
-│   ├── HOC			         # Higher order components
+│   ├── headless		# Components with no UI
+│   ├── HOC			# Higher order components
 ├── context	# Global providers
 ├── frontastic
 │   ├── hooks	   # Data fetching & mutation hooks
-│   ├── lib	      # Library sepcific code
+│   ├── lib	   # Library sepcific code
 │   ├── provider
 │   │   └── Frontastic	# Main provider
-│   └── tastics   # Tastic components
+│   └── tastics    # Tastic components
 ├── helpers
 │   ├── constants # Constants
 │   ├── hooks     # Custom hooks
@@ -107,15 +107,15 @@ Next step depends wether you want to work on the backend or the frontend.
 │   ├── mocks     # Mocks & placeholders
 │   └── utils     # Utility functions
 ├── pages
-│   ├── __preview			         # Preview
-│   ├── sitemap-categories.xml	# Ctageories sitemap
-│   ├── sitemap-products.xml	   # Products sitemap
-│   ├── sitemap-static.xml		   # Structure sitemap
-│   └── verify				         # Account verification
-├── public	  # Public assets
-├── sdk	     # SDK instance
-├── styles	  # Global styling
-└── types	  # Types
+│   ├── __preview			# Preview
+│   ├── sitemap-categories.xml	        # Ctageories sitemap
+│   ├── sitemap-products.xml		# Products sitemap
+│   ├── sitemap-static.xml		# Structure sitemap
+│   └── verify				# Account verification
+├── public	# Public assets
+├── sdk	        # SDK instance
+├── styles	# Global styling
+└── types	# Types
 ```
 
 ## Customization & Configuration Files
