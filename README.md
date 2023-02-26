@@ -18,7 +18,7 @@
 
 3. Under `/packages/home/frontend` create a `.env.local` file with keys from `.env.dist` and populate with your own values.
    <br />
-   :wanring: `.env.local` is gitignore and this should not change. In production environments you should set these variables using [Netlify environment variables](https://docs.netlify.com/environment-variables/overview/).
+   :warning: `.env.local` is gitignore and this should not change. In production environments you should set these variables using [Netlify environment variables](https://docs.netlify.com/environment-variables/overview/).
 
    ```bash
    NEXT_PUBLIC_FRONTASTIC_HOST=https://home-thegoodstore.frontastic.io/frontastic
