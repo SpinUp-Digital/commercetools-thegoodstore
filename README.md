@@ -5,13 +5,17 @@
 # Getting Started:
 
 1. Install the `Frontastic-CLI`.
+
    ```bash
    brew tap frontasticgmbh/tap && brew install frontastic-cli
    ```
+
 2. Install project dependencies. This installs both frontend and backend dependencies.
+
    ```bash
    frontasitc install
    ```
+
 3. Under `/packages/home/frontend` create a `.env.local` file with keys from `.env.dist` and populate with your own values.
    <br />
    :wanring: `.env.local` is gitignore and this should not change. In production environments you should set these variables using [Netlify environment variables](https://docs.netlify.com/environment-variables/overview/).
@@ -34,14 +38,19 @@ Next step depends wether you want to work on the backend or the frontend.
 ## For Front-End Development:
 
 1. `cd` into frontend working directory.
+
    ```bash
    cd /packages/home/frontend
    ```
+
 2. Start the project in development mode.
+
    ```bash
    yarn dev
    ```
+
 3. Launch storybook.
+
    ```bash
    yarn storybook
    ```
@@ -49,10 +58,13 @@ Next step depends wether you want to work on the backend or the frontend.
 ## For Back-End Development:
 
 1. From the project's root run
+
    ```bash
    frontastic init
    ```
+
 2. Then run
+
    ```bash
    frontastic run
    ```
@@ -120,10 +132,13 @@ Next step depends wether you want to work on the backend or the frontend.
 ## Production
 
 1. Run linter to detect or auto fix code errors and presist a consistent code styling
+
    ```bash
    yarn fix
    ```
+
 2. Run the `build` command. This will build the project and generate sitemaps and robots.txt file.
+
    ```bash
    yarn build
    ```
