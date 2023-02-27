@@ -22,6 +22,8 @@ import SubscribeForm from './sections/my-account/forms/subscribe-form';
 import Orders from './sections/orders';
 import OrderPage from './sections/orders/order-page';
 import PaymentMethods from './sections/payment-methods';
+import PaymentAdd from './sections/payment-methods/payment-add';
+import PaymentEdit from './sections/payment-methods/payment-edit';
 
 export interface AccountTab {
   name: string;
@@ -103,6 +105,8 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
     '#orders': <Orders />,
     '#order': <OrderPage orderId={id} />,
     '#payment': <PaymentMethods />,
+    '#edit-payment': <PaymentEdit paymentId={id ?? ''} />,
+    '#add-payment': <PaymentAdd />,
     '#addresses': <Addresses />,
     '#support': (
       <CustomerSupport
