@@ -11,7 +11,7 @@ type EditCTAProps = {
 const EditCTA: FC<EditCTAProps> = ({ editHref }) => {
   const { formatMessage } = useFormat({ name: 'common' });
   return (
-    <Link link={editHref} className="h-fit" onMouseEnter={() => console.log('gii')}>
+    <Link link={editHref} className="h-fit">
       <Typography
         medium
         fontSize={14}

@@ -37,7 +37,6 @@ const Address: React.FC<AddressProps> = ({ address }) => {
   ];
 
   const handleChecked = () => {
-    console.log('Im clicked');
     setChecked(true);
     setAsDefault();
   };

@@ -173,7 +173,7 @@ const CreateAddressModal = () => {
                 })}
                 labelPosition="on-right"
                 checked={saveAsDefault}
-                onChange={(e) => setSaveAsDefault(e.target.checked)}
+                onChange={({ checked }) => setSaveAsDefault(checked)}
               />
             </div>
             <div className="mt-32 flex gap-12">

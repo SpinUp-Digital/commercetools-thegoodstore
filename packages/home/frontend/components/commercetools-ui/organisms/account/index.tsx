@@ -127,7 +127,7 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
   const Content = mapping[hash as keyof typeof mapping];
 
   const contentClassNames = useClassNames([
-    contentTitle && hash != '#orders' ? 'px-16' : 'md:px-0',
+    hash != '#orders' ? 'px-16 md:px-24' : 'md:px-0',
     'w-full flex flex-col lg:items-start md:border-l border-neutral-400 lg:px-44 lg:py-48 md:py-24',
   ]);
 

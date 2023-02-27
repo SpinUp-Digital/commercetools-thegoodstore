@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 import Button from 'components/commercetools-ui/atoms/button';
-import Checkbox from 'components/commercetools-ui/atoms/checkbox';
+import Checkbox, { CheckboxProps } from 'components/commercetools-ui/atoms/checkbox';
 import Input from 'components/commercetools-ui/atoms/input';
 import PasswordInput from 'components/commercetools-ui/atoms/input-password';
 import Link from 'components/commercetools-ui/atoms/link';
@@ -82,8 +82,8 @@ const Login: React.FC<LoginProps> = ({ signInLink, accountLink }) => {
   };
 
   //handle checkbox input change
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setData({ ...data, [e.target.name]: e.target.checked });
+  const handleCheckboxChange: CheckboxProps['onChange'] = ({ name, checked }) => {
+    setData({ ...data, [name]: checked });
   };
 
   //login user
