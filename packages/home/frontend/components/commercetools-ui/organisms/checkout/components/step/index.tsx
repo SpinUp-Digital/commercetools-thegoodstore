@@ -43,7 +43,7 @@ const Step: React.FC<Props> = ({ number, label, isExpanded, isCompleted, onEdit,
   return (
     <div className="bg-white">
       <div className={headerClassName}>
-        <div className="flex cursor-default items-center gap-12">
+        <div className="flex cursor-default items-center gap-12 lg:gap-16">
           <span className={numberClassName}>{number}</span>
           <h5 className={labelClassName}>{label}</h5>
         </div>
@@ -55,7 +55,9 @@ const Step: React.FC<Props> = ({ number, label, isExpanded, isCompleted, onEdit,
             {formatMessage({ id: 'edit', defaultMessage: 'Edit' })}
           </p>
         )}
-        {isExpanded && CTA}
+        {isExpanded && (
+          <span className="text-white decoration-white lg:text-secondary-black lg:decoration-primary-black">{CTA}</span>
+        )}
       </div>
       <div>
         <div className={isCompleted && !isExpanded ? 'block' : 'hidden'}>{Preview}</div>

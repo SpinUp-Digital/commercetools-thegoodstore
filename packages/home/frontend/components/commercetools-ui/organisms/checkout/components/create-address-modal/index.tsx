@@ -138,10 +138,7 @@ const CreateAddressModal = () => {
 
   return (
     <>
-      <p
-        className="text-14 underline decoration-secondary-black underline-offset-2 hover:cursor-pointer"
-        onClick={() => setIsOpen(true)}
-      >
+      <p className="text-14 underline underline-offset-2 hover:cursor-pointer" onClick={() => setIsOpen(true)}>
         {formatAccountMessage({ id: 'address.add', defaultMessage: 'Add new address' })} +
       </p>
       <Modal
@@ -150,7 +147,7 @@ const CreateAddressModal = () => {
         style={{ content: { background: 'transparent', border: 'none' } }}
         closeTimeoutMS={200}
       >
-        <div className="mx-auto max-w-[600px] rounded-sm bg-white p-32 pt-24">
+        <div className="mx-auto w-[90%] max-w-[600px] rounded-sm bg-white p-32 pt-24">
           <h4 className="text-24">{formatAccountMessage({ id: 'address.add', defaultMessage: 'Add new address' })}</h4>
           <AddressForm className="mt-32" address={data} fields={fields} onChange={handleChange} onSubmit={handleSubmit}>
             <div className="mt-12">

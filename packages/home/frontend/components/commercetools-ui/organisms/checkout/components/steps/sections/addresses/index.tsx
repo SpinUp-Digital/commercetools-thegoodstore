@@ -240,7 +240,7 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
       )}
 
       <div className="mt-48">
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-8 lg:gap-12">
           <h5 className="text-16 capitalize">
             {formatCheckoutMessage({ id: 'billingAddress', defaultMessage: 'Billing Address' })}
           </h5>
@@ -281,7 +281,7 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
             />
           ))}
 
-        <div className="mt-24">
+        <div className="mt-28 md:mt-36 lg:mt-45">
           <Button
             variant="primary"
             className="w-full min-w-[200px] md:text-16 lg:w-fit lg:px-36"

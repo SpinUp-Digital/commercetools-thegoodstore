@@ -163,7 +163,7 @@ const CheckoutWrapped: React.FC<Props> = ({ logo }) => {
   return (
     <div className="min-h-screen lg:bg-neutral-200">
       <Header logo={logo} />
-      <div className="lg:mx-auto lg:max-w-[1500px]">
+      <div className="lg:mx-[48px]">
         <Secure />
         <div className="flex-row-reverse items-start gap-24 lg:flex">
           <Summary onPurchase={purchase} isFinalStep={isFinalStep} />
