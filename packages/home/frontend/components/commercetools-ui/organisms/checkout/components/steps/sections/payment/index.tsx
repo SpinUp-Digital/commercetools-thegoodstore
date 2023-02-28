@@ -66,10 +66,10 @@ const Payment: React.FC<Props> = ({ goToNextStep }) => {
         {paymentMethods.map(({ name, type, image }) => (
           <div
             key={type}
-            className="cursor-pointer border-b border-neutral-400 p-16"
+            className="cursor-pointer border-b border-neutral-400 p-16 lg:py-28 lg:px-20"
             onClick={() => handlePaymentMethodSelection(type)}
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between lg:justify-start lg:gap-64">
               <div>
                 <div className="flex items-center gap-16">
                   <Radio name="checkout-shipping-method" checked={type === selectedType} />
@@ -77,7 +77,7 @@ const Payment: React.FC<Props> = ({ goToNextStep }) => {
                 </div>
               </div>
               {/* eslint-disable-next-line */}
-              <img src={image.src} className="h-[20px]" />
+              <img src={image.src} className="h-[20px] lg:h-[24px]" />
             </div>
             {getComponent(type)}
           </div>
