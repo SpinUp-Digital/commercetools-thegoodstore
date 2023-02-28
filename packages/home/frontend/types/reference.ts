@@ -2,7 +2,7 @@ export interface LinkReference {
   type: 'link';
   link: string;
   target?: string;
-  openInNewWindow: boolean;
+  openInNewWindow?: boolean;
 }
 
 export interface PageFolderReference {

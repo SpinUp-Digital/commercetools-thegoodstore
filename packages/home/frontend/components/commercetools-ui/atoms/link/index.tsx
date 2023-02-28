@@ -22,10 +22,10 @@ const variantStyle: VariantStyle = {
 
 const Link: FC<LinkProps> = ({ link, children, className = '', variant, title = '', ...props }) => {
   const linkUrl = useMemo(() => {
-    if (!link) return '#';
+    if (!link) return '';
     if (typeof link === 'string') return link;
 
-    return resolveReferenceTarget(link) ?? '#';
+    return resolveReferenceTarget(link);
   }, [link]);
 
   const linkProps = useMemo(() => {
@@ -36,13 +36,15 @@ const Link: FC<LinkProps> = ({ link, children, className = '', variant, title = 
 
   const linkClassNames = useClassNames([variant ? variantStyle[variant] : '', className]);
 
-  return (
-    <NextLink href={linkUrl}>
-      <a className={linkClassNames} title={title} {...props} {...linkProps}>
-        {children}
-      </a>
-    </NextLink>
+  const Tag = (
+    <a className={linkClassNames} title={title} {...props} {...linkProps}>
+      {children}
+    </a>
   );
+
+  if (!linkUrl) return Tag;
+
+  return <NextLink href={linkUrl}>{Tag}</NextLink>;
 };
 
 export default Link;
