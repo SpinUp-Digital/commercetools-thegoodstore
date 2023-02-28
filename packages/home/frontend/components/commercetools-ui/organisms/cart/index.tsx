@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
+import { XMarkIcon as CloseIcon } from '@heroicons/react/24/solid';
 import Button from 'components/commercetools-ui/atoms/button';
 import Link from 'components/commercetools-ui/atoms/link';
+import Modal from 'components/commercetools-ui/atoms/modal';
 import CartItem from 'components/commercetools-ui/organisms/cart/cart-item';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import { tablet } from 'helpers/utils/screensizes';
 import { Category } from 'types/category';
 import { useAccount, useCart } from 'frontastic';
+import Login from '../authentication/login';
 import OrderSummary, { PaymentMethod } from '../order-summary';
 
 export interface Props {
@@ -18,6 +21,11 @@ export interface Props {
 const Cart: React.FC<Props> = ({ categories, paymentMethods, emptyStateDescription }) => {
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
+
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
+  const openLoginModal = useCallback(() => setIsLoginModalOpen(true), []);
+  const closeLoginModal = useCallback(() => setIsLoginModalOpen(false), []);
 
   const [isTablet] = useMediaQuery(tablet);
 
@@ -43,11 +51,12 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods, emptyStateDescripti
             </h3>
 
             {!loggedIn && (
-              <Link link={loginLink}>
-                <button className="rounded-md border border-primary-black py-6 px-24 font-medium transition hover:border-secondary-black hover:text-secondary-black md:px-36 lg:hidden">
-                  {formatAccountMessage({ id: 'sign.in', defaultMessage: ' Login in' })}
-                </button>
-              </Link>
+              <button
+                className="rounded-md border border-primary-black py-6 px-24 font-medium transition hover:border-secondary-black hover:text-secondary-black md:px-36 lg:hidden"
+                onClick={openLoginModal}
+              >
+                {formatAccountMessage({ id: 'sign.in', defaultMessage: ' Login in' })}
+              </button>
             )}
           </div>
 
@@ -96,11 +105,12 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods, emptyStateDescripti
                     defaultMessage: 'Log in to use your personal offers!',
                   })}
                 </p>
-                <Link link={loginLink}>
-                  <button className="mt-18 w-full rounded-md border border-primary-black py-6 px-24 font-medium transition hover:border-secondary-black hover:text-secondary-black md:px-36">
-                    {formatAccountMessage({ id: 'sign.in', defaultMessage: ' Login in' })}
-                  </button>
-                </Link>
+                <button
+                  className="mt-18 w-full rounded-md border border-primary-black py-6 px-24 font-medium transition hover:border-secondary-black hover:text-secondary-black md:px-36"
+                  onClick={openLoginModal}
+                >
+                  {formatAccountMessage({ id: 'sign.in', defaultMessage: ' Login in' })}
+                </button>
               </>
             )}
           </div>
@@ -133,6 +143,22 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods, emptyStateDescripti
           </button>
         </Link>
       </div>
+
+      <Modal
+        isOpen={isLoginModalOpen}
+        onRequestClose={closeLoginModal}
+        className="relative w-[90%] rounded-md bg-white"
+        style={{ content: { maxWidth: '600px' } }}
+        closeTimeoutMS={200}
+      >
+        <CloseIcon
+          className="absolute top-20 right-20 h-24 w-24 cursor-pointer text-secondary-black"
+          onClick={closeLoginModal}
+        />
+        <div className="p-1 pb-48 pt-72">
+          <Login onLogin={closeLoginModal} signInLink={{ type: 'link', link: loginLink }} />
+        </div>
+      </Modal>
     </div>
   );
 };

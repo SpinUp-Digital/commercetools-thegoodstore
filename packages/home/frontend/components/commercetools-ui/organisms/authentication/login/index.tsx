@@ -1,5 +1,4 @@
-import React, { useMemo, useState } from 'react';
-import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 import Button from 'components/commercetools-ui/atoms/button';
 import Checkbox from 'components/commercetools-ui/atoms/checkbox';
@@ -8,7 +7,6 @@ import PasswordInput from 'components/commercetools-ui/atoms/input-password';
 import Link from 'components/commercetools-ui/atoms/link';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { useFormat } from 'helpers/hooks/useFormat';
-import Redirect from 'helpers/redirect';
 import { Reference } from 'types/reference';
 import { useAccount } from 'frontastic';
 import AlterForm from '../../account/account-atoms/alter-form';
@@ -17,18 +15,17 @@ import Feedback from '../../account/account-atoms/feedback';
 export interface LoginProps {
   signInLink: Reference;
   accountLink?: Reference;
+  onLogin?: () => void;
 }
 
-const Login: React.FC<LoginProps> = ({ signInLink, accountLink }) => {
+const Login: React.FC<LoginProps> = ({ onLogin }) => {
   //i18n messages
   const { formatMessage: formatErrorMessage } = useFormat({ name: 'error' });
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
   const { formatMessage } = useFormat({ name: 'common' });
 
-  const router = useRouter();
-
   //account actions
-  const { login, loggedIn, requestConfirmationEmail, requestPasswordReset } = useAccount();
+  const { login, requestConfirmationEmail, requestPasswordReset } = useAccount();
 
   //login data
   const [data, setData] = useState({ email: '', password: '', rememberMe: false });
@@ -50,12 +47,6 @@ const Login: React.FC<LoginProps> = ({ signInLink, accountLink }) => {
 
   //not on default login modal
   const subModal = resendVerification || resendPasswordReset;
-
-  //redirection link after user is logged in
-  const redirectLink = useMemo(() => {
-    const lastVisitedPage = router.query.lvp ? `/${router.query.lvp}` : accountLink;
-    return lastVisitedPage;
-  }, [accountLink, router]);
 
   const resetFeedback = () => {
     setError('');
@@ -90,8 +81,9 @@ const Login: React.FC<LoginProps> = ({ signInLink, accountLink }) => {
   const loginUser = async () => {
     try {
       const response = await login(data.email, data.password, data.rememberMe);
-      if (!response.accountId)
-        setError(formatErrorMessage({ id: 'auth.wrong', defaultMessage: 'Wrong email address or password' }));
+
+      if (!response.accountId) onLogin?.();
+      else setError(formatErrorMessage({ id: 'auth.wrong', defaultMessage: 'Wrong email address or password' }));
     } catch (err) {
       setError(formatErrorMessage({ id: 'wentWrong', defaultMessage: 'Sorry. Something went wrong..' }));
     }
@@ -143,8 +135,6 @@ const Login: React.FC<LoginProps> = ({ signInLink, accountLink }) => {
     //processing ends
     setLoading(false);
   };
-
-  if (loggedIn) return <Redirect target={redirectLink} />;
 
   return (
     <>
@@ -216,7 +206,12 @@ const Login: React.FC<LoginProps> = ({ signInLink, accountLink }) => {
           </Button>
 
           {resendPasswordReset && (
-            <Link variant="menu-item" className="mx-auto block w-fit text-14" link={signInLink} onClick={backToLogin}>
+            <Link
+              variant="menu-item"
+              className="mx-auto block w-fit cursor-pointer text-14"
+              link=""
+              onClick={backToLogin}
+            >
               {formatAccountMessage({ id: 'account.back.sign', defaultMessage: 'Back to sign in' })}
             </Link>
           )}
