@@ -50,7 +50,7 @@ const AdditionalInfo: FC<AdditionalInfoProps> = ({ productspec, description }) =
       >
         <Markdown
           className="block font-body text-14 font-regular leading-loose text-primary-black"
-          text={productspec}
+          markdown={productspec}
         />
       </AccordionBtn>
     </div>
