@@ -8,23 +8,25 @@ import useOnClickOutside from 'helpers/hooks/useOnClickOutside';
 import ProductDetailsAdapter from '../product-details/helpers/adapter';
 
 type QuickViewProps = {
-  showButton: boolean;
+  buttonIsVisible: boolean;
   product: Product;
+  hideButton: () => void;
 };
 
-const QuickView: FC<QuickViewProps> = ({ showButton, product }) => {
+const QuickView: FC<QuickViewProps> = ({ buttonIsVisible, product, hideButton }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
 
   const ref = useRef<HTMLDivElement>(null);
 
   const { formatMessage } = useFormat({ name: 'product' });
   const classNames = useClassNames([
-    showButton ? 'block' : 'hidden',
+    buttonIsVisible ? 'block' : 'hidden',
     'w-full border border-neutral-400 bg-white py-16 text-center text-12 capitalize leading-[16px] transition duration-150 ease-out hover:border-primary-black',
   ]);
 
   const openModal = () => {
     setIsOpen(true);
+    hideButton();
   };
 
   const closeModal = () => {
