@@ -12,7 +12,7 @@ const AccountButton = () => {
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
   const userName = useMemo(() => {
     return `${account?.salutation ?? formatAccountMessage({ id: 'hello', defaultMessage: 'Hi, ' })} ${
-      account?.firstName?.split(' ')[0] ?? formatAccountMessage({ id: 'user', defaultMessage: 'User' })
+      account?.firstName ?? formatAccountMessage({ id: 'user', defaultMessage: 'User' })
     }`;
   }, [account?.firstName, account?.salutation, formatAccountMessage]);
 
