@@ -138,7 +138,7 @@ const Register: React.FC<RegisterProps> = ({ termsOfUseLink }) => {
             id="is-subscribed"
             name="isSubscribed"
             containerClassName="mb-20"
-            onChange={(e) => setIsSubscribed(e.target.checked)}
+            onChange={({ checked }) => setIsSubscribed(checked)}
             label={formatMessage({
               id: 'receive.emails',
               defaultMessage: 'I wish to receive emails about special offers, new products and promotions.',

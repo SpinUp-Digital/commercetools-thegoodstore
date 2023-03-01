@@ -1,19 +1,19 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { CheckIcon } from '@heroicons/react/24/outline';
 import useClassNames from 'helpers/hooks/useClassNames';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import { desktop } from 'helpers/utils/screensizes';
 import Typography from '../typography';
 
-export interface Props extends Omit<React.ComponentProps<'input'>, 'onChange'> {
+export interface CheckboxProps extends Omit<React.ComponentProps<'input'>, 'onChange'> {
   label?: string;
   labelPosition?: 'on-left' | 'on-right';
   containerClassName?: string;
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (props: { name: string; checked: boolean }) => void;
   disableBackground?: boolean;
 }
 
-const Checkbox: React.FC<Props> = ({
+const Checkbox: React.FC<CheckboxProps> = ({
   className = '',
   checked,
   onChange,
@@ -31,13 +31,22 @@ const Checkbox: React.FC<Props> = ({
 
   const [isDesktopSize] = useMediaQuery(desktop);
 
+  const checkboxRef = useRef<HTMLInputElement>(null);
+
   useEffect(() => {
     if (typeof checked !== 'undefined') setIsChecked(checked);
   }, [checked]);
 
   const handleContainerClick = () => {
-    if (!isDesktopSize) setIsChecked(!isChecked);
+    if (!isDesktopSize) {
+      toggleIsChecked();
+    }
   };
+
+  const toggleIsChecked = useCallback(() => {
+    onChange?.({ name: props.name ?? '', checked: !isChecked });
+    setIsChecked(!isChecked);
+  }, [isChecked, onChange, props.name]);
 
   const handleMouseOver = (e: React.MouseEvent<HTMLInputElement>) => {
     setIsHovered(isDesktopSize);
@@ -47,11 +56,6 @@ const Checkbox: React.FC<Props> = ({
   const handleMouseLeave = (e: React.MouseEvent<HTMLInputElement>) => {
     setIsHovered(false);
     onMouseLeave?.(e);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsChecked(e.target.checked);
-    onChange?.(e);
   };
 
   const containerClassNames = useClassNames(['flex items-center gap-12', containerClassName]);
@@ -88,12 +92,13 @@ const Checkbox: React.FC<Props> = ({
 
       <div className={buttonClassName}>
         <input
+          ref={checkboxRef}
           type="checkbox"
           checked={isChecked}
           className={inputClassName}
           onMouseOver={handleMouseOver}
           onMouseLeave={handleMouseLeave}
-          onChange={handleChange}
+          onChange={toggleIsChecked}
           {...props}
         />
 

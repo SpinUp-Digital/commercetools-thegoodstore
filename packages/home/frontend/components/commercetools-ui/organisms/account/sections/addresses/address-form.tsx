@@ -91,8 +91,12 @@ const AddressForm: React.FC<AddressFormProps> = ({ editedAddressId }) => {
     setData(defaultData);
   }, [defaultData]);
 
+  const updateData = (name: string, value: boolean | string) => {
+    setData({ ...data, [name]: value });
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
-    setData({ ...data, [e.target.name]: e.target.value });
+    updateData(e.target.name, e.target.value);
   };
 
   const discardFormAndNotify = (promise: Promise<Account | void>) => {
@@ -216,7 +220,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ editedAddressId }) => {
         name="isDefaultAddress"
         id="is-default-address"
         checked={data?.isDefaultBillingAddress || data?.isDefaultShippingAddress || false}
-        onChange={handleChange}
+        onChange={({ name, checked }) => updateData(name, checked)}
         containerClassName="mt-4 md:mb-20 mb-12"
         label={formatAccountMessage({
           id: 'address.setDefault',

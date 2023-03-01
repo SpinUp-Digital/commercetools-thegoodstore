@@ -153,7 +153,7 @@ const RangeFacet: React.FC<FacetProps> = ({ attribute }) => {
           <div className="flex items-center gap-12">
             <Checkbox
               checked={appliedOptions.includes(index)}
-              onChange={(e) => handleRangeOptionChange(index, e.target.checked)}
+              onChange={({ checked }) => handleRangeOptionChange(index, checked)}
               label={refinements?.toString()}
               labelPosition="on-left"
             />

@@ -260,7 +260,7 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
             })}
             labelPosition="on-right"
             checked={sameShippingAddress}
-            onChange={(e) => setSameShippingAddress(e.target.checked)}
+            onChange={({ checked }) => setSameShippingAddress(checked)}
             disableBackground
           />
         </div>
