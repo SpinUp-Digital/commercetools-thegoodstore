@@ -1,34 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import DOMPurify from 'dompurify';
 import { Log } from 'helpers/errorLogger';
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 //@ts-ignore
-import { markdown } from 'markdown';
+import { markdown as MD } from 'markdown';
 
 export interface Props {
-  text: string;
+  markdown: string;
   className?: string;
 }
 
-const Markdown: React.FC<Props> = ({ text }) => {
-  if (typeof text !== 'string') {
-    Log.error(new Error(`Markdown: Invalid text property. Expected string but received ${typeof text}`));
+const Markdown: React.FC<Props> = ({ markdown }) => {
+  const [safeMarkdown, setSafeMarkdown] = useState('');
+
+  useEffect(() => {
+    setSafeMarkdown(DOMPurify.sanitize(MD.toHTML(markdown)));
+  }, [markdown]);
+
+  if (typeof markdown !== 'string') {
+    Log.error(new Error(`Markdown: Invalid markdown property. Expected string but received ${typeof markdown}`));
+
     return <></>;
   }
+
   return (
     <>
-      <style>
-        {`
-        .markdown > * {
-          margin: revert;
-          padding: revert;
-          font-size: revert;
-          font-weight: revert;
-        }
-      `}
-      </style>
-
-      {/* eslint-disable-next-line tailwindcss/no-custom-classname */}
-      <div className="markdown" dangerouslySetInnerHTML={{ __html: markdown.toHTML(text) }}></div>
+      <div
+        className="prose max-w-[1024px] p-24 md:p-56 lg:p-84"
+        dangerouslySetInnerHTML={{ __html: safeMarkdown }}
+      ></div>
     </>
   );
 };

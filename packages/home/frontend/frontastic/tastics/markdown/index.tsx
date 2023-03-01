@@ -5,7 +5,7 @@ interface Props {
 }
 
 const MarkdownTastic = ({ data }: Props) => {
-  return <Markdown text={data.text} />;
+  return <Markdown {...data} />;
 };
 
 export default MarkdownTastic;

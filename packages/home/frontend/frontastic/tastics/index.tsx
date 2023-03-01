@@ -1,5 +1,4 @@
 import dynamic from 'next/dynamic';
-//import Markdown from './content/markdown';
 //import Newsletter from './newsletter';
 import AnnouncementBarTastic from './bar/announcment';
 import CategorySliderTastic from './category-slider';
@@ -9,6 +8,7 @@ import Tile from './content/tile';
 import TilesGroupTastic from './content/tiles-group';
 import Footer from './footer';
 import Header from './header';
+import Markdown from './markdown';
 import Missing from './missing';
 import NotFoundTastic from './not-found';
 import ProductSlider from './products/slider';
@@ -38,7 +38,7 @@ export const tastics = {
   'commercetools/ui/content/hero': HeroTastic,
   'commercetools/ui/content/spacer': SpacerTastic,
   'commercetools/ui/content/showcase': Showcase,
-  //'commercetools/ui/content/markdown': Markdown,
+  'commercetools/ui/content/markdown': Markdown,
   //'commercetools/ui/content/newsletter': Newsletter,
   'commercetools/ui/cart': Cart,
   'commercetools/ui/products/details': ProductDetails,
