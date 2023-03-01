@@ -82,7 +82,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
     try {
       const response = await login(data.email, data.password, data.rememberMe);
 
-      if (!response.accountId) onLogin?.();
+      if (response.accountId) onLogin?.();
       else setError(formatErrorMessage({ id: 'auth.wrong', defaultMessage: 'Wrong email address or password' }));
     } catch (err) {
       setError(formatErrorMessage({ id: 'wentWrong', defaultMessage: 'Sorry. Something went wrong..' }));
