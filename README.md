@@ -1,6 +1,6 @@
 # Commercetools For Front-End (CoFe) Starter
 
-> :information_source: Full documentation can be found [Here](https://docs.frontastic.cloud/docs)
+> :information_source: Full documentation can be found [Here](https://docs.commercetools.com/frontend-development/)
 
 # Getting Started:
 
@@ -10,13 +10,19 @@
    brew tap frontasticgmbh/tap && brew install frontastic-cli
    ```
 
-2. Install project dependencies. This installs both frontend and backend dependencies.
+2. Initialize the `Frontastic-CLI`.
+
+   ```bash
+   frontastic init
+   ```
+
+3. Install project dependencies. This installs both frontend and backend dependencies.
 
    ```bash
    frontasitc install
    ```
 
-3. Under `/packages/home/frontend` create a `.env.local` file with keys from `.env.dist` and populate with your own values.
+4. Under `/packages/home/frontend` create a `.env.local` file with keys from `.env.dist` and populate with your own values.
    <br />
    :warning: `.env.local` is gitignored and this should not change. In production environments you should set these variables using [Netlify environment variables](https://docs.netlify.com/environment-variables/overview/).
 
@@ -58,12 +64,6 @@ Next step depends wether you want to work on the backend or the frontend.
 ## For Back-End Development:
 
 1. From the project's root run
-
-   ```bash
-   frontastic init
-   ```
-
-2. Then run
 
    ```bash
    frontastic run
@@ -148,3 +148,9 @@ Next step depends wether you want to work on the backend or the frontend.
 If you want to deploy your project. All you have to do is push to master and Netlify will automatically start building your project.
 
 > :information_source: If you want to manually trigger a build based on the latest commit on master you can do it from Netlify. For more information refer to [this documentation](https://docs.netlify.com/site-deploys/create-deploys/).
+
+# Additional Links
+
+- [Frontastic-CLI](https://docs.frontastic.cloud/docs/frontastic-cli)
+- [Adyen setup](https://docs.commercetools.com/frontend-development/adyen)
+- [Contentful guide](https://docs.commercetools.com/frontend-development/creating-a-blog-using-contentful)
