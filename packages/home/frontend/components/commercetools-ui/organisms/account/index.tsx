@@ -56,7 +56,7 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
   faqs,
 }) => {
   const router = useRouter();
-  const { account, logout } = useAccount();
+  const { account, accountLoading, logout } = useAccount();
   const { updateCart } = useCart();
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
   const [hash, id] = useHash();
@@ -65,9 +65,7 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
 
   //update associated cart data using account data
   useEffect(() => {
-    if (!account) {
-      router.push('login');
-    } else {
+    if (account) {
       const email = account.email;
       const addresses = account.addresses?.filter((address) => address.country === country);
       const shippingAddress = addresses?.find((address) => address.isDefaultShippingAddress) || addresses?.[0];
@@ -78,8 +76,11 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
         shipping: shippingAddress,
         billing: billingAddress,
       });
+    } else if (accountLoading) {
+    } else {
+      router.push('login');
     }
-  }, [account, country, router, updateCart]);
+  }, [account, country, router, accountLoading, updateCart]);
 
   const handleLogout = () => {
     logout().then(() => router.push('login'));

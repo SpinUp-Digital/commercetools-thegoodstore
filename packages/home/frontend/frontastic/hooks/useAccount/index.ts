@@ -11,15 +11,16 @@ const useAccount = (): UseAccountReturn => {
   const result = useSWR('/action/account/getAccount', extensions.account.getAccount, revalidateOptions);
 
   const data = useMemo(() => {
-    if (result.data?.isError) return { loggedIn: false, error: result.error };
+    if (result.data?.isError) return { loggedIn: false, accountLoading: false, error: result.error };
 
     const account = (result.data?.data as GetAccountResult)?.account as Account;
 
-    if (account?.accountId) return { account, loggedIn: true };
+    if (account?.accountId) return { account, loggedIn: true, accountLoading: false };
 
     return {
       loggedIn: false,
       account: undefined,
+      accountLoading: true,
       error: result.error,
     };
   }, [result]);
