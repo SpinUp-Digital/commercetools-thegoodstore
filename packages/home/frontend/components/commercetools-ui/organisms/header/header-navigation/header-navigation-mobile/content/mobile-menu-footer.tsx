@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useLayoutEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import Button from 'components/commercetools-ui/atoms/button';
 import Link from 'components/commercetools-ui/atoms/link';
@@ -10,15 +10,18 @@ import { useAccount } from 'frontastic';
 import MobileMenuNavButton from '../atoms/menu-nav-button';
 
 export interface Props {
+  showMenu: boolean;
   insertCategory: (category: Category) => void;
   hideHeaderMenu: () => void;
 }
 
-const MobileMenuFooter: FC<Props> = ({ hideHeaderMenu, insertCategory }) => {
+const MobileMenuFooter: FC<Props> = ({ showMenu, hideHeaderMenu, insertCategory }) => {
   const router = useRouter();
-  const { account, logout } = useAccount();
   const { formatMessage } = useFormat({ name: 'common' });
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
+  const marketButtonRef = useRef<HTMLDivElement>(null);
+  const { account, logout } = useAccount();
+  const [languageMenuTop, setLanguageMenuTop] = useState(false);
 
   const tabs = [
     { name: formatAccountMessage({ id: 'my.account', defaultMessage: 'My Account' }), href: '/account#' },
@@ -47,6 +50,14 @@ const MobileMenuFooter: FC<Props> = ({ hideHeaderMenu, insertCategory }) => {
     logout().then(() => router.push('/login'));
     hideHeaderMenu();
   };
+
+  useLayoutEffect(() => {
+    if (marketButtonRef.current) {
+      if (window.innerHeight - marketButtonRef.current.getBoundingClientRect().bottom < 100) setLanguageMenuTop(true);
+      else setLanguageMenuTop(false);
+    }
+  }, [showMenu]);
+
   return (
     <>
       <div className="mt-12 mb-16 w-full border border-neutral-400" />
@@ -62,7 +73,7 @@ const MobileMenuFooter: FC<Props> = ({ hideHeaderMenu, insertCategory }) => {
       ) : (
         <div className="ml-24 mr-22 block py-16 md:hidden">
           <Link link="/help" onClick={hideHeaderMenu} className="py-16">
-            <Typography fontSize={16} className="text-primary-black">
+            <Typography fontSize={14} className="text-primary-black">
               {formatMessage({ id: 'help.and.support', defaultMessage: 'Help & Customer Service' })}
             </Typography>
           </Link>{' '}
@@ -78,14 +89,14 @@ const MobileMenuFooter: FC<Props> = ({ hideHeaderMenu, insertCategory }) => {
           </Button>
         ) : (
           <Link link="/login" onClick={hideHeaderMenu} className="px-0">
-            <Typography fontSize={16} className="font-normal text-primary-black">
+            <Typography fontSize={14} className="font-normal text-primary-black">
               {formatAccountMessage({ id: 'sign.in', defaultMessage: 'Sign in' })}
             </Typography>
           </Link>
         )}
       </div>
-      <div className="py-16">
-        <MarketButtonMobile />
+      <div className="p-16" ref={marketButtonRef}>
+        <MarketButtonMobile menuTop={languageMenuTop} />
       </div>
     </>
   );

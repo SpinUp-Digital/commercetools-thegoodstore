@@ -72,7 +72,7 @@ const HeaderNavigationMobile: FC<Props> = ({ links, logo, logoLink }) => {
         />
 
         {categoriesNavigator.length <= 0 && (
-          <MobileMenuFooter hideHeaderMenu={hideHeaderMenu} insertCategory={insertCategory} />
+          <MobileMenuFooter showMenu={showMenu} hideHeaderMenu={hideHeaderMenu} insertCategory={insertCategory} />
         )}
       </Drawer>
     </div>
