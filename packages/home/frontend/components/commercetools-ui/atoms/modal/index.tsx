@@ -4,7 +4,7 @@ import useMediaQuery from 'helpers/hooks/useMediaQuery';
 //import useScrollBlock from 'helpers/hooks/useScrollBlock';
 import { desktop } from 'helpers/utils/screensizes';
 
-const Modal: FC<ReactModalProps> = ({ children, style, ...props }) => {
+const Modal: FC<ReactModalProps> = ({ children, style, preventScroll, ...props }) => {
   const [isDesktopSize] = useMediaQuery(desktop);
 
   //const { blockScroll } = useScrollBlock();
@@ -29,15 +29,15 @@ const Modal: FC<ReactModalProps> = ({ children, style, ...props }) => {
   };
 
   useEffect(() => {
-    document.body.style.overflow = props.isOpen ? 'hidden' : 'auto';
-  }, [props.isOpen]);
+    if (preventScroll) document.body.style.overflow = props.isOpen ? 'hidden' : 'auto';
+  }, [props.isOpen, preventScroll]);
   /*
   useEffect(() => {
     blockScroll(props.isOpen);
   }, [props.isOpen, blockScroll]);*/
 
   return (
-    <ReactModal {...props} ariaHideApp={false} style={modalStyle}>
+    <ReactModal {...props} ariaHideApp={false} style={modalStyle} preventScroll={preventScroll}>
       {children}
     </ReactModal>
   );

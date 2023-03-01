@@ -5,6 +5,7 @@ import Modal from 'components/commercetools-ui/atoms/modal';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useOnClickOutside from 'helpers/hooks/useOnClickOutside';
+import useScrollBlock from 'helpers/hooks/useScrollBlock';
 import ProductDetailsAdapter from '../product-details/helpers/adapter';
 
 type QuickViewProps = {
@@ -16,6 +17,8 @@ type QuickViewProps = {
 const QuickView: FC<QuickViewProps> = ({ buttonIsVisible, product, hideButton }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
 
+  const { blockScroll } = useScrollBlock();
+
   const ref = useRef<HTMLDivElement>(null);
 
   const { formatMessage } = useFormat({ name: 'product' });
@@ -26,14 +29,16 @@ const QuickView: FC<QuickViewProps> = ({ buttonIsVisible, product, hideButton })
 
   const openModal = () => {
     setIsOpen(true);
+    blockScroll(true);
     hideButton();
   };
 
-  const closeModal = () => {
+  const closeModal = (shouldRevertScroll: boolean) => {
     setIsOpen(false);
+    blockScroll(shouldRevertScroll ? false : true);
   };
 
-  useOnClickOutside(ref, closeModal);
+  useOnClickOutside(ref, () => closeModal(true));
 
   return (
     <>
@@ -47,16 +52,22 @@ const QuickView: FC<QuickViewProps> = ({ buttonIsVisible, product, hideButton })
         shouldCloseOnOverlayClick
         isOpen={modalIsOpen}
         contentLabel={formatMessage({ id: 'quick.view', defaultMessage: 'Quick view' })}
-        onRequestClose={closeModal}
+        onRequestClose={() => closeModal(true)}
+        preventScroll={false}
       >
         <div ref={ref}>
           <XMarkIcon
             className="absolute top-15 right-15 h-24 w-24 hover:cursor-pointer"
             strokeWidth={1}
             color="#494949"
-            onClick={closeModal}
+            onClick={() => closeModal(true)}
           />
-          <ProductDetailsAdapter product={product} inModalVersion={true} setIsOpen={setIsOpen} />
+          <ProductDetailsAdapter
+            product={product}
+            inModalVersion={true}
+            setIsOpen={setIsOpen}
+            onAddToCart={() => closeModal(false)}
+          />
         </div>
       </Modal>
     </>

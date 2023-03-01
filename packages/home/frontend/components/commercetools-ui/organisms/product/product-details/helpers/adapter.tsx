@@ -13,9 +13,10 @@ type ProductDetailsAdapterProps = {
   product: Product;
   inModalVersion?: ProductDetailsProps['inModalVersion'];
   setIsOpen?: (value: boolean) => void;
+  onAddToCart?: () => void;
 };
 
-const ProductDetailsAdapter: FC<ProductDetailsAdapterProps> = ({ product, inModalVersion, setIsOpen }) => {
+const ProductDetailsAdapter: FC<ProductDetailsAdapterProps> = ({ product, inModalVersion, setIsOpen, onAddToCart }) => {
   const router = useRouter();
 
   const [variant, setVariant] = useState<Variant>();
@@ -67,6 +68,7 @@ const ProductDetailsAdapter: FC<ProductDetailsAdapterProps> = ({ product, inModa
       inModalVersion={inModalVersion}
       onChangeVariant={handleChangeVariant}
       setIsOpen={setIsOpen}
+      onAddToCart={onAddToCart}
     />
   );
 };

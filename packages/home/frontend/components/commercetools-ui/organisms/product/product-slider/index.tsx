@@ -99,8 +99,8 @@ const ProductSlider: FC<ProductSliderProps> = ({
             slidesPerGroup={1}
             dots={false}
             arrows
-            nextButtonStyles={{ transform: 'translateY(-250%) rotateZ(-45deg)' }}
-            prevButtonStyles={{ transform: 'translateY(-250%) rotateZ(135deg)' }}
+            nextButtonStyles={{ transform: 'translateY(-225%) rotateZ(-45deg)' }}
+            prevButtonStyles={{ transform: 'translateY(-225%) rotateZ(135deg)' }}
             allowTouchMove
             spaceBetween={8}
             breakpoints={{

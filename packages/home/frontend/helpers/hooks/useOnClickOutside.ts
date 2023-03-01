@@ -9,7 +9,7 @@ function useOnClickOutside<T extends HTMLElement = HTMLElement>(
     if (!enabled) return;
 
     const handleMouseDown = (event: MouseEvent | TouchEvent) => {
-      if (!ref.current?.contains(event.target as Node)) {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
         handler();
       }
     };

@@ -12,12 +12,14 @@
   "product.view": "Produkt anzeigen",
   "outOfStock": "Nicht vorrättig",
   "price": "Preis",
-  "sortAndFilter":"Sortieren & Filtern",
+  "sortAndFilter": "Sortieren & Filtern",
   "clear": "Klar",
   "applyFilters": "Anwenden",
   "sortBy": "Sortieren nach",
   "priceAsc": "Preis (aufsteigend)",
   "priceDesc": "Preis (absteigend)",
   "noProductsFound": "Keine Produkte gefunden.",
-  "items": "Produkte von"
+  "items": "Produkte von",
+  "cart.added": "In den Warenkorb gelegt",
+  "bought.together": "Wird oft zusammen gekauft"
 }

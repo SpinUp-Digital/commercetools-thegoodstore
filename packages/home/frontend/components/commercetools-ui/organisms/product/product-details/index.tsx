@@ -21,6 +21,7 @@ export interface ProductDetailsProps {
   onChangeVariant: (sku: string) => void;
   inModalVersion?: boolean;
   setIsOpen?: (value: boolean) => void;
+  onAddToCart?: () => void;
 }
 
 const ProductDetails: FC<ProductDetailsProps> = ({
@@ -30,6 +31,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({
   onChangeVariant,
   inModalVersion,
   setIsOpen,
+  onAddToCart,
 }) => {
   const { addItem } = useCart();
   const { formatMessage } = useFormat({ name: 'cart' });
@@ -57,6 +59,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({
       }, 1000);
 
       show(product, variant, quantity);
+      onAddToCart?.();
     });
     trackAddToCart();
   };
