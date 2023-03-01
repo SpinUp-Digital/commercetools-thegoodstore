@@ -30,7 +30,7 @@ const Register: React.FC<RegisterProps> = ({ termsOfUseLink }) => {
 
   //register data
   const [isSubscribed, setIsSubscribed] = useState(false);
-  const [data, setData] = useState({ name: '', email: '', password: '' });
+  const [data, setData] = useState({ firstName: '', lastName: '', email: '', password: '' });
 
   //error
   const [error, setError] = useState('');
@@ -72,7 +72,7 @@ const Register: React.FC<RegisterProps> = ({ termsOfUseLink }) => {
     setLoading(true);
     //try registering the user with given credentials
     try {
-      const response = await register({ firstName: data.name, email: data.email, password: data.password });
+      const response = await register(data);
       if (!response.accountId) {
         setError(
           formatErrorMessage({ id: 'account.create.fail', defaultMessage: "Sorry. We couldn't create your account.." }),
@@ -104,12 +104,23 @@ const Register: React.FC<RegisterProps> = ({ termsOfUseLink }) => {
 
           <Input
             id="name"
-            name="name"
-            type="name"
-            autoComplete="name"
+            name="firstName"
+            type="text"
+            autoComplete="firstName"
             required
             className="mb-16 md:mb-20"
-            placeholder={formatMessage({ id: 'name', defaultMessage: 'Name' })}
+            placeholder={formatMessage({ id: 'firstName', defaultMessage: 'First Name' })}
+            onChange={handleChange}
+          />
+
+          <Input
+            id="name"
+            name="lastName"
+            type="text"
+            autoComplete="lastName"
+            required
+            className="mb-16 md:mb-20"
+            placeholder={formatMessage({ id: 'lastName', defaultMessage: 'Last Name' })}
             onChange={handleChange}
           />
 

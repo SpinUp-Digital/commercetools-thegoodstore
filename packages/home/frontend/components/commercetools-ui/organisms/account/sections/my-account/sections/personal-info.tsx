@@ -11,7 +11,8 @@ const PersonalInfo: FC<PersonalInformation> = ({ account }) => {
   const { formatMessage } = useFormat({ name: 'common' });
 
   const personalInformationFields: Array<{ label: string; value: string }> = [
-    { label: formatMessage({ id: 'name', defaultMessage: 'Name' }), value: account?.firstName as string },
+    { label: formatMessage({ id: 'firstName', defaultMessage: 'First Name' }), value: account?.firstName as string },
+    { label: formatMessage({ id: 'lastName', defaultMessage: 'Last Name' }), value: account?.lastName as string },
     { label: formatMessage({ id: 'email', defaultMessage: 'Email' }), value: account?.email },
   ];
 

@@ -8,6 +8,8 @@ import { useAccount } from 'frontastic';
 import AccountForm from '../../../account-atoms/account-form';
 import useDiscardForm from '../../../hooks/useDiscardForm';
 
+type inputNameType = 'firstName' | 'lastName' | 'email';
+
 const PersonalInfoForm = () => {
   const { account, update } = useAccount();
   const { discardForm } = useDiscardForm();
@@ -41,7 +43,8 @@ const PersonalInfoForm = () => {
   };
 
   const inputFields: Array<InputProps> = [
-    { label: 'Name', name: 'firstName', errorMessage: invalidNameErrorMessage, validation: validateTextExists },
+    { label: 'First Name', name: 'firstName', errorMessage: invalidNameErrorMessage, validation: validateTextExists },
+    { label: 'Last Name', name: 'lastName', errorMessage: invalidNameErrorMessage, validation: validateTextExists },
     { label: 'Email', name: 'email', errorMessage: invalidEmailErrorMessage, validation: validateEmail },
   ];
 
@@ -59,7 +62,7 @@ const PersonalInfoForm = () => {
             key={index}
             {...fieldProps}
             onChange={handleChange}
-            value={data?.[fieldProps.name as 'firstName' | 'email'] ?? ''}
+            value={data?.[fieldProps.name as inputNameType] ?? ''}
             required
           />
         ))}
