@@ -19,7 +19,7 @@
 3. Install project dependencies. This installs both frontend and backend dependencies.
 
    ```bash
-   frontasitc install
+   frontastic install
    ```
 
 4. Under `/packages/home/frontend` create a `.env.local` file with keys from `.env.dist` and populate with your own values.
