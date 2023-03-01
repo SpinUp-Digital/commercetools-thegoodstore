@@ -57,10 +57,15 @@ const ProductTile: FC<ProductTileProps> = ({
 
   const [imageHovered, setImageHovered] = useState(false);
   const [buttonHovered, setButtonHovered] = useState(false);
-  const showButton = useMemo(
+  const buttonIsVisible = useMemo(
     () => (imageHovered || buttonHovered) && isDesktopSize,
     [imageHovered, buttonHovered, isDesktopSize],
   );
+
+  const hideButton = () => {
+    setImageHovered(false);
+    setButtonHovered(false);
+  };
 
   const productToWishlistLineItem = useMemo<LineItem | undefined>(() => {
     if (product) {
@@ -132,7 +137,7 @@ const ProductTile: FC<ProductTileProps> = ({
               </span>
             )}
           </div>
-          <QuickView showButton={showButton && !disableQuickView} product={product} />
+          <QuickView buttonIsVisible={buttonIsVisible && !disableQuickView} hideButton={hideButton} product={product} />
         </div>
       </div>
 
