@@ -233,7 +233,11 @@ export class ProductApi extends BaseApi {
             if (categories[i].parent && nodes[categories[i].parent.id]) {
               nodes[categories[i].parent.id].subCategories.push(categories[i]);
             }
+
+            for (const ancestor of categories[i].ancestors)
+              (ancestor.obj as any) = categories.find((category) => category.id === ancestor.id);
           }
+
           const nodesQueue = [categories];
 
           while (nodesQueue.length > 0) {

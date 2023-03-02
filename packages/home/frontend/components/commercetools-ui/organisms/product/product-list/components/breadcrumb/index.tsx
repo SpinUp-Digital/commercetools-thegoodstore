@@ -20,7 +20,9 @@ const Breadcrumbs: React.FC<Props> = ({ categoryId, categories }) => {
 
     const categoryIdChunks = router.asPath.split('?')[0].slice(1).split('/').slice(0, -1);
 
-    return categoryIdChunks.map((id) => (categories.find((category) => category.categoryId === id) ?? {}) as Category);
+    return categoryIdChunks.map(
+      (id) => (categories.find((category) => [category.categoryId, category.slug].includes(id)) ?? {}) as Category,
+    );
   }, [router, categories]);
 
   const currentCategory = useMemo(() => {

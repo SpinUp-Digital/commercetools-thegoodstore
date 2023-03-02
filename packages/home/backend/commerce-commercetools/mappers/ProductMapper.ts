@@ -165,7 +165,7 @@ export class ProductMapper {
         (commercetoolsCategory.ancestors.length > 0
           ? `/${commercetoolsCategory.ancestors
               .map((ancestor) => {
-                return ancestor.id;
+                return ancestor.obj?.slug?.[locale.language] ?? ancestor.id;
               })
               .join('/')}/${commercetoolsCategory.id}`
           : `/${commercetoolsCategory.id}`),
