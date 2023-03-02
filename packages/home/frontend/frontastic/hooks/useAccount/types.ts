@@ -3,6 +3,7 @@ import { ResponseError } from 'frontastic/lib/fetch-api-hub';
 
 export interface GetAccountResult {
   loggedIn: boolean;
+  accountLoading: boolean;
   account?: Account;
   error?: ResponseError;
 }
