@@ -21,7 +21,7 @@ export interface Props {
   serverState?: InstantSearchServerState;
   categories: Category[];
   data: {
-    categoryId?: string;
+    slug?: string;
     searchQuery?: string;
     facetsConfiguration: FacetConfiguration[];
     pricesConfiguration: PriceConfiguration[];
@@ -75,14 +75,14 @@ function ProductListTastic({ categories, data }: Props) {
   const isCategoryFoundOrSearchQueryExists = useMemo(() => {
     if (data.searchQuery) return true;
 
-    return data.categoryId && !!categories?.find((category) => category.categoryId === data.categoryId);
+    return data.slug && !!categories?.find((category) => category.slug === data.slug);
   }, [data, categories]);
 
   if (!isCategoryFoundOrSearchQueryExists) return <NotFound />;
 
   return (
     <ProductList
-      categoryId={data.categoryId}
+      slug={data.slug}
       searchQuery={data.searchQuery}
       categories={categories}
       facetsConfiguration={facetsConfiguration}

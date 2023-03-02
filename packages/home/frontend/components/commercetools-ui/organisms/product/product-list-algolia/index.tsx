@@ -14,27 +14,24 @@ import SearchHeader from './components/search-header';
 import { FacetConfiguration } from './types';
 
 interface Props {
-  categoryId?: string;
+  slug?: string;
   searchQuery?: string;
   categories: Category[];
   facetsConfiguration: Record<string, FacetConfiguration>;
 }
 
-const ProductListAlgolia: React.FC<Props> = ({ categoryId, searchQuery, categories, facetsConfiguration }) => {
+const ProductListAlgolia: React.FC<Props> = ({ slug, searchQuery, categories, facetsConfiguration }) => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
-  const isValidCategoryId = useMemo(
-    () => !!categories.find((category) => category.categoryId === categoryId),
-    [categories, categoryId],
-  );
+  const category = useMemo(() => categories.find((category) => category.slug === slug), [categories, slug]);
 
-  if (!searchQuery && !categoryId) return <></>;
+  if (!searchQuery && !slug) return <></>;
 
   return (
     <div className="min-h-screen bg-neutral-200 py-48">
       <Configure
         query={searchQuery}
-        filters={isValidCategoryId ? `categories.categoryId:${categoryId}` : ''}
+        filters={!!category ? `categories.categoryId:${category.categoryId}` : ''}
         maxValuesPerFacet={1000}
       />
 
@@ -42,7 +39,7 @@ const ProductListAlgolia: React.FC<Props> = ({ categoryId, searchQuery, categori
         {searchQuery ? (
           <SearchHeader query={searchQuery ?? ''} />
         ) : (
-          <Breadcrumbs categories={categories} categoryId={categoryId} />
+          <Breadcrumbs categories={categories} categoryId={category?.categoryId} />
         )}
 
         <MobileFacets facetsConfiguration={facetsConfiguration} />

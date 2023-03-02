@@ -34,11 +34,9 @@ export type Props = Tastic<
 };
 
 const ProductListWrapped: React.FC<Props> = ({ data, categories }) => {
-  console.log(data);
   const { query } = useRouter();
 
-  const { updatePricesConfiguration, updateFacetsConfiguration, updateUiState, categoryId, searchQuery } =
-    useProductList();
+  const { updatePricesConfiguration, updateFacetsConfiguration, updateUiState, slug, searchQuery } = useProductList();
 
   const externalFacetsConfiguration = useMemo<Record<string, FacetConfiguration>>(() => {
     return (data.facetsConfiguration ?? []).reduce(
@@ -90,7 +88,7 @@ const ProductListWrapped: React.FC<Props> = ({ data, categories }) => {
     if (!data.data?.dataSource) return;
 
     updateUiState({
-      categoryId: data.data?.dataSource?.category?.split('/').at(-1),
+      slug: data.data?.dataSource?.category?.split('/').at(-1),
       searchQuery: query.q as string,
       previousCursor: data.data.dataSource.previousCursor,
       nextCursor: data.data.dataSource.nextCursor,
@@ -100,8 +98,8 @@ const ProductListWrapped: React.FC<Props> = ({ data, categories }) => {
 
   const isValidCategoryOrSearchQuery = useMemo(() => {
     if (searchQuery) return true;
-    return categoryId && !!categories.find((c) => c.categoryId === categoryId);
-  }, [searchQuery, categoryId, categories]);
+    return slug && !!categories.find((c) => c.slug === slug);
+  }, [searchQuery, slug, categories]);
 
   if (!data?.data) return <></>;
 

@@ -155,19 +155,20 @@ export class ProductMapper {
     return {
       categoryId: commercetoolsCategory.id,
       name: commercetoolsCategory.name?.[locale.language] ?? undefined,
-      slug: commercetoolsCategory.slug?.[locale.language] ?? undefined,
+      slug: commercetoolsCategory.slug?.[locale.language] ?? commercetoolsCategory.id,
       depth: commercetoolsCategory.ancestors.length,
       subCategories: (commercetoolsCategory as any).subCategories.map((subCategory: CommercetoolsCategory) =>
         ProductMapper.commercetoolsCategoryToCategory(subCategory, locale),
       ),
       path:
-        commercetoolsCategory.ancestors.length > 0
+        commercetoolsCategory.slug?.[locale.language] ??
+        (commercetoolsCategory.ancestors.length > 0
           ? `/${commercetoolsCategory.ancestors
               .map((ancestor) => {
                 return ancestor.id;
               })
               .join('/')}/${commercetoolsCategory.id}`
-          : `/${commercetoolsCategory.id}`,
+          : `/${commercetoolsCategory.id}`),
     };
   };
 

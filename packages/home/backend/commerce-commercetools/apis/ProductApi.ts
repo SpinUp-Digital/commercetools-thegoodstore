@@ -198,7 +198,9 @@ export class ProductApi extends BaseApi {
       const where: string[] = [];
 
       if (categoryQuery.slug) {
-        where.push(`slug(${locale.language}="${categoryQuery.slug}")`);
+        if (categoryQuery.slug.match(/([a-z0-9]-)+/))
+          where.push(`slug(${locale.language}="${categoryQuery.slug}") or id="${categoryQuery.slug}"`);
+        else where.push(`slug(${locale.language}="${categoryQuery.slug}")`);
       }
 
       if (categoryQuery.parentId) {
@@ -228,7 +230,7 @@ export class ProductApi extends BaseApi {
           }
 
           for (let i = 0; i < categories.length; i++) {
-            if (categories[i].parent) {
+            if (categories[i].parent && nodes[categories[i].parent.id]) {
               nodes[categories[i].parent.id].subCategories.push(categories[i]);
             }
           }

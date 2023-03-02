@@ -5,7 +5,7 @@ export interface RefinementRemovedEvent {
 }
 
 export interface UiState {
-  categoryId?: string;
+  slug?: string;
   searchQuery?: string;
   previousCursor?: string;
   nextCursor?: string;

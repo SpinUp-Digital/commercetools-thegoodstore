@@ -16,14 +16,11 @@ export interface Props {
 }
 
 const ProductList: React.FC<Props> = ({ products, categories }) => {
-  const { categoryId, searchQuery } = useProductList();
+  const { slug, searchQuery } = useProductList();
 
-  const isValidCategoryId = useMemo(
-    () => !!categories.find((category) => category.categoryId === categoryId),
-    [categories, categoryId],
-  );
+  const category = useMemo(() => categories.find((category) => category.slug === slug), [categories, slug]);
 
-  if (!searchQuery && !isValidCategoryId) return <></>;
+  if (!searchQuery && !category) return <></>;
 
   return (
     <div className="min-h-screen bg-neutral-200 py-48">
@@ -31,7 +28,7 @@ const ProductList: React.FC<Props> = ({ products, categories }) => {
         {searchQuery ? (
           <SearchHeader query={searchQuery ?? ''} />
         ) : (
-          <Breadcrumbs categories={categories} categoryId={categoryId} />
+          <Breadcrumbs categories={categories} categoryId={category?.categoryId} />
         )}
 
         <MobileFacets />

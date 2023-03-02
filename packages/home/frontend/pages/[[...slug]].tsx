@@ -121,7 +121,7 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({
   const serverUrl = `${protocol}://${req.headers.host}${resolvedUrl}`;
 
   /* Algolia */
-  const categoryId = (params?.slug as string[])?.[(params?.slug?.length as number) - 1];
+  const slug = (params?.slug as string[])?.[(params?.slug?.length as number) - 1];
 
   const searchQuery = (query.q as string) ?? '';
 
@@ -133,7 +133,7 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({
     ProductListTasticProps['data']
   >;
 
-  if (categoryId) plpConfiguration.categoryId = categoryId;
+  if (slug) plpConfiguration.slug = slug;
   if (searchQuery) plpConfiguration.searchQuery = searchQuery;
 
   const serverState = await getServerState(
@@ -141,7 +141,7 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({
       serverUrl={serverUrl}
       categories={(categories.items as Category[]) ?? []}
       data={{
-        categoryId,
+        slug,
         searchQuery,
         facetsConfiguration: plpConfiguration.facetsConfiguration ?? [],
         pricesConfiguration: plpConfiguration.pricesConfiguration ?? [],
