@@ -24,6 +24,26 @@ const useAccount = (): UseAccountReturn => {
     };
   }, [result]);
 
+  const shippingAddresses = useMemo(() => {
+    if (!data.account) return [];
+
+    return (data.account.addresses ?? []).filter((address) => address.isShippingAddress);
+  }, [data.account]);
+
+  const billingAddresses = useMemo(() => {
+    if (!data.account) return [];
+
+    return (data.account.addresses ?? []).filter((address) => address.isBillingAddress);
+  }, [data.account]);
+
+  const defaultShippingAddress = useMemo(() => {
+    return data.account?.addresses?.find((address) => address.isDefaultShippingAddress);
+  }, [data.account]);
+
+  const defaultBillingAddress = useMemo(() => {
+    return data.account?.addresses?.find((address) => address.isDefaultBillingAddress);
+  }, [data.account]);
+
   const login = async (email: string, password: string, remember?: boolean): Promise<Account> => {
     const extensions = SDK.getExtensions();
 
@@ -239,6 +259,10 @@ const useAccount = (): UseAccountReturn => {
 
   return {
     ...data,
+    shippingAddresses,
+    billingAddresses,
+    defaultShippingAddress,
+    defaultBillingAddress,
     login,
     logout,
     register,

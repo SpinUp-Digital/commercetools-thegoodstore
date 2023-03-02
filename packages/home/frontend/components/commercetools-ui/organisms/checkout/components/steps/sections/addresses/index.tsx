@@ -24,7 +24,7 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
   const { formatMessage: formatCheckoutMessage } = useFormat({ name: 'checkout' });
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
 
-  const { account, loggedIn } = useAccount();
+  const { account, loggedIn, shippingAddresses } = useAccount();
 
   const { updateCart } = useCart();
 
@@ -220,16 +220,18 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
   return (
     <div className="bg-white pt-16 lg:px-36 lg:pt-0 lg:pb-36">
       {loggedIn ? (
-        <div className="mt-20">
-          <h5 className="text-16 capitalize">
-            {formatCheckoutMessage({ id: 'shippingAddress', defaultMessage: 'Shipping Address' })}
-          </h5>
-          <AccountAddresses
-            className="mt-20"
-            type="shipping"
-            onSelectAddress={(address) => setShippingAddress(address)}
-          />
-        </div>
+        shippingAddresses.length > 0 && (
+          <div className="mt-20">
+            <h5 className="text-16 capitalize">
+              {formatCheckoutMessage({ id: 'shippingAddress', defaultMessage: 'Shipping Address' })}
+            </h5>
+            <AccountAddresses
+              className="mt-20"
+              type="shipping"
+              onSelectAddress={(address) => setShippingAddress(address)}
+            />
+          </div>
+        )
       ) : (
         <AddressForm
           className="md:max-w-[400px]"
@@ -239,61 +241,65 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
         />
       )}
 
-      <div className="mt-48">
-        <div className="flex items-center gap-8 lg:gap-12">
-          <h5 className="text-16 capitalize">
-            {formatCheckoutMessage({ id: 'billingAddress', defaultMessage: 'Billing Address' })}
-          </h5>
-          <Info
-            message={`${formatCheckoutMessage({
-              id: 'enter.associated.address.with.payment',
-              defaultMessage: 'Enter the address that is associated with your payment method',
-            })}.`}
-          />
-        </div>
-
-        <div className="mt-28 flex items-center gap-12 p-2">
-          <Checkbox
-            label={formatCheckoutMessage({
-              id: 'billingDetailsLabel',
-              defaultMessage: 'My billing address is the same as my delivery address',
-            })}
-            labelPosition="on-right"
-            checked={sameShippingAddress}
-            onChange={({ checked }) => setSameShippingAddress(checked)}
-            disableBackground
-          />
-        </div>
-
-        {!sameShippingAddress &&
-          (loggedIn ? (
-            <AccountAddresses
-              type="billing"
-              className="mt-28"
-              onSelectAddress={(address) => setBillingAddress(address)}
+      {loggedIn && shippingAddresses.length === 0 ? (
+        <></>
+      ) : (
+        <div className="mt-48">
+          <div className="flex items-center gap-8 lg:gap-12">
+            <h5 className="text-16 capitalize">
+              {formatCheckoutMessage({ id: 'billingAddress', defaultMessage: 'Billing Address' })}
+            </h5>
+            <Info
+              message={`${formatCheckoutMessage({
+                id: 'enter.associated.address.with.payment',
+                defaultMessage: 'Enter the address that is associated with your payment method',
+              })}.`}
             />
-          ) : (
-            <AddressForm
-              className="mt-28 md:max-w-[400px]"
-              fields={fields}
-              address={billingAddress}
-              onChange={handleBillingAddressChange}
-            />
-          ))}
+          </div>
 
-        <div className="mt-28 md:mt-36 lg:mt-45">
-          <Button
-            variant="primary"
-            className="w-full min-w-[200px] md:text-16 lg:w-fit lg:px-36"
-            disabled={!isValidShippingAddress || !isValidBillingAddress}
-            loading={processing}
-            type="submit"
-            onClick={submit}
-          >
-            {formatCartMessage({ id: 'continue.to', defaultMessage: 'Continue to' })}{' '}
-            <span className="lowercase">{formatCartMessage({ id: 'shipping', defaultMessage: 'Shipping' })}</span>
-          </Button>
+          <div className="mt-28 flex items-center gap-12 p-2">
+            <Checkbox
+              label={formatCheckoutMessage({
+                id: 'billingDetailsLabel',
+                defaultMessage: 'My billing address is the same as my delivery address',
+              })}
+              labelPosition="on-right"
+              checked={sameShippingAddress}
+              onChange={({ checked }) => setSameShippingAddress(checked)}
+              disableBackground
+            />
+          </div>
+
+          {!sameShippingAddress &&
+            (loggedIn ? (
+              <AccountAddresses
+                type="billing"
+                className="mt-28"
+                onSelectAddress={(address) => setBillingAddress(address)}
+              />
+            ) : (
+              <AddressForm
+                className="mt-28 md:max-w-[400px]"
+                fields={fields}
+                address={billingAddress}
+                onChange={handleBillingAddressChange}
+              />
+            ))}
         </div>
+      )}
+
+      <div className="mt-28 md:mt-36 lg:mt-45">
+        <Button
+          variant="primary"
+          className="w-full min-w-[200px] md:text-16 lg:w-fit lg:px-36"
+          disabled={!isValidShippingAddress || !isValidBillingAddress}
+          loading={processing}
+          type="submit"
+          onClick={submit}
+        >
+          {formatCartMessage({ id: 'continue.to', defaultMessage: 'Continue to' })}{' '}
+          <span className="lowercase">{formatCartMessage({ id: 'shipping', defaultMessage: 'Shipping' })}</span>
+        </Button>
       </div>
     </div>
   );

@@ -24,6 +24,10 @@ export interface RegisterAccount extends UpdateAccount {
 }
 
 export interface UseAccountReturn extends GetAccountResult {
+  shippingAddresses: Address[];
+  billingAddresses: Address[];
+  defaultShippingAddress?: Address;
+  defaultBillingAddress?: Address;
   login: (email: string, password: string, remember?: boolean) => Promise<Account>;
   logout: () => Promise<void>;
   register: (account: RegisterAccount) => Promise<Account>;

@@ -11,25 +11,21 @@ interface Props {
 }
 
 const AccountAddresses: React.FC<Props> = ({ className = '', type, onSelectAddress }) => {
-  const { account } = useAccount();
+  const { shippingAddresses, billingAddresses, defaultBillingAddress, defaultShippingAddress } = useAccount();
 
   const { accountAddressToAddress } = useMappers();
 
   const addresses = useMemo(() => {
-    return (account?.addresses ?? []).filter(
-      (address) => address[type === 'shipping' ? 'isShippingAddress' : 'isBillingAddress'],
-    );
-  }, [account?.addresses, type]);
+    return type === 'shipping' ? shippingAddresses : billingAddresses;
+  }, [type, shippingAddresses, billingAddresses]);
 
   const [selected, setSelected] = useState<Address>();
 
   useEffect(() => {
-    const defaultAddress = addresses.find(
-      (address) => address[type === 'shipping' ? 'isDefaultShippingAddress' : 'isDefaultBillingAddress'],
-    );
+    const defaultAddress = type === 'shipping' ? defaultShippingAddress : defaultBillingAddress;
 
     if (defaultAddress) setSelected(accountAddressToAddress(defaultAddress));
-  }, [addresses, accountAddressToAddress, type]);
+  }, [defaultShippingAddress, defaultBillingAddress, accountAddressToAddress, type]);
 
   useEffect(() => {
     if (selected) onSelectAddress(selected);
