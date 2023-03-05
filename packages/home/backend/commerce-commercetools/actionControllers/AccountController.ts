@@ -164,16 +164,14 @@ export const register: ActionHook = async (request: Request, actionContext: Acti
   const cart = await CartFetcher.fetchCart(request, actionContext);
 
   const account = await accountApi.create(accountData, cart);
-  /*
-  const emailApi = EmailApiFactory.getDefaultApi(actionContext.frontasticContext, locale);
-*/
-  //emailApi.sendWelcomeCustomerEmail(account);
 
-  //emailApi.sendAccountVerificationEmail(account);
+  const emailApi = EmailApiFactory.getDefaultApi(actionContext.frontasticContext, locale);
+
+  emailApi.sendWelcomeCustomerEmail(account);
+  emailApi.sendAccountVerificationEmail(account);
 
   const response: Response = {
     statusCode: 200,
-    //body: JSON.stringify(account),
     body: JSON.stringify(account),
     sessionData: {
       ...request.sessionData,

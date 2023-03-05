@@ -48,7 +48,7 @@ const Verify: NextPage = () => {
 
     confirmed.current = true;
 
-    router.push('/account?verify=1');
+    router.replace('/account?verify=1', undefined, { shallow: true });
 
     confirm(token as string)
       .then(successCallback)
