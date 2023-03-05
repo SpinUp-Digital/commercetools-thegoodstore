@@ -189,7 +189,10 @@ export class ProductApi extends BaseApi {
     }
   };
 
-  queryCategories: (categoryQuery: CategoryQuery) => Promise<Result> = async (categoryQuery: CategoryQuery) => {
+  queryCategories: (categoryQuery: CategoryQuery, considerId?: boolean) => Promise<Result> = async (
+    categoryQuery: CategoryQuery,
+    considerId = true,
+  ) => {
     try {
       const locale = await this.getCommercetoolsLocal();
 
@@ -198,8 +201,7 @@ export class ProductApi extends BaseApi {
       const where: string[] = [];
 
       if (categoryQuery.slug) {
-        if (categoryQuery.slug.match(/([a-z0-9]-)+/))
-          where.push(`slug(${locale.language}="${categoryQuery.slug}") or id="${categoryQuery.slug}"`);
+        if (considerId) where.push(`slug(${locale.language}="${categoryQuery.slug}") or id="${categoryQuery.slug}"`);
         else where.push(`slug(${locale.language}="${categoryQuery.slug}")`);
       }
 
@@ -264,7 +266,8 @@ export class ProductApi extends BaseApi {
           return result;
         })
         .catch((error) => {
-          throw error;
+          if (!considerId) throw error;
+          return this.queryCategories(categoryQuery, false);
         });
     } catch (error) {
       //TODO: better error, get status code etc...

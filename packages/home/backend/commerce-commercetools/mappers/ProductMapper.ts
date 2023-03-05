@@ -161,14 +161,13 @@ export class ProductMapper {
         ProductMapper.commercetoolsCategoryToCategory(subCategory, locale),
       ),
       path:
-        commercetoolsCategory.slug?.[locale.language] ??
-        (commercetoolsCategory.ancestors.length > 0
+        commercetoolsCategory.ancestors.length > 0
           ? `/${commercetoolsCategory.ancestors
               .map((ancestor) => {
                 return ancestor.obj?.slug?.[locale.language] ?? ancestor.id;
               })
-              .join('/')}/${commercetoolsCategory.id}`
-          : `/${commercetoolsCategory.id}`),
+              .join('/')}/${commercetoolsCategory.slug?.[locale.language] ?? commercetoolsCategory.id}`
+          : `/${commercetoolsCategory.slug?.[locale.language] ?? commercetoolsCategory.id}`,
     };
   };
 
