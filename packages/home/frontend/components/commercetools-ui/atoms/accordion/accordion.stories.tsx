@@ -10,14 +10,15 @@ export default {
 } as Meta;
 
 const Template: Story = (args) => (
-  <div className="rounded border-2">
+  <div className="flex flex-col items-stretch gap-8">
     {accordionMockItems.map((item, index) => (
       <AccordionBtn
         key={index}
         variant="arrow"
         closedSectionTitle={item.title}
         openSectionTitle={item.title}
-        className={index < accordionMockItems.length - 1 ? 'border-b-2' : ''}
+        className={`p-8 ${index < accordionMockItems.length - 1 ? 'border-b-2' : ''}`}
+        panelClassName="p-8 text-secondary-black"
         {...args}
       >
         {item.content}
