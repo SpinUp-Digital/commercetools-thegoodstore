@@ -1,6 +1,8 @@
 import { RouterContext } from 'next/dist/shared/lib/router-context';
+import { SDK } from '../sdk';
 import 'tailwindcss/tailwind.css';
 import '../styles/app.css';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -17,4 +19,10 @@ export const parameters = {
   },
 };
 
-export const decorators = [(Story) => <Story />];
+const StoryWrapper = ({ Story }) => {
+  SDK.configure('en');
+
+  return <Story />;
+};
+
+export const decorators = [(Story) => <StoryWrapper Story={Story} />];

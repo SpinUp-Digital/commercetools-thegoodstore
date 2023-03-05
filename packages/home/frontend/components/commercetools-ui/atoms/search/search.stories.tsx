@@ -10,3 +10,6 @@ export default {
 const Template: ComponentStory<typeof Search> = (args) => <Search {...args} />;
 
 export const Primary = Template.bind({});
+Primary.args = {
+  categories: [],
+};
