@@ -24,7 +24,7 @@ const Summary: React.FC<Props> = ({ isFinalStep, onPurchase }) => {
 
   const { processing } = useCheckout();
 
-  const { locale } = useRouter();
+  const { locale, ...router } = useRouter();
 
   const hiddenItemsCount = (data?.lineItems?.length ?? 0) - 3;
 
@@ -40,7 +40,11 @@ const Summary: React.FC<Props> = ({ isFinalStep, onPurchase }) => {
       <div className="relative mt-30 hidden gap-20 pr-[65px] lg:block">
         <div className={`grid grid-cols-3 gap-16 overflow-hidden ${!isSummaryExpanded ? 'max-h-[104px]' : ''}`}>
           {data?.lineItems?.map((lineItem) => (
-            <div key={lineItem.lineItemId} className="relative h-[104px]">
+            <div
+              key={lineItem.lineItemId}
+              className="relative h-[104px] cursor-pointer"
+              onClick={() => router.push(lineItem._url ?? '')}
+            >
               <Image layout="fill" src={lineItem.variant?.images?.[0]} objectFit="contain" suffix="small" />
             </div>
           ))}
@@ -65,6 +69,7 @@ const Summary: React.FC<Props> = ({ isFinalStep, onPurchase }) => {
         closedSectionTitle={formatCheckoutMessage({ id: 'discount.apply', defaultMessage: 'Apply a discount' })}
         buttonClassName="text-secondary-black border-y border-neutral-400 py-16 mt-16 md:mt-24 lg:mt-28"
         buttonWrapperClassName="px-16 md:px-24 lg:px-0"
+        panelClassName="px-16 md:px-24 lg:px-0"
         iconClassName="w-24"
       >
         <DiscountForm />

@@ -8,7 +8,7 @@ import Image from 'frontastic/lib/image';
 const CartSummary = () => {
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
 
-  const { locale } = useRouter();
+  const { locale, ...router } = useRouter();
 
   const { data, transaction, isEmpty, isShippingAccurate } = useCart();
 
@@ -16,7 +16,11 @@ const CartSummary = () => {
     <div>
       <div className="divide-y divide-neutral-400 px-16 md:px-24">
         {data?.lineItems?.map((lineItem) => (
-          <div key={lineItem.lineItemId} className="flex items-center justify-between">
+          <div
+            key={lineItem.lineItemId}
+            className="flex cursor-pointer items-center justify-between"
+            onClick={() => router.push(lineItem._url ?? '')}
+          >
             <div className="flex items-start gap-16 py-16 md:gap-32">
               <div className="relative h-[104px] w-[89px] shrink-0">
                 <Image layout="fill" src={lineItem.variant?.images?.[0]} objectFit="contain" />
