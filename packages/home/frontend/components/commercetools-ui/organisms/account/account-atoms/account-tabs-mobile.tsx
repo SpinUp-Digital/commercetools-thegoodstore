@@ -16,7 +16,6 @@ export interface Props {
 const AccountTabsMobile: FC<Props> = ({ contentTitle, hash, tabs }) => {
   const forms = ['#edit-personal-info', '#edit-newsletter', '#edit-address', '#change-password', '#delete-account'];
   const accountNavButtonClassNames = useClassNames([
-    hash === '#orders' ? 'px-16' : '',
     hash && forms.includes(hash) ? 'hidden' : 'relative pt-8 pb-20 md:hidden',
   ]);
 

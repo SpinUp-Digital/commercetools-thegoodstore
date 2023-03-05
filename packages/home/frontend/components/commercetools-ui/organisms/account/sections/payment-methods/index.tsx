@@ -14,14 +14,27 @@ export interface Payment {
   cardCVC?: string;
 }
 export const payments: Payment[] = [
-  { id: '1', cardHolder: 'Ahmed Amir', cardNumber: '4646464646464644', cardExpiry: { name: '03/25', value: '03/25' } },
+  {
+    id: '1',
+    cardHolder: 'Ahmed Amir',
+    cardNumber: '4646464646464644',
+    cardExpiry: { name: '03/25', value: '03/25' },
+    cardCVC: '420',
+  },
   {
     id: '2',
     cardHolder: 'Ahmed George',
     cardNumber: '4988438843884305',
     cardExpiry: { name: '03/27', value: '03/27' },
+    cardCVC: '522',
   },
-  { id: '3', cardHolder: 'Dio Brando', cardNumber: '5555444433331111', cardExpiry: { name: '03/30', value: '03/30' } },
+  {
+    id: '3',
+    cardHolder: 'Dio Brando',
+    cardNumber: '5555444433331111',
+    cardExpiry: { name: '03/30', value: '03/30' },
+    cardCVC: '555',
+  },
 ];
 
 const PaymentMethods = () => {
@@ -29,8 +42,12 @@ const PaymentMethods = () => {
   const router = useRouter();
   const resolveCCImage = useResolveCCImage();
 
+  const goToEdit = (payment: Payment) => {
+    router.push(`/account#edit-payment/${payment.id}`);
+  };
+
   return (
-    <div>
+    <div className="px-16 md:mt-24 md:px-24 lg:mt-40 lg:px-44">
       <div className="hidden md:block">
         <Typography as="h2" fontFamily="libre" fontSize={18} className="text-primary-black md:text-22 lg:text-24">
           {formatPaymentMessage({
@@ -57,28 +74,38 @@ const PaymentMethods = () => {
           defaultMessage: 'Add new card',
         })}
       </Button>
-      <div className="mt-32 w-full lg:w-[70%]">
+      <div className="mt-32 w-full lg:w-[90%]">
         {payments.map((payment) => (
-          <div key={payment.id} className="mt-16 flex items-center justify-between rounded-md border p-16 lg:py-24">
-            <div className="flex">
+          <div
+            key={payment.id}
+            className="mt-16 flex items-center justify-between rounded-md border px-16 py-12 lg:p-24"
+          >
+            <div className="flex items-center">
               {/* eslint-disable-next-line */}
-              <img className="w-[32px]" src={resolveCCImage(payment.cardNumber)} />
+              <img className="h-fit w-[32px]" src={resolveCCImage(payment.cardNumber)} />
               <Typography fontSize={14} className="ml-16 text-primary-black">
                 {`...${payment.cardNumber.substring(12, 16)} ${payment.cardExpiry.name}`}
               </Typography>
             </div>
             <Button
               variant="ghost"
-              onClick={() => router.push(`/account#edit-payment/${payment.id}`)}
-              className="text-primary-black"
+              onClick={() => goToEdit(payment)}
+              className="p-0 text-primary-black hover:underline"
             >
-              <Typography fontSize={14} className="hidden text-primary-black md:block ">
+              <Typography fontSize={14} className="hidden text-primary-black md:block">
                 {formatPaymentMessage({
                   id: 'edit',
                   defaultMessage: 'Edit',
                 })}
               </Typography>
-              <PencilSquareIcon className="block rounded-full bg-neutral-200 p-12 md:hidden" />
+            </Button>
+
+            <Button
+              variant="ghost"
+              onClick={() => goToEdit(payment)}
+              className="rounded-full bg-neutral-200 p-12 md:hidden"
+            >
+              <PencilSquareIcon className="w-20" />
             </Button>
           </div>
         ))}

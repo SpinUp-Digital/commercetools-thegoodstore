@@ -11,12 +11,12 @@ const useOrderData = (order?: Order) => {
   }, [order]);
 
   const orderDateShipping = useMemo(() => {
-    return orderDateCreated && new Date(orderDateCreated?.setDate(orderDateCreated?.getDate() + 3));
-  }, [orderDateCreated]);
+    return order?.createdAt && new Date(new Date(order?.createdAt).setDate(new Date(order?.createdAt).getDate() + 3));
+  }, [order]);
 
   const orderDateDelivery = useMemo(() => {
-    return orderDateCreated && new Date(orderDateCreated?.setDate(orderDateCreated?.getDate() + 3));
-  }, [orderDateCreated]);
+    return order?.createdAt && new Date(new Date(order?.createdAt).setDate(new Date(order?.createdAt).getDate() + 6));
+  }, [order]);
 
   const formattedOrderDate = useMemo(() => {
     return (
@@ -25,7 +25,7 @@ const useOrderData = (order?: Order) => {
         new Date(orderDateCreated).toDateString().split(' ')[1]
       } ${new Date(orderDateCreated).toDateString().split(' ')[2]}`
     );
-  }, [orderDateCreated]);
+  }, [order]);
 
   const formattedShippingDate = useMemo(() => {
     return (

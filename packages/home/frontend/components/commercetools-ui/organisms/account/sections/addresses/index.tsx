@@ -12,7 +12,7 @@ const Addresses = () => {
   const addresses = account?.addresses;
 
   return (
-    <div>
+    <div className="mt-20 px-16 md:px-24 lg:mt-40 lg:px-44">
       <div className="hidden pb-12 md:block md:pb-20 2xl:pb-36">
         <Typography as="h2" fontFamily="libre" className="text-22 text-primary-black lg:text-24">
           {formatAccountMessage({

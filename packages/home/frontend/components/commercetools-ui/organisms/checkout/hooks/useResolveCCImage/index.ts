@@ -9,8 +9,8 @@ const useResolveCCImage = () => {
 
     return (
       {
-        visa: '/images/visa.png',
-        mastercard: '/images/mc.png',
+        visa: '/images/visa.svg',
+        mastercard: '/images/mc.svg',
       }[types[0].type] ?? ''
     );
   }, []);

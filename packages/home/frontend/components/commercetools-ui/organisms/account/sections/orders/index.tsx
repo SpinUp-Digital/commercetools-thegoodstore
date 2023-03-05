@@ -24,7 +24,7 @@ const Orders = () => {
 
   const statusTabs: StatusTab[] = [
     { name: formatOrdersMessage({ id: 'all.orders', defaultMessage: 'All orders' }), slug: 'allOrders' },
-    { name: formatOrdersMessage({ id: 'Open', defaultMessage: 'Registered' }), slug: 'Open' },
+    { name: formatOrdersMessage({ id: 'Confirmed', defaultMessage: 'Registered' }), slug: 'Confirmed' },
     { name: formatOrdersMessage({ id: 'Complete', defaultMessage: 'Delivered' }), slug: 'Complete' },
     { name: formatOrdersMessage({ id: 'Cancelled', defaultMessage: 'Returned' }), slug: 'Cancelled' },
   ];
@@ -44,15 +44,15 @@ const Orders = () => {
 
   const tabTextClassNames = (tab: StatusTab) => {
     return `border-primary-black pb-12 ${
-      tab.slug === selectedTab ? 'border-b-[1.5px] text-primary-black' : 'text-secondary-black'
+      tab.slug === selectedTab ? 'border-b-2 text-primary-black' : 'text-secondary-black'
     }`;
   };
 
   const mobileStatusWrapper = useClassNames([
     'h-fit w-full',
-    leftArrowAppear === true && 'pl-36',
-    rightArrowAppear === true && 'pr-36',
-    !overflow ? 'flex justify-center pl-16 pr-16' : '',
+    leftArrowAppear === true ? 'pl-36' : 'pl-16',
+    rightArrowAppear === true ? 'pr-36' : 'pr-16',
+    !overflow && 'flex justify-center px-16',
   ]);
 
   const swiperReachBeginning = useCallback(() => {
@@ -75,15 +75,18 @@ const Orders = () => {
         <Skeleton className="h-[30px]" />
       ) : (
         <>
-          <div className="hidden px-24 pb-12 md:block lg:px-0">
-            <Typography as="h2" fontFamily="libre" className="text-22 text-primary-black lg:text-24">
-              {formatOrdersMessage({
-                id: 'orders',
-                defaultMessage: 'Orders',
-              })}
-            </Typography>
-          </div>
-          <div className="px-16 pt-12 pb-16 md:px-24 lg:px-0">
+          <Typography
+            as="h2"
+            fontFamily="libre"
+            className="mt-20 hidden text-22 text-primary-black md:ml-24 md:block lg:mt-42 lg:ml-44 lg:text-24"
+          >
+            {formatOrdersMessage({
+              id: 'orders',
+              defaultMessage: 'Orders',
+            })}
+          </Typography>
+
+          <div className="mt-36 px-16 pb-16 md:px-24 lg:px-44">
             <Typography as="h3" fontSize={14} fontFamily="inter" className="text-secondary-black md:text-16">
               {formatOrdersMessage({
                 id: 'help.question',
@@ -92,7 +95,7 @@ const Orders = () => {
             </Typography>
           </div>
 
-          <Wrapper className="h-56 w-full border-b-2 border-neutral-400 pt-12 md:hidden">
+          <Wrapper className="h-44 w-full border-b-2 border-neutral-400 pt-12 md:hidden">
             <div className={mobileStatusWrapper} ref={ref}>
               <Slider
                 onReachEnd={swiperReachEnd}
@@ -101,12 +104,12 @@ const Orders = () => {
                 dots={false}
                 prevButtonStyles={{
                   left: '-20px',
-                  transform: 'translateY(-50%) rotateZ(135deg) scale(0.55)',
+                  transform: 'translateY(-70%) rotateZ(135deg) scale(0.55)',
                   borderWidth: '0 3px 3px 0',
                 }}
                 nextButtonStyles={{
                   right: '-20px',
-                  transform: ' translateY(-50%) rotateZ(-45deg) scale(0.55)',
+                  transform: ' translateY(-70%) rotateZ(-45deg) scale(0.55)',
                   borderWidth: '0 3px 3px 0',
                 }}
                 allowTouchMove
@@ -129,8 +132,8 @@ const Orders = () => {
             </div>
           </Wrapper>
 
-          <div className="px-16 md:px-24 lg:px-0">
-            <div className="relative hidden h-57 w-full border-b-[1.5px] border-neutral-400 pt-24 md:flex">
+          <div className="px-16 md:px-24 lg:px-44">
+            <div className="relative hidden h-58 w-full border-b-2 border-neutral-400 pt-24 md:flex">
               <div className="absolute flex h-fit w-[40%] justify-between">
                 {statusTabs.map((tab) => (
                   <div
@@ -147,7 +150,7 @@ const Orders = () => {
             </div>
           </div>
 
-          <div className=" overflow-auto py-24 px-16 md:px-24 lg:px-0">
+          <div className="overflow-auto py-24 px-16 md:px-24 lg:px-44">
             {orderHistoryContent?.map((order?: Order) => (
               <OrderItem key={order?.orderId} order={order} />
             ))}

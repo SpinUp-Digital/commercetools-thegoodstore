@@ -28,7 +28,7 @@ const PaymentAdd = () => {
 
   const handleSaveClick = () => {
     payments.push({
-      id: payments.length.toString(),
+      id: (payments.length + 1).toString(),
       cardHolder: cardHolder,
       cardNumber: cardNumber,
       cardExpiry: cardExpDate ?? { name: '', value: '' },
@@ -39,7 +39,7 @@ const PaymentAdd = () => {
   };
 
   return (
-    <div>
+    <div className="mt-20 ml-0 lg:ml-44 lg:mt-40">
       <div className="mt-24 px-16 md:mt-0 md:px-24 lg:px-0">
         <Typography as="h2" fontFamily="libre" fontSize={16} className="text-primary-black md:text-22 lg:text-24">
           {formatPaymentMessage({

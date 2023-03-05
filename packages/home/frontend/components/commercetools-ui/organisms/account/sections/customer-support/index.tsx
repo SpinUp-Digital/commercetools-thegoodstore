@@ -28,7 +28,7 @@ const CustomerSupport: React.FC<Props> = ({
 }) => {
   const { formatMessage: formatCustomerSupportMessage } = useFormat({ name: 'customer-support' });
   return (
-    <>
+    <div className="mt-20 px-16 md:px-24 lg:mt-38 lg:px-44">
       <div className="hidden pb-12 md:block">
         <Typography as="h2" fontFamily="libre" className="text-22 text-primary-black lg:text-24">
           {formatCustomerSupportMessage({
@@ -54,7 +54,7 @@ const CustomerSupport: React.FC<Props> = ({
       />
 
       <FAQuestions faqs={faqs} />
-    </>
+    </div>
   );
 };
 

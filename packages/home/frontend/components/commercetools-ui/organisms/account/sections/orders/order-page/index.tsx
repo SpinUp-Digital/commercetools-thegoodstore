@@ -14,10 +14,11 @@ const OrderPage: FC<Props> = ({ orderId }) => {
   const { formatMessage: formatOrdersMessage } = useFormat({ name: 'orders' });
 
   const { orders } = useOrderFetch();
+
   const order = orders?.find((order) => order.orderId === orderId);
 
   return (
-    <>
+    <div className="px-16 md:mt-20 md:px-24 lg:mt-40 lg:px-44">
       <div className="mt-16 pb-12 md:mt-0">
         <Typography
           as="h2"
@@ -31,7 +32,7 @@ const OrderPage: FC<Props> = ({ orderId }) => {
           })}
         </Typography>
       </div>
-      <div className="flex pl-16 pt-8 pb-16 md:px-0 md:pl-24 md:pt-12 lg:pl-0 lg:pt-24">
+      <div className="flex justify-start pl-16 pt-8 pb-16 md:px-0 md:pl-24 md:pt-12 lg:pl-0 lg:pt-24">
         <Typography
           as="h3"
           fontSize={14}
@@ -57,7 +58,7 @@ const OrderPage: FC<Props> = ({ orderId }) => {
 
         <OrderSummary order={order} />
       </div>
-    </>
+    </div>
   );
 };
 

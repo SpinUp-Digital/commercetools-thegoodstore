@@ -3,6 +3,7 @@
     "orders.subtitle": "Check status of recent orders, manage your returns and download invoices.",
     "all.orders": "All orders",
     "Open": "Registered",
+    "Confirmed": "Registered",
     "Complete": "Delivered",
     "Cancelled": "Returned",
     "order.id": "Order ID:",

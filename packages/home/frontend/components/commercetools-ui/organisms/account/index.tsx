@@ -125,18 +125,13 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
 
   const contentTitle = useMemo(() => {
     const tabIndex = tabs?.findIndex((tab) => tab?.href === hash);
-    if (tabs[tabIndex]) return tabs[tabIndex].name;
+    if (tabs[tabIndex]) return tabs[tabIndex].name ?? '';
     else return '';
   }, [hash, tabs]);
 
+  const contentTitleClassNames = useClassNames(['block pb-12 pt-16 md:hidden']);
+
   const Content = mapping[hash as keyof typeof mapping];
-
-  const contentClassNames = useClassNames([
-    hash != '#orders' ? 'px-16 md:px-24' : 'md:px-0',
-    'w-full flex flex-col lg:items-start md:border-l border-neutral-400 lg:px-44 lg:py-48 md:py-24',
-  ]);
-
-  const contentTitleClassNames = useClassNames([hash === '#orders' ? 'px-16' : '', 'block pb-12 pt-16 md:hidden']);
 
   return (
     <div className="relative flex bg-neutral-100">
@@ -178,18 +173,20 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
           </div>
         </div>
       </div>
-      <div className={contentClassNames}>
+      <div className="flex w-full flex-col border-neutral-400 md:border-l lg:items-start">
         <div className="w-full pb-48">
-          {contentTitle && (
-            <div className={contentTitleClassNames}>
-              <Typography as="h2" fontFamily="libre" className="text-18 text-primary-black">
-                {contentTitle}
-              </Typography>
-            </div>
-          )}
+          <div className="px-16">
+            {contentTitle && (
+              <div className={contentTitleClassNames}>
+                <Typography as="h2" fontFamily="libre" className="text-18 text-primary-black">
+                  {contentTitle}
+                </Typography>
+              </div>
+            )}
 
-          {contentTitle && <AccountTabsMobile contentTitle={contentTitle} hash={hash} tabs={tabs} />}
-          {Content && Content}
+            {contentTitle && <AccountTabsMobile contentTitle={contentTitle} hash={hash} tabs={tabs} />}
+          </div>
+          <div key={hash}>{Content && Content}</div>
         </div>
       </div>
     </div>
