@@ -18,7 +18,7 @@ const MyAccount: React.FC<Props> = ({ isLoading }) => {
   const { formatMessage } = useFormat({ name: 'account' });
 
   return (
-    <div>
+    <div className="mt-20 px-16 md:px-24 lg:mt-42 lg:px-44">
       {/* Title and subtitle */}
       <div className="mb-32 grid gap-20 md:mb-42 lg:mb-56 lg:gap-24">
         {isLoading ? (

@@ -5,7 +5,6 @@ const usePaymentMethods = () => {
   const [cardHolder, setCardHolder] = useState('');
   const [cardNumber, setCardNumber] = useState('');
   const [cardCVC, setCardCVC] = useState('');
-  const [cardExpDate, setCardExpDate] = useState<Option | undefined>(undefined);
 
   const expiryDateOptions = useMemo(() => {
     const now = new Date();
@@ -27,6 +26,8 @@ const usePaymentMethods = () => {
 
     return options;
   }, []);
+
+  const [cardExpDate, setCardExpDate] = useState<Option>(expiryDateOptions[1]);
 
   const handleCardHolderChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {

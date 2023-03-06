@@ -24,7 +24,7 @@ const ContactUs: React.FC<Props> = ({
 }) => {
   const { formatMessage: formatCustomerSupportMessage } = useFormat({ name: 'customer-support' });
   return (
-    <>
+    <div className="mt-24">
       <div className="border-b border-neutral-400 pb-20 lg:border-b-0 lg:py-40">
         <Typography as="h4" fontSize={18} fontFamily="libre">
           {formatCustomerSupportMessage({ id: 'contact.us', defaultMessage: 'Contact us' })}
@@ -32,7 +32,7 @@ const ContactUs: React.FC<Props> = ({
       </div>
 
       <div className="hidden w-full border-b border-neutral-400 px-12 pb-20 lg:flex">
-        <div className="flex w-[30%] ">
+        <div className="flex w-[30%]">
           <PhoneIcon className="w-20" />
           <Typography as="h5" fontSize={14} fontFamily="inter" medium className="py-1 pl-16 text-primary-black">
             {formatCustomerSupportMessage({ id: 'phone', defaultMessage: 'Phone' })}
@@ -118,7 +118,7 @@ const ContactUs: React.FC<Props> = ({
           </Typography>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -30,9 +30,9 @@ const Select: React.FC<Props> = ({ onChange, defaultValue, options = [] }) => {
   return (
     <Listbox value={selected} onChange={handleChange}>
       <div className="relative">
-        <Listbox.Button className="relative flex h-[40px] w-full cursor-default items-center rounded-sm border border-neutral-500 bg-white pl-8 pr-32 text-left focus:outline-none">
-          <span className="text-sm text-secondary-black">{selected?.name}</span>
-          <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4">
+        <Listbox.Button className="relative flex h-[40px] w-full cursor-default items-center rounded-sm border border-neutral-500 bg-white pl-12 pr-32 text-left focus:outline-none">
+          <span className="text-sm text-primary-black">{selected?.name}</span>
+          <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-8">
             <ChevronDownIcon className="h-20 w-20 text-secondary-black" aria-hidden="true" />
           </span>
         </Listbox.Button>
@@ -47,17 +47,19 @@ const Select: React.FC<Props> = ({ onChange, defaultValue, options = [] }) => {
               <Listbox.Option
                 key={option.value}
                 className={({ active }) =>
-                  `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                    active ? 'bg-amber-100 text-amber-900' : 'text-secondary-black'
+                  `relative cursor-default select-none py-2 pl-10 pr-4 hover:bg-neutral-200 ${
+                    active ? 'bg-neutral-200' : ''
                   }`
                 }
                 value={option}
               >
                 {({ selected }) => (
                   <>
-                    <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>{option.name}</span>
+                    <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'} text-primary-black`}>
+                      {option.name}
+                    </span>
                     {selected ? (
-                      <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
+                      <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                         <CheckIcon className="h-5 w-5" aria-hidden="true" />
                       </span>
                     ) : null}

@@ -41,15 +41,19 @@ const useEditPaymentMethods = (paymentId: string) => {
 
   const handleDeleteClick = () => {
     router.push('/account#payment');
-    payments.splice(payments.findIndex((payment) => payment.id !== paymentId) + 1, 1);
+    payments.splice(
+      payments.findIndex((payment) => payment.id === paymentId),
+      1,
+    );
   };
 
   const handleSaveClick = () => {
-    payments[payments.findIndex((payment) => payment.id !== paymentId) + 1] = {
-      ...payments[payments.findIndex((payment) => payment.id !== paymentId) + 1],
+    payments[payments.findIndex((payment) => payment.id === paymentId)] = {
+      ...payments[payments.findIndex((payment) => payment.id === paymentId)],
       cardHolder: cardHolder ?? '',
       cardNumber: cardNumber ?? '',
       cardExpiry: cardExpDate ?? { name: '02/69', value: '02/69' },
+      cardCVC: cardCVC ?? '',
     };
 
     router.push('/account#payment');

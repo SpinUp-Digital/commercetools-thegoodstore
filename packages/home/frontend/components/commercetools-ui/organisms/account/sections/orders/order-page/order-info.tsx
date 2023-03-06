@@ -14,6 +14,10 @@ const OrderInfoSection: FC<Props> = ({ order }) => {
   const { shippingInfo, paymentInfo } = useOrderData(order);
   const { formatMessage: formatOrdersMessage } = useFormat({ name: 'orders' });
 
+  const handlePrint = () => {
+    window.print();
+  };
+
   return (
     <div className="h-fit w-full rounded-none lg:rounded-md lg:border lg:py-44 2xl:w-[55%] 2xl:px-36 3xl:w-[60%]">
       <div className="mb-24 block w-full px-16 md:px-24 lg:hidden">
@@ -80,7 +84,7 @@ const OrderInfoSection: FC<Props> = ({ order }) => {
       <div className="flex flex-col px-16 md:px-24 lg:mt-40 lg:px-44 2xl:px-0">
         <div className="flex flex-col lg:grid lg:grid-cols-2 2xl:grid-cols-1 2xl:gap-y-16">
           <div className="lg:w-full lg:pr-10 2xl:w-[276px] 2xl:pr-0">
-            <Button variant="secondary" className="h-40 w-full py-0">
+            <Button variant="secondary" className="h-40 w-full py-0" onClick={handlePrint}>
               <Typography fontSize={14} align="center" fontFamily="inter" className="md:text-16">
                 {formatOrdersMessage({
                   id: 'print.invoice',

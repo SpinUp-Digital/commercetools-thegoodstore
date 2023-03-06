@@ -134,7 +134,12 @@ const AddressForm: React.FC<AddressFormProps> = ({ editedAddressId }) => {
   };
 
   return (
-    <AccountForm onSubmit={handleSubmit} title={formTitle} loading={loading} containerClassName="grid gap-12">
+    <AccountForm
+      onSubmit={handleSubmit}
+      title={formTitle}
+      loading={loading}
+      containerClassName="grid gap-12 md:px-24 md:px-0"
+    >
       <Input
         label={formatMessage({ id: 'name', defaultMessage: 'Name' })}
         required
