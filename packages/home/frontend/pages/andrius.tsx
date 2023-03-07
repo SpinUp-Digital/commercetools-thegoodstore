@@ -50,9 +50,7 @@ export default function Slug({ data }: SlugProps) {
   }
 
   return (
-    <>
-      Empty page
-    </>
+    <>Empty page</>
   );
 }
 

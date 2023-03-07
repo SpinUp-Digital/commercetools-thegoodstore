@@ -1,17 +1,22 @@
 import React from 'react';
 import { GetServerSideProps, Redirect } from 'next';
+import Head from 'next/head';
 import { Result } from '@commercetools/frontend-domain-types/product/Result';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 //@ts-ignore
 import { renderToString } from 'react-dom/server';
 import { getServerState } from 'react-instantsearch-hooks-server';
+import GASnippet from 'components/headless/GASnippet';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { SDK } from 'sdk';
 import { Category } from 'types/category';
 import { createClient, PageDataResponse, ResponseError } from 'frontastic';
+import { FrontasticRenderer } from 'frontastic/lib/renderer';
+import { tastics } from 'frontastic/tastics';
 import ProductListTastic, { Props as ProductListTasticProps } from 'frontastic/tastics/products/product-list-algolia';
 import { Log } from '../helpers/errorLogger';
+import styles from './slug.module.css';
 
 type SlugProps = {
   // This needs an overhaul. Can be too many things in my opinion (*Marcel)
@@ -22,6 +27,8 @@ type SlugProps = {
 };
 
 export default function Slug({ data }: SlugProps) {
+  const { formatMessage } = useFormat({ name: 'common' });
+
   if (!data || typeof data === 'string') {
     return (
       <>
@@ -44,6 +51,14 @@ export default function Slug({ data }: SlugProps) {
 
   return (
     <>
+      <Head>
+        <title>{formatMessage({ id: 'meta.title', defaultMessage: 'The Good Store' })}</title>
+        <meta
+          name="description"
+          content={formatMessage({ id: 'meta.desc', defaultMessage: 'Find largest home collections here!' })}
+        />
+      </Head>
+      <GASnippet />
       Empty page
     </>
   );
