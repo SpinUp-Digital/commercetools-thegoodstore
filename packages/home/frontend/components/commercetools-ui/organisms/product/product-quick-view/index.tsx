@@ -54,6 +54,7 @@ const QuickView: FC<QuickViewProps> = ({ buttonIsVisible, product, hideButton })
         contentLabel={formatMessage({ id: 'quick.view', defaultMessage: 'Quick view' })}
         onRequestClose={() => closeModal(true)}
         preventScroll={false}
+        style={{ content: { backgroundColor: 'white' } }}
       >
         <div ref={ref}>
           <XMarkIcon
