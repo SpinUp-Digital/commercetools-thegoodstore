@@ -16,7 +16,7 @@ const ThankYouHeader: FC<ThankYouHeaderProps> = ({ email, onPrint }) => {
   const subtitleProps: TypographyProps = {
     fontSize: 14,
     lineHeight: 'loose',
-    className: 'text-primary-black md:text-16 lg:text-18',
+    className: 'text-primary-black md:text-16',
   };
 
   return (
