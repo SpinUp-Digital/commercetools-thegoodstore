@@ -32,6 +32,7 @@ type Regions2 = {
   footer: Footer2;
   main: Main2;
   head: Head2;
+  kit: Kit;
 };
 type Footer = {
   _type: 'Frontastic\\Catwalk\\FrontendBundle\\Domain\\Region';
@@ -54,6 +55,10 @@ type Head2 = {
   layoutElements: Cell[];
 };
 type Main2 = {
+  _type: 'Frontastic\\Catwalk\\FrontendBundle\\Domain\\Region';
+  layoutElements: Cell[];
+};
+type Kit = {
   _type: 'Frontastic\\Catwalk\\FrontendBundle\\Domain\\Region';
   layoutElements: Cell[];
 };
@@ -117,6 +122,7 @@ export type TasticWrapperProps = {
   highlight?: boolean;
   serverState?: InstantSearchServerState;
   serverUrl: string;
+  previewId?: string;
 };
 export interface DataSourceConfiguration {
   dataSourceId: string;

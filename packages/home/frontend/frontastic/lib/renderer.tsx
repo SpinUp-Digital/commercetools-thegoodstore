@@ -6,7 +6,7 @@ import { Cell as LayoutElement } from './cell';
 import { highlightClassNames, TasticWrapper } from './component';
 import { Errors } from './errors';
 import { Grid } from './grid';
-import { Cell as LayoutElementType, Tastic, TasticRegistry, PageDataResponse, CellConfiguration } from './types';
+import { Cell as LayoutElementType, Tastic, TasticRegistry, CellConfiguration, PagePreviewDataResponse } from './types';
 
 export function FrontasticRenderer({
   data,
@@ -14,7 +14,7 @@ export function FrontasticRenderer({
   gridClassName,
   currentHighlight,
 }: {
-  data: PageDataResponse & {
+  data: PagePreviewDataResponse & {
     categories: { items: Category[] };
     serverState?: InstantSearchServerState;
     serverUrl: string;
@@ -33,6 +33,30 @@ export function FrontasticRenderer({
   return (
     <div className="flex min-h-[calc(100vh-138px)] flex-col items-stretch justify-start">
       {process && process.env.NODE_ENV !== 'production' && <Errors />}
+      <Grid wrapperClassName="w-full">
+        {data?.page?.sections?.kit?.layoutElements.map((layoutElement: LayoutElementType) => (
+          <LayoutElement
+            size={layoutElement.configuration.size}
+            className={highlightClassNames(currentHighlight === layoutElement.layoutElementId)}
+            key={layoutElement.layoutElementId}
+          >
+            {layoutElement.tastics.map((t) => (
+              <TasticWrapper
+                tastics={tastics}
+                key={t.tasticId}
+                data={t}
+                categories={data.categories.items ?? []}
+                dataSources={data.data.dataSources}
+                pageFolder={data.pageFolder}
+                highlight={currentHighlight === t.tasticId}
+                previewId={data?.previewId}
+                serverUrl={data.serverUrl}
+                serverState={data.serverState}
+              />
+            ))}
+          </LayoutElement>
+        ))}
+      </Grid>
       <Grid
         gridClassName={gridClassName}
         wrapperClassName={`w-full ${highlightClassNames(currentHighlight === 'head')}`}

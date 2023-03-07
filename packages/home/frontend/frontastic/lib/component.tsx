@@ -27,6 +27,7 @@ export function TasticWrapper(props: TasticWrapperProps) {
       {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
       {/* @ts-ignore */}
       <ErrorBoundary>
+        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
         {/* @ts-ignore */}
         <TasticToRender
           type={data?.tasticType}
