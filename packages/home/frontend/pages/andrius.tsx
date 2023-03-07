@@ -49,9 +49,7 @@ export default function Slug({ data }: SlugProps) {
     );
   }
 
-  return (
-    <>Empty page</>
-  );
+  return <>Empty page</>;
 }
 
 export const getServerSideProps: GetServerSideProps | Redirect = async ({
