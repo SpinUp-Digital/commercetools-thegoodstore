@@ -3,15 +3,19 @@ import Button from 'components/commercetools-ui/atoms/button';
 import Link from 'components/commercetools-ui/atoms/link';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { useFormat } from 'helpers/hooks/useFormat';
+import { Address } from 'types/account';
 import { Order } from 'types/order';
-import useOrderData from '../helper-hooks/useOrderData';
 import OrderSummaryMobile from './order-summary/order-summary-mobile';
+
 export interface Props {
-  order?: Order;
+  order: Order;
+  shippingInfo: string;
+  paymentInfo: string;
+  shippingAddress: Address;
+  orderState: string;
 }
 
-const OrderInfoSection: FC<Props> = ({ order }) => {
-  const { shippingInfo, paymentInfo } = useOrderData(order);
+const OrderInfoSection: FC<Props> = ({ order, shippingInfo, paymentInfo, shippingAddress, orderState }) => {
   const { formatMessage: formatOrdersMessage } = useFormat({ name: 'orders' });
 
   const handlePrint = () => {
@@ -23,25 +27,24 @@ const OrderInfoSection: FC<Props> = ({ order }) => {
       <div className="mb-24 block w-full px-16 md:px-24 lg:hidden">
         <div className="h-1 w-full bg-neutral-400 px-24" />
       </div>
-      {order?.shippingInfo && (
-        <div className="flex px-16 md:px-24 lg:px-44 2xl:pl-0">
-          <Typography fontSize={14} fontFamily="inter" className="whitespace-nowrap text-secondary-black md:text-16">
-            {formatOrdersMessage({
-              id: 'shipping.method',
-              defaultMessage: 'Shipping method:',
-            })}
-          </Typography>
 
-          <Typography
-            fontSize={14}
-            medium
-            fontFamily="inter"
-            className="pl-8 text-primary-black md:pl-20 md:text-16 2xl:whitespace-nowrap 2xl:pl-44"
-          >
-            {shippingInfo}
-          </Typography>
-        </div>
-      )}
+      <div className="flex px-16 md:px-24 lg:px-44 2xl:pl-0">
+        <Typography fontSize={14} fontFamily="inter" className="whitespace-nowrap text-secondary-black md:text-16">
+          {formatOrdersMessage({
+            id: 'shipping.method',
+            defaultMessage: 'Shipping method:',
+          })}
+        </Typography>
+
+        <Typography
+          fontSize={14}
+          medium
+          fontFamily="inter"
+          className="pl-8 text-primary-black md:pl-20 md:text-16 2xl:whitespace-nowrap 2xl:pl-44"
+        >
+          {shippingInfo}
+        </Typography>
+      </div>
 
       <div className="mt-24 flex px-16 md:px-24 lg:px-44 2xl:pl-0">
         <Typography fontSize={14} fontFamily="inter" className="whitespace-nowrap text-secondary-black md:text-16">
@@ -53,10 +56,10 @@ const OrderInfoSection: FC<Props> = ({ order }) => {
 
         <div className="pl-8 md:pl-20 2xl:pl-44">
           <Typography fontSize={14} medium fontFamily="inter" className="text-primary-black md:text-16">
-            {order?.shippingAddress?.streetName}
+            {shippingAddress.streetName}
           </Typography>
           <Typography fontSize={14} fontFamily="inter" className="mt-8 text-primary-black md:text-16">
-            {order?.shippingAddress?.additionalAddressInfo}
+            {shippingAddress.additionalAddressInfo}
           </Typography>
         </div>
       </div>
@@ -94,7 +97,7 @@ const OrderInfoSection: FC<Props> = ({ order }) => {
             </Button>
           </div>
 
-          {order?.orderState === 'Confirmed' && (
+          {orderState === 'Confirmed' && (
             <div className="mt-20 lg:mt-0 lg:w-full lg:pl-10 2xl:w-[276px] 2xl:pl-0">
               <Button variant="secondary" className="h-40 w-full py-0">
                 <Typography fontSize={14} align="center" fontFamily="inter" className="md:text-16">
@@ -107,7 +110,7 @@ const OrderInfoSection: FC<Props> = ({ order }) => {
             </div>
           )}
 
-          {order?.orderState === 'Complete' && (
+          {orderState === 'Complete' && (
             <div className="mt-20 lg:mt-0 lg:w-full lg:pl-10 2xl:w-[276px] 2xl:pl-0">
               <Button variant="secondary" className="h-40 w-full py-0">
                 <Typography fontSize={14} align="center" fontFamily="inter" className="md:text-16">

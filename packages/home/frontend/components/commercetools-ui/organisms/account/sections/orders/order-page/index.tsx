@@ -1,8 +1,11 @@
 import React, { FC } from 'react';
-import Typography from 'components/commercetools-ui/atoms/typography';
-import { useFormat } from 'helpers/hooks/useFormat';
+import { LineItem } from '@commercetools/frontend-domain-types/cart/LineItem';
+import { Address } from 'types/account';
+import useOrderData from '../helper-hooks/useOrderData';
 import useOrderFetch from '../helper-hooks/useOrderFetch';
+import useOrderTransactions from '../helper-hooks/useOrderTransaction';
 import OrderInfoSection from './order-info';
+import OrderNumber from './order-number';
 import OrderStatusBar from './order-status-bar';
 import OrderSummary from './order-summary/order-summary';
 
@@ -11,53 +14,49 @@ export interface Props {
 }
 
 const OrderPage: FC<Props> = ({ orderId }) => {
-  const { formatMessage: formatOrdersMessage } = useFormat({ name: 'orders' });
-
   const { orders } = useOrderFetch();
+  const order = orders.find((order) => order.orderId === orderId);
+  const { formattedOrderDate, formattedShippingDate, formattedDeliveryDate, shippingInfo, paymentInfo } =
+    useOrderData(order);
 
-  const order = orders?.find((order) => order.orderId === orderId);
+  const { hiddenItemsCount, subtotal, shipmentFees, totalTax, total } = useOrderTransactions(order);
 
   return (
-    <div className="px-16 md:mt-20 md:px-24 lg:mt-40 lg:px-44">
-      <div className="mt-16 pb-12 md:mt-0">
-        <Typography
-          as="h2"
-          fontSize={18}
-          fontFamily="libre"
-          className="mt-20 pl-16 text-primary-black md:mt-0 md:pl-24 md:text-22 lg:pl-0 lg:text-24"
-        >
-          {formatOrdersMessage({
-            id: 'order.details',
-            defaultMessage: 'Order Details',
-          })}
-        </Typography>
-      </div>
-      <div className="flex justify-start pl-16 pt-8 pb-16 md:px-0 md:pl-24 md:pt-12 lg:pl-0 lg:pt-24">
-        <Typography
-          as="h3"
-          fontSize={14}
-          fontFamily="inter"
-          className="whitespace-nowrap text-secondary-black md:text-16"
-        >
-          {formatOrdersMessage({
-            id: 'order.number',
-            defaultMessage: 'Order number:',
-          })}
-        </Typography>
-        <Typography as="h3" medium fontSize={14} fontFamily="inter" className="pl-8 text-primary-black md:text-16">
-          {order?.orderId?.replaceAll('-', ' ')}
-        </Typography>
-      </div>
+    <div className="md:mt-20 lg:mt-40">
+      {order && (
+        <>
+          <OrderNumber orderNumber={order.orderId ?? ''} />
 
-      <div>
-        <OrderStatusBar order={order} />
-      </div>
+          <div className="mt-12">
+            <OrderStatusBar
+              orderDate={formattedOrderDate ?? ''}
+              orderShippingDate={formattedShippingDate ?? ''}
+              orderDeliveryDate={formattedDeliveryDate ?? ''}
+              orderState={order.orderState ?? 'Registered'}
+              orderShippingState={order.shipmentState ?? 'Pending'}
+            />
+          </div>
 
-      <div className="mt-96 flex lg:flex-col xl:flex-row">
-        <OrderInfoSection order={order} />
+          <div className="mt-96 flex px-0 lg:flex-col lg:px-44 xl:flex-row">
+            <OrderInfoSection
+              order={order}
+              shippingInfo={shippingInfo}
+              paymentInfo={paymentInfo ?? ''}
+              shippingAddress={order.shippingAddress as Address}
+              orderState={order.orderState ?? 'Registered'}
+            />
 
-        <OrderSummary order={order} />
-      </div>
+            <OrderSummary
+              hiddenItemsCount={hiddenItemsCount}
+              subtotal={subtotal}
+              shipmentFees={shipmentFees}
+              totalTax={totalTax}
+              total={total}
+              lineItems={order.lineItems as LineItem[]}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 };

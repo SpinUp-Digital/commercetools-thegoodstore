@@ -66,31 +66,29 @@ const OrderSummaryMobile: FC<Props> = ({ order }) => {
 
   return (
     <Accordion customClosedButton={orderSummaryAccordion} className={accordionClassNames} buttonClassName="w-full">
-      <div className="grid max-h-[400px] w-full grid-cols-1 overflow-auto px-16 md:px-24">
+      <div className="grid max-h-[400px] w-full grid-cols-1 overflow-auto px-16 md:px-24 lg:px-44">
         {order?.lineItems?.map((lineItem, index) => (
-          <div key={lineItem.lineItemId} className="px-0 lg:px-44">
-            <div className={lineItemClassNames(order, index)}>
-              {lineItem.variant?.images?.[0] && (
-                <div className="relative h-[104px] w-[88px] shrink-0">
-                  <Image layout="fill" src={lineItem.variant.images[0]} objectFit="contain" />
-                </div>
-              )}
-              <div className="flex flex-col justify-center pl-16">
-                <Typography fontSize={14} className="uppercase text-primary-black">
-                  {lineItem?.name}
-                </Typography>
-                <Typography fontSize={14} medium className="mt-8 text-primary-black">
-                  {CurrencyHelpers.formatForCurrency(lineItem?.price as number, locale)}
-                </Typography>
-                <Typography fontSize={14} className="mt-8 text-primary-black">
-                  {`x ${lineItem?.count}`}
-                </Typography>
+          <div key={lineItem.lineItemId} className={lineItemClassNames(order, index)}>
+            {lineItem.variant?.images?.[0] && (
+              <div className="relative h-[104px] w-[88px] shrink-0">
+                <Image layout="fill" src={lineItem.variant.images[0]} objectFit="contain" />
               </div>
+            )}
+            <div className="flex flex-col justify-center pl-16">
+              <Typography fontSize={14} className="uppercase text-primary-black">
+                {lineItem?.name}
+              </Typography>
+              <Typography fontSize={14} medium className="mt-8 text-primary-black">
+                {CurrencyHelpers.formatForCurrency(lineItem?.price as number, locale)}
+              </Typography>
+              <Typography fontSize={14} className="mt-8 text-primary-black">
+                {`x ${lineItem?.count}`}
+              </Typography>
             </div>
           </div>
         ))}
       </div>
-      <div className="flex flex-col gap-8 bg-neutral-200 p-16 pb-20 md:px-24 lg:px-44">
+      <div className="flex flex-col gap-8 bg-neutral-200 p-16 md:px-24 lg:px-44">
         <div className="flex justify-between">
           <Typography fontSize={16} className="text-secondary-black">
             {formatOrdersMessage({
@@ -124,9 +122,7 @@ const OrderSummaryMobile: FC<Props> = ({ order }) => {
             {getTotalTax}
           </Typography>
         </div>
-      </div>
-      <div className="flex flex-col gap-20 bg-neutral-200 px-16 pt-12 pb-16 md:px-24 lg:px-44">
-        <div className="flex justify-between">
+        <div className="mt-16 flex justify-between">
           <Typography fontSize={18} medium className="text-secondary-black">
             {formatOrdersMessage({
               id: 'order.total',
