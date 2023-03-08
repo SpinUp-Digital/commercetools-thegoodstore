@@ -86,7 +86,7 @@ const Orders = () => {
             })}
           </Typography>
 
-          <div className="mt-36 px-16 pb-16 md:px-24 lg:px-44">
+          <div className="mt-20 px-16 md:mt-36 md:px-24 lg:px-44">
             <Typography as="h3" fontSize={14} fontFamily="inter" className="text-secondary-black md:text-16">
               {formatOrdersMessage({
                 id: 'help.question',
@@ -95,42 +95,44 @@ const Orders = () => {
             </Typography>
           </div>
 
-          <Wrapper className="h-44 w-full border-b-2 border-neutral-400 pt-12 md:hidden">
-            <div className={mobileStatusWrapper} ref={ref}>
-              <Slider
-                onReachEnd={swiperReachEnd}
-                onReachBeginning={swiperReachBeginning}
-                slideWidthIsFlexible
-                dots={false}
-                prevButtonStyles={{
-                  left: '-20px',
-                  transform: 'translateY(-70%) rotateZ(135deg) scale(0.55)',
-                  borderWidth: '0 3px 3px 0',
-                }}
-                nextButtonStyles={{
-                  right: '-20px',
-                  transform: ' translateY(-70%) rotateZ(-45deg) scale(0.55)',
-                  borderWidth: '0 3px 3px 0',
-                }}
-                allowTouchMove
-                allowArrowsOnTouchDevice
-                arrows={overflow}
-                spaceBetween={20}
-              >
-                {statusTabs.map((tab) => (
-                  <div
-                    key={tab.slug}
-                    onClick={() => setSelectedTab(tab.slug)}
-                    className="w-fit cursor-pointer whitespace-nowrap"
-                  >
-                    <Typography fontSize={14} medium={tab.slug === selectedTab} className={tabTextClassNames(tab)}>
-                      {tab.name}
-                    </Typography>
-                  </div>
-                ))}
-              </Slider>
-            </div>
-          </Wrapper>
+          <div className="mt-16">
+            <Wrapper className="relative h-32 w-full border-b-2 border-neutral-400 md:hidden">
+              <div className={mobileStatusWrapper} ref={ref}>
+                <Slider
+                  onReachEnd={swiperReachEnd}
+                  onReachBeginning={swiperReachBeginning}
+                  slideWidthIsFlexible
+                  dots={false}
+                  prevButtonStyles={{
+                    left: '-20px',
+                    transform: 'translateY(-70%) rotateZ(135deg) scale(0.55)',
+                    borderWidth: '0 3px 3px 0',
+                  }}
+                  nextButtonStyles={{
+                    right: '-20px',
+                    transform: ' translateY(-70%) rotateZ(-45deg) scale(0.55)',
+                    borderWidth: '0 3px 3px 0',
+                  }}
+                  allowTouchMove
+                  allowArrowsOnTouchDevice
+                  arrows={overflow}
+                  spaceBetween={20}
+                >
+                  {statusTabs.map((tab) => (
+                    <div
+                      key={tab.slug}
+                      onClick={() => setSelectedTab(tab.slug)}
+                      className="w-fit cursor-pointer whitespace-nowrap"
+                    >
+                      <Typography fontSize={14} medium={tab.slug === selectedTab} className={tabTextClassNames(tab)}>
+                        {tab.name}
+                      </Typography>
+                    </div>
+                  ))}
+                </Slider>
+              </div>
+            </Wrapper>
+          </div>
 
           <div className="px-16 md:px-24 lg:px-44">
             <div className="relative hidden h-58 w-full border-b-2 border-neutral-400 pt-24 md:flex">

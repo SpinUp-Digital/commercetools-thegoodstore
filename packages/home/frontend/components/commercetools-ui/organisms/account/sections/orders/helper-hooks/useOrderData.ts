@@ -25,7 +25,7 @@ const useOrderData = (order?: Order) => {
         new Date(orderDateCreated).toDateString().split(' ')[1]
       } ${new Date(orderDateCreated).toDateString().split(' ')[2]}`
     );
-  }, [order]);
+  }, [orderDateCreated]);
 
   const formattedShippingDate = useMemo(() => {
     return (
@@ -56,7 +56,7 @@ const useOrderData = (order?: Order) => {
   }, [orderDateDelivery, shippingName]);
 
   const paymentInfo = useMemo(() => {
-    return order?.payments && `${order?.payments[0].paymentMethod} **${order?.payments[0].cardSummary}`;
+    return order?.payments && `${order?.payments[0]?.paymentMethod} **${order?.payments[0]?.cardSummary}`;
   }, [order?.payments]);
 
   return {

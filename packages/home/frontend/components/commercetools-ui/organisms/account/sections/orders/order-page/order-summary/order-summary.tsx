@@ -1,6 +1,6 @@
 import React, { FC, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
-import { Order } from '@commercetools/frontend-domain-types/cart/Order';
+import { LineItem } from '@commercetools/frontend-domain-types/cart/LineItem';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import Accordion from 'components/commercetools-ui/atoms/accordion';
 import Typography from 'components/commercetools-ui/atoms/typography';
@@ -8,31 +8,27 @@ import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
 import Image from 'frontastic/lib/image';
-import useOrderTransactions from '../../helper-hooks/useOrderTransaction';
 
 export interface Props {
-  order?: Order;
+  hiddenItemsCount: number;
+  subtotal: string;
+  shipmentFees: string;
+  totalTax: string;
+  total: string;
+  lineItems: LineItem[];
 }
 
-const OrderSummary: FC<Props> = ({ order }) => {
+const OrderSummary: FC<Props> = ({ hiddenItemsCount, subtotal, shipmentFees, totalTax, total, lineItems }) => {
   const { locale } = useRouter();
-
-  const {
-    hiddenItemsCount,
-    subtotal: getSubtotal,
-    shipmentFees: getShipmentFees,
-    totalTax: getTotalTax,
-    total: getTotal,
-  } = useOrderTransactions(order);
 
   const { formatMessage: formatOrdersMessage } = useFormat({ name: 'orders' });
 
   const [open, setOpen] = useState(false);
 
   const lineItemOrderSummary = useMemo(() => {
-    if (order?.lineItems && order?.lineItems?.length < 3) return order.lineItems;
-    else return [order?.lineItems?.[0], order?.lineItems?.[1], order?.lineItems?.[2]];
-  }, [order]);
+    if (lineItems.length < 3) return lineItems;
+    else return [lineItems[0], lineItems[1], lineItems[2]];
+  }, [lineItems]);
 
   const accordionClassNames = useClassNames(['max-h-[400px] overflow-auto ', open ? 'border-b' : '']);
 
@@ -76,28 +72,23 @@ const OrderSummary: FC<Props> = ({ order }) => {
 
   return (
     <div className="ml-44 hidden h-fit w-[45%] rounded-md border p-36 2xl:block 3xl:w-[40%]">
-      {order?.lineItems?.length === 1 ? (
+      {lineItems.length === 1 ? (
         <div className="grid w-full grid-cols-1">
           <div className="flex justify-start border-b py-16">
-            {order?.lineItems[0].variant?.images?.[0] && (
+            {lineItems[0].variant?.images?.[0] && (
               <div className="relative h-[104px] w-[88px] shrink-0">
-                <Image
-                  layout="fill"
-                  src={order.lineItems[0].variant.images[0]}
-                  objectFit="contain"
-                  alt={order.lineItems[0].name}
-                />
+                <Image layout="fill" src={lineItems[0].variant.images[0]} objectFit="contain" alt={lineItems[0].name} />
               </div>
             )}
             <div className="flex flex-col justify-center pl-16">
               <Typography fontSize={14} className="uppercase text-primary-black">
-                {order?.lineItems[0]?.name}
+                {lineItems[0].name}
               </Typography>
               <Typography fontSize={14} medium className="mt-8 text-primary-black">
-                {CurrencyHelpers.formatForCurrency(order?.lineItems[0]?.price as number, locale)}
+                {CurrencyHelpers.formatForCurrency(lineItems[0].price as number, locale)}
               </Typography>
               <Typography fontSize={14} className="mt-8 text-primary-black">
-                {`x ${order?.lineItems[0]?.count}`}
+                {`x ${lineItems[0].count}`}
               </Typography>
             </div>
           </div>
@@ -111,7 +102,7 @@ const OrderSummary: FC<Props> = ({ order }) => {
           onClick={() => setOpen(!open)}
         >
           <div className="grid w-full grid-cols-1">
-            {order?.lineItems?.map((lineItem) => (
+            {lineItems.map((lineItem) => (
               <div key={lineItem.lineItemId} className="flex justify-start border-b py-16">
                 {lineItem.variant?.images?.[0] && (
                   <div className="relative h-[104px] w-[88px] shrink-0">
@@ -143,11 +134,10 @@ const OrderSummary: FC<Props> = ({ order }) => {
               defaultMessage: 'Subtotal',
             })}
           </Typography>
-          {order && (
-            <Typography fontSize={16} className="text-secondary-black">
-              {getSubtotal}
-            </Typography>
-          )}
+
+          <Typography fontSize={16} className="text-secondary-black">
+            {subtotal}
+          </Typography>
         </div>
         <div className="flex justify-between">
           <Typography fontSize={16} className="text-secondary-black">
@@ -157,7 +147,7 @@ const OrderSummary: FC<Props> = ({ order }) => {
             })}
           </Typography>
           <Typography fontSize={16} className="text-secondary-black">
-            {getShipmentFees}
+            {shipmentFees}
           </Typography>
         </div>
         <div className="flex justify-between">
@@ -168,7 +158,7 @@ const OrderSummary: FC<Props> = ({ order }) => {
             })}
           </Typography>
           <Typography fontSize={16} className="text-secondary-black">
-            {getTotalTax}
+            {totalTax}
           </Typography>
         </div>
       </div>
@@ -181,7 +171,7 @@ const OrderSummary: FC<Props> = ({ order }) => {
             })}
           </Typography>
           <Typography fontSize={18} medium className="text-secondary-black">
-            {getTotal}
+            {total}
           </Typography>
         </div>
       </div>

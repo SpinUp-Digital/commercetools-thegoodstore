@@ -11,16 +11,17 @@ export interface Props {
   contentTitle: string;
   hash: string | undefined;
   tabs: AccountTab[];
+  className?: string;
 }
 
-const AccountTabsMobile: FC<Props> = ({ contentTitle, hash, tabs }) => {
+const AccountTabsMobile: FC<Props> = ({ contentTitle, hash, tabs, className = '' }) => {
   const forms = ['#edit-personal-info', '#edit-newsletter', '#edit-address', '#change-password', '#delete-account'];
   const accountNavButtonClassNames = useClassNames([
-    hash && forms.includes(hash) ? 'hidden' : 'relative pt-8 pb-20 md:hidden',
+    hash && forms.includes(hash) ? 'hidden' : 'relative md:hidden',
+    className,
   ]);
 
   const accountNavMenuWrapperClassNames = useClassNames(['absolute top-40 left-0 z-30 w-full']);
-
   const accountTabsButtonClassNames = useCallback((open?: boolean) => {
     return `flex h-40 w-full items-center justify-between border ${
       open
@@ -28,7 +29,6 @@ const AccountTabsMobile: FC<Props> = ({ contentTitle, hash, tabs }) => {
         : 'rounded-sm border-neutral-500'
     } bg-white px-16 py-12 active:border-gray-500 focus:border-gray-500 focus:shadow-md`;
   }, []);
-
   const accountTabsMenuClassNames = useCallback((open?: boolean) => {
     return `max-h-300 overflow-scroll rounded-b-sm border ${
       open ? 'border-x-neutral-500 border-b-neutral-500' : 'border-neutral-400'
