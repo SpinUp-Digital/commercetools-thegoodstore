@@ -1,2 +1,2 @@
 [functions]
-  included_files = ["public/locales/**/*.json", "public/storybook/", "public/sitemap.xml", "public/sitemap-*.xml", "next-i18next.config.js"]
+  included_files = ["public/locales/**/*.json", "public/storybook/*.*", "public/sitemap.xml", "public/sitemap-*.xml", "next-i18next.config.js"]
