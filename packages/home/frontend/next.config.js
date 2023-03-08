@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const { i18n, localePath } = require('./next-i18next.config');
 const withPWA = require('next-pwa');
 
@@ -17,6 +19,7 @@ module.exports = withPWA({
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     // path: `https://res.cloudinary.com/dlwdq84ig/image/upload/`,
   },
+  productionBrowserSourceMaps: false,
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
@@ -25,5 +28,13 @@ module.exports = withPWA({
 
     return config;
   },
-  productionBrowserSourceMaps: false,
+  async redirects() {
+    return [
+      {
+        source: '/storybook',
+        destination: '/storybook/index.html',
+        permanent: true,
+      },
+    ];
+  },
 });

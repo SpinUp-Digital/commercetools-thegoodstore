@@ -10,6 +10,7 @@
     "debug": "concurrently -n NEXT,TSC -c magenta,cyan \"NODE_OPTIONS='--inspect' next dev\" \"yarn ts --watch\"",
     "build": "next build",
     "postbuild": "next-sitemap",
+    "prebuild": "yarn build-storybook",
     "start": "next start",
     "test": "next build",
     "ts": "tsc --noEmit --incremental --preserveWatchOutput --pretty",
@@ -17,7 +18,7 @@
     "prettify": "prettier --write \"**/*.{ts,tsx}\"",
     "fix": "yarn lint --fix --ext .js --ext .jsx --ext ts --ext tsx && yarn prettify",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook --output-dir ./public/storybook"
   },
   "dependencies": {
     "@adyen/adyen-web": "^5.33.0",
