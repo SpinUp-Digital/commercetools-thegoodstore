@@ -74,5 +74,7 @@ frontastic-cli-dependencies
 yalc.lock
 !/saas/project-libraries/extension-commercetools/build
 
+/public/storybook/
+
 # Do not ignore any .gitkeep files which are there to keep directories
 !**/.gitkeep
