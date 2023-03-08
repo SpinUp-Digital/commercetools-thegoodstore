@@ -20,3 +20,4 @@ tsconfig.tsbuildinfo
 /public/workbox-*.js.map
 /public/sitemap.xml
 /public/sitemap-*.xml
+/public/storybook/
