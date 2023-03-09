@@ -1,9 +1,13 @@
 /* eslint-disable */
 
 const { i18n, localePath } = require('./next-i18next.config');
+const withPlugins = require('next-compose-plugins');
 const withPWA = require('next-pwa');
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
 
-module.exports = withPWA({
+module.exports = withPlugins([withPWA, withBundleAnalyzer], {
   pwa: {
     dest: 'public',
     disable: true,

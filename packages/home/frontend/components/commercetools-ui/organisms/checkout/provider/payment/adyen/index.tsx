@@ -1,7 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
-import AdyenCheckout from '@adyen/adyen-web';
-import { PaymentAction } from '@adyen/adyen-web/dist/types/types';
+import type { PaymentAction } from '@adyen/adyen-web/dist/types/types';
 import creditCardType from 'credit-card-type';
 import * as yup from 'yup';
 import { ObjectShape } from 'yup/lib/object';
@@ -40,15 +39,19 @@ const AdyenPaymentProvider: React.FC = ({ children }) => {
 
   const initAdyenCheckout = useCallback(
     async ({ onAdditionalDetails }: { onAdditionalDetails?: ThreeDS2AuthCallback } = {}) => {
-      return AdyenCheckout({
-        locale: mapLocaleLanguage(router.locale),
-        environment: 'test',
-        clientKey: process.env.NEXT_PUBLIC_ADYEN_CLIENT_KEY,
-        onAdditionalDetails: (state: { data: Record<string, string> }) => {
-          handleOnAdditionalDetails(state).then((response) => {
-            onAdditionalDetails?.(response);
-          });
-        },
+      return import('@adyen/adyen-web').then((module) => {
+        const AdyenCheckout = module.default;
+
+        return AdyenCheckout({
+          locale: mapLocaleLanguage(router.locale),
+          environment: 'test',
+          clientKey: process.env.NEXT_PUBLIC_ADYEN_CLIENT_KEY,
+          onAdditionalDetails: (state: { data: Record<string, string> }) => {
+            handleOnAdditionalDetails(state).then((response) => {
+              onAdditionalDetails?.(response);
+            });
+          },
+        });
       });
     },
     [router.locale, handleOnAdditionalDetails],
