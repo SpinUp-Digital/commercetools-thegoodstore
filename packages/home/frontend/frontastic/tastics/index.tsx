@@ -8,12 +8,12 @@ import Tile from './content/tile';
 import TilesGroupTastic from './content/tiles-group';
 import Footer from './footer';
 import Header from './header';
-import Markdown from './markdown';
 import Missing from './missing';
 import NotFoundTastic from './not-found';
 import ProductSlider from './products/slider';
 import SpacerTastic from './spacer';
 
+const Markdown = dynamic(() => import('./markdown'));
 const AccountDetails = dynamic(() => import('./account/details'));
 const AccountLogin = dynamic(() => import('./account/login'));
 const AccountOrdersHistory = dynamic(() => import('./account/orders'));

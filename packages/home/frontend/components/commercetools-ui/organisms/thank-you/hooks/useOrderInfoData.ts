@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 import { ShippingMethod } from '@commercetools/frontend-domain-types/cart/ShippingMethod';
-import moment from 'moment';
 import { Order } from 'types/order';
 import { useCart } from 'frontastic';
 
@@ -21,8 +20,13 @@ const useOrderInfoData = (order: Order) => {
     const shippingMethod = shippingMethods.data?.find(
       (method) => method.shippingMethodId === order?.shippingInfo?.shippingMethodId,
     ) as ShippingMethod;
-    const shippingDate = moment().add(shippingMethod?.description, 'days').format('YYYY-MM-DD');
-    const label = `${shippingDate} by ${shippingMethod?.name}`;
+
+    const shippingDate = new Date();
+
+    shippingDate.setDate(shippingDate.getDate() + +(shippingMethod?.description ?? 0));
+
+    const label = `${shippingDate.toISOString().split('T')[0]} by ${shippingMethod?.name}`;
+
     setDeliveryMethod(label);
   }, [order?.shippingInfo?.shippingMethodId, shippingMethods.data]);
 
