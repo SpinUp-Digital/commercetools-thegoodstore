@@ -16,6 +16,7 @@ import { FrontasticRenderer } from 'frontastic/lib/renderer';
 import { tastics } from 'frontastic/tastics';
 import ProductListTastic, { Props as ProductListTasticProps } from 'frontastic/tastics/products/product-list-algolia';
 import { Log } from '../helpers/errorLogger';
+import styles from './slug.module.css';
 
 type SlugProps = {
   // This needs an overhaul. Can be too many things in my opinion (*Marcel)
@@ -26,7 +27,41 @@ type SlugProps = {
 };
 
 export default function Slug({ data }: SlugProps) {
-  return <>Fetch only page</>;
+  const { formatMessage } = useFormat({ name: 'common' });
+
+  if (!data || typeof data === 'string') {
+    return (
+      <>
+        <h1 className="mt-2 text-4xl font-extrabold tracking-tight text-gray-900">Internal Error</h1>
+        <p className="mt-2 text-lg">{data}</p>
+        <p className="mt-2 text-lg">Check the logs of your Frontastic CLI for more details.</p>
+      </>
+    );
+  }
+
+  if (!data?.ok && data?.message) {
+    return (
+      <>
+        <h1 className="mt-2 text-4xl font-extrabold tracking-tight text-gray-900">Internal Error</h1>
+        <p className="mt-2 text-lg">{data.message}</p>
+        <p className="mt-2 text-lg">Check the logs of your Frontastic CLI for more details.</p>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <Head>
+        <title>{formatMessage({ id: 'meta.title', defaultMessage: 'The Good Store' })}</title>
+        <meta
+          name="description"
+          content={formatMessage({ id: 'meta.desc', defaultMessage: 'Find largest home collections here!' })}
+        />
+      </Head>
+      <GASnippet />
+      Page + Categories + Head scripts
+    </>
+  );
 }
 
 export const getServerSideProps: GetServerSideProps | Redirect = async ({
@@ -42,7 +77,10 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({
   const extensions = SDK.getExtensions();
 
   const frontastic = createClient();
-  const [data] = await Promise.all([frontastic.getRouteData(params ?? {}, locale as string, query, req, res)]);
+  const [data, categories] = await Promise.all([
+    frontastic.getRouteData(params ?? {}, locale as string, query, req, res),
+    extensions.product.queryCategories({ query: { limit: 99 } }).then((res) => (res.isError ? [] : res.data) as Result),
+  ]);
 
   if (data) {
     if (data instanceof ResponseError && data.getStatus() == 404) {
@@ -98,9 +136,23 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({
   if (slug) plpConfiguration.slug = slug;
   if (searchQuery) plpConfiguration.searchQuery = searchQuery;
 
+  const serverState = await getServerState(
+    <ProductListTastic
+      serverUrl={serverUrl}
+      categories={(categories.items as Category[]) ?? []}
+      data={{
+        slug,
+        searchQuery,
+        facetsConfiguration: plpConfiguration.facetsConfiguration ?? [],
+        pricesConfiguration: plpConfiguration.pricesConfiguration ?? [],
+      }}
+    />,
+    { renderToString },
+  );
+
   return {
     props: {
-      data: { ...data, serverUrl } || null,
+      data: { ...data, categories, serverUrl, serverState } || null,
       locale: locale,
       ...(await serverSideTranslations(locale as string, [
         'common',

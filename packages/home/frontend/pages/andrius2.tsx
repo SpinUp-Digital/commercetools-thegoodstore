@@ -49,19 +49,7 @@ export default function Slug({ data }: SlugProps) {
     );
   }
 
-  return (
-    <>
-      <Head>
-        <title>{formatMessage({ id: 'meta.title', defaultMessage: 'The Good Store' })}</title>
-        <meta
-          name="description"
-          content={formatMessage({ id: 'meta.desc', defaultMessage: 'Find largest home collections here!' })}
-        />
-      </Head>
-      <GASnippet />
-      Empty page
-    </>
-  );
+  return <>Fetch page and categories</>;
 }
 
 export const getServerSideProps: GetServerSideProps | Redirect = async ({
