@@ -1,7 +1,9 @@
 import { FC } from 'react';
+import dynamic from 'next/dynamic';
 import AccordionBtn from 'components/commercetools-ui/atoms/accordion';
 import { useFormat } from 'helpers/hooks/useFormat';
-import Markdown from '../../../markdown';
+
+const Markdown = dynamic(() => import('../../../markdown'));
 
 type AdditionalInfoProps = {
   productspec: string;
