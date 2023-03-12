@@ -5,7 +5,11 @@ interface Props {
 }
 
 const MarkdownTastic = ({ data }: Props) => {
-  return <Markdown {...data} />;
+  return (
+    <div className="prose max-w-[1024px] p-24 md:p-56 lg:p-84">
+      <Markdown {...data} />
+    </div>
+  );
 };
 
 export default MarkdownTastic;

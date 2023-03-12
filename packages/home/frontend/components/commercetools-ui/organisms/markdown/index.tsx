@@ -25,10 +25,7 @@ const Markdown: React.FC<Props> = ({ markdown }) => {
 
   return (
     <>
-      <div
-        className="prose max-w-[1024px] p-24 md:p-56 lg:p-84"
-        dangerouslySetInnerHTML={{ __html: safeMarkdown }}
-      ></div>
+      <div dangerouslySetInnerHTML={{ __html: safeMarkdown }}></div>
     </>
   );
 };
