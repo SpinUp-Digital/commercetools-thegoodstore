@@ -20,7 +20,7 @@ const DeleteModal: FC<DeleteModalProps> = ({ modalIsOpen, loading, closeModal, h
     <Modal
       shouldCloseOnOverlayClick
       isOpen={modalIsOpen}
-      style={{ content: { width: 400, height: 280, overflow: 'hidden' } }}
+      style={{ content: { width: 400, height: 280, overflow: 'hidden', background: 'white' } }}
       contentLabel={formatMessage({ id: 'quick.view', defaultMessage: 'Quick view' })}
       onRequestClose={closeModal}
     >

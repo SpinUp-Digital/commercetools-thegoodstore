@@ -89,7 +89,6 @@ const CreateAddressModal = () => {
           name: 'line1',
           label: formatMessage({ id: 'address', defaultMessage: 'Address' }),
           labelDesc: '',
-          required: true,
           type: 'string',
           className: 'col-span-3',
           render() {

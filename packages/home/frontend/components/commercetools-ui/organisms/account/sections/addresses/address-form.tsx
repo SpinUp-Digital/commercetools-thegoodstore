@@ -154,8 +154,10 @@ const AddressForm: React.FC<AddressFormProps> = ({ editedAddressId }) => {
       />
 
       <Input
-        label={formatMessage({ id: 'address', defaultMessage: 'Address' })}
-        required
+        label={`${formatMessage({ id: 'address', defaultMessage: 'Address' })} 1 (${formatMessage({
+          id: 'optional',
+          defaultMessage: 'Optional',
+        })})`}
         type="text"
         name="streetName"
         id="street-name"
@@ -163,11 +165,13 @@ const AddressForm: React.FC<AddressFormProps> = ({ editedAddressId }) => {
         autoComplete="primary-address"
         className="border-neutral-500"
         onChange={handleChange}
-        validation={validateTextExists}
       />
 
       <Input
-        label={formatMessage({ id: 'address.optional', defaultMessage: 'Address 2 (optional)' })}
+        label={`${formatMessage({ id: 'address', defaultMessage: 'Address' })} 2 (${formatMessage({
+          id: 'optional',
+          defaultMessage: 'Optional',
+        })})`}
         type="text"
         name="additionalAddressInfo"
         id="additional-address-info"

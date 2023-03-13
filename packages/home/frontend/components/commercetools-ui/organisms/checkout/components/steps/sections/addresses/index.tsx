@@ -56,7 +56,7 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
       name: yup.string().required(),
       email: yup.string().email().required(),
       phone: yup.string().optional(),
-      line1: yup.string().required(),
+      line1: yup.string().optional(),
       line2: yup.string().optional(),
       postalCode: yup.string().required(),
       city: yup.string().required(),

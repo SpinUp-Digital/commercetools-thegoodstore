@@ -6,7 +6,6 @@
   "email": "Email",
   "emailAddress": "Email Address",
   "address": "Address",
-  "address.optional": "Address 2 (optional)",
   "city": "City",
   "zipCode": "Postcode",
   "country": "Country",
