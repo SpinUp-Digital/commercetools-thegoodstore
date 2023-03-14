@@ -102,6 +102,7 @@
     "autoprefixer": "^10.4.2",
     "babel-loader": "^8.2.4",
     "concurrently": "^7.0.0",
+    "cssnano": "^5.1.15",
     "eslint": "^8.15.0",
     "eslint-config-next": "^12.1.6",
     "eslint-config-prettier": "^8.3.0",
