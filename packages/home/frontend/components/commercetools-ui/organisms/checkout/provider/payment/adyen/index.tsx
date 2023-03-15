@@ -5,7 +5,7 @@ import creditCardType from 'credit-card-type';
 import * as yup from 'yup';
 import { ObjectShape } from 'yup/lib/object';
 import Overlay from 'components/commercetools-ui/atoms/overlay';
-import { mapLocaleLanguage } from 'project.config';
+import { getLocalizationInfo } from 'project.config';
 import {
   PaymentMethod,
   PaymentMethodType,
@@ -43,7 +43,7 @@ const AdyenPaymentProvider: React.FC = ({ children }) => {
         const AdyenCheckout = module.default;
 
         return AdyenCheckout({
-          locale: mapLocaleLanguage(router.locale),
+          locale: getLocalizationInfo(router.locale).locale,
           environment: 'test',
           clientKey: process.env.NEXT_PUBLIC_ADYEN_CLIENT_KEY,
           onAdditionalDetails: (state: { data: Record<string, string> }) => {

@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 import * as uuid from 'uuid';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useI18n from 'helpers/hooks/useI18n';
-import { mapLocaleLanguage } from 'project.config';
+import { getLocalizationInfo } from 'project.config';
 import { KlarnaPaymentRequestPayload, PaymentResponse, SchemePaymentRequestPayload } from 'types/payment';
 import { useAccount, useCart } from 'frontastic';
 import Footer from './components/footer';
@@ -102,7 +102,7 @@ const CheckoutWrapped: React.FC<Props> = ({ logo }) => {
         channel: 'web',
         origin: window.location.origin,
         countryCode: country,
-        shopperLocale: mapLocaleLanguage(router.locale),
+        shopperLocale: getLocalizationInfo(router.locale).locale,
         authenticationData: {
           threeDSRequestData: {
             nativeThreeDS: 'preferred',
@@ -128,7 +128,7 @@ const CheckoutWrapped: React.FC<Props> = ({ logo }) => {
         reference: order.orderId as string,
         shopperReference: account?.accountId ?? uuid.v4(),
         countryCode: country,
-        shopperLocale: mapLocaleLanguage(router.locale),
+        shopperLocale: getLocalizationInfo(router.locale).locale,
         lineItems: (data?.lineItems ?? []).map((lineItem) => ({
           id: lineItem.lineItemId as string,
           quantity: (lineItem.count ?? 1).toString() as string,

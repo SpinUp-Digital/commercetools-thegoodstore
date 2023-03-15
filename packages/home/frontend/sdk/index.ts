@@ -1,6 +1,6 @@
 import { ComposableCommerce } from '@commercetools/frontend-composable-commerce';
 import { SDK as BaseSDK } from '@commercetools/frontend-sdk';
-import { mapSDKLanguage } from 'project.config';
+import { getLocalizationInfo } from 'project.config';
 import { resolveApiHubUrl } from 'frontastic';
 
 export const sdk = new BaseSDK();
@@ -9,10 +9,13 @@ export class SDK {
   private static extensions: ComposableCommerce;
   static locale: string;
 
-  static configure(locale: string) {
+  static configure(nextLocale: string) {
+    const { locale, currency } = getLocalizationInfo(nextLocale);
+
     sdk.configure({
-      locale: mapSDKLanguage(locale),
-      currency: locale === 'de' ? 'EUR' : 'GBP',
+      locale,
+      currency,
+      useCurrencyInLocale: true,
       endpoint: resolveApiHubUrl().split('/frontastic')[0],
     });
 

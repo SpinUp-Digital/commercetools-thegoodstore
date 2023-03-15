@@ -1,65 +1,18 @@
 import { IncomingMessage, ServerResponse } from 'http';
-import { Category } from 'types/category';
-import { mapLanguage } from '../../../project.config';
+import { Result } from '@commercetools/frontend-domain-types/product/Result';
+import { SDK, sdk } from 'sdk';
 import { fetchApiHubServerSide } from '../fetch-api-hub';
 import { PageDataResponse, PagePreviewDataResponse, RedirectResponse, PageFolderStructureResponse } from '../types';
 
-type UrlParams = {
-  slug?: Array<string>;
-};
-
-type QueryParams = {
-  [key: string]: string | string[] | undefined;
-};
-
-const encodeSingleQueryParam = (key: string, value: string | string[] | undefined): string[] => {
-  if (value === undefined) {
-    return [encodeURIComponent(key)];
-  }
-
-  if (typeof value === 'string') {
-    return [`${encodeURIComponent(key)}=${encodeURIComponent(value)}`];
-  }
-
-  return value.map((element) => `${encodeURIComponent(key)}=${encodeURIComponent(element)}`);
-};
-
-const encodeQueryParams = (query: QueryParams): string[] => {
-  return Object.entries(query).flatMap(([key, value]) => encodeSingleQueryParam(key, value));
-};
-
 export const getRouteData =
   () =>
-  async (
-    urlParams: UrlParams,
-    locale: string,
-    query: QueryParams,
-    nextJsReq?: IncomingMessage,
-    nextJsRes?: ServerResponse,
-  ): Promise<RedirectResponse | PageDataResponse> => {
-    // Remove slug from query since it's not needed as part of the query.
-    delete query.slug;
+  async (slug: string[]): Promise<RedirectResponse | PageDataResponse> => {
+    const pageSlug = (slug as string[])?.join('/') || '';
+    const path = `/${pageSlug !== 'index' ? pageSlug : ''}`;
 
-    const slug = urlParams.slug?.join('/') || '';
-    query.path = `/${slug !== 'index' ? slug : ''}`;
-    query.locale = mapLanguage(locale);
+    const res = await sdk.page.getPage({ path });
 
-    const headers = {
-      'Frontastic-Path': query.path,
-      'Frontastic-Locale': mapLanguage(locale),
-    };
-    const endpoint = `/page?${encodeQueryParams(query).join('&')}`;
-
-    const data: RedirectResponse | PageDataResponse = (await fetchApiHubServerSide(
-      endpoint,
-      locale,
-      {
-        req: nextJsReq,
-        res: nextJsRes,
-      },
-      headers,
-    )) as RedirectResponse | PageDataResponse;
-    return data;
+    return (res.isError ? {} : res.data) as RedirectResponse | PageDataResponse;
   };
 
 export const getPreview =
@@ -79,35 +32,13 @@ export const getPreview =
     return data;
   };
 
-export const getCategories =
-  () =>
-  async (
-    urlParams: UrlParams,
-    locale: string,
-    query: QueryParams,
-    nextJsReq: IncomingMessage,
-    nextJsRes: ServerResponse,
-  ): Promise<Category[]> => {
-    // Remove slug from query since it's not needed as part of the query.
+export const getCategories = () => async (): Promise<Result> => {
+  const extensions = SDK.getExtensions();
 
-    const headers = {
-      'Frontastic-Locale': mapLanguage(locale),
-    };
+  const res = await extensions.product.queryCategories({ limit: 99 });
 
-    const endpoint = `/action/product/queryCategories?limit=100`;
-
-    const data = (await fetchApiHubServerSide(
-      endpoint,
-      locale,
-      {
-        req: nextJsReq,
-        res: nextJsRes,
-      },
-      headers,
-    )) as Category[];
-
-    return data;
-  };
+  return (res.isError ? [] : res.data) as Result;
+};
 
 export const getStructure =
   () =>

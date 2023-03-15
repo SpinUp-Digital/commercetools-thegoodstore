@@ -1848,21 +1848,22 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@commercetools/frontend-composable-commerce@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@commercetools/frontend-composable-commerce/-/frontend-composable-commerce-1.1.0.tgz#c73773dda48451e1cd62f1e42c05c4d8a81ab1db"
-  integrity sha512-pWu/hPXsq8l4szSJYMZJ8qrqlPNhYnfKBIrNe3+Z907YbZx9Xhwcl7/NlUbrZ9nGwQQZ8MQ/zQGzhIB50yYW6g==
+"@commercetools/frontend-composable-commerce@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@commercetools/frontend-composable-commerce/-/frontend-composable-commerce-1.1.4.tgz#87e2406d6b756f8037a66fa1df5c3245390e17bc"
+  integrity sha512-rkwqqI05+xJbQSSDMjw2V04cLKzEyHcAyyzKGAtyc8hVskf5RVl26DjxSOlfd50RUyi6TczV2EvXroOrG1oAjg==
 
 "@commercetools/frontend-domain-types@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@commercetools/frontend-domain-types/-/frontend-domain-types-1.0.3.tgz#8eae385ad672e8acdffb65c63b6a2af110567327"
   integrity sha512-ENsvOvUyY6jdjgdUWn33Jvig+hcLxFaZN/6FNrnA9rz4nGClLhzJE9DT/NlOBryqSLxuw00FJC8NGRnnNzZ8Dg==
 
-"@commercetools/frontend-sdk@^1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@commercetools/frontend-sdk/-/frontend-sdk-1.1.2.tgz#5e69434e3a1172409fa519959e00a50a736d3de4"
-  integrity sha512-ZEs2QIKSNqXll0uePLpXt7wfzhx4woAbtePnY+RWIrH4znJmzMiLqmsQ4ACdypbV1Lioy9JljpYEKA73yF5QCA==
+"@commercetools/frontend-sdk@^1.2.6":
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/@commercetools/frontend-sdk/-/frontend-sdk-1.2.6.tgz#a47cd3e828570399ac7fe85866e65335fe4da84d"
+  integrity sha512-DMW+c52uSmevXZgLPXuEcY+x/2oScSIjo11uIhi2uOCPv7r4mBVX3P2QP0toBI5eQI1M5tknLwGlzz9FIDoIag==
   dependencies:
+    "@frontastic/extension-types" "^0.0.11"
     js-cookie "3.0.1"
 
 "@corex/deepmerge@^4.0.29":
@@ -2175,6 +2176,11 @@
     "@formatjs/intl-listformat" "6.5.3"
     intl-messageformat "9.12.0"
     tslib "^2.1.0"
+
+"@frontastic/extension-types@^0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@frontastic/extension-types/-/extension-types-0.0.11.tgz#2b4919cbe0a05e18d817424da454c65a84d7852c"
+  integrity sha512-Qme7FALn7JHZooiKmuqWdNsK4u+leLY4dzt+ctLWfRES5/zvpsZiErh7MuE+ftfbc/mXByNcULUeaOL5MsUEAw==
 
 "@gar/promisify@^1.0.1":
   version "1.1.3"

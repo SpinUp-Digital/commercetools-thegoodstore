@@ -1,42 +1,18 @@
-const languageMapper = {
-  en: 'en_GB@GBP',
-  de: 'de_DE@EUR',
+const localizationMapper = {
+  en: { locale: 'en_GB@GBP', currency: 'GBP', currencyCode: '£', countryCode: 'GB', countryName: 'Great Britain' },
+  de: { locale: 'de_DE@EUR', currency: 'EUR', currencyCode: '€', countryCode: 'DE', countryName: 'Germany' },
 };
 
-const SDKLanguageMapper = {
-  en: 'en-GB',
-  de: 'de-DE',
-};
+const getLocalizationInfo = (locale) => {
+  if (!(locale in localizationMapper)) {
+    console.warn(
+      `Invalid locale ${locale} provided. Possible values are ${Object.keys(localizationMapper).join(', ')}`,
+    );
 
-const localeMapper = {
-  en: 'en_GB',
-  de: 'de_DE',
-};
-
-const mapLanguage = (lang) => {
-  if (!languageMapper[lang]) {
-    console.error(`Language mapper is missing language ${lang}`);
+    return localizationMapper.en;
   }
 
-  //If language is not defined in languageMapper then select first locale
-  return languageMapper[lang] || languageMapper[Object.keys(languageMapper)[0]];
+  return localizationMapper[locale];
 };
 
-const mapSDKLanguage = (lang) => {
-  if (!SDKLanguageMapper[lang]) {
-    console.error(`SDK language mapper is missing language ${lang}`);
-  }
-
-  //If language is not defined in SDKLanguageMapper then select first locale
-  return SDKLanguageMapper[lang] || SDKLanguageMapper[Object.keys(SDKLanguageMapper)[0]];
-};
-
-const mapLocaleLanguage = (lang) => {
-  if (!localeMapper[lang]) {
-    console.error(`Locale language mapper is missing language ${lang}`);
-  }
-
-  return localeMapper[lang] || localeMapper[Object.keys(SDKLanguageMapper)[0]];
-};
-
-module.exports = { localeMapper, languageMapper, SDKLanguageMapper, mapLanguage, mapLocaleLanguage, mapSDKLanguage };
+module.exports = { getLocalizationInfo };
