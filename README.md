@@ -1,4 +1,4 @@
-# Commercetools For Front-End (CoFe) Starter
+# commercetools for Frontend (coFe) Template
 
 > :information_source: Full documentation can be found [Here](https://docs.commercetools.com/frontend-development/)
 
@@ -41,7 +41,7 @@
 
 Next step depends wether you want to work on the backend or the frontend.
 
-## For Front-End Development:
+## For Frontend Development:
 
 1. `cd` into frontend working directory.
 
