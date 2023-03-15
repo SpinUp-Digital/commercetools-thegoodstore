@@ -1,7 +1,6 @@
 import React from 'react';
 import { GetServerSideProps, Redirect } from 'next';
 import Head from 'next/head';
-import { Result } from '@commercetools/frontend-domain-types/product/Result';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 //@ts-ignore
@@ -69,17 +68,15 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({
   locale,
   query,
   req,
-  res,
   resolvedUrl,
 }) => {
   SDK.configure(locale as string);
 
-  const extensions = SDK.getExtensions();
-
   const frontastic = createClient();
+
   const [data, categories] = await Promise.all([
-    frontastic.getRouteData(params ?? {}, locale as string, query, req, res),
-    extensions.product.queryCategories({ query: { limit: 99 } }).then((res) => (res.isError ? [] : res.data) as Result),
+    frontastic.getRouteData(params?.slug as string[]),
+    frontastic.getCategories(),
   ]);
 
   if (data) {
@@ -87,7 +84,7 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({
       return {
         notFound: true,
       };
-    } else if (typeof data === 'object' && 'target' in data) {
+    } else if (typeof data === 'object' && 'target' in data && 'statusCode' in data) {
       return {
         redirect: {
           destination: data.target,

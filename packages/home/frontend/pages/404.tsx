@@ -1,6 +1,5 @@
 import React from 'react';
 import { GetStaticProps, Redirect } from 'next';
-import { Result } from '@commercetools/frontend-domain-types/product/Result';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import GASnippet from 'components/headless/GASnippet';
 import { Log } from 'helpers/errorLogger';
@@ -29,17 +28,11 @@ export default function Error404({ data }: Props) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   SDK.configure(locale as string);
 
-  const extensions = SDK.getExtensions();
-
-  const query = { path: '/404', locale };
   const frontastic = createClient();
-  const [data, categories] = await Promise.all([
-    frontastic.getRouteData(params ?? { slug: ['404'] }, locale as string, query),
-    extensions.product.queryCategories({ query: { limit: 99 } }).then((res) => (res.isError ? [] : res.data) as Result),
-  ]);
+  const [data, categories] = await Promise.all([frontastic.getRouteData(['404']), frontastic.getCategories()]);
 
   if (data) {
     if (data instanceof ResponseError && data.getStatus() == 404) {

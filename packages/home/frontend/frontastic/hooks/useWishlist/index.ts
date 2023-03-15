@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { LineItem } from '@commercetools/frontend-domain-types/wishlist/LineItem';
 import { Wishlist } from '@commercetools/frontend-domain-types/wishlist/Wishlist';
-import useSWR, { mutate } from 'swr';
+import useSWR, { mutate, SWRResponse } from 'swr';
 import { SDK, sdk } from 'sdk';
 import { revalidateOptions } from 'frontastic';
 
@@ -10,7 +10,7 @@ const useWishlist = () => {
 
   const result = useSWR('/action/wishlist/getWishlist', extensions.wishlist.getWishlist, revalidateOptions);
 
-  const data = result.data?.isError ? {} : { data: result.data?.data };
+  const data = (result.data?.isError ? {} : { data: result.data?.data }) as SWRResponse<Wishlist>;
 
   const totalWishlistItems = data.data?.lineItems?.reduce((acc, curr) => acc + (curr.count as number), 0) ?? 0;
 

@@ -41,7 +41,7 @@ const Search: React.FC<Props> = ({ categories }) => {
   }, [blockScroll, focused]);
 
   const fetchResults = useCallback(async () => {
-    const results = await queryProducts({ query, limit: '6' });
+    const results = await queryProducts({ query, limit: 6 });
 
     if (results.isError) return;
 

@@ -2,13 +2,15 @@ import { GetServerSideProps } from 'next';
 import { Result } from '@commercetools/frontend-domain-types/product/Result';
 import { getServerSideSitemap, ISitemapField } from 'next-sitemap';
 import { siteUrl } from 'next-sitemap.config';
-import { mapLanguage } from 'project.config';
+import { getLocalizationInfo } from 'project.config';
 import { fetchApiHubServerSide } from 'frontastic';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const fields = [] as ISitemapField[];
 
   let nextCursor: string | undefined;
+
+  const { locale } = getLocalizationInfo(context.locale);
 
   do {
     /* TODO: Use SDK instead of fetchApiHubServerSide */
@@ -20,8 +22,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     // const items = response.isError ? [] : response.data.items;
 
     const response = (await fetchApiHubServerSide(
-      `/action/product/query?cursor=${nextCursor}&limit=128&locale=${mapLanguage(context.locale)}`,
-      mapLanguage(context.locale),
+      `/action/product/query?cursor=${nextCursor}&limit=128&locale=${locale}`,
+      locale,
       {
         req: context.req,
         res: context.res,

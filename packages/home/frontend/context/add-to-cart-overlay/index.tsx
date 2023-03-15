@@ -46,7 +46,7 @@ const AddToCartOverlayProvider: React.FC = ({ children }) => {
 
       if (!category) return;
 
-      const response = await query({ category, limit: '15' });
+      const response = await query({ category, limit: 15 });
 
       if (response.isError) return;
 

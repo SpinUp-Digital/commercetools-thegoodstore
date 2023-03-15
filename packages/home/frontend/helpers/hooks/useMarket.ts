@@ -1,21 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Market } from 'components/commercetools-ui/organisms/header/types';
-import { mapSDKLanguage } from 'project.config';
+import { getLocalizationInfo } from 'project.config';
 
 const useMarket = () => {
   const [markets, setMarkets] = useState<Market[]>([]);
   const [market, setMarket] = useState<Market>();
   const router = useRouter();
-
-  const getCountryAndCurrency = (country: string) => {
-    switch (country) {
-      case 'en-GB':
-        return { countryCode: 'GB', countryName: 'Great Britain', currency: 'GBP', currencyCode: '£' };
-      default:
-        return { countryCode: 'DE', countryName: 'Germany', currency: 'EUR', currencyCode: '€' };
-    }
-  };
 
   const handleMarket = (market: Market) => {
     setMarket(market);
@@ -24,13 +15,17 @@ const useMarket = () => {
   };
 
   useEffect(() => {
-    const initialMarkets = router.locales?.map((locale) => ({
-      region: getCountryAndCurrency(mapSDKLanguage(locale)).countryName,
-      flag: getCountryAndCurrency(mapSDKLanguage(locale)).countryCode,
-      locale: mapSDKLanguage(locale),
-      currency: getCountryAndCurrency(mapSDKLanguage(locale)).currency,
-      currencyCode: getCountryAndCurrency(mapSDKLanguage(locale)).currencyCode,
-    }));
+    const initialMarkets = router.locales?.map((nextLocale) => {
+      const { locale, currency, currencyCode, countryCode, countryName } = getLocalizationInfo(nextLocale);
+
+      return {
+        locale,
+        currencyCode,
+        region: countryName,
+        flag: countryCode,
+        currency: currency,
+      };
+    });
 
     if (!initialMarkets) return;
 

@@ -14,7 +14,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const extensions = SDK.getExtensions();
 
   do {
-    const response = await extensions.product.queryCategories({ query: { cursor: nextCursor, limit: 12 } });
+    const response = await extensions.product.queryCategories({ cursor: nextCursor, limit: 12 });
 
     const items = ((response.isError ? [] : response.data.items) ?? []) as Category[];
 
