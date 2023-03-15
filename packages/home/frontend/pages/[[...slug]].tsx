@@ -79,6 +79,8 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({
     frontastic.getCategories(),
   ]);
 
+  console.log('PROCESS ENV:', process.env);
+
   if (data) {
     if (data instanceof ResponseError && data.getStatus() == 404) {
       return {
