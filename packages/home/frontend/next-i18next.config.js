@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const path = require('path');
 
 module.exports = {
@@ -6,5 +8,4 @@ module.exports = {
     locales: ['de', 'en'],
     localeDetection: false,
   },
-  localePath: path.resolve('./public/locales'),
 };
