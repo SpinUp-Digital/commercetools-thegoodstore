@@ -3,9 +3,6 @@ const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
   target: 'node',
-  externals: {
-    'node-fetch': 'commonjs2 node-fetch',
-  },
   entry: {
     app: './index.ts',
   },
