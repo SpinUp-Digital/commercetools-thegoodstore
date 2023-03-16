@@ -78,7 +78,7 @@ Next step depends wether you want to work on the backend or the frontend.
 
 # Integrations:
 
-- [Commercetools Composable Commerce (CoCo)](https://docs.commercetools.com/api/) is our e-commerce suite :briefcase:
+- [commercetools Composable Commerce (CoCo)](https://docs.commercetools.com/api/) is our e-commerce suite :briefcase:
 - [Algolia](https://www.algolia.com/doc/) for the fastest real time search experience :zap:
 - [Adyen](https://docs.adyen.com/) for fast and secure payments :lock:
 
