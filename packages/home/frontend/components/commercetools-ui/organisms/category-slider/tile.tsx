@@ -30,7 +30,7 @@ const Tile: React.FC<Props> = ({ tile }) => {
         />
       </div>
       <Typography
-        as="h6"
+        as="h2"
         fontSize={14}
         align="center"
         className="mt-5 block overflow-hidden truncate rounded-b-sm border-neutral-300 py-5 text-primary-black md:text-16 lg:mt-0 lg:border lg:bg-white lg:py-10"

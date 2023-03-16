@@ -22,7 +22,7 @@ const useProduct = (): UseProductReturn => {
 
     const extensions = SDK.getExtensions();
 
-    const res = await extensions.product.query({ limit: productQuery.limit });
+    const res = await extensions.product.query({ limit: productQuery.limit, query: productQuery.query });
 
     return res;
 
