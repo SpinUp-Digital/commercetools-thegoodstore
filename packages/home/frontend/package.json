@@ -10,7 +10,7 @@
     "debug": "concurrently -n NEXT,TSC -c magenta,cyan \"NODE_OPTIONS='--inspect' next dev\" \"yarn ts --watch\"",
     "build": "node pre-build.js && yarn run next_build",
     "next_build": "next build",
-    "postbuild": "concurrently \"yarn build-storybook\" \"next-sitemap\"",
+    "postbuild": "rm -rf ./public/storybook && concurrently \"yarn build-storybook\" \"next-sitemap\"",
     "build:analyze": "ANALYZE=true yarn run build",
     "start": "next start",
     "test": "next build",

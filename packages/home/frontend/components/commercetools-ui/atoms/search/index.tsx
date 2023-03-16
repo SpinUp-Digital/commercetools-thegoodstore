@@ -101,6 +101,7 @@ const Search: React.FC<Props> = ({ categories }) => {
             />
             <button
               type="submit"
+              title={formatMessage({ id: 'search', defaultMessage: 'Search' })}
               className={`shrink-0 border-l border-neutral-400 px-16 py-10 transition ${
                 focused ? 'bg-primary-black' : 'bg-white'
               }`}

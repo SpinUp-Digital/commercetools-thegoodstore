@@ -5,7 +5,10 @@ import { Tastic } from 'types/tastic';
 function ProductSliderTastic({ data }: Tastic<{ items: Product[] }, ProductSliderProps>) {
   if (!data?.data?.dataSource?.items) return <p>No products found.</p>;
 
-  return <ProductSlider {...data} products={data.data.dataSource.items} />;
+  //eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { mobile, tablet, desktop, ...props } = data;
+
+  return <ProductSlider {...props} products={data.data.dataSource.items} />;
 }
 
 export default ProductSliderTastic;

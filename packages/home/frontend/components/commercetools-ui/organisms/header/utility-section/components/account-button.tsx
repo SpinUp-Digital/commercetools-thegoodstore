@@ -16,15 +16,18 @@ const AccountButton = () => {
     }`;
   }, [account?.firstName, account?.salutation, formatAccountMessage]);
 
+  const title = account
+    ? formatAccountMessage({ id: 'account', defaultMessage: 'Account' })
+    : formatAccountMessage({ id: 'sign.in', defaultMessage: 'Login' });
   return (
     <>
-      <Link link={account ? '/account' : '/login'}>
+      <Link link={account ? '/account' : '/login'} title={title}>
         <UserIcon className="hidden w-28 text-secondary-black md:flex lg:hidden" />
       </Link>
       <Popover className="relative hidden lg:flex">
         {() => (
           <>
-            <Popover.Button>
+            <Popover.Button title={title}>
               <div className="flex w-fit whitespace-nowrap">
                 <div className="mr-16 hidden w-104 py-2 lg:inline-block">
                   {loggedIn && (

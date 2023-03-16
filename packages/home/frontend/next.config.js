@@ -20,7 +20,7 @@ const config = {
     domains: ['res.cloudinary.com', 's3-eu-west-1.amazonaws.com'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
   },
-  productionBrowserSourceMaps: false,
+  productionBrowserSourceMaps: true,
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
