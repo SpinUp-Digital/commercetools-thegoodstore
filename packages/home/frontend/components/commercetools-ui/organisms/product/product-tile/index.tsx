@@ -7,7 +7,6 @@ import QuickView from 'components/commercetools-ui/organisms/product/product-qui
 import Prices from 'components/commercetools-ui/organisms/product/product-tile/prices';
 import WishlistButton from 'components/commercetools-ui/organisms/wishlist/components/wishlist-button';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
-import usePreloadImages from 'helpers/hooks/usePreloadImages';
 import useVariantWithDiscount from 'helpers/hooks/useVariantWithDiscount';
 import { desktop } from 'helpers/utils/screensizes';
 import Image from 'frontastic/lib/image';
@@ -33,11 +32,6 @@ const ProductTile: FC<ProductTileProps> = ({
   const [isDesktopSize] = useMediaQuery(desktop);
 
   const { ref } = useTrack({ product });
-
-  usePreloadImages(
-    product.variants.map((variant) => variant.images?.[0] ?? ''),
-    'medium',
-  );
 
   const variantWithDiscount = useVariantWithDiscount(product.variants) as Variant;
 

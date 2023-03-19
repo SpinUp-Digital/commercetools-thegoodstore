@@ -5,6 +5,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 //@ts-ignore
 import { renderToString } from 'react-dom/server';
+import { InstantSearchServerState } from 'react-instantsearch-hooks';
 import { getServerState } from 'react-instantsearch-hooks-server';
 import GASnippet from 'components/headless/GASnippet';
 import { useFormat } from 'helpers/hooks/useFormat';
@@ -79,8 +80,6 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({
     frontastic.getCategories(),
   ]);
 
-  console.log('PROCESS ENV:', process.env);
-
   if (data) {
     if (data instanceof ResponseError && data.getStatus() == 404) {
       return {
@@ -120,34 +119,37 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({
   const serverUrl = `${protocol}://${req.headers.host}${resolvedUrl}`;
 
   /* Algolia */
-  const slug = (params?.slug as string[])?.[(params?.slug?.length as number) - 1];
-
-  const searchQuery = (query.q as string) ?? '';
-
   const plpTasticKey = 'commercetools/ui/products/product-list-algolia';
 
-  const plpConfiguration = ((data as PageDataResponse).page?.sections.main.layoutElements
+  const plpConfiguration = (data as PageDataResponse).page?.sections.main.layoutElements
     .find((layoutElement) => layoutElement.tastics.find((tastic) => tastic.tasticType === plpTasticKey))
-    ?.tastics.find((tastic) => tastic.tasticType === plpTasticKey)?.configuration ?? {}) as Partial<
+    ?.tastics.find((tastic) => tastic.tasticType === plpTasticKey)?.configuration as Partial<
     ProductListTasticProps['data']
   >;
 
-  if (slug) plpConfiguration.slug = slug;
-  if (searchQuery) plpConfiguration.searchQuery = searchQuery;
+  let serverState: null | InstantSearchServerState = null;
 
-  const serverState = await getServerState(
-    <ProductListTastic
-      serverUrl={serverUrl}
-      categories={(categories.items as Category[]) ?? []}
-      data={{
-        slug,
-        searchQuery,
-        facetsConfiguration: plpConfiguration.facetsConfiguration ?? [],
-        pricesConfiguration: plpConfiguration.pricesConfiguration ?? [],
-      }}
-    />,
-    { renderToString },
-  );
+  if (plpConfiguration) {
+    const slug = (params?.slug as string[])?.[(params?.slug?.length as number) - 1];
+    const searchQuery = (query.q as string) ?? '';
+
+    if (slug) plpConfiguration.slug = slug;
+    if (searchQuery) plpConfiguration.searchQuery = searchQuery;
+
+    serverState = await getServerState(
+      <ProductListTastic
+        serverUrl={serverUrl}
+        categories={(categories.items as Category[]) ?? []}
+        data={{
+          slug,
+          searchQuery,
+          facetsConfiguration: plpConfiguration.facetsConfiguration ?? [],
+          pricesConfiguration: plpConfiguration.pricesConfiguration ?? [],
+        }}
+      />,
+      { renderToString },
+    );
+  }
 
   return {
     props: {
