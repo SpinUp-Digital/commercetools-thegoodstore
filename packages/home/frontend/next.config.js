@@ -14,7 +14,6 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 /** @type {import('next').NextConfig} */
 const config = {
   i18n,
-  optimizeFonts: false,
   images: {
     loader: 'custom',
     domains: ['res.cloudinary.com', 's3-eu-west-1.amazonaws.com'],

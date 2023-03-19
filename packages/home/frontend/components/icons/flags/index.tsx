@@ -1,14 +1,16 @@
 import React from 'react';
-import France from './france';
-import Germany from './germany';
-import Greece from './greece';
-import Italy from './italy';
-import Netherlands from './netherlands';
-import Portugal from './portugal';
-import Spain from './spain';
-import Sweden from './sweden';
-import UnitedKingdom from './united-kingdom';
-import UnitedStates from './united-states';
+import dynamic from 'next/dynamic';
+
+const France = dynamic(() => import('./france'));
+const Germany = dynamic(() => import('./germany'));
+const Greece = dynamic(() => import('./greece'));
+const Italy = dynamic(() => import('./italy'));
+const Netherlands = dynamic(() => import('./netherlands'));
+const Portugal = dynamic(() => import('./portugal'));
+const Spain = dynamic(() => import('./spain'));
+const Sweden = dynamic(() => import('./sweden'));
+const UnitedKingdom = dynamic(() => import('./united-kingdom'));
+const UnitedStates = dynamic(() => import('./united-states'));
 
 type Props = {
   flagName: string;
