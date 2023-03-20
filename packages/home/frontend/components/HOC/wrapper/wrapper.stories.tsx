@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import Wrapper from '.';
 
 export default {
-  title: 'commercetools Frontend/Organisms/Wrapper',
+  title: 'Components/Organisms/Wrapper',
   component: Wrapper,
 } as ComponentMeta<typeof Wrapper>;
 

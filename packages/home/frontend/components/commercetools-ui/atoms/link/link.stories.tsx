@@ -2,7 +2,7 @@ import { Meta, Story } from '@storybook/react';
 import Link, { LinkProps } from '.';
 
 export default {
-  title: 'commercetools Frontend/Atoms/Link',
+  title: 'Components/Atoms/Link',
   component: Link,
 } as Meta;
 

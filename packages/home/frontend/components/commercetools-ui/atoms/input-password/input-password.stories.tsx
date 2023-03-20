@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import InputPassword from '.';
 
 export default {
-  title: 'commercetools Frontend/Atoms/Input Password',
+  title: 'Components/Atoms/Input Password',
   component: InputPassword,
 } as ComponentMeta<typeof InputPassword>;
 

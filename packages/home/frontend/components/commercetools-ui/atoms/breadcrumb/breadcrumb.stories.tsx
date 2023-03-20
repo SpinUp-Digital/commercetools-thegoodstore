@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/react';
 import Breadcrumb, { BreadcrumbProps } from './index';
 
 export default {
-  title: 'commercetools Frontend/Atoms/Breadcrumb',
+  title: 'Components/Atoms/Breadcrumb',
   component: Breadcrumb,
 } as Meta;
 

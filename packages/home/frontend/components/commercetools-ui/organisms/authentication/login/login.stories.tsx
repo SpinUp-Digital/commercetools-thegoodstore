@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/react';
 import Login, { LoginProps } from './index';
 
 export default {
-  title: 'commercetools Frontend/Organisms/Login',
+  title: 'Components/Organisms/Login',
   component: Login,
   argTypes: {},
 } as Meta;

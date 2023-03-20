@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import Search from '.';
 
 export default {
-  title: 'commercetools Frontend/Atoms/Search',
+  title: 'Components/Atoms/Search',
   component: Search,
 } as ComponentMeta<typeof Search>;
 

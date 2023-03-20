@@ -5,7 +5,7 @@ import { Reference } from 'types/reference';
 import Tile, { TileProps } from './index';
 
 export default {
-  title: 'commercetools Frontend/Organisms/Tile',
+  title: 'Components/Organisms/Tile',
   component: Tile,
   argTypes: {
     backgroundColor: { control: 'color' },

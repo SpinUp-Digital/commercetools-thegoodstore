@@ -4,7 +4,7 @@ import { Meta, Story } from '@storybook/react';
 import Button, { ButtonProps } from '.';
 
 export default {
-  title: 'commercetools Frontend/Atoms/Button',
+  title: 'Components/Atoms/Button',
   component: Button,
   argTypes: {
     variant: {
@@ -51,7 +51,7 @@ const Template: Story<ButtonProps> = (args) => {
   };
 
   return (
-    <div className="bg-gray-400 p-30">
+    <div className="bg-gray-300 p-30">
       <Button {...args} onClick={toggleButtonFeedback} loading={loading || args.loading} added={added || args.added} />
     </div>
   );

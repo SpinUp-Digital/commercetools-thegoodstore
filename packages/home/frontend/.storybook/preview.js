@@ -3,8 +3,12 @@ import { SDK } from '../sdk';
 import 'tailwindcss/tailwind.css';
 import '../styles/app.css';
 import 'react-loading-skeleton/dist/skeleton.css';
+import theme from './theme';
 
 export const parameters = {
+  docs: {
+    theme: theme,
+  },
   actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
     matchers: {
@@ -14,8 +18,13 @@ export const parameters = {
   },
   nextRouter: {
     Provider: RouterContext.Provider,
-    locales: ['en', 'de'],
-    locale: 'en',
+    locales: ['en_GB', 'de_DE'],
+    locale: 'en_GB',
+  },
+  options: {
+    storySort: {
+      method: 'alphabetical',
+    },
   },
 };
 

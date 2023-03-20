@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import Radio from '.';
 
 export default {
-  title: 'commercetools Frontend/Atoms/Radio',
+  title: 'Components/Atoms/Radio',
   component: Radio,
 } as ComponentMeta<typeof Radio>;
 

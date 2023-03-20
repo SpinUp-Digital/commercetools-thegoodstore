@@ -2,7 +2,7 @@ import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import Markdown from '.';
 
 export default {
-  title: 'commercetools Frontend/Organisms/Markdown',
+  title: 'Components/Organisms/Markdown',
   component: Markdown,
 } as ComponentMeta<typeof Markdown>;
 

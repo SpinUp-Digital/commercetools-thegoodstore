@@ -4,7 +4,7 @@ import Typography from '.';
 import { fontSizes, tagTypesToUse, TypographyProps } from './types';
 
 export default {
-  title: 'commercetools Frontend/Atoms/Typography',
+  title: 'Components/Atoms/Typography',
   component: Typography,
   argTypes: {
     fontFamily: { control: { type: 'select' }, options: ['libre', 'inter'], defaultValue: 'libre' },

@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import CategorySlider, { Props } from '.';
 
 export default {
-  title: 'commercetools Frontend/Organisms/Category Slider',
+  title: 'Components/Organisms/Category Slider',
   component: CategorySlider,
 } as ComponentMeta<typeof CategorySlider>;
 

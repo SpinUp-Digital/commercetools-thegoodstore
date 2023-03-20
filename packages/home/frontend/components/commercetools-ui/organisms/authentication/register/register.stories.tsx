@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/react';
 import Register, { RegisterProps } from './index';
 
 export default {
-  title: 'commercetools Frontend/Organisms/Register',
+  title: 'Components/Organisms/Register',
   component: Register,
   argTypes: {},
 } as Meta;
