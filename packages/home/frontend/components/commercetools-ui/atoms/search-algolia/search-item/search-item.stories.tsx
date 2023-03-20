@@ -5,7 +5,7 @@ import { searchClient } from 'algolia/searchClient';
 import SearchItem from '.';
 
 export default {
-  title: 'commercetools Frontend/Atoms/Search Item',
+  title: 'Components/Atoms/Search Item',
   component: SearchItem,
 } as ComponentMeta<typeof SearchItem>;
 

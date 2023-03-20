@@ -11,7 +11,14 @@ export interface DrawerProps {
   onClose?: () => void;
 }
 
-const Drawer: FC<DrawerProps> = ({ className = '', isOpen, direction, blockScrolling = true, onClose, children }) => {
+const Drawer: FC<DrawerProps> = ({
+  className = '',
+  isOpen,
+  direction = 'right',
+  blockScrolling = true,
+  onClose,
+  children,
+}) => {
   const { blockScroll } = useScrollBlock();
 
   useEffect(() => {

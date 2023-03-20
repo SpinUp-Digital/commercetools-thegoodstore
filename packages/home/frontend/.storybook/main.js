@@ -1,8 +1,14 @@
 const path = require('path');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
-  stories: ['../components/**/*.stories.mdx', '../components/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: [
+    '../components/**/*.stories.mdx',
+    '../components/**/*.stories.@(js|jsx|ts|tsx)',
+    '../business-docs/**/*.stories.mdx',
+    '../business-docs/**/*.stories.@(js|jsx|ts|tsx)',
+  ],
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
@@ -45,10 +51,28 @@ module.exports = {
     config.resolve.plugins = [
       new TsconfigPathsPlugin({
         configFile: path.resolve(__dirname, '..', 'tsconfig.json'),
-        extensions: ['.ts', '.tsx', '.js', '.jsx'],
+        extensions: ['.ts', '.tsx', '.js', '.jsx', '.mdx'],
       }),
     ];
 
+    config.plugins.push(
+      new webpack.DefinePlugin({
+        'process.env.NEXT_PUBLIC_FRONTASTIC_HOST': JSON.stringify(process.env.NEXT_PUBLIC_FRONTASTIC_HOST),
+        'process.env.NEXT_PUBLIC_FRONTASTIC_API_KEY': JSON.stringify(process.env.NEXT_PUBLIC_FRONTASTIC_API_KEY),
+        'process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME': JSON.stringify(process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME),
+        SITE_URL: JSON.stringify(process.env.SITE_URL),
+        'process.env.NEXT_PUBLIC_TRACKING_ID': JSON.stringify(process.env.NEXT_PUBLIC_TRACKING_ID),
+        'process.env.NEXT_PUBLIC_ALGOLIA_APPLICATION_ID': JSON.stringify(
+          process.env.NEXT_PUBLIC_ALGOLIA_APPLICATION_ID,
+        ),
+        'process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY': JSON.stringify(
+          process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY,
+        ),
+        'process.env.NEXT_PUBLIC_ALGOLIA_PRODUCTS_INDEX': JSON.stringify(
+          process.env.NEXT_PUBLIC_ALGOLIA_PRODUCTS_INDEX,
+        ),
+      }),
+    );
     config.module.rules.find((rule) => rule.test.toString() === '/\\.css$/').exclude = /\.module\.css$/;
 
     config.module.rules.push({

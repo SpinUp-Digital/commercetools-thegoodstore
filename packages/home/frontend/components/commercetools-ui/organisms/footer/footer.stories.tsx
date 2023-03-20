@@ -1,10 +1,10 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
-import { footerColumns, footerLogo, footerSocialMediaLinks } from 'helpers/mocks/mockData';
+import { footerColumns, footerLogo, footerSocialMediaLinks } from 'helpers/mocks/mockFooterData';
 import Footer, { Props as FooterProps } from './index';
 
 export default {
-  title: 'commercetools Frontend/Organisms/Footer',
+  title: 'Components/Organisms/Footer',
   component: Footer,
   argTypes: {
     backgroundColor: { control: 'color' },

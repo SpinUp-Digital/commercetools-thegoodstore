@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import Toaster from './index';
 
 export default {
-  title: 'commercetools Frontend/Atoms/Toaster',
+  title: 'Components/Atoms/Toaster',
   component: Toaster,
   argTypes: {
     variant: { control: { type: 'select' }, options: ['info', 'success', 'error'], defaultValue: 'info' },

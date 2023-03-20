@@ -3,15 +3,15 @@ import { Story, Meta } from '@storybook/react';
 import Dropdown, { DropdownProps } from '.';
 
 export default {
-  title: 'commercetools Frontend/Atoms/Dropdown',
+  title: 'Components/Atoms/Dropdown',
   component: Dropdown,
 } as Meta;
 
 const items: DropdownProps['items'] = Array(5)
   .fill('option')
-  .map((val) => {
+  .map((val, index) => {
     return {
-      label: val,
+      label: `${val}  ${index + 1}`,
       value: val,
     };
   });

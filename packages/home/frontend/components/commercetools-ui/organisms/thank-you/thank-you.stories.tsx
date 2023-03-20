@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/react';
 import ThankYou from './index';
 
 export default {
-  title: 'commercetools Frontend/Organisms/ThankYou',
+  title: 'Components/Organisms/ThankYou',
   component: ThankYou,
   argTypes: {
     backgroundColor: { control: 'color' },

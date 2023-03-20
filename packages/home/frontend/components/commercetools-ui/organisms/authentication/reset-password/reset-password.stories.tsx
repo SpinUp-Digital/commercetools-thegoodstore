@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/react';
 import ResetPassword, { ResetPasswordProps } from './index';
 
 export default {
-  title: 'commercetools Frontend/Organisms/Reset Password',
+  title: 'Components/Organisms/Reset Password',
   component: ResetPassword,
   argTypes: {},
 } as Meta;

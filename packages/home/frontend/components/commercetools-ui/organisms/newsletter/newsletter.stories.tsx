@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/react';
 import NewsLetter, { NewsletterProps } from './index';
 
 export default {
-  title: 'commercetools Frontend/Organisms/Newsletter',
+  title: 'Components/Organisms/Newsletter',
   component: NewsLetter,
   argTypes: {
     backgroundColor: { control: 'color' },

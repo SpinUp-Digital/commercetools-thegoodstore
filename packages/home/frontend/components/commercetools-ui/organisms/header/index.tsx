@@ -24,6 +24,8 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
   const links = categories?.filter((category) => category.depth === 0);
 
+  console.log(logo);
+
   return (
     <header className="relative h-fit w-full border-b-[1.5px] border-neutral-400 bg-white">
       <div aria-label="Top" className="flex w-full items-center justify-between px-16 md:px-28 lg:px-48">

@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/react';
 import HighlightBar from './index';
 
 export default {
-  title: 'commercetools Frontend/Organisms/HighlightBar',
+  title: 'Components/Organisms/HighlightBar',
   component: HighlightBar,
   argTypes: {},
 } as Meta;

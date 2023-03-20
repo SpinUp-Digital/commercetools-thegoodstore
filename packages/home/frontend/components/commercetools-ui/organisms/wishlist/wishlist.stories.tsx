@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/react';
 import WishList, { Props } from './index';
 
 export default {
-  title: 'commercetools Frontend/Organisms/Wishlist',
+  title: 'Components/Organisms/Wishlist',
   component: WishList,
   argTypes: {
     backgroundColor: { control: 'color' },
