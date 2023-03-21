@@ -4,6 +4,7 @@ import Checkbox from 'components/commercetools-ui/atoms/checkbox';
 import Dropdown from 'components/commercetools-ui/atoms/dropdown';
 import Modal from 'components/commercetools-ui/atoms/modal';
 import { useFormat } from 'helpers/hooks/useFormat';
+import useGeo from 'helpers/hooks/useGeo';
 import useProcessing from 'helpers/hooks/useProcessing';
 import { useAccount } from 'frontastic';
 import AddressForm from '../steps/sections/addresses/components/address-form';
@@ -17,6 +18,8 @@ const CreateAddressModal = () => {
   const { formatMessage: formatCheckoutMessage } = useFormat({ name: 'checkout' });
 
   const { processing, startProcessing, stopProcessing } = useProcessing();
+
+  const { getInfoByZipcode } = useGeo();
 
   const { addressToAccountAddress } = useMappers();
 
@@ -35,8 +38,14 @@ const CreateAddressModal = () => {
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
       setData({ ...data, [e.target.name]: e.target.value });
+
+      if (e.target.name === 'postalCode') {
+        getInfoByZipcode(e.target.value).then((info) => {
+          if (info.places?.[0]) setData((data) => ({ ...data, city: info.places[0]['place name'] ?? '' }));
+        });
+      }
     },
-    [data],
+    [data, getInfoByZipcode],
   );
 
   const handleSubmit = useCallback(async () => {

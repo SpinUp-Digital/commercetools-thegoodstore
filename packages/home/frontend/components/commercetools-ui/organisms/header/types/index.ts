@@ -24,13 +24,7 @@ export interface Tile {
   tileButtonLink: Reference;
 }
 
-export interface HeaderProps {
-  categories: Category[];
-  logo: NextFrontasticImage;
-  logoMobile: NextFrontasticImage;
-  logoLink: Reference;
-  logoLinkMobile: Reference;
-  tiles?: Tile[];
+export interface EmptyStateProps {
   emptyCartTitle: string;
   emptyCartSubtitle: string;
   emptyCartImage: NextFrontasticImage;
@@ -39,4 +33,13 @@ export interface HeaderProps {
   emptyWishlistSubtitle: string;
   emptyWishlistImage: NextFrontasticImage;
   emptyWishlistCategories: Link[];
+}
+
+export interface HeaderProps extends EmptyStateProps {
+  categories: Category[];
+  logo: NextFrontasticImage;
+  logoMobile: NextFrontasticImage;
+  logoLink: Reference;
+  logoLinkMobile: Reference;
+  tiles?: Tile[];
 }

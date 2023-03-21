@@ -7,7 +7,6 @@ export default {
   component: Search,
 } as ComponentMeta<typeof Search>;
 
-console.log(process.env.ELE, process.env.ELEV);
 const Template: ComponentStory<typeof Search> = (args) => <Search {...args} />;
 
 export const Primary = Template.bind({});

@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { useRouter } from 'next/router';
 import Button from 'components/commercetools-ui/atoms/button';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useCheckout } from '../../provider';
@@ -20,6 +21,8 @@ const Steps: React.FC<Props> = ({ onPurchase, onFinalStepChange }) => {
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
   const { formatMessage: formatCheckoutMessage } = useFormat({ name: 'checkout' });
 
+  const router = useRouter();
+
   const { processing } = useCheckout();
 
   const [active, setActive] = useState<number>(0);
@@ -28,7 +31,15 @@ const Steps: React.FC<Props> = ({ onPurchase, onFinalStepChange }) => {
   const goToNextStep = useCallback(() => {
     setCompleted([...completed, active]);
     setActive(active + 1);
-  }, [active, completed]);
+    router.push({ pathname: router.asPath.split('?').shift(), query: { step: active + 1 } }, undefined, {
+      shallow: true,
+    });
+  }, [active, completed, router]);
+
+  useEffect(() => {
+    if (router.query.step) setActive(+router.query.step);
+    else setActive(0);
+  }, [router.query.step]);
 
   const onEdit = useCallback((index: number) => setActive(index), []);
 

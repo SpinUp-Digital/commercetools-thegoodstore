@@ -21,7 +21,7 @@ export const EmptyState: React.FC<Props> = ({ image, title, subtitle, categories
       </Typography>
       <div className="flex w-full justify-center">
         <div className="relative h-92 w-197 px-10 text-center md:mt-55 md:mb-120">
-          <Image media={image.media} layout="fill" objectFit="contain" alt={image.title} />
+          <Image media={image?.media} layout="fill" objectFit="contain" alt={image?.title} />
         </div>
       </div>
       <ul className="mt-55 flex flex-col items-center gap-y-20">

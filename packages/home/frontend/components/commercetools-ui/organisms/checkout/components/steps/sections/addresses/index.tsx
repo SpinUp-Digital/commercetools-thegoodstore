@@ -5,6 +5,7 @@ import Button from 'components/commercetools-ui/atoms/button';
 import Checkbox from 'components/commercetools-ui/atoms/checkbox';
 import Info from 'components/commercetools-ui/atoms/info';
 import { useFormat } from 'helpers/hooks/useFormat';
+import useGeo from 'helpers/hooks/useGeo';
 import useProcessing from 'helpers/hooks/useProcessing';
 import useValidate from 'helpers/hooks/useValidate';
 import { useAccount, useCart } from 'frontastic';
@@ -25,6 +26,8 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
 
   const { account, loggedIn, shippingAddresses } = useAccount();
+
+  const { getInfoByZipcode } = useGeo();
 
   const { updateCart } = useCart();
 
@@ -84,8 +87,15 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
   const handleShippingAddressChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setShippingAddress({ ...shippingAddress, [e.target.name]: e.target.value });
+
+      if (e.target.name === 'postalCode') {
+        getInfoByZipcode(e.target.value).then((data) => {
+          if (data.places?.[0])
+            setShippingAddress((shippingAddress) => ({ ...shippingAddress, city: data.places[0]['place name'] ?? '' }));
+        });
+      }
     },
-    [shippingAddress],
+    [shippingAddress, getInfoByZipcode],
   );
 
   const handleBillingAddressChange = useCallback(

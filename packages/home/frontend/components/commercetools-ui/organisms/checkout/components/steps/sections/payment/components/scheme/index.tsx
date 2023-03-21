@@ -43,9 +43,9 @@ const Scheme = () => {
 
   const handleCardNumberChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (e.target.value.length > 16) e.target.value = e.target.value.slice(0, e.target.value.length - 1);
+      e.target.value = e.target.value.replace(/(\d{4})(?=\d+)/g, '$1 ').trim();
 
-      setPaymentData({ ...paymentData, number: e.target.value } as SchemeData);
+      setPaymentData({ ...paymentData, number: e.target.value.replace(/\s/g, '') } as SchemeData);
     },
     [paymentData, setPaymentData],
   );
@@ -86,8 +86,8 @@ const Scheme = () => {
           className="sm:px-8"
           labelPosition="inline"
           placeholder={formatCheckoutMessage({ id: 'card.number', defaultMessage: 'Card number' })}
-          type="number"
           onChange={handleCardNumberChange}
+          isValid={!!(paymentData.number && paymentData.number.length >= 12 && paymentData.number.length <= 19)}
         />
         {resolveCCImage(paymentData.number) && (
           // eslint-disable-next-line
