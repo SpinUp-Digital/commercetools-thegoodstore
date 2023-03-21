@@ -1,28 +1,45 @@
-import React from 'react';
-import { ChevronLeftIcon } from '@heroicons/react/24/solid';
-import Link from 'components/commercetools-ui/atoms/link';
-import { useFormat } from 'helpers/hooks/useFormat';
+import React, { useState } from 'react';
+import Drawer from 'components/commercetools-ui/atoms/drawer';
+import { EmptyStateProps } from 'components/commercetools-ui/organisms/header/types';
+import Slideout from 'components/commercetools-ui/organisms/header/utility-section/components/slide-out';
+import CartIcon from 'components/icons/cart';
+import { useCart } from 'frontastic';
 import Image, { FrontasticImage } from 'frontastic/lib/image';
 
-export interface Props {
+export interface Props extends EmptyStateProps {
   logo: FrontasticImage;
 }
 
-const Header: React.FC<Props> = ({ logo }) => {
-  const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
+const Header: React.FC<Props> = ({ logo, ...emptyState }) => {
+  const { totalItems: totalCartItems } = useCart();
+
+  const [isCartSlideoutOpen, setIsCartSlideoutOpen] = useState(false);
 
   return (
-    <div className="relative border-b border-neutral-400 bg-white px-8 py-18 md:px-16 md:py-24 lg:p-28">
-      <Link link="/" className="flex items-center gap-6">
-        <ChevronLeftIcon className="h-24 w-24 fill-secondary-black stroke-0" />
-        <p className="text-14 text-secondary-black">
-          {formatCartMessage({ id: 'continue.shopping', defaultMessage: 'Continue shopping' })}
-        </p>
-      </Link>
-
-      <div className="absolute left-1/2 top-1/2 hidden h-[36px] w-[208px] -translate-x-1/2 -translate-y-1/2 md:block lg:h-[44px] lg:w-[259px]">
+    <div className="flex items-center justify-between border-b border-neutral-400 bg-white px-8 py-18 md:px-16 md:py-24 lg:p-28">
+      <div className="relative h-[36px] w-[208px] lg:h-[44px] lg:w-[259px]">
         <Image {...logo} objectFit="contain" layout="fill" />
       </div>
+      <div onClick={() => setIsCartSlideoutOpen(true)} className="cursor-pointer">
+        <CartIcon
+          className="w-28 text-secondary-black"
+          totalCartItems={totalCartItems}
+          counterClassName="-translate-y-1/4"
+        />
+      </div>
+      <Drawer
+        isOpen={isCartSlideoutOpen}
+        direction="right"
+        className="w-[90%] max-w-[380px] bg-white"
+        onClose={() => setIsCartSlideoutOpen(false)}
+      >
+        <Slideout
+          state="cart"
+          onClose={() => setIsCartSlideoutOpen(false)}
+          enableWishlistState={false}
+          {...emptyState}
+        />
+      </Drawer>
     </div>
   );
 };

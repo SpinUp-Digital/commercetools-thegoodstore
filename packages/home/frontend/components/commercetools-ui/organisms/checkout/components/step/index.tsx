@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
 
@@ -15,6 +15,8 @@ interface Props {
 
 const Step: React.FC<Props> = ({ number, label, isExpanded, isCompleted, onEdit, Component, Preview, CTA }) => {
   const { formatMessage } = useFormat({ name: 'common' });
+
+  const ref = useRef<HTMLDivElement>(null);
 
   const headerClassName = useClassNames([
     'rounded-sm p-12 border transition lg:px-36 lg:py-24 lg:bg-white lg:border-none lg:rounded-md flex items-center justify-between',
@@ -40,8 +42,12 @@ const Step: React.FC<Props> = ({ number, label, isExpanded, isCompleted, onEdit,
     },
   ]);
 
+  useEffect(() => {
+    if (isExpanded && ref.current) ref.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, [isExpanded]);
+
   return (
-    <div className="bg-white">
+    <div className="bg-white" ref={ref}>
       <div className={headerClassName}>
         <div className="flex cursor-default items-center gap-12 lg:gap-16">
           <span className={numberClassName}>{number}</span>

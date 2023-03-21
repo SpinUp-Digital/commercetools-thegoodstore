@@ -17,7 +17,7 @@ import CheckoutProvider, { useCheckout } from './provider';
 
 export type Props = HeaderProps;
 
-const CheckoutWrapped: React.FC<Props> = ({ logo }) => {
+const CheckoutWrapped: React.FC<Props> = ({ logo, ...emptyState }) => {
   const { formatMessage: formatCheckoutMessage } = useFormat({ name: 'checkout' });
 
   const { orderCart, transaction, data, hasOutOfStockItems } = useCart();
@@ -61,6 +61,8 @@ const CheckoutWrapped: React.FC<Props> = ({ logo }) => {
   );
 
   const purchase = useCallback(async () => {
+    if (!data?.shippingAddress || !data?.billingAddress || !data?.shippingInfo) return;
+
     if (hasOutOfStockItems) {
       const outOfStockItems = data?.lineItems.filter((lineItem) => lineItem.variant?.isOnStock) ?? [];
 
@@ -154,7 +156,7 @@ const CheckoutWrapped: React.FC<Props> = ({ logo }) => {
     makeKlarnaPayment,
     account?.accountId,
     country,
-    data?.lineItems,
+    data,
     paymentDataIsValid,
     handlePaymentResponse,
     formatCheckoutMessage,
@@ -162,7 +164,7 @@ const CheckoutWrapped: React.FC<Props> = ({ logo }) => {
 
   return (
     <div className="min-h-screen lg:bg-neutral-200">
-      <Header logo={logo} />
+      <Header logo={logo} {...emptyState} />
       <div className="lg:mx-[48px]">
         <Secure />
         <div className="flex-row-reverse items-start gap-24 lg:flex">
