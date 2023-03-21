@@ -153,7 +153,7 @@ export class EmailApi implements BaseEmailApi {
     return [body, statusCode];
   }
 
-  async unsubscribe(account: Account) {
+  async unsubscribe(account: Account, list: string) {
     const [contactResponse, contactBody] = await this.client.request({
       url: `/v3/marketing/contacts/search/emails`,
       method: 'POST',
@@ -163,9 +163,9 @@ export class EmailApi implements BaseEmailApi {
     const contact = (Object.values(contactBody.result)[0] as any).contact;
 
     const [deleteResponse, deleteBody] = await this.client.request({
-      url: `/v3/marketing/contacts`,
+      url: `/v3/marketing/lists/${this.configuration.listIds[list]}/contacts`,
       method: 'DELETE',
-      qs: { ids: contact.id },
+      qs: { contact_ids: contact.id },
     });
 
     return [deleteResponse, deleteBody];
