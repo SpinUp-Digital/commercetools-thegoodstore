@@ -6,7 +6,7 @@ export const discardRepeatedValues = (variants: Variant[], attribute: string) =>
   const variantsToDisplay = variants?.filter((variant) => {
     const value = variant.attributes?.[attribute];
 
-    if (uniqueValues[value]) return false;
+    if (!value || uniqueValues[value]) return false;
     else {
       uniqueValues[value] = true;
       return true;
