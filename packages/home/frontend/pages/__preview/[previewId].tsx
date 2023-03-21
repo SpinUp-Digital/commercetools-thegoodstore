@@ -48,6 +48,11 @@ export default function Preview({ data }: PreviewProps) {
     }
   }, [currentHighlight, data?.previewId, data?.previewContext?.customerName]);
 
+  useEffect(() => {
+    //Gtag mock function
+    window.gtag = function () {};
+  }, []);
+
   if (!data) {
     return null;
   }
@@ -62,13 +67,15 @@ export default function Preview({ data }: PreviewProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ params, locale, req, res }) => {
+export const getServerSideProps: GetServerSideProps = async ({ params, locale }) => {
   SDK.configure(locale as string);
 
   const extensions = SDK.getExtensions();
 
   const frontastic = createClient();
-  const data = await frontastic.getPreview(params?.previewId?.toString() ?? '', locale as string, req, res);
+
+  const data = await frontastic.getPreview(params?.previewId?.toString() ?? '');
+
   const categories = await extensions.product
     .queryCategories({ limit: 99 })
     .then((res) => (res.isError ? [] : res.data));

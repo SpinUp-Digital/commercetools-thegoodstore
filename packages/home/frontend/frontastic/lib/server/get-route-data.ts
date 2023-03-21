@@ -17,19 +17,10 @@ export const getRouteData =
 
 export const getPreview =
   () =>
-  async (
-    previewId: string,
-    locale: string,
-    nextJsReq: IncomingMessage,
-    nextJsRes: ServerResponse,
-  ): Promise<PagePreviewDataResponse> => {
-    const endpoint = `/preview?previewId=${previewId}&locale=${locale}`;
+  async (previewId: string): Promise<PagePreviewDataResponse> => {
+    const res = await sdk.page.getPreview({ previewId });
 
-    const data: PagePreviewDataResponse = (await fetchApiHubServerSide(endpoint, locale, {
-      req: nextJsReq,
-      res: nextJsRes,
-    })) as PagePreviewDataResponse;
-    return data;
+    return (res.isError ? {} : res.data) as PagePreviewDataResponse;
   };
 
 export const getCategories = () => async (): Promise<Result> => {
