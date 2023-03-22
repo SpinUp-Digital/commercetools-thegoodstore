@@ -52,6 +52,27 @@
           "type": "reference"
         }
       ]
+    },
+    {
+      "name": "Customization",
+      "fields": [
+        {
+          "label": "Variant",
+          "field": "variant",
+          "type": "enum",
+          "default": "normal",
+          "values": [
+            {
+              "name": "Normal",
+              "value": "normal"
+            },
+            {
+              "name": "Cart",
+              "value": "cart"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

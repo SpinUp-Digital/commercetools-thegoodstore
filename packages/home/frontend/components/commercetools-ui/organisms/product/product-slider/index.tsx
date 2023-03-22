@@ -30,6 +30,7 @@ export interface ProductSliderProps extends Partial<SwiperOptions> {
   classNames?: {
     title?: string;
   };
+  variant?: 'normal' | 'cart';
 }
 
 const ProductSlider: FC<ProductSliderProps> = ({
