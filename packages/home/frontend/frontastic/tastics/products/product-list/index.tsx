@@ -87,7 +87,7 @@ const ProductListWrapped: React.FC<Props> = ({ data, categories }) => {
 
   useEffect(() => {
     if (!data.data?.dataSource) return;
-    console.log(data.data.dataSource);
+
     updateUiState({
       slug: data.data?.dataSource?.category?.split('/').at(-1),
       searchQuery: query.q as string,
