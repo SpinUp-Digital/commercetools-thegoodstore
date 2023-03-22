@@ -20,8 +20,6 @@ const ProductList: React.FC<Props> = ({ products, categories }) => {
 
   const category = useMemo(() => categories.find((category) => category.slug === slug), [categories, slug]);
 
-  if (!searchQuery && !category) return <></>;
-
   return (
     <div className="min-h-screen bg-neutral-200 py-48">
       <div className="relative mx-auto max-w-[1150px] px-12 md:px-24 2xl:max-w-[1248px]">

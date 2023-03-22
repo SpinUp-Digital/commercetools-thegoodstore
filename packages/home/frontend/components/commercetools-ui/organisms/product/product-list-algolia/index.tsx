@@ -25,8 +25,6 @@ const ProductListAlgolia: React.FC<Props> = ({ slug, searchQuery, categories, fa
 
   const category = useMemo(() => categories.find((category) => category.slug === slug), [categories, slug]);
 
-  if (!searchQuery && !slug) return <></>;
-
   return (
     <div className="min-h-screen bg-neutral-200 py-48">
       <Configure

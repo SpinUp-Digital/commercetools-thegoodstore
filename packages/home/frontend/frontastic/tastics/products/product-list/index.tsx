@@ -26,6 +26,7 @@ export type Props = Tastic<
     facets: Facet[];
     previousCursor?: string;
     nextCursor?: string;
+    total: number;
     totalItems: number;
   },
   TasticProps
@@ -86,19 +87,20 @@ const ProductListWrapped: React.FC<Props> = ({ data, categories }) => {
 
   useEffect(() => {
     if (!data.data?.dataSource) return;
-
+    console.log(data.data.dataSource);
     updateUiState({
       slug: data.data?.dataSource?.category?.split('/').at(-1),
       searchQuery: query.q as string,
       previousCursor: data.data.dataSource.previousCursor,
       nextCursor: data.data.dataSource.nextCursor,
-      totalItems: data.data.dataSource.totalItems,
+      totalItems: data.data.dataSource.total ?? data.data.dataSource.totalItems,
     });
   }, [data.data?.dataSource, updateUiState, query]);
 
   const isValidCategoryOrSearchQuery = useMemo(() => {
     if (searchQuery) return true;
-    return slug && !!categories.find((c) => c.slug === slug);
+    if (!slug) return true;
+    return !!categories.find((c) => c.slug === slug);
   }, [searchQuery, slug, categories]);
 
   if (!data?.data) return <></>;
