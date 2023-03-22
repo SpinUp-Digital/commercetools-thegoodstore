@@ -15,17 +15,21 @@ import {
 } from 'types/payment';
 import { useAdyen } from 'frontastic';
 import { KlarnaData, PaymentData, PaymentProvider, SchemeData, ThreeDS2AuthCallback } from '../types';
+import usePaymentTestData from './hooks/usePaymentTestData';
 
 export const AdyenContext = React.createContext<PaymentProvider>({} as PaymentProvider);
 
 const AdyenPaymentProvider: React.FC = ({ children }) => {
   const adyen = useAdyen();
 
+  const paymentTestData = usePaymentTestData();
+
   const router = useRouter();
 
   const [isOverlayActive, setIsOverlayActive] = useState(false);
 
   const [processing, setProcessing] = useState(false);
+  const {} = usePaymentTestData();
 
   const handleOnAdditionalDetails = useCallback(
     async (state: { data: Record<string, string> }) => {
@@ -57,7 +61,10 @@ const AdyenPaymentProvider: React.FC = ({ children }) => {
     [router.locale, handleOnAdditionalDetails],
   );
 
-  const [paymentData, setPaymentData] = useState<PaymentData>({ type: 'scheme' } as PaymentData);
+  const [paymentData, setPaymentData] = useState<PaymentData>({
+    ...(process.env.NEXT_PUBLIC_CHECKOUT_TEST_DATA ? paymentTestData : {}),
+    type: 'scheme',
+  } as PaymentData);
 
   const paymentDataIsValid = useMemo(() => {
     if (!paymentData?.type) return false;

@@ -80,6 +80,7 @@ const Scheme = () => {
         labelPosition="inline"
         placeholder={formatCheckoutMessage({ id: 'card.holder', defaultMessage: 'Card holder' })}
         onChange={handleChange}
+        defaultValue={paymentData.holderName}
       />
       <div className="relative mt-16">
         <Input
@@ -88,6 +89,7 @@ const Scheme = () => {
           placeholder={formatCheckoutMessage({ id: 'card.number', defaultMessage: 'Card number' })}
           onChange={handleCardNumberChange}
           isValid={!!(paymentData.number && paymentData.number.length >= 12 && paymentData.number.length <= 19)}
+          defaultValue={paymentData.number}
         />
         {resolveCCImage(paymentData.number) && (
           // eslint-disable-next-line
@@ -99,7 +101,18 @@ const Scheme = () => {
       </div>
       <div className="mt-16 flex gap-8">
         <div className="grow md:flex-1">
-          <Select options={expiryDateOptions} onChange={handleExpiryDateChange} />
+          <Select
+            options={expiryDateOptions}
+            onChange={handleExpiryDateChange}
+            defaultValue={
+              paymentData.expiryMonth && paymentData.expiryYear
+                ? {
+                    name: `${paymentData.expiryMonth}/${paymentData.expiryYear.slice(2)}`,
+                    value: `${paymentData.expiryMonth}/${paymentData.expiryYear}`,
+                  }
+                : undefined
+            }
+          />
         </div>
         <div className="relative grow md:flex-1">
           <Input
@@ -108,6 +121,7 @@ const Scheme = () => {
             type="number"
             placeholder={formatCheckoutMessage({ id: 'card.securityNumber', defaultMessage: 'Security number' })}
             onChange={handleCVCChange}
+            defaultValue={paymentData.cvc}
           />
           {/* eslint-disable-next-line */}
           <img className="absolute top-1/2 right-8 w-[32px] -translate-y-1/2" src="/images/cvc.png" />
