@@ -1,5 +1,6 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { categories } from 'helpers/mocks/mockData';
 import Search from '.';
 
 export default {
@@ -7,7 +8,7 @@ export default {
   component: Search,
 } as ComponentMeta<typeof Search>;
 
-const Template: ComponentStory<typeof Search> = (args) => <Search {...args} />;
+const Template: ComponentStory<typeof Search> = (args) => <Search {...args} categories={categories} />;
 
 export const Primary = Template.bind({});
 Primary.args = { categories: [] };

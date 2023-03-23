@@ -1,5 +1,4 @@
 import { LineItem } from '@commercetools/frontend-domain-types/cart/LineItem';
-import { Reference } from 'types/reference';
 
 export const linkReferenceOne = {
   link: '/',
