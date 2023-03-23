@@ -1,5 +1,5 @@
 import { Account, Address } from 'types/account';
-import { ResponseError } from 'frontastic/lib/fetch-api-hub';
+import { ResponseError } from 'frontastic';
 
 export interface GetAccountResult {
   loggedIn: boolean;

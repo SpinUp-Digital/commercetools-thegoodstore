@@ -16,10 +16,10 @@ export const revalidateOptions = {
 };
 
 export * from './lib/server/get-route-data';
+export * from './lib/utils/api-hub';
 export * from './lib/types';
 export * from './lib/renderer';
 export * from './lib/component';
 export * from './lib/notifier';
-export * from './lib/fetch-api-hub';
 export * from './provider';
 export * from './hooks';

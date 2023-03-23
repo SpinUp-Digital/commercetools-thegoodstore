@@ -1858,10 +1858,10 @@
   resolved "https://registry.yarnpkg.com/@commercetools/frontend-domain-types/-/frontend-domain-types-1.0.3.tgz#8eae385ad672e8acdffb65c63b6a2af110567327"
   integrity sha512-ENsvOvUyY6jdjgdUWn33Jvig+hcLxFaZN/6FNrnA9rz4nGClLhzJE9DT/NlOBryqSLxuw00FJC8NGRnnNzZ8Dg==
 
-"@commercetools/frontend-sdk@^1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@commercetools/frontend-sdk/-/frontend-sdk-1.3.0.tgz#bb95b15923406744e744392cdc1f5d61b077b81d"
-  integrity sha512-NFJhMEMGKMLJbOpRkR2VeyEzHRwWDmWF7+dOARCi+gOlfpsblxBkvHqv+ErjnDBLRnuULoof5h5AaxxP7rhT+Q==
+"@commercetools/frontend-sdk@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@commercetools/frontend-sdk/-/frontend-sdk-1.4.0.tgz#0290fb29c0c5ac353eb08d559f9360242761220e"
+  integrity sha512-Vb5ezZaXr1icRDADTk92T8i/iF2zHYGzoE0hrDYAIOvU24K/tUaSSQIOYipWNIXjBT0PmKsjHS/qspB3XtrwRw==
   dependencies:
     "@frontastic/extension-types" "^0.0.11"
     js-cookie "3.0.1"
