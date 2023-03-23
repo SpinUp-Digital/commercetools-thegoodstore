@@ -18,28 +18,34 @@ export interface AccordionProps {
   customOpenButton?: ReactNode;
   customClosedButton?: ReactNode;
   onClick?: () => void;
+  defaultOpen?: boolean;
+  ref?: React.RefObject<HTMLDivElement>;
 }
 
-const Accordion: React.FC<AccordionProps> = ({
-  variant = 'arrow',
-  closedSectionTitle,
-  openSectionTitle = closedSectionTitle,
-  children,
-  className = '',
-  iconClassName = '',
-  buttonClassName = '',
-  buttonWrapperClassName = '',
-  panelClassName = '',
-  collapsedLabel,
-  customClosedButton,
-  customOpenButton = customClosedButton,
-  onClick,
-}) => {
+const Accordion = (
+  {
+    variant = 'arrow',
+    closedSectionTitle,
+    openSectionTitle = closedSectionTitle,
+    children,
+    className = '',
+    iconClassName = '',
+    buttonClassName = '',
+    buttonWrapperClassName = '',
+    panelClassName = '',
+    collapsedLabel,
+    customClosedButton,
+    customOpenButton = customClosedButton,
+    defaultOpen = false,
+    onClick,
+  }: React.PropsWithChildren<AccordionProps>,
+  ref: React.ForwardedRef<HTMLDivElement>,
+) => {
   const panelClassNames = useClassNames([panelClassName]);
 
   return (
-    <div className={className} onClick={onClick}>
-      <Disclosure>
+    <div className={className} onClick={onClick} ref={ref}>
+      <Disclosure defaultOpen={defaultOpen}>
         {({ open }) => (
           <>
             {(open && !customOpenButton) || (!open && !customClosedButton) ? (
@@ -79,4 +85,4 @@ const Accordion: React.FC<AccordionProps> = ({
   );
 };
 
-export default Accordion;
+export default React.forwardRef<HTMLDivElement, React.PropsWithChildren<AccordionProps>>(Accordion);

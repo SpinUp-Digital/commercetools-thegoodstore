@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import Accordion from 'components/commercetools-ui/atoms/accordion';
@@ -20,6 +20,8 @@ const Summary: React.FC<Props> = ({ isFinalStep, onPurchase }) => {
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
   const { formatMessage: formatCheckoutMessage } = useFormat({ name: 'checkout' });
 
+  const accordionRef = useRef<HTMLDivElement>(null);
+
   const { data, transaction, isEmpty, isShippingAccurate } = useCart();
 
   const { processing } = useCheckout();
@@ -29,6 +31,11 @@ const Summary: React.FC<Props> = ({ isFinalStep, onPurchase }) => {
   const hiddenItemsCount = (data?.lineItems?.length ?? 0) - 3;
 
   const [isSummaryExpanded, setIsSummaryExpanded] = useState(false);
+
+  useEffect(() => {
+    if (isFinalStep && accordionRef.current)
+      accordionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [isFinalStep]);
 
   return (
     <div className="bg-white py-16 md:mt-24 lg:mt-0 lg:min-w-[35%] lg:p-36">
@@ -76,6 +83,9 @@ const Summary: React.FC<Props> = ({ isFinalStep, onPurchase }) => {
       </Accordion>
       <div className="lg:hidden">
         <Accordion
+          key={isFinalStep.toString()}
+          ref={accordionRef}
+          defaultOpen={isFinalStep}
           closedSectionTitle={formatCheckoutMessage({ id: 'yourOrder', defaultMessage: 'Your order' })}
           buttonClassName="text-secondary-black border-b border-neutral-400 py-16"
           buttonWrapperClassName="px-16 md:px-24 lg:px-0"
