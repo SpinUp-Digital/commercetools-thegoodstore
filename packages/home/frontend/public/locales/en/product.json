@@ -40,5 +40,8 @@
   "best-selling": "Best-Selling",
   "newest": "Newest",
   "cart.added": "Added to cart",
-  "bought.together": "Frequently bought together"
+  "bought.together": "Frequently bought together",
+  "more.on.way": "More on the way",
+  "expected.in.weeks": "Expected availability: {weeks} weeks",
+  "available.in.weeks": "Available in {weeks} weeks"
 }

@@ -35,6 +35,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({
 }) => {
   const { addItem } = useCart();
   const { formatMessage } = useFormat({ name: 'cart' });
+  const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
   const [quantity, setQuantity] = useState<number>(1);
   const [loading, setLoading] = useState(false);
@@ -96,7 +97,22 @@ const ProductDetails: FC<ProductDetailsProps> = ({
           inModalVersion={inModalVersion}
         />
 
-        <div className="flex gap-8 pt-25">
+        {!variant.isOnStock && (
+          <div className="pt-20">
+            <p className="font-medium text-red-500">
+              {formatProductMessage({ id: 'more.on.way', defaultMessage: 'More on the way' })}
+            </p>
+            <p className="text-14 text-secondary-black">
+              {formatProductMessage({
+                id: 'expected.in.weeks',
+                defaultMessage: 'Expected availability: {weeks} weeks',
+                values: { weeks: '2-3' },
+              })}
+            </p>
+          </div>
+        )}
+
+        <div className="flex gap-8 pt-20">
           <Dropdown
             className="h-full rounded-sm"
             defaultValue="1"
