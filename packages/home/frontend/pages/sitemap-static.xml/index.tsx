@@ -1,23 +1,19 @@
 import { GetServerSideProps } from 'next';
 import { getServerSideSitemap, ISitemapField } from 'next-sitemap';
 import { siteUrl } from 'next-sitemap.config';
-import { getLocalizationInfo } from 'project.config';
+import { SDK } from 'sdk';
 import { createClient } from 'frontastic';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  SDK.configure(context.locale as string);
+
   const fields = [] as ISitemapField[];
-  const path = '';
-  const depth = '';
+  const path = '/';
+  const depth = 1;
 
   const frontastic = createClient();
 
-  const data = await frontastic.getStructure(
-    path,
-    depth,
-    getLocalizationInfo(context.locale).locale,
-    context.req,
-    context.res,
-  );
+  const data = await frontastic.getStructure(path, depth);
 
   if (data?.pageFolderStructure) {
     fields.push(

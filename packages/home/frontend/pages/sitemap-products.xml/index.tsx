@@ -1,44 +1,31 @@
 import { GetServerSideProps } from 'next';
-import { Result } from '@commercetools/frontend-domain-types/product/Result';
 import { getServerSideSitemap, ISitemapField } from 'next-sitemap';
 import { siteUrl } from 'next-sitemap.config';
-import { getLocalizationInfo } from 'project.config';
-import { fetchApiHubServerSide } from 'frontastic';
+import { SDK } from 'sdk';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  SDK.configure(context.locale as string);
+
   const fields = [] as ISitemapField[];
 
   let nextCursor: string | undefined;
 
-  const { locale } = getLocalizationInfo(context.locale);
-
   do {
-    /* TODO: Use SDK instead of fetchApiHubServerSide */
+    const extensions = SDK.getExtensions();
 
-    // const extensions = SDK.getExtensions();
+    const response = await extensions.product.query({ cursor: nextCursor, limit: 12 });
 
-    // const response = await extensions.product.query({ query: { cursor: nextCursor, limit: 12 } });
-
-    // const items = response.isError ? [] : response.data.items;
-
-    const response = (await fetchApiHubServerSide(
-      `/action/product/query?cursor=${nextCursor}&limit=128&locale=${locale}`,
-      locale,
-      {
-        req: context.req,
-        res: context.res,
-      },
-    )) as Result;
+    const items = response.isError ? [] : response.data.items;
 
     fields.push(
-      ...response.items.map((product) => ({
+      ...items.map((product) => ({
         loc: `${siteUrl}/${context.locale}${product._url}`,
         lastmod: new Date().toISOString(),
         changefreq: 'daily' as const,
       })),
     );
 
-    nextCursor = response.nextCursor;
+    nextCursor = !response.isError ? response.data.nextCursor : undefined;
   } while (nextCursor);
 
   context.res.setHeader('Cache-Control', 'public, s-maxage=86400, stale-while-revalidate');

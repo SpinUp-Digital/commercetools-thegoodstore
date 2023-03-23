@@ -1,7 +1,5 @@
-import { IncomingMessage, ServerResponse } from 'http';
 import { Result } from '@commercetools/frontend-domain-types/product/Result';
 import { SDK, sdk } from 'sdk';
-import { fetchApiHubServerSide } from '../fetch-api-hub';
 import { PageDataResponse, PagePreviewDataResponse, RedirectResponse, PageFolderStructureResponse } from '../types';
 
 export const getRouteData =
@@ -33,26 +31,8 @@ export const getCategories = () => async (): Promise<Result> => {
 
 export const getStructure =
   () =>
-  async (
-    path: string,
-    depth: string,
-    locale: string,
-    nextJsReq: IncomingMessage,
-    nextJsRes: ServerResponse,
-  ): Promise<PageFolderStructureResponse> => {
-    const endpoint = `/structure?locale=${locale}`;
+  async (path: string, depth: number): Promise<PageFolderStructureResponse> => {
+    const res = await sdk.page.getPages({ path, depth });
 
-    if (path) {
-      endpoint.concat(`&path=${path}`);
-    }
-
-    if (depth) {
-      endpoint.concat(`&depth=${depth}`);
-    }
-
-    const data: PageFolderStructureResponse = (await fetchApiHubServerSide(endpoint, locale, {
-      req: nextJsReq,
-      res: nextJsRes,
-    })) as PageFolderStructureResponse;
-    return data;
+    return (res.isError ? {} : res.data) as PageFolderStructureResponse;
   };

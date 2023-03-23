@@ -5,11 +5,11 @@ import { SDK } from 'sdk';
 import { Category } from 'types/category';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  SDK.configure(context.locale as string);
+
   const fields = [] as ISitemapField[];
 
   let nextCursor: string | undefined;
-
-  SDK.configure(context.locale as string);
 
   const extensions = SDK.getExtensions();
 
