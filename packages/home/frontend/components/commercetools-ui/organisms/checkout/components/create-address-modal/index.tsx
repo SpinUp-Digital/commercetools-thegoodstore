@@ -87,8 +87,16 @@ const CreateAddressModal = () => {
     ({ enableAddress2, onEnableAddress2 }: FieldsOptions) => {
       return [
         {
-          name: 'name',
-          label: formatMessage({ id: 'name', defaultMessage: 'Name' }),
+          name: 'firstName',
+          label: formatMessage({ id: 'firstName', defaultMessage: 'First Name' }),
+          labelDesc: '',
+          required: true,
+          type: 'string',
+          className: 'col-span-3',
+        },
+        {
+          name: 'lastName',
+          label: formatMessage({ id: 'lastName', defaultMessage: 'Last Name' }),
           labelDesc: '',
           required: true,
           type: 'string',

@@ -141,13 +141,26 @@ const AddressForm: React.FC<AddressFormProps> = ({ editedAddressId }) => {
       containerClassName="grid gap-12 md:px-24 md:px-0"
     >
       <Input
-        label={formatMessage({ id: 'name', defaultMessage: 'Name' })}
+        label={formatMessage({ id: 'firstName', defaultMessage: 'First Name' })}
         required
         type="text"
         name="firstName"
         id="first-name"
         value={data?.firstName ?? ''}
         autoComplete="first-name"
+        className="border-neutral-500"
+        onChange={handleChange}
+        validation={validateTextExists}
+      />
+
+      <Input
+        label={formatMessage({ id: 'lastName', defaultMessage: 'Last Name' })}
+        required
+        type="text"
+        name="lastName"
+        id="last-name"
+        value={data?.lastName ?? ''}
+        autoComplete="last-name"
         className="border-neutral-500"
         onChange={handleChange}
         validation={validateTextExists}
