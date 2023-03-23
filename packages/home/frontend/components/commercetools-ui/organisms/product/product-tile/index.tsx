@@ -6,6 +6,7 @@ import { LineItem } from '@commercetools/frontend-domain-types/wishlist/LineItem
 import QuickView from 'components/commercetools-ui/organisms/product/product-quick-view';
 import Prices from 'components/commercetools-ui/organisms/product/product-tile/prices';
 import WishlistButton from 'components/commercetools-ui/organisms/wishlist/components/wishlist-button';
+import { useFormat } from 'helpers/hooks/useFormat';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import useVariantWithDiscount from 'helpers/hooks/useVariantWithDiscount';
 import { desktop } from 'helpers/utils/screensizes';
@@ -30,6 +31,8 @@ const ProductTile: FC<ProductTileProps> = ({
   disableVariants = false,
 }) => {
   const [isDesktopSize] = useMediaQuery(desktop);
+
+  const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
   const { ref } = useTrack({ product });
 
@@ -128,6 +131,17 @@ const ProductTile: FC<ProductTileProps> = ({
             {variantWithDiscount && (
               <span className="ml-8 mb-8 flex h-[25px] w-[45px] items-center justify-center bg-accent-red text-12 text-neutral-100">
                 {Math.round(discountPercentage)}%
+              </span>
+            )}
+          </div>
+          <div className="w-full text-center">
+            {!selectedVariant.isOnStock && (
+              <span className="ml-8 mb-8 flex h-[25px] w-fit items-center justify-center bg-yellow-100 py-4 px-8 text-12">
+                {formatProductMessage({
+                  id: 'available.in.weeks',
+                  defaultMessage: 'Available in {weeks} weeks',
+                  values: { weeks: '2-3' },
+                })}
               </span>
             )}
           </div>
