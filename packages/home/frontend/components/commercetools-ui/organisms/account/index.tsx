@@ -106,7 +106,7 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
     '#orders': <Orders />,
     '#order': <OrderPage orderId={id} />,
     '#payment': <PaymentMethods />,
-    '#edit-payment': <PaymentEdit paymentId={id ?? ''} />,
+    '#edit-payment': <PaymentEdit />,
     '#add-payment': <PaymentAdd />,
     '#addresses': <Addresses />,
     '#support': (

@@ -32,39 +32,42 @@ const OrderSummary: FC<Props> = ({ hiddenItemsCount, subtotal, shipmentFees, tot
 
   const accordionClassNames = useClassNames(['max-h-[400px] overflow-auto ', open ? 'border-b' : '']);
 
-  const contentClassNames = useClassNames(['flex w-full justify-between', open ? 'border-y py-16' : 'border-b pb-20']);
+  const contentClassNames = useClassNames(['flex w-full flex-col', 'border-b pb-4']);
 
   const arrowClassNames = useClassNames([open ? 'rotate-180 transform' : '', 'transition mr-8']);
   const orderSummaryAccordion = useMemo(() => {
     return (
       <div className={contentClassNames}>
-        {!open ? (
-          <div className="flex w-[70%] items-center">
-            {lineItemOrderSummary?.map((lineItem) => (
-              <div key={lineItem?.lineItemId} className="pr-16">
-                {lineItem?.variant?.images?.[0] && (
-                  <div key={lineItem?.lineItemId} className="relative mr-12 h-[104px] w-[88px] shrink-0">
-                    <Image layout="fill" src={lineItem.variant.images[0]} objectFit="contain" alt={lineItem.name} />
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        ) : (
+        <div className="flex w-full justify-between">
           <Typography fontSize={16} className="text-secondary-black">
             {formatOrdersMessage({
               id: 'your.order',
               defaultMessage: 'Your Order',
             })}
           </Typography>
-        )}
-        <div className="flex items-center">
-          {hiddenItemsCount > 0 && !open && (
-            <Typography fontSize={16} className="mr-8 whitespace-nowrap text-secondary-black">
-              {`+ ${hiddenItemsCount}`}
-            </Typography>
-          )}
           <ChevronDownIcon width={20} strokeWidth={1.5} className={arrowClassNames} />
+        </div>
+        <div className="mt-12 flex justify-between pr-20">
+          {!open && (
+            <div className="flex w-[70%] items-center">
+              {lineItemOrderSummary?.map((lineItem) => (
+                <div key={lineItem?.lineItemId} className="pr-16">
+                  {lineItem?.variant?.images?.[0] && (
+                    <div key={lineItem?.lineItemId} className="relative mr-12 h-[104px] w-[88px] shrink-0">
+                      <Image layout="fill" src={lineItem.variant.images[0]} objectFit="contain" alt={lineItem.name} />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+          <div className="flex items-center">
+            {hiddenItemsCount > 0 && !open && (
+              <Typography fontSize={16} className="mr-8 whitespace-nowrap text-secondary-black">
+                {`+ ${hiddenItemsCount}`}
+              </Typography>
+            )}
+          </div>
         </div>
       </div>
     );
@@ -74,6 +77,14 @@ const OrderSummary: FC<Props> = ({ hiddenItemsCount, subtotal, shipmentFees, tot
     <div className="ml-44 hidden h-fit w-[45%] rounded-md border p-36 2xl:block 3xl:w-[40%]">
       {lineItems.length === 1 ? (
         <div className="grid w-full grid-cols-1">
+          <div className="border-b pb-16">
+            <Typography fontSize={16} className="text-secondary-black">
+              {formatOrdersMessage({
+                id: 'your.order',
+                defaultMessage: 'Your Order',
+              })}
+            </Typography>
+          </div>
           <div className="flex justify-start border-b py-16">
             {lineItems[0].variant?.images?.[0] && (
               <div className="relative h-[104px] w-[88px] shrink-0">

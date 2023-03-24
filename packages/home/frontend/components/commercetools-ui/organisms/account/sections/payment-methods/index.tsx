@@ -1,11 +1,10 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { PencilSquareIcon } from '@heroicons/react/24/outline';
 import Button from 'components/commercetools-ui/atoms/button';
 import { Option } from 'components/commercetools-ui/atoms/select';
 import Typography from 'components/commercetools-ui/atoms/typography';
-import useResolveCCImage from 'components/commercetools-ui/organisms/checkout/hooks/useResolveCCImage';
 import { useFormat } from 'helpers/hooks/useFormat';
+import PaymentCard from './payment-card';
 export interface Payment {
   id: string;
   cardHolder: string;
@@ -38,13 +37,8 @@ export const payments: Payment[] = [
 ];
 
 const PaymentMethods = () => {
-  const { formatMessage: formatPaymentMessage } = useFormat({ name: 'orders' });
+  const { formatMessage: formatPaymentMessage } = useFormat({ name: 'payment' });
   const router = useRouter();
-  const resolveCCImage = useResolveCCImage();
-
-  const goToEdit = (payment: Payment) => {
-    router.push(`/account#edit-payment/${payment.id}`);
-  };
 
   return (
     <div className="px-16 md:mt-24 md:px-24 lg:mt-40 lg:px-44">
@@ -76,38 +70,7 @@ const PaymentMethods = () => {
       </Button>
       <div className="mt-32 w-full lg:w-[90%]">
         {payments.map((payment) => (
-          <div
-            key={payment.id}
-            className="mt-16 flex items-center justify-between rounded-md border px-16 py-12 lg:p-24"
-          >
-            <div className="flex items-center">
-              {/* eslint-disable-next-line */}
-              <img className="h-fit w-[32px]" src={resolveCCImage(payment.cardNumber)} />
-              <Typography fontSize={14} className="ml-16 text-primary-black">
-                {`...${payment.cardNumber.substring(12, 16)} ${payment.cardExpiry.name}`}
-              </Typography>
-            </div>
-            <Button
-              variant="ghost"
-              onClick={() => goToEdit(payment)}
-              className="p-0 text-primary-black hover:underline"
-            >
-              <Typography fontSize={14} className="hidden text-primary-black md:block">
-                {formatPaymentMessage({
-                  id: 'edit',
-                  defaultMessage: 'Edit',
-                })}
-              </Typography>
-            </Button>
-
-            <Button
-              variant="ghost"
-              onClick={() => goToEdit(payment)}
-              className="rounded-full bg-neutral-200 p-12 md:hidden"
-            >
-              <PencilSquareIcon className="w-20" />
-            </Button>
-          </div>
+          <PaymentCard key={payment.id} payment={payment} />
         ))}
       </div>
     </div>
