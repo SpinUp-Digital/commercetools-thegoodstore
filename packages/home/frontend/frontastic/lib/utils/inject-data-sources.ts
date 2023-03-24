@@ -1,4 +1,4 @@
-import { Log } from '../../../helpers/errorLogger';
+import { Log } from 'helpers/errorLogger';
 import { TasticConfiguration, DataSources } from '../types';
 
 // injects the data sources from the root level into the node
