@@ -13,6 +13,12 @@
           "type": "markdown",
           "translatable": true,
           "required": true
+        },
+        {
+          "label": "Full Width",
+          "field": "fullWidth",
+          "type": "boolean",
+          "default": false
         }
       ]
     }
