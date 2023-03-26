@@ -36,15 +36,16 @@ const CartItem: React.FC<Props> = ({ item, classNames = {} }) => {
 
   const updateCartItem = useCallback(
     async (newQuantity: number) => {
-      if (processing || newQuantity < 1) return;
+      if (processing) return;
 
       setProcessing(true);
 
-      if (item.lineItemId) await updateItem(item.lineItemId, newQuantity);
+      if (newQuantity < 1) await removeItem(item.lineItemId as string);
+      else await updateItem(item.lineItemId as string, newQuantity);
 
       setProcessing(false);
     },
-    [updateItem, processing, item],
+    [updateItem, removeItem, processing, item],
   );
 
   const cartLineItemToWishlistLineItem = useMemo<LineItemWishlist>(() => {

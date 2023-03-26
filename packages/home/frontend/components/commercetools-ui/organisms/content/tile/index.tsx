@@ -48,13 +48,15 @@ const Tile: React.FC<TileProps> = ({
         >
           {title}
         </Typography>
-        <Link link={ctaReference}>
-          <Button className="mt-24">
-            <Typography as="span" fontSize={12}>
-              {ctaLabel}
-            </Typography>
-          </Button>
-        </Link>
+        {ctaLabel && (
+          <Link link={ctaReference}>
+            <Button className="mt-24">
+              <Typography as="span" fontSize={12}>
+                {ctaLabel}
+              </Typography>
+            </Button>
+          </Link>
+        )}
       </div>
     </div>
   );

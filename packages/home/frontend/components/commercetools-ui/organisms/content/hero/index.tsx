@@ -41,13 +41,15 @@ const Hero: React.FC<HeroProps> = ({ image, title, subtitle, ctaLabel, ctaRefere
         >
           {title}
         </Typography>
-        <Link link={ctaReference}>
-          <Button className="mt-22 md:mt-36 md:py-12 md:px-48 lg:mt-32">
-            <Typography as="span" fontSize={12} className="text-neutral-150 md:text-14 lg:text-16">
-              {ctaLabel}
-            </Typography>
-          </Button>
-        </Link>
+        {ctaLabel && (
+          <Link link={ctaReference}>
+            <Button className="mt-22 md:mt-36 md:py-12 md:px-48 lg:mt-32">
+              <Typography as="span" fontSize={12} className="text-neutral-150 md:text-14 lg:text-16">
+                {ctaLabel}
+              </Typography>
+            </Button>
+          </Link>
+        )}
       </div>
     </div>
   );
