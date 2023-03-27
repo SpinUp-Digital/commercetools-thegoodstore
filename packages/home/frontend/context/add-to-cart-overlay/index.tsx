@@ -140,7 +140,7 @@ const AddToCartOverlayProvider: React.FC = ({ children }) => {
               clearDefaultWrapperStyles
               products={relatedProducts}
               title={formatProductMessage({ id: 'bought.together', defaultMessage: 'Frequently bought together' })}
-              titleVariant="sm"
+              titleVariant="xs"
               disableProductQuickView
               disableProductWishlistButton
               disableProductVariants

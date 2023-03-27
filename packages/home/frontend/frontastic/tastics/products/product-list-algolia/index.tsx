@@ -74,8 +74,9 @@ function ProductListTastic({ categories, data }: Props) {
 
   const isCategoryFoundOrSearchQueryExists = useMemo(() => {
     if (data.searchQuery) return true;
+    if (!data.slug) return true;
 
-    return data.slug && !!categories?.find((category) => category.slug === data.slug);
+    return !!categories?.find((category) => category.slug === data.slug);
   }, [data, categories]);
 
   if (!isCategoryFoundOrSearchQueryExists) return <NotFound />;

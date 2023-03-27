@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { useHits } from 'react-instantsearch-hooks';
 import ColorFacet from '../components/facets/color';
 import RangeFacet from '../components/facets/range';
 import TermFacet from '../components/facets/term';
@@ -12,6 +13,8 @@ interface Options {
 }
 
 const useDynamicFacets = ({ configuration, ordering, render }: Options = {}) => {
+  const { results } = useHits();
+
   const facetMapping = useMemo<Record<FacetConfiguration['type'], React.ComponentType<FacetProps>>>(
     () => ({
       range: RangeFacet,
@@ -27,19 +30,27 @@ const useDynamicFacets = ({ configuration, ordering, render }: Options = {}) => 
     const facets = Object.keys(configuration).map((attribute) => {
       const facet = configuration[attribute];
 
+      const isEmptyFacet =
+        (facet.type === 'color' || facet.type === 'term') &&
+        !results?.disjunctiveFacets?.find((f) => f.name === attribute);
+
       const Component = facetMapping[facet.type];
       const FinalComponent = <Component key={attribute} label={facet.label} attribute={attribute} />;
 
       return {
         attribute,
-        Component: render?.({ attribute, Component: FinalComponent }) ?? FinalComponent,
+        Component: (
+          <div className={isEmptyFacet ? 'hidden' : 'block'}>
+            {render?.({ attribute, Component: FinalComponent }) ?? FinalComponent}
+          </div>
+        ),
       };
     });
 
     if (ordering) facets.sort((a, b) => ordering.indexOf(a.attribute) - ordering.indexOf(b.attribute));
 
     return facets.map((facet) => facet.Component);
-  }, [facetMapping, configuration, ordering, render]);
+  }, [facetMapping, configuration, ordering, render, results?.disjunctiveFacets]);
 
   return dynamicFacets;
 };
