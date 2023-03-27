@@ -46,27 +46,21 @@ const MarketButtonMobile: FC<Props> = ({ menuTop }) => {
     handleMarket(market);
   };
 
-  const marketButtonLabel = `${selectedMarket?.region} | ${selectedMarket?.currency}`;
-
   const marketButtonElement = useMemo(() => {
     return (
       <>
-        <div className="flex w-fit items-center justify-start">
+        <div className="flex w-fit cursor-pointer items-center justify-start">
           <FlagIcons flagName={selectedMarket?.flag} className="my-auto mr-8" />
-          <Typography fontSize={14} className="text-primary-black">
-            {marketButtonLabel}
+          <Typography fontSize={14} className="text-secondary-black">
+            {`${selectedMarket?.region} | ${selectedMarket?.currency} ${selectedMarket?.currencyCode}`}
           </Typography>
-          <span
-            dangerouslySetInnerHTML={{ __html: selectedMarket?.currencyCode }}
-            className="ml-5 text-14 text-primary-black"
-          />
         </div>
         <div className="flex justify-end">
-          <ChevronDownIcon strokeWidth={2} className="w-16 text-primary-black" />
+          <ChevronDownIcon strokeWidth={2} className="w-16 text-secondary-black" />
         </div>
       </>
     );
-  }, [selectedMarket, marketButtonLabel]);
+  }, [selectedMarket]);
 
   return (
     <Dropdown
@@ -86,13 +80,9 @@ const MarketButtonMobile: FC<Props> = ({ menuTop }) => {
             >
               <div className="flex w-fit items-center justify-start">
                 <FlagIcons flagName={market.flag} className="mr-8" />
-                <Typography as="span" fontSize={14} className="font-normal text-primary-black">
-                  {`${market?.region} | ${market?.currency}`}
+                <Typography as="span" fontSize={14} className="font-normal text-secondary-black">
+                  {`${market?.region} | ${market?.currency} ${market?.currencyCode}`}
                 </Typography>
-                <span
-                  dangerouslySetInnerHTML={{ __html: market?.currencyCode }}
-                  className="ml-5 text-14 text-primary-black"
-                />
               </div>
             </Button>
           </div>

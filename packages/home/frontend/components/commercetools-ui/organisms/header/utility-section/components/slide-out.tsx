@@ -80,6 +80,7 @@ const Slideout: React.FC<SlideOutProps> = ({
             emptyStateTitle={emptyCartTitle}
             emptyStateSubtitle={emptyCartSubtitle}
             emptyStateCategories={emptyCartCategories}
+            handleCategoryClick={onClose}
           />
         ),
         wishlist: (
@@ -88,6 +89,7 @@ const Slideout: React.FC<SlideOutProps> = ({
             emptyWishlistSubtitle={emptyWishlistSubtitle}
             emptyWishlistImage={emptyWishlistImage}
             emptyWishlistCategories={emptyWishlistCategories}
+            handleCategoryClick={onClose}
           />
         ),
       }[state as MenuState] ?? <></>),
@@ -100,6 +102,7 @@ const Slideout: React.FC<SlideOutProps> = ({
       emptyWishlistImage,
       emptyWishlistSubtitle,
       emptyWishlistTitle,
+      onClose,
       state,
     ],
   );

@@ -12,12 +12,14 @@ export interface Props {
   emptyWishlistSubtitle: string;
   emptyWishlistImage: NextFrontasticImage;
   emptyWishlistCategories: FooterLink[];
+  handleCategoryClick?: () => void;
 }
 const Wishlist: React.FC<Props> = ({
   emptyWishlistTitle,
   emptyWishlistSubtitle,
   emptyWishlistImage,
   emptyWishlistCategories,
+  handleCategoryClick,
 }) => {
   const { formatMessage: formatWishlistMessage } = useFormat({ name: 'wishlist' });
   const { data: wishlistData, clearWishlist } = useWishlist();
@@ -34,6 +36,7 @@ const Wishlist: React.FC<Props> = ({
             subtitle={emptyWishlistSubtitle}
             image={emptyWishlistImage}
             categories={emptyWishlistCategories}
+            handleCategoryClick={handleCategoryClick}
           />
         </>
       ) : (
@@ -44,15 +47,9 @@ const Wishlist: React.FC<Props> = ({
             ))}
           </div>
           <div className="absolute bottom-0 h-88 w-full p-20">
-            <div className="overflow-hidden rounded-md border-[0.5px] border-transparent hover:border-primary-black">
-              <Button
-                onClick={handleClearWishlist}
-                variant="ghost"
-                className="w-full rounded-md border border-primary-black text-16"
-              >
-                {formatWishlistMessage({ id: 'wishlist.clear.list', defaultMessage: 'Clear the list' })}
-              </Button>
-            </div>
+            <Button onClick={handleClearWishlist} variant="secondary" className="w-full text-16">
+              {formatWishlistMessage({ id: 'wishlist.clear.list', defaultMessage: 'Clear the list' })}
+            </Button>
           </div>
         </>
       )}

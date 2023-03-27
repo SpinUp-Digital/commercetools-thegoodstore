@@ -3,6 +3,7 @@ import Button from 'components/commercetools-ui/atoms/button';
 import Link from 'components/commercetools-ui/atoms/link';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { Link as CategoryLink } from 'components/commercetools-ui/organisms/header/types';
+import useClassNames from 'helpers/hooks/useClassNames';
 import Image, { NextFrontasticImage } from 'frontastic/lib/image';
 
 type Props = {
@@ -11,11 +12,21 @@ type Props = {
   subtitle: string;
   categories: CategoryLink[];
   className?: string;
+  handleCategoryClick?: () => void;
 };
 
-export const EmptyState: React.FC<Props> = ({ image, title, subtitle, categories, className = '' }: Props) => {
+export const EmptyState: React.FC<Props> = ({
+  image,
+  title,
+  subtitle,
+  categories,
+  handleCategoryClick,
+  className = '',
+}: Props) => {
+  const titleClassNames = useClassNames(['py-36 text-center', className]);
+
   return (
-    <div className={`py-36 text-center ${className}`}>
+    <div className={titleClassNames}>
       <Typography as="h6" fontSize={16} align="center">
         {title}
       </Typography>
@@ -29,11 +40,11 @@ export const EmptyState: React.FC<Props> = ({ image, title, subtitle, categories
           {subtitle}
         </Typography>
         {categories.map((category) => (
-          <li key={category.name}>
+          <li key={category.name} onClick={handleCategoryClick}>
             <Link link={category.reference}>
               <Button
                 className="w-200 rounded-[4px] border border-primary-black text-16 text-secondary-black"
-                variant="ghost"
+                variant="secondary"
               >
                 {category.name}
               </Button>
