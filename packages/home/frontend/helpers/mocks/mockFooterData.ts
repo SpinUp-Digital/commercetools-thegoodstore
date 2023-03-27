@@ -10,8 +10,8 @@ const footerLinkTwo = {
   reference: linkReferenceOne,
 };
 
-const footerLinksOne = new Array(3).fill({ name: footerLinkOne, link: '#' });
-const footerLinksTwo = new Array(4).fill({ name: footerLinkTwo, link: '#' });
+const footerLinksOne = new Array(4).fill(footerLinkOne);
+const footerLinksTwo = new Array(4).fill(footerLinkTwo);
 
 const footerSocialMedia = {
   logo: {

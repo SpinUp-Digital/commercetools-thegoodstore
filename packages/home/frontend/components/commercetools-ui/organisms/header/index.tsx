@@ -7,6 +7,7 @@ import { HeaderProps } from 'components/commercetools-ui/organisms/header/types'
 import UtilitySection from 'components/commercetools-ui/organisms/header/utility-section';
 
 const Header: React.FC<HeaderProps> = ({
+  navLinks,
   categories,
   logo,
   logoMobile,
@@ -22,12 +23,10 @@ const Header: React.FC<HeaderProps> = ({
   emptyWishlistImage,
   emptyWishlistCategories,
 }) => {
-  const links = categories?.filter((category) => category.depth === 0);
-
   return (
     <header className="relative h-fit w-full border-b-[1.5px] border-neutral-400 bg-white">
       <div aria-label="Top" className="flex w-full items-center justify-between px-16 md:px-28 lg:px-48">
-        <HeaderNavigationMobile logo={logoMobile} links={links} logoLink={logoLinkMobile} />
+        <HeaderNavigationMobile logo={logoMobile} links={navLinks} logoLink={logoLinkMobile} />
 
         <div className="flex w-full justify-start lg:w-fit">
           <HeaderLogo
@@ -57,7 +56,7 @@ const Header: React.FC<HeaderProps> = ({
         <Search categories={categories} />
       </div>
 
-      <HeaderNavigationDesktop links={links} tiles={tiles ?? []} />
+      <HeaderNavigationDesktop links={navLinks} tiles={tiles ?? []} />
     </header>
   );
 };

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { ShippingMethod } from '@commercetools/frontend-domain-types/cart/ShippingMethod';
+import { shippingMethods as shippingMethodsMock } from 'helpers/mocks/mockCommonData';
 import { Order } from 'types/order';
 import { useCart } from 'frontastic';
 
@@ -25,7 +26,9 @@ const useOrderInfoData = (order: Order) => {
 
     shippingDate.setDate(shippingDate.getDate() + +(shippingMethod?.description ?? 0));
 
-    const label = `${shippingDate.toISOString().split('T')[0]} by ${shippingMethod?.name}`;
+    const label = `${shippingDate.toISOString().split('T')[0]} by ${
+      shippingMethod?.name ?? shippingMethodsMock[0].name
+    }`;
 
     setDeliveryMethod(label);
   }, [order?.shippingInfo?.shippingMethodId, shippingMethods.data]);

@@ -1,5 +1,4 @@
 import dynamic from 'next/dynamic';
-//import Newsletter from './newsletter';
 import AnnouncementBarTastic from './bar/announcment';
 import CategorySliderTastic from './category-slider';
 import ContentSliderTastic from './content-slider';
@@ -39,7 +38,6 @@ export const tastics = {
   'commercetools/ui/content/spacer': SpacerTastic,
   'commercetools/ui/content/showcase': Showcase,
   'commercetools/ui/content/markdown': Markdown,
-  //'commercetools/ui/content/newsletter': Newsletter,
   'commercetools/ui/cart': Cart,
   'commercetools/ui/products/details': ProductDetails,
   'commercetools/ui/products/product-list': ProductList,

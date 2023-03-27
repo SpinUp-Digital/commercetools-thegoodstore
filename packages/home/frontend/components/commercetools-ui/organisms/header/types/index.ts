@@ -25,6 +25,13 @@ export interface Tile {
 }
 
 export interface EmptyStateProps {
+  navLinks: Category[];
+  categories: Category[];
+  logo: NextFrontasticImage;
+  logoMobile: NextFrontasticImage;
+  logoLink: Reference;
+  logoLinkMobile: Reference;
+  tiles?: Tile[];
   emptyCartTitle: string;
   emptyCartSubtitle: string;
   emptyCartImage: NextFrontasticImage;

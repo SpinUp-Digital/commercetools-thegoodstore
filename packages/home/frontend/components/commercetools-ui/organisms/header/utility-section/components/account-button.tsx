@@ -44,7 +44,7 @@ const AccountButton = () => {
               <div className="absolute left-1/2 -top-20 z-10 w-31 -translate-x-1/2 overflow-hidden">
                 <div className="h-21 w-21 origin-bottom-left rotate-45 bg-white" />
               </div>
-              <AccountDropdown />
+              <AccountDropdown loggedIn={loggedIn} />
             </Popover.Panel>
           </>
         )}
