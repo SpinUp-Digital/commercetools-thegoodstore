@@ -43,8 +43,8 @@ const PaymentAdd = () => {
       <div className="mt-24 px-16 md:mt-0 md:px-24 lg:px-0">
         <Typography as="h2" fontFamily="libre" fontSize={16} className="text-primary-black md:text-22 lg:text-24">
           {formatPaymentMessage({
-            id: 'add.payment',
-            defaultMessage: 'Add new payment method',
+            id: 'add.card',
+            defaultMessage: 'Add new card',
           })}
         </Typography>
       </div>

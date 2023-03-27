@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { useRouter } from 'next/router';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import Button from 'components/commercetools-ui/atoms/button';
 import Modal from 'components/commercetools-ui/atoms/modal';
@@ -14,7 +13,6 @@ export interface Props {
 }
 
 const PaymentDelete: FC<Props> = ({ modalIsOpen, closeModal, handleCancelClick, handleDeleteClick }) => {
-  const router = useRouter();
   const { formatMessage: formatPaymentMessage } = useFormat({ name: 'payment' });
   const { formatMessage } = useFormat({ name: 'common' });
 
@@ -28,7 +26,7 @@ const PaymentDelete: FC<Props> = ({ modalIsOpen, closeModal, handleCancelClick, 
       className="h-[280px] w-[400px] rounded-md border bg-neutral-100"
     >
       <div className="mx-auto  px-24 py-32 md:ml-24 lg:ml-0">
-        <div className="flex w-full cursor-pointer justify-end" onClick={() => router.push('/account#payment')}>
+        <div className="flex w-full cursor-pointer justify-end" onClick={closeModal}>
           <XMarkIcon className="w-24 text-secondary-black" />
         </div>
         <div className="mt-32 flex h-full flex-col items-center">

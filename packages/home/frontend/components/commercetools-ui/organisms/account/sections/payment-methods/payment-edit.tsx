@@ -7,15 +7,14 @@ import Select from 'components/commercetools-ui/atoms/select';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import useResolveCCImage from 'components/commercetools-ui/organisms/checkout/hooks/useResolveCCImage';
 import { useFormat } from 'helpers/hooks/useFormat';
+import useHash from 'helpers/hooks/useHash';
 import useEditPaymentMethods from './helper-hooks/useEditPaymentMethod';
 import usePaymentMethods from './helper-hooks/usePaymentMethods';
 import PaymentDelete from './payment-delete';
 
-export interface Props {
-  paymentId: string;
-}
-
-const PaymentEdit: FC<Props> = ({ paymentId }) => {
+const PaymentEdit: FC = () => {
+  // eslint-disable-next-line
+  const [_hash, id] = useHash();
   const { formatMessage: formatPaymentMessage } = useFormat({ name: 'payment' });
   const {
     cardHolder,
@@ -28,7 +27,7 @@ const PaymentEdit: FC<Props> = ({ paymentId }) => {
     handleCVCChange,
     handleSaveClick,
     handleDeleteClick,
-  } = useEditPaymentMethods(paymentId);
+  } = useEditPaymentMethods(id as string);
 
   const router = useRouter();
 
