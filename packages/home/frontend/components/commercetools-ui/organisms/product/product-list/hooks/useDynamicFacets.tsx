@@ -27,6 +27,9 @@ const useDynamicFacets = ({ configuration, ordering, render }: Options = {}) => 
     const facets = Object.keys(configuration).map((attribute) => {
       const facet = configuration[attribute];
 
+      if ((facet.type === 'term' || facet.type === 'color') && facet.terms.length === 0)
+        return { attribute, Component: <></> };
+
       const Component = facetMapping[facet.type];
       const FinalComponent = <Component key={attribute} label={facet.label} attribute={attribute} />;
 

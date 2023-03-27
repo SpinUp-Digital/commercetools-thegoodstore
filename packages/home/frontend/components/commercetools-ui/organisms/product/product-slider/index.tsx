@@ -15,7 +15,7 @@ import useTrack from './useTrack';
 export interface ProductSliderProps extends Partial<SwiperOptions> {
   products: Product[];
   title: string;
-  titleVariant?: 'sm' | 'lg';
+  titleVariant?: 'xs' | 'sm' | 'lg';
   subline?: string;
   subtitleVariant?: SubtitleProps['variant'];
   ctaLabel?: string;
@@ -57,6 +57,7 @@ const ProductSlider: FC<ProductSliderProps> = ({
 
   const titleClassName = useMemo(() => {
     return {
+      xs: 'md:text-16',
       sm: 'md:text-18 lg:text-22',
       lg: 'md:text-22 lg:text-28',
     }[titleVariant ?? 'lg'];

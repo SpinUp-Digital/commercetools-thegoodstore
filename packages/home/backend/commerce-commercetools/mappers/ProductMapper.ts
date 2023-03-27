@@ -154,6 +154,7 @@ export class ProductMapper {
   ) => {
     return {
       categoryId: commercetoolsCategory.id,
+      parentId: commercetoolsCategory.parent?.id,
       name: commercetoolsCategory.name?.[locale.language] ?? undefined,
       slug: commercetoolsCategory.slug?.[locale.language] ?? commercetoolsCategory.id,
       depth: commercetoolsCategory.ancestors.length,
