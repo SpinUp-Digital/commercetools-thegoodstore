@@ -1,11 +1,12 @@
 import React from 'react';
-import { useAccount } from 'frontastic';
 import LoggedIn from './loggedin';
 import LoggedOut from './loggedout';
 
-const AccountDropdown: React.FC = () => {
-  const { loggedIn } = useAccount();
+interface Props {
+  loggedIn: boolean;
+}
 
+const AccountDropdown: React.FC<Props> = ({ loggedIn }) => {
   return loggedIn ? <LoggedIn /> : <LoggedOut />;
 };
 

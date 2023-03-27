@@ -42,6 +42,7 @@ const HeaderTastic = ({ data, categories }: Props) => {
       <div id="header-container" className="fixed top-0 z-50 w-full" ref={headerRef}>
         {announcementBarData && <AnnouncementBar {...announcementBarData} />}
         <Header
+          navLinks={categories?.filter((category) => category.depth === 0)}
           categories={categories}
           logo={data.logo}
           logoLink={data.logoLink}
