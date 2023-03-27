@@ -1,6 +1,20 @@
 const localizationMapper = {
-  en: { locale: 'en_GB@GBP', useCurrencyInLocale: true, currency: 'GBP', currencyCode: '£', countryCode: 'GB', countryName: 'Great Britain' },
-  de: { locale: 'de_DE@EUR', useCurrencyInLocale: true, currency: 'EUR', currencyCode: '€', countryCode: 'DE', countryName: 'Germany' },
+  en: {
+    locale: 'en_GB@GBP',
+    useCurrencyInLocale: true,
+    currency: 'GBP',
+    currencyCode: '£',
+    countryCode: 'GB',
+    countryName: 'United Kingdom',
+  },
+  de: {
+    locale: 'de_DE@EUR',
+    useCurrencyInLocale: true,
+    currency: 'EUR',
+    currencyCode: '€',
+    countryCode: 'DE',
+    countryName: 'Germany',
+  },
 };
 
 const getLocalizationInfo = (locale) => {

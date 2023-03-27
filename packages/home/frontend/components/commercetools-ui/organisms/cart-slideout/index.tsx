@@ -12,9 +12,16 @@ export interface Props {
   emptyStateTitle: string;
   emptyStateSubtitle: string;
   emptyStateCategories: Link[];
+  handleCategoryClick?: () => void;
 }
 
-const CartSlideout: FC<Props> = ({ emptyStateImage, emptyStateTitle, emptyStateSubtitle, emptyStateCategories }) => {
+const CartSlideout: FC<Props> = ({
+  emptyStateImage,
+  emptyStateTitle,
+  emptyStateSubtitle,
+  emptyStateCategories,
+  handleCategoryClick,
+}) => {
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
 
   const { data, isEmpty } = useCart();
@@ -28,6 +35,7 @@ const CartSlideout: FC<Props> = ({ emptyStateImage, emptyStateTitle, emptyStateS
           image={emptyStateImage}
           title={emptyStateTitle}
           subtitle={emptyStateSubtitle}
+          handleCategoryClick={handleCategoryClick}
         />
       ) : (
         <div className="h-[65vh] grow divide-y divide-neutral-400 overflow-auto px-12 md:px-22">

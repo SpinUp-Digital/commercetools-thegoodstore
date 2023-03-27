@@ -18,17 +18,18 @@ type Props = {
 };
 
 const Icon: React.FC<Props> = ({ className, flagName }: Props) => {
+  const iconClassNames = `h-14 w-21 ${className}`;
   const flags = {
-    france: <France className={className} />,
-    DE: <Germany className={className} />,
-    greece: <Greece className={className} />,
-    italy: <Italy className={className} />,
-    netherlands: <Netherlands className={className} />,
-    portugal: <Portugal className={`${className} h-14 w-21`} />,
-    spain: <Spain className={`${className} h-14 w-21`} />,
-    sweden: <Sweden className={className} />,
-    GB: <UnitedKingdom className={className} />,
-    US: <UnitedStates className={className} />,
+    france: <France className={iconClassNames} />,
+    DE: <Germany className={iconClassNames} />,
+    greece: <Greece className={iconClassNames} />,
+    italy: <Italy className={iconClassNames} />,
+    netherlands: <Netherlands className={iconClassNames} />,
+    portugal: <Portugal className={iconClassNames} />,
+    spain: <Spain className={iconClassNames} />,
+    sweden: <Sweden className={iconClassNames} />,
+    GB: <UnitedKingdom className={iconClassNames} />,
+    US: <UnitedStates className={iconClassNames} />,
   };
   return <>{flags[flagName as keyof typeof flags]}</>;
 };
