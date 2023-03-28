@@ -1,11 +1,12 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
-import { LineItem } from '@commercetools/frontend-domain-types/cart/LineItem';
 import { LineItem as LineItemWishlist } from '@commercetools/frontend-domain-types/wishlist/LineItem';
 import { TrashIcon } from '@heroicons/react/24/outline';
+import OutOfStock from 'components/commercetools-ui/atoms/out-of-stock';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
+import { LineItem } from 'types/cart';
 import { useCart, useWishlist } from 'frontastic';
 import Image from 'frontastic/lib/image';
 
@@ -85,7 +86,12 @@ const CartItem: React.FC<Props> = ({ item, classNames = {} }) => {
             <TrashIcon stroke="#494949" className="w-20" />
           </i>
         </div>
-        <div className="mt-12">
+        {!item.variant?.isOnStock && (
+          <div className="mt-8">
+            <OutOfStock restockableInDays={item.variant.restockableInDays} />
+          </div>
+        )}
+        <div className="mt-8">
           {item.discountedPrice ? (
             <div className="flex items-center gap-5">
               <span className="text-14 font-medium leading-loose text-accent-red">

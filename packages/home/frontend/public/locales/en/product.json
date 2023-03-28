@@ -43,5 +43,8 @@
   "bought.together": "Frequently bought together",
   "more.on.way": "More on the way",
   "expected.in.weeks": "Expected availability: {weeks} weeks",
-  "available.in.weeks": "Available in {weeks} weeks"
+  "expected.in.days": "Expected availability: {days} days",
+  "available.in.weeks": "Available in {weeks} weeks",
+  "available.in.days": "Available in {days} days",
+  "sold.out": "Sold out"
 }

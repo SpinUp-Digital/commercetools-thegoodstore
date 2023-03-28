@@ -1,15 +1,15 @@
 import React, { FC, useMemo, useState } from 'react';
 import NextLink from 'next/link';
 import { Product } from '@commercetools/frontend-domain-types/product/Product';
-import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
 import { LineItem } from '@commercetools/frontend-domain-types/wishlist/LineItem';
+import OutOfStock from 'components/commercetools-ui/atoms/out-of-stock';
 import QuickView from 'components/commercetools-ui/organisms/product/product-quick-view';
 import Prices from 'components/commercetools-ui/organisms/product/product-tile/prices';
 import WishlistButton from 'components/commercetools-ui/organisms/wishlist/components/wishlist-button';
-import { useFormat } from 'helpers/hooks/useFormat';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import useVariantWithDiscount from 'helpers/hooks/useVariantWithDiscount';
 import { desktop } from 'helpers/utils/screensizes';
+import { Variant } from 'types/product';
 import Image from 'frontastic/lib/image';
 import useTrack from './useTrack';
 
@@ -31,8 +31,6 @@ const ProductTile: FC<ProductTileProps> = ({
   disableVariants = false,
 }) => {
   const [isDesktopSize] = useMediaQuery(desktop);
-
-  const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
   const { ref } = useTrack({ product });
 
@@ -136,13 +134,9 @@ const ProductTile: FC<ProductTileProps> = ({
           </div>
           <div className="w-full text-center">
             {!selectedVariant.isOnStock && (
-              <span className="ml-8 mb-8 flex h-[25px] w-fit items-center justify-center bg-yellow-100 py-4 px-8 text-12">
-                {formatProductMessage({
-                  id: 'available.in.weeks',
-                  defaultMessage: 'Available in {weeks} weeks',
-                  values: { weeks: '2-3' },
-                })}
-              </span>
+              <div className="ml-8 mb-8">
+                <OutOfStock restockableInDays={selectedVariant.restockableInDays} />
+              </div>
             )}
           </div>
           <QuickView buttonIsVisible={buttonIsVisible && !disableQuickView} hideButton={hideButton} product={product} />

@@ -1,8 +1,7 @@
 import { Money } from '@commercetools/frontend-domain-types/product/Money';
-import { Product } from '@commercetools/frontend-domain-types/product/Product';
-import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
+import { Product, Variant } from 'types/product';
 
-export type UIProduct = {
+export type UIProduct = Product & {
   name: string;
   variants: Variant[];
   price: Money;
@@ -11,7 +10,7 @@ export type UIProduct = {
   sizes: UISize[];
   description: string;
   details: UIDetail[];
-} & Product;
+};
 
 interface UIImage {
   id: string;

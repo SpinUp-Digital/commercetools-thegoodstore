@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Product } from '@commercetools/frontend-domain-types/product/Product';
-import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
+import { Variant } from 'types/product';
 import { Transition } from '@headlessui/react';
 import { XMarkIcon as CloseIcon } from '@heroicons/react/24/solid';
 import Link from 'components/commercetools-ui/atoms/link';

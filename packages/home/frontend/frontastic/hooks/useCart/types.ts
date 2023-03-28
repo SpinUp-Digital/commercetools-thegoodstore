@@ -2,7 +2,7 @@ import { Address } from '@commercetools/frontend-domain-types/account/Address';
 import { Discount } from '@commercetools/frontend-domain-types/cart/Discount';
 import { ShippingMethod } from '@commercetools/frontend-domain-types/cart/ShippingMethod';
 import { Money } from '@commercetools/frontend-domain-types/product/Money';
-import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
+import { Variant } from 'types/product';
 import { ProjectSettings } from '@commercetools/frontend-domain-types/ProjectSettings';
 import { Cart } from 'types/cart';
 import { Order } from 'types/order';

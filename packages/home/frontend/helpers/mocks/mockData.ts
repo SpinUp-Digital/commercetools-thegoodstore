@@ -3,7 +3,7 @@ import { Address } from '@commercetools/frontend-domain-types/account/Address';
 import { Group } from '@commercetools/frontend-domain-types/account/Group';
 import { LineItem as CartLineItem } from '@commercetools/frontend-domain-types/cart/LineItem';
 import { Money } from '@commercetools/frontend-domain-types/product/Money';
-import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
+import { Variant } from 'types/product';
 import { LineItem } from '@commercetools/frontend-domain-types/wishlist/LineItem';
 import { Wishlist } from '@commercetools/frontend-domain-types/wishlist/Wishlist';
 import { Account } from 'types/account';

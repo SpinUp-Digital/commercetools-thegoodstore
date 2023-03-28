@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import { Discount } from '@commercetools/frontend-domain-types/cart/Discount';
-import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
+import { Variant } from 'types/product';
 import useSWR, { mutate } from 'swr';
 import useI18n from 'helpers/hooks/useI18n';
 import { SDK, sdk } from 'sdk';

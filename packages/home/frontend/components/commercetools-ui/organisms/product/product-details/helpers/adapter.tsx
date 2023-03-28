@@ -1,7 +1,7 @@
 import { useState, useEffect, FC } from 'react';
 import { useRouter } from 'next/router';
 import { Product } from '@commercetools/frontend-domain-types/product/Product';
-import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
+import { Variant } from 'types/product';
 import { UIProduct } from 'components/commercetools-ui/organisms/product/product-details/types';
 import usePreloadImages from 'helpers/hooks/usePreloadImages';
 import { toUIColor } from 'helpers/mappers/toUIColor';

@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { Product } from '@commercetools/frontend-domain-types/product/Product';
-// import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
+// import { Variant } from 'types/product';
 import { Hit } from 'instantsearch.js';
 import { Highlight, useHits } from 'react-instantsearch-hooks-web';
 import { AUTOCOMPLETE_PRODUCT_CLICKED } from 'helpers/constants/events';

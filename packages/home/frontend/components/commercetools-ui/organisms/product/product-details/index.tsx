@@ -1,5 +1,4 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
 import Button from 'components/commercetools-ui/atoms/button';
 import Dropdown from 'components/commercetools-ui/atoms/dropdown';
 import Link from 'components/commercetools-ui/atoms/link';
@@ -7,6 +6,7 @@ import Gallery from 'components/commercetools-ui/organisms/gallery';
 import { useAddToCartOverlay } from 'context/add-to-cart-overlay';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
+import { Variant } from 'types/product';
 import { useCart } from 'frontastic';
 import AdditionalInfo from './components/additional-info';
 import ProductInformation from './components/product-information';
@@ -100,14 +100,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({
         {!variant.isOnStock && (
           <div className="pt-20">
             <p className="font-medium text-red-500">
-              {formatProductMessage({ id: 'more.on.way', defaultMessage: 'More on the way' })}
-            </p>
-            <p className="text-14 text-secondary-black">
-              {formatProductMessage({
-                id: 'expected.in.weeks',
-                defaultMessage: 'Expected availability: {weeks} weeks',
-                values: { weeks: '2-3' },
-              })}
+              {formatProductMessage({ id: 'outOfStock', defaultMessage: 'Out of stock' })}
             </p>
           </div>
         )}
