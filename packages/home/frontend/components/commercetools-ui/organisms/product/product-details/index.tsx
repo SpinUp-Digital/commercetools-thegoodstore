@@ -99,9 +99,24 @@ const ProductDetails: FC<ProductDetailsProps> = ({
 
         {!variant.isOnStock && (
           <div className="pt-20">
-            <p className="font-medium text-red-500">
-              {formatProductMessage({ id: 'outOfStock', defaultMessage: 'Out of stock' })}
-            </p>
+            {variant.restockableInDays ? (
+              <>
+                <p className="font-medium text-red-500">
+                  {formatProductMessage({ id: 'more.on.way', defaultMessage: 'More on the way' })}
+                </p>
+                <p className="text-14 text-secondary-black">
+                  {formatProductMessage({
+                    id: 'expected.in.days',
+                    defaultMessage: 'Expected availability: {days} days',
+                    values: { days: variant.restockableInDays },
+                  })}
+                </p>
+              </>
+            ) : (
+              <p className="font-medium text-red-500">
+                {formatProductMessage({ id: 'outOfStock', defaultMessage: 'Out of stock' })}
+              </p>
+            )}
           </div>
         )}
 
