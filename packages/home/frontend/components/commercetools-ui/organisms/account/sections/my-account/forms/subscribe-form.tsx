@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import Radio from 'components/commercetools-ui/atoms/radio';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import AccountForm from 'components/commercetools-ui/organisms/account/account-atoms/account-form';
@@ -10,8 +11,9 @@ import { useAccount } from 'frontastic';
 
 const SubscribeForm = () => {
   const { account, updateSubscription } = useAccount();
+  const { formatMessage: formatErrorMessage } = useFormat({ name: 'error' });
   const { formatMessage } = useFormat({ name: 'account' });
-  const { notifyDataUpdated, notifyWentWrong } = useFeedbackToasts();
+  const { notifyDataUpdated } = useFeedbackToasts();
   const { discardForm } = useDiscardForm();
 
   const [subscribed, setSubscribed] = useState((account as Account)?.isSubscribed ?? false);
@@ -27,7 +29,12 @@ const SubscribeForm = () => {
         setLoading(false);
         discardForm();
       } else {
-        notifyWentWrong();
+        toast.error(
+          formatErrorMessage({
+            id: 'wentWrong.retry',
+            defaultMessage: 'Sorry, something went wrong. Please try again in 5 minutes.',
+          }),
+        );
         setLoading(false);
         discardForm();
       }
