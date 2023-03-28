@@ -82,7 +82,7 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods, emptyStateDescripti
                       <Link link={category.path}>
                         <Button
                           className="w-200 rounded-md border border-primary-black text-16 text-secondary-black"
-                          variant="ghost"
+                          variant="secondary"
                         >
                           {category.name}
                         </Button>
