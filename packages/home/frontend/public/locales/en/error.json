@@ -1,6 +1,7 @@
 {
   "auth.wrong": "Wrong email address or password",
   "wentWrong": "Sorry, something went wrong..",
+  "wentWrong.retry": "Entschuldigung, etwas ist schief gelaufen. Bitte versuchen Sie es in 5 Minuten erneut.",
   "password.noMatch": "Passwords don't match.",
   "password.not.valid": "Password has to be at least 8 characters long and have at least one uppercase letter.",
   "account.create.fail": "Sorry. We couldn't create your account..",
