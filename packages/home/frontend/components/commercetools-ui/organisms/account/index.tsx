@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import Skeleton from 'react-loading-skeleton';
 import Button from 'components/commercetools-ui/atoms/button';
@@ -7,9 +7,8 @@ import Typography from 'components/commercetools-ui/atoms/typography';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useHash from 'helpers/hooks/useHash';
-import useI18n from 'helpers/hooks/useI18n';
 import { Reference } from 'types/reference';
-import { useAccount, useCart } from 'frontastic';
+import { useAccount } from 'frontastic';
 import AccountTabsMobile from './account-atoms/account-tabs-mobile';
 import Addresses from './sections/addresses';
 import AddressForm from './sections/addresses/address-form';
@@ -56,31 +55,10 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
   faqs,
 }) => {
   const router = useRouter();
-  const { account, accountLoading, logout } = useAccount();
-  const { updateCart } = useCart();
+  const { logout } = useAccount();
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
   const [hash, id] = useHash();
-  const { country } = useI18n();
   const isLoading = useMemo(() => !!router.query.verify, [router]);
-
-  //update associated cart data using account data
-  useEffect(() => {
-    if (account) {
-      const email = account.email;
-      const addresses = account.addresses?.filter((address) => address.country === country);
-      const shippingAddress = addresses?.find((address) => address.isDefaultShippingAddress) || addresses?.[0];
-      const billingAddress = addresses?.find((address) => address.isDefaultBillingAddress) || addresses?.[0];
-
-      updateCart({
-        account: { email },
-        shipping: shippingAddress,
-        billing: billingAddress,
-      });
-    } else if (accountLoading) {
-    } else {
-      router.push('login');
-    }
-  }, [account, country, router, accountLoading, updateCart]);
 
   const handleLogout = () => {
     logout().then(() => router.push('login'));

@@ -1,9 +1,9 @@
 import {
   PaymentAction,
   PaymentMethod,
-  PaymentRequestPayload,
   KlarnaPaymentRequestPayload,
   PaymentResponse,
+  SchemePaymentRequestPayload,
 } from 'types/payment';
 
 export interface SchemeData {
@@ -34,7 +34,7 @@ export interface PaymentProvider {
   setProcessing: (val: boolean) => void;
   setPaymentData: (data: PaymentData) => void;
   getPaymentMethods: () => Promise<PaymentMethod[]>;
-  makePayment: (data: Omit<PaymentRequestPayload, 'paymentMethod'>) => Promise<PaymentResponse>;
+  makePayment: (data: Omit<SchemePaymentRequestPayload, 'paymentMethod'>) => Promise<PaymentResponse>;
   makeKlarnaPayment: (
     data: Omit<KlarnaPaymentRequestPayload, 'paymentMethod' | 'shopperEmail' | 'shopperName'>,
   ) => Promise<PaymentResponse>;

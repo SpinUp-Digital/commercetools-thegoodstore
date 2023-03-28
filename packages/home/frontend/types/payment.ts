@@ -83,6 +83,7 @@ export interface SchemePaymentRequestPayload {
       nativeThreeDS: 'preferred';
     };
   };
+  metadata?: Record<string, unknown>;
 }
 
 export interface KlarnaLineItem {
@@ -111,6 +112,7 @@ export interface KlarnaPaymentRequestPayload {
     lastName?: string;
   };
   lineItems: Array<KlarnaLineItem>;
+  metadata?: Record<string, unknown>;
 }
 
 export type PaymentRequestPayload = SchemePaymentRequestPayload | KlarnaPaymentRequestPayload;

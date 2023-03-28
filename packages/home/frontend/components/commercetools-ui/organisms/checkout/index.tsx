@@ -1,12 +1,12 @@
 import React, { useCallback, useState } from 'react';
 import { useRouter } from 'next/router';
-import { Order } from '@commercetools/frontend-domain-types/cart/Order';
 import toast from 'react-hot-toast';
 import * as uuid from 'uuid';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useI18n from 'helpers/hooks/useI18n';
+import { Guid } from 'helpers/utils/guid';
 import { getLocalizationInfo } from 'project.config';
-import { KlarnaPaymentRequestPayload, PaymentResponse, SchemePaymentRequestPayload } from 'types/payment';
+import { PaymentResponse } from 'types/payment';
 import { useAccount, useCart } from 'frontastic';
 import Footer from './components/footer';
 import Header, { Props as HeaderProps } from './components/header';
@@ -20,7 +20,7 @@ export type Props = HeaderProps;
 const CheckoutWrapped: React.FC<Props> = ({ logo, ...emptyState }) => {
   const { formatMessage: formatCheckoutMessage } = useFormat({ name: 'checkout' });
 
-  const { orderCart, transaction, data, hasOutOfStockItems } = useCart();
+  const { transaction, data, hasOutOfStockItems } = useCart();
 
   const [isFinalStep, setIsFinalStep] = useState(false);
 
@@ -34,9 +34,9 @@ const CheckoutWrapped: React.FC<Props> = ({ logo, ...emptyState }) => {
   const router = useRouter();
 
   const handlePaymentResponse = useCallback(
-    (response: PaymentResponse, order: Order) => {
+    (response: PaymentResponse, orderNumber: string) => {
       if (['Authorised', 'RedirectShopper', 'IdentifyShopper', 'ChallengeShopper'].includes(response.resultCode)) {
-        if (!response.action) return router.push(`/thank-you?orderId=${order.orderId}`);
+        if (!response.action) return router.push(`/thank-you?orderId=${orderNumber}`);
 
         switch (response.action.type) {
           case 'redirect':
@@ -44,7 +44,7 @@ const CheckoutWrapped: React.FC<Props> = ({ logo, ...emptyState }) => {
             break;
           case 'threeDS2':
             handleThreeDS2Action(response.action, (threeDS2AuthResponse) =>
-              handlePaymentResponse(threeDS2AuthResponse, order),
+              handlePaymentResponse(threeDS2AuthResponse, orderNumber),
             );
             break;
         }
@@ -92,15 +92,15 @@ const CheckoutWrapped: React.FC<Props> = ({ logo, ...emptyState }) => {
 
     setProcessing(true);
 
-    const order = await orderCart();
+    const orderNumber = Guid.newGuid(false, ['', 'xxxx-xxxx-yxxx']);
 
     let response = {} as PaymentResponse;
 
     if (paymentData.type === 'scheme') {
       response = await makePayment({
         amount: { currency: transaction.total.currencyCode, value: transaction.total.centAmount },
-        returnUrl: `${window.location.origin}/thank-you?orderId=${order.orderId}`,
-        reference: order.orderId as string,
+        returnUrl: `${window.location.origin}/thank-you?orderId=${orderNumber}`,
+        reference: orderNumber as string,
         channel: 'web',
         origin: window.location.origin,
         countryCode: country,
@@ -120,14 +120,15 @@ const CheckoutWrapped: React.FC<Props> = ({ logo, ...emptyState }) => {
           timeZoneOffset: new Date().getTimezoneOffset(),
           userAgent: navigator.userAgent,
         },
-      } as SchemePaymentRequestPayload);
+        metadata: { cartId: data.cartId },
+      });
     }
 
     if (paymentData.type === 'klarna_paynow') {
       response = await makeKlarnaPayment({
         amount: { currency: transaction.total.currencyCode, value: transaction.total.centAmount },
-        returnUrl: `${window.location.origin}/thank-you?orderId=${order.orderId}`,
-        reference: order.orderId as string,
+        returnUrl: `${window.location.origin}/thank-you?orderId=${orderNumber}`,
+        reference: orderNumber as string,
         shopperReference: account?.accountId ?? uuid.v4(),
         countryCode: country,
         shopperLocale: getLocalizationInfo(router.locale).locale,
@@ -139,14 +140,14 @@ const CheckoutWrapped: React.FC<Props> = ({ logo, ...emptyState }) => {
           productUrl: lineItem._url,
           imageUrl: lineItem.variant?.images?.[0],
         })),
-      } as KlarnaPaymentRequestPayload);
+        metadata: { cartId: data.cartId },
+      });
     }
 
-    handlePaymentResponse(response, order);
+    handlePaymentResponse(response, orderNumber);
 
     setProcessing(false);
   }, [
-    orderCart,
     setProcessing,
     makePayment,
     hasOutOfStockItems,

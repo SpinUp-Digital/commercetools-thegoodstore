@@ -63,7 +63,7 @@ export const notify = async (request: Request, actionContext: ActionContext) => 
   const validator = new hmacValidator();
 
   // @ts-ignore
-  notificationItems.forEach(({ NotificationRequestItem }) => {
+  notificationItems.forEach(async ({ NotificationRequestItem }) => {
     if (!validator.validateHMAC(NotificationRequestItem, hmacKey)) throw new Error('Invalid or no HMAC signature');
 
     const {
@@ -72,11 +72,17 @@ export const notify = async (request: Request, actionContext: ActionContext) => 
       amount,
       success,
       eventCode,
-      additionalData: { shopperLocale, cardSummary },
+      additionalData: { shopperLocale, cardSummary, ...additionalData },
     } = NotificationRequestItem;
 
     const emailApi = EmailApiFactory.getDefaultApi(actionContext.frontasticContext, shopperLocale ?? 'en_GB');
     const cartApi = new CartApi(actionContext.frontasticContext, shopperLocale ?? 'en_GB');
+
+    const cartId = additionalData['metadata.cartId'];
+
+    const cart = await cartApi.getById(cartId);
+
+    await cartApi.order(cart, { orderNumber: merchantReference });
 
     if (eventCode === 'AUTHORISATION' && success) {
       cartApi

@@ -316,13 +316,13 @@ export class CartApi extends BaseApi {
     return this.buildCartWithAvailableShippingMethods(commercetoolsCart, locale);
   };
 
-  order: (cart: Cart) => Promise<Order> = async (cart: Cart) => {
+  order: (cart: Cart, data: { orderNumber: string }) => Promise<Order> = async (cart, { orderNumber }) => {
     const locale = await this.getCommercetoolsLocal();
 
     const orderFromCartDraft: OrderFromCartDraft = {
       id: cart.cartId,
       version: +cart.cartVersion,
-      orderNumber: Guid.newGuid(false, ['','xxxx-xxxx-yxxx']),
+      orderNumber,
     };
 
     if (!isReadyForCheckout(cart)) {

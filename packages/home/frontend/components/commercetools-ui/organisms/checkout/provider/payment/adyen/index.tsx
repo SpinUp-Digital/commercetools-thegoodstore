@@ -10,7 +10,6 @@ import {
   PaymentMethod,
   PaymentMethodType,
   KlarnaPaymentRequestPayload,
-  PaymentRequestPayload,
   SchemePaymentRequestPayload,
 } from 'types/payment';
 import { useAdyen } from 'frontastic';
@@ -125,7 +124,7 @@ const AdyenPaymentProvider: React.FC = ({ children }) => {
   );
 
   const makePayment = useCallback(
-    async (data: Omit<PaymentRequestPayload, 'paymentMethod'>) => {
+    async (data: Omit<SchemePaymentRequestPayload, 'paymentMethod'>) => {
       const response = await adyen.makePayment({
         ...data,
         paymentMethod: {
