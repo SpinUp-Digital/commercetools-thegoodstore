@@ -28,7 +28,7 @@ const MobileMenuNavButton: FC<Props> = ({ link, categoriesNavigator, onClick, hi
         </div>
       ) : (
         <div onClick={hideHeaderMenu} className={linkClassNames}>
-          <Link link={link.slug ?? link.path}>
+          <Link link={link?.path}>
             <Typography fontSize={16} className="text-primary-black">
               {link.name}
             </Typography>
