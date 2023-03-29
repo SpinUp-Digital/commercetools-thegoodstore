@@ -51,13 +51,13 @@ const PaymentAdd = () => {
 
       <div className="mt-0 w-full px-16 py-0 md:px-24 lg:mt-36 lg:w-[60%] lg:rounded-md lg:border lg:py-32 lg:px-24">
         <div className="mt-24 md:max-w-[436px] lg:mt-0">
-          <Typography as="label" medium fontSize={12} className="text-secondary-black">
+          <Typography as="label" medium fontSize={14} className="text-secondary-black">
             {formatPaymentMessage({ id: 'card.holder', defaultMessage: 'Card holder *' })}
           </Typography>
           <Input name="holderName" className="mt-8 sm:px-8" labelPosition="inline" onChange={handleCardHolderChange} />
 
           <div className="relative mt-16 lg:mt-12">
-            <Typography as="label" medium fontSize={12} className="text-secondary-black">
+            <Typography as="label" medium fontSize={14} className="text-secondary-black">
               {formatPaymentMessage({ id: 'card.number', defaultMessage: 'Card number *' })}
             </Typography>
             <Input className="mt-8 sm:px-8" labelPosition="inline" type="number" onChange={handleCardNumberChange} />
@@ -69,7 +69,7 @@ const PaymentAdd = () => {
 
           <div className="mt-16 w-full flex-col gap-8 md:max-w-[436px] lg:mt-12 lg:flex lg:flex-row">
             <div className="w-full lg:w-[60%]">
-              <Typography as="label" fontSize={12} medium className="text-secondary-black">
+              <Typography as="label" fontSize={14} medium className="text-secondary-black">
                 {formatPaymentMessage({ id: 'expiration.date', defaultMessage: 'Expiration date *' })}
               </Typography>
               <div className="mt-8 grow md:flex-1">
@@ -78,7 +78,7 @@ const PaymentAdd = () => {
             </div>
 
             <div className="relative mt-16 grow md:flex-1 lg:mt-0">
-              <Typography as="label" medium fontSize={12} className="text-secondary-black">
+              <Typography as="label" medium fontSize={14} className="text-secondary-black">
                 {formatPaymentMessage({ id: 'card.securityNumber', defaultMessage: 'Security number *' })}
               </Typography>
               <Input className="mt-8 sm:px-8" labelPosition="inline" type="number" onChange={handleCVCChange} />
