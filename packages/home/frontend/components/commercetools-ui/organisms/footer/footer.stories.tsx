@@ -7,14 +7,12 @@ import Footer, { Props as FooterProps } from './index';
 export default {
   title: 'Components/Footer',
   component: Footer,
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
+  argTypes: {},
 } as Meta;
 
 const Template: Story<FooterProps> = (args) => (
   <div className="ml-44">
-    <Typography fontSize={28} fontFamily="libre" medium className="mt-40 w-[40%] text-primary-black">
+    <Typography fontSize={28} fontFamily="inter" medium className="mt-40 w-[40%] text-primary-black">
       Page Footer
     </Typography>
     <Typography fontSize={18} fontFamily="inter" className="mt-20 w-[60%] leading-6 text-secondary-black">

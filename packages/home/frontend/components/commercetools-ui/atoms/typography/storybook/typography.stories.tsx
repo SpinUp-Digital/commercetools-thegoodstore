@@ -1,10 +1,11 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
-import Typography from '.';
-import { fontSizes, tagTypesToUse, TypographyProps } from './types';
+import Typography from '..';
+import { fontSizes, tagTypesToUse, TypographyProps } from '../types';
+import TypographyContent from './typography-content';
 
 export default {
-  title: 'Components/Atoms/Typography',
+  title: 'Components/Typography',
   component: Typography,
   argTypes: {
     fontFamily: { control: { type: 'select' }, options: ['libre', 'inter'], defaultValue: 'libre' },
@@ -15,7 +16,7 @@ export default {
   },
 } as Meta;
 
-const Template: Story<TypographyProps> = (args) => <Typography {...args}>Typography Component</Typography>;
+const Template: Story<TypographyProps> = () => <TypographyContent />;
 
 export const Default = Template.bind({});
 Default.args = {

@@ -6,7 +6,7 @@ import AccountDropdown from '..';
 const AccountDropdownContent: FC = () => {
   return (
     <div className="ml-44">
-      <Typography fontSize={28} fontFamily="libre" medium className="mt-40 w-[40%] text-primary-black">
+      <Typography fontSize={28} fontFamily="inter" medium className="mt-40 w-[40%] text-primary-black">
         Account Dropdown
       </Typography>
       <Typography fontSize={18} fontFamily="inter" className="mt-20 w-[60%] leading-6 text-secondary-black">

@@ -1,0 +1,44 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Business docs/Style guide/Borders" />
+
+# Borders - radius and width
+
+Almost all components are slightly rounded. Our radius system follows a rule of multiple of 2.<br />
+Scale creates a visual balance that makes it easier to understand the interface.
+
+Border width is primarily used to outline the frame of a component or to structure content.<br />
+We use an inset border width of 1 px in form elements and shadow buttons.
+
+<br />
+<br />
+<div className="flex h-[600px] w-full items-center justify-center rounded-lg bg-neutral-150">
+  <div className="flex flex-col justify-start">
+    <div className="flex items-center" style={{ marginBottom: '64px' }}>
+      <div className="h-120 w-120 rounded-sm bg-neutral-100" style={{ marginRight: '64px' }} />
+      <div>
+        <div className="font-bold">S - 2px</div>
+        <div className="w-[350px]">
+          This is the rounding used in small components and components such as checkboxes and tags.
+        </div>
+      </div>
+    </div>
+    <div className="flex items-center" style={{ marginBottom: '64px' }}>
+      <div className="h-120 w-120 rounded-md bg-neutral-100" style={{ marginRight: '64px' }} />
+      <div>
+        <div className="font-bold">Default M - 4px</div>
+        <div className="w-[350px]">Use this rounding for most components, buttons etc.</div>
+      </div>
+    </div>
+    <div className="flex items-center">
+      <div className="h-120 w-120 rounded-lg bg-neutral-100" style={{ marginRight: '64px' }} />
+      <div>
+        <div className="font-bold">L - 8px</div>
+        <div className="w-[350px]">
+          Full rounding is used sparingly in large components such as image borders, large containers, cards, modals
+          etc.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
