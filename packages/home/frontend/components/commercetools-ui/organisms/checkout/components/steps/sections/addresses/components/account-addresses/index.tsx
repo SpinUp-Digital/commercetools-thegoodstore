@@ -43,7 +43,7 @@ const AccountAddresses: React.FC<Props> = ({ className = '', type, onSelectAddre
           >
             <Radio className="shrink-0" checked={address.addressId === selected?.addressId} />
             <p className="max-w-full overflow-hidden truncate text-14 text-secondary-black">
-              {address.name}
+              {address.firstName} {address.lastName}
               <span className="mt-8 block" />
               {address.line1}
               <span className="mt-8 block" />

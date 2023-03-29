@@ -12,7 +12,8 @@ const useMappers = () => {
     (address: AccountAddress) => {
       return {
         addressId: address.addressId,
-        name: `${address.firstName ?? ''} ${address.lastName ?? ''}`,
+        firstName: address.firstName,
+        lastName: address.lastName,
         email: account?.email ?? '',
         phone: address.phone,
         line1: address.streetName ?? '',
@@ -26,10 +27,9 @@ const useMappers = () => {
 
   const addressToAccountAddress = useCallback(
     (address: Address) => {
-      const [firstName, lastName] = address.name.split(' ');
       return {
-        firstName: firstName ?? '',
-        lastName: lastName ?? '',
+        firstName: address.firstName,
+        lastName: address.lastName,
         phone: address.phone,
         streetName: address.line1,
         additionalAddressInfo: address.line2,

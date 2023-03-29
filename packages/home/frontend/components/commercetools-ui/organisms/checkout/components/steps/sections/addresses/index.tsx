@@ -36,7 +36,8 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
   const { validateEmail } = useValidate();
 
   const initialAddressData = {
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
     phone: '',
     line1: '',
@@ -56,7 +57,8 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
 
   const addressValidationScehma = useMemo(() => {
     return yup.object().shape({
-      name: yup.string().required(),
+      firstName: yup.string().required(),
+      lastName: yup.string().required(),
       email: yup.string().email().required(),
       phone: yup.string().optional(),
       line1: yup.string().optional(),
@@ -150,8 +152,16 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
     ({ enableAddress2, onEnableAddress2 }: FieldsOptions) => {
       return [
         {
-          name: 'name',
-          label: formatMessage({ id: 'name', defaultMessage: 'Name' }),
+          name: 'firstName',
+          label: formatMessage({ id: 'firstName', defaultMessage: 'First Name' }),
+          labelDesc: '',
+          required: true,
+          type: 'string',
+          className: 'col-span-3',
+        },
+        {
+          name: 'lastName',
+          label: formatMessage({ id: 'lastName', defaultMessage: 'Last Name' }),
           labelDesc: '',
           required: true,
           type: 'string',

@@ -1,6 +1,7 @@
 export interface Address {
   addressId: string;
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   phone?: string;
   line1: string;
