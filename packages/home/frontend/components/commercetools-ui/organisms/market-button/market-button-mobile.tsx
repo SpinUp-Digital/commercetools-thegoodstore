@@ -63,32 +63,36 @@ const MarketButtonMobile: FC<Props> = ({ menuTop }) => {
   }, [selectedMarket]);
 
   return (
-    <Dropdown
-      customButtonElement={marketButtonElement}
-      customMenuWrapperClassNames={marketMenuWrapperClassNames}
-      customButtonClassNames={marketButtonClassNames}
-      customMenuClassNames={marketMenuClassNames}
-    >
-      {markets.map((market) => (
-        <Menu.Item key={market.locale}>
-          <div className="overflow-y-scroll hover:bg-neutral-200 active:bg-neutral-200">
-            <Button
-              variant="ghost"
-              size="full"
-              onClick={() => handleMarketClick(market)}
-              className="flex w-full items-center justify-start py-12 px-16"
-            >
-              <div className="flex w-fit items-center justify-start">
-                <FlagIcons flagName={market.flag} className="mr-8" />
-                <Typography as="span" fontSize={14} className="font-normal text-secondary-black">
-                  {`${market?.region} | ${market?.currency} ${market?.currencyCode}`}
-                </Typography>
+    <>
+      {markets && markets.length !== 0 && (
+        <Dropdown
+          customButtonElement={marketButtonElement}
+          customMenuWrapperClassNames={marketMenuWrapperClassNames}
+          customButtonClassNames={marketButtonClassNames}
+          customMenuClassNames={marketMenuClassNames}
+        >
+          {markets.map((market) => (
+            <Menu.Item key={market.locale}>
+              <div className="overflow-y-scroll hover:bg-neutral-200 active:bg-neutral-200">
+                <Button
+                  variant="ghost"
+                  size="full"
+                  onClick={() => handleMarketClick(market)}
+                  className="flex w-full items-center justify-start py-12 px-16"
+                >
+                  <div className="flex w-fit items-center justify-start">
+                    <FlagIcons flagName={market.flag} className="mr-8" />
+                    <Typography as="span" fontSize={14} className="font-normal text-secondary-black">
+                      {`${market?.region} | ${market?.currency} ${market?.currencyCode}`}
+                    </Typography>
+                  </div>
+                </Button>
               </div>
-            </Button>
-          </div>
-        </Menu.Item>
-      ))}
-    </Dropdown>
+            </Menu.Item>
+          ))}
+        </Dropdown>
+      )}
+    </>
   );
 };
 

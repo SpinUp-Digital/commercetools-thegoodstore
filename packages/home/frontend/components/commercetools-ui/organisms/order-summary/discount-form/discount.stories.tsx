@@ -6,14 +6,12 @@ import DiscountForm, { Props as DiscountProps } from './index';
 export default {
   title: 'Components/DiscountForm',
   component: DiscountForm,
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
+  argTypes: {},
 } as Meta;
 
 const Template: Story<DiscountProps> = (args) => (
   <div className="ml-44 w-full">
-    <Typography fontSize={28} fontFamily="libre" medium className="mt-40 w-[40%] text-primary-black">
+    <Typography fontSize={28} fontFamily="inter" medium className="mt-40 w-[40%] text-primary-black">
       Discount Form
     </Typography>
     <Typography fontSize={18} fontFamily="inter" className="mt-20 w-[60%] leading-6 text-secondary-black">

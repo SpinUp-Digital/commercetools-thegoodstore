@@ -13,7 +13,7 @@ export default {
 
 const Template: Story<TileProps> = (args) => (
   <div className="ml-44">
-    <Typography fontSize={28} fontFamily="libre" medium className="mt-40 w-[40%] text-primary-black">
+    <Typography fontSize={28} fontFamily="inter" medium className="mt-40 w-[40%] text-primary-black">
       Hero Tile
     </Typography>
     <Typography fontSize={18} fontFamily="inter" className="mt-20 w-[60%] leading-6 text-secondary-black">
@@ -31,7 +31,7 @@ const Template: Story<TileProps> = (args) => (
         subtitle="Here are some lovely Subtitle texts just for testing"
         ctaLabel="Call To Action"
         ctaReference={headerButtonLink as Reference}
-        className="h-[500px] w-[80%]"
+        className="h-[550px] w-[85%]"
       />
     </div>
   </div>

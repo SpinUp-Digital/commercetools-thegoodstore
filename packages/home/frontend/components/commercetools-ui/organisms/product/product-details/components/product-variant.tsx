@@ -1,9 +1,9 @@
 import { FC, useEffect, useState } from 'react';
-import { Variant as VariantType } from 'types/product';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { discardRepeatedValues } from 'helpers/utils/discardRepeatedValues';
+import { Variant as VariantType } from 'types/product';
 
 type ProductVariantProps = {
   className?: string;

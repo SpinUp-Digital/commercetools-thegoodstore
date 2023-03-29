@@ -9,14 +9,12 @@ import { HeaderProps } from './types';
 export default {
   title: 'Components/Header',
   component: Header,
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
+  argTypes: {},
 } as Meta;
 
 const Template: Story<HeaderProps> = () => (
   <div className="ml-44">
-    <Typography fontSize={28} fontFamily="libre" medium className="mt-40 w-[40%] text-primary-black">
+    <Typography fontSize={28} fontFamily="inter" medium className="mt-40 w-[40%] text-primary-black">
       Page header
     </Typography>
     <Typography fontSize={18} fontFamily="inter" className="mt-20 w-[60%] leading-6 text-secondary-black">
