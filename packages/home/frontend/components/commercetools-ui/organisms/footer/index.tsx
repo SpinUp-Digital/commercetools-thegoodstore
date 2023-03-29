@@ -1,6 +1,8 @@
 import React from 'react';
 import Accordion from 'components/commercetools-ui/atoms/accordion';
 import Link from 'components/commercetools-ui/atoms/link';
+import Typography from 'components/commercetools-ui/atoms/typography';
+import { useFormat } from 'helpers/hooks/useFormat';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import * as screensizes from 'helpers/utils/screensizes';
 import { Reference } from 'types/reference';
@@ -24,11 +26,12 @@ export interface SocialMedia {
 
 const Footer: React.FC<Props> = ({ columns, logo, socialMedia }) => {
   const [isBiggerThanTabletSize] = useMediaQuery(screensizes.tablet);
+  const { formatMessage } = useFormat({ name: 'common' });
 
   return (
     <footer aria-labelledby="footer-heading" className="w-full bg-primary-black">
       {isBiggerThanTabletSize ? (
-        <div className="mx-auto w-full max-w-[1248px] px-72 py-58 xl:px-0">
+        <div className="mx-auto w-full max-w-[1248px] px-24 py-58 xl:px-0">
           <div className="grid grid-cols-4 ">
             {columns?.map((column, index) => (
               <div key={index}>
@@ -67,6 +70,9 @@ const Footer: React.FC<Props> = ({ columns, logo, socialMedia }) => {
             <Image {...logo} alt="logo" />
           </div>
         )}
+        <Typography fontSize={14} className="text-neutral-500">
+          {formatMessage({ id: 'powered', defaultMessage: 'Powered by commercetools' })}
+        </Typography>
         <ul className="mt-40 flex flex-row gap-20 self-center lg:mt-0">
           {socialMedia?.map((item, i) => (
             <li key={i} className="w-22">

@@ -18,20 +18,11 @@ const Column: React.FC<Props> = ({ header, links, className }) => {
   return (
     <div className={className}>
       {header && (
-        <Typography
-          as="h3"
-          fontFamily="inter"
-          fontSize={16}
-          medium
-          className=" text-neutral-200 sm:self-center sm:pb-20 lg:self-start"
-        >
+        <Typography as="h3" fontFamily="inter" fontSize={16} medium className=" self-start text-neutral-200 sm:pb-20">
           {header}
         </Typography>
       )}
-      <ul
-        role="list"
-        className="mb-3 flex flex-col gap-y-18 sm:self-center md:items-center lg:items-start lg:self-start"
-      >
+      <ul role="list" className="mb-3 flex flex-col items-start  gap-y-18 self-start">
         {links.map((item, i) => (
           <li key={i}>
             <Link variant="primary" link={item.reference}>
