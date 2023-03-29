@@ -25,7 +25,7 @@ const PaymentCard: FC<Props> = ({ payment }) => {
         {/* eslint-disable-next-line */}
         <img className="h-fit w-[32px]" src={resolveCCImage(payment.cardNumber)} />
         <Typography fontSize={14} className="ml-16 text-primary-black">
-          {`...${payment.cardNumber.substring(12, 16)} ${payment.cardExpiry.name}`}
+          {`...${payment.cardNumber.substring(12, 16)} ${payment.cardExpiryMonth.name}/${payment.cardExpiryYear.name}`}
         </Typography>
       </div>
       <Button variant="ghost" onClick={() => goToEdit(payment)} className="py-0 text-primary-black hover:underline">

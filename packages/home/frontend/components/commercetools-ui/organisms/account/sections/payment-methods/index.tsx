@@ -9,30 +9,30 @@ export interface Payment {
   id: string;
   cardHolder: string;
   cardNumber: string;
-  cardExpiry: Option;
-  cardCVC?: string;
+  cardExpiryMonth: Option;
+  cardExpiryYear: Option;
 }
 export const payments: Payment[] = [
   {
     id: '1',
     cardHolder: 'Ahmed Amir',
     cardNumber: '4646464646464644',
-    cardExpiry: { name: '03/25', value: '03/25' },
-    cardCVC: '420',
+    cardExpiryMonth: { name: '03', value: '03' },
+    cardExpiryYear: { name: '27', value: '27' },
   },
   {
     id: '2',
     cardHolder: 'Ahmed George',
     cardNumber: '4988438843884305',
-    cardExpiry: { name: '03/27', value: '03/27' },
-    cardCVC: '522',
+    cardExpiryMonth: { name: '03', value: '03' },
+    cardExpiryYear: { name: '25', value: '25' },
   },
   {
     id: '3',
     cardHolder: 'Dio Brando',
     cardNumber: '5555444433331111',
-    cardExpiry: { name: '03/30', value: '03/30' },
-    cardCVC: '555',
+    cardExpiryMonth: { name: '03', value: '03' },
+    cardExpiryYear: { name: '30', value: '30' },
   },
 ];
 

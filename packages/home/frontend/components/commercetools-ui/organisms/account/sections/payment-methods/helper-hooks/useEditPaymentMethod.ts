@@ -8,8 +8,8 @@ const useEditPaymentMethods = (paymentId: string) => {
   const payment = payments.find((payment) => payment.id === paymentId);
   const [cardHolder, setCardHolder] = useState(payment?.cardHolder);
   const [cardNumber, setCardNumber] = useState(payment?.cardNumber);
-  const [cardCVC, setCardCVC] = useState(payment?.cardCVC);
-  const [cardExpDate, setCardExpDate] = useState<Option | undefined>(payment?.cardExpiry);
+  const [cardExpMonthDate, setCardExpMonthDate] = useState<Option | undefined>(payment?.cardExpiryMonth);
+  const [cardExpYearDate, setCardExpYearDate] = useState<Option | undefined>(payment?.cardExpiryYear);
 
   const handleCardHolderChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,18 +25,18 @@ const useEditPaymentMethods = (paymentId: string) => {
     [setCardNumber],
   );
 
-  const handleExpiryDateChange = useCallback(
+  const handleExpiryDateMonthChange = useCallback(
     (option: Option) => {
-      setCardExpDate(option);
+      setCardExpMonthDate(option);
     },
-    [setCardExpDate],
+    [setCardExpMonthDate],
   );
 
-  const handleCVCChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setCardCVC(e.target.value);
+  const handleExpiryDateYearChange = useCallback(
+    (option: Option) => {
+      setCardExpYearDate(option);
     },
-    [setCardCVC],
+    [setCardExpYearDate],
   );
 
   const handleDeleteClick = () => {
@@ -52,8 +52,8 @@ const useEditPaymentMethods = (paymentId: string) => {
       ...payments[payments.findIndex((payment) => payment.id === paymentId)],
       cardHolder: cardHolder ?? '',
       cardNumber: cardNumber ?? '',
-      cardExpiry: cardExpDate ?? { name: '02/69', value: '02/69' },
-      cardCVC: cardCVC ?? '',
+      cardExpiryMonth: cardExpMonthDate ?? { name: '02', value: '02' },
+      cardExpiryYear: cardExpYearDate ?? { name: '69', value: '69' },
     };
 
     router.push('/account#payment');
@@ -62,12 +62,12 @@ const useEditPaymentMethods = (paymentId: string) => {
   return {
     cardHolder,
     cardNumber,
-    cardExpDate,
-    cardCVC,
+    cardExpMonthDate,
+    cardExpYearDate,
     handleCardHolderChange,
     handleCardNumberChange,
-    handleExpiryDateChange,
-    handleCVCChange,
+    handleExpiryDateMonthChange,
+    handleExpiryDateYearChange,
     handleDeleteClick,
     handleSaveClick,
   };

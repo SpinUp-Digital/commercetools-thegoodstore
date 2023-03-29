@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { LockClosedIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { LockClosedIcon } from '@heroicons/react/24/outline';
 import Button from '..';
 import Typography from '../../typography';
 

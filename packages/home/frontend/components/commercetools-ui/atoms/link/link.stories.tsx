@@ -7,7 +7,7 @@ export default {
   component: Link,
 } as Meta;
 
-const Template: Story<LinkProps> = (args) => (
+const Template: Story<LinkProps> = () => (
   <div className="ml-44">
     <Typography fontSize={28} fontFamily="inter" medium className="mt-40 w-[40%] text-primary-black">
       Link Component
