@@ -74,7 +74,7 @@ const OrderSummary: FC<Props> = ({ hiddenItemsCount, subtotal, shipmentFees, tot
   }, [open, arrowClassNames, contentClassNames, formatOrdersMessage, hiddenItemsCount, lineItemOrderSummary]);
 
   return (
-    <div className="ml-44 hidden h-fit w-[45%] rounded-md border p-36 2xl:block 3xl:w-[40%]">
+    <div className="ml-44 hidden h-fit w-[35%] rounded-md border p-36 2xl:block">
       {lineItems.length === 1 ? (
         <div className="grid w-full grid-cols-1">
           <div className="border-b pb-16">
