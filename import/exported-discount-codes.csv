@@ -1,0 +1,5 @@
+name.en,description.en,code,cartDiscounts,cartPredicate,groups,isActive,validFrom,validUntil,references,maxApplications,maxApplicationsPerCustomer
+,,AutumnDiscount,a5842b45-cb58-4e92-9cf3-9c53cfcd74b0,,,true,,,,,
+,,SummerDiscount,b9db62ec-1276-4bcc-bf80-7dbd18c88057,,,true,,,,,
+,,special30,94d400df-9938-4e81-a047-39733592ddb4,,,false,,,,,
+,,SpringDiscount,c7efbd78-6574-4ae4-9150-2720c9f4cc43,,,true,,,,,

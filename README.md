@@ -2,6 +2,10 @@
 
 > :information_source: Full documentation can be found [Here](https://docs.commercetools.com/frontend-development/)
 
+# Before you begin:
+
+In order to get you started quickly with your demo, we made read [CSV import files](https://github.com/frontastic-developers/customer-thegoodstore/blob/master/import) that you can [import in merchant center](https://docs.commercetools.com/import-export/) to populate it with sample data.
+
 # Getting Started:
 
 1. Install the `Frontastic-CLI`.
