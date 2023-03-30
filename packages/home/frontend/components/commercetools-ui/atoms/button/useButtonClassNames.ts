@@ -27,7 +27,7 @@ const useButtonClassNames: UseButtonClassNames = ({
   const primaryClassName = useClassNames([
     'bg-gray-700 text-neutral-100 outline-offset-0',
     'hover:bg-gray-500',
-    'active:shadow-button active:bg-secondary-black',
+    'active:shadow-button active:disabled:shadow-none active:bg-secondary-black',
     'focus-visible:outline focus-visible:outline-gray-700 border-gray-700 focus-visible:border focus-visible:outline-offset-[3px]',
     'disabled:bg-neutral-400 disabled:text-neutral-100',
   ]);
@@ -43,7 +43,7 @@ const useButtonClassNames: UseButtonClassNames = ({
   const warningClassName = useClassNames([
     'bg-red-500 text-neutral-100 outline-offset-0',
     'hover:bg-red-600',
-    'active:shadow-button active:bg-red-500',
+    'active:shadow-button active:disabled:shadow-none active:bg-red-500',
     'focus-visible:outline focus-visible:bg-red-700 focus-visible:outline-gray-700 focus-visible:border-red-700 focus-visible:border focus-visible:outline-offset-[3px]',
     'disabled:bg-neutral-400 disabled:text-neutral-100',
   ]);

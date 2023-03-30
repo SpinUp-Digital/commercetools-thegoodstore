@@ -2,14 +2,17 @@ import Markdown, { Props as MarkdownProps } from 'components/commercetools-ui/or
 import useClassNames from 'helpers/hooks/useClassNames';
 
 interface Props {
-  data: MarkdownProps & { fullWidth: boolean };
+  data: MarkdownProps & { fullWidth: boolean; textAlign: 'center' | 'left' | 'right' | 'justify' };
 }
 
-const MarkdownTastic = ({ data: { fullWidth = false, ...data } }: Props) => {
-  const classNames = useClassNames(['prose p-24 md:p-56 lg:p-84', !fullWidth ? 'max-w-[1024px]' : 'max-w-full']);
+const MarkdownTastic = ({ data: { fullWidth = false, textAlign = 'left', ...data } }: Props) => {
+  const classNames = useClassNames([
+    'prose px-24 md:px-56 lg:px-84',
+    !fullWidth ? 'mx-auto max-w-[1150px] 2xl:max-w-[1248px] box-content' : 'max-w-full',
+  ]);
 
   return (
-    <div className={classNames}>
+    <div className={classNames} style={{ textAlign }}>
       <Markdown {...data} />
     </div>
   );
