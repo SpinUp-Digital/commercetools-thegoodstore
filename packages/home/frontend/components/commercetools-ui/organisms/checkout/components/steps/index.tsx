@@ -26,15 +26,13 @@ const Steps: React.FC<Props> = ({ onPurchase, onFinalStepChange }) => {
   const { processing } = useCheckout();
 
   const [active, setActive] = useState<number>(0);
-  const [completed, setCompleted] = useState<Array<number>>([]);
 
   const goToNextStep = useCallback(() => {
-    setCompleted([...completed, active]);
     setActive(active + 1);
     router.push({ pathname: router.asPath.split('?').shift(), query: { step: active + 1 } }, undefined, {
       shallow: true,
     });
-  }, [active, completed, router]);
+  }, [active, router]);
 
   useEffect(() => {
     if (router.query.step) setActive(+router.query.step);
@@ -79,7 +77,7 @@ const Steps: React.FC<Props> = ({ onPurchase, onFinalStepChange }) => {
             label={label}
             number={index + 1}
             isExpanded={index === active}
-            isCompleted={completed.includes(index)}
+            isCompleted={index < active}
             onEdit={() => onEdit(index)}
             Component={Component}
             Preview={Preview}

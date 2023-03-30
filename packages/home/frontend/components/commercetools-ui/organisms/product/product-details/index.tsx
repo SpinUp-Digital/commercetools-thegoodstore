@@ -141,6 +141,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({
             onClick={handleAddToCart}
             loading={loading}
             added={added}
+            disabled={!variant.isOnStock}
           >
             {formatMessage({ id: 'cart.add', defaultMessage: 'Add to cart' })}
           </Button>

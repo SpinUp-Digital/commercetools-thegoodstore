@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { XMarkIcon as CloseIcon } from '@heroicons/react/24/solid';
 import Button from 'components/commercetools-ui/atoms/button';
 import Link from 'components/commercetools-ui/atoms/link';
@@ -21,6 +21,7 @@ export interface Props {
 const Cart: React.FC<Props> = ({ categories, paymentMethods, emptyStateDescription }) => {
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
+  const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
@@ -32,6 +33,18 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods, emptyStateDescripti
   const { isEmpty, totalItems, data, hasOutOfStockItems } = useCart();
 
   const { loggedIn } = useAccount();
+
+  const lineItems = useMemo(() => {
+    return (data?.lineItems ?? []).filter(
+      (lineItem) => lineItem.variant.isOnStock || lineItem.variant.restockableInDays,
+    );
+  }, [data?.lineItems]);
+
+  const soldoutItems = useMemo(() => {
+    return (data?.lineItems ?? []).filter(
+      (lineItem) => !(lineItem.variant.isOnStock || lineItem.variant.restockableInDays),
+    );
+  }, [data?.lineItems]);
 
   const loginLink = '/login?lvp=cart';
 
@@ -62,11 +75,28 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods, emptyStateDescripti
 
           {!isEmpty ? (
             <div className="mt-12 divide-y divide-neutral-400 border-t border-neutral-400 lg:mt-34 lg:border-none">
-              {data?.lineItems?.map((lineItem) => (
-                <div key={lineItem.lineItemId}>
-                  <CartItem item={lineItem} classNames={{ moveToWishlist: 'text-14' }} />
+              {lineItems
+                ?.filter((lineItem) => lineItem.variant.isOnStock || !lineItem.variant.restockableInDays)
+                .map((lineItem) => (
+                  <div key={lineItem.lineItemId}>
+                    <CartItem item={lineItem} classNames={{ moveToWishlist: 'text-14' }} />
+                  </div>
+                ))}
+
+              <div className="border-t border-neutral-400 pt-36">
+                <h3 className="text-16 md:text-18 lg:text-22">
+                  {formatProductMessage({ id: 'sold.out', defaultMessage: 'Sold out' })}
+                </h3>
+                <div className="mt-52">
+                  {soldoutItems
+                    ?.filter((lineItem) => lineItem.variant.isOnStock || !lineItem.variant.restockableInDays)
+                    .map((lineItem) => (
+                      <div key={lineItem.lineItemId}>
+                        <CartItem item={lineItem} classNames={{ moveToWishlist: 'text-14' }} />
+                      </div>
+                    ))}
                 </div>
-              ))}
+              </div>
             </div>
           ) : (
             <div className="mt-28">
