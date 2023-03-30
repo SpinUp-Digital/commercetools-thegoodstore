@@ -49,28 +49,32 @@ const UtilitySection: React.FC<Props> = ({
   };
 
   return (
-    <div className="flex h-30 items-center">
+    <div className="mt-20 flex h-40 items-center">
       <div className="flex w-full justify-center">
         <AccountButton />
 
-        <div
-          title={formatWishlistMessage({ id: 'wishlist', defaultMessage: 'Wishlist' })}
-          className="relative cursor-pointer px-16 md:mx-16"
-          onClick={onWishlistClicked}
-        >
-          <WishlistIcon totalWishlistItems={totalWishlistItems} className="w-28 text-secondary-black" />
+        <div className="mx-32 h-40">
+          <div
+            title={formatWishlistMessage({ id: 'wishlist', defaultMessage: 'Wishlist' })}
+            className="relative h-fit cursor-pointer border-secondary-black pb-8 hover:border-b-2"
+            onClick={onWishlistClicked}
+          >
+            <WishlistIcon totalWishlistItems={totalWishlistItems} className="w-28 text-secondary-black" />
+          </div>
         </div>
 
-        <div
-          title={formatCartMessage({ id: 'myCart', defaultMessage: 'My Cart' })}
-          className="cursor-pointer"
-          onClick={onCartClicked}
-        >
-          <CartIcon
-            className="w-28 text-secondary-black"
-            totalCartItems={totalCartItems}
-            counterClassName="-translate-y-1/4"
-          />
+        <div className="h-40">
+          <div
+            title={formatCartMessage({ id: 'myCart', defaultMessage: 'My Cart' })}
+            className="h-fit cursor-pointer border-secondary-black pb-8 hover:border-b-2"
+            onClick={onCartClicked}
+          >
+            <CartIcon
+              className="w-28 text-secondary-black"
+              totalCartItems={totalCartItems}
+              counterClassName="-translate-y-1/4"
+            />
+          </div>
         </div>
       </div>
 

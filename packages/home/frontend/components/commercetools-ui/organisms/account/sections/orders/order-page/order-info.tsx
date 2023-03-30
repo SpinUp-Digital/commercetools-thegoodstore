@@ -23,7 +23,7 @@ const OrderInfoSection: FC<Props> = ({ order, shippingInfo, paymentInfo, shippin
   };
 
   return (
-    <div className="h-fit w-full rounded-none lg:rounded-md lg:border lg:py-44 2xl:w-[55%] 2xl:px-36 3xl:w-[60%]">
+    <div className="h-fit w-full rounded-none lg:rounded-md lg:border lg:py-44 2xl:w-[60%] 2xl:px-36">
       <div className="mb-24 block w-full px-16 md:px-24 lg:hidden">
         <div className="h-1 w-full bg-neutral-400 px-24" />
       </div>
