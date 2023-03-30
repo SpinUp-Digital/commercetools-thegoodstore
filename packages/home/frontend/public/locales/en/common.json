@@ -66,5 +66,6 @@
   "select.market": "Select your market",
   "help.and.support": "Help & Customer Service",
   "view.all": "View All",
-  "optional": "Optional"
+  "optional": "Optional",
+  "powered": "Powered by commercetools"
 }
