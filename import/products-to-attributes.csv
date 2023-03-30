@@ -1,0 +1,6 @@
+name,key,description,color,type,sheets,style,pillow-cases,product-reference-example,productspec,finish,colorlabel,finishlabel,new-arrival,size,sizelabel
+Product sets,,products also sold as sets with their variants,,X,,,,,,,,,,,
+Single variant,,any cheese tray or serving tray with no attributes,,,,,,,X,,,,,,
+Bedding Bundle,bedding-bundle,Product type used to bundle bedding components,,,X,X,X,X,,,,,,,
+Furniture and decor,,"items with color, fabric, finish and product spec attributes",X,,,,,,X,X,X,X,X,,
+Products with sizes,,"Products that have small, medium or large size",,,,,,,X,,,,,X,X
