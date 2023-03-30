@@ -170,7 +170,7 @@ export const checkout: ActionHook = async (request: Request, actionContext: Acti
 
   const cart = await updateCartFromRequest(request, actionContext);
 
-  const order = await cartApi.order(cart);
+  const order = await cartApi.order(cart, { orderNumber: cart.cartId });
 
   // Unset the cartId
   const cartId: string = undefined;
