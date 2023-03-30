@@ -4,20 +4,19 @@ import { Option } from 'components/commercetools-ui/atoms/select';
 const usePaymentMethods = () => {
   const [cardHolder, setCardHolder] = useState('');
   const [cardNumber, setCardNumber] = useState('');
-  const [cardCVC, setCardCVC] = useState('');
 
-  const expiryDateOptions = useMemo(() => {
+  const expiryDateMonthOptions = useMemo(() => {
     const now = new Date();
 
     let month = now.getMonth() + 1;
     let year = now.getFullYear();
 
-    const options = [{ name: 'MM/YY', value: 'MM/YY' }] as Option[];
+    const options = [{ name: 'MM', value: 'MM' }] as Option[];
 
-    while (year < now.getFullYear() + 10) {
+    while (year < now.getFullYear() + 1) {
       options.push({
-        name: `${month} / ${year.toString().slice(2)}`,
-        value: `${month} / ${year}`,
+        name: `${month}`,
+        value: `${month}`,
       });
 
       if (month == 12) (month = 1), (year += 1);
@@ -27,7 +26,26 @@ const usePaymentMethods = () => {
     return options;
   }, []);
 
-  const [cardExpDate, setCardExpDate] = useState<Option>(expiryDateOptions[1]);
+  const expiryDateYearOptions = useMemo(() => {
+    const now = new Date();
+    let year = now.getFullYear();
+
+    const options = [{ name: 'YY', value: 'YY' }] as Option[];
+
+    while (year < now.getFullYear() + 10) {
+      options.push({
+        name: `${year.toString().slice(2)}`,
+        value: `${year}`,
+      });
+
+      year += 1;
+    }
+
+    return options;
+  }, []);
+
+  const [cardExpMonthDate, setCardExpMonthDate] = useState<Option>(expiryDateMonthOptions[1]);
+  const [cardExpYearDate, setCardExpYearDate] = useState<Option>(expiryDateYearOptions[1]);
 
   const handleCardHolderChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,30 +61,31 @@ const usePaymentMethods = () => {
     [setCardNumber],
   );
 
-  const handleExpiryDateChange = useCallback(
+  const handleExpiryMonthDateChange = useCallback(
     (option: Option) => {
-      setCardExpDate(option);
+      setCardExpMonthDate(option);
     },
-    [setCardExpDate],
+    [setCardExpMonthDate],
   );
 
-  const handleCVCChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setCardCVC(e.target.value);
+  const handleExpiryYearDateChange = useCallback(
+    (option: Option) => {
+      setCardExpYearDate(option);
     },
-    [setCardCVC],
+    [setCardExpYearDate],
   );
 
   return {
-    expiryDateOptions,
+    expiryDateMonthOptions,
+    expiryDateYearOptions,
     cardHolder,
     cardNumber,
-    cardExpDate,
-    cardCVC,
+    cardExpMonthDate,
+    cardExpYearDate,
     handleCardHolderChange,
     handleCardNumberChange,
-    handleExpiryDateChange,
-    handleCVCChange,
+    handleExpiryMonthDateChange,
+    handleExpiryYearDateChange,
   };
 };
 export default usePaymentMethods;

@@ -19,19 +19,22 @@ const PaymentEdit: FC = () => {
   const {
     cardHolder,
     cardNumber,
-    cardExpDate,
-    cardCVC,
+    cardExpMonthDate,
+    cardExpYearDate,
     handleCardHolderChange,
     handleCardNumberChange,
-    handleExpiryDateChange,
-    handleCVCChange,
+    handleExpiryDateMonthChange,
+    handleExpiryDateYearChange,
     handleSaveClick,
     handleDeleteClick,
   } = useEditPaymentMethods(id as string);
 
   const router = useRouter();
 
-  const { expiryDateOptions } = usePaymentMethods();
+  const { expiryDateMonthOptions, expiryDateYearOptions } = usePaymentMethods();
+
+  console.log(expiryDateMonthOptions);
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const closeModal = () => {
@@ -96,24 +99,23 @@ const PaymentEdit: FC = () => {
               <Typography as="label" fontSize={14} medium className="text-secondary-black">
                 {formatPaymentMessage({ id: 'expiration.date', defaultMessage: 'Expiration date *' })}
               </Typography>
-              <div className="mt-8 grow md:flex-1">
-                <Select defaultValue={cardExpDate} options={expiryDateOptions} onChange={handleExpiryDateChange} />
+              <div className="mt-8 flex grow items-center md:flex-1">
+                <div className="mr-12">
+                  <Select
+                    defaultValue={cardExpMonthDate}
+                    options={expiryDateMonthOptions}
+                    onChange={handleExpiryDateMonthChange}
+                  />
+                </div>
+                /
+                <div className="ml-12">
+                  <Select
+                    defaultValue={cardExpYearDate}
+                    options={expiryDateYearOptions}
+                    onChange={handleExpiryDateYearChange}
+                  />
+                </div>
               </div>
-            </div>
-
-            <div className="relative mt-24 grow md:flex-1 lg:mt-0">
-              <Typography as="label" medium fontSize={14} className="text-secondary-black">
-                {formatPaymentMessage({ id: 'card.securityNumber', defaultMessage: 'Security number *' })}
-              </Typography>
-              <Input
-                value={cardCVC}
-                className="mt-8 sm:px-8"
-                labelPosition="inline"
-                type="number"
-                onChange={handleCVCChange}
-              />
-              {/* eslint-disable-next-line */}
-              <img className="absolute top-1/2 right-8 w-[32px] -translate-y-1/2" src="/images/cvc.png" />
             </div>
           </div>
         </div>
