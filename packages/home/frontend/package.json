@@ -8,7 +8,7 @@
     "dev": "concurrently -n NEXT,TSC -c magenta,cyan \"next dev\" \"yarn ts --watch\"",
     "prod": "concurrently -n NEXT,TSC -c magenta,cyan \"NODE_ENV=production next dev\" \"yarn ts --watch\"",
     "debug": "concurrently -n NEXT,TSC -c magenta,cyan \"NODE_OPTIONS='--inspect' next dev\" \"yarn ts --watch\"",
-    "build": "node pre-build.js && yarn run next_build",
+    "build": "yarn run next_build",
     "next_build": "next build",
     "postbuild": "rm -rf ./public/storybook && concurrently \"yarn build-storybook\" \"next-sitemap\"",
     "build:analyze": "ANALYZE=true yarn run build",
