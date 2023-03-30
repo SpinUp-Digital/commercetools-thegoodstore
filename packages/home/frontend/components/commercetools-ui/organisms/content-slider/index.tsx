@@ -17,6 +17,7 @@ type ContentSliderSlide = {
   image: NextFrontasticImage;
   title: string;
   ctaLabel?: string;
+  summary?: string;
   ctaReference?: Reference;
 };
 
@@ -43,26 +44,37 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
 
   const slidesElement = useMemo(
     () =>
-      slides.map(({ image, title, ctaReference, ctaLabel }, index) => (
+      slides.map(({ image, title, summary, ctaReference, ctaLabel }, index) => (
         <Link link={ctaReference} key={index} className="shrink overflow-hidden lg:shrink-0 lg:grow lg:basis-0">
-          <div className="relative h-[220px] w-[246px] md:h-[356px] md:w-[400px]">
-            <div className="absolute z-10 h-full w-full rounded-md bg-black opacity-20"></div>
-            <Image {...image} sizes={tileImageSizes} className="mb-5 rounded-md" layout="fill" objectFit="cover" />
-          </div>
-          <Typography
-            as="h4"
-            fontSize={18}
-            fontFamily="libre"
-            className="my-3.5 max-w-[90%] overflow-hidden text-ellipsis whitespace-pre text-primary-black"
-          >
-            {title}
-          </Typography>
-          <div className="flex gap-1.5">
-            <Typography fontSize={16} className="hidden text-black md:block">
-              {ctaLabel}
+          {image && (
+            <div className="relative h-[220px] w-[246px] md:h-[356px] md:w-[400px]">
+              <div className="absolute z-10 h-full w-full rounded-md bg-black opacity-20"></div>
+              <Image {...image} sizes={tileImageSizes} className="mb-5 rounded-md" layout="fill" objectFit="cover" />
+            </div>
+          )}
+          {title && (
+            <Typography
+              as="h4"
+              fontSize={18}
+              fontFamily="libre"
+              className="mt-3.5 max-w-[90%] overflow-hidden text-ellipsis whitespace-pre text-primary-black"
+            >
+              {title}
             </Typography>
-            <ArrowLongRightIcon className="mt-2 h-20 w-24 text-secondary-black" />
-          </div>
+          )}
+          {summary && (
+            <Typography as="p" fontSize={14} fontFamily="inter" className="mt-3.5 leading-[24px]">
+              {summary}
+            </Typography>
+          )}
+          {ctaLabel && (
+            <div className="mt-1.5 flex gap-1.5">
+              <Typography fontSize={16} className="hidden text-black md:block">
+                {ctaLabel}
+              </Typography>
+              <ArrowLongRightIcon className="mt-2 h-20 w-24 text-secondary-black" />
+            </div>
+          )}
         </Link>
       )),
     [slides, tileImageSizes],
