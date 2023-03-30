@@ -1866,10 +1866,10 @@
     dotenv "^16.0.3"
     node-fetch "^3.3.1"
 
-"@commercetools/frontend-sdk@^1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@commercetools/frontend-sdk/-/frontend-sdk-1.4.0.tgz#0290fb29c0c5ac353eb08d559f9360242761220e"
-  integrity sha512-Vb5ezZaXr1icRDADTk92T8i/iF2zHYGzoE0hrDYAIOvU24K/tUaSSQIOYipWNIXjBT0PmKsjHS/qspB3XtrwRw==
+"@commercetools/frontend-sdk@^1.4.1":
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/@commercetools/frontend-sdk/-/frontend-sdk-1.4.1.tgz#5878bcf93b698d218189423488498332997e7ee8"
+  integrity sha512-xTew53QLXNLOTmapkLMSc5mt1GZx05YejbC+o0AxN8PjN1ONxknbYsCc28E64xM/6ku8FO3hqiZ1XAJymIah9w==
   dependencies:
     "@frontastic/extension-types" "^0.0.11"
     js-cookie "3.0.1"
