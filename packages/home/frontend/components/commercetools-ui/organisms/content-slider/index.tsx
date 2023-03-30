@@ -47,7 +47,7 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
       slides.map(({ image, title, summary, ctaReference, ctaLabel }, index) => (
         <Link link={ctaReference} key={index} className="shrink overflow-hidden lg:shrink-0 lg:grow lg:basis-0">
           {image && (
-            <div className="relative h-[220px] w-[246px] md:h-[356px] md:w-[400px]">
+            <div className="relative h-[220px] md:h-[356px]">
               <div className="absolute z-10 h-full w-full rounded-md bg-black opacity-20"></div>
               <Image {...image} sizes={tileImageSizes} className="mb-5 rounded-md" layout="fill" objectFit="cover" />
             </div>

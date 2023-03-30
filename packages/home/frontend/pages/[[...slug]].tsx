@@ -1,6 +1,7 @@
 import React from 'react';
 import { GetServerSideProps, Redirect } from 'next';
 import Head from 'next/head';
+import { AcceptedQueryTypes } from '@commercetools/frontend-sdk/lib/types/Query';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 //@ts-ignore
@@ -76,7 +77,7 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({
   const frontastic = createClient();
 
   const [data, categories] = await Promise.all([
-    frontastic.getRouteData(params?.slug as string[]),
+    frontastic.getRouteData(params?.slug as string[], query as AcceptedQueryTypes),
     frontastic.getCategories(),
   ]);
 

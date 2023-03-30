@@ -36,7 +36,7 @@ const Wrapper: FC<WrapperProps> = ({
 
   const wrapperClassName = clearDefaultStyles
     ? className
-    : `mx-auto max-w-[1150px] 2xl:max-w-[1248px] ${variantClassNames[variant]} ${className ?? ''}`;
+    : `mx-auto lg:max-w-[90%] ${variantClassNames[variant]} ${className ?? ''}`;
 
   return (
     <div className={`bg-${background}`}>

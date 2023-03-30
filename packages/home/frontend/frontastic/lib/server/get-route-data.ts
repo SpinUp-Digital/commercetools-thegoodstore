@@ -1,14 +1,15 @@
 import { Result } from '@commercetools/frontend-domain-types/product/Result';
+import { AcceptedQueryTypes } from '@commercetools/frontend-sdk/lib/types/Query';
 import { SDK, sdk } from 'sdk';
 import { PageDataResponse, PagePreviewDataResponse, RedirectResponse, PageFolderStructureResponse } from '../types';
 
 export const getRouteData =
   () =>
-  async (slug: string[]): Promise<RedirectResponse | PageDataResponse> => {
+  async (slug: string[], query?: AcceptedQueryTypes): Promise<RedirectResponse | PageDataResponse> => {
     const pageSlug = (slug as string[])?.join('/') || '';
     const path = `/${pageSlug !== 'index' ? pageSlug : ''}`;
 
-    const res = await sdk.page.getPage({ path });
+    const res = await sdk.page.getPage({ path, query });
 
     return (res.isError ? {} : res.data) as RedirectResponse | PageDataResponse;
   };

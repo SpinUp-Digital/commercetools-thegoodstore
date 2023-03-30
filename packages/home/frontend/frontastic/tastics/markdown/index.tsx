@@ -8,7 +8,7 @@ interface Props {
 const MarkdownTastic = ({ data: { fullWidth = false, textAlign = 'left', ...data } }: Props) => {
   const classNames = useClassNames([
     'prose px-24 md:px-56 lg:px-84',
-    !fullWidth ? 'mx-auto max-w-[1150px] 2xl:max-w-[1248px] box-content' : 'max-w-full',
+    !fullWidth ? 'mx-auto max-w-[90%] box-content' : 'max-w-full',
   ]);
 
   return (
