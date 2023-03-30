@@ -15,7 +15,7 @@ const HeaderNavigationButtonDesktop: FC<Props> = ({ show, link, updateSubMenu })
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const navLinkClassNames = useClassNames([
     'flex border-primary-black py-4 cursor-pointer relative',
-    show ? 'border-b-[1.5px]' : '',
+    show ? 'border-b-2' : '',
   ]);
 
   useEffect(() => {
