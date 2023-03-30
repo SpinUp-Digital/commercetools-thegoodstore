@@ -14,7 +14,7 @@ const Markdown: React.FC<Props> = ({ markdown }) => {
   const [safeMarkdown, setSafeMarkdown] = useState('');
 
   useEffect(() => {
-    setSafeMarkdown(DOMPurify.sanitize(MD.toHTML(markdown)));
+    if (typeof markdown === 'string') setSafeMarkdown(DOMPurify.sanitize(MD.toHTML(markdown)));
   }, [markdown]);
 
   if (typeof markdown !== 'string') {

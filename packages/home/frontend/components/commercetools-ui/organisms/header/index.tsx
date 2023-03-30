@@ -1,5 +1,5 @@
 import React from 'react';
-import Search from 'components/commercetools-ui/atoms/search-algolia';
+import Search from 'components/commercetools-ui/atoms/search';
 import HeaderLogo from 'components/commercetools-ui/organisms/header/header-logo';
 import HeaderNavigationDesktop from 'components/commercetools-ui/organisms/header/header-navigation/header-navigation-desktop';
 import HeaderNavigationMobile from 'components/commercetools-ui/organisms/header/header-navigation/header-navigation-mobile';
