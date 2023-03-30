@@ -30,20 +30,20 @@ const MenuDropdown: FC<Props> = ({ show, links, tileContent, onClick }) => {
             {link.depth === 1 ? (
               <>
                 <div className="w-min pb-8">
-                  <Link link={link.slug ?? link.path} variant="menu-header" className="whitespace-nowrap">
+                  <Link link={link?.path} variant="menu-header" className="whitespace-nowrap">
                     <Typography fontSize={14}>{link.name}</Typography>
                   </Link>
                 </div>
                 {link.subCategories.map((field) => (
                   <div key={field.categoryId} onClick={onClick} className="w-min pb-8">
-                    <Link link={field.slug ?? field.path} variant="menu-item" className="whitespace-nowrap">
+                    <Link link={field?.path} variant="menu-item" className="whitespace-nowrap">
                       <Typography fontSize={14}>{field.name}</Typography>
                     </Link>
                   </div>
                 ))}
               </>
             ) : (
-              <Link key={link.categoryId} link={link.slug ?? link.path} variant="menu-header">
+              <Link key={link.categoryId} link={link?.path} variant="menu-header">
                 <Typography fontSize={14}>{link.name}</Typography>
               </Link>
             )}
