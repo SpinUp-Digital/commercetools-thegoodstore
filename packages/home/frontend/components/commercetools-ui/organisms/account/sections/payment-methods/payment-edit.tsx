@@ -33,8 +33,6 @@ const PaymentEdit: FC = () => {
 
   const { expiryDateMonthOptions, expiryDateYearOptions } = usePaymentMethods();
 
-  console.log(expiryDateMonthOptions);
-
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const closeModal = () => {
