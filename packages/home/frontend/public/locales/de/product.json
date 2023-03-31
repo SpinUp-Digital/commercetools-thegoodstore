@@ -21,5 +21,9 @@
   "noProductsFound": "Keine Produkte gefunden.",
   "items": "Produkte von",
   "cart.added": "In den Warenkorb gelegt",
-  "bought.together": "Wird oft zusammen gekauft"
+  "bought.together": "Wird oft zusammen gekauft",
+  "quick.view": "Schnellansicht",
+  "items.all": "Alle Artikel",
+  "showing": "Zeigt {current} von {total}",
+  "load.more": "Mehr laden"
 }

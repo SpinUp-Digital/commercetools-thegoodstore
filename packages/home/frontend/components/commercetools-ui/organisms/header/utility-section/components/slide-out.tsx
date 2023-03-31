@@ -55,7 +55,7 @@ const Slideout: React.FC<SlideOutProps> = ({
       case 'cart':
         return formatCartMessage({ id: 'myCart', defaultMessage: 'My Cart' });
       case 'wishlist':
-        return formatWishlistMessage({ id: 'myWishlist', defaultMessage: 'My Wishlist' });
+        return formatWishlistMessage({ id: 'my.wishlist', defaultMessage: 'My Wishlist' });
     }
   }, [formatCartMessage, formatWishlistMessage, state]);
 

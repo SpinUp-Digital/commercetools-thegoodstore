@@ -14,7 +14,14 @@ const Newsletter = () => {
     label: formatMessage({ id: 'subscription', defaultMessage: 'Subscription' }),
     value: (account as Account)?.isSubscribed ? subscribed : unsubscribed,
   };
-  return <InfoCard isEditable title="Newsletter" infoFields={[subscriptionField]} editHref="#edit-newsletter" />;
+  return (
+    <InfoCard
+      isEditable
+      title={formatMessage({ id: 'newsletter', defaultMessage: 'Yes, I want to subscribe.' })}
+      infoFields={[subscriptionField]}
+      editHref="#edit-newsletter"
+    />
+  );
 };
 
 export default Newsletter;

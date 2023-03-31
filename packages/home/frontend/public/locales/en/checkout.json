@@ -54,5 +54,6 @@
   "card.number": "Card number",
   "card.securityNumber": "Security number",
   "items.outOfStock": "The following items are out of stock",
-  "payment.failed": "We could not process your payment, please try again later."
+  "payment.failed": "We could not process your payment, please try again later.",
+  "discount.apply": "Apply a discount"
 }

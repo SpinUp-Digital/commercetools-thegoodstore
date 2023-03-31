@@ -4,6 +4,8 @@
   "subtotal": "Zwischensumme",
   "totalAmount": "Gesamtbetrag",
   "totalSum": "Gesamtsumme",
+  "total": "Gesamt",
+  "tax": "Steuer",
   "orderTotal": "Gesamtbetrag",
   "enterVouchers": "Du kannst Gutscheincodes im letzten Schritt des Bestellvorgangs eingeben.",
   "checkout": "Zur Kasse",
@@ -35,11 +37,15 @@
   "codeNotValid": "Der Rabattcode ist ungültig",
   "codeAdded": "Rabattcode hinzugefügt",
   "cart.add": "In den Warenkorb legen",
+  "move.to.wishlist": "Zur Wunschliste verschieben",
   "delivery.standard": "Standard Lieferung",
   "delivery.express": "Expresszustellung",
   "add.postcode": "Postleitzahl für Verfügbarkeit hinzufügen",
   "postcode.invalid": "Die Postleitzahl ist ungültig.",
   "more.details": "Mehr Details",
   "cart.go": "Zum Einkaufskorb gehen",
-  "continue.shopping": "Mit dem Einkaufen fortfahren"
+  "continue.shopping": "Mit dem Einkaufen fortfahren",
+  "discount.apply": "Wenden Sie einen Rabatt an",
+  "cart.discount.enter": "Rabattcode eingeben"
 }
+

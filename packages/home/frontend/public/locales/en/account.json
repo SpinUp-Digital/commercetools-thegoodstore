@@ -57,6 +57,7 @@
   "user": "User",
   "membership.info": "Membership info",
   "not.member": "Not a member",
+  "not.member.yet": "Not a member yet?",
   "join.here": "Join here",
   "account.back.sign": "Back to sign in",
   "welcome.back": "Welcome back",
@@ -79,5 +80,6 @@
   "delete.address": "Delete address",
   "action.warning": "This action can not be undone.",
   "address.deleted": "Address deleted successfully",
-  "default": "Default"
+  "default": "Default",
+  "newsletter": "Newsletter"
 }
