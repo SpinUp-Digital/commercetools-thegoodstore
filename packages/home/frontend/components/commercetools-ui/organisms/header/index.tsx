@@ -25,10 +25,10 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
   return (
     <header className="relative h-fit w-full border-b-[1.5px] border-neutral-400 bg-white">
-      <div aria-label="Top" className="flex w-full items-center justify-between px-16 md:px-28 lg:px-48">
+      <div aria-label="Top" className="flex w-full items-center justify-between px-16 md:px-24 lg:px-20 xl:px-48">
         <HeaderNavigationMobile logo={logoMobile} links={navLinks} logoLink={logoLinkMobile} />
 
-        <div className="flex w-full justify-start lg:w-fit">
+        <div className="ml-0 flex w-full justify-start lg:ml-20 xl:ml-0 xl:w-fit">
           <HeaderLogo
             logo={logo}
             logoLink={logoLink}
@@ -36,7 +36,7 @@ const Header: React.FC<HeaderProps> = ({
           />
         </div>
 
-        <div className="relative hidden w-full px-15 py-12 md:px-32 lg:block lg:px-20 xl:px-60">
+        <div className="relative hidden w-full px-16 py-12 md:px-32 lg:px-20 xl:block xl:px-60">
           <Search categories={categories} />
         </div>
 
@@ -52,7 +52,7 @@ const Header: React.FC<HeaderProps> = ({
         />
       </div>
 
-      <div className="relative block w-full border-t border-neutral-400 px-15 py-8 md:px-28 lg:hidden lg:px-20 xl:px-60">
+      <div className="relative block w-full border-t border-neutral-400 px-15 py-8 md:px-28 lg:px-20 xl:hidden xl:px-60">
         <Search categories={categories} />
       </div>
 

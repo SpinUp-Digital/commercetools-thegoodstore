@@ -49,11 +49,11 @@ const UtilitySection: React.FC<Props> = ({
   };
 
   return (
-    <div className="mt-20 flex h-40 items-center">
+    <div className="mt-12 flex h-40 items-center xl:mt-20">
       <div className="flex w-full justify-center">
         <AccountButton />
 
-        <div className="mx-32 h-40">
+        <div className="mx-16 h-40 lg:mx-32">
           <div
             title={formatWishlistMessage({ id: 'wishlist', defaultMessage: 'Wishlist' })}
             className="relative h-fit cursor-pointer border-secondary-black pb-8 hover:border-b-2"

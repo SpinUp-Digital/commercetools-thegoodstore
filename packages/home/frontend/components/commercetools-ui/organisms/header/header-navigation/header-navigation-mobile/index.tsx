@@ -39,14 +39,14 @@ const HeaderNavigationMobile: FC<Props> = ({ links, logo, logoLink }) => {
   };
 
   return (
-    <div className="flex lg:hidden">
+    <div className="flex xl:hidden">
       <Button
         variant="ghost"
         onClick={showHeaderMenu}
         title={formatMessage({ id: 'header.menu.open', defaultMessage: 'Open side menu' })}
         className="mr-8 py-12 px-0"
       >
-        <Bars3Icon className="w-30 text-secondary-black" />
+        <Bars3Icon className="w-30 lg:w-44 text-secondary-black" />
       </Button>
 
       <Drawer
