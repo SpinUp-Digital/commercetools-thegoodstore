@@ -76,7 +76,7 @@ const useAccount = (): UseAccountReturn => {
   const register = useCallback(async (account: RegisterAccount): Promise<Account> => {
     const extensions = SDK.getExtensions();
 
-    const res = await extensions.account.register({ account: account });
+    const res = await extensions.account.register(account);
 
     return res.isError ? ({} as Account) : res.data;
   }, []);
@@ -177,7 +177,7 @@ const useAccount = (): UseAccountReturn => {
   const addAddress = useCallback(async (address: Omit<Address, 'addressId'>): Promise<Account> => {
     const extensions = SDK.getExtensions();
 
-    const res = await extensions.account.addAddress({ address });
+    const res = await extensions.account.addAddress(address);
 
     mutate('/action/account/getAccount');
 
@@ -221,7 +221,7 @@ const useAccount = (): UseAccountReturn => {
   const updateAddress = useCallback(async (address: Address): Promise<Account> => {
     const extensions = SDK.getExtensions();
 
-    const res = await extensions.account.updateAddress({ address });
+    const res = await extensions.account.updateAddress(address);
 
     mutate('/action/account/getAccount');
 
