@@ -60,5 +60,8 @@
   "select.country": "Wähle dein Land",
   "select.market": "Wählen Sie Ihren Markt aus",
   "view.all": "Alle ansehen",
-  "powered": "Unterstützt von commercetools"
+  "powered": "Unterstützt von commercetools",
+  "quick.view": "Schnellansicht",
+  "search.placeholder": "Tippe um zu suchen",
+  "required.field": "Pflichtfeld"
 }

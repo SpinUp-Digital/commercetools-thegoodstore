@@ -9,6 +9,7 @@ interface PersonalInformation {
 
 const PersonalInfo: FC<PersonalInformation> = ({ account }) => {
   const { formatMessage } = useFormat({ name: 'common' });
+  const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
 
   const personalInformationFields: Array<{ label: string; value: string }> = [
     { label: formatMessage({ id: 'firstName', defaultMessage: 'First Name' }), value: account?.firstName as string },
@@ -18,7 +19,7 @@ const PersonalInfo: FC<PersonalInformation> = ({ account }) => {
 
   return (
     <InfoCard
-      title={formatMessage({ id: 'personal.info', defaultMessage: 'Personal information' })}
+      title={formatAccountMessage({ id: 'personal.info', defaultMessage: 'Personal information' })}
       isEditable
       infoFields={personalInformationFields}
       editHref="#edit-personal-info"

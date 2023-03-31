@@ -147,7 +147,7 @@ const RegisterForm: FC<Props> = ({ termsOfUseLink }) => {
           name="isSubscribed"
           containerClassName="mb-20"
           onChange={({ checked }) => setIsSubscribed(checked)}
-          label={formatMessage({
+          label={formatAccountMessage({
             id: 'receive.emails',
             defaultMessage: 'I wish to receive emails about special offers, new products and promotions.',
           })}

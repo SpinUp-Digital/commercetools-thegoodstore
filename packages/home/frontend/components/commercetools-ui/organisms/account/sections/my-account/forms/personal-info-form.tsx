@@ -19,6 +19,7 @@ const PersonalInfoForm = () => {
   const { validateEmail, validateTextExists } = useValidate();
   const { notifyDataUpdated, notifyWentWrong } = useFeedbackToasts();
 
+  const { formatMessage } = useFormat({ name: 'common' });
   const { formatMessage: formatErrorMessage } = useFormat({ name: 'error' });
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
 
@@ -43,9 +44,24 @@ const PersonalInfoForm = () => {
   };
 
   const inputFields: Array<InputProps> = [
-    { label: 'First Name', name: 'firstName', errorMessage: invalidNameErrorMessage, validation: validateTextExists },
-    { label: 'Last Name', name: 'lastName', errorMessage: invalidNameErrorMessage, validation: validateTextExists },
-    { label: 'Email', name: 'email', errorMessage: invalidEmailErrorMessage, validation: validateEmail },
+    {
+      label: formatMessage({ id: 'firstName', defaultMessage: 'First Name' }),
+      name: 'firstName',
+      errorMessage: invalidNameErrorMessage,
+      validation: validateTextExists,
+    },
+    {
+      label: formatMessage({ id: 'lastName', defaultMessage: 'Last Name' }),
+      name: 'lastName',
+      errorMessage: invalidNameErrorMessage,
+      validation: validateTextExists,
+    },
+    {
+      label: formatMessage({ id: 'email', defaultMessage: 'Email' }),
+      name: 'email',
+      errorMessage: invalidEmailErrorMessage,
+      validation: validateEmail,
+    },
   ];
 
   return (
