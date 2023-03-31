@@ -84,7 +84,7 @@ const Search: React.FC<Props> = ({ categories }) => {
     <>
       {focused && <Overlay />}
 
-      <div className="relative z-[300]">
+      <div className="relative z-[350]">
         <div
           className={`relative z-50 border-neutral-400 bg-white lg:rounded-sm lg:border ${
             focused ? 'border-b' : 'border'
@@ -115,7 +115,7 @@ const Search: React.FC<Props> = ({ categories }) => {
                 onClick={cleanUp}
                 onMouseDown={(e) => e.preventDefault()}
               >
-                <CloseIcon className="w-24 w-24 fill-primary-black" />
+                <CloseIcon className="w-24 fill-primary-black" />
               </button>
             )}
           </form>

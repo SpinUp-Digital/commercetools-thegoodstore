@@ -4,15 +4,15 @@ import Typography from '..';
 const TypographyContent = () => {
   return (
     <div className="ml-44">
-      <Typography fontSize={28} fontFamily="libre" medium className="mt-40 w-[40%] text-primary-black">
-        Typography Component
+      <Typography fontSize={28} className="mt-40 w-[40%] font-bold text-black">
+        Typography
       </Typography>
-      <Typography fontSize={18} fontFamily="inter" className="mt-20 w-[60%] leading-loose text-secondary-black">
-        Account Dropdown subtitle explaining text, usage and many other things that can help the client understand the
-        usage and look at something cool we have made, here you will see the components and it&apos;s variants in order
-        to show how much is the client capable to customize
+      <Typography fontSize={20} lineHeight="loose" className="mt-20 w-[60%] text-neutral-700">
+        The Typography Component consists of pre-defined styles for various text elements. The Typography components can
+        be used to create a consistent and visually appealing typography system and includes font size, line height,
+        color, and spacing.
       </Typography>
-      <div className="mt-40 flex">
+      <div className="mt-52 flex">
         <Typography fontSize={24} className="w-200">
           This is Regular Font 24px Inter Font Text
         </Typography>

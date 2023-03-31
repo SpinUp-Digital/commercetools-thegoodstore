@@ -24,16 +24,21 @@ const DrawerContent = () => {
   };
   return (
     <div className="ml-44">
-      <Typography fontSize={28} fontFamily="inter" medium className="mt-40 w-[40%] text-primary-black">
-        Menu Components
-      </Typography>
-      <Typography fontSize={18} fontFamily="inter" className="mt-20 w-[60%] leading-6 text-secondary-black">
-        Account Dropdown subtitle explaining text, usage and many other things that can help the client understand the
-        usage and look at something cool we have made, here you will see the components and it&apos;s variants in order
-        to show how much is the client capable to customize
+      <Typography fontSize={28} className="mt-40 w-[40%] font-bold text-black">
+        Menu components
       </Typography>
 
-      <div className="mt-40 w-full">
+      <Typography fontSize={24} medium className="mt-40 w-[40%] text-black">
+        Drawer
+      </Typography>
+
+      <Typography fontSize={16} lineHeight="loose" className="mt-16 w-[60%] text-neutral-700">
+        The Drawer Component displays additional content or options that are hidden off-screen until the user activates
+        them. It consists of a panel that slides in or out from the edge of the screen when a user clicks a button or
+        performs a specific action.
+      </Typography>
+
+      <div className="mt-32 w-full">
         <button
           className="rounded-md bg-primary-black px-16 py-8 text-white transition hover:bg-neutral-500"
           onClick={() => setIsOpenLeftMenu(!isOpenLeftMenu)}
@@ -89,7 +94,17 @@ const DrawerContent = () => {
         </Drawer>
       </div>
 
-      <div className="mt-20 w-full">
+      <Typography fontSize={24} medium className="mt-40 w-[40%] text-black">
+        Modal
+      </Typography>
+
+      <Typography fontSize={16} lineHeight="loose" className="mt-16 w-[60%] text-neutral-700">
+        The Modal Component consists of a pop-up window that appears in front of the current view, blocking access to
+        the rest of the page until the user performs a specific action or dismisses the modal. The modal can be exited
+        by pressing the close button in the corner or pressing outside of the modal.
+      </Typography>
+
+      <div className="mt-24 w-full">
         <button
           className="rounded-md bg-primary-black px-16 py-8 text-white transition hover:bg-neutral-500"
           onClick={() => setIsOpenModal(!isOpenModal)}
@@ -101,7 +116,16 @@ const DrawerContent = () => {
         </Modal>
       </div>
 
-      <div className="mt-20 w-full">
+      <Typography fontSize={24} medium className="mt-40 w-[40%] text-black">
+        Toast
+      </Typography>
+
+      <Typography fontSize={16} lineHeight="loose" className="mt-16 w-[60%] text-neutral-700">
+        The Toast Component displays brief notifications or feedback to the user. It consists of a small pop-up window
+        that appears at the top of the screen for a short period of time.
+      </Typography>
+
+      <div className="mt-24 w-full">
         <button
           onClick={() => showToast('success')}
           className="rounded-md border border-secondary-black p-8 hover:shadow-300"

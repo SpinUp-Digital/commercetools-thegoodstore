@@ -1,8 +1,7 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import Button, { ButtonProps } from '..';
-import ButtonSizing from './button-sizing';
-import ButtonVariants from './button-variants';
+import ButtonContent from './button-content';
 
 export default {
   title: 'Components/Button',
@@ -10,10 +9,6 @@ export default {
   argTypes: {},
 } as Meta;
 
-const TemplateSizing: Story<ButtonProps> = () => <ButtonSizing />;
+const Template: Story<ButtonProps> = () => <ButtonContent />;
 
-const TemplateStyling: Story<ButtonProps> = () => <ButtonVariants />;
-
-export const Sizing = TemplateSizing.bind({});
-
-export const Styles = TemplateStyling.bind({});
+export const Default = Template.bind({});

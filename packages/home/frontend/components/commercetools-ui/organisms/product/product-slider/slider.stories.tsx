@@ -12,13 +12,12 @@ export default {
 
 const Template: Story<ProductSliderProps> = (args) => (
   <div className="ml-44">
-    <Typography fontSize={28} fontFamily="inter" medium className="mt-40 w-[40%] whitespace-nowrap text-primary-black">
+    <Typography fontSize={28} className="mt-40 w-[40%] font-bold text-black">
       Product Slider
     </Typography>
-    <Typography fontSize={18} fontFamily="inter" className="mt-20 w-full leading-6 text-secondary-black md:w-[60%]">
-      Account Dropdown subtitle explaining text, usage and many other things that can help the client understand the
-      usage and look at something cool we have made, here you will see the components and it&apos;s variants in order to
-      show how much is the client capable to customize
+    <Typography fontSize={20} lineHeight="loose" className="mt-20 w-[60%] text-neutral-700">
+      The Product Slider showcases a selection of products. It consists of a horizontal strip of cards that can be
+      scrolled through using arrows or swiping. It includes product name, price, images and a Quick-view button.
     </Typography>
     <div className="mt-40 w-[80%] pl-44">
       <ProductSlider
@@ -26,7 +25,7 @@ const Template: Story<ProductSliderProps> = (args) => (
         products={products}
         title="This is a Product Slider"
         ctaLabel="A Call to Action"
-        classNames={{ title: 'pt-20 pl-24 ' }}
+        classNames={{ title: 'pt-20' }}
       />
     </div>
   </div>
