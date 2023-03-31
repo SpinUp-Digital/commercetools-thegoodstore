@@ -14,13 +14,12 @@ export default {
 
 const Template: Story<HeaderProps> = () => (
   <div className="ml-44">
-    <Typography fontSize={28} fontFamily="inter" medium className="mt-40 w-[40%] text-primary-black">
-      Page header
+    <Typography fontSize={28} className="mt-40 w-[40%] font-bold text-black">
+      Page Header
     </Typography>
-    <Typography fontSize={18} fontFamily="inter" className="mt-20 w-[60%] leading-6 text-secondary-black">
-      Account Dropdown subtitle explaining text, usage and many other things that can help the client understand the
-      usage and look at something cool we have made, here you will see the components and it&apos;s variants in order to
-      show how much is the client capable to customize
+    <Typography fontSize={20} lineHeight="loose" className="mt-20 w-[60%] text-black">
+      The Page Header provides customers with a clear overview of the page&apos;s content. It includes a logo, search
+      bar, page navigation and links for actions like account, wishlist and fly-out cart.
     </Typography>
     <div className="mt-40 pr-40">
       <Header

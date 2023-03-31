@@ -1,5 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import Input from '.';
+import InputPassword from '../input-password';
 import Typography from '../typography';
 
 export default {
@@ -9,21 +10,85 @@ export default {
 
 const Template: ComponentStory<typeof Input> = (args) => (
   <div className="ml-44">
-    <Typography fontSize={28} fontFamily="inter" medium className="mt-40 w-[40%] text-primary-black">
-      Input Component
+    <Typography fontSize={28} className="mt-40 w-[40%] font-bold text-black">
+      Input Field
     </Typography>
-    <Typography fontSize={18} fontFamily="inter" className="mt-20 w-[60%] leading-6 text-secondary-black">
-      Account Dropdown subtitle explaining text, usage and many other things that can help the client understand the
-      usage and look at something cool we have made, here you will see the components and it&apos;s variants in order to
-      show how much is the client capable to customize
+    <Typography fontSize={20} lineHeight="loose" className="mt-20 w-[60%] text-neutral-700">
+      The Input Field allows customers to enter data or information. It has a top label, placeholder and validation.
     </Typography>
-    <div className="mt-44 w-[40%] justify-start">
-      <Input {...args} variant="primary" placeholder="Placeholder" label="Primary" />
-      <div className="mt-24">
-        <Input {...args} variant="secondary" placeholder="Placeholder" label="Secondary" />{' '}
+
+    <div className="mt-40 flex w-full justify-start gap-x-80">
+      <div className="w-[30%]">
+        <Typography fontSize={24} fontFamily="inter" medium className="w-[40%] text-primary-black">
+          Input Default
+        </Typography>
+
+        <div className="mt-20">
+          <Input {...args} variant="primary" placeholder="Placeholder" label="Primary input" />
+          <div className="mt-16">
+            <Input
+              {...args}
+              variant="primary"
+              error="Invalid input"
+              placeholder="Placeholder"
+              label="Primary input - invalid"
+              className="border-red-500"
+            />
+          </div>
+          <div className="mt-16">
+            <Input {...args} variant="secondary" placeholder="Placeholder" label="Secondary input" />
+          </div>
+          <div className="mt-16">
+            <Input
+              {...args}
+              isValid
+              variant="secondary"
+              placeholder="Placeholder"
+              label="Secondary input - valid"
+              className="border-green-500"
+            />
+          </div>
+          <div className="mt-16">
+            <Input {...args} disabled placeholder="Placeholder" label="Disabled" />
+          </div>
+        </div>
       </div>
-      <div className="mt-24">
-        <Input {...args} disabled placeholder="Placeholder" label="Disabled" />
+      <div className="w-[30%]">
+        <Typography fontSize={24} fontFamily="inter" medium className="w-[40%] text-primary-black">
+          Input Password
+        </Typography>
+
+        <div className="w-full">
+          <div className="mt-20">
+            <InputPassword {...args} variant="primary" placeholder="Placeholder" label="Primary password" />
+          </div>
+          <div className="mt-16">
+            <InputPassword
+              {...args}
+              variant="primary"
+              error="An error occured while entering an unworthy password"
+              placeholder="Placeholder"
+              label="Primary password - Invalid"
+              className="border-red-500"
+            />
+          </div>
+          <div className="mt-16">
+            <InputPassword {...args} variant="secondary" placeholder="Placeholder" label="Secondary password" />
+          </div>
+          <div className="mt-16">
+            <InputPassword
+              {...args}
+              variant="secondary"
+              isValid
+              placeholder="Placeholder"
+              label="Secondary password - valid"
+              className="border-green-500"
+            />
+          </div>
+          <div className="mt-16">
+            <InputPassword {...args} disabled placeholder="Placeholder" label="Disabled password" />
+          </div>
+        </div>
       </div>
     </div>
   </div>

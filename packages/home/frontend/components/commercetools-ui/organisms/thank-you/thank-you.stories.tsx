@@ -2,27 +2,28 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { orders } from 'helpers/mocks/mockCommonData';
+import OrderSummary from './components/order-summary';
 import ThankYou from './index';
-import ThankYouContent from './thank-you-content';
 
 export default {
-  title: 'Components/ThankYou',
+  title: 'Components/Order Summary',
   component: ThankYou,
   argTypes: {},
 } as Meta;
 
 const Template: Story = (args) => (
   <div className="ml-44">
-    <Typography fontSize={28} fontFamily="inter" medium className="mt-40 w-[40%] whitespace-nowrap text-primary-black">
-      Thank you page
+    <Typography fontSize={28} className="mt-40 w-[40%] font-bold text-black">
+      Order Summary
     </Typography>
-    <Typography fontSize={18} fontFamily="inter" className="mt-20 w-full leading-6 text-secondary-black md:w-[60%]">
-      Account Dropdown subtitle explaining text, usage and many other things that can help the client understand the
-      usage and look at something cool we have made, here you will see the components and it&apos;s variants in order to
-      show how much is the client capable to customize
+    <Typography fontSize={20} lineHeight="loose" className="mt-20 w-[60%] text-neutral-700">
+      The Order Summary Component displays a summary of items that the customer has added to their shopping cart or
+      placed in an order. It presents a list of products displaying product name, image, quantity and price. The
+      component also includes a subtotal, shipping information, a total price for the order and an interactive button
+      that when clicked completes the purchase order.
     </Typography>
-    <div className="mt-40">
-      <ThankYouContent order={orders[0]} {...args} />
+    <div className="mt-40 w-[30%] rounded-lg border bg-neutral-100 shadow-200">
+      <OrderSummary order={orders[0]} onPrint={() => {}} {...args} />
     </div>
   </div>
 );
