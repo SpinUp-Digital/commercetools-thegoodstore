@@ -25,6 +25,7 @@ class CommercetoolsSDK extends SDK<ComposableCommerceEvents> {
       locale,
       currency,
       useCurrencyInLocale,
+      extensionVersion: process.env.NEXT_PUBLIC_EXT_BUILD_ID ?? 'dev',
       endpoint: (process.env.NEXT_PUBLIC_FRONTASTIC_HOST as string).split('/frontastic')[0],
     });
   }
