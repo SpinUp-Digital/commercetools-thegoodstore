@@ -1,0 +1,14 @@
+###############################################################################
+# ATTENTION: Auto-generated. Do not edit manually. Changes will be overwritten.
+###############################################################################
+vhosts:
+  - "frontastic.io.local"
+  - "home-thegoodstore.frontastic.io.local"
+customer: "thegoodstore"
+customer_secret: "$2y$10$.mz3vuwxcs3H9dEKqOO6.uZVG3W3S5ZgZPPvCcsh4hS1DY3WZ.W4K"
+is_customer_vm: true
+has_paas_modifications: false
+is_single_ssr_server_project: false
+tideways_key: ""
+replicator_projects:
+  - "home"
