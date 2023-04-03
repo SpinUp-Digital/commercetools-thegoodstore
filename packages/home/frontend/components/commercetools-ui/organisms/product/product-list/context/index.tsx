@@ -3,9 +3,9 @@ import { useRouter } from 'next/router';
 import cloneDeep from 'lodash/cloneDeep';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import useI18n from 'helpers/hooks/useI18n';
-import { FacetConfiguration, PriceConfiguration, RangeFacet, TermFacet } from '../types';
 import { refinementRemovedEventName, refinementsClearedEventName } from './constants';
 import { ActiveRefinement, ProductListContextShape, RefinementRemovedEvent, Sort, UiState } from './types';
+import { FacetConfiguration, PriceConfiguration, RangeFacet, TermFacet } from '../types';
 
 export const ProductListContext = createContext<ProductListContextShape>({
   pricesConfiguration: {},
@@ -60,7 +60,7 @@ const ProductListProvider: React.FC = ({ children }) => {
   }, []);
 
   const applyRefinements = useCallback(
-    (facetsConfiguration: Record<string, FacetConfiguration>, sort?: Sort, limit?: number) => {
+    (facetsConfiguration: Record<string, FacetConfiguration>, sort?: Sort, limit?: number, scrollToTheTop = true) => {
       const params = new URLSearchParams();
 
       if (uiState?.searchQuery) params.set('q', uiState.searchQuery);
@@ -82,7 +82,9 @@ const ProductListProvider: React.FC = ({ children }) => {
 
       if (limit) params.set('limit', limit.toString());
 
-      router.replace({ pathname: router.asPath.split('?')[0], query: params.toString() });
+      router.replace({ pathname: router.asPath.split('?')[0], query: params.toString() }, undefined, {
+        scroll: scrollToTheTop,
+      });
     },
     [uiState?.searchQuery, router],
   );
@@ -186,7 +188,7 @@ const ProductListProvider: React.FC = ({ children }) => {
   );
 
   const loadMore = useCallback(() => {
-    applyRefinements(facetsConfiguration, activeSort, activeLimit + limitStep);
+    applyRefinements(facetsConfiguration, activeSort, activeLimit + limitStep, false);
   }, [facetsConfiguration, activeSort, applyRefinements, activeLimit, limitStep]);
 
   const removeAllRefinements = useCallback(() => {

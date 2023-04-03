@@ -65,7 +65,7 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods, emptyStateDescripti
 
             {!loggedIn && (
               <button
-                className="rounded-md border border-primary-black py-6 px-24 font-medium transition hover:border-secondary-black hover:text-secondary-black md:px-36 lg:hidden"
+                className="rounded-md border border-primary-black px-24 py-6 font-medium transition hover:border-secondary-black hover:text-secondary-black md:px-36 lg:hidden"
                 onClick={openLoginModal}
               >
                 {formatAccountMessage({ id: 'sign.in', defaultMessage: ' Login in' })}
@@ -83,20 +83,22 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods, emptyStateDescripti
                   </div>
                 ))}
 
-              <div className="border-t border-neutral-400 pt-36">
-                <h3 className="text-16 md:text-18 lg:text-22">
-                  {formatProductMessage({ id: 'sold.out', defaultMessage: 'Sold out' })}
-                </h3>
-                <div className="mt-52">
-                  {soldoutItems
-                    ?.filter((lineItem) => lineItem.variant.isOnStock || !lineItem.variant.restockableInDays)
-                    .map((lineItem) => (
-                      <div key={lineItem.lineItemId}>
-                        <CartItem item={lineItem} classNames={{ moveToWishlist: 'text-14' }} />
-                      </div>
-                    ))}
+              {soldoutItems.length > 0 && (
+                <div className="border-t border-neutral-400 pt-36">
+                  <h3 className="text-16 md:text-18 lg:text-22">
+                    {formatProductMessage({ id: 'sold.out', defaultMessage: 'Sold out' })}
+                  </h3>
+                  <div className="mt-52">
+                    {soldoutItems
+                      ?.filter((lineItem) => lineItem.variant.isOnStock || !lineItem.variant.restockableInDays)
+                      .map((lineItem) => (
+                        <div key={lineItem.lineItemId}>
+                          <CartItem item={lineItem} classNames={{ moveToWishlist: 'text-14' }} />
+                        </div>
+                      ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           ) : (
             <div className="mt-28">
@@ -124,7 +126,7 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods, emptyStateDescripti
           )}
         </div>
 
-        <div className="bg-white pt-24 pb-12 md:py-12 lg:mt-0 lg:w-[30%] lg:rounded-md lg:py-36">
+        <div className="bg-white pb-12 pt-24 md:py-12 lg:mt-0 lg:w-[30%] lg:rounded-md lg:py-36">
           <div className="hidden px-36 pb-32 lg:block">
             <h4 className="text-18">{formatCartMessage({ id: 'order.summary', defaultMessage: 'Order Summary' })}</h4>
             {!loggedIn && (
@@ -136,7 +138,7 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods, emptyStateDescripti
                   })}
                 </p>
                 <button
-                  className="mt-18 w-full rounded-md border border-primary-black py-6 px-24 font-medium transition hover:border-secondary-black hover:text-secondary-black md:px-36"
+                  className="mt-18 w-full rounded-md border border-primary-black px-24 py-6 font-medium transition hover:border-secondary-black hover:text-secondary-black md:px-36"
                   onClick={openLoginModal}
                 >
                   {formatAccountMessage({ id: 'sign.in', defaultMessage: ' Login in' })}
@@ -182,7 +184,7 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods, emptyStateDescripti
         closeTimeoutMS={200}
       >
         <CloseIcon
-          className="absolute top-20 right-20 h-24 w-24 cursor-pointer text-secondary-black"
+          className="absolute right-20 top-20 h-24 w-24 cursor-pointer text-secondary-black"
           onClick={closeLoginModal}
         />
         <div className="p-1 pb-48 pt-72">
