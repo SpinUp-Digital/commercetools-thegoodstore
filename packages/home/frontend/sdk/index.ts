@@ -1,14 +1,25 @@
-import { ComposableCommerce } from '@commercetools/frontend-composable-commerce';
-import { SDK as BaseSDK } from '@commercetools/frontend-sdk';
+import { ComposableCommerce, ComposableCommerceEvents } from '@commercetools/frontend-composable-commerce';
+import { SDK } from '@commercetools/frontend-sdk';
 import { getLocalizationInfo } from 'project.config';
+// Add other extension's custom events to the SDK's generic type here,
+// by extending ComposableCommerceEvents with their type with an
+// intersection. For example <ComposableCommerceEvents & OtherEvents>.
+class CommercetoolsSDK extends SDK<ComposableCommerceEvents> {
+  composableCommerce!: ComposableCommerce;
+  // Add your other extensions here.
+  constructor() {
+    super();
+    this.composableCommerce = new ComposableCommerce(this);
+    // Initialise your other extensions here.
+    this.on('errorCaught', (event) => {
+      // Globally handle any errors caught by the SDK from your
+      // extensions. Log error, fire notification etc...
+      console.log('SDK error: ', event.data);
+    });
+  }
 
-export const sdk = new BaseSDK();
-
-export class SDK {
-  private static extensions: ComposableCommerce;
-
-  static configure(nextLocale: string) {
-    const { locale, currency, useCurrencyInLocale } = getLocalizationInfo(nextLocale);
+  configureForNext(nextJsLocale: string) {
+    const { locale, currency, useCurrencyInLocale } = getLocalizationInfo(nextJsLocale);
 
     sdk.configure({
       locale,
@@ -16,11 +27,10 @@ export class SDK {
       useCurrencyInLocale,
       endpoint: (process.env.NEXT_PUBLIC_FRONTASTIC_HOST as string).split('/frontastic')[0],
     });
-
-    this.extensions = new ComposableCommerce(sdk);
-  }
-
-  static getExtensions() {
-    return this.extensions;
   }
 }
+// Create a single instance of the sdk.
+const sdk = new CommercetoolsSDK();
+// Export only the instance to serve as a singleton throughout
+// the project.
+export { sdk };

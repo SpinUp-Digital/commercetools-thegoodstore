@@ -2,11 +2,11 @@ import { useCallback } from 'react';
 import { LineItem } from '@commercetools/frontend-domain-types/wishlist/LineItem';
 import { Wishlist } from '@commercetools/frontend-domain-types/wishlist/Wishlist';
 import useSWR, { mutate, SWRResponse } from 'swr';
-import { SDK, sdk } from 'sdk';
+import { sdk } from 'sdk';
 import { revalidateOptions } from 'frontastic';
 
 const useWishlist = () => {
-  const extensions = SDK.getExtensions();
+  const extensions = sdk.composableCommerce;
 
   const result = useSWR('/action/wishlist/getWishlist', extensions.wishlist.getWishlist, revalidateOptions);
 
@@ -15,7 +15,7 @@ const useWishlist = () => {
   const totalWishlistItems = data.data?.lineItems?.reduce((acc, curr) => acc + (curr.count as number), 0) ?? 0;
 
   const addToWishlist = useCallback(async (wishlist: Wishlist, lineItem: LineItem, count = 1) => {
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     const newWishlist = { ...wishlist, lineItems: [...(wishlist.lineItems ?? []), lineItem] };
 
@@ -28,7 +28,7 @@ const useWishlist = () => {
   }, []);
 
   const removeLineItem = useCallback(async (wishlist: Wishlist, lineItem: LineItem) => {
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     const newWishlist = {
       ...wishlist,
@@ -58,7 +58,7 @@ const useWishlist = () => {
   }, []);
 
   const updateLineItem = useCallback(async (wishlist: Wishlist, lineItem: LineItem, count = 1) => {
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     const newWishlist = {
       ...wishlist,

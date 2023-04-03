@@ -1,16 +1,16 @@
 import { useCallback, useMemo } from 'react';
 import { Discount } from '@commercetools/frontend-domain-types/cart/Discount';
-import { Variant } from 'types/product';
 import useSWR, { mutate } from 'swr';
 import useI18n from 'helpers/hooks/useI18n';
-import { SDK, sdk } from 'sdk';
+import { sdk } from 'sdk';
 import { Cart } from 'types/cart';
 import { Order } from 'types/order';
+import { Variant } from 'types/product';
 import { revalidateOptions } from 'frontastic';
 import { CartDetails, UseCartReturn } from './types';
 
 const useCart = (): UseCartReturn => {
-  const extensions = SDK.getExtensions();
+  const extensions = sdk.composableCommerce;
 
   const { currency } = useI18n();
 
@@ -103,7 +103,7 @@ const useCart = (): UseCartReturn => {
   }, [data.data, currency]);
 
   const addItem = useCallback(async (variant: Variant, quantity: number) => {
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     const payload = {
       variant: {
@@ -131,7 +131,7 @@ const useCart = (): UseCartReturn => {
   }, []);
 
   const orderHistory = useCallback(async () => {
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     const res = await extensions.cart.getOrderHistory();
 
@@ -139,7 +139,7 @@ const useCart = (): UseCartReturn => {
   }, []);
 
   const getProjectSettings = useCallback(async () => {
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     const res = await extensions.project.getSettings();
 
@@ -147,7 +147,7 @@ const useCart = (): UseCartReturn => {
   }, []);
 
   const removeItem = useCallback(async (lineItemId: string) => {
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     const payload = {
       lineItem: { id: lineItemId },
@@ -158,7 +158,7 @@ const useCart = (): UseCartReturn => {
   }, []);
 
   const updateItem = useCallback(async (lineItemId: string, newQuantity: number) => {
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     const payload = {
       lineItem: {
@@ -171,7 +171,7 @@ const useCart = (): UseCartReturn => {
   }, []);
 
   const updateCart = useCallback(async (payload: CartDetails): Promise<Cart> => {
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     const res = await extensions.cart.updateCart(payload);
 
@@ -181,7 +181,7 @@ const useCart = (): UseCartReturn => {
   }, []);
 
   const setShippingMethod = useCallback(async (shippingMethodId: string) => {
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     const payload = {
       shippingMethod: {
@@ -195,7 +195,7 @@ const useCart = (): UseCartReturn => {
   }, []);
 
   const redeemDiscountCode = useCallback(async (code: string) => {
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     const payload = {
       code: code,
@@ -210,7 +210,7 @@ const useCart = (): UseCartReturn => {
   }, []);
 
   const removeDiscountCode = useCallback(async (discount: Discount) => {
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     const res = await extensions.cart.removeDiscountCode({ discountId: discount.discountId as string });
 

@@ -3,7 +3,7 @@ import { GetStaticProps, Redirect } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import GASnippet from 'components/headless/GASnippet';
 import { Log } from 'helpers/errorLogger';
-import { SDK } from 'sdk';
+import { sdk } from 'sdk';
 import { createClient, FrontasticRenderer, ResponseError } from 'frontastic';
 import { tastics } from 'frontastic/tastics';
 import styles from './slug.module.css';
@@ -29,7 +29,7 @@ export default function Error404({ data }: Props) {
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  SDK.configure(locale as string);
+  sdk.configureForNext(locale as string);
 
   const frontastic = createClient();
   const [data, categories] = await Promise.all([frontastic.getRouteData(['404']), frontastic.getCategories()]);

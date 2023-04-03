@@ -1,13 +1,13 @@
 import { useCallback } from 'react';
 import { ProductQuery } from '@commercetools/frontend-domain-types/query/ProductQuery';
 import useSWR from 'swr';
-import { SDK } from 'sdk';
+import { sdk } from 'sdk';
 import { Category } from 'types/category';
 import { revalidateOptions } from 'frontastic';
 import { UseProductReturn } from './types';
 
 const useProduct = (): UseProductReturn => {
-  const extensions = SDK.getExtensions();
+  const extensions = sdk.composableCommerce;
 
   const categoriesResults = useSWR(
     '/action/product/queryCategories',
@@ -20,7 +20,7 @@ const useProduct = (): UseProductReturn => {
   const query = useCallback(async (productQuery: ProductQuery) => {
     /* To Do: Use SDK instead of current workaround */
 
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     const res = await extensions.product.query({ limit: productQuery.limit, query: productQuery.query });
 

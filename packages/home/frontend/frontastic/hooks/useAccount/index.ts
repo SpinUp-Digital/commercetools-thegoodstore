@@ -1,12 +1,12 @@
 import { useMemo, useCallback } from 'react';
 import useSWR, { mutate } from 'swr';
-import { SDK, sdk } from 'sdk';
+import { sdk } from 'sdk';
 import { Account, Address } from 'types/account';
 import { revalidateOptions } from 'frontastic';
 import { GetAccountResult, RegisterAccount, UpdateAccount, UseAccountReturn } from './types';
 
 const useAccount = (): UseAccountReturn => {
-  const extensions = SDK.getExtensions();
+  const extensions = sdk.composableCommerce;
 
   const result = useSWR('/action/account/getAccount', extensions.account.getAccount, revalidateOptions);
 
@@ -46,7 +46,7 @@ const useAccount = (): UseAccountReturn => {
   }, [data.account]);
 
   const login = async (email: string, password: string, remember?: boolean): Promise<Account> => {
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     const payload = {
       email,
@@ -64,7 +64,7 @@ const useAccount = (): UseAccountReturn => {
   };
 
   const logout = useCallback(async () => {
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     await extensions.account.logout();
 
@@ -74,7 +74,7 @@ const useAccount = (): UseAccountReturn => {
   }, []);
 
   const register = useCallback(async (account: RegisterAccount): Promise<Account> => {
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     const res = await extensions.account.register(account);
 
@@ -82,7 +82,7 @@ const useAccount = (): UseAccountReturn => {
   }, []);
 
   const confirm = useCallback(async (token: string): Promise<Account> => {
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     const res = await extensions.account.confirm({ token });
 
@@ -92,7 +92,7 @@ const useAccount = (): UseAccountReturn => {
   }, []);
 
   const requestConfirmationEmail = useCallback(async (email: string, password: string): Promise<void> => {
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     const payload = {
       email,
@@ -103,7 +103,7 @@ const useAccount = (): UseAccountReturn => {
   }, []);
 
   const changePassword = useCallback(async (oldPassword: string, newPassword: string): Promise<Account> => {
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     const res = await extensions.account.changePassword({ oldPassword, newPassword });
 
@@ -111,7 +111,7 @@ const useAccount = (): UseAccountReturn => {
   }, []);
 
   const requestPasswordReset = useCallback(async (email: string): Promise<void> => {
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     const payload = {
       email,
@@ -121,7 +121,7 @@ const useAccount = (): UseAccountReturn => {
   }, []);
 
   const resetPassword = useCallback(async (token: string, newPassword: string): Promise<Account> => {
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     const res = await extensions.account.resetPassword({ token, newPassword });
 
@@ -131,7 +131,7 @@ const useAccount = (): UseAccountReturn => {
   }, []);
 
   const update = useCallback(async (account: UpdateAccount): Promise<Account> => {
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     const res = await extensions.account.updateAccount(account);
 
@@ -141,7 +141,7 @@ const useAccount = (): UseAccountReturn => {
   }, []);
 
   const addIsSubscribedType = useCallback(async () => {
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     const response = await extensions.account.getAccount();
 
@@ -158,7 +158,7 @@ const useAccount = (): UseAccountReturn => {
   }, []);
 
   const updateSubscription = useCallback(async (isSubscribed: boolean) => {
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     const response = await extensions.account.getAccount();
 
@@ -175,7 +175,7 @@ const useAccount = (): UseAccountReturn => {
   }, []);
 
   const addAddress = useCallback(async (address: Omit<Address, 'addressId'>): Promise<Account> => {
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     const res = await extensions.account.addAddress(address);
 
@@ -185,7 +185,7 @@ const useAccount = (): UseAccountReturn => {
   }, []);
 
   const addShippingAddress = useCallback(async (address: Omit<Address, 'addressId'>): Promise<Account> => {
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     const response = await extensions.account.getAccount();
 
@@ -202,7 +202,7 @@ const useAccount = (): UseAccountReturn => {
   }, []);
 
   const addBillingAddress = useCallback(async (address: Omit<Address, 'addressId'>): Promise<Account> => {
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     const response = await extensions.account.getAccount();
 
@@ -219,7 +219,7 @@ const useAccount = (): UseAccountReturn => {
   }, []);
 
   const updateAddress = useCallback(async (address: Address): Promise<Account> => {
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     const res = await extensions.account.updateAddress(address);
 
@@ -229,7 +229,7 @@ const useAccount = (): UseAccountReturn => {
   }, []);
 
   const removeAddress = useCallback(async (addressId: string): Promise<Account> => {
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     const res = await extensions.account.removeAddress({ addressId });
 
@@ -239,7 +239,7 @@ const useAccount = (): UseAccountReturn => {
   }, []);
 
   const setDefaultBillingAddress = useCallback(async (addressId: string): Promise<Account> => {
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     const res = await extensions.account.setDefaultBillingAddress({ addressId });
 
@@ -249,7 +249,7 @@ const useAccount = (): UseAccountReturn => {
   }, []);
 
   const setDefaultShippingAddress = useCallback(async (addressId: string): Promise<Account> => {
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     const res = await extensions.account.setDefaultShippingAddress({ addressId });
 
