@@ -1,28 +1,48 @@
 import React from 'react';
+import useClassNames from 'helpers/hooks/useClassNames';
 
 interface Props extends React.ComponentProps<'input'> {
   className?: string;
-  onChecked?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  inputClassName?: string;
+  onChecked?: () => void;
 }
 
-const Radio: React.FC<Props> = ({ className = '', checked, onChecked, ...props }) => {
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+  onChecked?: () => void;
+}
+
+const Radio: React.FC<Props> = ({
+  className = '',
+  inputClassName = '',
+  onChecked,
+  children,
+  checked,
+  onChange,
+  ...props
+}) => {
+  const labelClassName = useClassNames([
+    'grid place-content-center w-20 h-20 border border-secondary-black rounded-full',
+    className,
+  ]);
+
+  const inputClassNames = useClassNames(['h-12 w-12 border-0 text-secondary-black', inputClassName]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange?.(e);
+    onChecked?.();
+  };
+
   return (
-    <label
-      className={`flex h-20 w-20 cursor-pointer items-center justify-center rounded-full border border-secondary-black p-4 ${className}`}
-    >
+    <label className={labelClassName} htmlFor={props.id}>
       <input
-        {...props}
-        hidden
-        className="absolute z-[-999] opacity-0"
+        style={{ background: checked ? '#494949' : 'white' }}
+        className={inputClassNames}
         type="radio"
         checked={checked}
-        onChange={onChecked}
+        onChange={(e) => handleChange(e)}
+        {...props}
       />
-      <span
-        className={`block h-full w-full shrink-0 rounded-full bg-secondary-black ${
-          checked ? 'opacity-1' : 'opacity-0'
-        }`}
-      />
+      {children}
     </label>
   );
 };
