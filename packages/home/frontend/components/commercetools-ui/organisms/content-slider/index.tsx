@@ -55,20 +55,20 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
           {title && (
             <Typography
               as="h4"
-              fontSize={18}
+              fontSize={20}
               fontFamily="libre"
-              className="mt-3.5 max-w-[90%] overflow-hidden text-ellipsis whitespace-pre text-primary-black"
+              className="mt-12 max-w-[90%] overflow-hidden text-ellipsis whitespace-pre text-primary-black"
             >
               {title}
             </Typography>
           )}
           {summary && (
-            <Typography as="p" fontSize={14} fontFamily="inter" className="mt-3.5 leading-[24px]">
+            <Typography as="p" fontSize={16} fontFamily="inter" className="mt-12 leading-[24px]">
               {summary}
             </Typography>
           )}
           {ctaLabel && (
-            <div className="mt-1.5 flex gap-1.5">
+            <div className="mt-20 flex gap-1.5">
               <Typography fontSize={16} className="hidden text-black md:block">
                 {ctaLabel}
               </Typography>
