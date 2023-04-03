@@ -1,15 +1,57 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Address as AddressType } from '@commercetools/frontend-domain-types/account';
 import Link from 'components/commercetools-ui/atoms/link';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useAccount } from 'frontastic';
 import Address from './address';
+import { AddressFormData } from './address-form';
+import usePropsToAddressType from './mapPropsToAddressType';
 
 const Addresses = () => {
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
 
-  const { account } = useAccount();
+  const { mapPropsToAddress } = usePropsToAddressType();
+
+  const { account, defaultBillingAddress, defaultShippingAddress } = useAccount();
   const addresses = account?.addresses;
+
+  const [selectedBillingAddress, setSelectedBillingAddress] = useState<AddressType>();
+  const [selectedShippingAddress, setSelectedShippingAddress] = useState<AddressType>();
+
+  const selectAddress = (address: AddressFormData) => {
+    address.isBillingAddress ? setSelectedBillingAddress(address) : setSelectedShippingAddress(address);
+  };
+
+  const setAddressAsDefault = useCallback(
+    (address: AddressType) => {
+      const { setAsDefault } = mapPropsToAddress(address as AddressFormData);
+      setAsDefault();
+    },
+    [mapPropsToAddress],
+  );
+
+  useEffect(() => {
+    if (selectedBillingAddress !== defaultBillingAddress?.addressId) {
+      setAddressAsDefault(selectedBillingAddress as AddressType);
+    }
+  }, [defaultBillingAddress?.addressId, selectedBillingAddress, setAddressAsDefault]);
+
+  useEffect(() => {
+    if (selectedShippingAddress !== defaultShippingAddress?.addressId) {
+      setAddressAsDefault(selectedShippingAddress as AddressType);
+    }
+  }, [defaultShippingAddress?.addressId, selectedShippingAddress, setAddressAsDefault]);
+
+  useEffect(() => {
+    if (!selectedBillingAddress) {
+      setSelectedBillingAddress(defaultBillingAddress);
+    }
+
+    if (!selectedShippingAddress) {
+      setSelectedShippingAddress(defaultShippingAddress);
+    }
+  }, [defaultBillingAddress, defaultShippingAddress, selectedBillingAddress, selectedShippingAddress]);
 
   return (
     <div className="mt-20 px-16 md:px-24 lg:mt-40 lg:px-44">
@@ -40,11 +82,20 @@ const Addresses = () => {
         </Link>
       </div>
 
-      <div className="mt-24 grid gap-20 pb-28 md:mt-28 2xl:mt-32">
+      <form className="mt-24 grid gap-20 pb-28 md:mt-28 2xl:mt-32">
         {addresses?.map((address) => (
-          <Address key={address.addressId} address={address} />
+          <Address
+            key={address.addressId}
+            address={address}
+            isChecked={false}
+            selectAddress={selectAddress}
+            isDefaultAddress={
+              address.addressId == selectedBillingAddress?.addressId ||
+              address.addressId == selectedShippingAddress?.addressId
+            }
+          />
         ))}
-      </div>
+      </form>
     </div>
   );
 };

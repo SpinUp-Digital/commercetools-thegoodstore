@@ -23,7 +23,7 @@ const usePropsToAddressType = () => {
       const typeBasedProps = {
         billing: {
           checked: address?.isDefaultBillingAddress,
-          label: formatMessage({ id: 'billing', defaultMessage: 'Billing' }),
+          label: formatMessage({ id: 'billing', defaultMessage: 'Billing' }).toLowerCase(),
           addressType: addressType,
           setAsDefault: async () => {
             await setDefaultBillingAddress(address?.addressId);
@@ -37,7 +37,7 @@ const usePropsToAddressType = () => {
         },
         shipping: {
           checked: address?.isDefaultShippingAddress,
-          label: formatMessage({ id: 'shipping', defaultMessage: 'Shipping' }),
+          label: formatMessage({ id: 'shipping', defaultMessage: 'Shipping' }).toLowerCase(),
           addressType: addressType,
           setAsDefault: async () => {
             await setDefaultShippingAddress(address?.addressId);
