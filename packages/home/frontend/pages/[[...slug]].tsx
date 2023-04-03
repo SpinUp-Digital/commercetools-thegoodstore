@@ -10,14 +10,14 @@ import { InstantSearchServerState } from 'react-instantsearch-hooks';
 import { getServerState } from 'react-instantsearch-hooks-server';
 import GASnippet from 'components/headless/GASnippet';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { SDK } from 'sdk';
+import { sdk } from 'sdk';
 import { Category } from 'types/category';
 import { createClient, PageDataResponse, ResponseError } from 'frontastic';
 import { FrontasticRenderer } from 'frontastic/lib/renderer';
 import { tastics } from 'frontastic/tastics';
 import ProductListTastic, { Props as ProductListTasticProps } from 'frontastic/tastics/products/product-list-algolia';
-import { Log } from '../helpers/errorLogger';
 import styles from './slug.module.css';
+import { Log } from '../helpers/errorLogger';
 
 type SlugProps = {
   // This needs an overhaul. Can be too many things in my opinion (*Marcel)
@@ -72,7 +72,7 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({
   req,
   resolvedUrl,
 }) => {
-  SDK.configure(locale as string);
+  sdk.configureForNext(locale as string);
 
   const frontastic = createClient();
 

@@ -1,6 +1,6 @@
 import { Result } from '@commercetools/frontend-domain-types/product/Result';
 import { AcceptedQueryTypes } from '@commercetools/frontend-sdk/lib/types/Query';
-import { SDK, sdk } from 'sdk';
+import { sdk } from 'sdk';
 import { PageDataResponse, PagePreviewDataResponse, RedirectResponse, PageFolderStructureResponse } from '../types';
 
 export const getRouteData =
@@ -23,7 +23,7 @@ export const getPreview =
   };
 
 export const getCategories = () => async (): Promise<Result> => {
-  const extensions = SDK.getExtensions();
+  const extensions = sdk.composableCommerce;
 
   const res = await extensions.product.queryCategories({ limit: 99 });
 

@@ -1,17 +1,17 @@
 import { GetServerSideProps } from 'next';
 import { getServerSideSitemap, ISitemapField } from 'next-sitemap';
 import { siteUrl } from 'next-sitemap.config';
-import { SDK } from 'sdk';
+import { sdk } from 'sdk';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  SDK.configure(context.locale as string);
+  sdk.configureForNext(context.locale as string);
 
   const fields = [] as ISitemapField[];
 
   let nextCursor: string | undefined;
 
   do {
-    const extensions = SDK.getExtensions();
+    const extensions = sdk.composableCommerce;
 
     const response = await extensions.product.query({ cursor: nextCursor, limit: 12 });
 

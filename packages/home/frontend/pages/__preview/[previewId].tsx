@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Log } from 'helpers/errorLogger';
-import { SDK } from 'sdk';
+import { sdk } from 'sdk';
 import { createClient, FrontasticRenderer, Notifier } from 'frontastic';
 import { tastics } from 'frontastic/tastics';
 import styles from '../slug.module.css';
@@ -68,17 +68,14 @@ export default function Preview({ data }: PreviewProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ params, locale }) => {
-  SDK.configure(locale as string);
-
-  const extensions = SDK.getExtensions();
+  sdk.configureForNext(locale as string);
 
   const frontastic = createClient();
 
-  const data = await frontastic.getPreview(params?.previewId?.toString() ?? '');
-
-  const categories = await extensions.product
-    .queryCategories({ limit: 99 })
-    .then((res) => (res.isError ? [] : res.data));
+  const [data, categories] = await Promise.all([
+    frontastic.getPreview(params?.previewId?.toString() ?? ''),
+    frontastic.getCategories(),
+  ]);
 
   return {
     props: {
