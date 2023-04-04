@@ -71,7 +71,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({
 
   const wrapperClassName = inModalVersion
     ? 'md:grid grid-cols-12 pt-70 pb-35 px-20 md:pr-36'
-    : 'max-w-[1280px] mx-auto pt-16 pb-32 md:grid md:grid-cols-12 md:items-start md:px-24 px-16';
+    : 'pt-16 pb-32 md:grid md:grid-cols-12 md:items-start lg:px-48 md:px-24 px-16';
 
   const galleryContainerClassName = useClassNames([
     inModalVersion ? 'col-span-6' : 'md:col-span-7 lg:col-span-8',
