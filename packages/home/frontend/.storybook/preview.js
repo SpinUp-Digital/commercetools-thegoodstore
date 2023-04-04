@@ -1,5 +1,5 @@
 import { RouterContext } from 'next/dist/shared/lib/router-context';
-import { SDK } from '../sdk';
+import { sdk } from '../sdk';
 import 'tailwindcss/tailwind.css';
 import '../styles/app.css';
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -29,7 +29,7 @@ export const parameters = {
 };
 
 const StoryWrapper = ({ Story }) => {
-  SDK.configure('en');
+  sdk.configureForNext('en');
 
   return <Story />;
 };
