@@ -6,17 +6,18 @@ import { payments } from '..';
 import useCardNumberFormatter from './useFormatCredit';
 import usePaymentHelpers from './usePaymentHelpers';
 
-const useEditPaymentMethods = (paymentId: string) => {
+const useAddPaymentMethod = () => {
   const router = useRouter();
   const { formatMessage: formatPaymentMessage } = useFormat({ name: 'payment' });
-  const payment = payments.find((payment) => payment.id === paymentId);
-  const cardNumberFormatted = useCardNumberFormatter(payment?.cardNumber ?? '');
-  const { hasNumbersAndSpaces } = usePaymentHelpers();
   const [error, setError] = useState('');
-  const [cardHolder, setCardHolder] = useState(payment?.cardHolder);
-  const [cardNumber, setCardNumber] = useState(cardNumberFormatted);
-  const [cardExpMonthDate, setCardExpMonthDate] = useState<Option | undefined>(payment?.cardExpiryMonth);
-  const [cardExpYearDate, setCardExpYearDate] = useState<Option | undefined>(payment?.cardExpiryYear);
+  const [cardHolder, setCardHolder] = useState('');
+  const [cardNumber, setCardNumber] = useState('');
+  const cardNumberFormatted = useCardNumberFormatter(cardNumber ?? '');
+
+  const { expiryDateMonthOptions, expiryDateYearOptions, hasNumbersAndSpaces } = usePaymentHelpers();
+
+  const [cardExpMonthDate, setCardExpMonthDate] = useState<Option>(expiryDateMonthOptions[1]);
+  const [cardExpYearDate, setCardExpYearDate] = useState<Option>(expiryDateYearOptions[1]);
 
   const handleCardHolderChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,62 +36,54 @@ const useEditPaymentMethods = (paymentId: string) => {
     [setCardNumber, hasNumbersAndSpaces],
   );
 
-  const handleExpiryDateMonthChange = useCallback(
+  const handleExpiryMonthDateChange = useCallback(
     (option: Option) => {
       setCardExpMonthDate(option);
     },
     [setCardExpMonthDate],
   );
 
-  const handleExpiryDateYearChange = useCallback(
+  const handleExpiryYearDateChange = useCallback(
     (option: Option) => {
       setCardExpYearDate(option);
     },
     [setCardExpYearDate],
   );
 
-  const handleDeleteClick = () => {
-    router.push('/account#payment');
-    payments.splice(
-      payments.findIndex((payment) => payment.id === paymentId),
-      1,
-    );
-  };
-
   const concatCardNumber = useMemo(() => {
     return cardNumber.replaceAll(' ', '');
   }, [cardNumber]);
 
-  const handleSaveClick = () => {
-    if (concatCardNumber.length < 16) {
+  const handleAddClick = () => {
+    if (concatCardNumber && concatCardNumber.length < 16) {
       setError(formatPaymentMessage({ id: 'card.number.error', defaultMessage: 'Please insert all 16 numbers' }));
     } else {
       setError('');
-      const updatedPaymentIndex = payments.findIndex((payment) => payment.id === paymentId);
-      payments[updatedPaymentIndex] = {
-        ...payments[updatedPaymentIndex],
+      payments.push({
+        id: (payments.length + 1).toString(),
         cardHolder: cardHolder ?? '',
         cardNumber: concatCardNumber ?? '',
-        cardExpiryMonth: cardExpMonthDate ?? { name: '02', value: '02' },
-        cardExpiryYear: cardExpYearDate ?? { name: '69', value: '69' },
-      };
-
+        cardExpiryMonth: cardExpMonthDate ?? { name: '', value: '' },
+        cardExpiryYear: cardExpYearDate ?? { name: '', value: '' },
+      });
       router.push('/account#payment');
     }
   };
 
   return {
     error,
+    expiryDateMonthOptions,
+    expiryDateYearOptions,
     cardHolder,
     cardNumber,
+    cardNumberFormatted,
     cardExpMonthDate,
     cardExpYearDate,
     handleCardHolderChange,
     handleCardNumberChange,
-    handleExpiryDateMonthChange,
-    handleExpiryDateYearChange,
-    handleDeleteClick,
-    handleSaveClick,
+    handleExpiryMonthDateChange,
+    handleExpiryYearDateChange,
+    handleAddClick,
   };
 };
-export default useEditPaymentMethods;
+export default useAddPaymentMethod;

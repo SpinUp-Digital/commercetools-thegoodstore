@@ -6,38 +6,15 @@ import Select from 'components/commercetools-ui/atoms/select';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import useResolveCCImage from 'components/commercetools-ui/organisms/checkout/hooks/useResolveCCImage';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { payments } from '.';
-import usePaymentMethods from './helper-hooks/usePaymentMethods';
+import useAddPaymentMethods from '../helper-hooks/useAddPaymentMethod';
+import usePaymentHelpers from '../helper-hooks/usePaymentHelpers';
 
 const PaymentAdd = () => {
   const router = useRouter();
   const { formatMessage: formatPaymentMessage } = useFormat({ name: 'payment' });
   const resolveCCImage = useResolveCCImage();
-
-  const {
-    expiryDateMonthOptions,
-    expiryDateYearOptions,
-    cardHolder,
-    cardNumber,
-    cardExpMonthDate,
-    cardExpYearDate,
-    handleCardHolderChange,
-    handleExpiryMonthDateChange,
-    handleExpiryYearDateChange,
-    handleCardNumberChange,
-  } = usePaymentMethods();
-
-  const handleSaveClick = () => {
-    payments.push({
-      id: (payments.length + 1).toString(),
-      cardHolder: cardHolder,
-      cardNumber: cardNumber,
-      cardExpiryMonth: cardExpMonthDate ?? { name: '', value: '' },
-      cardExpiryYear: cardExpYearDate ?? { name: '', value: '' },
-    });
-
-    router.push('/account#payment');
-  };
+  const { expiryDateMonthOptions, expiryDateYearOptions } = usePaymentHelpers();
+  const paymentAddData = useAddPaymentMethods();
 
   return (
     <div className="mt-20 ml-0 lg:ml-44 lg:mt-40">
@@ -50,21 +27,37 @@ const PaymentAdd = () => {
         </Typography>
       </div>
 
-      <div className="mt-0 w-full px-16 py-0 md:px-24 lg:mt-36 lg:w-[60%] lg:rounded-md lg:border lg:py-32 lg:px-24">
-        <div className="mt-24 md:max-w-[436px] lg:mt-0">
+      <div className="mt-0 w-full px-16 py-0 md:px-24 lg:mt-36 lg:w-[800px] lg:rounded-md lg:border lg:py-32 lg:px-24">
+        <div className="mt-24 md:w-[375px] lg:mt-0">
           <Typography as="label" medium fontSize={14} className="text-secondary-black">
             {formatPaymentMessage({ id: 'card.holder', defaultMessage: 'Card holder *' })}
           </Typography>
-          <Input name="holderName" className="mt-8 sm:px-8" labelPosition="inline" onChange={handleCardHolderChange} />
+          <Input
+            name="holderName"
+            value={paymentAddData.cardHolder}
+            className="mt-8 sm:px-8"
+            labelPosition="inline"
+            onChange={paymentAddData.handleCardHolderChange}
+          />
 
           <div className="relative mt-16 lg:mt-12">
             <Typography as="label" medium fontSize={14} className="text-secondary-black">
               {formatPaymentMessage({ id: 'card.number', defaultMessage: 'Card number *' })}
             </Typography>
-            <Input className="mt-8 sm:px-8" labelPosition="inline" type="number" onChange={handleCardNumberChange} />
-            {resolveCCImage(cardNumber) && (
+            <Input
+              value={paymentAddData.cardNumberFormatted}
+              className="mt-8 sm:px-8"
+              labelPosition="inline"
+              type="text"
+              onChange={paymentAddData.handleCardNumberChange}
+              error={paymentAddData.error}
+            />
+            {resolveCCImage(paymentAddData.cardNumberFormatted) && (
               // eslint-disable-next-line
-              <img className="absolute top-52 right-8 w-[32px] -translate-y-1/2" src={resolveCCImage(cardNumber)} />
+              <img
+                className="absolute top-52 right-8 w-[32px] -translate-y-1/2"
+                src={resolveCCImage(paymentAddData.cardNumberFormatted)}
+              />
             )}
           </div>
 
@@ -76,24 +69,23 @@ const PaymentAdd = () => {
               <div className="mt-8 flex grow items-center md:flex-1">
                 <div className="mr-12">
                   <Select
-                    defaultValue={cardExpMonthDate}
+                    defaultValue={paymentAddData.cardExpMonthDate}
                     options={expiryDateMonthOptions}
-                    onChange={handleExpiryMonthDateChange}
+                    onChange={paymentAddData.handleExpiryMonthDateChange}
                   />
                 </div>
                 /
                 <div className="ml-12">
                   <Select
-                    defaultValue={cardExpYearDate}
+                    defaultValue={paymentAddData.cardExpYearDate}
                     options={expiryDateYearOptions}
-                    onChange={handleExpiryYearDateChange}
+                    onChange={paymentAddData.handleExpiryYearDateChange}
                   />
                 </div>
               </div>
             </div>
           </div>
         </div>
-
         <div className="mt-32 flex">
           <Button variant="secondary" className="w-[112px]" onClick={() => router.push('/account#payment')}>
             <Typography as="h2" align="center" fontSize={14} className="text-primary-black">
@@ -104,7 +96,7 @@ const PaymentAdd = () => {
             </Typography>
           </Button>
 
-          <Button variant="primary" className="ml-12 w-[112px]" onClick={handleSaveClick}>
+          <Button variant="primary" className="ml-12 w-[112px]" onClick={paymentAddData.handleAddClick}>
             <Typography as="h2" align="center" fontSize={14}>
               {formatPaymentMessage({
                 id: 'save',

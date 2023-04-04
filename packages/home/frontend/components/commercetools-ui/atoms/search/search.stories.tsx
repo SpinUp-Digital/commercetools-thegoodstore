@@ -11,9 +11,9 @@ export default {
 } as ComponentMeta<typeof Search>;
 
 const Template: ComponentStory<typeof Search> = (args) => (
-  <div className="ml-44">
-    <Typography fontSize={28} className="mt-40 w-[40%] font-bold text-black">
-      Default Search and Algolia Search Component
+  <div className="ml-44 h-full">
+    <Typography fontSize={28} className="mt-36 w-[45%] font-bold text-black">
+      Default Search and Algolia Search
     </Typography>
     <Typography fontSize={20} lineHeight="loose" className="mt-20 w-[60%] text-neutral-700">
       The Search component consists of an input field where customers can enter keywords or phrases related to the
@@ -21,18 +21,21 @@ const Template: ComponentStory<typeof Search> = (args) => (
       component integrated with Algolia
     </Typography>
 
-    <Typography fontSize={20} fontFamily="inter" medium className="mt-40 w-[40%] text-primary-black">
+    <Typography fontSize={20} fontFamily="inter" medium className="mt-36 w-[40%] text-primary-black">
       Default Search
     </Typography>
 
-    <div className="mt-24 w-[70%]">
+    <div className="mt-20 w-[70%]">
       <Search {...args} />
     </div>
-    <Typography fontSize={20} fontFamily="inter" medium className="mt-40 w-[40%] text-primary-black">
+    <Typography fontSize={20} fontFamily="inter" medium className="mt-36 w-[40%] text-primary-black">
       Algolia Search
     </Typography>
+    <Typography fontSize={16} lineHeight="loose" className="mt-12 w-[60%] text-neutral-700">
+      The search component integrated with Algolia.
+    </Typography>
 
-    <div className="mt-24 w-[70%]">
+    <div className="mt-20 w-[70%]">
       <SearchAlgolia {...args} categories={categories} />
     </div>
   </div>

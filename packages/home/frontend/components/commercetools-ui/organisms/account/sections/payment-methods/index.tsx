@@ -12,6 +12,7 @@ export interface Payment {
   cardExpiryMonth: Option;
   cardExpiryYear: Option;
 }
+
 export const payments: Payment[] = [
   {
     id: '1',
@@ -30,7 +31,7 @@ export const payments: Payment[] = [
   {
     id: '3',
     cardHolder: 'Dio Brando',
-    cardNumber: '5555444433331111',
+    cardNumber: '5555444433337777',
     cardExpiryMonth: { name: '03', value: '03' },
     cardExpiryYear: { name: '30', value: '30' },
   },

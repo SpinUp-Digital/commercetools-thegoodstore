@@ -8,30 +8,20 @@ import Typography from 'components/commercetools-ui/atoms/typography';
 import useResolveCCImage from 'components/commercetools-ui/organisms/checkout/hooks/useResolveCCImage';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useHash from 'helpers/hooks/useHash';
-import useEditPaymentMethods from './helper-hooks/useEditPaymentMethod';
-import usePaymentMethods from './helper-hooks/usePaymentMethods';
-import PaymentDelete from './payment-delete';
+import useEditPaymentMethods from '../helper-hooks/useEditPaymentMethod';
+import useCardNumberFormatter from '../helper-hooks/useFormatCredit';
+import usePaymentHelpers from '../helper-hooks/usePaymentHelpers';
+import PaymentDelete from '../payment-delete';
 
 const PaymentEdit: FC = () => {
+  const router = useRouter();
   // eslint-disable-next-line
   const [_hash, id] = useHash();
   const { formatMessage: formatPaymentMessage } = useFormat({ name: 'payment' });
-  const {
-    cardHolder,
-    cardNumber,
-    cardExpMonthDate,
-    cardExpYearDate,
-    handleCardHolderChange,
-    handleCardNumberChange,
-    handleExpiryDateMonthChange,
-    handleExpiryDateYearChange,
-    handleSaveClick,
-    handleDeleteClick,
-  } = useEditPaymentMethods(id as string);
+  const paymentEditData = useEditPaymentMethods(id as string);
 
-  const router = useRouter();
-
-  const { expiryDateMonthOptions, expiryDateYearOptions } = usePaymentMethods();
+  const { expiryDateMonthOptions, expiryDateYearOptions } = usePaymentHelpers();
+  const cardNumberFormatted = useCardNumberFormatter(paymentEditData.cardNumber ?? '');
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -56,7 +46,7 @@ const PaymentEdit: FC = () => {
         modalIsOpen={modalIsOpen}
         closeModal={closeModal}
         handleCancelClick={closeModal}
-        handleDeleteClick={handleDeleteClick}
+        handleDeleteClick={paymentEditData.handleDeleteClick}
       />
 
       <div className="mt-0 w-full py-0 px-16 lg:mt-36 lg:w-[60%] lg:rounded-md lg:border lg:py-32 lg:px-24">
@@ -65,11 +55,11 @@ const PaymentEdit: FC = () => {
             {formatPaymentMessage({ id: 'card.holder', defaultMessage: 'Card holder *' })}
           </Typography>
           <Input
-            value={cardHolder}
+            value={paymentEditData.cardHolder}
             name="holderName"
             className="mt-8 sm:px-8"
             labelPosition="inline"
-            onChange={handleCardHolderChange}
+            onChange={paymentEditData.handleCardHolderChange}
           />
 
           <div className="relative mt-24 lg:mt-12">
@@ -77,17 +67,18 @@ const PaymentEdit: FC = () => {
               {formatPaymentMessage({ id: 'card.number', defaultMessage: 'Card number *' })}
             </Typography>
             <Input
-              value={cardNumber}
+              value={cardNumberFormatted}
               className="mt-8 sm:px-8"
               labelPosition="inline"
-              type="number"
-              onChange={handleCardNumberChange}
+              type="text"
+              onChange={paymentEditData.handleCardNumberChange}
+              error={paymentEditData.error}
             />
-            {resolveCCImage(cardNumber ?? '') && (
+            {resolveCCImage(cardNumberFormatted) && (
               // eslint-disable-next-line
               <img
                 className="absolute top-52 right-8 w-[32px] -translate-y-1/2"
-                src={resolveCCImage(cardNumber ?? '')}
+                src={resolveCCImage(cardNumberFormatted)}
               />
             )}
           </div>
@@ -100,17 +91,17 @@ const PaymentEdit: FC = () => {
               <div className="mt-8 flex grow items-center md:flex-1">
                 <div className="mr-12">
                   <Select
-                    defaultValue={cardExpMonthDate}
+                    defaultValue={paymentEditData.cardExpMonthDate}
                     options={expiryDateMonthOptions}
-                    onChange={handleExpiryDateMonthChange}
+                    onChange={paymentEditData.handleExpiryDateMonthChange}
                   />
                 </div>
                 /
                 <div className="ml-12">
                   <Select
-                    defaultValue={cardExpYearDate}
+                    defaultValue={paymentEditData.cardExpYearDate}
                     options={expiryDateYearOptions}
-                    onChange={handleExpiryDateYearChange}
+                    onChange={paymentEditData.handleExpiryDateYearChange}
                   />
                 </div>
               </div>
@@ -143,7 +134,7 @@ const PaymentEdit: FC = () => {
               </Typography>
             </Button>
 
-            <Button variant="primary" className="ml-12 w-[112px]" onClick={handleSaveClick}>
+            <Button variant="primary" className="ml-12 w-[112px]" onClick={paymentEditData.handleSaveClick}>
               <Typography as="h2" align="center" fontSize={14}>
                 {formatPaymentMessage({
                   id: 'save',
