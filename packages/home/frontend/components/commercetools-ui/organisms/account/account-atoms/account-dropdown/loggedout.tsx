@@ -23,14 +23,16 @@ const LoggedOut = () => {
           {formatAccountMessage({ id: 'membership.info', defaultMessage: 'Membership info' })}
         </Link>
       </Popover.Button>
-      <span className="mt-32 block pb-10">
-        {formatAccountMessage({ id: 'not.member', defaultMessage: 'Not a member' })}?{' '}
+      <div className="mt-32 flex pb-10 ">
+        <span className="whitespace-nowrap">
+          {formatAccountMessage({ id: 'not.member', defaultMessage: 'Not a member' })}?
+        </span>
         <Popover.Button>
-          <Link link="/register" className="font-medium text-primary-black hover:underline">
+          <Link link="/register" className="ml-4 whitespace-nowrap font-medium text-primary-black hover:underline">
             {formatAccountMessage({ id: 'join.here', defaultMessage: 'Join here' })}
           </Link>
         </Popover.Button>
-      </span>
+      </div>
     </div>
   );
 };

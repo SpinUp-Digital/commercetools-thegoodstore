@@ -46,6 +46,9 @@
   "cart.go": "Zum Einkaufskorb gehen",
   "continue.shopping": "Mit dem Einkaufen fortfahren",
   "discount.apply": "Wenden Sie einen Rabatt an",
-  "cart.discount.enter": "Rabattcode eingeben"
+  "cart.discount.enter": "Rabattcode eingeben",
+  "checkout.go": "Zum Checkout gehen",
+  "we.accept": "Wir akzeptieren",
+  "order.summary.login": "Melden Sie sich an, um Ihre persönlichen Angebote zu nutzen!"
 }
 

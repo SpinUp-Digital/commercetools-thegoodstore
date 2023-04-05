@@ -3,9 +3,9 @@ import { useRouter } from 'next/router';
 import cloneDeep from 'lodash/cloneDeep';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import useI18n from 'helpers/hooks/useI18n';
+import { FacetConfiguration, PriceConfiguration, RangeFacet, TermFacet } from '../types';
 import { refinementRemovedEventName, refinementsClearedEventName } from './constants';
 import { ActiveRefinement, ProductListContextShape, RefinementRemovedEvent, Sort, UiState } from './types';
-import { FacetConfiguration, PriceConfiguration, RangeFacet, TermFacet } from '../types';
 
 export const ProductListContext = createContext<ProductListContextShape>({
   pricesConfiguration: {},

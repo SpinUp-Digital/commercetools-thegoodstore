@@ -20,7 +20,7 @@ const LoggedIn = () => {
       <Popover.Button className="w-full">
         <Link link="/account#" className="mt-10 block w-fit">
           <Typography fontSize={16} fontFamily="inter" className="text-primary-black hover:underline">
-            {formatAccountMessage({ id: 'my.account', defaultMessage: 'Membership info' })}
+            {formatAccountMessage({ id: 'my.account', defaultMessage: 'My Account' })}
           </Typography>
         </Link>
       </Popover.Button>
