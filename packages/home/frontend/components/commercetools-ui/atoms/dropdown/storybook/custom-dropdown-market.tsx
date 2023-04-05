@@ -65,7 +65,7 @@ const CustomDropdownMarket = () => {
                 <div className="flex w-fit items-center justify-start">
                   <FlagIcons flagName={market.flag} className="mr-8" />
                   <Typography as="span" fontSize={14} className="font-normal text-secondary-black">
-                    {`${market?.region} | ${market?.currency} ${market?.currencyCode}`}
+                    {market?.region}
                   </Typography>
                 </div>
               </Button>
