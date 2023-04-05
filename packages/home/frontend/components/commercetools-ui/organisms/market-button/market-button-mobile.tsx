@@ -52,7 +52,7 @@ const MarketButtonMobile: FC<Props> = ({ menuTop }) => {
         <div className="flex w-fit cursor-pointer items-center justify-start">
           <FlagIcons flagName={selectedMarket?.flag} className="my-auto mr-8" />
           <Typography fontSize={14} className="text-secondary-black">
-            {`${selectedMarket?.region} | ${selectedMarket?.currency} ${selectedMarket?.currencyCode}`}
+            {selectedMarket?.region}
           </Typography>
         </div>
         <div className="flex justify-end">
@@ -83,7 +83,7 @@ const MarketButtonMobile: FC<Props> = ({ menuTop }) => {
                   <div className="flex w-fit items-center justify-start">
                     <FlagIcons flagName={market.flag} className="mr-8" />
                     <Typography as="span" fontSize={14} className="font-normal text-secondary-black">
-                      {`${market?.region} | ${market?.currency} ${market?.currencyCode}`}
+                      {market?.region}
                     </Typography>
                   </div>
                 </Button>
