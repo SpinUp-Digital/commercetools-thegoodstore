@@ -14,7 +14,7 @@ const HeaderLogo: FC<Props> = ({ logoLink, logo, imageClassName, onClick }) => {
   return (
     <div className="relative px-10 md:mt-0" onClick={onClick}>
       <Link className={imageClassName} link={logoLink}>
-        <Image media={logo.media} layout="fill" objectFit="contain" alt={logo.title} />
+        <Image media={logo?.media} layout="fill" objectFit="contain" alt={logo?.title} />
       </Link>
     </div>
   );
