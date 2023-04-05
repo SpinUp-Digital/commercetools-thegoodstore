@@ -16,8 +16,8 @@ import { createClient, PageDataResponse, ResponseError } from 'frontastic';
 import { FrontasticRenderer } from 'frontastic/lib/renderer';
 import { tastics } from 'frontastic/tastics';
 import ProductListTastic, { Props as ProductListTasticProps } from 'frontastic/tastics/products/product-list-algolia';
-import styles from './slug.module.css';
 import { Log } from '../helpers/errorLogger';
+import styles from './slug.module.css';
 
 type SlugProps = {
   // This needs an overhaul. Can be too many things in my opinion (*Marcel)

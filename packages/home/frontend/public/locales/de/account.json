@@ -81,8 +81,11 @@
   "action.warning": "Diese Aktion kann nicht rückgängig gemacht werden.",
   "address.deleted": "Adresse erfolgreich gelöscht",
   "default": "Default",
+  "not.member": "Kein Mitglied",
   "not.member.yet": "Noch kein Mitglied?",
+  "join.here": "Hier beitreten",
   "by.registering": "Durch die Registrierung eines Kontos stimmen Sie unseren zu",
   "terms.of.use": "Nutzungsbedingungen.",
-  "newsletter": "das Mitteilungsblatt"
+  "newsletter": "das Mitteilungsblatt",
+  "membership.info": "Mitgliedschaftsinfo"
 }
