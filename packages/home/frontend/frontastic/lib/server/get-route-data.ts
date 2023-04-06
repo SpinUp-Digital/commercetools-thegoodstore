@@ -1,17 +1,28 @@
+import type { IncomingMessage, ServerResponse } from 'http';
 import { Result } from '@commercetools/frontend-domain-types/product/Result';
+import { serverSession } from '@commercetools/frontend-sdk';
 import { AcceptedQueryTypes } from '@commercetools/frontend-sdk/lib/types/Query';
 import { sdk } from 'sdk';
 import { PageDataResponse, PagePreviewDataResponse, RedirectResponse, PageFolderStructureResponse } from '../types';
 
 export const getRouteData =
   () =>
-  async (slug: string[], query?: AcceptedQueryTypes): Promise<RedirectResponse | PageDataResponse> => {
+  async (
+    slug: string[],
+    query?: AcceptedQueryTypes,
+    req?: IncomingMessage,
+    res?: ServerResponse,
+  ): Promise<RedirectResponse | PageDataResponse> => {
     const pageSlug = (slug as string[])?.join('/') || '';
     const path = `/${pageSlug !== 'index' ? pageSlug : ''}`;
 
-    const res = await sdk.page.getPage({ path, query });
+    const response = await sdk.page.getPage({
+      path,
+      query,
+      serverSession: req && res ? serverSession.get(req, res) : undefined,
+    });
 
-    return (res.isError ? {} : res.data) as RedirectResponse | PageDataResponse;
+    return (response.isError ? {} : response.data) as RedirectResponse | PageDataResponse;
   };
 
 export const getPreview =

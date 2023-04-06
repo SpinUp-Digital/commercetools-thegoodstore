@@ -70,6 +70,7 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({
   locale,
   query,
   req,
+  res,
   resolvedUrl,
 }) => {
   sdk.configureForNext(locale as string);
@@ -77,7 +78,7 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({
   const frontastic = createClient();
 
   const [data, categories] = await Promise.all([
-    frontastic.getRouteData(params?.slug as string[], query as AcceptedQueryTypes),
+    frontastic.getRouteData(params?.slug as string[], query as AcceptedQueryTypes, req, res),
     frontastic.getCategories(),
   ]);
 
