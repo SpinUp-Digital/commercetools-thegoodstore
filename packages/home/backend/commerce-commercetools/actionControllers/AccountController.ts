@@ -159,7 +159,7 @@ export const register: ActionHook = async (request: Request, actionContext: Acti
   const locale = getLocale(request);
 
   const accountApi = new AccountApi(actionContext.frontasticContext, locale);
-  const accountData = mapRequestToAccount(JSON.parse(request.body).account);
+  const accountData = mapRequestToAccount(JSON.parse(request.body));
 
   const cart = await CartFetcher.fetchCart(request, actionContext);
 
