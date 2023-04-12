@@ -59,51 +59,6 @@
           ]
         }
       ]
-    },
-    {
-      "name": "Empty Wishlist",
-      "fields": [
-        {
-          "label": "Image",
-          "field": "emptyWishlistImage",
-          "type": "media",
-          "required": true,
-          "options": {}
-        },
-        {
-          "label": "Title",
-          "field": "emptyWishlistTitle",
-          "translatable": true,
-          "type": "string"
-        },
-        {
-          "label": "Subtitle",
-          "field": "emptyWishlistSubtitle",
-          "translatable": true,
-          "type": "string"
-        },
-        {
-          "label": "Categories",
-          "field": "emptyWishlistCategories",
-          "type": "group",
-          "min": 1,
-          "fields": [
-            {
-              "label": "Name",
-              "field": "name",
-              "translatable": true,
-              "required": true,
-              "type": "string"
-            },
-            {
-              "label": "Link",
-              "field": "reference",
-              "type": "reference",
-              "required": true
-            }
-          ]
-        }
-      ]
     }
   ]
 }

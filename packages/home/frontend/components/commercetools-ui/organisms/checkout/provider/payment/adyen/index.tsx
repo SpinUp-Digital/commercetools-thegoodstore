@@ -73,10 +73,16 @@ const AdyenPaymentProvider: React.FC = ({ children }) => {
     if (paymentData.type === 'scheme') {
       validationSchema = yup.object().shape({
         holderName: yup.string().required(),
-        cvc: yup.string().required().min(3).max(5),
-        number: yup.string().required().min(12).max(19),
-        expiryMonth: yup.string().required().notOneOf(['MM']),
-        expiryYear: yup.string().required().notOneOf(['YY']),
+        cvc: yup
+          .number()
+          .required()
+          .test((val) => !!(val && val.toString().length >= 3 && val.toString().length <= 4)),
+        number: yup
+          .number()
+          .required()
+          .test((val) => !!(val && val.toString().length >= 12 && val.toString().length <= 19)),
+        expiryMonth: yup.number().required(),
+        expiryYear: yup.number().required(),
       });
     }
 

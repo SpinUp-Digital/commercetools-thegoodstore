@@ -19,12 +19,12 @@ const Scheme = () => {
     let month = now.getMonth() + 1;
     let year = now.getFullYear();
 
-    const options = [{ name: 'MM/YY', value: 'MM/YY' }] as Option[];
+    const options = [] as Option[];
 
     while (year < now.getFullYear() + 10) {
       options.push({
         name: `${month} / ${year.toString().slice(2)}`,
-        value: `${month} / ${year}`,
+        value: `${month}/${year}`,
       });
 
       if (month == 12) (month = 1), (year += 1);
@@ -54,7 +54,7 @@ const Scheme = () => {
     (option: Option) => {
       const date = option.value.toString();
 
-      const [expiryMonth, expiryYear] = date.split(' / ');
+      const [expiryMonth, expiryYear] = date.split('/');
 
       setPaymentData({ ...paymentData, expiryMonth, expiryYear } as SchemeData);
     },
@@ -63,7 +63,7 @@ const Scheme = () => {
 
   const handleCVCChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (e.target.value.length > 4) e.target.value = e.target.value.slice(0, e.target.value.length - 1);
+      e.target.value = e.target.value.slice(0, 4);
 
       setPaymentData({ ...paymentData, cvc: e.target.value } as SchemeData);
     },
@@ -107,10 +107,10 @@ const Scheme = () => {
             defaultValue={
               paymentData.expiryMonth && paymentData.expiryYear
                 ? {
-                    name: `${paymentData.expiryMonth}/${paymentData.expiryYear.slice(2)}`,
+                    name: `${paymentData.expiryMonth} / ${paymentData.expiryYear.slice(2)}`,
                     value: `${paymentData.expiryMonth}/${paymentData.expiryYear}`,
                   }
-                : undefined
+                : { name: 'MM / YY', value: 'MM/YY' }
             }
           />
         </div>

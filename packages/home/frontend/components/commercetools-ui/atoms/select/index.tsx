@@ -31,7 +31,7 @@ const Select: React.FC<Props> = ({ onChange, defaultValue, options = [] }) => {
     <Listbox value={selected} onChange={handleChange}>
       <div className="relative">
         <Listbox.Button className="relative flex h-[40px] w-full cursor-default items-center rounded-sm border border-neutral-500 bg-white pl-12 pr-32 text-left focus:outline-none">
-          <span className="text-sm text-primary-black">{selected?.name}</span>
+          <span className="text-14 text-secondary-black">{selected?.name}</span>
           <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-8">
             <ChevronDownIcon className="h-20 w-20 text-secondary-black" aria-hidden="true" />
           </span>
@@ -55,7 +55,7 @@ const Select: React.FC<Props> = ({ onChange, defaultValue, options = [] }) => {
               >
                 {({ selected }) => (
                   <>
-                    <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'} text-primary-black`}>
+                    <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'} text-secondary-black`}>
                       {option.name}
                     </span>
                     {selected ? (
