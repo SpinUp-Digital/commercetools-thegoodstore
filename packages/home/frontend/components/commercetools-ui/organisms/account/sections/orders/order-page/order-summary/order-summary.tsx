@@ -30,14 +30,12 @@ const OrderSummary: FC<Props> = ({ hiddenItemsCount, subtotal, shipmentFees, tot
     else return [lineItems[0], lineItems[1], lineItems[2]];
   }, [lineItems]);
 
-  const accordionClassNames = useClassNames(['max-h-[400px] overflow-auto ', open ? 'border-b' : '']);
-
-  const contentClassNames = useClassNames(['flex w-full flex-col', 'border-b pb-4']);
+  const accordionClassNames = useClassNames(['max-h-[400px] overflow-auto', open ? 'border-b' : '']);
 
   const arrowClassNames = useClassNames([open ? 'rotate-180 transform' : '', 'transition mr-8']);
   const orderSummaryAccordion = useMemo(() => {
     return (
-      <div className={contentClassNames}>
+      <div className="flex w-full flex-col overflow-x-visible border-b pb-4">
         <div className="flex w-full justify-between">
           <Typography fontSize={16} className="text-secondary-black">
             {formatOrdersMessage({
@@ -71,10 +69,10 @@ const OrderSummary: FC<Props> = ({ hiddenItemsCount, subtotal, shipmentFees, tot
         </div>
       </div>
     );
-  }, [open, arrowClassNames, contentClassNames, formatOrdersMessage, hiddenItemsCount, lineItemOrderSummary]);
+  }, [open, arrowClassNames, formatOrdersMessage, hiddenItemsCount, lineItemOrderSummary]);
 
   return (
-    <div className="ml-44 hidden h-fit w-[35%] rounded-md border p-36 2xl:block">
+    <div className="ml-44 hidden h-fit w-[42%] rounded-md border p-36 2xl:block 3xl:w-[37%]">
       {lineItems.length === 1 ? (
         <div className="grid w-full grid-cols-1">
           <div className="border-b pb-16">

@@ -12,7 +12,8 @@ const useEditPaymentMethods = (paymentId: string) => {
   const payment = payments.find((payment) => payment.id === paymentId);
   const cardNumberFormatted = useCardNumberFormatter(payment?.cardNumber ?? '');
   const { hasNumbersAndSpaces } = usePaymentHelpers();
-  const [error, setError] = useState('');
+  const [cardHolderError, setCardHolderError] = useState('');
+  const [cardNumberError, setCardNumberError] = useState('');
   const [cardHolder, setCardHolder] = useState(payment?.cardHolder);
   const [cardNumber, setCardNumber] = useState(cardNumberFormatted);
   const [cardExpMonthDate, setCardExpMonthDate] = useState<Option | undefined>(payment?.cardExpiryMonth);
@@ -28,7 +29,7 @@ const useEditPaymentMethods = (paymentId: string) => {
   const handleCardNumberChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       if (hasNumbersAndSpaces(e.target.value)) {
-        setError('');
+        setCardNumberError('');
         setCardNumber(e.target.value);
       }
     },
@@ -62,10 +63,16 @@ const useEditPaymentMethods = (paymentId: string) => {
   }, [cardNumber]);
 
   const handleSaveClick = () => {
-    if (concatCardNumber.length < 16) {
-      setError(formatPaymentMessage({ id: 'card.number.error', defaultMessage: 'Please insert all 16 numbers' }));
+    if (!cardHolder || cardHolder.length === 0) {
+      setCardHolderError(
+        formatPaymentMessage({ id: 'card.holder.error', defaultMessage: 'Please insert your name on the card' }),
+      );
+    } else if (concatCardNumber.length < 16) {
+      setCardNumberError(
+        formatPaymentMessage({ id: 'card.number.error', defaultMessage: 'Please insert all 16 numbers' }),
+      );
     } else {
-      setError('');
+      setCardNumberError('');
       const updatedPaymentIndex = payments.findIndex((payment) => payment.id === paymentId);
       payments[updatedPaymentIndex] = {
         ...payments[updatedPaymentIndex],
@@ -80,7 +87,8 @@ const useEditPaymentMethods = (paymentId: string) => {
   };
 
   return {
-    error,
+    cardHolderError,
+    cardNumberError,
     cardHolder,
     cardNumber,
     cardExpMonthDate,

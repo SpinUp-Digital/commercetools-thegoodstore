@@ -38,10 +38,10 @@ const AccountTabsMobile: FC<Props> = ({ contentTitle, hash, tabs, className = ''
   const accountTabButton = useMemo(() => {
     return (
       <>
-        <Typography fontSize={14} className="text-primary-black">
+        <Typography fontSize={14} medium className="text-secondary-black">
           {contentTitle}
         </Typography>
-        <ChevronDownIcon strokeWidth={2} className="w-16 text-primary-black" />
+        <ChevronDownIcon strokeWidth={2} className="w-16 text-secondary-black" />
       </>
     );
   }, [contentTitle]);
@@ -58,7 +58,7 @@ const AccountTabsMobile: FC<Props> = ({ contentTitle, hash, tabs, className = ''
           <Menu.Item key={index}>
             <div className="overflow-y-scroll py-12 hover:bg-neutral-200 active:bg-neutral-200">
               <Link link={tab.href} className="flex w-full items-center justify-start px-16">
-                <Typography fontSize={14} className="text-primary-black">
+                <Typography fontSize={14} medium={tab.href === hash} className="text-secondary-black">
                   {tab.name}
                 </Typography>
               </Link>
