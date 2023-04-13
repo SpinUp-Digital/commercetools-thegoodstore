@@ -25,7 +25,7 @@ const PaymentDelete: FC<Props> = ({ modalIsOpen, closeModal, handleCancelClick, 
       onRequestClose={closeModal}
       className="h-[280px] w-[400px] rounded-md border bg-neutral-100"
     >
-      <div className="mx-auto  px-24 py-32 md:ml-24 lg:ml-0">
+      <div className="mx-auto p-24 md:ml-24 lg:ml-0">
         <div className="flex w-full cursor-pointer justify-end" onClick={closeModal}>
           <XMarkIcon className="w-24 text-secondary-black" />
         </div>

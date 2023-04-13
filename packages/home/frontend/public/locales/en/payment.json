@@ -14,5 +14,6 @@
     "delete": "Delete",
     "delete.question": "Delete payment method?",
     "delete.warning": "This action can not be undone.",
-    "card.number.error": "Please insert all 16 digits"
+    "card.number.error": "Please insert all 16 digits",
+    "card.holder.error": "Insert card holder name"
 }

@@ -31,8 +31,8 @@ const Footer: React.FC<Props> = ({ columns, logo, socialMedia }) => {
   return (
     <footer aria-labelledby="footer-heading" className="w-full bg-primary-black">
       {isBiggerThanTabletSize ? (
-        <div className="mx-auto w-full max-w-[1248px] px-24 py-58 xl:px-0">
-          <div className="grid grid-cols-4 ">
+        <div className="flex w-full justify-between py-58 px-24 lg:px-20 xl:px-48">
+          <div className="grid w-full grid-cols-4">
             {columns?.map((column, index) => (
               <div key={index}>
                 <Column

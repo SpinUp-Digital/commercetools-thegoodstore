@@ -38,6 +38,7 @@ const PaymentAdd = () => {
             className="mt-8 sm:px-8"
             labelPosition="inline"
             onChange={paymentAddData.handleCardHolderChange}
+            error={paymentAddData.cardHolderError}
           />
 
           <div className="relative mt-16 lg:mt-12">
@@ -50,7 +51,7 @@ const PaymentAdd = () => {
               labelPosition="inline"
               type="text"
               onChange={paymentAddData.handleCardNumberChange}
-              error={paymentAddData.error}
+              error={paymentAddData.cardNumberError}
             />
             {resolveCCImage(paymentAddData.cardNumberFormatted) && (
               // eslint-disable-next-line

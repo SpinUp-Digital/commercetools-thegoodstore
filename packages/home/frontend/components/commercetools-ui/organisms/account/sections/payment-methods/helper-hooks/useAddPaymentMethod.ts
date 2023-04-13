@@ -9,7 +9,8 @@ import usePaymentHelpers from './usePaymentHelpers';
 const useAddPaymentMethod = () => {
   const router = useRouter();
   const { formatMessage: formatPaymentMessage } = useFormat({ name: 'payment' });
-  const [error, setError] = useState('');
+  const [cardHolderError, setCardHolderError] = useState('');
+  const [cardNumberError, setCardNumberError] = useState('');
   const [cardHolder, setCardHolder] = useState('');
   const [cardNumber, setCardNumber] = useState('');
   const cardNumberFormatted = useCardNumberFormatter(cardNumber ?? '');
@@ -21,6 +22,7 @@ const useAddPaymentMethod = () => {
 
   const handleCardHolderChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
+      setCardHolderError('');
       setCardHolder(e.target.value);
     },
     [setCardHolder],
@@ -29,7 +31,7 @@ const useAddPaymentMethod = () => {
   const handleCardNumberChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       if (hasNumbersAndSpaces(e.target.value)) {
-        setError('');
+        setCardNumberError('');
         setCardNumber(e.target.value);
       }
     },
@@ -55,10 +57,17 @@ const useAddPaymentMethod = () => {
   }, [cardNumber]);
 
   const handleAddClick = () => {
-    if (concatCardNumber && concatCardNumber.length < 16) {
-      setError(formatPaymentMessage({ id: 'card.number.error', defaultMessage: 'Please insert all 16 numbers' }));
+    if (!cardHolder || cardHolder.length === 0) {
+      setCardHolderError(
+        formatPaymentMessage({ id: 'card.holder.error', defaultMessage: 'Please insert your name on the card' }),
+      );
+    } else if (concatCardNumber && concatCardNumber.length < 16) {
+      setCardNumberError(
+        formatPaymentMessage({ id: 'card.number.error', defaultMessage: 'Please insert all 16 numbers' }),
+      );
     } else {
-      setError('');
+      setCardHolderError('');
+      setCardNumberError('');
       payments.push({
         id: (payments.length + 1).toString(),
         cardHolder: cardHolder ?? '',
@@ -71,7 +80,8 @@ const useAddPaymentMethod = () => {
   };
 
   return {
-    error,
+    cardHolderError,
+    cardNumberError,
     expiryDateMonthOptions,
     expiryDateYearOptions,
     cardHolder,
