@@ -18,7 +18,7 @@ const TermFacet: React.FC<FacetProps> = ({ attribute }) => {
             <Checkbox
               checked={term.selected}
               onChange={() => refine(attribute, term.key)}
-              label={term.count.toString()}
+              label={term.count !== undefined ? term.count.toString() : ''}
               labelPosition="on-left"
             />
           </div>

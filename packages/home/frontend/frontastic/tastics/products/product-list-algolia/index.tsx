@@ -29,7 +29,7 @@ export interface Props {
 }
 
 function ProductListTastic({ categories, data }: Props) {
-  const { updatePricesConfiguration } = useProductList();
+  const { updateFacetsConfiguration, updatePricesConfiguration } = useProductList();
 
   const { refine: clearAllRefinements } = useClearRefinements();
 
@@ -61,8 +61,9 @@ function ProductListTastic({ categories, data }: Props) {
   }, [data.pricesConfiguration]);
 
   useEffect(() => {
+    updateFacetsConfiguration(facetsConfiguration);
     updatePricesConfiguration(pricesConfiguration);
-  }, [pricesConfiguration, updatePricesConfiguration]);
+  }, [facetsConfiguration, pricesConfiguration, updateFacetsConfiguration, updatePricesConfiguration]);
 
   useEffect(() => {
     if (!router) return;

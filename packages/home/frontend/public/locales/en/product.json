@@ -46,5 +46,6 @@
   "expected.in.days": "Expected availability: {days} days",
   "available.in.weeks": "Available in {weeks} weeks",
   "available.in.days": "Available in {days} days",
-  "sold.out": "Sold out"
+  "sold.out": "Sold out",
+  "regular": "Regular"
 }

@@ -24,7 +24,7 @@ export class CategoryRouter {
 
       const response = await productApi.queryCategories({ slug });
 
-      request.query.category = (response.items[0] as Category).categoryId;
+      request.query.categories = [(response.items[0] as Category).categoryId];
 
       const productQuery = ProductQueryFactory.queryFromParams({
         ...request,
