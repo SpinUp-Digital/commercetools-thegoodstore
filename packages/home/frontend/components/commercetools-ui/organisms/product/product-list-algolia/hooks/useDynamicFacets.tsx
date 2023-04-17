@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useHits } from 'react-instantsearch-hooks';
+import BooleanFacet from '../components/facets/boolean';
 import ColorFacet from '../components/facets/color';
 import RangeFacet from '../components/facets/range';
 import TermFacet from '../components/facets/term';
@@ -20,6 +21,7 @@ const useDynamicFacets = ({ configuration, ordering, render }: Options = {}) => 
       range: RangeFacet,
       color: ColorFacet,
       term: TermFacet,
+      boolean: BooleanFacet,
     }),
     [],
   );
@@ -31,7 +33,7 @@ const useDynamicFacets = ({ configuration, ordering, render }: Options = {}) => 
       const facet = configuration[attribute];
 
       const isEmptyFacet =
-        (facet.type === 'color' || facet.type === 'term') &&
+        (facet.type === 'color' || facet.type === 'term' || facet.type === 'boolean') &&
         !results?.disjunctiveFacets?.find((f) => f.name === attribute);
 
       const Component = facetMapping[facet.type];

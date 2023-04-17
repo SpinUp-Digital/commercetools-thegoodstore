@@ -72,9 +72,15 @@ const ProductListProvider: React.FC = ({ children }) => {
           params.set(`facets[${configuration.key}][min]`, (configuration.minSelected ?? configuration.min).toString());
           params.set(`facets[${configuration.key}][max]`, (configuration.maxSelected ?? configuration.max).toString());
         } else if (configuration.type === 'term' || configuration.type === 'color') {
-          configuration.terms
-            .filter((term) => term.selected)
-            .forEach((term, index) => params.set(`facets[${configuration.key}][terms][${index}]`, term.key));
+          if (configuration.key === 'categories.categoryId') {
+            configuration.terms
+              .filter((term) => term.selected)
+              .forEach((term) => params.append('categories[]', term.key));
+          } else {
+            configuration.terms
+              .filter((term) => term.selected)
+              .forEach((term, index) => params.set(`facets[${configuration.key}][terms][${index}]`, term.key));
+          }
         }
       });
 

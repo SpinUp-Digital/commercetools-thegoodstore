@@ -8,6 +8,7 @@ import ProductListProvider, {
   useProductList,
 } from 'components/commercetools-ui/organisms/product/product-list/context';
 import {
+  TermFacet,
   FacetConfiguration,
   PriceConfiguration,
 } from 'components/commercetools-ui/organisms/product/product-list/types';
@@ -66,7 +67,36 @@ const ProductListWrapped: React.FC<Props> = ({ data, categories }) => {
   }, [pricesConfiguration, updatePricesConfiguration]);
 
   const facetsConfiguration = useMemo<Record<string, FacetConfiguration>>(() => {
-    return (data.data?.dataSource?.facets ?? [])
+    const externalCategoryFacet = externalFacetsConfiguration['categories.categoryId'];
+
+    const facetConfig = [
+      ...(data.data?.dataSource?.facets ?? []),
+      ...(externalCategoryFacet
+        ? [
+            {
+              key: externalCategoryFacet.key,
+              type: 'term',
+              identifier: externalCategoryFacet.key,
+              label: externalCategoryFacet.label,
+              selected: !!query['categories[]']?.length,
+              terms: categories.map((category) => ({
+                key: category.categoryId,
+                identifier: category.categoryId,
+                label: category.name,
+                selected: ((query['categories[]'] as string[]) ?? []).includes(category.categoryId as string),
+              })),
+            } as TermFacet,
+          ]
+        : []),
+    ];
+
+    facetConfig.sort(
+      (a, b) =>
+        Object.keys(externalFacetsConfiguration).indexOf(a.key) -
+        Object.keys(externalFacetsConfiguration).indexOf(b.key),
+    );
+
+    return facetConfig
       .filter((facet) => facet.key in externalFacetsConfiguration)
       .reduce(
         (acc, configuration) => ({
@@ -79,7 +109,7 @@ const ProductListWrapped: React.FC<Props> = ({ data, categories }) => {
         }),
         {},
       );
-  }, [data.data?.dataSource?.facets, externalFacetsConfiguration]);
+  }, [data.data?.dataSource?.facets, externalFacetsConfiguration, categories, query]);
 
   useEffect(() => {
     updateFacetsConfiguration(facetsConfiguration);

@@ -1,25 +1,32 @@
 import React, { createContext, useCallback, useContext, useMemo, useState } from 'react';
 import { CurrentRefinementsConnectorParamsRefinement } from 'instantsearch.js/es/connectors/current-refinements/connectCurrentRefinements';
 import { useClearRefinements, useCurrentRefinements } from 'react-instantsearch-hooks';
-import { PriceConfiguration } from '../types';
+import { FacetConfiguration, PriceConfiguration } from '../types';
 import { refinementRemovedEventName, refinementsClearedEventName } from './constants';
 import { ProductListContextShape, RefinementRemovedEvent } from './types';
 
 export const ProductListContext = createContext<ProductListContextShape>({
   pricesConfiguration: {},
+  facetsConfiguration: {},
   numericRanges: {},
   updateNumericRange() {},
+  updateFacetsConfiguration() {},
   updatePricesConfiguration() {},
   removeRefinement() {},
   removeAllRefinements() {},
 });
 
 const ProductListProvider: React.FC = ({ children }) => {
+  const [facetsConfiguration, setFacetsConfiguration] = useState<Record<string, FacetConfiguration>>({});
   const [pricesConfiguration, setPricesConfiguration] = useState<Record<string, PriceConfiguration>>({});
   const [numericRanges, setNumericRanges] = useState<Record<string, [number, number]>>({});
 
   const { items, refine } = useCurrentRefinements();
   const { refine: clearAllRefinements } = useClearRefinements();
+
+  const updateFacetsConfiguration = useCallback((newFacetsConfiguration: Record<string, FacetConfiguration>) => {
+    setFacetsConfiguration(newFacetsConfiguration);
+  }, []);
 
   const updatePricesConfiguration = useCallback((newPricesConfiguration: Record<string, PriceConfiguration>) => {
     setPricesConfiguration(newPricesConfiguration);
@@ -62,17 +69,21 @@ const ProductListProvider: React.FC = ({ children }) => {
 
   const value = useMemo(
     () => ({
+      facetsConfiguration,
       pricesConfiguration,
       numericRanges,
       updateNumericRange,
+      updateFacetsConfiguration,
       updatePricesConfiguration,
       removeRefinement,
       removeAllRefinements,
     }),
     [
+      facetsConfiguration,
       pricesConfiguration,
       numericRanges,
       updateNumericRange,
+      updateFacetsConfiguration,
       updatePricesConfiguration,
       removeRefinement,
       removeAllRefinements,

@@ -1,6 +1,5 @@
 import { Result } from '@commercetools/frontend-domain-types/product/Result';
 import { ProductMapper } from '../mappers/ProductMapper';
-import { ProductQuery } from '@commercetools/frontend-domain-types/query/ProductQuery';
 import { Product } from '@commercetools/frontend-domain-types/product/Product';
 import { BaseApi } from './BaseApi';
 import { FilterField, FilterFieldTypes } from '@commercetools/frontend-domain-types/product/FilterField';
@@ -10,6 +9,7 @@ import { RangeFilter } from '@commercetools/frontend-domain-types/query/RangeFil
 import { CategoryQuery } from '../interfaces/CategoryQuery';
 import { Category } from '@commercetools/frontend-domain-types/product/Category';
 import { FacetDefinition } from '@commercetools/frontend-domain-types/product/FacetDefinition';
+import { ProductQuery } from '../../types/product/product-query';
 
 export class ProductApi extends BaseApi {
   protected getOffsetFromCursor = (cursor: string) => {
@@ -44,6 +44,10 @@ export class ProductApi extends BaseApi {
           attributeId: 'variants.price',
           attributeType: 'money',
         },
+        {
+          attributeId: 'variants.scopedPriceDiscounted',
+          attributeType: 'boolean',
+        },
       ];
 
       const queryArgFacets = ProductMapper.facetDefinitionsToCommercetoolsQueryArgFacets(facetDefinitions, locale);
@@ -56,8 +60,9 @@ export class ProductApi extends BaseApi {
         filterQuery.push(`variants.sku:"${productQuery.skus.join('","')}"`);
       }
 
-      if (productQuery.category !== undefined && productQuery.category !== '') {
-        filterQuery.push(`categories.id:subtree("${productQuery.category}")`);
+      if (productQuery.categories !== undefined && productQuery.categories.length !== 0) {
+        const categoryIds = productQuery.categories.map((category) => `subtree("${category}")`);
+        filterQuery.push(`categories.id: ${categoryIds.join(', ')}`);
       }
 
       if (productQuery.filters !== undefined) {

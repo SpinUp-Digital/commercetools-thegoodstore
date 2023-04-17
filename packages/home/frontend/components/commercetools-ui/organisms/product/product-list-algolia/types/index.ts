@@ -1,6 +1,6 @@
 export interface FacetConfiguration {
   key: string;
-  type: 'range' | 'color' | 'term';
+  type: 'range' | 'color' | 'term' | 'boolean';
   label: string;
 }
 
