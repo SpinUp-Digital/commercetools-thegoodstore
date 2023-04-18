@@ -1,0 +1,101 @@
+configuration:
+  product:
+    engine: commercetools
+    clientId: wnfsvNK4KWFIxU7z3Yfy9-WZ
+    clientSecret: KkqmSPPMfirq6u_3f4mQfB5y0NMfeVEi
+    projectKey: thegoodstore
+    authUrl: 'https://auth.sphere.io'
+    hostUrl: 'https://api.sphere.io'
+  productSearch: {}
+  account:
+    engine: commercetools
+    clientId: wnfsvNK4KWFIxU7z3Yfy9-WZ
+    clientSecret: KkqmSPPMfirq6u_3f4mQfB5y0NMfeVEi
+    projectKey: thegoodstore
+    authUrl: 'https://auth.sphere.io'
+    hostUrl: 'https://api.sphere.io'
+  cart:
+    engine: commercetools
+    clientId: wnfsvNK4KWFIxU7z3Yfy9-WZ
+    clientSecret: KkqmSPPMfirq6u_3f4mQfB5y0NMfeVEi
+    projectKey: thegoodstore
+    authUrl: 'https://auth.sphere.io'
+    hostUrl: 'https://api.sphere.io'
+  wishlist:
+    engine: commercetools
+    clientId: wnfsvNK4KWFIxU7z3Yfy9-WZ
+    clientSecret: KkqmSPPMfirq6u_3f4mQfB5y0NMfeVEi
+    projectKey: thegoodstore
+    authUrl: 'https://auth.sphere.io'
+    hostUrl: 'https://api.sphere.io'
+  search:
+    engine: commercetools
+    clientId: wnfsvNK4KWFIxU7z3Yfy9-WZ
+    clientSecret: KkqmSPPMfirq6u_3f4mQfB5y0NMfeVEi
+    projectKey: thegoodstore
+    authUrl: 'https://auth.sphere.io'
+    hostUrl: 'https://api.sphere.io'
+  content:
+    engine: contentful
+    accessToken: 3d50038afea30f11997a73f887c4aa12d7d411d9da6825dabcc250b78623a530
+    previewToken: 7391f414d8febe45caf58672ddb65ae62b2c37d525c10205669ba57c6f47bfa6
+    spaceId: 2yke74xvylnq
+  media:
+    engine: cloudinary
+    apiKey: 183832318368184
+    apiSecret: 93R2n-_itjETBA3o1OSN0X-w56g
+    autoTaggingMinConfidence: 0.8
+    autoTaggingService: ''
+    cloudName: dlwdq84ig
+    mediaPoolName: thegoodstore
+  github:
+    url: 'https://github.com/frontastic-developers/customer-thegoodstore'
+  cloudinary:
+    apiKey: 183832318368184
+    apiSecret: 93R2n-_itjETBA3o1OSN0X-w56g
+    autoTaggingMinConfidence: 0.8
+    autoTaggingService: ''
+    cloudName: dlwdq84ig
+    mediaPoolName: thegoodstore
+  commercetools:
+    clientId: wnfsvNK4KWFIxU7z3Yfy9-WZ
+    clientSecret: KkqmSPPMfirq6u_3f4mQfB5y0NMfeVEi
+    projectKey: thegoodstore
+    authUrl: 'https://auth.sphere.io'
+    hostUrl: 'https://api.sphere.io'
+  contentful:
+    accessToken: 3d50038afea30f11997a73f887c4aa12d7d411d9da6825dabcc250b78623a530
+    previewToken: 7391f414d8febe45caf58672ddb65ae62b2c37d525c10205669ba57c6f47bfa6
+    spaceId: 2yke74xvylnq
+  adyen:
+    baseUrl: https://checkout-test.adyen.com/v70
+    merchantAccount: Commercetools553ECOM
+    apiKey: AQEyhmfxLILPbhNGw0m/n3Q5qf3Va4RAAJZYW2BCyXenjTMezbCeGlTwhtA642PH73QWuiYQwV1bDb7kfNy1WIxIIkxgBw==-s621mi3kmceH56goRDJbFLG7wAJFdhb69aglXmgNTNo=-p]=T=h$rw:h3ka%S
+    password: M_UE[>FTNp25V6uIx#uYCmr+g
+    clientKey: test_I3EXGUWPI5BLHACQ2FES3FKEYMNPFTQH
+    hmacKey: F7C4C9B613344ACAAC3FECCF5AA28D9B3C7E1E333C53E0F31194E164F8DD34D0
+  smtp:
+    host: smtp.mailgun.org
+    port: 587
+    encryption: tls
+    user: postmaster@mailing.frontastic.cloud
+    password: 2acf9dd7a69cc699b1484b22f1b2fe6c-c1fe131e-bb1f026f
+    sender: no-reply@frontastic.cloud
+    client_host: 'https://home-thegoodstore.frontastic.io.netlify.app'
+  sendgrid:
+    apiKey: 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
+    sender: connect-support@commercetools.com
+    client_host: https://home-thegoodstore.netlify.app
+    templateIds:
+      accountVerification: d-0b3d41a307454d55be2ce5097cbdf857
+      passwordReset: d-835b96e30e6947978b44307958efe460
+      orderConfirmation: d-cd553da56912473c9d266679df1d06c6
+      welcomeCustomer: d-6c567ea4fbc4427aaac5dd4c9263f74d
+      accountDeletion: d-7e423a89d7224cd0ab891c5fb10bb8e0
+    listIds:
+      newsletter: 89beb094-0bb1-4637-b057-6b23bf4fc87f
+data: {}
+languages:
+  - de_DE@EUR
+  - en_GB@GBP
+defaultLanguage: en_GB@GBP
