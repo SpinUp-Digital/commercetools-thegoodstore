@@ -49,4 +49,5 @@ export interface HeaderProps extends EmptyStateProps {
   logoLink: Reference;
   logoLinkMobile: Reference;
   tiles?: Tile[];
+  enableAlgoliaSearch?: boolean;
 }

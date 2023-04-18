@@ -45,7 +45,7 @@ const SearchItem: React.FC<Props> = ({ hit, categories, onClick }) => {
       <div className="flex items-center gap-12">
         <div className="shrink-0 p-8">
           <div className="relative h-90 w-80">
-            <Image src={variant?.images?.[0]} objectFit="contain" />
+            <Image src={variant?.images?.[0]} suffix="small" objectFit="contain" />
           </div>
         </div>
         <div>

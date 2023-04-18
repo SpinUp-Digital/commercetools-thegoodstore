@@ -57,6 +57,7 @@ const HeaderTastic = ({ data, categories }: Props) => {
           emptyWishlistSubtitle={data.emptyWishlistSubtitle}
           emptyWishlistImage={data.emptyWishlistImage}
           emptyWishlistCategories={data.emptyWishlistCategories}
+          enableAlgoliaSearch={data.enableAlgoliaSearch}
         />
       </div>
     </MarketProvider>

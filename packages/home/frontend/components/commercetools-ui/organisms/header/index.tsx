@@ -1,5 +1,6 @@
 import React from 'react';
-import Search from 'components/commercetools-ui/atoms/search';
+import CommercetoolsSearch from 'components/commercetools-ui/atoms/search';
+import AlgoliaSearch from 'components/commercetools-ui/atoms/search-algolia';
 import HeaderLogo from 'components/commercetools-ui/organisms/header/header-logo';
 import HeaderNavigationDesktop from 'components/commercetools-ui/organisms/header/header-navigation/header-navigation-desktop';
 import HeaderNavigationMobile from 'components/commercetools-ui/organisms/header/header-navigation/header-navigation-mobile';
@@ -22,7 +23,10 @@ const Header: React.FC<HeaderProps> = ({
   emptyWishlistSubtitle,
   emptyWishlistImage,
   emptyWishlistCategories,
+  enableAlgoliaSearch = false,
 }) => {
+  const Search = enableAlgoliaSearch ? AlgoliaSearch : CommercetoolsSearch;
+
   return (
     <header className="relative h-fit w-full border-b-[1.5px] border-neutral-400 bg-white">
       <div aria-label="Top" className="flex w-full items-center justify-between px-16 md:px-24 lg:px-20 xl:px-48">
