@@ -6,8 +6,11 @@ export type SliderNavigationProps = {
   compactNavigation?: boolean;
   arrows?: boolean;
   innerArrows?: boolean;
+  solidArrows?: boolean;
   prevButtonStyles?: CSSProperties;
   nextButtonStyles?: CSSProperties;
+  prevArrowStyles?: CSSProperties;
+  nextArrowStyles?: CSSProperties;
   totalSlides?: number;
   swiperRef?: SwiperType;
   navigationPrevRef?: LegacyRef<HTMLDivElement>;
@@ -18,8 +21,11 @@ const SliderNavigation: FC<SliderNavigationProps> = ({
   compactNavigation,
   arrows,
   innerArrows,
+  solidArrows,
   prevButtonStyles,
   nextButtonStyles,
+  prevArrowStyles,
+  nextArrowStyles,
   totalSlides,
   navigationPrevRef,
   navigationNextRef,
@@ -45,19 +51,24 @@ const SliderNavigation: FC<SliderNavigationProps> = ({
     );
 
   const innerArrowsClassName = innerArrows ? 'slider_arrow_inner' : '';
+  const solidArrowsClassName = solidArrows ? 'slider_arrow_solid' : '';
 
   return (
     <div style={{ display: arrows ? 'block' : 'none' }}>
       <div
         ref={navigationPrevRef}
-        className={`slider_arrow slider_arrow_prev ${innerArrowsClassName}`}
+        className={`slider_arrow slider_arrow_prev ${innerArrowsClassName} ${solidArrowsClassName}`}
         style={prevButtonStyles}
-      />
+      >
+        <span className={`arrow`} style={prevArrowStyles}></span>
+      </div>
       <div
         ref={navigationNextRef}
-        className={`slider_arrow slider_arrow_next ${innerArrowsClassName}`}
+        className={`slider_arrow slider_arrow_next ${innerArrowsClassName} ${solidArrowsClassName}`}
         style={nextButtonStyles}
-      />
+      >
+        <span className={`arrow`} style={nextArrowStyles}></span>
+      </div>
     </div>
   );
 };

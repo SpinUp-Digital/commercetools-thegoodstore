@@ -1,7 +1,6 @@
 import React, { useCallback, useContext, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Product } from '@commercetools/frontend-domain-types/product/Product';
-import { Variant } from 'types/product';
 import { Transition } from '@headlessui/react';
 import { XMarkIcon as CloseIcon } from '@heroicons/react/24/solid';
 import Link from 'components/commercetools-ui/atoms/link';
@@ -12,6 +11,7 @@ import { useFormat } from 'helpers/hooks/useFormat';
 import useScrollBlock from 'helpers/hooks/useScrollBlock';
 import useTouchDevice from 'helpers/hooks/useTouchDevice';
 import { mediumDesktop, tablet } from 'helpers/utils/screensizes';
+import { Variant } from 'types/product';
 import { useProduct } from 'frontastic';
 import Image from 'frontastic/lib/image';
 import { AddToCartOverlayContextShape, StateProduct } from './types';
@@ -136,7 +136,6 @@ const AddToCartOverlayProvider: React.FC = ({ children }) => {
           </div>
           <div className={`mt-36 hidden bg-neutral-200 py-24 md:block ${isTouchDevice ? 'px-48' : 'px-96'}`}>
             <ProductSlider
-              wrapperVariant="none"
               clearDefaultWrapperStyles
               products={relatedProducts}
               title={formatProductMessage({ id: 'bought.together', defaultMessage: 'Frequently bought together' })}

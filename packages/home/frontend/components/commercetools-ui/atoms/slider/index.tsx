@@ -13,6 +13,7 @@ import SliderNavigation, { SliderNavigationProps } from './slider-navigation';
 export type SliderProps = SliderNavigationProps & {
   allowArrowsOnTouchDevice?: boolean;
   className?: string;
+  containerClassName?: string;
   spaceBetween?: number;
   slidesPerView?: number;
   dots?: boolean;
@@ -24,11 +25,13 @@ export type SliderProps = SliderNavigationProps & {
 
 const Slider: FC<SliderProps> = ({
   className = '',
+  containerClassName = '',
   slideWidth = 300,
   slidesPerView,
   fitToSlides = false,
   arrows = false,
   innerArrows = false,
+  solidArrows = false,
   dots = true,
   spaceBetween = 20,
   withThumbs = false,
@@ -38,6 +41,8 @@ const Slider: FC<SliderProps> = ({
   allowTouchMove,
   prevButtonStyles = {},
   nextButtonStyles = {},
+  prevArrowStyles = {},
+  nextArrowStyles = {},
   compactNavigation,
   slideWidthIsFlexible,
   allowArrowsOnTouchDevice = false,
@@ -66,7 +71,8 @@ const Slider: FC<SliderProps> = ({
   const sliderWidth: CSSProperties['width'] =
     validToFit && slidesPerView ? `${spaceBetween * (slidesPerView - 1) + slideWidth * slidesPerView}px` : '';
 
-  const containerClassName = useClassNames([
+  const containerClassNames = useClassNames([
+    containerClassName,
     'slider_container relative',
     {
       'slider__container--fit': validToFit,
@@ -97,7 +103,7 @@ const Slider: FC<SliderProps> = ({
   };
 
   return (
-    <div className={containerClassName}>
+    <div className={containerClassNames}>
       <Swiper
         key={`${allowTouchMove} ${isTouchDevice}`}
         className={slidesClassName}
@@ -126,11 +132,14 @@ const Slider: FC<SliderProps> = ({
         arrows={allowArrowsOnTouchDevice ? arrows : arrows && !isTouchDevice}
         prevButtonStyles={prevButtonStyles}
         nextButtonStyles={nextButtonStyles}
+        prevArrowStyles={prevArrowStyles}
+        nextArrowStyles={nextArrowStyles}
         navigationPrevRef={navigationPrevRef}
         navigationNextRef={navigationNextRef}
         totalSlides={slides?.length}
         swiperRef={swiperRef?.current}
         innerArrows={innerArrows}
+        solidArrows={solidArrows}
       />
     </div>
   );

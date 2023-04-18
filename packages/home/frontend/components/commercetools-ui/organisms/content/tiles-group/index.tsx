@@ -1,5 +1,4 @@
 import React from 'react';
-import Wrapper from 'components/HOC/wrapper';
 import useImageSizes from 'helpers/hooks/useImageSizes';
 import Tile, { TileProps } from '../tile';
 
@@ -11,7 +10,7 @@ const TilesGroup: React.FC<Props> = ({ tiles }) => {
   const imageSizes = useImageSizes({ md: 1, lg: 0.5, defaultSize: 0.5 });
 
   return (
-    <Wrapper background="neutral-200">
+    <div className="bg-neutral-200 lg:px-20 xl:px-48">
       <div className="flex flex-col bg-neutral-200 md:flex-row lg:gap-16">
         {tiles.map((tile, index) => (
           <Tile
@@ -22,7 +21,7 @@ const TilesGroup: React.FC<Props> = ({ tiles }) => {
           />
         ))}
       </div>
-    </Wrapper>
+    </div>
   );
 };
 

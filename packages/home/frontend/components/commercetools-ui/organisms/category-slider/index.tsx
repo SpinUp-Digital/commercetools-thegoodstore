@@ -15,19 +15,21 @@ const CategorySlider: React.FC<Props> = ({ tiles = [] }) => {
 
   const [isDesktopSize] = useMediaQuery(mediumDesktop);
 
-  const fitsToScreenSize = useMemo(
-    () => (isDesktopSize && tiles.length <= 4) || (!isDesktopSize && tiles.length <= 2),
-    [isDesktopSize, tiles.length],
+  const showArrows = useMemo(
+    () => !isTouchDevice && !((isDesktopSize && tiles.length <= 4) || (!isDesktopSize && tiles.length <= 2)),
+    [isDesktopSize, isTouchDevice, tiles.length],
   );
 
   return (
-    <Wrapper background="neutral-200" variant="left-padding-only">
+    <Wrapper background="neutral-200">
       <Slider
+        containerClassName={showArrows ? 'px-48' : ''}
         slidesPerView={isTouchDevice ? 2.3 : 1.3}
         dots={false}
         spaceBetween={4}
-        arrows={!fitsToScreenSize}
-        allowTouchMove={!fitsToScreenSize}
+        arrows={showArrows}
+        innerArrows
+        allowTouchMove={!showArrows}
         breakpoints={{
           [tablet]: {
             spaceBetween: 8,

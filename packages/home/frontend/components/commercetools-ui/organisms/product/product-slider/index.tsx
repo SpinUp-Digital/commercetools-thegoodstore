@@ -4,7 +4,7 @@ import { SwiperOptions } from 'swiper';
 import Slider from 'components/commercetools-ui/atoms/slider';
 import Subtitle, { SubtitleProps } from 'components/commercetools-ui/atoms/subtitle';
 import Typography from 'components/commercetools-ui/atoms/typography';
-import Wrapper, { WrapperVariant } from 'components/HOC/wrapper';
+import Wrapper from 'components/HOC/wrapper';
 import useTouchDevice from 'helpers/hooks/useTouchDevice';
 import { mediumDesktop, tablet } from 'helpers/utils/screensizes';
 import { Reference } from 'types/reference';
@@ -20,7 +20,6 @@ export interface ProductSliderProps extends Partial<SwiperOptions> {
   subtitleVariant?: SubtitleProps['variant'];
   ctaLabel?: string;
   ctaLink?: Reference;
-  wrapperVariant?: WrapperVariant;
   clearDefaultWrapperStyles?: boolean;
   slidesPerView?: number;
   disableProductQuickView?: boolean;
@@ -42,7 +41,6 @@ const ProductSlider: FC<ProductSliderProps> = ({
   onProductClick,
   titleVariant = 'lg',
   subtitleVariant = 'lg',
-  wrapperVariant = 'left-padding-only',
   clearDefaultWrapperStyles = false,
   disableProductQuickView = false,
   disableProductWishlistButton = false,
@@ -64,7 +62,7 @@ const ProductSlider: FC<ProductSliderProps> = ({
   }, [titleVariant]);
 
   return (
-    <Wrapper background="neutral-200" variant={wrapperVariant} clearDefaultStyles={clearDefaultWrapperStyles}>
+    <Wrapper background="neutral-200" clearDefaultStyles={clearDefaultWrapperStyles}>
       <div>
         <Typography
           className={`mb-12 ${titleClassName} ${classNames.title ?? ''}`}
@@ -101,8 +99,10 @@ const ProductSlider: FC<ProductSliderProps> = ({
             slidesPerGroup={1}
             dots={false}
             arrows
-            nextButtonStyles={{ transform: 'translateY(-225%) rotateZ(-45deg)' }}
-            prevButtonStyles={{ transform: 'translateY(-225%) rotateZ(135deg)' }}
+            innerArrows
+            solidArrows
+            nextButtonStyles={{ transform: 'translateY(-150%)' }}
+            prevButtonStyles={{ transform: 'translateY(-150%)' }}
             allowTouchMove
             spaceBetween={8}
             breakpoints={{

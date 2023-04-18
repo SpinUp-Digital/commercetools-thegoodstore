@@ -81,7 +81,7 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
   );
 
   return (
-    <Wrapper variant="left-padding-only">
+    <Wrapper>
       {title && (
         <Typography className="mb-12 md:text-22 lg:text-28" fontSize={20} as="h3" fontFamily="libre">
           {title}
