@@ -67,37 +67,25 @@ const ProductListWrapped: React.FC<Props> = ({ data, categories }) => {
   }, [pricesConfiguration, updatePricesConfiguration]);
 
   const facetsConfiguration = useMemo<Record<string, FacetConfiguration>>(() => {
-    const externalCategoryFacet = externalFacetsConfiguration['categories.categoryId'];
+    const facets = data.data?.dataSource?.facets ?? [];
 
-    const facetConfig = [
-      ...(data.data?.dataSource?.facets ?? []),
-      ...(externalCategoryFacet
-        ? [
-            {
-              key: externalCategoryFacet.key,
-              type: 'term',
-              identifier: externalCategoryFacet.key,
-              label: externalCategoryFacet.label,
-              selected: !!query['categories[]']?.length,
-              terms: categories.map((category) => ({
-                key: category.categoryId,
-                identifier: category.categoryId,
-                label: category.name,
-                selected: ((query['categories[]'] as string[]) ?? []).includes(category.categoryId as string),
-              })),
-            } as TermFacet,
-          ]
-        : []),
-    ];
+    const keys = Object.keys(externalFacetsConfiguration);
 
-    facetConfig.sort(
-      (a, b) =>
-        Object.keys(externalFacetsConfiguration).indexOf(a.key) -
-        Object.keys(externalFacetsConfiguration).indexOf(b.key),
-    );
+    facets.sort((a, b) => keys.indexOf(a.key) - keys.indexOf(b.key));
 
-    return facetConfig
+    return facets
       .filter((facet) => facet.key in externalFacetsConfiguration)
+      .map((facet) => {
+        if (facet.key === 'categories.id') {
+          (facet as TermFacet).terms = (facet as TermFacet).terms.map((term) => ({
+            ...term,
+            label: categories.find((c) => c.categoryId === term.key)?.name ?? '',
+            count: 0,
+          }));
+        }
+
+        return facet;
+      })
       .reduce(
         (acc, configuration) => ({
           ...acc,
@@ -109,7 +97,7 @@ const ProductListWrapped: React.FC<Props> = ({ data, categories }) => {
         }),
         {},
       );
-  }, [data.data?.dataSource?.facets, externalFacetsConfiguration, categories, query]);
+  }, [data.data?.dataSource?.facets, externalFacetsConfiguration, categories]);
 
   useEffect(() => {
     updateFacetsConfiguration(facetsConfiguration);

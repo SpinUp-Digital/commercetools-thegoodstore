@@ -36,6 +36,10 @@ export class ProductApi extends BaseApi {
         ...ProductMapper.commercetoolsProductTypesToFacetDefinitions(await this.getProductTypes(), locale),
         // Include Scoped Price facet
         {
+          attributeId: 'categories.id',
+          attributeType: 'text',
+        },
+        {
           attributeId: 'variants.scopedPrice.value',
           attributeType: 'money',
         },
