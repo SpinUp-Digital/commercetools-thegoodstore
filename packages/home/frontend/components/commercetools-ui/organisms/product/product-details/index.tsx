@@ -64,12 +64,14 @@ const ProductDetails: FC<ProductDetailsProps> = ({
 
   const handleAddToCart = async () => {
     setLoading(true);
+
     addItem(variant, quantity).then(() => {
       setLoading(false);
 
       setAdded(true);
       setTimeout(() => {
         setAdded(false);
+        setQuantity(1);
       }, 1000);
 
       show(product, variant, quantity);
@@ -148,7 +150,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({
         <div className="flex gap-8 pt-20">
           <Dropdown
             className="h-full rounded-sm"
-            defaultValue="1"
+            value={quantity.toString()}
             items={Array(10)
               .fill(0)
               .map((_, index) => {
