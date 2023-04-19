@@ -1,13 +1,16 @@
 import React, { FC, useEffect, useState } from 'react';
+import Breadcrumb from 'components/commercetools-ui/atoms/breadcrumb';
 import Button from 'components/commercetools-ui/atoms/button';
 import Dropdown from 'components/commercetools-ui/atoms/dropdown';
 import Link from 'components/commercetools-ui/atoms/link';
+import Typography from 'components/commercetools-ui/atoms/typography';
 import Gallery from 'components/commercetools-ui/organisms/gallery';
 import { useAddToCartOverlay } from 'context/add-to-cart-overlay';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
+import { Category } from 'types/category';
 import { Variant } from 'types/product';
-import { useCart } from 'frontastic';
+import { useCart, useProduct } from 'frontastic';
 import AdditionalInfo from './components/additional-info';
 import ProductInformation from './components/product-information';
 import ShippingSection from './components/shipping-section';
@@ -37,9 +40,19 @@ const ProductDetails: FC<ProductDetailsProps> = ({
   const { formatMessage } = useFormat({ name: 'cart' });
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
+  const [category, setCategory] = useState<Category>();
   const [quantity, setQuantity] = useState<number>(1);
   const [loading, setLoading] = useState(false);
   const [added, setAdded] = useState(false);
+
+  const { categories } = useProduct();
+
+  useEffect(() => {
+    if (product && categories && !category) {
+      const currentCategory = categories.find((cat) => cat.categoryId === product.categories?.[0].categoryId);
+      setCategory(currentCategory);
+    }
+  }, [categories, category, product, product?.categories]);
 
   const { trackAddToCart } = useTrack({ product, inModalVersion });
 
@@ -85,6 +98,18 @@ const ProductDetails: FC<ProductDetailsProps> = ({
 
   return (
     <div className={wrapperClassName}>
+      {category && (
+        <Breadcrumb Separator="/" className="col-span-12 mb-24 w-fit">
+          <Link key={category.categoryId} link={category.path} className="text-14 text-primary-black">
+            {category.name}
+          </Link>
+
+          <Typography key={product.slug} fontSize={14} className="cursor-default text-neutral-500">
+            {product.name}
+          </Typography>
+        </Breadcrumb>
+      )}
+
       <div className={galleryContainerClassName}>
         <Gallery images={variant?.images ?? []} inModalVersion={inModalVersion} />
       </div>

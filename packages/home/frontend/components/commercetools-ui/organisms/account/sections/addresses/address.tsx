@@ -26,7 +26,7 @@ const Address: React.FC<AddressProps> = ({ address, isDefaultAddress, selectAddr
 
   const addressInfoTypographyProps: TypographyProps = {
     fontSize: 14,
-    lineHeight: 'tight',
+    lineHeight: 'loose',
     className: 'text-secondary-black',
   };
 
@@ -52,9 +52,9 @@ const Address: React.FC<AddressProps> = ({ address, isDefaultAddress, selectAddr
           checked={isDefaultAddress}
           onChange={() => selectAddress(address as AddressFormData)}
         />
-        <div className="grid">
-          <div className="mb-24 flex gap-5 md:mb-4">
-            <Typography className="md:text-16" medium fontSize={14}>
+        <div className="grid gap-24 md:gap-4">
+          <div className="flex gap-5 md:mb-4">
+            <Typography className="capitalize md:text-16" medium fontSize={14}>
               {label}
             </Typography>
             {isDefaultAddress && (
@@ -64,7 +64,7 @@ const Address: React.FC<AddressProps> = ({ address, isDefaultAddress, selectAddr
             )}
           </div>
 
-          <div className="grid gap-12">
+          <div className="grid">
             {addressInfoTypographyElements.map((element) => (
               <Typography key={element} {...addressInfoTypographyProps}>
                 {element}
