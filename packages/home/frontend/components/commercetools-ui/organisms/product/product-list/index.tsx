@@ -22,7 +22,7 @@ const ProductList: React.FC<Props> = ({ products, categories }) => {
 
   return (
     <div className="min-h-screen bg-neutral-200 py-48">
-      <div className="relative mx-auto max-w-[90%] px-12 md:px-24">
+      <div className="relative pl-8 md:pl-12 lg:px-20 xl:px-48">
         {searchQuery ? (
           <SearchHeader query={searchQuery ?? ''} />
         ) : (

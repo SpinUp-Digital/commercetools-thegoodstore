@@ -33,7 +33,7 @@ const ProductListAlgolia: React.FC<Props> = ({ slug, searchQuery, categories, fa
         maxValuesPerFacet={1000}
       />
 
-      <div className="relative mx-auto max-w-[1150px] px-12 md:px-24 2xl:max-w-[1248px]">
+      <div className="relative pl-8 md:pl-12 lg:px-20 xl:px-48">
         {searchQuery ? (
           <SearchHeader query={searchQuery ?? ''} />
         ) : (
