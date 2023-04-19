@@ -1,6 +1,6 @@
 import { Product } from '@commercetools/frontend-domain-types/product/Product';
 import { Context, Request } from '@frontastic/extension-types';
-import { ProductQuery } from '../../types/product/product-query';
+import { ProductQuery } from '@commercetools/frontend-domain-types/query/ProductQuery';
 import { ProductApi } from '../apis/ProductApi';
 import { LineItem } from '@commercetools/frontend-domain-types/cart/LineItem';
 import { getPath, getLocale } from './Request';

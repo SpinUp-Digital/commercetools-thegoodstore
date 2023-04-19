@@ -46,7 +46,7 @@ const AddToCartOverlayProvider: React.FC = ({ children }) => {
 
       if (!category) return;
 
-      const response = await query({ category, limit: 15 });
+      const response = await query({ categories: [category], limit: 15 });
 
       if (response.isError) return;
 
@@ -140,6 +140,8 @@ const AddToCartOverlayProvider: React.FC = ({ children }) => {
               products={relatedProducts}
               title={formatProductMessage({ id: 'bought.together', defaultMessage: 'Frequently bought together' })}
               titleVariant="xs"
+              innerArrows={false}
+              solidArrows={false}
               disableProductQuickView
               disableProductWishlistButton
               disableProductVariants

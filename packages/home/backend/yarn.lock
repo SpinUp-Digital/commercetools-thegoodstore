@@ -1206,12 +1206,10 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@commercetools/frontend-domain-types@^1.0.4-alpha.0":
-  version "1.0.4-alpha.0"
-  resolved "https://registry.yarnpkg.com/@commercetools/frontend-domain-types/-/frontend-domain-types-1.0.4-alpha.0.tgz#eda29819c407b1b229ab54253d4f19c0d4dcad19"
-  integrity sha512-1iBJe4bwjjgUsnETdDsj2csFTuf9wuptP3Y9I/DyeBFdX7G5tBZjGlsKK5j+d9G7Ivt1o3DLd1GVWQWpIinm3g==
-  dependencies:
-    typescript "4.8.3"
+"@commercetools/frontend-domain-types@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@commercetools/frontend-domain-types/-/frontend-domain-types-1.0.7.tgz#37b2a92f5111e04b6c30d21ee6670b3a28106feb"
+  integrity sha512-FA6U1fHDcILB6B9reZU9PwoZUAEdpBB16W/7qfPkqsVNzKiPNsAhWGvVdzhpXmD/bI3VG9DIqF3kXDhDKVPqSw==
 
 "@commercetools/platform-sdk@^1.20.0":
   version "1.20.0"
@@ -6900,11 +6898,6 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
-
-typescript@4.8.3:
-  version "4.8.3"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.8.3.tgz#d59344522c4bc464a65a730ac695007fdb66dd88"
-  integrity sha512-goMHfm00nWPa8UvR/CPSvykqf6dVV8x/dp0c5mFTMTIu0u0FlGWRioyy7Nn0PGAdHxpJZnuO/ut+PpQ8UiHAig==
 
 typescript@^4.3.5:
   version "4.5.3"

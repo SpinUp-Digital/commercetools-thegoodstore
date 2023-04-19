@@ -9,7 +9,7 @@ import { RangeFilter } from '@commercetools/frontend-domain-types/query/RangeFil
 import { CategoryQuery } from '../interfaces/CategoryQuery';
 import { Category } from '@commercetools/frontend-domain-types/product/Category';
 import { FacetDefinition } from '@commercetools/frontend-domain-types/product/FacetDefinition';
-import { ProductQuery } from '../../types/product/product-query';
+import { ProductQuery } from '@commercetools/frontend-domain-types/query/ProductQuery';
 
 export class ProductApi extends BaseApi {
   protected getOffsetFromCursor = (cursor: string) => {

@@ -1848,15 +1848,15 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@commercetools/frontend-composable-commerce@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@commercetools/frontend-composable-commerce/-/frontend-composable-commerce-1.2.2.tgz#06509b9ca32b483ae25f58ff1ab9a5279223e610"
-  integrity sha512-pmK1/P+WktBrmkLDI3lsWXhJ9tHZYXQKMJ06jEU7i7f0Sr6G0XKu8lsyk1eqz1aQ+CuOUDO/96ATHcyR2DYWpw==
+"@commercetools/frontend-composable-commerce@^1.2.4":
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/@commercetools/frontend-composable-commerce/-/frontend-composable-commerce-1.2.4.tgz#df6481d453466b377c9c77fd373ddeefc78f35a4"
+  integrity sha512-27EGrzPyf66aP9sUyC+sMQEDyA474ZVMou/8BANRfTwkuD7+MRu9oqdSpBUrrCE1c43qmP9nsxlKDWqluJOuXg==
 
-"@commercetools/frontend-domain-types@^1.0.6":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@commercetools/frontend-domain-types/-/frontend-domain-types-1.0.6.tgz#edd443dc1a6025e0de2937991470acd6c3134e97"
-  integrity sha512-gjUYwMnm+BB5nuacteIFWOLPwgqDA62QN2K7Dr1Pz4P23IjgmhZ5hXPBHRiu8a0gHEMGuzFSxnCGEne4bw+9bg==
+"@commercetools/frontend-domain-types@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@commercetools/frontend-domain-types/-/frontend-domain-types-1.0.7.tgz#37b2a92f5111e04b6c30d21ee6670b3a28106feb"
+  integrity sha512-FA6U1fHDcILB6B9reZU9PwoZUAEdpBB16W/7qfPkqsVNzKiPNsAhWGvVdzhpXmD/bI3VG9DIqF3kXDhDKVPqSw==
 
 "@commercetools/frontend-netlify-plugin@^0.0.3":
   version "0.0.3"
@@ -1866,10 +1866,10 @@
     dotenv "^16.0.3"
     node-fetch "^3.3.1"
 
-"@commercetools/frontend-sdk@^1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@commercetools/frontend-sdk/-/frontend-sdk-1.6.0.tgz#f7a2cc92b68667bc364e7ed93bea832c880c9ebc"
-  integrity sha512-cA0/Lcke3XxKnqiFL7A/NBu110iUExgMBc3ripuMGhyEq87fsio+kQPIbMQsXeJwuAggnDjO4NkN45d8+BAuVw==
+"@commercetools/frontend-sdk@^1.6.2":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@commercetools/frontend-sdk/-/frontend-sdk-1.7.0.tgz#4192d6e3932ba6c5009992c604b56ba760b63fd0"
+  integrity sha512-ijBGalCOoVSTwa6siMaLkHSok595jG+/djgXu/nz5P5HVGCj1tKgRmp/3yXL/PDgdrm3JtT58BsQ4WrKgfbXtA==
   dependencies:
     "@frontastic/extension-types" "^0.0.11"
     cookies "^0.8.0"

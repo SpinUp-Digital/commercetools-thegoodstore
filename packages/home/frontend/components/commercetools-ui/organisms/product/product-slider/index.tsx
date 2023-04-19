@@ -25,6 +25,8 @@ export interface ProductSliderProps extends Partial<SwiperOptions> {
   disableProductQuickView?: boolean;
   disableProductWishlistButton?: boolean;
   disableProductVariants?: boolean;
+  innerArrows?: boolean;
+  solidArrows?: boolean;
   onProductClick?: (product: Product) => void;
   classNames?: {
     title?: string;
@@ -45,6 +47,8 @@ const ProductSlider: FC<ProductSliderProps> = ({
   disableProductQuickView = false,
   disableProductWishlistButton = false,
   disableProductVariants = false,
+  innerArrows = true,
+  solidArrows = true,
   breakpoints = {},
   classNames = {},
   ...props
@@ -99,8 +103,8 @@ const ProductSlider: FC<ProductSliderProps> = ({
             slidesPerGroup={1}
             dots={false}
             arrows
-            innerArrows
-            solidArrows
+            innerArrows={innerArrows}
+            solidArrows={solidArrows}
             nextButtonStyles={{ transform: 'translateY(-150%)' }}
             prevButtonStyles={{ transform: 'translateY(-150%)' }}
             allowTouchMove

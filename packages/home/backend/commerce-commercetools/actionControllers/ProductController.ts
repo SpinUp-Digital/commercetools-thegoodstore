@@ -2,7 +2,7 @@ import { Request, Response } from '@frontastic/extension-types';
 import { ProductApi } from '../apis/ProductApi';
 import { ActionContext } from '@frontastic/extension-types';
 import { ProductQueryFactory } from '../utils/ProductQueryFactory';
-import { ProductQuery } from '../../types/product/product-query';
+import { ProductQuery } from '@commercetools/frontend-domain-types/query/ProductQuery';
 import { CategoryQuery } from '../interfaces/CategoryQuery';
 import { getLocale } from '../utils/Request';
 

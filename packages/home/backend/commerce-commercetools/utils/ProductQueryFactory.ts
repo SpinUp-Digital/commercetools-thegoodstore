@@ -7,7 +7,7 @@ import { FilterFieldTypes } from '@commercetools/frontend-domain-types/product/F
 import { Facet } from '@commercetools/frontend-domain-types/query/Facet';
 import { TermFacet } from '@commercetools/frontend-domain-types/query/TermFacet';
 import { RangeFacet } from '@commercetools/frontend-domain-types/query/RangeFacet';
-import { ProductQuery } from '../../types/product/product-query';
+import { ProductQuery } from '@commercetools/frontend-domain-types/query/ProductQuery';
 
 export class ProductQueryFactory {
   static queryFromParams: (request: Request, config?: DataSourceConfiguration) => ProductQuery = (
@@ -91,7 +91,7 @@ export class ProductQueryFactory {
       for ([key, configFilterData] of Object.entries(configFiltersData)) {
         if (configFilterData?.field === 'categoryId') {
           // Overwrite category with any value that has been set from Frontastic Studio
-          productQuery.category = configFilterData.values[0]; // TODO: should change if category is a single value
+          productQuery.categories = [configFilterData.values[0]]; // TODO: should change if category is a single value
           continue;
         }
 
