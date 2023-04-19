@@ -17,6 +17,7 @@ interface Props {
 
 const Search: React.FC<Props> = ({ categories }) => {
   const form = useRef<HTMLFormElement>(null);
+  const input = useRef<HTMLInputElement>(null);
 
   const { query: queryProducts } = useProduct();
 
@@ -63,17 +64,17 @@ const Search: React.FC<Props> = ({ categories }) => {
   );
 
   const cleanUp = useCallback(() => {
-    setQuery('');
+    updateQuery('');
     setValue('');
-  }, []);
+  }, [updateQuery]);
 
   const onSubmit = useCallback(
     (e: React.FormEvent) => {
       e.preventDefault();
       router.push(`/search?q=${value}`);
-      cleanUp();
+      input.current?.blur();
     },
-    [value, router, cleanUp],
+    [value, router],
   );
 
   useEffect(() => {
@@ -92,6 +93,7 @@ const Search: React.FC<Props> = ({ categories }) => {
         >
           <form className="quick-search relative flex w-full items-stretch" ref={form} onSubmit={onSubmit}>
             <input
+              ref={input}
               className="box-content grow border-none p-0 px-12 py-10 transition placeholder:text-14 placeholder:text-secondary-black focus:outline-none"
               value={value}
               onChange={onChange}

@@ -167,11 +167,9 @@ const AddressForm: React.FC<AddressFormProps> = ({ editedAddressId }) => {
       />
 
       <Input
-        label={`${formatMessage({ id: 'address', defaultMessage: 'Address' })} 1 (${formatMessage({
-          id: 'optional',
-          defaultMessage: 'Optional',
-        })})`}
+        label={`${formatMessage({ id: 'address', defaultMessage: 'Address' })} 1`}
         type="text"
+        required
         name="streetName"
         id="street-name"
         value={data?.streetName ?? ''}
