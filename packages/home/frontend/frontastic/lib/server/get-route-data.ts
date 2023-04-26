@@ -1,6 +1,6 @@
 import type { IncomingMessage, ServerResponse } from 'http';
 import { Result } from '@commercetools/frontend-domain-types/product/Result';
-import { serverSession } from '@commercetools/frontend-sdk';
+import { serverSession, ServerOptions } from '@commercetools/frontend-sdk';
 import { AcceptedQueryTypes } from '@commercetools/frontend-sdk/lib/types/Query';
 import { sdk } from 'sdk';
 import { PageDataResponse, PagePreviewDataResponse, RedirectResponse, PageFolderStructureResponse } from '../types';
@@ -15,11 +15,15 @@ export const getRouteData =
   ): Promise<RedirectResponse | PageDataResponse> => {
     const pageSlug = (slug as string[])?.join('/') || '';
     const path = `/${pageSlug !== 'index' ? pageSlug : ''}`;
+    const serverOptions: ServerOptions = {
+      req: req,
+      res: res,
+    };
 
     const response = await sdk.page.getPage({
       path,
       query,
-      serverSession: req && res ? serverSession.get(req, res) : undefined,
+      serverOptions: req && res ? serverOptions : undefined,
     });
 
     return (response.isError ? {} : response.data) as RedirectResponse | PageDataResponse;
