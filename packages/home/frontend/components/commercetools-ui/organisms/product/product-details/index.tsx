@@ -98,7 +98,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({
 
   return (
     <div className={wrapperClassName}>
-      {category && (
+      {category && !inModalVersion && (
         <Breadcrumb Separator="/" className="col-span-12 mb-24 w-fit">
           <Link key={category.categoryId} link={category.path} className="text-14 text-primary-black">
             {category.name}
