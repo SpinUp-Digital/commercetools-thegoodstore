@@ -79,7 +79,7 @@ export const getServerSideProps: GetServerSideProps | Redirect = async ({
 
   const [data, categories] = await Promise.all([
     frontastic.getRouteData(params?.slug as string[], query as AcceptedQueryTypes, req, res),
-    frontastic.getCategories(),
+    frontastic.getCategories(req, res),
   ]);
 
   if (data) {

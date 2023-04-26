@@ -67,14 +67,14 @@ export default function Preview({ data }: PreviewProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ params, locale }) => {
+export const getServerSideProps: GetServerSideProps = async ({ params, locale, req, res }) => {
   sdk.configureForNext(locale as string);
 
   const frontastic = createClient();
 
   const [data, categories] = await Promise.all([
     frontastic.getPreview(params?.previewId?.toString() ?? ''),
-    frontastic.getCategories(),
+    frontastic.getCategories(req, res),
   ]);
 
   return {

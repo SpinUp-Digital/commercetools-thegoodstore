@@ -37,13 +37,20 @@ export const getPreview =
     return (res.isError ? {} : res.data) as PagePreviewDataResponse;
   };
 
-export const getCategories = () => async (): Promise<Result> => {
-  const extensions = sdk.composableCommerce;
+export const getCategories =
+  () =>
+  async (req?: IncomingMessage, res?: ServerResponse): Promise<Result> => {
+    const extensions = sdk.composableCommerce;
 
-  const res = await extensions.product.queryCategories({ limit: 99 });
+    const serverOptions: ServerOptions = {
+      req: req,
+      res: res,
+    };
 
-  return (res.isError ? [] : res.data) as Result;
-};
+    const response = await extensions.product.queryCategories({ limit: 99 }, { serverOptions: serverOptions });
+
+    return (response.isError ? [] : response.data) as Result;
+  };
 
 export const getStructure =
   () =>
