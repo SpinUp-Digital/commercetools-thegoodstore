@@ -47,7 +47,7 @@ const OrderSummary: FC<OrderSummaryProps> = ({ order, onPrint }) => {
         <Typography
           as="h4"
           fontFamily="libre"
-          fontSize={16}
+          fontSize={18}
           asSkeleton={!order.sum}
           className="w-fit leading-[20px] text-primary-black"
         >
