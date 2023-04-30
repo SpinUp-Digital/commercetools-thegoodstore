@@ -19,7 +19,7 @@
     "@babel/runtime": "^7.16.5",
     "@commercetools/frontend-domain-types": "^1.0.7",
     "@commercetools/platform-sdk": "^1.20.0",
-    "@commercetools/sdk-client-v2": "^0.2.0",
+    "@commercetools/sdk-client-v2": "^2.1.1",
     "@sendgrid/client": "^7.7.0",
     "@sendgrid/mail": "^7.7.0",
     "@types/jest": "^27.4.1",
