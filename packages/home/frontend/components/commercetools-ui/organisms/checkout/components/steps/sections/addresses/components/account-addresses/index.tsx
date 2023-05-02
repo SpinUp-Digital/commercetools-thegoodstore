@@ -38,7 +38,7 @@ const AccountAddresses: React.FC<Props> = ({ className = '', type, onSelectAddre
         .map((address) => (
           <div
             key={address.addressId}
-            className="flex cursor-pointer items-center gap-20 rounded-md border border-neutral-400 py-38 px-20"
+            className="flex cursor-pointer items-center gap-20 rounded-md border border-neutral-400 px-20 py-38"
             onClick={() => setSelected(address)}
           >
             <Radio className="shrink-0" checked={address.addressId === selected?.addressId} />

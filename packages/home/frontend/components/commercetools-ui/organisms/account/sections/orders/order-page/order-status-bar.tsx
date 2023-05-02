@@ -123,7 +123,7 @@ const OrderStatusBar: FC<Props> = ({
         </div>
 
         <div className={statePointer3ClassNames} />
-        <div className="absolute top-20 -right-32 md:top-24 md:-right-60 md:w-144 lg:top-28">
+        <div className="absolute -right-32 top-20 md:-right-60 md:top-24 md:w-144 lg:top-28">
           {orderState === 'Complete' ? (
             <Typography
               align="center"

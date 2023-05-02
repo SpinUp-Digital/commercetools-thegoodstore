@@ -50,7 +50,7 @@ const Shipping: React.FC<Props> = ({ goToNextStep }) => {
   }, [goToNextStep, setShippingMethod, selectedId, processing, startProcessing, stopProcessing]);
 
   return (
-    <div className="lg:px-36 lg:pt-0 lg:pb-36">
+    <div className="lg:px-36 lg:pb-36 lg:pt-0">
       <div className="mt-24 border-x border-t border-neutral-400 border-neutral-400 bg-white lg:mt-0">
         {shippingMethods.map((shippingMethod) => (
           <div

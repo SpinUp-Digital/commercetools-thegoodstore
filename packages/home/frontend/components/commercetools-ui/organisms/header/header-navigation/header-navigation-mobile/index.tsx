@@ -44,7 +44,7 @@ const HeaderNavigationMobile: FC<Props> = ({ links, logo, logoLink }) => {
         variant="ghost"
         onClick={showHeaderMenu}
         title={formatMessage({ id: 'header.menu.open', defaultMessage: 'Open side menu' })}
-        className="mr-8 py-12 px-0"
+        className="mr-8 px-0 py-12"
       >
         <Bars3Icon className="w-30 text-secondary-black lg:w-44" />
       </Button>

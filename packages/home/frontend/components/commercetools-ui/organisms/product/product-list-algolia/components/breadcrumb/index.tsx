@@ -64,7 +64,7 @@ const Breadcrumbs: React.FC<Props> = ({ categoryId, categories }) => {
         <Breadcrumb className="mt-32">
           <Link
             link={currentCategory.path}
-            className="mr-8 rounded-md border border-gray-700 bg-gray-700 py-8 px-16 text-12 leading-[16px] text-white lg:text-16"
+            className="mr-8 rounded-md border border-gray-700 bg-gray-700 px-16 py-8 text-12 leading-[16px] text-white lg:text-16"
           >
             {formatProductMessage({ id: 'items.all', defaultMessage: 'All items' })}
           </Link>
@@ -72,7 +72,7 @@ const Breadcrumbs: React.FC<Props> = ({ categoryId, categories }) => {
             <Link
               key={category.categoryId}
               link={category.path}
-              className="mr-8 rounded-md border border-gray-700 bg-transparent py-8 px-16 text-12 leading-[16px] text-primary-black transition hover:bg-gray-700 hover:text-white lg:text-16"
+              className="mr-8 rounded-md border border-gray-700 bg-transparent px-16 py-8 text-12 leading-[16px] text-primary-black transition hover:bg-gray-700 hover:text-white lg:text-16"
             >
               {category.name}
             </Link>
@@ -84,7 +84,7 @@ const Breadcrumbs: React.FC<Props> = ({ categoryId, categories }) => {
         <Breadcrumb className="mt-32">
           <Link
             link={parentCategory?.path}
-            className="mr-8 rounded-md border border-gray-700 bg-transparent py-8 px-16 text-12 leading-[16px] text-primary-black transition hover:bg-gray-700 hover:text-white lg:text-16"
+            className="mr-8 rounded-md border border-gray-700 bg-transparent px-16 py-8 text-12 leading-[16px] text-primary-black transition hover:bg-gray-700 hover:text-white lg:text-16"
           >
             {formatProductMessage({ id: 'items.all', defaultMessage: 'All items' })}
           </Link>
@@ -92,7 +92,7 @@ const Breadcrumbs: React.FC<Props> = ({ categoryId, categories }) => {
             <Link
               key={category.categoryId}
               link={category.path}
-              className={`mr-8 rounded-md border border-gray-700 py-8 px-16 text-12 leading-[16px] transition lg:text-16 ${
+              className={`mr-8 rounded-md border border-gray-700 px-16 py-8 text-12 leading-[16px] transition lg:text-16 ${
                 category.categoryId === currentCategory.categoryId
                   ? 'bg-gray-700 text-white'
                   : 'bg-transparent text-primary-black hover:bg-gray-700 hover:text-white'

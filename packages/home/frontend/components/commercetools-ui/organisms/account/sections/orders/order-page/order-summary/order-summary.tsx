@@ -135,7 +135,7 @@ const OrderSummary: FC<Props> = ({ hiddenItemsCount, subtotal, shipmentFees, tot
         </Accordion>
       )}
 
-      <div className="flex flex-col gap-20 border-b pt-32 pb-20">
+      <div className="flex flex-col gap-20 border-b pb-20 pt-32">
         <div className="flex justify-between">
           <Typography fontSize={16} className="text-secondary-black">
             {formatOrdersMessage({

@@ -15,7 +15,7 @@ const AccountDropdownContent: FC = () => {
         that on click, opens a menu. The menu has a logged out and a logged in state, presenting options of login and
         register, or account related actions.
       </Typography>
-      <div className="mt-44 ml-100 flex w-fit justify-start gap-x-50 rounded-md border-2 px-12 pt-12">
+      <div className="ml-100 mt-44 flex w-fit justify-start gap-x-50 rounded-md border-2 px-12 pt-12">
         <div className="h-40">
           <div className="w-fit">
             <Popover as="div" className="relative hidden h-fit lg:flex">
@@ -30,7 +30,7 @@ const AccountDropdownContent: FC = () => {
                   </Popover.Button>
                   <Popover.Overlay className="fixed inset-0 z-[310] bg-secondary-black opacity-30" />
                   <Popover.Panel className="absolute -left-105 top-50 z-[310] animate-[appearDropdown_0.15s_ease-in-out] rounded-sm bg-white shadow-400">
-                    <div className="absolute left-1/2 -top-20 z-10 w-31 -translate-x-1/2 overflow-hidden">
+                    <div className="absolute -top-20 left-1/2 z-10 w-31 -translate-x-1/2 overflow-hidden">
                       <div className="h-21 w-21 origin-bottom-left rotate-45 bg-white" />
                     </div>
                     <AccountDropdown loggedIn={false} />

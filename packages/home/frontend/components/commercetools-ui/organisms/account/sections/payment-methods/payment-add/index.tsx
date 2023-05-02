@@ -17,7 +17,7 @@ const PaymentAdd = () => {
   const paymentAddData = useAddPaymentMethods();
 
   return (
-    <div className="mt-20 ml-0 lg:ml-44 lg:mt-40">
+    <div className="ml-0 mt-20 lg:ml-44 lg:mt-40">
       <div className="mt-24 px-16 md:mt-0 md:px-24 lg:px-0">
         <Typography as="h2" fontFamily="libre" fontSize={16} className="text-primary-black md:text-22 lg:text-24">
           {formatPaymentMessage({
@@ -27,7 +27,7 @@ const PaymentAdd = () => {
         </Typography>
       </div>
 
-      <div className="mt-0 w-full px-16 py-0 md:px-24 lg:mt-36 lg:w-[800px] lg:rounded-md lg:border lg:py-32 lg:px-24">
+      <div className="mt-0 w-full px-16 py-0 md:px-24 lg:mt-36 lg:w-[800px] lg:rounded-md lg:border lg:px-24 lg:py-32">
         <div className="mt-24 md:w-[375px] lg:mt-0">
           <Typography as="label" medium fontSize={14} className="text-secondary-black">
             {formatPaymentMessage({ id: 'card.holder', defaultMessage: 'Card holder *' })}
@@ -56,7 +56,7 @@ const PaymentAdd = () => {
             {resolveCCImage(paymentAddData.cardNumberFormatted) && (
               // eslint-disable-next-line
               <img
-                className="absolute top-52 right-8 w-[32px] -translate-y-1/2"
+                className="absolute right-8 top-52 w-[32px] -translate-y-1/2"
                 src={resolveCCImage(paymentAddData.cardNumberFormatted)}
               />
             )}

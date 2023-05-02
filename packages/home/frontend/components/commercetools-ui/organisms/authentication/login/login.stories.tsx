@@ -20,7 +20,7 @@ const Template: Story<LoginProps> = (args) => (
       when clicked, submits the form to authenticate the customer&apos;s credentials. The Login Form also includes a
       remember me checkbox and a password reset link.
     </Typography>
-    <div className="mt-44 ml-80 w-[30%] gap-x-50">
+    <div className="ml-80 mt-44 w-[30%] gap-x-50">
       <LoginForm {...args} />
     </div>
   </div>

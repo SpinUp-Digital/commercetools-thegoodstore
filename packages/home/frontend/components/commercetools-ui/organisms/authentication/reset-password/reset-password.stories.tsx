@@ -19,7 +19,7 @@ const Template: Story<ResetPasswordProps> = (args) => (
       The Reset Password Form allows customers to reset their account password. It has two input fields for creating a
       new password and a confirmation field.
     </Typography>
-    <div className="mt-44 ml-80 w-[30%] gap-x-50">
+    <div className="ml-80 mt-44 w-[30%] gap-x-50">
       <ResetPasswordForm {...args} />
     </div>
   </div>

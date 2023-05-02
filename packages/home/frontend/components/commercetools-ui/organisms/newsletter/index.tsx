@@ -85,16 +85,16 @@ export default function Newsletter({
   };
 
   return (
-    <div className="mx-auto max-w-7xl rounded-lg bg-gray-100 py-2 px-4 sm:px-6 lg:px-0">
+    <div className="mx-auto max-w-7xl rounded-lg bg-gray-100 px-4 py-2 sm:px-6 lg:px-0">
       {!isConfirm ? (
-        <div className="relative py-3 px-6 text-neutral-700 md:py-6 md:px-12 lg:py-9 lg:px-16 xl:flex xl:items-center">
+        <div className="relative px-6 py-3 text-neutral-700 md:px-12 md:py-6 lg:px-16 lg:py-9 xl:flex xl:items-center">
           <div className="xl:w-0 xl:flex-1">
             <h2 className="mt-2 text-center text-2xl font-bold tracking-[0.010em] md:text-left">
               {headline || fallbackHeadline}
             </h2>
             <p className="mt-3 max-w-2xl text-center text-sm md:text-left">{description || fallbackDescription}</p>
           </div>
-          <div className="mt-8 sm:w-full sm:max-w-md xl:mt-0 xl:ml-8">
+          <div className="mt-8 sm:w-full sm:max-w-md xl:ml-8 xl:mt-0">
             <form action="#" className="mt-4 sm:mx-auto sm:flex sm:max-w-xl xl:px-4" onSubmit={onSubmit}>
               <label htmlFor="cta-email" className="sr-only">
                 <Typography as="fragment">{inputPlaceholder || fallbackPlaceholder}</Typography>
@@ -103,14 +103,14 @@ export default function Newsletter({
                 id="cta-email"
                 name="email"
                 type="email"
-                className="block w-full rounded-md border border-transparent py-3 px-5 text-sm leading-5 text-gray-600 shadow-sm placeholder:text-gray-500 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
+                className="block w-full rounded-md border border-transparent px-5 py-3 text-sm leading-5 text-gray-600 shadow-sm placeholder:text-gray-500 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
                 placeholder={inputPlaceholder}
                 onChange={onChange}
               />
-              <div className="mt-4 sm:mt-0 sm:ml-3">
+              <div className="mt-4 sm:ml-3 sm:mt-0">
                 <button
                   type="submit"
-                  className="block w-full rounded-md py-3 px-6 text-base font-bold leading-5 text-white sm:px-11"
+                  className="block w-full rounded-md px-6 py-3 text-base font-bold leading-5 text-white sm:px-11"
                 >
                   <Typography as="fragment">{ctaLabel || fallbackCta}</Typography>
                 </button>

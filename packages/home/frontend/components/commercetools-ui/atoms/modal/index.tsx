@@ -51,7 +51,7 @@ const Modal: FC<Props> = ({ children, style, preventScroll, closeButton, classNa
     >
       {closeButton && (
         <CloseIcon
-          className="absolute top-20 right-20 h-24 w-24 cursor-pointer text-secondary-black"
+          className="absolute right-20 top-20 h-24 w-24 cursor-pointer text-secondary-black"
           onClick={props.onRequestClose}
         />
       )}

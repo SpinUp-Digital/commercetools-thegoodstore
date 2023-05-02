@@ -53,7 +53,7 @@ const AccountForm: FC<AccountFormProps> = ({
         {title}
       </Typography>
 
-      <div className="relative border-neutral-400 pt-24 pb-8 md:border md:p-32 md:pr-68">
+      <div className="relative border-neutral-400 pb-8 pt-24 md:border md:p-32 md:pr-68">
         {subtitle && (
           <Typography fontSize={14} lineHeight="loose" className="mb-28 text-primary-black md:mb-40 md:text-16">
             {subtitle}

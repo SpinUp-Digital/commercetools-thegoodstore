@@ -176,7 +176,7 @@ const AdyenPaymentProvider: React.FC = ({ children }) => {
       {isOverlayActive && <Overlay />}
       <div
         id="threeDS2-container"
-        className="fixed top-1/2 left-1/2 z-[999] -translate-x-1/2 -translate-y-1/2 bg-white"
+        className="fixed left-1/2 top-1/2 z-[999] -translate-x-1/2 -translate-y-1/2 bg-white"
       />
       {children}
     </AdyenContext.Provider>

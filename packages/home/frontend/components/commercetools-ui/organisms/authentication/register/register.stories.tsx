@@ -20,7 +20,7 @@ const Template: Story<RegisterProps> = (args) => (
       personal information, such as name, email address, and password. It also has a checkbox for subscribing the
       newsletter, along with a button that when clicked, submits the form to create a new account.
     </Typography>
-    <div className="mt-44 ml-80 w-[30%] gap-x-50">
+    <div className="ml-80 mt-44 w-[30%] gap-x-50">
       <RegisterForm {...args} />
     </div>
   </div>

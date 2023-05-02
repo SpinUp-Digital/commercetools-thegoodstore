@@ -238,7 +238,7 @@ const Addresses: React.FC<Props> = ({ goToNextStep }) => {
   );
 
   return (
-    <div className="bg-white pt-16 lg:px-36 lg:pt-0 lg:pb-36">
+    <div className="bg-white pt-16 lg:px-36 lg:pb-36 lg:pt-0">
       {loggedIn ? (
         shippingAddresses.length > 0 && (
           <div className="mt-20">

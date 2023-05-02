@@ -135,14 +135,14 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
               </Link>
             ))}
           </div>
-          <div className="py-16 px-20 lg:px-40">
+          <div className="px-20 py-16 lg:px-40">
             {isLoading ? (
               <Skeleton className="h-[30px]" />
             ) : (
               <Button
                 onClick={handleLogout}
                 variant="secondary"
-                className="w-full rounded-md border border-primary-black py-8 px-0 text-14"
+                className="w-full rounded-md border border-primary-black px-0 py-8 text-14"
               >
                 {formatAccountMessage({ id: 'sign.out', defaultMessage: 'Sign out' })}
               </Button>

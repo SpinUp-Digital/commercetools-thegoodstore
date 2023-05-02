@@ -148,7 +148,7 @@ const Input: FC<InputProps> = ({
           {...props}
         />
         {(isValid || (props.isValid && !isInActiveState)) && !isFocused && !hideCheckIcon && (
-          <CheckIcon className="absolute top-[50%] right-12 h-16 w-16 translate-y-[-50%] text-green-500" />
+          <CheckIcon className="absolute right-12 top-[50%] h-16 w-16 translate-y-[-50%] text-green-500" />
         )}
         {children}
       </div>

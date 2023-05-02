@@ -210,7 +210,7 @@ const RangeFacet: React.FC<FacetProps> = ({ attribute }) => {
 
         <button
           type="submit"
-          className="rounded-sm bg-primary-black py-8 px-14 font-medium leading-[24px] text-white transition hover:bg-gray-500"
+          className="rounded-sm bg-primary-black px-14 py-8 font-medium leading-[24px] text-white transition hover:bg-gray-500"
         >
           {formatProductMessage({ id: 'go', defaultMessage: 'Go' })}
         </button>

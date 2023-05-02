@@ -28,7 +28,7 @@ const Highlights = () => {
       {highlights.map(({ Icon, text }, index: number) => (
         <div
           key={index}
-          className="flex flex-1 items-center justify-center gap-5 py-4 px-8 lg:justify-items-center lg:px-0"
+          className="flex flex-1 items-center justify-center gap-5 px-8 py-4 lg:justify-items-center lg:px-0"
         >
           <Icon size={30} />
           <span>{text}</span>

@@ -109,7 +109,7 @@ const Slideout: React.FC<SlideOutProps> = ({
 
   return (
     <>
-      <div className="flex items-center justify-between border-b border-neutral-400 py-24 pl-12 pr-8 pb-22 md:pl-22 md:pr-18">
+      <div className="flex items-center justify-between border-b border-neutral-400 py-24 pb-22 pl-12 pr-8 md:pl-22 md:pr-18">
         <h3 className="text-18 font-medium leading-normal md:text-20">{title}</h3>
         <div className="flex h-full items-center gap-24">
           {enableWishlistState && (
@@ -119,7 +119,7 @@ const Slideout: React.FC<SlideOutProps> = ({
             >
               <div className={wishlistClassName} />
               {totalWishlistItems > 0 && (
-                <span className="absolute top-[-3px] right-[-8px] h-10 w-10 rounded-full bg-green-500" />
+                <span className="absolute right-[-8px] top-[-3px] h-10 w-10 rounded-full bg-green-500" />
               )}
               <HeartIcon className="w-28" stroke="#494949" />
             </div>

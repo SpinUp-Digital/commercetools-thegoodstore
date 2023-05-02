@@ -100,7 +100,7 @@ const ShippingSection = () => {
                     error={error?.shippingMethodId == shippingMethodId ? error?.message : ''}
                   />
                   <XMarkIcon
-                    className="absolute top-18 right-18 h-20 w-20 stroke-neutral-800 hover:cursor-pointer"
+                    className="absolute right-18 top-18 h-20 w-20 stroke-neutral-800 hover:cursor-pointer"
                     onClick={collapseShippingSections}
                   />
                 </form>

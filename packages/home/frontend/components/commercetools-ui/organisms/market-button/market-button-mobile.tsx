@@ -78,7 +78,7 @@ const MarketButtonMobile: FC<Props> = ({ menuTop }) => {
                   variant="ghost"
                   size="full"
                   onClick={() => handleMarketClick(market)}
-                  className="flex w-full items-center justify-start py-12 px-16"
+                  className="flex w-full items-center justify-start px-16 py-12"
                 >
                   <div className="flex w-fit items-center justify-start">
                     <FlagIcons flagName={market.flag} className="mr-8" />

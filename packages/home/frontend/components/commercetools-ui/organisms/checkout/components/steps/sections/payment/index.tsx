@@ -61,12 +61,12 @@ const Payment: React.FC<Props> = ({ goToNextStep }) => {
   );
 
   return (
-    <div className="lg:px-36 lg:pt-0 lg:pb-36">
+    <div className="lg:px-36 lg:pb-36 lg:pt-0">
       <div className="mt-24 border-x border-t border-neutral-400 bg-white lg:mt-0">
         {paymentMethods.map(({ name, type, image }) => (
           <div
             key={type}
-            className="cursor-pointer border-b border-neutral-400 p-16 lg:py-28 lg:px-20"
+            className="cursor-pointer border-b border-neutral-400 p-16 lg:px-20 lg:py-28"
             onClick={() => handlePaymentMethodSelection(type)}
           >
             <div className="flex items-center justify-between lg:justify-start lg:gap-64">

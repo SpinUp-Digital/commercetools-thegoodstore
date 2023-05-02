@@ -44,7 +44,7 @@ const MarketButton = () => {
         className="w-[90%] max-w-[380px] bg-neutral-200"
         onClose={hideMarketMenu}
       >
-        <div className="flex w-full items-center justify-between border-b border-neutral-400 py-20 px-16">
+        <div className="flex w-full items-center justify-between border-b border-neutral-400 px-16 py-20">
           <Typography as="h5" fontFamily="libre" fontSize={22} className="text-primary-black">
             {formatMessage({ id: 'select.country', defaultMessage: 'Select your country' })}
           </Typography>
