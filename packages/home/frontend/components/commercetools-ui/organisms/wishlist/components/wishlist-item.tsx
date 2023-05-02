@@ -58,7 +58,7 @@ const WishlistItem: FC<Props> = ({ item }) => {
           )}
         </div>
         <div className="mt-16 leading-normal">
-          <Button variant="primary" onClick={moveToCart} className="py-8 text-14">
+          <Button variant="primary" onClick={moveToCart} disabled={!item.variant?.isOnStock} className="py-8 text-14">
             {formatWishlistMessage({ id: 'wishlist.add.to.cart', defaultMessage: 'Add to cart' })}
           </Button>
         </div>
