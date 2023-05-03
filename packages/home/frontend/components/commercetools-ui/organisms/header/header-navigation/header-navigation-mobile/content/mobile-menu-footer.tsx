@@ -60,7 +60,7 @@ const MobileMenuFooter: FC<Props> = ({ showMenu, hideHeaderMenu, insertCategory 
 
   return (
     <>
-      <div className="mt-12 mb-16 w-full border border-neutral-400" />
+      <div className="mb-16 mt-12 w-full border border-neutral-400" />
 
       {account ? (
         <div className="ml-24 mr-22 block pt-16 md:hidden">

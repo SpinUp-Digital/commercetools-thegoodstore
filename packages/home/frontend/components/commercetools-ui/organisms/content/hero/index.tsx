@@ -28,7 +28,7 @@ const Hero: React.FC<HeroProps> = ({ image, title, subtitle, ctaLabel, ctaRefere
           />
         </div>
       )}
-      <div className="absolute top-1/2 left-0 w-full -translate-y-1/2 px-48 text-center">
+      <div className="absolute left-0 top-1/2 w-full -translate-y-1/2 px-48 text-center">
         <Typography align="center" fontSize={14} className="text-white md:text-18">
           {subtitle}
         </Typography>
@@ -43,7 +43,7 @@ const Hero: React.FC<HeroProps> = ({ image, title, subtitle, ctaLabel, ctaRefere
         </Typography>
         {ctaLabel && (
           <Link link={ctaReference}>
-            <Button className="mt-22 md:mt-36 md:py-12 md:px-48 lg:mt-32">
+            <Button className="mt-22 md:mt-36 md:px-48 md:py-12 lg:mt-32">
               <Typography as="span" fontSize={12} className="text-neutral-150 md:text-14 lg:text-16">
                 {ctaLabel}
               </Typography>

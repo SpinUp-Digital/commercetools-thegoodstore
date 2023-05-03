@@ -33,7 +33,7 @@ const DesktopFacets: React.FC<Props> = ({ facetsConfiguration }) => {
             </Menu.Button>
             <Menu.Items
               static
-              className={`absolute left-0 max-h-[316px] min-w-[320px] origin-top-right translate-y-[10px] overflow-auto rounded-md bg-white py-24 px-36 shadow-lg transition ${
+              className={`absolute left-0 max-h-[316px] min-w-[320px] origin-top-right translate-y-[10px] overflow-auto rounded-md bg-white px-36 py-24 shadow-lg transition ${
                 styles.desktop_facet_container
               } ${open ? 'opacity-1 z-20 scale-100' : 'z-[-1] scale-95 opacity-0'}`}
             >

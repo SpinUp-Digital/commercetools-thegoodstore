@@ -14,7 +14,7 @@ const ThankYouFooter: FC<ThankYouFooterProps> = ({ loading }) => {
   const { bottomSectionProps } = useBottomSectionProps(loggedIn);
 
   return (
-    <div className="grid border-b border-neutral-400 pt-16 pb-24 md:border-b-0 lg:pb-0 lg:pt-36">
+    <div className="grid border-b border-neutral-400 pb-24 pt-16 md:border-b-0 lg:pb-0 lg:pt-36">
       <Typography
         className="mb-16 w-fit leading-[20px] text-primary-black md:mb-24 md:text-18 md:leading-normal lg:text-22"
         fontFamily="libre"

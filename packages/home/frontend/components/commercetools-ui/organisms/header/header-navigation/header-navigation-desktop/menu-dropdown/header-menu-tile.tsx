@@ -22,7 +22,7 @@ const HeaderDropdownTile: FC<Props> = ({ tileContent }) => {
         className="brightness-75"
         alt={tileContent?.tileImage.title}
       />
-      <div className="absolute top-[42%] left-1/2 h-35 w-full -translate-x-1/2 -translate-y-1/2">
+      <div className="absolute left-1/2 top-[42%] h-35 w-full -translate-x-1/2 -translate-y-1/2">
         <Typography fontSize={28} fontFamily="libre" as="h3" align="center" className={tileHeaderTextClassName}>
           {tileContent?.tileHeaderText}
         </Typography>

@@ -70,7 +70,7 @@ const Drawer: FC<DrawerProps> = ({
 
   return (
     <>
-      {isOpen && <div className="fixed top-0 left-0 z-[999] h-full w-full bg-secondary-black opacity-30" />}
+      {isOpen && <div className="fixed left-0 top-0 z-[999] h-full w-full bg-secondary-black opacity-30" />}
 
       <div ref={ref} style={{ display: isOpen ? 'block' : 'none' }} className={drawerClassName}>
         <div className="flex h-full flex-col items-stretch">{children}</div>

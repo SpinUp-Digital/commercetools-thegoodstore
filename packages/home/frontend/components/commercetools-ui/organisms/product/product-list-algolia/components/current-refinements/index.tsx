@@ -77,7 +77,7 @@ const CurrentRefinements = () => {
           />
         </div>
       ))}
-      <div className="flex cursor-default items-center justify-center gap-8 rounded-md border border-transparent bg-white py-6 px-8 transition hover:border-primary-black">
+      <div className="flex cursor-default items-center justify-center gap-8 rounded-md border border-transparent bg-white px-8 py-6 transition hover:border-primary-black">
         <span className="text-14">{formatProductMessage({ id: 'clear.all', defaultMessage: 'Clear All' })}</span>
         <CloseIcon className="w-20 cursor-pointer fill-secondary-black stroke-0" onClick={removeAllRefinements} />
       </div>

@@ -24,7 +24,7 @@ const OrderItem: FC<Props> = ({ order }) => {
 
   return (
     <div className="mb-24 w-full rounded-md border-[1.5px] border-neutral-300">
-      <div className="grid grid-cols-1 items-center rounded-t-md bg-neutral-150 p-12 md:grid-cols-3 md:p-16 lg:grid-cols-4 lg:py-32 lg:px-24">
+      <div className="grid grid-cols-1 items-center rounded-t-md bg-neutral-150 p-12 md:grid-cols-3 md:p-16 lg:grid-cols-4 lg:px-24 lg:py-32">
         <div className="flex-col">
           <div className="flex whitespace-nowrap pb-16">
             <Typography fontSize={14} medium className="text-primary-black lg:text-16">
@@ -63,7 +63,7 @@ const OrderItem: FC<Props> = ({ order }) => {
           </Typography>
         </div>
         <div className="hidden justify-end lg:flex">
-          <Button variant="primary" size="s" onClick={handleReturnClick} className="rounded-md py-8 px-16">
+          <Button variant="primary" size="s" onClick={handleReturnClick} className="rounded-md px-16 py-8">
             <Typography fontSize={14} medium>
               {formatOrdersMessage({ id: 'create.return', defaultMessage: 'Create return' })}
             </Typography>
@@ -71,7 +71,7 @@ const OrderItem: FC<Props> = ({ order }) => {
         </div>
       </div>
       <Link link={`/account#order/${order?.orderId}`}>
-        <div className="flex w-full cursor-pointer items-center justify-between px-12 py-16 md:px-16 lg:py-20 lg:px-24">
+        <div className="flex w-full cursor-pointer items-center justify-between px-12 py-16 md:px-16 lg:px-24 lg:py-20">
           <div className="flex">
             <Typography fontSize={14} className="text-primary-black">
               {order?.lineItems?.length.toString()}

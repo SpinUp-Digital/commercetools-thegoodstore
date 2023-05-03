@@ -78,7 +78,7 @@ const Orders = () => {
           <Typography
             as="h2"
             fontFamily="libre"
-            className="mt-20 hidden text-22 text-primary-black md:ml-24 md:block lg:mt-42 lg:ml-44 lg:text-24"
+            className="mt-20 hidden text-22 text-primary-black md:ml-24 md:block lg:ml-44 lg:mt-42 lg:text-24"
           >
             {formatOrdersMessage({
               id: 'orders',
@@ -152,7 +152,7 @@ const Orders = () => {
             </div>
           </div>
 
-          <div className="overflow-auto py-24 px-16 md:px-24 lg:px-44">
+          <div className="overflow-auto px-16 py-24 md:px-24 lg:px-44">
             {orderHistoryContent?.map((order?: Order) => (
               <OrderItem key={order?.orderId} order={order} />
             ))}

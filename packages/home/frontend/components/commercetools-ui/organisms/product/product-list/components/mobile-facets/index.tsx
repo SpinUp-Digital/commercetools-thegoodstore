@@ -36,7 +36,7 @@ const MobileFacets: React.FC = () => {
         variant="arrow"
         iconClassName={accordionClassNames.icon}
       >
-        <div className="py-28 px-16">{Component}</div>
+        <div className="px-16 py-28">{Component}</div>
       </Accordion>
     ),
   });
@@ -50,7 +50,7 @@ const MobileFacets: React.FC = () => {
         variant="arrow"
         iconClassName={accordionClassNames.icon}
       >
-        <div className="py-28 px-16">
+        <div className="px-16 py-28">
           <SortFacet />
         </div>
       </Accordion>

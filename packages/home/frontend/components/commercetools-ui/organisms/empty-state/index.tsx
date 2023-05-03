@@ -31,7 +31,7 @@ export const EmptyState: React.FC<Props> = ({
         {title}
       </Typography>
       <div className="hidden w-full justify-center md:flex">
-        <div className="relative h-92 w-197 px-10 text-center md:mt-55 md:mb-120">
+        <div className="relative h-92 w-197 px-10 text-center md:mb-120 md:mt-55">
           <Image media={image?.media} layout="fill" objectFit="contain" alt={image?.title} />
         </div>
       </div>

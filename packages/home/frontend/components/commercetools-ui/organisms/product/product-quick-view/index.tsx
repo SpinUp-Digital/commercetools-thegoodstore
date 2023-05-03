@@ -58,7 +58,7 @@ const QuickView: FC<QuickViewProps> = ({ buttonIsVisible, product, hideButton })
       >
         <div ref={ref}>
           <XMarkIcon
-            className="absolute top-15 right-15 h-24 w-24 hover:cursor-pointer"
+            className="absolute right-15 top-15 h-24 w-24 hover:cursor-pointer"
             strokeWidth={1}
             color="#494949"
             onClick={() => closeModal(true)}

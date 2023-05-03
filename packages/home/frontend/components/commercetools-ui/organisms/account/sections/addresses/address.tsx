@@ -38,7 +38,7 @@ const Address: React.FC<AddressProps> = ({ address, isDefaultAddress, selectAddr
 
   return (
     <div
-      className="flex cursor-pointer items-center justify-between rounded-md border border-neutral-400 p-12 md:py-24 md:px-20 2xl:px-24"
+      className="flex cursor-pointer items-center justify-between rounded-md border border-neutral-400 p-12 md:px-20 md:py-24 2xl:px-24"
       key={address.addressId}
       onClick={() => isTabletSize && selectAddress(address as AddressFormData)}
     >

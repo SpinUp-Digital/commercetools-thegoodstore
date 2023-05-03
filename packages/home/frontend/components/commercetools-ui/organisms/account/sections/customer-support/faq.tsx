@@ -31,7 +31,7 @@ const FAQ: React.FC<Props> = ({ faqs }) => {
                 fontSize={16}
                 fontFamily="inter"
                 lineHeight="loose"
-                className="pl-16 pr-24 pb-20 text-secondary-black"
+                className="pb-20 pl-16 pr-24 text-secondary-black"
               >
                 {faq.answer}
               </Typography>

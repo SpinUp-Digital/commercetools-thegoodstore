@@ -20,7 +20,7 @@ const ThankYouHeader: FC<ThankYouHeaderProps> = ({ email, onPrint }) => {
   };
 
   return (
-    <div className="grid justify-items-center gap-24 border-b border-neutral-400 pt-16 pb-24 md:border-b-0 lg:justify-items-start lg:p-0">
+    <div className="grid justify-items-center gap-24 border-b border-neutral-400 pb-24 pt-16 md:border-b-0 lg:justify-items-start lg:p-0">
       {/* Title */}
       <Typography
         asSkeleton={!email}

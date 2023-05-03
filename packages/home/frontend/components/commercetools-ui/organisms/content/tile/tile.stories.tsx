@@ -20,7 +20,7 @@ const Template: Story<TileProps> = (args) => (
       The Tile Component displays content in a two grid layout. It displays an image, title, short description and a CTA
       button.
     </Typography>
-    <div className="mt-44 ml-80">
+    <div className="ml-80 mt-44">
       <Tile
         {...args}
         image={{

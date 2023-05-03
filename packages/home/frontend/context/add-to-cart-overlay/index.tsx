@@ -73,7 +73,7 @@ const AddToCartOverlayProvider: React.FC = ({ children }) => {
       {product && <Overlay onClick={hide} />}
       <Transition
         show={!!product}
-        className="fixed bottom-0 z-[9999] w-full overflow-hidden rounded-[20px_20px_0_0] bg-white shadow md:left-1/2 md:bottom-[unset] md:top-1/2 md:w-[90%] md:max-w-[650px] md:-translate-x-1/2 md:-translate-y-1/2 md:rounded-lg"
+        className="fixed bottom-0 z-[9999] w-full overflow-hidden rounded-[20px_20px_0_0] bg-white shadow md:bottom-[unset] md:left-1/2 md:top-1/2 md:w-[90%] md:max-w-[650px] md:-translate-x-1/2 md:-translate-y-1/2 md:rounded-lg"
         enter="transition md:transition-opacity duration-75"
         enterFrom="opacity-0 translate-y-full"
         enterTo="opacity-100 translate-y-0"
@@ -82,7 +82,7 @@ const AddToCartOverlayProvider: React.FC = ({ children }) => {
         leaveTo="opacity-0 translate-y-full"
       >
         <div onMouseUp={(e) => e.stopPropagation()}>
-          <div className="bg-white p-16 md:py-24 md:px-48">
+          <div className="bg-white p-16 md:px-48 md:py-24">
             <h4 className="text-18 leading-[27px] lg:text-22 lg:leading-[33px]">
               {formatProductMessage({ id: 'cart.added', defaultMessage: 'Added to cart' })}
             </h4>

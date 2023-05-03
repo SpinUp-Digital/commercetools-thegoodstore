@@ -49,7 +49,7 @@ const PaymentEdit: FC = () => {
         handleDeleteClick={paymentEditData.handleDeleteClick}
       />
 
-      <div className="mt-0 w-full py-0 px-16 lg:mt-36 lg:w-[60%] lg:rounded-md lg:border lg:py-32 lg:px-24">
+      <div className="mt-0 w-full px-16 py-0 lg:mt-36 lg:w-[60%] lg:rounded-md lg:border lg:px-24 lg:py-32">
         <div className="mt-24 md:max-w-[436px] lg:mt-0">
           <Typography as="label" medium fontSize={14} className="text-secondary-black">
             {formatPaymentMessage({ id: 'card.holder', defaultMessage: 'Card holder *' })}
@@ -78,7 +78,7 @@ const PaymentEdit: FC = () => {
             {resolveCCImage(cardNumberFormatted) && (
               // eslint-disable-next-line
               <img
-                className="absolute top-52 right-8 w-[32px] -translate-y-1/2"
+                className="absolute right-8 top-52 w-[32px] -translate-y-1/2"
                 src={resolveCCImage(cardNumberFormatted)}
               />
             )}

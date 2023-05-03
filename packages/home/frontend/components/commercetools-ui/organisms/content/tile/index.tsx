@@ -29,7 +29,7 @@ const Tile: React.FC<TileProps> = ({
   return (
     <div className={`relative w-full ${className}`}>
       {image && <Image {...image} alt={title} objectFit="cover" className={`brightness-75 ${imageClassName}`} />}
-      <div className="absolute top-1/2 left-0 w-full -translate-y-1/2 text-center">
+      <div className="absolute left-0 top-1/2 w-full -translate-y-1/2 text-center">
         <Typography
           className="text-shadow text-white md:text-16 lg:font-medium"
           fontSize={14}

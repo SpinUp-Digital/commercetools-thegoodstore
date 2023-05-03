@@ -25,7 +25,7 @@ const HeaderNavigationButtonDesktop: FC<Props> = ({ show, link, updateSubMenu })
   if (!isLoaded) return <></>;
 
   return (
-    <div onClick={updateSubMenu} className="h-52 py-12 px-10">
+    <div onClick={updateSubMenu} className="h-52 px-10 py-12">
       <Link link={link?.path} title={link?.name} className={navLinkClassNames}>
         <Typography as="span" fontSize={16}>
           {link?.name}
