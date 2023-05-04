@@ -1,6 +1,6 @@
 import React from 'react';
 import Footer, { Props as FooterProps } from 'components/commercetools-ui/organisms/footer';
-import { FooterLink } from 'components/commercetools-ui/organisms/footer/column';
+import { FooterLink } from 'components/commercetools-ui/organisms/footer/atoms/column';
 
 interface Props {
   data: FooterProps & {

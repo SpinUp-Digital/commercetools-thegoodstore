@@ -82,7 +82,7 @@ const MobileMenuFooter: FC<Props> = ({ showMenu, hideHeaderMenu, insertCategory 
 
       <div className="mx-24 flex py-16">
         {account ? (
-          <Button variant="ghost" onClick={handleLogout} className="px-0">
+          <Button variant="ghost" size="fit" onClick={handleLogout}>
             <Typography fontSize={16} className="font-normal text-primary-black">
               {formatAccountMessage({ id: 'sign.out', defaultMessage: 'Sign out' })}
             </Typography>
