@@ -47,6 +47,8 @@ const Search: React.FC<Props> = ({ categories }) => {
   }, []);
 
   const onSubmit = useCallback(() => {
+    if (!query) return;
+
     router.push(`/search?q=${query}`);
     cleanUp();
   }, [query, router, cleanUp]);

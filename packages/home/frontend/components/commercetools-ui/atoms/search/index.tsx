@@ -71,6 +71,9 @@ const Search: React.FC<Props> = ({ categories }) => {
   const onSubmit = useCallback(
     (e: React.FormEvent) => {
       e.preventDefault();
+
+      if (!value) return;
+
       router.push(`/search?q=${value}`);
       input.current?.blur();
     },
