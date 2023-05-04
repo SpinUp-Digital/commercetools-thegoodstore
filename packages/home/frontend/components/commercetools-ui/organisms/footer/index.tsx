@@ -1,13 +1,11 @@
 import React from 'react';
 import Accordion from 'components/commercetools-ui/atoms/accordion';
-import Link from 'components/commercetools-ui/atoms/link';
-import Typography from 'components/commercetools-ui/atoms/typography';
-import { useFormat } from 'helpers/hooks/useFormat';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import * as screensizes from 'helpers/utils/screensizes';
 import { Reference } from 'types/reference';
-import Image, { NextFrontasticImage } from 'frontastic/lib/image';
-import Column, { FooterLink } from './column';
+import { NextFrontasticImage } from 'frontastic/lib/image';
+import Column, { FooterLink } from './atoms/column';
+import FooterBottom from './footer-bottom';
 
 export interface FooterColumn {
   header?: string;
@@ -26,7 +24,6 @@ export interface SocialMedia {
 
 const Footer: React.FC<Props> = ({ columns, logo, socialMedia }) => {
   const [isBiggerThanTabletSize] = useMediaQuery(screensizes.tablet);
-  const { formatMessage } = useFormat({ name: 'common' });
 
   return (
     <footer aria-labelledby="footer-heading" className="w-full bg-primary-black">
@@ -63,26 +60,8 @@ const Footer: React.FC<Props> = ({ columns, logo, socialMedia }) => {
           ))}
         </ul>
       )}
-      <div className="w-full sm:border-t sm:border-secondary-grey"></div>
-      <div className="mx-auto flex flex-col-reverse items-center gap-y-32 px-72 lg:flex-row lg:justify-between lg:gap-y-0 lg:py-40 xl:px-48">
-        {logo && (
-          <div className="mb-32 w-160 self-center lg:mb-0">
-            <Image {...logo} alt="logo" />
-          </div>
-        )}
-        <Typography fontSize={14} className="text-neutral-500">
-          {formatMessage({ id: 'powered', defaultMessage: 'Powered by commercetools' })}
-        </Typography>
-        <ul className="mt-40 flex flex-row gap-20 self-center lg:mt-0">
-          {socialMedia?.map((item, i) => (
-            <li key={i} className="w-22">
-              <Link link={item.reference}>
-                <Image {...item.logo} className="mb-20" />
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <div className="w-full sm:border-t sm:border-secondary-grey" />
+      <FooterBottom socialMedia={socialMedia} logo={logo} />
     </footer>
   );
 };

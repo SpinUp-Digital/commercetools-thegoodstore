@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from 'components/commercetools-ui/atoms/button';
 import { EmptyState } from 'components/commercetools-ui/organisms/empty-state';
-import { FooterLink } from 'components/commercetools-ui/organisms/footer/column';
+import { FooterLink } from 'components/commercetools-ui/organisms/footer/atoms/column';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useWishlist } from 'frontastic';
 import { NextFrontasticImage } from 'frontastic/lib/image';

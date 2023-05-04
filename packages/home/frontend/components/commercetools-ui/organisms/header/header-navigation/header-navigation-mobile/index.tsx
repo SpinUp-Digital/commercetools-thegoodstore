@@ -42,9 +42,10 @@ const HeaderNavigationMobile: FC<Props> = ({ links, logo, logoLink }) => {
     <div className="flex xl:hidden">
       <Button
         variant="ghost"
+        size="icon"
         onClick={showHeaderMenu}
         title={formatMessage({ id: 'header.menu.open', defaultMessage: 'Open side menu' })}
-        className="mr-8 px-0 py-12"
+        className="mr-8"
       >
         <Bars3Icon className="w-30 text-secondary-black lg:w-44" />
       </Button>

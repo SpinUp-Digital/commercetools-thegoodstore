@@ -48,8 +48,8 @@ const MarketButtonMobile: FC<Props> = ({ menuTop }) => {
 
   const marketButtonElement = useMemo(() => {
     return (
-      <>
-        <div className="flex w-fit cursor-pointer items-center justify-start">
+      <div className="flex w-full cursor-pointer justify-between">
+        <div className="flex w-fit items-center justify-start">
           <FlagIcons flagName={selectedMarket?.flag} className="my-auto mr-8" />
           <Typography fontSize={14} className="text-secondary-black">
             {selectedMarket?.region}
@@ -58,7 +58,7 @@ const MarketButtonMobile: FC<Props> = ({ menuTop }) => {
         <div className="flex justify-end">
           <ChevronDownIcon strokeWidth={2} className="w-16 text-secondary-black" />
         </div>
-      </>
+      </div>
     );
   }, [selectedMarket]);
 

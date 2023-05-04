@@ -28,9 +28,24 @@ module.exports = {
             scale: 1,
           },
         },
+        appearSelect: {
+          '0%': {
+            opacity: 0,
+            height: 0,
+          },
+          '50%': {
+            opacity: 0.5,
+            height: 50,
+          },
+          '100%': {
+            opacity: 1,
+            height: 100,
+          },
+        },
       },
       animation: {
         appearDropdown: 'appearDropdown 0.15s ease-in-out',
+        appearSelect: 'appearSelect 0.5s ease-in-out',
       },
       fontFamily: {
         body: 'Inter, sans-serif',

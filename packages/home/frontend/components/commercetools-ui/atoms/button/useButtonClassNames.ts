@@ -20,6 +20,7 @@ const useButtonClassNames: UseButtonClassNames = ({
     s: 'py-12 px-24',
     m: 'py-12 px-36',
     l: 'py-12 px-48',
+    fit: 'p-0',
     full: 'py-12 w-full',
     icon: 'w-40 h-40 grid items-center justify-center',
   };

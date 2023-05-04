@@ -22,7 +22,7 @@ const MobileMenuHeader: FC<Props> = ({ onArrowClick, logo, logoLink, hideHeaderM
     <div className="flex h-52 w-full justify-between border-b border-neutral-400 px-20">
       {categories.length > 0 && (
         <div className="flex h-full items-center justify-start">
-          <Button variant="ghost" onClick={onArrowClick} className="px-0">
+          <Button variant="ghost" size="fit" onClick={onArrowClick} className="px-0">
             <ChevronLeftIcon className="w-20 text-secondary-black" />
           </Button>
         </div>
@@ -44,6 +44,7 @@ const MobileMenuHeader: FC<Props> = ({ onArrowClick, logo, logoLink, hideHeaderM
       <div className="flex h-full items-center justify-end">
         <Button
           variant="ghost"
+          size="xs"
           onClick={hideHeaderMenu}
           title={formatMessage({ id: 'close', defaultMessage: 'Close' })}
           className="px-0"

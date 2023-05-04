@@ -4,7 +4,7 @@ import FeedbackIconLayer from './feedbackIconLayer';
 import useButtonClassNames from './useButtonClassNames';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'warning' | 'underlined' | 'ghost';
-export type ButtonSize = 'xs' | 's' | 'm' | 'l' | 'full' | 'icon';
+export type ButtonSize = 'xs' | 's' | 'm' | 'l' | 'fit' | 'full' | 'icon';
 export type ButtonIconPosition = 'left' | 'middle' | 'right';
 
 export interface ButtonProps extends ComponentProps<'button'> {
