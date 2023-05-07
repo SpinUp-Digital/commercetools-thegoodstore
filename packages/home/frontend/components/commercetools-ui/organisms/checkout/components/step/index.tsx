@@ -27,10 +27,10 @@ const Step: React.FC<Props> = ({ number, label, isExpanded, isCompleted, onEdit,
   ]);
 
   const numberClassName = useClassNames([
-    'rounded-full bg-white w-24 h-24 flex items-center justify-center border text-14 md:text-16 font-medium transition lg:border-primary-black leading-[38px] md:w-30 md:h-30',
+    'rounded-full w-24 h-24 flex items-center justify-center border text-14 md:text-16 font-medium transition lg:border-primary-black leading-[38px] md:w-30 md:h-30',
     {
       'border-white bg-primary-black text-white': isExpanded,
-      'border-primary-black text-primary-black': !isExpanded,
+      'border-primary-black bg-white text-primary-black': !isExpanded,
     },
   ]);
 
