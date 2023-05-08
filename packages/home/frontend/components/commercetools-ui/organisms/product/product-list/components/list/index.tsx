@@ -18,7 +18,7 @@ const List: React.FC<Props> = ({ products }) => {
 
   return (
     <div>
-      <div className="grid grid-cols-2 gap-24 pt-32 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-16 pt-32 md:grid-cols-3 lg:grid-cols-4 lg:gap-24">
         {products.map((product) => (
           <ProductTile
             key={product.productId}

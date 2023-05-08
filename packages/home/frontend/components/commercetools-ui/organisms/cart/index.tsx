@@ -50,8 +50,8 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods, emptyStateDescripti
 
   return (
     <div className="relative bg-neutral-200">
-      <div className="flex flex-col lg:flex-row lg:items-start lg:gap-26 lg:p-50">
-        <div className="bg-white px-16 py-12 md:px-24 md:py-12 lg:w-[70%] lg:rounded-md lg:px-48 lg:py-36">
+      <div className="flex flex-col lg:flex-row lg:items-start lg:gap-26 lg:px-20 lg:py-48 xl:px-48">
+        <div className="bg-white px-16 py-12 md:px-24 md:py-12 lg:w-[70%] lg:rounded-md lg:px-20 lg:py-36 xl:px-48">
           <div className="flex items-center justify-between">
             <h3 className="text-16 md:text-18 lg:text-22">
               {formatCartMessage({ id: 'cart', defaultMessage: 'Cart' })}
@@ -142,8 +142,8 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods, emptyStateDescripti
           <div className="px-16 md:px-24 lg:px-36">
             <OrderSummary
               classNames={{
-                applyDiscountButton: 'px-8 lg:px-0 py-14 text-16',
-                infoContainer: 'px-8 lg:px-0 pt-16 pb-18 text-16',
+                applyDiscountButton: 'py-14 text-16',
+                infoContainer: 'pt-16 pb-18 text-16',
                 totalAmountContainer: 'text-18',
               }}
               hideCheckoutButton={!isTablet}

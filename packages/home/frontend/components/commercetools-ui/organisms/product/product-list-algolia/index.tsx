@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { Product } from '@commercetools/frontend-domain-types/product/Product';
 import { Configure, InfiniteHits } from 'react-instantsearch-hooks-web';
+import Wrapper from 'components/HOC/wrapper';
 import { PLP_PRODUCT_CLICKED } from 'helpers/constants/events';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { Category } from 'types/category';
@@ -33,7 +34,7 @@ const ProductListAlgolia: React.FC<Props> = ({ slug, searchQuery, categories, fa
         maxValuesPerFacet={1000}
       />
 
-      <div className="relative pl-8 md:pl-12 lg:px-20 xl:px-48">
+      <Wrapper className="relative">
         {searchQuery ? (
           <SearchHeader query={searchQuery ?? ''} />
         ) : (
@@ -59,7 +60,7 @@ const ProductListAlgolia: React.FC<Props> = ({ slug, searchQuery, categories, fa
           )}
           classNames={{
             root: 'pt-32',
-            list: 'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-24',
+            list: 'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-16 lg:gap-24',
             loadMore:
               'mx-auto bg-primary-black rounded-md font-medium text-white text-16 px-48 py-12 block mt-[90px] hover:bg-gray-500 transition disabled:bg-neutral-400 disabled:opacity-0',
           }}
@@ -69,7 +70,7 @@ const ProductListAlgolia: React.FC<Props> = ({ slug, searchQuery, categories, fa
         />
 
         <AccumalativeTrace />
-      </div>
+      </Wrapper>
     </div>
   );
 };

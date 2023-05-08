@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { Product } from '@commercetools/frontend-domain-types/product/Product';
+import Wrapper from 'components/HOC/wrapper';
 import { Category } from 'types/category';
 import AccumalativeTrace from './components/accumalative-trace';
 import Breadcrumbs from './components/breadcrumb';
@@ -22,7 +23,7 @@ const ProductList: React.FC<Props> = ({ products, categories }) => {
 
   return (
     <div className="min-h-screen bg-neutral-200 py-48">
-      <div className="relative pl-8 md:pl-12 lg:px-20 xl:px-48">
+      <Wrapper className="relative" background="neutral-200">
         {searchQuery ? (
           <SearchHeader query={searchQuery ?? ''} />
         ) : (
@@ -37,7 +38,7 @@ const ProductList: React.FC<Props> = ({ products, categories }) => {
         <List products={products} />
 
         <AccumalativeTrace currentItems={products.length} />
-      </div>
+      </Wrapper>
     </div>
   );
 };

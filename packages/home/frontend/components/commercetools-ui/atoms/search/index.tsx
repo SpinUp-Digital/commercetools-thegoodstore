@@ -92,7 +92,7 @@ const Search: React.FC<Props> = ({ categories }) => {
         <div
           className={`relative z-50 border-neutral-400 bg-white lg:rounded-sm lg:border ${
             focused ? 'border-b' : 'border'
-          } mx-auto lg:w-[calc(100%-24px)]`}
+          }`}
         >
           <form className="quick-search relative flex w-full items-stretch" ref={form} onSubmit={onSubmit}>
             <input

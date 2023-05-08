@@ -68,7 +68,7 @@ const Search: React.FC<Props> = ({ categories }) => {
           classNames={{
             root: `relative z-50 bg-white lg:rounded-sm border-neutral-400 lg:border ${
               focused ? 'border-b' : 'border'
-            } lg:w-[calc(100%-24px)] mx-auto`,
+            }`,
             form: 'relative flex items-stretch w-full quick-search',
             input:
               'placeholder:text-14 placeholder:text-secondary-black box-content border-none grow focus:outline-none transition p-0 px-12 py-10',

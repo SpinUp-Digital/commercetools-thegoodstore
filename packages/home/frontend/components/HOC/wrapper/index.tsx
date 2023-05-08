@@ -12,7 +12,7 @@ export type WrapperProps = {
 
 const Wrapper: FC<WrapperProps> = ({ children, background = 'white', className, clearDefaultStyles }) => {
   const wrapperClassName = useClassNames(
-    clearDefaultStyles ? [className] : [className, 'pl-8 md:pl-12 lg:px-20 xl:px-48'],
+    clearDefaultStyles ? [className] : [className, 'px-16 md:px-24 lg:px-20 xl:px-48'],
   );
 
   return (

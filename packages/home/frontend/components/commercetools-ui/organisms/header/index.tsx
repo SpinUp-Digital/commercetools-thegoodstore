@@ -56,7 +56,7 @@ const Header: React.FC<HeaderProps> = ({
         />
       </div>
 
-      <div className="relative block w-full border-t border-neutral-400 px-15 py-8 md:px-28 lg:px-20 xl:hidden xl:px-60">
+      <div className="relative block w-full border-t border-neutral-400 px-16 py-8 md:px-24 lg:px-20 xl:hidden xl:px-48">
         <Search categories={categories} />
       </div>
 
