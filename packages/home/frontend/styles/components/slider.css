@@ -52,7 +52,7 @@
 .slider_arrow .arrow {
   display: block;
   border: solid #494949;
-  border-width: 0 1.5px 1.5px 0;
+  border-width: 0 2px 2px 0;
   padding: 10px;
   width: 0;
   height: 0;
@@ -121,8 +121,11 @@
 }
 
 .swiper-button-disabled {
-  display: none;
   cursor: default;
+}
+
+.swiper-button-disabled .arrow {
+  border-color: #d1d1d1;
 }
 
 .swiper-slide {

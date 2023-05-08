@@ -21,7 +21,7 @@ const CategorySlider: React.FC<Props> = ({ tiles = [] }) => {
   );
 
   return (
-    <Wrapper background="neutral-200">
+    <Wrapper background="neutral-200" clearDefaultStyles className="px-8 md:px-12 lg:px-20 xl:px-48">
       <Slider
         containerClassName={showArrows ? 'px-48' : ''}
         slidesPerView={isTouchDevice ? 2.3 : 1.3}
