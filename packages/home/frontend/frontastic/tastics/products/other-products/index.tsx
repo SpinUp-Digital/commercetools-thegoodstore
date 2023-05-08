@@ -7,8 +7,8 @@ function OtherProductsTastic({ data }: Tastic<{ items: Product[] }, ProductSlide
 
   if (data.variant === 'cart')
     return (
-      <div className="bg-neutral-200 px-[48px] pb-64 md:px-[104px]">
-        <ProductSlider {...data} products={data.data.dataSource.items ?? []} clearDefaultWrapperStyles />
+      <div className="bg-neutral-200 px-16 pb-64 md:px-24">
+        <ProductSlider {...data} products={data.data.dataSource.items ?? []} />
       </div>
     );
 

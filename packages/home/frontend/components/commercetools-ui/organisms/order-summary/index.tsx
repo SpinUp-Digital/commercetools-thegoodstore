@@ -120,7 +120,7 @@ const OrderSummary: React.FC<Props> = ({
                 {formatCartMessage({ id: 'we.accept', defaultMessage: 'We accept' })}
               </p>
             </div>
-            <div className="mt-26 flex items-center justify-center gap-14 lg:mt-18 lg:justify-start">
+            <div className="mt-26 flex items-center justify-start gap-14 md:justify-center lg:mt-18 lg:justify-start">
               {paymentMethods.map(({ name, image }) => (
                 <div key={name} className="relative h-30 w-30">
                   <Image {...image} layout="fill" objectFit="contain" />

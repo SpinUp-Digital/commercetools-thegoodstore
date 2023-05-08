@@ -62,15 +62,6 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods, emptyStateDescripti
                 </span>
               )}
             </h3>
-
-            {!loggedIn && (
-              <button
-                className="rounded-md border border-primary-black px-24 py-6 font-medium transition hover:border-secondary-black hover:text-secondary-black md:px-36 lg:hidden"
-                onClick={openLoginModal}
-              >
-                {formatAccountMessage({ id: 'sign.in', defaultMessage: ' Login in' })}
-              </button>
-            )}
           </div>
 
           {!isEmpty ? (
@@ -127,18 +118,20 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods, emptyStateDescripti
         </div>
 
         <div className="bg-white pb-12 pt-24 md:py-12 lg:mt-0 lg:w-[30%] lg:rounded-md lg:py-36">
-          <div className="hidden px-36 pb-32 lg:block">
-            <h4 className="text-18">{formatCartMessage({ id: 'order.summary', defaultMessage: 'Order Summary' })}</h4>
+          <div className="px-16 pb-32 md:px-24 lg:px-36">
+            <h4 className="hidden text-18 lg:block">
+              {formatCartMessage({ id: 'order.summary', defaultMessage: 'Order Summary' })}
+            </h4>
             {!loggedIn && (
               <>
-                <p className="mt-34 leading-[20px] text-secondary-black">
+                <p className="mt-18 border-t border-neutral-400 pt-16 text-14 leading-[20px] text-secondary-black md:text-16 lg:border-none">
                   {formatCartMessage({
                     id: 'order.summary.login',
                     defaultMessage: 'Log in to use your personal offers!',
                   })}
                 </p>
                 <button
-                  className="mt-18 w-full rounded-md border border-primary-black px-24 py-6 font-medium transition hover:border-secondary-black hover:text-secondary-black md:px-36"
+                  className="mt-18 w-full rounded-md border border-primary-black px-24 py-6 text-14 font-medium transition hover:border-secondary-black hover:text-secondary-black md:px-36 md:text-16"
                   onClick={openLoginModal}
                 >
                   {formatAccountMessage({ id: 'sign.in', defaultMessage: ' Login in' })}
