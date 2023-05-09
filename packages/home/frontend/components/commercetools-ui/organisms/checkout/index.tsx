@@ -6,6 +6,7 @@ import { useFormat } from 'helpers/hooks/useFormat';
 import useI18n from 'helpers/hooks/useI18n';
 import { Guid } from 'helpers/utils/guid';
 import { getLocalizationInfo } from 'project.config';
+import { sdk } from 'sdk';
 import { PaymentResponse } from 'types/payment';
 import { useAccount, useCart } from 'frontastic';
 import Footer from './components/footer';
@@ -34,12 +35,17 @@ const CheckoutWrapped: React.FC<Props> = ({ logo, ...emptyState }) => {
   const router = useRouter();
 
   const handlePaymentResponse = useCallback(
-    (response: PaymentResponse, orderNumber: string) => {
+    async (response: PaymentResponse, orderNumber: string) => {
       if (['Authorised', 'RedirectShopper', 'IdentifyShopper', 'ChallengeShopper'].includes(response.resultCode)) {
-        if (!response.action) return router.push(`/thank-you?orderId=${orderNumber}`);
+        if (!response.action) {
+          await sdk.callAction({ actionName: 'cart/resetCart' });
+          router.push(`/thank-you?orderId=${orderNumber}`);
+          return;
+        }
 
         switch (response.action.type) {
           case 'redirect':
+            await sdk.callAction({ actionName: 'cart/resetCart' });
             window.location.replace(response.action.url as string);
             break;
           case 'threeDS2':
