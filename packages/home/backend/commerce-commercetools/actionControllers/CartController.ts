@@ -58,6 +58,19 @@ export const getCart: ActionHook = async (request: Request, actionContext: Actio
   return response;
 };
 
+export const resetCart: ActionHook = async (request: Request, actionContext: ActionContext) => {
+  const response: Response = {
+    statusCode: 200,
+    body: null,
+    sessionData: {
+      ...request.sessionData,
+      cartId: null,
+    },
+  };
+
+  return response;
+};
+
 export const addToCart: ActionHook = async (request: Request, actionContext: ActionContext) => {
   const cartApi = new CartApi(actionContext.frontasticContext, getLocale(request));
 
