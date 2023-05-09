@@ -15,9 +15,9 @@ export interface Props {
 
 const MenuDropdown: FC<Props> = ({ show, links, tileContent, onClick }) => {
   const wrapperClassNames = useClassNames([
-    'transition absolute flex justify-between bottom-0 left-0 duration-500 ease-in-out min-h-[300px] w-[100%] translate-y-full',
-    show ? 'opacity-1 z-20 delay-500' : 'opacity-0 z-[-999] pointer-events-none',
-    'border-b-[1.5px] border-t-[1.5px] border-b-secondary-grey border-t-neutral-400 bg-white pl-52 pr-48 py-32',
+    'transition absolute flex justify-between bottom-0 left-0 duration-300 ease-in-out min-h-[300px] w-[100%] translate-y-full',
+    show ? 'opacity-1 z-20 delay-300' : 'opacity-0 z-[-999] pointer-events-none',
+    'border-b-2 border-t-2 border-b-secondary-grey border-t-neutral-400 bg-white pl-52 pr-48 py-32',
   ]);
 
   const linksClassNames = useClassNames(['grid grid-cols-4 gap-x-116 gap-y-28', tileContent ? 'pr-116' : '']);
