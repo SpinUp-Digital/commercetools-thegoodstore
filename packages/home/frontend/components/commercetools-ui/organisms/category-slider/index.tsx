@@ -26,13 +26,13 @@ const CategorySlider: React.FC<Props> = ({ tiles = [] }) => {
         containerClassName={showArrows ? 'px-48' : ''}
         slidesPerView={isTouchDevice ? 2.3 : 1.3}
         dots={false}
-        spaceBetween={4}
+        spaceBetween={8}
         arrows={showArrows}
         innerArrows
         allowTouchMove={!showArrows}
         breakpoints={{
           [tablet]: {
-            spaceBetween: 8,
+            spaceBetween: 12,
             slidesPerView: 2.3,
           },
           [mediumDesktop]: {
