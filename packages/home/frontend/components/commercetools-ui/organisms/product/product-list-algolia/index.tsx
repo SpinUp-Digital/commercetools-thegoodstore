@@ -34,13 +34,15 @@ const ProductListAlgolia: React.FC<Props> = ({ slug, searchQuery, categories, fa
         maxValuesPerFacet={1000}
       />
 
-      <Wrapper className="relative">
-        {searchQuery ? (
+      {searchQuery ? (
+        <Wrapper background="neutral-200">
           <SearchHeader query={searchQuery ?? ''} />
-        ) : (
-          <Breadcrumbs categories={categories} categoryId={category?.categoryId} />
-        )}
+        </Wrapper>
+      ) : (
+        <Breadcrumbs categories={categories} categoryId={category?.categoryId} />
+      )}
 
+      <Wrapper className="relative">
         <MobileFacets facetsConfiguration={facetsConfiguration} />
         <DesktopFacets facetsConfiguration={facetsConfiguration} />
 

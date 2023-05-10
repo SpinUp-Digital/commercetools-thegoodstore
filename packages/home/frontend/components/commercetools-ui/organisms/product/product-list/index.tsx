@@ -23,13 +23,15 @@ const ProductList: React.FC<Props> = ({ products, categories }) => {
 
   return (
     <div className="min-h-screen bg-neutral-200 py-48">
-      <Wrapper className="relative" background="neutral-200">
-        {searchQuery ? (
+      {searchQuery ? (
+        <Wrapper background="neutral-200">
           <SearchHeader query={searchQuery ?? ''} />
-        ) : (
-          <Breadcrumbs categories={categories} categoryId={category?.categoryId} />
-        )}
+        </Wrapper>
+      ) : (
+        <Breadcrumbs categories={categories} categoryId={category?.categoryId} />
+      )}
 
+      <Wrapper className="relative" background="neutral-200">
         <MobileFacets />
         <DesktopFacets />
 
