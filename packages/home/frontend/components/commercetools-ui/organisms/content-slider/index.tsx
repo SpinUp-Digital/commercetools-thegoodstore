@@ -64,3 +64,5 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
   );
 };
 export default ContentSlider;
+
+export * from './types';
