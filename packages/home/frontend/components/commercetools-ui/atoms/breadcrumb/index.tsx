@@ -6,7 +6,12 @@ export type BreadcrumbProps = {
   listClassName?: string;
 };
 
-const Breadcrumb: React.FC<BreadcrumbProps> = ({ children, Separator, className = '', listClassName }) => {
+const Breadcrumb: React.FC<React.PropsWithChildren<BreadcrumbProps>> = ({
+  children,
+  Separator,
+  className = '',
+  listClassName,
+}) => {
   return (
     <nav className={`max-w-[100%] overflow-x-auto scrollbar-hide ${className}`} aria-label="Breadcrumb">
       <ol

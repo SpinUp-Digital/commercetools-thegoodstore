@@ -20,7 +20,7 @@ export interface Props {
   goToNextStep: () => void;
 }
 
-const Addresses: React.FC<Props> = ({ goToNextStep }) => {
+const Addresses: React.FC<React.PropsWithChildren<Props>> = ({ goToNextStep }) => {
   const { formatMessage } = useFormat({ name: 'common' });
   const { formatMessage: formatCheckoutMessage } = useFormat({ name: 'checkout' });
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });

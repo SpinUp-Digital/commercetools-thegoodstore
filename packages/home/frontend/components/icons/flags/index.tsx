@@ -17,7 +17,7 @@ type Props = {
   className?: string;
 };
 
-const Icon: React.FC<Props> = ({ className, flagName }: Props) => {
+const Icon: React.FC<React.PropsWithChildren<Props>> = ({ className, flagName }: Props) => {
   const iconClassNames = `h-14 w-21 ${className}`;
   const flags = {
     france: <France className={iconClassNames} />,

@@ -10,7 +10,7 @@ export interface Props {
   className?: string;
 }
 
-const DiscountForm: React.FC<Props> = ({ className }) => {
+const DiscountForm: React.FC<React.PropsWithChildren<Props>> = ({ className }) => {
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
 
   const [code, setCode] = useState('');

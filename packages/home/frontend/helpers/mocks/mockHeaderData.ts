@@ -1,5 +1,5 @@
-import { Category } from 'types/category';
 import { Tile } from 'components/commercetools-ui/organisms/header/types';
+import { Category } from 'types/category';
 
 export const logo = {
   media: {
@@ -14,6 +14,7 @@ export const logo = {
 export const tiles: Tile[] = [
   {
     tileImage: {
+      alt: '',
       media: {
         mediaId: 'evttc8mtgc59spx0j19j',
         resourceType: 'image',
@@ -36,6 +37,7 @@ export const tiles: Tile[] = [
   },
   {
     tileImage: {
+      alt: '',
       media: {
         mediaId: 'r47edtqlooinexeyrdwe',
         resourceType: 'image',
@@ -65,6 +67,7 @@ export const tiles: Tile[] = [
   },
   {
     tileImage: {
+      alt: '',
       media: {
         mediaId: 'jdrbzwz19qiw0a2duxek',
         resourceType: 'image',
@@ -94,6 +97,7 @@ export const tiles: Tile[] = [
   },
   {
     tileImage: {
+      alt: '',
       media: {
         mediaId: 'l3x6iq067r7faazm2t3k',
         resourceType: 'image',

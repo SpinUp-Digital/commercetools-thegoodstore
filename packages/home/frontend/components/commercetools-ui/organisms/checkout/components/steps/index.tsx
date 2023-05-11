@@ -17,7 +17,7 @@ interface Props {
   onFinalStepChange: (isFinalStep: boolean) => void;
 }
 
-const Steps: React.FC<Props> = ({ onPurchase, onFinalStepChange }) => {
+const Steps: React.FC<React.PropsWithChildren<Props>> = ({ onPurchase, onFinalStepChange }) => {
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
   const { formatMessage: formatCheckoutMessage } = useFormat({ name: 'checkout' });
 

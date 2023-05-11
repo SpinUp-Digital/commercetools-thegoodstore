@@ -7,7 +7,7 @@ interface Props {
   className?: string;
 }
 
-const OutOfStock: React.FC<Props> = ({ restockableInDays, className }) => {
+const OutOfStock: React.FC<React.PropsWithChildren<Props>> = ({ restockableInDays, className }) => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
   const classNames = useClassNames([

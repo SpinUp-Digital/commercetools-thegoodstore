@@ -6,7 +6,7 @@ interface Props {
   orderNumber: string;
 }
 
-const OrderNumber: FC<Props> = ({ orderNumber }) => {
+const OrderNumber: FC<React.PropsWithChildren<Props>> = ({ orderNumber }) => {
   const { formatMessage: formatOrdersMessage } = useFormat({ name: 'orders' });
 
   return (

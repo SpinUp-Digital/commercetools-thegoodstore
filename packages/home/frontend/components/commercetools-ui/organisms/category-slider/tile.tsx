@@ -13,7 +13,7 @@ export interface Props {
   };
 }
 
-const Tile: React.FC<Props> = ({ tile }) => {
+const Tile: React.FC<React.PropsWithChildren<Props>> = ({ tile }) => {
   const tileImageSizes = useImageSizes({ md: 0.5, lg: 0.25, defaultSize: 0.25 });
 
   return (
@@ -23,8 +23,8 @@ const Tile: React.FC<Props> = ({ tile }) => {
           {...tile.image}
           sizes={tileImageSizes}
           alt={tile.title}
-          layout="fill"
-          objectFit="cover"
+          fill
+          style={{ objectFit: 'cover' }}
           className="brightness-75"
           loading="eager"
         />

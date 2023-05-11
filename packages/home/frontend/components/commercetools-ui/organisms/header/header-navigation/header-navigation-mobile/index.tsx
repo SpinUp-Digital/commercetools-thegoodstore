@@ -16,7 +16,7 @@ export interface Props {
   links: Category[];
 }
 
-const HeaderNavigationMobile: FC<Props> = ({ links, logo, logoLink }) => {
+const HeaderNavigationMobile: FC<React.PropsWithChildren<Props>> = ({ links, logo, logoLink }) => {
   const { formatMessage } = useFormat({ name: 'common' });
   const [categoriesNavigator, setCategoriesNavigator] = useState<Category[]>([]);
   const [showMenu, setShowMenu] = useState(false);

@@ -7,7 +7,7 @@ interface PersonalInformation {
   account: Account;
 }
 
-const PersonalInfo: FC<PersonalInformation> = ({ account }) => {
+const PersonalInfo: FC<React.PropsWithChildren<PersonalInformation>> = ({ account }) => {
   const { formatMessage } = useFormat({ name: 'common' });
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
 

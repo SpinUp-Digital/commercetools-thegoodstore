@@ -31,7 +31,7 @@ export interface Props {
   onClick?: () => void;
 }
 
-const SearchSuggestion: React.FC<Props> = ({ hit, categories, onClick }) => {
+const SearchSuggestion: React.FC<React.PropsWithChildren<Props>> = ({ hit, categories, onClick }) => {
   const router = useRouter();
 
   const categoryOptions = useMemo(() => {

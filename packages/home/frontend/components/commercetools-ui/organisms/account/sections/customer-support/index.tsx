@@ -16,7 +16,7 @@ interface Props {
   faqs: FAQ[];
 }
 
-const CustomerSupport: React.FC<Props> = ({
+const CustomerSupport: React.FC<React.PropsWithChildren<Props>> = ({
   phoneNumber,
   workingHoursWeekdays,
   workingHoursWeekends,

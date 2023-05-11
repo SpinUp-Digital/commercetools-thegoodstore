@@ -13,7 +13,7 @@ export interface Props {
   menuTop?: boolean;
 }
 
-const MarketButtonMobile: FC<Props> = ({ menuTop }) => {
+const MarketButtonMobile: FC<React.PropsWithChildren<Props>> = ({ menuTop }) => {
   const { market: selectedMarket, markets, handleMarket } = useContext(MarketContext);
 
   const marketButtonClassNames = useCallback(

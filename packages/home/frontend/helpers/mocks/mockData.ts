@@ -3,12 +3,12 @@ import { Address } from '@commercetools/frontend-domain-types/account/Address';
 import { Group } from '@commercetools/frontend-domain-types/account/Group';
 import { LineItem as CartLineItem } from '@commercetools/frontend-domain-types/cart/LineItem';
 import { Money } from '@commercetools/frontend-domain-types/product/Money';
-import { Variant } from 'types/product';
 import { LineItem } from '@commercetools/frontend-domain-types/wishlist/LineItem';
 import { Wishlist } from '@commercetools/frontend-domain-types/wishlist/Wishlist';
 import { Account } from 'types/account';
 import { Category } from 'types/category';
 import { ShippingInfo } from 'types/order';
+import { Variant } from 'types/product';
 import { NextFrontasticImage } from 'frontastic/lib/image';
 
 export const categories: Category[] = [
@@ -1175,6 +1175,7 @@ export const account: Account = {
 };
 
 export const frontasticImage: NextFrontasticImage = {
+  alt: '',
   media: {
     file: 'https://res.cloudinary.com/dlwdq84ig/image/upload/v1646648997/m1qzalyiebn9boow3tth.webp',
     height: 66,

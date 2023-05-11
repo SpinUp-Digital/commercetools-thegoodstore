@@ -4,7 +4,7 @@ type Props = {
   className?: string;
 };
 
-const Icon: React.FC<Props> = ({ className }: Props) => (
+const Icon: React.FC<React.PropsWithChildren<Props>> = ({ className }: Props) => (
   <svg
     width="100%"
     height="100%"

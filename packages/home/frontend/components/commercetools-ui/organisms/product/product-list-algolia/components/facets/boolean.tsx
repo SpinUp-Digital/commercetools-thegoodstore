@@ -4,7 +4,7 @@ import Checkbox from 'components/commercetools-ui/atoms/checkbox';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { FacetProps } from './types';
 
-const BooleanFacet: React.FC<FacetProps> = ({ attribute, label }) => {
+const BooleanFacet: React.FC<React.PropsWithChildren<FacetProps>> = ({ attribute, label }) => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
   const { items, refine } = useRefinementList({ attribute });

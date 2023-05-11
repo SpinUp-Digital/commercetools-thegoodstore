@@ -7,7 +7,7 @@ interface Props {
   categories: Category[];
 }
 
-const CartTastic: React.FC<Props> = ({ data, categories }) => {
+const CartTastic: React.FC<React.PropsWithChildren<Props>> = ({ data, categories }) => {
   return <Cart {...data} categories={categories} />;
 };
 

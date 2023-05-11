@@ -14,7 +14,7 @@ type QuickViewProps = {
   hideButton: () => void;
 };
 
-const QuickView: FC<QuickViewProps> = ({ buttonIsVisible, product, hideButton }) => {
+const QuickView: FC<React.PropsWithChildren<QuickViewProps>> = ({ buttonIsVisible, product, hideButton }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
 
   const { blockScroll } = useScrollBlock();

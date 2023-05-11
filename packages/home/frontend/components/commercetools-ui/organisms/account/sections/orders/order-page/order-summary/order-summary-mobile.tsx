@@ -14,7 +14,7 @@ export interface Props {
   order?: Order;
 }
 
-const OrderSummaryMobile: FC<Props> = ({ order }) => {
+const OrderSummaryMobile: FC<React.PropsWithChildren<Props>> = ({ order }) => {
   const { locale } = useRouter();
 
   const {
@@ -71,7 +71,7 @@ const OrderSummaryMobile: FC<Props> = ({ order }) => {
           <div key={lineItem.lineItemId} className={lineItemClassNames(order, index)}>
             {lineItem.variant?.images?.[0] && (
               <div className="relative h-[104px] w-[88px] shrink-0">
-                <Image layout="fill" src={lineItem.variant.images[0]} objectFit="contain" />
+                <Image fill src={lineItem.variant.images[0]} style={{ objectFit: 'contain' }} />
               </div>
             )}
             <div className="flex flex-col justify-center pl-16">

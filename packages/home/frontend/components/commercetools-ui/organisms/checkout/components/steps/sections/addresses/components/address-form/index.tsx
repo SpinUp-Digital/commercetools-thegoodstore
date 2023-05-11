@@ -11,7 +11,7 @@ interface Props {
   onSubmit?: () => void;
 }
 
-const AddressForm: React.FC<Props> = ({
+const AddressForm: React.FC<React.PropsWithChildren<Props>> = ({
   className: containerClassName,
   fields,
   address,

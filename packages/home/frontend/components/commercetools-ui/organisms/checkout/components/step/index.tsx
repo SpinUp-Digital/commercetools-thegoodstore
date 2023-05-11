@@ -13,7 +13,16 @@ interface Props {
   CTA?: JSX.Element;
 }
 
-const Step: React.FC<Props> = ({ number, label, isExpanded, isCompleted, onEdit, Component, Preview, CTA }) => {
+const Step: React.FC<React.PropsWithChildren<Props>> = ({
+  number,
+  label,
+  isExpanded,
+  isCompleted,
+  onEdit,
+  Component,
+  Preview,
+  CTA,
+}) => {
   const { formatMessage } = useFormat({ name: 'common' });
 
   const ref = useRef<HTMLDivElement>(null);

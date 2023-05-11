@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useProductList } from '../../context';
 
-const SortFacet: React.FC = () => {
+const SortFacet: React.FC<React.PropsWithChildren<object>> = () => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
   const { replaceSort, activeSort } = useProductList();

@@ -12,7 +12,7 @@ interface Props {
   goToNextStep: () => void;
 }
 
-const Payment: React.FC<Props> = ({ goToNextStep }) => {
+const Payment: React.FC<React.PropsWithChildren<Props>> = ({ goToNextStep }) => {
   const { formatMessage: formatCheckoutMessage } = useFormat({ name: 'checkout' });
 
   const { getPaymentMethods, setPaymentData, paymentData, paymentDataIsValid } = useCheckout();

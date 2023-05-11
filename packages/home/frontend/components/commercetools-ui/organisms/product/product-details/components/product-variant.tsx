@@ -14,7 +14,7 @@ type ProductVariantProps = {
   onClick?: (sku: string) => void;
 };
 
-const ProductVariant: FC<ProductVariantProps> = ({
+const ProductVariant: FC<React.PropsWithChildren<ProductVariantProps>> = ({
   className,
   currentVariant,
   variants,

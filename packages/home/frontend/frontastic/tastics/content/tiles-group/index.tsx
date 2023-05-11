@@ -5,7 +5,7 @@ export interface Props {
   data: TilesGroupProps;
 }
 
-const TilesGroupTastic: React.FC<Props> = ({ data }) => {
+const TilesGroupTastic: React.FC<React.PropsWithChildren<Props>> = ({ data }) => {
   return <TilesGroup {...data} />;
 };
 

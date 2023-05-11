@@ -18,7 +18,7 @@ interface Props {
   onClick?: () => void;
 }
 
-const SearchItem: React.FC<Props> = ({ hit, categories, onClick }) => {
+const SearchItem: React.FC<React.PropsWithChildren<Props>> = ({ hit, categories, onClick }) => {
   const router = useRouter();
 
   const primaryCategory = useMemo(
@@ -45,7 +45,7 @@ const SearchItem: React.FC<Props> = ({ hit, categories, onClick }) => {
       <div className="flex items-center gap-12">
         <div className="shrink-0 p-8">
           <div className="relative h-90 w-80">
-            <Image src={variant?.images?.[0]} suffix="small" objectFit="contain" />
+            <Image fill src={variant?.images?.[0]} suffix="small" style={{ objectFit: 'contain' }} />
           </div>
         </div>
         <div>

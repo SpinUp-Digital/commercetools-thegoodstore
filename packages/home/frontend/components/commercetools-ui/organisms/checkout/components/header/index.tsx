@@ -11,7 +11,7 @@ export interface Props extends EmptyStateProps {
   logo: FrontasticImage;
 }
 
-const Header: React.FC<Props> = ({ logo, ...emptyState }) => {
+const Header: React.FC<React.PropsWithChildren<Props>> = ({ logo, ...emptyState }) => {
   const { totalItems: totalCartItems } = useCart();
 
   const [isCartSlideoutOpen, setIsCartSlideoutOpen] = useState(false);
@@ -20,7 +20,7 @@ const Header: React.FC<Props> = ({ logo, ...emptyState }) => {
     <div className="flex items-center justify-between border-b border-neutral-400 bg-white px-16 py-18 md:p-24 lg:px-48 lg:py-28">
       <Link href="/">
         <div className="relative h-[36px] w-[208px] lg:h-[44px] lg:w-[259px]">
-          <Image {...logo} objectFit="contain" layout="fill" />
+          <Image {...logo} style={{ objectFit: 'contain' }} fill />
         </div>
       </Link>
       <div onClick={() => setIsCartSlideoutOpen(true)} className="cursor-pointer">

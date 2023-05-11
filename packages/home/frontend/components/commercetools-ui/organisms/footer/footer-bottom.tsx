@@ -10,7 +10,7 @@ interface Props {
   socialMedia?: SocialMedia[];
 }
 
-const FooterBottom: FC<Props> = ({ logo, socialMedia }) => {
+const FooterBottom: FC<React.PropsWithChildren<Props>> = ({ logo, socialMedia }) => {
   const { formatMessage } = useFormat({ name: 'common' });
   return (
     <>

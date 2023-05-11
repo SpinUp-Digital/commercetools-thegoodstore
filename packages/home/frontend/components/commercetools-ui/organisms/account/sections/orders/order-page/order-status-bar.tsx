@@ -11,7 +11,7 @@ export interface Props {
   orderState: string;
   orderShippingState: ShipmentState;
 }
-const OrderStatusBar: FC<Props> = ({
+const OrderStatusBar: FC<React.PropsWithChildren<Props>> = ({
   orderDate,
   orderShippingDate,
   orderDeliveryDate,

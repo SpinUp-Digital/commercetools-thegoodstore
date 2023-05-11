@@ -6,7 +6,7 @@ interface Props {
   currentItems: number;
 }
 
-const AccumalativeTrace: React.FC<Props> = ({ currentItems }) => {
+const AccumalativeTrace: React.FC<React.PropsWithChildren<Props>> = ({ currentItems }) => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
   const { totalItems } = useProductList();

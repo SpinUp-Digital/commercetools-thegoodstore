@@ -10,7 +10,7 @@ interface Props {
   onSelectAddress: (address: Address) => void;
 }
 
-const AccountAddresses: React.FC<Props> = ({ className = '', type, onSelectAddress }) => {
+const AccountAddresses: React.FC<React.PropsWithChildren<Props>> = ({ className = '', type, onSelectAddress }) => {
   const { shippingAddresses, billingAddresses, defaultBillingAddress, defaultShippingAddress } = useAccount();
 
   const { accountAddressToAddress } = useMappers();

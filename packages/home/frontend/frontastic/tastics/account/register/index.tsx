@@ -5,7 +5,7 @@ export interface Props {
   data: RegisterProps;
 }
 
-const AccountRegisterTastic: React.FC<Props> = ({ data }) => {
+const AccountRegisterTastic: React.FC<React.PropsWithChildren<Props>> = ({ data }) => {
   return <Register {...data} />;
 };
 

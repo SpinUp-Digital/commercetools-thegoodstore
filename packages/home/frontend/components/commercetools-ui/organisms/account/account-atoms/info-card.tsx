@@ -15,7 +15,7 @@ interface InfoCardProps extends ComponentProps<'div'> {
   editHref?: string;
 }
 
-const InfoCard: FC<InfoCardProps> = ({
+const InfoCard: FC<React.PropsWithChildren<InfoCardProps>> = ({
   children,
   infoFields,
   className,

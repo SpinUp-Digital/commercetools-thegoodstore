@@ -17,7 +17,7 @@ export interface AddressProps {
   selectAddress: (address: AddressFormData) => void;
 }
 
-const Address: React.FC<AddressProps> = ({ address, isDefaultAddress, selectAddress }) => {
+const Address: React.FC<React.PropsWithChildren<AddressProps>> = ({ address, isDefaultAddress, selectAddress }) => {
   const { mapPropsToAddress } = usePropsToAddressType();
   const { label } = mapPropsToAddress(address as AddressFormData);
 

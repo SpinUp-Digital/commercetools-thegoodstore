@@ -15,7 +15,7 @@ export interface Props {
   handleCategoryClick?: () => void;
 }
 
-const CartSlideout: FC<Props> = ({
+const CartSlideout: FC<React.PropsWithChildren<Props>> = ({
   emptyStateImage,
   emptyStateTitle,
   emptyStateSubtitle,

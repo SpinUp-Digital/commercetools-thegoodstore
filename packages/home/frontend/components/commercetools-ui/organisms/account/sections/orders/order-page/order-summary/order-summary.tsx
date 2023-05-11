@@ -18,7 +18,14 @@ export interface Props {
   lineItems: LineItem[];
 }
 
-const OrderSummary: FC<Props> = ({ hiddenItemsCount, subtotal, shipmentFees, totalTax, total, lineItems }) => {
+const OrderSummary: FC<React.PropsWithChildren<Props>> = ({
+  hiddenItemsCount,
+  subtotal,
+  shipmentFees,
+  totalTax,
+  total,
+  lineItems,
+}) => {
   const { locale } = useRouter();
 
   const { formatMessage: formatOrdersMessage } = useFormat({ name: 'orders' });
@@ -52,7 +59,12 @@ const OrderSummary: FC<Props> = ({ hiddenItemsCount, subtotal, shipmentFees, tot
                 <div key={lineItem?.lineItemId} className="pr-16">
                   {lineItem?.variant?.images?.[0] && (
                     <div key={lineItem?.lineItemId} className="relative mr-12 h-[104px] w-[88px] shrink-0">
-                      <Image layout="fill" src={lineItem.variant.images[0]} objectFit="contain" alt={lineItem.name} />
+                      <Image
+                        fill
+                        src={lineItem.variant.images[0]}
+                        style={{ objectFit: 'contain' }}
+                        alt={lineItem.name}
+                      />
                     </div>
                   )}
                 </div>
@@ -86,7 +98,12 @@ const OrderSummary: FC<Props> = ({ hiddenItemsCount, subtotal, shipmentFees, tot
           <div className="flex justify-start border-b py-16">
             {lineItems[0].variant?.images?.[0] && (
               <div className="relative h-[104px] w-[88px] shrink-0">
-                <Image layout="fill" src={lineItems[0].variant.images[0]} objectFit="contain" alt={lineItems[0].name} />
+                <Image
+                  fill
+                  src={lineItems[0].variant.images[0]}
+                  style={{ objectFit: 'contain' }}
+                  alt={lineItems[0].name}
+                />
               </div>
             )}
             <div className="flex flex-col justify-center pl-16">
@@ -115,7 +132,7 @@ const OrderSummary: FC<Props> = ({ hiddenItemsCount, subtotal, shipmentFees, tot
               <div key={lineItem.lineItemId} className="flex justify-start border-b py-16">
                 {lineItem.variant?.images?.[0] && (
                   <div className="relative h-[104px] w-[88px] shrink-0">
-                    <Image layout="fill" src={lineItem.variant.images[0]} objectFit="contain" alt={lineItem.name} />
+                    <Image fill src={lineItem.variant.images[0]} style={{ objectFit: 'contain' }} alt={lineItem.name} />
                   </div>
                 )}
                 <div className="flex flex-col justify-center pl-16">

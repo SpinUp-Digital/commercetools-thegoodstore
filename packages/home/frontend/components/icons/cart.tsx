@@ -7,7 +7,7 @@ type Props = {
   counterClassName?: string;
 };
 
-const Icon: React.FC<Props> = ({ className, totalCartItems = 0, counterClassName }) => (
+const Icon: React.FC<React.PropsWithChildren<Props>> = ({ className, totalCartItems = 0, counterClassName }) => (
   <div className="relative">
     {totalCartItems > 0 && (
       <>

@@ -11,7 +11,7 @@ export interface Props {
   goToNextStep: () => void;
 }
 
-const Shipping: React.FC<Props> = ({ goToNextStep }) => {
+const Shipping: React.FC<React.PropsWithChildren<Props>> = ({ goToNextStep }) => {
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
 
   const { locale } = useRouter();

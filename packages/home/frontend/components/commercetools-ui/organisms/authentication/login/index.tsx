@@ -9,7 +9,7 @@ export interface LoginProps {
   onLogin?: () => void;
 }
 
-const Login: React.FC<LoginProps> = ({ onLogin }) => {
+const Login: React.FC<React.PropsWithChildren<LoginProps>> = ({ onLogin }) => {
   return (
     <>
       <div className="m-auto grid max-w-[480px] px-16">

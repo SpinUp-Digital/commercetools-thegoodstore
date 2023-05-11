@@ -7,7 +7,7 @@ type OrderSummaryListProps = {
   order: Order;
 };
 
-const OrderSummaryList: FC<OrderSummaryListProps> = ({ className, order }) => {
+const OrderSummaryList: FC<React.PropsWithChildren<OrderSummaryListProps>> = ({ className, order }) => {
   return (
     <div className={className}>
       {order.lineItems?.map((lineItem, index) => (
