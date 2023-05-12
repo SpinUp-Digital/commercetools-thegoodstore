@@ -5,7 +5,7 @@ export interface Props {
   data: SpacerProps;
 }
 
-const SpacerTastic: React.FC<Props> = ({ data }) => {
+const SpacerTastic: React.FC<React.PropsWithChildren<Props>> = ({ data }) => {
   return <Spacer {...data} />;
 };
 

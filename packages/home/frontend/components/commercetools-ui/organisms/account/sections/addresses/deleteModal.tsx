@@ -12,7 +12,12 @@ type DeleteModalProps = {
   handleDelete: () => void;
 };
 
-const DeleteModal: FC<DeleteModalProps> = ({ modalIsOpen, loading, closeModal, handleDelete }) => {
+const DeleteModal: FC<React.PropsWithChildren<DeleteModalProps>> = ({
+  modalIsOpen,
+  loading,
+  closeModal,
+  handleDelete,
+}) => {
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
   const { formatMessage } = useFormat({ name: 'common' });
 

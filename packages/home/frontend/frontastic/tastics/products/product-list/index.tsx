@@ -35,7 +35,7 @@ export type Props = Tastic<
   categories: Category[];
 };
 
-const ProductListWrapped: React.FC<Props> = ({ data, categories }) => {
+const ProductListWrapped: React.FC<React.PropsWithChildren<Props>> = ({ data, categories }) => {
   const { query } = useRouter();
 
   const { updatePricesConfiguration, updateFacetsConfiguration, updateUiState, slug, searchQuery } = useProductList();
@@ -130,7 +130,7 @@ const ProductListWrapped: React.FC<Props> = ({ data, categories }) => {
   return <ProductList products={items} categories={categories} />;
 };
 
-const ProductListTastic: React.FC<Props> = ({ ...props }) => (
+const ProductListTastic: React.FC<React.PropsWithChildren<Props>> = ({ ...props }) => (
   <ProductListProvider>
     <ProductListWrapped {...props} />
   </ProductListProvider>

@@ -7,7 +7,7 @@ export interface RegisterProps {
   termsOfUseLink?: Reference;
 }
 
-const Register: React.FC<RegisterProps> = ({ termsOfUseLink }) => {
+const Register: React.FC<React.PropsWithChildren<RegisterProps>> = ({ termsOfUseLink }) => {
   return (
     <>
       <div className="m-auto grid max-w-[480px] px-16">

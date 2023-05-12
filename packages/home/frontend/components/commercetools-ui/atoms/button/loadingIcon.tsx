@@ -4,7 +4,7 @@ type LoadingIconProps = {
   className: 'fill-gray-700' | 'fill-white';
 };
 
-const LoadingIcon: FC<LoadingIconProps> = ({ className = 'fill-white' }) => {
+const LoadingIcon: FC<React.PropsWithChildren<LoadingIconProps>> = ({ className = 'fill-white' }) => {
   return (
     <span className="relative h-20 w-20">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">

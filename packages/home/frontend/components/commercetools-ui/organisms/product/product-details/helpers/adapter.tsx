@@ -16,7 +16,12 @@ type ProductDetailsAdapterProps = {
   onAddToCart?: () => void;
 };
 
-const ProductDetailsAdapter: FC<ProductDetailsAdapterProps> = ({ product, inModalVersion, setIsOpen, onAddToCart }) => {
+const ProductDetailsAdapter: FC<React.PropsWithChildren<ProductDetailsAdapterProps>> = ({
+  product,
+  inModalVersion,
+  setIsOpen,
+  onAddToCart,
+}) => {
   const router = useRouter();
 
   const [variant, setVariant] = useState<Variant>();

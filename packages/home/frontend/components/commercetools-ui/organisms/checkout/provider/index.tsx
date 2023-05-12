@@ -3,7 +3,7 @@ import AdyenPaymentProvider, { AdyenContext } from './payment/adyen';
 
 const CheckoutContext = React.createContext({});
 
-const CheckoutProvider: React.FC = ({ children }) => {
+const CheckoutProvider: React.FC<React.PropsWithChildren<object>> = ({ children }) => {
   return (
     <CheckoutContext.Provider value={{}}>
       <AdyenPaymentProvider>{children}</AdyenPaymentProvider>

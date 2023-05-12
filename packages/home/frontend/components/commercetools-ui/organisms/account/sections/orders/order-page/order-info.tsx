@@ -15,7 +15,13 @@ export interface Props {
   orderState: string;
 }
 
-const OrderInfoSection: FC<Props> = ({ order, shippingInfo, paymentInfo, shippingAddress, orderState }) => {
+const OrderInfoSection: FC<React.PropsWithChildren<Props>> = ({
+  order,
+  shippingInfo,
+  paymentInfo,
+  shippingAddress,
+  orderState,
+}) => {
   const { formatMessage: formatOrdersMessage } = useFormat({ name: 'orders' });
 
   const handlePrint = () => {

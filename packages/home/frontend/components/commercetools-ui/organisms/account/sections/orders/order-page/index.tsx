@@ -13,7 +13,7 @@ export interface Props {
   orderId?: string;
 }
 
-const OrderPage: FC<Props> = ({ orderId }) => {
+const OrderPage: FC<React.PropsWithChildren<Props>> = ({ orderId }) => {
   const { orders } = useOrderFetch();
   const order = orders.find((order) => order.orderId === orderId);
   const { formattedOrderDate, formattedShippingDate, formattedDeliveryDate, shippingInfo, paymentInfo } =

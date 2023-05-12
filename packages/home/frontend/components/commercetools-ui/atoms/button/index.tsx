@@ -17,7 +17,7 @@ export interface ButtonProps extends ComponentProps<'button'> {
   asSkeleton?: boolean;
 }
 
-const Button: FC<ButtonProps> = ({
+const Button: FC<React.PropsWithChildren<ButtonProps>> = ({
   icon,
   added,
   loading,

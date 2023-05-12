@@ -24,4 +24,6 @@ export type FrontasticImage = {
   suffix?: string;
 };
 
-export type NextFrontasticImage = FrontasticImage & Partial<Pick<NextImageProps, 'src'>> & Omit<NextImageProps, 'src'>;
+export type NextFrontasticImage = FrontasticImage &
+  Partial<Pick<NextImageProps, 'src'>> &
+  Partial<Omit<NextImageProps, 'src'>>;

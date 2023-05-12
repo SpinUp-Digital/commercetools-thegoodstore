@@ -10,7 +10,13 @@ export interface SaveOrCancelProps extends ComponentProps<'div'> {
   onCancel: () => void;
 }
 
-const SaveOrCancel: FC<SaveOrCancelProps> = ({ variant = 'save', loading, className, onSave, onCancel }) => {
+const SaveOrCancel: FC<React.PropsWithChildren<SaveOrCancelProps>> = ({
+  variant = 'save',
+  loading,
+  className,
+  onSave,
+  onCancel,
+}) => {
   const { formatMessage } = useFormat({ name: 'common' });
 
   const containerClassName = useClassNames(['flex gap-12', className]);

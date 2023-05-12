@@ -5,7 +5,7 @@ import { useFormat } from 'helpers/hooks/useFormat';
 import Skeleton from '../skeleton';
 import { TypographyProps } from './types';
 
-const Typography: React.FC<TypographyProps> = ({
+const Typography: React.FC<React.PropsWithChildren<TypographyProps>> = ({
   medium = false,
   children,
   underline = false,

@@ -13,7 +13,7 @@ interface Props {
   country?: string;
 }
 
-const ContactUs: React.FC<Props> = ({
+const ContactUs: React.FC<React.PropsWithChildren<Props>> = ({
   phoneNumber,
   workingHoursWeekdays,
   workingHoursWeekends,

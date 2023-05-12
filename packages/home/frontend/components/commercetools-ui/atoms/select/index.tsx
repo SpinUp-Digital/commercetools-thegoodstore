@@ -12,7 +12,7 @@ export interface Props {
   onChange?: (option: Option) => void;
 }
 
-const Select: React.FC<Props> = ({ onChange, defaultValue, options = [] }) => {
+const Select: React.FC<React.PropsWithChildren<Props>> = ({ onChange, defaultValue, options = [] }) => {
   const [selected, setSelected] = useState<Option | undefined>(defaultValue ?? options?.[0]);
 
   useEffect(() => {

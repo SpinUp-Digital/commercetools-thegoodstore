@@ -9,7 +9,12 @@ export interface Props {
   customDesktop: number;
 }
 
-const Spacer: React.FC<Props> = ({ customMobile, customTablet, customDesktop, backgroundColor = 'white' }) => {
+const Spacer: React.FC<React.PropsWithChildren<Props>> = ({
+  customMobile,
+  customTablet,
+  customDesktop,
+  backgroundColor = 'white',
+}) => {
   const [isTablet] = useMediaQuery(screensizes.tablet);
   const [isDesktop] = useMediaQuery(screensizes.desktop);
 

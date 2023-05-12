@@ -10,7 +10,7 @@ const initialMarketState = {
 
 const MarketContext = createContext(initialMarketState);
 
-const MarketProvider: React.FC = ({ children }) => {
+const MarketProvider: React.FC<React.PropsWithChildren<object>> = ({ children }) => {
   const { market, markets, handleMarket } = useMarket();
 
   return (

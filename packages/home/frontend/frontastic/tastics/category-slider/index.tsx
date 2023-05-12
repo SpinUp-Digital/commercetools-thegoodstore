@@ -5,7 +5,7 @@ export interface Props {
   data: CategorySliderProps;
 }
 
-const CategorySliderTastic: React.FC<Props> = ({ data }) => {
+const CategorySliderTastic: React.FC<React.PropsWithChildren<Props>> = ({ data }) => {
   return <CategorySlider {...data} />;
 };
 

@@ -10,7 +10,7 @@ type ThankYouHeaderProps = {
   onPrint: (e: React.FormEvent) => void;
 };
 
-const ThankYouHeader: FC<ThankYouHeaderProps> = ({ email, onPrint }) => {
+const ThankYouHeader: FC<React.PropsWithChildren<ThankYouHeaderProps>> = ({ email, onPrint }) => {
   const { formatMessage } = useFormat({ name: 'thank-you' });
 
   const subtitleProps: TypographyProps = {

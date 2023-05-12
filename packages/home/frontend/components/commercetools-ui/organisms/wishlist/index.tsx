@@ -14,7 +14,7 @@ export interface Props {
   emptyWishlistCategories: FooterLink[];
   handleCategoryClick?: () => void;
 }
-const Wishlist: React.FC<Props> = ({
+const Wishlist: React.FC<React.PropsWithChildren<Props>> = ({
   emptyWishlistTitle,
   emptyWishlistSubtitle,
   emptyWishlistImage,

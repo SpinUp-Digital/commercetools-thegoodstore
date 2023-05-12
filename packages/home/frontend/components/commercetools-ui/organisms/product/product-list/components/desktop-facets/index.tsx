@@ -7,7 +7,7 @@ import useDynamicFacets from '../../hooks/useDynamicFacets';
 import styles from '../../styles/index.module.css';
 import SortFacet from '../facets/sort';
 
-const DesktopFacets: React.FC = () => {
+const DesktopFacets: React.FC<React.PropsWithChildren<object>> = () => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
   const { facetsConfiguration, totalItems } = useProductList();

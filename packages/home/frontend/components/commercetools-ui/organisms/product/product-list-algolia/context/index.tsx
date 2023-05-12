@@ -16,7 +16,7 @@ export const ProductListContext = createContext<ProductListContextShape>({
   removeAllRefinements() {},
 });
 
-const ProductListProvider: React.FC = ({ children }) => {
+const ProductListProvider: React.FC<React.PropsWithChildren<object>> = ({ children }) => {
   const [facetsConfiguration, setFacetsConfiguration] = useState<Record<string, FacetConfiguration>>({});
   const [pricesConfiguration, setPricesConfiguration] = useState<Record<string, PriceConfiguration>>({});
   const [numericRanges, setNumericRanges] = useState<Record<string, [number, number]>>({});

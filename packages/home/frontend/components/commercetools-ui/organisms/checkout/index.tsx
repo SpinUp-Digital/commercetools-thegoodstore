@@ -18,7 +18,7 @@ import CheckoutProvider, { useCheckout } from './provider';
 
 export type Props = HeaderProps;
 
-const CheckoutWrapped: React.FC<Props> = ({ logo, ...emptyState }) => {
+const CheckoutWrapped: React.FC<React.PropsWithChildren<Props>> = ({ logo, ...emptyState }) => {
   const { formatMessage: formatCheckoutMessage } = useFormat({ name: 'checkout' });
 
   const { transaction, data, hasOutOfStockItems } = useCart();
@@ -184,7 +184,7 @@ const CheckoutWrapped: React.FC<Props> = ({ logo, ...emptyState }) => {
   );
 };
 
-const Checkout: React.FC<Props> = (props) => {
+const Checkout: React.FC<React.PropsWithChildren<Props>> = (props) => {
   return (
     <CheckoutProvider>
       <CheckoutWrapped {...props} />

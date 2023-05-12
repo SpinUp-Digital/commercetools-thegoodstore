@@ -4,7 +4,7 @@ import Checkbox from 'components/commercetools-ui/atoms/checkbox';
 import useRefinementHelpers from '../../hooks/useRefinementHelpers';
 import { FacetProps } from './types';
 
-const TermFacet: React.FC<FacetProps> = ({ attribute }) => {
+const TermFacet: React.FC<React.PropsWithChildren<FacetProps>> = ({ attribute }) => {
   const { refine, items } = useRefinementList({ attribute });
 
   const { resolveLabel } = useRefinementHelpers();

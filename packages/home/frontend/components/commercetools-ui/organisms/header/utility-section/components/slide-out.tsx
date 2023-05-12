@@ -28,7 +28,7 @@ export interface SlideOutProps {
   enableWishlistState?: boolean;
 }
 
-const Slideout: React.FC<SlideOutProps> = ({
+const Slideout: React.FC<React.PropsWithChildren<SlideOutProps>> = ({
   state,
   changeState,
   onClose,

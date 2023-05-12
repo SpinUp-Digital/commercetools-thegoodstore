@@ -16,7 +16,7 @@ export interface Props {
   products: Product[];
 }
 
-const ProductList: React.FC<Props> = ({ products, categories }) => {
+const ProductList: React.FC<React.PropsWithChildren<Props>> = ({ products, categories }) => {
   const { slug, searchQuery } = useProductList();
 
   const category = useMemo(() => categories.find((category) => category.slug === slug), [categories, slug]);

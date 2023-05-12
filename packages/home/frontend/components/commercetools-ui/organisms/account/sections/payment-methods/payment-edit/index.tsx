@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { TrashIcon } from '@heroicons/react/24/outline';
 import Button from 'components/commercetools-ui/atoms/button';
@@ -13,7 +13,7 @@ import useCardNumberFormatter from '../helper-hooks/useFormatCredit';
 import usePaymentHelpers from '../helper-hooks/usePaymentHelpers';
 import PaymentDelete from '../payment-delete';
 
-const PaymentEdit: FC = () => {
+const PaymentEdit: React.FC<React.PropsWithChildren<object>> = () => {
   const router = useRouter();
   // eslint-disable-next-line
   const [_hash, id] = useHash();

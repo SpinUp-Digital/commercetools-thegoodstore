@@ -14,7 +14,7 @@ export interface Props {
   className?: string;
 }
 
-const AccountTabsMobile: FC<Props> = ({ contentTitle, hash, tabs, className = '' }) => {
+const AccountTabsMobile: FC<React.PropsWithChildren<Props>> = ({ contentTitle, hash, tabs, className = '' }) => {
   const forms = ['#edit-personal-info', '#edit-newsletter', '#edit-address', '#change-password', '#delete-account'];
   const accountNavButtonClassNames = useClassNames([
     hash && forms.includes(hash) ? 'hidden' : 'relative md:hidden',

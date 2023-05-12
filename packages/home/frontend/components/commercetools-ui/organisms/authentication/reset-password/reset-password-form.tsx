@@ -10,7 +10,7 @@ import { resolveReferenceTarget } from 'helpers/reference';
 import { useAccount } from 'frontastic';
 import { ResetPasswordProps } from '.';
 
-const ResetPasswordForm: FC<ResetPasswordProps> = ({ token, accountLink, signInLink }) => {
+const ResetPasswordForm: FC<React.PropsWithChildren<ResetPasswordProps>> = ({ token, accountLink, signInLink }) => {
   //i18n messages
   const { formatMessage: formatErrorMessage } = useFormat({ name: 'error' });
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });

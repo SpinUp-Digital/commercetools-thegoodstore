@@ -9,7 +9,7 @@ interface wishlistButtonProps {
   className?: string;
 }
 
-const WishlistButton: FC<wishlistButtonProps> = ({ lineItem, className }) => {
+const WishlistButton: FC<React.PropsWithChildren<wishlistButtonProps>> = ({ lineItem, className }) => {
   const wishlist = useWishlist();
   const [onWishlist, setOnWishlist] = useState<boolean>(false);
   const [processing, setProcessing] = useState(false);

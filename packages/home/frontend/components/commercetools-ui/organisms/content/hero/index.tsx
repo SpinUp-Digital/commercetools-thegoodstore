@@ -12,7 +12,7 @@ export interface HeroProps {
   ctaReference?: Reference;
 }
 
-const Hero: React.FC<HeroProps> = ({ image, title, subtitle, ctaLabel, ctaReference }) => {
+const Hero: React.FC<React.PropsWithChildren<HeroProps>> = ({ image, title, subtitle, ctaLabel, ctaReference }) => {
   return (
     <div className="relative w-full">
       {image && (
@@ -22,8 +22,8 @@ const Hero: React.FC<HeroProps> = ({ image, title, subtitle, ctaLabel, ctaRefere
             priority
             loading="eager"
             alt={title}
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: 'cover' }}
             className="brightness-75"
           />
         </div>

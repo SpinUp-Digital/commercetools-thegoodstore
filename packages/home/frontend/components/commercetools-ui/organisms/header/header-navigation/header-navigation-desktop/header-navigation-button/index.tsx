@@ -11,7 +11,7 @@ export interface Props {
   updateSubMenu: () => void;
 }
 
-const HeaderNavigationButtonDesktop: FC<Props> = ({ show, link, updateSubMenu }) => {
+const HeaderNavigationButtonDesktop: FC<React.PropsWithChildren<Props>> = ({ show, link, updateSubMenu }) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const navLinkClassNames = useClassNames([
     'flex border-primary-black py-4 cursor-pointer relative hover:border-b-2',

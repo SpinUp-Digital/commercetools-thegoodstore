@@ -13,7 +13,7 @@ export interface Props {
   onClick?: () => void;
 }
 
-const MenuDropdown: FC<Props> = ({ show, links, tileContent, onClick }) => {
+const MenuDropdown: FC<React.PropsWithChildren<Props>> = ({ show, links, tileContent, onClick }) => {
   const wrapperClassNames = useClassNames([
     'transition absolute flex justify-between bottom-0 left-0 duration-300 ease-in-out min-h-[300px] w-[100%] translate-y-full',
     show ? 'opacity-1 z-20 delay-300' : 'opacity-0 z-[-999] pointer-events-none',

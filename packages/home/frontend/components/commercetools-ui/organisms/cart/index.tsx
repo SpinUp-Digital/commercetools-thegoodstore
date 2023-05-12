@@ -18,7 +18,7 @@ export interface Props {
   emptyStateDescription?: string;
 }
 
-const Cart: React.FC<Props> = ({ categories, paymentMethods, emptyStateDescription }) => {
+const Cart: React.FC<React.PropsWithChildren<Props>> = ({ categories, paymentMethods, emptyStateDescription }) => {
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });

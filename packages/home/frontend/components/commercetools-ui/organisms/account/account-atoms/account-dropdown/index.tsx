@@ -6,7 +6,7 @@ interface Props {
   loggedIn: boolean;
 }
 
-const AccountDropdown: React.FC<Props> = ({ loggedIn }) => {
+const AccountDropdown: React.FC<React.PropsWithChildren<Props>> = ({ loggedIn }) => {
   return loggedIn ? <LoggedIn /> : <LoggedOut />;
 };
 

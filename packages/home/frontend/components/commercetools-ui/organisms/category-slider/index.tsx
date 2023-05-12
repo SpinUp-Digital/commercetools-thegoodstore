@@ -10,7 +10,7 @@ export interface Props {
   tiles: Array<TileProps['tile']>;
 }
 
-const CategorySlider: React.FC<Props> = ({ tiles = [] }) => {
+const CategorySlider: React.FC<React.PropsWithChildren<Props>> = ({ tiles = [] }) => {
   const { isTouchDevice } = useTouchDevice();
 
   const [isDesktopSize] = useMediaQuery(mediumDesktop);

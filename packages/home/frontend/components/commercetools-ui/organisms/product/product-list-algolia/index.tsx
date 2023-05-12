@@ -21,7 +21,12 @@ interface Props {
   facetsConfiguration: Record<string, FacetConfiguration>;
 }
 
-const ProductListAlgolia: React.FC<Props> = ({ slug, searchQuery, categories, facetsConfiguration }) => {
+const ProductListAlgolia: React.FC<React.PropsWithChildren<Props>> = ({
+  slug,
+  searchQuery,
+  categories,
+  facetsConfiguration,
+}) => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
   const category = useMemo(() => categories.find((category) => category.slug === slug), [categories, slug]);

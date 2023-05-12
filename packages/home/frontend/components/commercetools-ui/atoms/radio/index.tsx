@@ -11,7 +11,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   onChecked?: () => void;
 }
 
-const Radio: React.FC<Props> = ({
+const Radio: React.FC<React.PropsWithChildren<Props>> = ({
   className = '',
   inputClassName = '',
   onChecked,
