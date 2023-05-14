@@ -64,7 +64,7 @@ const OrderSummary: FC<React.PropsWithChildren<OrderSummaryProps>> = ({ order, o
         <Accordion
           closedSectionTitle={formatMessage({ id: 'your.order', defaultMessage: 'Your order' })}
           className="hidden divide-y divide-neutral-400 lg:block lg:pt-0"
-          buttonClassName="py-16 border-y border-neutral-400"
+          buttonClassName="py-16 border-y w-full border-neutral-400"
           customClosedButton={<OrdersAccordionButton order={order} />}
         >
           <OrderSummaryList className="max-h-316 divide-y divide-neutral-400 overflow-scroll" order={order} />
