@@ -25,16 +25,21 @@ const HeaderNavigationDesktop: React.FC<React.PropsWithChildren<Props>> = ({ lin
 
   const showTimeout = useRef<NodeJS.Timer | null>(null) as React.MutableRefObject<NodeJS.Timer | null>;
 
+  const clearShowTimeout = () => {
+    if (showTimeout.current) {
+      clearTimeout(showTimeout.current);
+      showTimeout.current = null;
+    }
+  };
+
   const handleMouseIn = (category: Category) => {
+    clearShowTimeout();
     if (activeCategory) showSubMenu(category); //Already opened do not delay
     else showTimeout.current = setTimeout(() => showSubMenu(category), 500);
   };
 
   const handleMouseOut = () => {
-    if (showTimeout.current) {
-      clearTimeout(showTimeout.current);
-      showTimeout.current = null;
-    }
+    clearShowTimeout();
     hideSubMenu();
   };
 

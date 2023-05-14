@@ -1,6 +1,6 @@
 {
   "tasticType": "commercetools/ui/content/content-slider",
-  "name": "Commercetools UI Content Slider",
+  "name": "commercetools UI Content Slider",
   "category": "Content",
   "icon": "announcement",
   "schema": [
