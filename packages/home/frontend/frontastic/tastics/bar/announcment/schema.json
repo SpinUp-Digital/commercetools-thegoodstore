@@ -1,6 +1,6 @@
 {
   "tasticType": "commercetools/ui/content/announcement-bar",
-  "name": "Commercetools UI announcement bar",
+  "name": "commercetools UI announcement bar",
   "category": "Content",
   "icon": "announcement",
   "schema": [
