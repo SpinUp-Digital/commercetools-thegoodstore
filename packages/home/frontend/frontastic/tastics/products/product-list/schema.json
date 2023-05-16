@@ -39,6 +39,10 @@
                 {
                   "name": "Term",
                   "value": "term"
+                },
+                {
+                  "name": "Boolean",
+                  "value": "boolean"
                 }
               ]
             },
