@@ -49,21 +49,9 @@ const PaymentEdit: React.FC<React.PropsWithChildren<object>> = () => {
         handleDeleteClick={paymentEditData.handleDeleteClick}
       />
 
-      <div className="mt-0 w-full px-16 py-0 lg:mt-36 lg:w-[60%] lg:rounded-md lg:border lg:px-24 lg:py-32">
+      <div className="mt-0 w-full px-16 py-0 lg:mt-36 lg:w-[65%] lg:rounded-md lg:border lg:px-24 lg:py-32">
         <div className="mt-24 md:max-w-[436px] lg:mt-0">
-          <Typography as="label" medium fontSize={14} className="text-secondary-black">
-            {formatPaymentMessage({ id: 'card.holder', defaultMessage: 'Card holder *' })}
-          </Typography>
-          <Input
-            value={paymentEditData.cardHolder}
-            name="holderName"
-            className="mt-8 sm:px-8"
-            labelPosition="inline"
-            onChange={paymentEditData.handleCardHolderChange}
-            error={paymentEditData.cardHolderError}
-          />
-
-          <div className="relative mt-24 lg:mt-12">
+          <div className="relative">
             <Typography as="label" medium fontSize={14} className="text-secondary-black">
               {formatPaymentMessage({ id: 'card.number', defaultMessage: 'Card number *' })}
             </Typography>
@@ -73,7 +61,11 @@ const PaymentEdit: React.FC<React.PropsWithChildren<object>> = () => {
               labelPosition="inline"
               type="text"
               onChange={paymentEditData.handleCardNumberChange}
-              error={paymentEditData.cardNumberError}
+              validation={paymentEditData.isCardNumber}
+              errorMessage={formatPaymentMessage({
+                id: 'card.number.error',
+                defaultMessage: 'Please insert all 16 numbers',
+              })}
             />
             {resolveCCImage(cardNumberFormatted) && (
               // eslint-disable-next-line
@@ -111,7 +103,7 @@ const PaymentEdit: React.FC<React.PropsWithChildren<object>> = () => {
         </div>
 
         <div className="mt-24 flex-col justify-start pl-4 lg:mt-32 lg:flex lg:max-w-[436px] lg:flex-row lg:justify-between lg:pl-0">
-          <Button variant="ghost" className="flex items-center px-0" onClick={() => setModalIsOpen(true)}>
+          <Button variant="ghost" size="fit" className="flex items-center px-0" onClick={() => setModalIsOpen(true)}>
             <TrashIcon className="w-20 text-secondary-black" />
             <Typography as="h2" align="center" fontSize={14} className="ml-8 font-normal text-secondary-black">
               {formatPaymentMessage({
