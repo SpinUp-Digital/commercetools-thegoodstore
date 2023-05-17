@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import BooleanFacet from '../components/facets/boolean';
 import ColorFacet from '../components/facets/color';
 import RangeFacet from '../components/facets/range';
 import TermFacet from '../components/facets/term';
@@ -17,6 +18,7 @@ const useDynamicFacets = ({ configuration, ordering, render }: Options = {}) => 
       range: RangeFacet,
       color: ColorFacet,
       term: TermFacet,
+      boolean: BooleanFacet,
     }),
     [],
   );
@@ -27,7 +29,7 @@ const useDynamicFacets = ({ configuration, ordering, render }: Options = {}) => 
     const facets = Object.keys(configuration).map((attribute) => {
       const facet = configuration[attribute];
 
-      if ((facet.type === 'term' || facet.type === 'color') && facet.terms.length === 0)
+      if ((facet.type === 'term' || facet.type === 'color' || facet.type === 'boolean') && facet.terms.length === 0)
         return { attribute, Component: <></> };
 
       const Component = facetMapping[facet.type];

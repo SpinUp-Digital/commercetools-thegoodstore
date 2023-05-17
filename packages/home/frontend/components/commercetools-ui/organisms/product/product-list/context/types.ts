@@ -4,6 +4,11 @@ export interface RefinementRemovedEvent {
   attribute: string;
 }
 
+export interface BooleanFilterSelected {
+  attribute: string;
+  key: string;
+}
+
 export interface UiState {
   slug?: string;
   searchQuery?: string;
