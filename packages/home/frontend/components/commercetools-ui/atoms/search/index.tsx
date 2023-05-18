@@ -88,7 +88,7 @@ const Search: React.FC<React.PropsWithChildren<Props>> = ({ categories }) => {
     <>
       {focused && <Overlay />}
 
-      <div className="relative z-[350]">
+      <div className="relative z-[350] lg:px-20">
         <div
           className={`relative z-50 border-neutral-400 bg-white lg:rounded-sm lg:border ${
             focused ? 'border-b' : 'border'
