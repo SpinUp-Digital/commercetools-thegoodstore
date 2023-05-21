@@ -76,7 +76,7 @@ const Scheme = () => {
     <div className="pt-24 md:max-w-[436px] md:pl-36">
       <Input
         name="holderName"
-        className="mt-16 sm:px-8"
+        className="mt-16 text-14 text-secondary-black sm:px-8"
         labelPosition="inline"
         placeholder={formatCheckoutMessage({ id: 'card.holder', defaultMessage: 'Card holder' })}
         onChange={handleChange}
@@ -84,7 +84,7 @@ const Scheme = () => {
       />
       <div className="relative mt-16">
         <Input
-          className="sm:px-8"
+          className="text-14 text-secondary-black sm:px-8"
           labelPosition="inline"
           placeholder={formatCheckoutMessage({ id: 'card.number', defaultMessage: 'Card number' })}
           onChange={handleCardNumberChange}
@@ -116,7 +116,7 @@ const Scheme = () => {
         </div>
         <div className="relative grow md:flex-1">
           <Input
-            className="sm:px-8"
+            className="text-14 text-secondary-black sm:px-8"
             labelPosition="inline"
             type="number"
             placeholder={formatCheckoutMessage({ id: 'card.securityNumber', defaultMessage: 'Security number' })}

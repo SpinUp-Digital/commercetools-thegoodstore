@@ -12,6 +12,7 @@ import {
   TermFacetResult as CommercetoolsTermFacetResult,
   TypedMoney,
   Price as CommercetoolsPrice,
+  InventoryEntry,
 } from '@commercetools/platform-sdk';
 import { Product } from '@commercetools/frontend-domain-types/product/Product';
 import { Variant } from '@commercetools/frontend-domain-types/product/Variant';
@@ -41,6 +42,7 @@ import { RangeFacet as QueryRangeFacet } from '@commercetools/frontend-domain-ty
 import { Facet as QueryFacet } from '@commercetools/frontend-domain-types/query/Facet';
 import { FacetDefinition } from '@commercetools/frontend-domain-types/product/FacetDefinition';
 import { FilterTypes } from '@commercetools/frontend-domain-types/query/Filter';
+import { Inventory } from 'types/inventory';
 
 const TypeMap = new Map<string, string>([
   ['boolean', FilterFieldTypes.BOOLEAN],
@@ -358,6 +360,15 @@ export class ProductMapper {
     return facetDefinitions;
   }
 
+  static commercetoolsInventoryToInventory(inventory: InventoryEntry): Inventory {
+    return {
+      availableQuantity: inventory.availableQuantity,
+      quantityOnStock: inventory.quantityOnStock,
+      restockableInDays: inventory.restockableInDays,
+      expectedDelivery: inventory.expectedDelivery,
+    };
+  }
+
   static facetDefinitionsToCommercetoolsQueryArgFacets(facetDefinitions: FacetDefinition[], locale: Locale): string[] {
     const queryArgFacets: string[] = [];
 
@@ -391,7 +402,7 @@ export class ProductMapper {
       }
 
       // Alias to identifier used by us
-      queryArgFacets.push(`${facet} as ${facetDefinition.attributeId}`);
+      queryArgFacets.push(`${facet} as ${facetDefinition.attributeId} counting products`);
     });
 
     return queryArgFacets;
@@ -554,7 +565,7 @@ export class ProductMapper {
         const term: Term = {
           identifier: facetResultTerm.term.toString(),
           label: facetResultTerm.term.toString(),
-          count: facetResultTerm.count,
+          count: facetResultTerm.productCount,
           key: facetResultTerm.term.toString(),
           selected: facetQuery !== undefined && facetQuery.terms.includes(facetResultTerm.term.toString()),
         };

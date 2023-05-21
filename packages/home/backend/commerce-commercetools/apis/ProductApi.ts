@@ -10,6 +10,7 @@ import { CategoryQuery } from '../interfaces/CategoryQuery';
 import { Category } from '@commercetools/frontend-domain-types/product/Category';
 import { FacetDefinition } from '@commercetools/frontend-domain-types/product/FacetDefinition';
 import { ProductQuery } from '@commercetools/frontend-domain-types/query/ProductQuery';
+import { Inventory } from 'types/inventory';
 
 export class ProductApi extends BaseApi {
   protected getOffsetFromCursor = (cursor: string) => {
@@ -19,6 +20,14 @@ export class ProductApi extends BaseApi {
 
     const offsetMach = cursor.match(/(?<=offset:).+/);
     return offsetMach !== null ? +Object.values(offsetMach)[0] : undefined;
+  };
+
+  getInventory: (sku: string) => Promise<Inventory> = async (sku: string) => {
+    return await this.getApiForProject()
+      .inventory()
+      .get({ queryArgs: { where: `sku="${sku}"` } })
+      .execute()
+      .then((res) => ProductMapper.commercetoolsInventoryToInventory(res.body.results?.[0]));
   };
 
   query: (productQuery: ProductQuery) => Promise<Result> = async (productQuery: ProductQuery) => {
