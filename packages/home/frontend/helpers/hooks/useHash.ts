@@ -6,12 +6,12 @@ const useHash = () => {
   const [hash, setHash] = useState('#');
   const [id, setId] = useState<string | undefined>(undefined);
 
-  useEffect(() => {
-    const updateHash = () => {
-      setHash(window.location.hash.split('/')[0] || '#');
-      setId(window.location.hash.split('/')[1]);
-    };
+  const updateHash = () => {
+    setHash(window.location.hash.split('/')[0] || '#');
+    setId(window.location.hash.split('/')[1]);
+  };
 
+  useEffect(() => {
     updateHash();
 
     router.events.on('hashChangeComplete', updateHash);
