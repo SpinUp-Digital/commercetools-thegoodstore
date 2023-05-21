@@ -1,24 +1,24 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 const useHash = () => {
-  //next/router
   const router = useRouter();
-
-  //current window hash
-  const [hash, setHash] = useState(typeof window === 'undefined' ? '#' : window.location.hash.split('/')[0] || '#');
-  const [id, setId] = useState(typeof window === 'undefined' ? undefined : window.location.hash.split('/')[1]);
-
-  //update window hash
-  const updateWindowHash = useCallback(() => {
-    setHash(window.location.hash.split('/')[0] || '#');
-    setId(window.location.hash.split('/')[1]);
-  }, []);
+  const [hash, setHash] = useState('#');
+  const [id, setId] = useState<string | undefined>(undefined);
 
   useEffect(() => {
-    router.events.on('hashChangeComplete', updateWindowHash);
-    return () => router.events.off('hashChangeComplete', updateWindowHash);
-  }, [updateWindowHash, router.events]);
+    const updateHash = () => {
+      setHash(window.location.hash.split('/')[0] || '#');
+      setId(window.location.hash.split('/')[1]);
+    };
+
+    updateHash();
+
+    router.events.on('hashChangeComplete', updateHash);
+    return () => {
+      router.events.off('hashChangeComplete', updateHash);
+    };
+  }, [router.events]);
 
   return [hash, id];
 };
