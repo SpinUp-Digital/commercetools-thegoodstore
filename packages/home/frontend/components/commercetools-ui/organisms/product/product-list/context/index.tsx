@@ -4,15 +4,8 @@ import cloneDeep from 'lodash/cloneDeep';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import useI18n from 'helpers/hooks/useI18n';
 import { BooleanFacet, FacetConfiguration, PriceConfiguration, RangeFacet, TermFacet } from '../types';
-import { booleanFilterSelectedEventName, refinementRemovedEventName, refinementsClearedEventName } from './constants';
-import {
-  ActiveRefinement,
-  BooleanFilterSelected,
-  ProductListContextShape,
-  RefinementRemovedEvent,
-  Sort,
-  UiState,
-} from './types';
+import { refinementRemovedEventName, refinementsClearedEventName } from './constants';
+import { ActiveRefinement, ProductListContextShape, RefinementRemovedEvent, Sort, UiState } from './types';
 
 export const ProductListContext = createContext<ProductListContextShape>({
   pricesConfiguration: {},
@@ -185,16 +178,8 @@ const ProductListProvider: React.FC<React.PropsWithChildren<object>> = ({ childr
       if (term) {
         term.selected = !term.selected;
 
-        if (facet.type === 'boolean') {
+        if (facet.type === 'boolean')
           facet.terms.filter((t) => t.key !== term.key).forEach((term) => (term.selected = false));
-
-          if (term?.selected)
-            window.dispatchEvent(
-              new CustomEvent<BooleanFilterSelected>(booleanFilterSelectedEventName, {
-                detail: { attribute, key },
-              }),
-            );
-        }
       }
 
       facet.selected = facet.terms.some((t) => t.selected);

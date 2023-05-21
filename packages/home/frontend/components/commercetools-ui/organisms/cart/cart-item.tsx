@@ -88,7 +88,7 @@ const CartItem: React.FC<React.PropsWithChildren<Props>> = ({ item, classNames =
         </div>
         {!item.variant?.isOnStock && (
           <div className="mt-8">
-            <OutOfStock restockableInDays={item.variant.restockableInDays} />
+            <OutOfStock variant={item.variant} />
           </div>
         )}
         <div className="mt-8">

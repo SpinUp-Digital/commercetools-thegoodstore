@@ -63,5 +63,12 @@
   "powered": "Unterstützt von commercetools",
   "quick.view": "Schnellansicht",
   "search.placeholder": "Tippe um zu suchen",
-  "required.field": "Pflichtfeld"
+  "required.field": "Pflichtfeld",
+  "years": "Jahre",
+  "months": "Monate",
+  "weeks": "Wochen",
+  "days": "Tage",
+  "hours": "Stunden",
+  "minutes": "Minuten",
+  "seconds": "Sekunden"
 }
