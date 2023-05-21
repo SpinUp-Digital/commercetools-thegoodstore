@@ -31,7 +31,7 @@ const Address: React.FC<React.PropsWithChildren<AddressProps>> = ({ address, isD
   };
 
   const addressInfoTypographyElements = [
-    address.firstName,
+    `${address.firstName} ${address.lastName}`,
     address.streetName,
     `${address.postalCode} ${address.city}`,
   ];
@@ -58,7 +58,7 @@ const Address: React.FC<React.PropsWithChildren<AddressProps>> = ({ address, isD
               {label}
             </Typography>
             {isDefaultAddress && (
-              <Typography fontSize={14} className="text-primary-black md:hidden">
+              <Typography fontSize={14} className="text-secondary-black md:hidden">
                 {'- ' + formatMessage({ id: 'default', defaultMessage: 'Default' })}
               </Typography>
             )}
