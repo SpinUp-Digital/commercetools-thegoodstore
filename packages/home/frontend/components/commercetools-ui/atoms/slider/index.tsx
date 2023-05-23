@@ -54,7 +54,7 @@ const Slider: FC<React.PropsWithChildren<SliderProps>> = ({
 
   const handleInit = useCallback(
     (swiper: SwiperType) => {
-      setInit(true);
+      setTimeout(() => setInit(true));
       onInit?.(swiper);
     },
     [onInit],
@@ -74,6 +74,7 @@ const Slider: FC<React.PropsWithChildren<SliderProps>> = ({
   const containerClassNames = useClassNames([
     containerClassName,
     'slider_container relative',
+    !init ? 'hidden' : 'block',
     {
       'slider__container--fit': validToFit,
       'slider__container--with-thumbs': withThumbs,
@@ -82,7 +83,6 @@ const Slider: FC<React.PropsWithChildren<SliderProps>> = ({
   const slidesClassName = useClassNames(['slider', className]);
 
   const slideProps = {
-    visibility: init ? 'visible' : 'hidden',
     width: slideWidthIsFlexible ? 'fit-content' : `${slideWidth}px`,
   } as React.CSSProperties;
 

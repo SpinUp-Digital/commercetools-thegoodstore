@@ -14,6 +14,6 @@
     "delete": "Löschen",
     "delete.question": "Zahlungsmethode löschen?",
     "delete.warning": "Diese Aktion kann nicht rückgängig gemacht werden.",
-    "card.number.error": "Bitte geben Sie alle 16 Ziffern ein",
+    "card.number.error": "Bitte geben Sie eine gültige Kreditkartennummer ein",
     "card.holder.error": "Karteninhabernamen eingeben"
 }

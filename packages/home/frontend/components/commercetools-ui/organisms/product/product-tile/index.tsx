@@ -133,7 +133,7 @@ const ProductTile: FC<React.PropsWithChildren<ProductTileProps>> = ({
           <div className="w-full text-center">
             {!selectedVariant.isOnStock && (
               <div className="mb-8 ml-8">
-                <OutOfStock restockableInDays={selectedVariant.restockableInDays} />
+                <OutOfStock variant={selectedVariant} />
               </div>
             )}
           </div>

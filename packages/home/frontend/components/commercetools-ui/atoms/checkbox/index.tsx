@@ -61,7 +61,7 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
   const containerClassNames = useClassNames(['flex items-center gap-12', containerClassName]);
   const buttonClassName = useClassNames([
     'h-20 w-20 min-w-[20px] rounded-sm relative outline outline-1 cursor-pointer',
-    isHovered ? 'outline-secondary-black' : 'outline-neutral-500',
+    isHovered ? 'outline-secondary-black' : 'outline-neutral-400',
   ]);
 
   const inputClassName = useClassNames([

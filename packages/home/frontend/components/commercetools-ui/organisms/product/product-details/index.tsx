@@ -7,7 +7,9 @@ import Typography from 'components/commercetools-ui/atoms/typography';
 import Gallery from 'components/commercetools-ui/organisms/gallery';
 import { useAddToCartOverlay } from 'context/add-to-cart-overlay';
 import useClassNames from 'helpers/hooks/useClassNames';
+import useDates from 'helpers/hooks/useDates';
 import { useFormat } from 'helpers/hooks/useFormat';
+import useInventory from 'helpers/hooks/useInventory';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import { desktop } from 'helpers/utils/screensizes';
 import { Category } from 'types/category';
@@ -49,6 +51,10 @@ const ProductDetails: FC<React.PropsWithChildren<ProductDetailsProps>> = ({
   const [added, setAdded] = useState(false);
 
   const { categories } = useProduct();
+
+  const inventory = useInventory({ sku: variant.sku });
+
+  const { representDateDiff } = useDates();
 
   useEffect(() => {
     if (product && categories && !category) {
@@ -129,17 +135,17 @@ const ProductDetails: FC<React.PropsWithChildren<ProductDetailsProps>> = ({
 
         {!variant.isOnStock && (
           <div className="pt-20">
-            {variant.restockableInDays ? (
+            {inventory?.expectedDelivery ? (
               <>
                 <p className="font-medium text-red-500">
                   {formatProductMessage({ id: 'more.on.way', defaultMessage: 'More on the way' })}
                 </p>
                 <p className="text-14 text-secondary-black">
                   {formatProductMessage({
-                    id: 'expected.in.days',
-                    defaultMessage: 'Expected availability: {days} days',
-                    values: { days: variant.restockableInDays },
+                    id: 'expected.in',
+                    defaultMessage: 'Expected availability',
                   })}
+                  : {representDateDiff(new Date(), new Date(inventory.expectedDelivery))}
                 </p>
               </>
             ) : (
@@ -171,7 +177,7 @@ const ProductDetails: FC<React.PropsWithChildren<ProductDetailsProps>> = ({
             onClick={handleAddToCart}
             loading={loading}
             added={added}
-            disabled={!variant.isOnStock && !variant.restockableInDays}
+            disabled={!variant.isOnStock && !variant.restockableInDays && !inventory?.expectedDelivery}
           >
             {formatMessage({ id: 'cart.add', defaultMessage: 'Add to cart' })}
           </Button>
