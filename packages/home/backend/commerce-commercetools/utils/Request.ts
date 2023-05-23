@@ -15,17 +15,17 @@ export const getLocale = (request: Request): string => {
 };
 
 export const getCurrency = (request: Request): string => {
-  const currency = getHeader(request, 'frontastic-ct-currency') ?? request.query["ct-currency"];
+  const currency = getHeader(request, 'frontastic-ct-currency') ?? request.query['ct-currency'];
 
   if (currency !== undefined) {
-    return getHeader(request, 'frontastic-ct-currency') ?? request.query["ct-currency"];
+    return getHeader(request, 'frontastic-ct-currency') ?? request.query['ct-currency'];
   }
 
   throw new Error(`Currency is missing from request ${request}`);
 };
 
 export const getCountry = (locale: string) => {
-  return { de_DE: 'DE', en_GB: 'GB', 'EUR': 'DE', 'GBP': 'GB' }[locale];
+  return { de_DE: 'DE', en_GB: 'GB', EUR: 'DE', GBP: 'GB' }[locale];
 };
 
 const getHeader = (request: Request, header: string): string | null => {

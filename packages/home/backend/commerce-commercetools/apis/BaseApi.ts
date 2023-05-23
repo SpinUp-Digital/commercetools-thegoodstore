@@ -291,7 +291,6 @@ const parseLocale = (locale: string): ParsedLocale => {
   }
 
   let currency: undefined | string = undefined;
-
   const modifier = matches.groups.modifier;
   if (modifier !== undefined) {
     if (modifier in modifierToCurrency) {
@@ -395,7 +394,7 @@ export abstract class BaseApi {
     this.apiRoot = createApiBuilderFromCtpClient(client);
     this.projectKey = clientSettings.projectKey;
     this.locale = locale;
-    this.currency = currency
+    this.currency = currency;
   }
 
   protected getApiForProject(): ByProjectKeyRequestBuilder {
