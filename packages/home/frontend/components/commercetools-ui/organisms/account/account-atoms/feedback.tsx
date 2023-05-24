@@ -7,7 +7,7 @@ type FeedbackProps = {
   success: string;
 };
 
-const Feedback: FC<React.PropsWithChildren<FeedbackProps>> = ({ error, success }) => {
+const Feedback: FC<FeedbackProps> = ({ error, success }) => {
   const feedBackElementClassName = useClassNames(['mb-12', success ? 'text-green-600' : 'text-accent-red']);
 
   if (!error && !success) return <></>;

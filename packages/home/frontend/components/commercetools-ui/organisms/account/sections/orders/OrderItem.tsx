@@ -12,7 +12,7 @@ interface Props {
   order?: Order;
 }
 
-const OrderItem: FC<React.PropsWithChildren<Props>> = ({ order }) => {
+const OrderItem: FC<Props> = ({ order }) => {
   const { formatMessage: formatOrdersMessage } = useFormat({ name: 'orders' });
   const { total: getTotal } = useOrderTransactions(order);
 

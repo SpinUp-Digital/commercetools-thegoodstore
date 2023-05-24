@@ -10,7 +10,7 @@ type AdditionalInfoProps = {
   description: string;
 };
 
-const AdditionalInfo: FC<React.PropsWithChildren<AdditionalInfoProps>> = ({ productspec, description }) => {
+const AdditionalInfo: FC<AdditionalInfoProps> = ({ productspec, description }) => {
   const { formatMessage } = useFormat({ name: 'product' });
 
   return (

@@ -6,7 +6,7 @@ import Subtitle, { SubtitleProps } from 'components/commercetools-ui/atoms/subti
 import Typography from 'components/commercetools-ui/atoms/typography';
 import Wrapper from 'components/HOC/wrapper';
 import useTouchDevice from 'helpers/hooks/useTouchDevice';
-import { desktop, tablet, mediumDesktop } from 'helpers/utils/screensizes';
+import { mediumDesktop, tablet } from 'helpers/utils/screensizes';
 import { Reference } from 'types/reference';
 import Link from '../../content/link';
 import Tile from '../product-tile';
@@ -34,7 +34,7 @@ export interface ProductSliderProps extends Partial<SwiperOptions> {
   variant?: 'normal' | 'cart';
 }
 
-const ProductSlider: FC<React.PropsWithChildren<ProductSliderProps>> = ({
+const ProductSlider: FC<ProductSliderProps> = ({
   products,
   title,
   subline,
@@ -43,6 +43,7 @@ const ProductSlider: FC<React.PropsWithChildren<ProductSliderProps>> = ({
   onProductClick,
   titleVariant = 'lg',
   subtitleVariant = 'lg',
+  clearDefaultWrapperStyles = false,
   disableProductQuickView = false,
   disableProductWishlistButton = false,
   disableProductVariants = false,
@@ -65,7 +66,7 @@ const ProductSlider: FC<React.PropsWithChildren<ProductSliderProps>> = ({
   }, [titleVariant]);
 
   return (
-    <Wrapper background="neutral-200" clearDefaultStyles className="pl-16 md:pl-24 lg:px-20 xl:px-48">
+    <Wrapper background="neutral-200" clearDefaultStyles={clearDefaultWrapperStyles}>
       <div>
         <Typography
           className={`mb-12 ${titleClassName} ${classNames.title ?? ''}`}
@@ -106,18 +107,13 @@ const ProductSlider: FC<React.PropsWithChildren<ProductSliderProps>> = ({
             solidArrows={solidArrows}
             nextButtonStyles={{ transform: 'translateY(-150%)' }}
             prevButtonStyles={{ transform: 'translateY(-150%)' }}
-            slidesOffsetAfter={16}
             allowTouchMove
             spaceBetween={8}
             breakpoints={{
               [tablet]: {
                 slidesPerView: 2.3,
                 spaceBetween: 25,
-                slidesOffsetAfter: 24,
                 ...(breakpoints[tablet] ?? {}),
-              },
-              [desktop]: {
-                slidesOffsetAfter: 0,
               },
               [mediumDesktop]: {
                 slidesPerView: 4,
@@ -130,7 +126,7 @@ const ProductSlider: FC<React.PropsWithChildren<ProductSliderProps>> = ({
           >
             {products.map((product, index) => (
               <Tile
-                key={product?.productId}
+                key={product.productId}
                 disableQuickView={disableProductQuickView}
                 disableWishlistButton={disableProductWishlistButton}
                 disableVariants={disableProductVariants}

@@ -5,7 +5,7 @@ interface Props {
   data: AnnouncementBarProps;
 }
 
-const AnnouncementBarTastic: React.FC<React.PropsWithChildren<Props>> = ({ data }) => {
+const AnnouncementBarTastic: React.FC<Props> = ({ data }) => {
   return <AnnouncementBar {...data} />;
 };
 

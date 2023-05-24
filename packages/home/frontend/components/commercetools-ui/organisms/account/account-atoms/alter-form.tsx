@@ -9,7 +9,7 @@ type AlterFormProps = {
 };
 type PageBasedData = { [key in AlterFormProps['page']]: { title: string; buttonLabel: string; link: string } };
 
-const AlterForm: FC<React.PropsWithChildren<AlterFormProps>> = ({ page }) => {
+const AlterForm: FC<AlterFormProps> = ({ page }) => {
   const router = useRouter();
   const { formatMessage } = useFormat({ name: 'account' });
 

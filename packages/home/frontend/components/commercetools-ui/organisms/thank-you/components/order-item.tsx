@@ -6,7 +6,7 @@ import Typography from 'components/commercetools-ui/atoms/typography';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import Image from 'frontastic/lib/image';
 
-const OrderLineItem: FC<React.PropsWithChildren<LineItem>> = ({ name, price, count, variant }) => {
+const OrderLineItem: FC<LineItem> = ({ name, price, count, variant }) => {
   const { locale } = useRouter();
 
   return (
@@ -14,7 +14,7 @@ const OrderLineItem: FC<React.PropsWithChildren<LineItem>> = ({ name, price, cou
       <div className="flex items-start gap-16 py-16 md:gap-32">
         <div className="relative h-[104px] w-[89px] shrink-0">
           {variant?.images?.[0] ? (
-            <Image fill src={variant?.images?.[0]} style={{ objectFit: 'contain' }} />
+            <Image layout="fill" src={variant?.images?.[0]} objectFit="contain" />
           ) : (
             <Skeleton className="h-full w-full" />
           )}

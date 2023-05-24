@@ -7,7 +7,7 @@ import HeaderNavigationMobile from 'components/commercetools-ui/organisms/header
 import { HeaderProps } from 'components/commercetools-ui/organisms/header/types';
 import UtilitySection from 'components/commercetools-ui/organisms/header/utility-section';
 
-const Header: React.FC<React.PropsWithChildren<HeaderProps>> = ({
+const Header: React.FC<HeaderProps> = ({
   navLinks,
   categories,
   logo,

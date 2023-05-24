@@ -12,7 +12,7 @@ interface GalleryProps {
   inModalVersion?: ProductDetailsProps['inModalVersion'];
 }
 
-const Gallery: FC<React.PropsWithChildren<GalleryProps>> = ({ images, inModalVersion }) => {
+const Gallery: FC<GalleryProps> = ({ images, inModalVersion }) => {
   const swiperRef = useRef<Swiper>();
   const [activeSlide, setActiveSlide] = useState(0);
 
@@ -50,7 +50,7 @@ const Gallery: FC<React.PropsWithChildren<GalleryProps>> = ({ images, inModalVer
       >
         {images?.map((image, index) => (
           <div className={imagesContainerClassName} key={index}>
-            <Image fill src={image} suffix="large" style={{ objectFit: 'contain' }} />
+            <Image src={image} suffix="large" objectFit="contain" />
           </div>
         ))}
       </Slider>
@@ -66,12 +66,11 @@ const Gallery: FC<React.PropsWithChildren<GalleryProps>> = ({ images, inModalVer
             >
               <div className="relative h-full w-full">
                 <Image
-                  fill
                   src={image}
                   suffix="small"
                   className={`rounded-md p-7 hover:cursor-pointer`}
                   onClick={() => slideTo(index)}
-                  style={{ objectFit: 'contain' }}
+                  objectFit="contain"
                 />
               </div>
             </div>

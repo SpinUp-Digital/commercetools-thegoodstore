@@ -12,12 +12,7 @@ export interface Props {
   handleDeleteClick: () => void;
 }
 
-const PaymentDelete: FC<React.PropsWithChildren<Props>> = ({
-  modalIsOpen,
-  closeModal,
-  handleCancelClick,
-  handleDeleteClick,
-}) => {
+const PaymentDelete: FC<Props> = ({ modalIsOpen, closeModal, handleCancelClick, handleDeleteClick }) => {
   const { formatMessage: formatPaymentMessage } = useFormat({ name: 'payment' });
   const { formatMessage } = useFormat({ name: 'common' });
 

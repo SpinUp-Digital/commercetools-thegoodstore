@@ -15,7 +15,7 @@ export interface TileProps {
   className?: string;
 }
 
-const Tile: React.FC<React.PropsWithChildren<TileProps>> = ({
+const Tile: React.FC<TileProps> = ({
   image,
   title,
   subtitle,
@@ -28,15 +28,7 @@ const Tile: React.FC<React.PropsWithChildren<TileProps>> = ({
 
   return (
     <div className={`relative w-full ${className}`}>
-      {image && (
-        <Image
-          {...image}
-          fill
-          alt={title}
-          style={{ objectFit: 'cover' }}
-          className={`brightness-75 ${imageClassName}`}
-        />
-      )}
+      {image && <Image {...image} alt={title} objectFit="cover" className={`brightness-75 ${imageClassName}`} />}
       <div className="absolute left-0 top-1/2 w-full -translate-y-1/2 text-center">
         <Typography
           className="text-shadow text-white md:text-16 lg:font-medium"

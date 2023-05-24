@@ -9,7 +9,7 @@ interface Props {
   products: Product[];
 }
 
-const List: React.FC<React.PropsWithChildren<Props>> = ({ products }) => {
+const List: React.FC<Props> = ({ products }) => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
   const { searchQuery, loadMore, totalItems } = useProductList();

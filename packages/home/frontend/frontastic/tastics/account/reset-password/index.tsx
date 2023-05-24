@@ -6,7 +6,7 @@ export interface Props {
   data: ResetPasswordProps;
 }
 
-const ResetPasswordTastic: React.FC<React.PropsWithChildren<Props>> = ({ data }) => {
+const ResetPasswordTastic: React.FC<Props> = ({ data }) => {
   //next/router
   const router = useRouter();
 

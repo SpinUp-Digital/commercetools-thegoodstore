@@ -8,7 +8,7 @@ export interface Props {
   data: LoginProps;
 }
 
-const AccountLoginTastic: React.FC<React.PropsWithChildren<Props>> = ({ data }) => {
+const AccountLoginTastic: React.FC<Props> = ({ data }) => {
   const router = useRouter();
 
   //redirection link after user is logged in

@@ -10,12 +10,7 @@ export type WrapperProps = {
   clearDefaultStyles?: boolean;
 };
 
-const Wrapper: FC<React.PropsWithChildren<WrapperProps>> = ({
-  children,
-  background = 'white',
-  className,
-  clearDefaultStyles,
-}) => {
+const Wrapper: FC<WrapperProps> = ({ children, background = 'white', className, clearDefaultStyles }) => {
   const wrapperClassName = useClassNames(
     clearDefaultStyles ? [className] : [className, 'px-16 md:px-24 lg:px-20 xl:px-48'],
   );

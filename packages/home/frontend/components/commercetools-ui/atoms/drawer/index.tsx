@@ -11,7 +11,7 @@ export interface DrawerProps {
   onClose?: () => void;
 }
 
-const Drawer: FC<React.PropsWithChildren<DrawerProps>> = ({
+const Drawer: FC<DrawerProps> = ({
   className = '',
   isOpen,
   direction = 'right',

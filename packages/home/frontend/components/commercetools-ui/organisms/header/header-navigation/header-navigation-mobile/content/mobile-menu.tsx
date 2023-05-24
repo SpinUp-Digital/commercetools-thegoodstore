@@ -12,12 +12,7 @@ export interface Props {
   insertCategory: (category: Category) => void;
 }
 
-const MobileMenu: FC<React.PropsWithChildren<Props>> = ({
-  links,
-  categoriesNavigator,
-  insertCategory,
-  hideHeaderMenu,
-}) => {
+const MobileMenu: FC<Props> = ({ links, categoriesNavigator, insertCategory, hideHeaderMenu }) => {
   const { formatMessage } = useFormat({ name: 'common' });
   return (
     <div className="ml-24 mr-22">

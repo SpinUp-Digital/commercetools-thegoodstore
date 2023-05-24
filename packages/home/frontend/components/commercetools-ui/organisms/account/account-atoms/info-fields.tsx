@@ -6,7 +6,7 @@ type InfoFieldsProps = {
   fields: Array<InfoField>;
 };
 
-const InfoFields: FC<React.PropsWithChildren<InfoFieldsProps>> = ({ fields }) => {
+const InfoFields: FC<InfoFieldsProps> = ({ fields }) => {
   return (
     <div className="grid gap-24">
       {fields?.map(({ label, value }, index) => {

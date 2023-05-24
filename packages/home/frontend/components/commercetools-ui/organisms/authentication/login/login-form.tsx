@@ -14,7 +14,7 @@ interface Props {
   onLogin?: () => void;
 }
 
-const LoginForm: FC<React.PropsWithChildren<Props>> = ({ onLogin }) => {
+const LoginForm: FC<Props> = ({ onLogin }) => {
   //i18n messages
   const { formatMessage: formatErrorMessage } = useFormat({ name: 'error' });
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });

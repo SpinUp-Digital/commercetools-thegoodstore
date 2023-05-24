@@ -22,7 +22,7 @@ const skeletonPlaceholder: OrderInfoType = [
   { label: 'Payment by', value: 'VISA **111' },
 ];
 
-const ThankYouOrderInfo: FC<React.PropsWithChildren<ThankYouOrderInfoProps>> = ({ firstName, order }) => {
+const ThankYouOrderInfo: FC<ThankYouOrderInfoProps> = ({ firstName, order }) => {
   const { formatMessage } = useFormat({ name: 'thank-you' });
   const [orderInfo, setOrderInfo] = useState<OrderInfoType>(skeletonPlaceholder);
   const [loading, setLoading] = useState(true);

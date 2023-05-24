@@ -14,7 +14,7 @@ export interface Props {
   className?: string;
 }
 
-const Column: React.FC<React.PropsWithChildren<Props>> = ({ header, links, className }) => {
+const Column: React.FC<Props> = ({ header, links, className }) => {
   return (
     <div className={className}>
       {header && (

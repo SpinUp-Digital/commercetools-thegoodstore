@@ -16,7 +16,7 @@ type OrderSummaryProps = {
   onPrint: () => void;
 };
 
-const OrderSummary: FC<React.PropsWithChildren<OrderSummaryProps>> = ({ order, onPrint }) => {
+const OrderSummary: FC<OrderSummaryProps> = ({ order, onPrint }) => {
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
   const { formatMessage } = useFormat({ name: 'thank-you' });
 

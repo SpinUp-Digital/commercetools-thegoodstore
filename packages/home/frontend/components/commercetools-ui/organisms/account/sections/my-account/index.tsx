@@ -12,7 +12,7 @@ interface Props {
   isLoading?: boolean;
 }
 
-const MyAccount: React.FC<React.PropsWithChildren<Props>> = ({ isLoading }) => {
+const MyAccount: React.FC<Props> = ({ isLoading }) => {
   const { account } = useAccount();
 
   const { formatMessage } = useFormat({ name: 'account' });

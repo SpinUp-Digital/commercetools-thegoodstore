@@ -11,7 +11,7 @@ interface Props {
   payment: Payment;
 }
 
-const PaymentCard: FC<React.PropsWithChildren<Props>> = ({ payment }) => {
+const PaymentCard: FC<Props> = ({ payment }) => {
   const { formatMessage: formatPaymentMessage } = useFormat({ name: 'payment' });
   const router = useRouter();
   const resolveCCImage = useResolveCCImage();

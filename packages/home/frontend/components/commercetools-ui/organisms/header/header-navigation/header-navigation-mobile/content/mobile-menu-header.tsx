@@ -16,13 +16,7 @@ export interface Props {
   hideHeaderMenu: () => void;
 }
 
-const MobileMenuHeader: FC<React.PropsWithChildren<Props>> = ({
-  onArrowClick,
-  logo,
-  logoLink,
-  hideHeaderMenu,
-  categories,
-}) => {
+const MobileMenuHeader: FC<Props> = ({ onArrowClick, logo, logoLink, hideHeaderMenu, categories }) => {
   const { formatMessage } = useFormat({ name: 'common' });
   return (
     <div className="flex h-52 w-full justify-between border-b border-neutral-400 px-20">

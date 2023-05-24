@@ -31,7 +31,7 @@ export interface ProductDetailsProps {
   onAddToCart?: () => void;
 }
 
-const ProductDetails: FC<React.PropsWithChildren<ProductDetailsProps>> = ({
+const ProductDetails: FC<ProductDetailsProps> = ({
   product,
   variant,
   url,
@@ -191,7 +191,7 @@ const ProductDetails: FC<React.PropsWithChildren<ProductDetailsProps>> = ({
             className="mx-auto mt-28 block w-fit border-b border-transparent text-center text-14 leading-loose text-secondary-black hover:border-secondary-black"
             onClick={() => setIsOpen?.(false)}
           >
-            {formatMessage({ id: 'more.details', defaultMessage: 'More details' })}
+            <a>{formatMessage({ id: 'more.details', defaultMessage: 'More details' })}</a>
           </Link>
         )}
       </div>

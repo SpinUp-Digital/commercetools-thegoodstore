@@ -17,7 +17,7 @@ export type SliderNavigationProps = {
   navigationNextRef?: LegacyRef<HTMLDivElement>;
 };
 
-const SliderNavigation: FC<React.PropsWithChildren<SliderNavigationProps>> = ({
+const SliderNavigation: FC<SliderNavigationProps> = ({
   compactNavigation,
   arrows,
   innerArrows,

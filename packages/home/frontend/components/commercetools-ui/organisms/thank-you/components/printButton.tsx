@@ -6,7 +6,7 @@ type PrintButtonProps = ButtonProps & {
   onPrint: (e: React.FormEvent) => void;
 };
 
-const PrintButton: FC<React.PropsWithChildren<PrintButtonProps>> = ({ onPrint, ...props }) => {
+const PrintButton: FC<PrintButtonProps> = ({ onPrint, ...props }) => {
   const { formatMessage } = useFormat({ name: 'thank-you' });
 
   return (

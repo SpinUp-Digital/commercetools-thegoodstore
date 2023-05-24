@@ -9,7 +9,7 @@ export interface Props {
   target?: Reference;
 }
 
-const AnnouncementBar: React.FC<React.PropsWithChildren<Props>> = ({ text, highlightedSubstring, target }) => {
+const AnnouncementBar: React.FC<Props> = ({ text, highlightedSubstring, target }) => {
   const [previewText, setPreviewText] = useState({ prefix: text, middle: '', suffix: '' });
 
   const processHighlighting = useCallback(() => {

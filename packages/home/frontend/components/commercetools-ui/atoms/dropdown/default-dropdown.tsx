@@ -13,7 +13,7 @@ export interface DropdownProps extends ComponentProps<'select'> {
   defaultValue?: string;
 }
 
-const DefaultDropdown: FC<React.PropsWithChildren<DropdownProps>> = ({
+const DefaultDropdown: FC<DropdownProps> = ({
   className = '',
   containerClassName = '',
   labelClassName,

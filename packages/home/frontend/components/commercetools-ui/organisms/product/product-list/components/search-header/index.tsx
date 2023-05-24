@@ -6,7 +6,7 @@ interface Props {
   query: string;
 }
 
-const SearchHeader: React.FC<React.PropsWithChildren<Props>> = ({ query }) => {
+const SearchHeader: React.FC<Props> = ({ query }) => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
   const { totalItems } = useProductList();

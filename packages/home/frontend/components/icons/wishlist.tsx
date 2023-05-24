@@ -6,7 +6,7 @@ type Props = {
   totalWishlistItems: number;
 };
 
-const Icon: React.FC<React.PropsWithChildren<Props>> = ({ className, totalWishlistItems }: Props) => (
+const Icon: React.FC<Props> = ({ className, totalWishlistItems }: Props) => (
   <>
     {totalWishlistItems > 0 && (
       <span className="absolute right-[-10px] top-[-3px] h-10 w-10 rounded-full bg-green-500" />

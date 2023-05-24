@@ -11,7 +11,7 @@ export interface Props {
   tiles: Tile[];
 }
 
-const HeaderNavigationDesktop: React.FC<React.PropsWithChildren<Props>> = ({ links, tiles }) => {
+const HeaderNavigationDesktop: React.FC<Props> = ({ links, tiles }) => {
   const [activeCategory, setActiveCategory] = useState<Category>();
 
   const tileContent = tiles.filter((tile) => tile.tileCategory === activeCategory?.name);

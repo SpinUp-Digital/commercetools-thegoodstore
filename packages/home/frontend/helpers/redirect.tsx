@@ -7,7 +7,7 @@ export interface RedirectProps {
   target?: string | Reference;
 }
 
-const Redirect: React.FC<React.PropsWithChildren<RedirectProps>> = ({ target }) => {
+const Redirect: React.FC<RedirectProps> = ({ target }) => {
   //next/router
   const router = useRouter();
 

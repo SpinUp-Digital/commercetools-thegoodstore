@@ -17,7 +17,7 @@ export interface InputProps extends Omit<ComponentProps<'input'>, 'onChange'> {
   validation?: (valueToValidate: string) => boolean;
 }
 
-const Input: FC<React.PropsWithChildren<InputProps>> = ({
+const Input: FC<InputProps> = ({
   label,
   labelDesc,
   onChange,

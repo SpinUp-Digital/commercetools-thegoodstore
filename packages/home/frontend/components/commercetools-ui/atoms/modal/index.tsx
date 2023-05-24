@@ -9,14 +9,7 @@ export interface Props extends ReactModalProps {
   closeButton?: boolean;
 }
 
-const Modal: FC<React.PropsWithChildren<Props>> = ({
-  children,
-  style,
-  preventScroll,
-  closeButton,
-  className = '',
-  ...props
-}) => {
+const Modal: FC<Props> = ({ children, style, preventScroll, closeButton, className = '', ...props }) => {
   const [isDesktopSize] = useMediaQuery(desktop);
 
   //const { blockScroll } = useScrollBlock();

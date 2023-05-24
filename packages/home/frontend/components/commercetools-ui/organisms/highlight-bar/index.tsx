@@ -1,6 +1,6 @@
 import React from 'react';
 
-const HighlightBar: React.FC<React.PropsWithChildren<object>> = ({ children }) => {
+const HighlightBar: React.FC = ({ children }) => {
   return (
     <>
       {/* eslint-disable-next-line */}
