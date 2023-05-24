@@ -74,19 +74,28 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
     ];
   }, [formatAccountMessage]);
 
+  const orders = useMemo(() => {
+    return id && id.startsWith('order') ? <OrderPage orderId={id.split('_')[1]} /> : <Orders />;
+  }, [id]);
+  const paymentPagesRef = useMemo(() => {
+    return { add: <PaymentAdd />, edit: <PaymentEdit /> };
+  }, []);
+
+  const Payment = useMemo(
+    () => paymentPagesRef[id?.split('-')[0] as 'add' | 'edit'] ?? <PaymentMethods />,
+    [id, paymentPagesRef],
+  );
+
   const mapping = {
     '#': <MyAccount isLoading={isLoading} />,
     '#edit-personal-info': <PersonalInfoForm />,
     '#edit-newsletter': <SubscribeForm />,
+    '#addresses': <Addresses />,
     '#edit-address': <AddressForm editedAddressId={id} />,
     '#change-password': <ChangePasswordForm />,
     '#delete-account': <DeleteAccountForm />,
-    '#orders': <Orders />,
-    '#order': <OrderPage orderId={id} />,
-    '#payment': <PaymentMethods />,
-    '#edit-payment': <PaymentEdit />,
-    '#add-payment': <PaymentAdd />,
-    '#addresses': <Addresses />,
+    '#orders': orders,
+    '#payment': Payment,
     '#support': (
       <CustomerSupport
         phoneNumber={phoneNumber}
@@ -115,6 +124,7 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
     (tab: AccountTab) => {
       return `hover:underline ${tab.href === hash ? 'text-primary-black' : 'text-secondary-black'}`;
     },
+
     [hash],
   );
 

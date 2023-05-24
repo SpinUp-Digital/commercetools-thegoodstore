@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Option } from 'components/commercetools-ui/atoms/select';
 import { payments } from '..';
@@ -7,12 +7,21 @@ import usePaymentHelpers from './usePaymentHelpers';
 
 const useEditPaymentMethods = (paymentId: string) => {
   const router = useRouter();
-  const payment = payments.find((payment) => payment.id === paymentId);
+
+  const payment = useMemo(() => {
+    return payments.find((payment) => payment.id === paymentId);
+  }, [paymentId]);
   const cardNumberFormatted = useCardNumberFormatter(payment?.cardNumber ?? '');
   const { hasNumbersAndSpaces } = usePaymentHelpers();
   const [cardNumber, setCardNumber] = useState(cardNumberFormatted);
   const [cardExpMonthDate, setCardExpMonthDate] = useState<Option | undefined>(payment?.cardExpiryMonth);
   const [cardExpYearDate, setCardExpYearDate] = useState<Option | undefined>(payment?.cardExpiryYear);
+
+  useEffect(() => {
+    setCardNumber(cardNumberFormatted);
+    setCardExpMonthDate(payment?.cardExpiryMonth);
+    setCardExpYearDate(payment?.cardExpiryYear);
+  }, [paymentId, payment, cardNumberFormatted]);
   const concatCardNumber = useMemo(() => {
     return cardNumber.replaceAll(' ', '');
   }, [cardNumber]);

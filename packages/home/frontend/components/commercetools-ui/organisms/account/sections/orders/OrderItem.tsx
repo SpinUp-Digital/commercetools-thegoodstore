@@ -70,7 +70,7 @@ const OrderItem: FC<Props> = ({ order }) => {
           </Button>
         </div>
       </div>
-      <Link link={`/account#order/${order?.orderId}`}>
+      <Link link={`/account#orders/order_${order?.orderId}`}>
         <div className="flex w-full cursor-pointer items-center justify-between px-12 py-16 md:px-16 lg:px-24 lg:py-20">
           <div className="flex">
             <Typography fontSize={14} className="text-primary-black">
