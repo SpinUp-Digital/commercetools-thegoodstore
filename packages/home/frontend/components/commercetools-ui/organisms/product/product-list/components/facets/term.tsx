@@ -4,7 +4,7 @@ import { useProductList } from '../../context';
 import { TermFacet } from '../../types';
 import { FacetProps } from './types';
 
-const TermFacet: React.FC<React.PropsWithChildren<FacetProps>> = ({ attribute }) => {
+const TermFacet: React.FC<FacetProps> = ({ attribute }) => {
   const { facetsConfiguration, refine } = useProductList();
 
   const facet = useMemo(() => facetsConfiguration[attribute] as TermFacet, [facetsConfiguration, attribute]);

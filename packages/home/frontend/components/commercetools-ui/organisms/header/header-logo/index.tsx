@@ -10,11 +10,11 @@ export interface Props {
   onClick?: () => void;
 }
 
-const HeaderLogo: FC<React.PropsWithChildren<Props>> = ({ logoLink, logo, imageClassName, onClick }) => {
+const HeaderLogo: FC<Props> = ({ logoLink, logo, imageClassName, onClick }) => {
   return (
     <div className="relative px-10 md:mt-0" onClick={onClick}>
       <Link className={imageClassName} link={logoLink}>
-        <Image media={logo?.media} fill style={{ objectFit: 'contain' }} alt={logo?.title} />
+        <Image media={logo?.media} layout="fill" objectFit="contain" alt={logo?.title} />
       </Link>
     </div>
   );

@@ -10,8 +10,8 @@ export default function Image({
   gravity,
   suffix,
   loading = 'lazy',
+  layout = 'responsive',
   alt = media?.name ?? '',
-  fill = false,
   src = '',
   ...props
 }: NextFrontasticImage) {
@@ -27,12 +27,13 @@ export default function Image({
     return (
       <NextImage
         {...props}
-        {...(!fill ? { width, height: baseHeight } : { fill })}
         unoptimized
         src={src}
+        layout={!width || isNaN(+width) || !baseHeight || isNaN(+baseHeight) ? 'fill' : layout}
         alt={alt}
         loading={loading}
-        loader={({ src }) => src}
+        width={width}
+        height={baseHeight}
       />
     );
 
@@ -68,9 +69,15 @@ export default function Image({
   return (
     <NextImage
       {...props}
-      {...(!fill ? { width: getImageWidth(), height: getImageHeight() } : { fill })}
+      {...(layout !== 'fill'
+        ? {
+            width: getImageWidth(),
+            height: getImageHeight(),
+          }
+        : {})}
       loader={frontasticCloudinaryLoader}
       src={paremeterizedSrc}
+      layout={layout}
       alt={alt}
       loading={loading}
     />

@@ -8,7 +8,7 @@ import { useProductList } from '../../context';
 import useDynamicFacets from '../../hooks/useDynamicFacets';
 import SortFacet from '../facets/sort';
 
-const MobileFacets: React.FC<React.PropsWithChildren<object>> = () => {
+const MobileFacets: React.FC = () => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
   const { removeAllRefinements, facetsConfiguration, totalItems } = useProductList();

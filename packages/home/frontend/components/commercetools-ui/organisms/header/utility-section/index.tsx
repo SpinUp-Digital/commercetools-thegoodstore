@@ -20,7 +20,7 @@ export interface Props {
   emptyWishlistCategories: Link[];
 }
 
-const UtilitySection: React.FC<React.PropsWithChildren<Props>> = ({
+const UtilitySection: React.FC<Props> = ({
   emptyCartTitle,
   emptyCartSubtitle,
   emptyCartImage,

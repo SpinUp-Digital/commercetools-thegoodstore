@@ -34,7 +34,7 @@ export interface Props {
   classNames?: ClassNames;
 }
 
-const OrderSummary: React.FC<React.PropsWithChildren<Props>> = ({
+const OrderSummary: React.FC<Props> = ({
   hideCheckoutButton = false,
   paymentMethods = [],
   button = {},
@@ -123,7 +123,7 @@ const OrderSummary: React.FC<React.PropsWithChildren<Props>> = ({
             <div className="mt-26 flex items-center justify-start gap-14 md:justify-center lg:mt-18 lg:justify-start">
               {paymentMethods.map(({ name, image }) => (
                 <div key={name} className="relative h-30 w-30">
-                  <Image {...image} fill style={{ objectFit: 'contain' }} />
+                  <Image {...image} layout="fill" objectFit="contain" />
                 </div>
               ))}
             </div>

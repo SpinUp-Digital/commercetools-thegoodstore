@@ -5,7 +5,7 @@ interface Props {
   data: NewsletterProps;
 }
 
-const NewsletterTastic: React.FC<React.PropsWithChildren<Props>> = ({ data }) => {
+const NewsletterTastic: React.FC<Props> = ({ data }) => {
   return <Newsletter {...data} />;
 };
 

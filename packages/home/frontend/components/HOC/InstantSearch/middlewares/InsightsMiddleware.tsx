@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { ANONYMOUS_USER_TOKEN, LAST_ALGOLIA_QUERY_ID } from 'helpers/constants/localStorage';
 import { useAccount } from 'frontastic';
 
-const InsightsMiddleware: React.FC<React.PropsWithChildren<object>> = () => {
+const InsightsMiddleware: React.FC = () => {
   const {
     use,
     results: { queryID },

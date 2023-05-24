@@ -20,7 +20,7 @@ const middleware: Middleware = () => {
   };
 };
 
-const GoogleAnalyticsMiddleware: React.FC<React.PropsWithChildren<object>> = () => {
+const GoogleAnalyticsMiddleware: React.FC = () => {
   const { use } = useInstantSearch();
 
   useLayoutEffect(() => {

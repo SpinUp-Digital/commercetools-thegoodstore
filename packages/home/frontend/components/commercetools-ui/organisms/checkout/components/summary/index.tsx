@@ -16,7 +16,7 @@ interface Props {
   onPurchase: () => void;
 }
 
-const Summary: React.FC<React.PropsWithChildren<Props>> = ({ isFinalStep, onPurchase }) => {
+const Summary: React.FC<Props> = ({ isFinalStep, onPurchase }) => {
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
   const { formatMessage: formatCheckoutMessage } = useFormat({ name: 'checkout' });
 
@@ -52,7 +52,7 @@ const Summary: React.FC<React.PropsWithChildren<Props>> = ({ isFinalStep, onPurc
               className="relative h-[104px] cursor-pointer"
               onClick={() => router.push(lineItem._url ?? '')}
             >
-              <Image fill src={lineItem.variant?.images?.[0]} style={{ objectFit: 'contain' }} suffix="small" />
+              <Image layout="fill" src={lineItem.variant?.images?.[0]} objectFit="contain" suffix="small" />
             </div>
           ))}
         </div>

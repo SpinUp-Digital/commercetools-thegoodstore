@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { ComponentProps, FC, useMemo } from 'react';
 import NextLink from 'next/link';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { resolveReferenceProps, resolveReferenceTarget } from 'helpers/reference';
@@ -6,7 +6,7 @@ import { Reference } from 'types/reference';
 
 export type LinkVariant = 'primary' | 'menu-header' | 'menu-item' | 'breadcrumb';
 
-export interface LinkProps extends Partial<React.ComponentProps<typeof NextLink>> {
+export interface LinkProps extends ComponentProps<'a'> {
   link?: string | Reference;
   variant?: LinkVariant;
 }
@@ -20,14 +20,7 @@ const variantStyle: VariantStyle = {
   'menu-header': 'text-14 font-medium text-primary-black cursor-pointer',
 };
 
-const Link: React.FC<React.PropsWithChildren<LinkProps>> = ({
-  link,
-  children,
-  className = '',
-  variant,
-  title = '',
-  ...props
-}) => {
+const Link: FC<LinkProps> = ({ link, children, className = '', variant, title = '', ...props }) => {
   const linkUrl = useMemo(() => {
     if (!link) return '';
     if (typeof link === 'string') return link;
@@ -43,11 +36,15 @@ const Link: React.FC<React.PropsWithChildren<LinkProps>> = ({
 
   const linkClassNames = useClassNames([variant ? variantStyle[variant] : '', className]);
 
-  return (
-    <NextLink href={linkUrl ?? ''} className={linkClassNames} title={title} {...props} {...linkProps}>
+  const Tag = (
+    <a className={linkClassNames} title={title} {...props} {...linkProps}>
       {children}
-    </NextLink>
+    </a>
   );
+
+  if (!linkUrl) return Tag;
+
+  return <NextLink href={linkUrl}>{Tag}</NextLink>;
 };
 
 export default Link;

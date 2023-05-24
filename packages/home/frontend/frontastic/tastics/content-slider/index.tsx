@@ -6,7 +6,7 @@ interface Props {
   data: ContentSliderProps;
 }
 
-const ContentSliderTastic: React.FC<React.PropsWithChildren<Props>> = ({ data }) => {
+const ContentSliderTastic: React.FC<Props> = ({ data }) => {
   return <ContentSlider {...data} />;
 };
 

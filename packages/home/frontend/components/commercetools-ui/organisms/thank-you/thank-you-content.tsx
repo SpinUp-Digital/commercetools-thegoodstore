@@ -9,7 +9,7 @@ interface Props {
   order: Order;
 }
 
-const ThankYouContent: FC<React.PropsWithChildren<Props>> = ({ order }) => {
+const ThankYouContent: FC<Props> = ({ order }) => {
   const handlePrint = () => {
     window.print();
   };

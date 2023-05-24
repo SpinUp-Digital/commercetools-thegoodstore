@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import Input, { InputProps } from '../input';
 
-const PasswordInput: FC<React.PropsWithChildren<InputProps>> = (props) => {
+const PasswordInput: FC<InputProps> = (props) => {
   const [hidden, setHidden] = useState<boolean>(true);
   const [type, setType] = useState<'text' | 'password'>('password');
 

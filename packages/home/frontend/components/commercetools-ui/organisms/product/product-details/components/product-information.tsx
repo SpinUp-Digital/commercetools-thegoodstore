@@ -10,12 +10,7 @@ import ProductVariant from './product-variant';
 
 type ProductInformationProps = Omit<ProductDetailsProps, 'onAddToCart'>;
 
-const ProductInformation: FC<React.PropsWithChildren<ProductInformationProps>> = ({
-  product,
-  variant,
-  onChangeVariant,
-  inModalVersion,
-}) => {
+const ProductInformation: FC<ProductInformationProps> = ({ product, variant, onChangeVariant, inModalVersion }) => {
   const router = useRouter();
 
   const attributesToDisplay = ['color', 'finish'];

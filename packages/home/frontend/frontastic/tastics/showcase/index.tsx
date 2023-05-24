@@ -5,7 +5,7 @@ interface Props {
   data: ShowcaseProps;
 }
 
-const ShowcaseTastic: React.FC<React.PropsWithChildren<Props>> = ({ data }) => {
+const ShowcaseTastic: React.FC<Props> = ({ data }) => {
   return <Showcase {...data} />;
 };
 

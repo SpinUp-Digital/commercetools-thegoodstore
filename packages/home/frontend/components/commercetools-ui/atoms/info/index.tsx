@@ -6,7 +6,7 @@ interface Props {
   message: string;
 }
 
-const Info: React.FC<React.PropsWithChildren<Props>> = ({ message }) => {
+const Info: React.FC<Props> = ({ message }) => {
   const [isShowing, setIsShowing] = useState(false);
 
   return (

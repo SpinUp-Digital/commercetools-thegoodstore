@@ -13,7 +13,7 @@ export interface CheckboxProps extends Omit<React.ComponentProps<'input'>, 'onCh
   disableBackground?: boolean;
 }
 
-const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
+const Checkbox: React.FC<CheckboxProps> = ({
   className = '',
   checked,
   onChange,

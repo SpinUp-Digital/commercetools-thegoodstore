@@ -22,7 +22,7 @@ export const ProductListContext = createContext<ProductListContextShape>({
   loadMore() {},
 });
 
-const ProductListProvider: React.FC<React.PropsWithChildren<object>> = ({ children }) => {
+const ProductListProvider: React.FC = ({ children }) => {
   const router = useRouter();
 
   const { currency } = useI18n();

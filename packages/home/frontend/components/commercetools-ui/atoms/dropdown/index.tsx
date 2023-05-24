@@ -16,7 +16,7 @@ export interface DropdownProps extends ComponentProps<'select'> {
   customMenuWrapperClassNames?: string;
 }
 
-const Dropdown: FC<React.PropsWithChildren<DropdownProps>> = ({
+const Dropdown: FC<DropdownProps> = ({
   className = '',
   containerClassName = '',
   labelClassName,

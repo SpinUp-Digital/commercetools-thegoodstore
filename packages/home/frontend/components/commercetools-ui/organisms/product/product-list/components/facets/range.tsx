@@ -10,7 +10,7 @@ import { RefinementRemovedEvent } from '../../context/types';
 import { RangeFacet } from '../../types';
 import { FacetProps } from './types';
 
-const RangeFacet: React.FC<React.PropsWithChildren<FacetProps>> = ({ attribute }) => {
+const RangeFacet: React.FC<FacetProps> = ({ attribute }) => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
   const router = useRouter();

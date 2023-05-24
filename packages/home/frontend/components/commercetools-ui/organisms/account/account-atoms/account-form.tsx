@@ -18,7 +18,7 @@ export interface AccountFormProps extends ComponentProps<'form'> {
   onSubmit: (e: React.FormEvent) => void;
 }
 
-const AccountForm: FC<React.PropsWithChildren<AccountFormProps>> = ({
+const AccountForm: FC<AccountFormProps> = ({
   className,
   containerClassName,
   title,

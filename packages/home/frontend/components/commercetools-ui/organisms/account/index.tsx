@@ -44,7 +44,7 @@ export interface AccountDetailsProps {
   faqs: FAQ[];
 }
 
-const AccountDetails: React.FC<React.PropsWithChildren<AccountDetailsProps>> = ({
+const AccountDetails: React.FC<AccountDetailsProps> = ({
   phoneNumber,
   workingHoursWeekdays,
   workingHoursWeekends,

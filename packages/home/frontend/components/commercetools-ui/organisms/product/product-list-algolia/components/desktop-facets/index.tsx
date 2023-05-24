@@ -13,7 +13,7 @@ interface Props {
   facetsConfiguration: Record<string, FacetConfiguration>;
 }
 
-const DesktopFacets: React.FC<React.PropsWithChildren<Props>> = ({ facetsConfiguration }) => {
+const DesktopFacets: React.FC<Props> = ({ facetsConfiguration }) => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
   const { results } = useHits();

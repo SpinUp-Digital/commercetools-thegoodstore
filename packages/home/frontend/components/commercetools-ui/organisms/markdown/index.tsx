@@ -10,7 +10,7 @@ export interface Props {
   className?: string;
 }
 
-const Markdown: React.FC<React.PropsWithChildren<Props>> = ({ markdown }) => {
+const Markdown: React.FC<Props> = ({ markdown }) => {
   const [safeMarkdown, setSafeMarkdown] = useState('');
 
   useEffect(() => {

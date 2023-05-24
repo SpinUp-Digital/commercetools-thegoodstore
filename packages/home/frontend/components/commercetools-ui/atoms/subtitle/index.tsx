@@ -6,7 +6,7 @@ export type SubtitleProps = {
   variant?: 'sm' | 'lg';
 };
 
-const Subtitle: React.FC<React.PropsWithChildren<SubtitleProps>> = ({ subtitle, className = '', variant = 'lg' }) => {
+const Subtitle: React.FC<SubtitleProps> = ({ subtitle, className = '', variant = 'lg' }) => {
   const fontClassName = useMemo(() => {
     switch (variant) {
       case 'sm':

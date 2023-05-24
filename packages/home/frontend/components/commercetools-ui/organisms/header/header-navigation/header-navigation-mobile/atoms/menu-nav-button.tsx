@@ -12,12 +12,7 @@ export interface Props {
   hideHeaderMenu: () => void;
 }
 
-const MobileMenuNavButton: FC<React.PropsWithChildren<Props>> = ({
-  link,
-  categoriesNavigator,
-  onClick,
-  hideHeaderMenu,
-}) => {
+const MobileMenuNavButton: FC<Props> = ({ link, categoriesNavigator, onClick, hideHeaderMenu }) => {
   const linkClassNames = useClassNames([
     'flex justify-between',
     categoriesNavigator?.length === 0 ? 'py-24' : link?.categoryId === 'myAccount' ? 'pb-16' : 'pb-36',

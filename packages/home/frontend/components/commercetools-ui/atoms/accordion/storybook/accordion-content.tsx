@@ -74,12 +74,7 @@ const AccordionContent = () => {
                 {lineItems?.map((lineItem) => (
                   <div key={lineItem.lineItemId} className="relative h-[104px] w-[88px] shrink-0">
                     {lineItem?.variant?.images?.[0] ? (
-                      <Image
-                        alt={lineItem.name ?? ''}
-                        fill
-                        src={variant?.images?.[0]}
-                        style={{ objectFit: 'contain' }}
-                      />
+                      <Image layout="fill" src={variant?.images?.[0]} objectFit="contain" />
                     ) : (
                       <Skeleton className="h-full w-full" />
                     )}
@@ -100,12 +95,7 @@ const AccordionContent = () => {
                 <div className="flex items-start gap-16 py-16 md:gap-32">
                   <div className="relative h-[104px] w-[89px] shrink-0">
                     {lineItem?.variant?.images?.[0] ? (
-                      <Image
-                        alt={lineItem.name ?? ''}
-                        fill
-                        src={variant?.images?.[0]}
-                        style={{ objectFit: 'contain' }}
-                      />
+                      <Image layout="fill" src={variant?.images?.[0]} objectFit="contain" />
                     ) : (
                       <Skeleton className="h-full w-full" />
                     )}

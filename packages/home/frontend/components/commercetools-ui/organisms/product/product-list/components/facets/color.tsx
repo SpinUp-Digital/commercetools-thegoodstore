@@ -4,7 +4,7 @@ import { useProductList } from '../../context';
 import { ColorFacet } from '../../types';
 import { FacetProps } from './types';
 
-const ColorFacet: React.FC<React.PropsWithChildren<FacetProps>> = ({ attribute }) => {
+const ColorFacet: React.FC<FacetProps> = ({ attribute }) => {
   const { facetsConfiguration, refine } = useProductList();
 
   const facet = useMemo(() => facetsConfiguration[attribute] as ColorFacet, [facetsConfiguration, attribute]);

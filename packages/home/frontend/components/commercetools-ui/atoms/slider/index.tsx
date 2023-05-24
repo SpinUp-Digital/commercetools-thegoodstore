@@ -23,7 +23,7 @@ export type SliderProps = SliderNavigationProps & {
   slideWidthIsFlexible?: boolean;
 } & SwiperProps;
 
-const Slider: FC<React.PropsWithChildren<SliderProps>> = ({
+const Slider: FC<SliderProps> = ({
   className = '',
   containerClassName = '',
   slideWidth = 300,

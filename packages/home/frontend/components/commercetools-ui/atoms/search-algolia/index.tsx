@@ -18,7 +18,7 @@ interface Props {
   categories: Category[];
 }
 
-const Search: React.FC<React.PropsWithChildren<Props>> = ({ categories }) => {
+const Search: React.FC<Props> = ({ categories }) => {
   const form = useRef<HTMLFormElement>(null);
 
   const [focused, setFocused] = useState(false);

@@ -35,7 +35,7 @@ export interface AddressFormData extends Address {
 type AddressType = 'shipping' | 'billing';
 type AddressTypeOptions = Array<{ label: string; value: AddressType }>;
 
-const AddressForm: React.FC<React.PropsWithChildren<AddressFormProps>> = ({ editedAddressId }) => {
+const AddressForm: React.FC<AddressFormProps> = ({ editedAddressId }) => {
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
   const { formatMessage: formatCheckoutMessage } = useFormat({ name: 'checkout' });
   const { formatMessage } = useFormat({ name: 'common' });

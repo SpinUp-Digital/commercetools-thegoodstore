@@ -9,7 +9,7 @@ export interface ResetPasswordProps {
   signInLink: Reference;
 }
 
-const ResetPassword: FC<React.PropsWithChildren<ResetPasswordProps>> = ({ token, accountLink, signInLink }) => {
+const ResetPassword: FC<ResetPasswordProps> = ({ token, accountLink, signInLink }) => {
   return (
     <>
       <div className="m-auto grid max-w-[480px] px-16">

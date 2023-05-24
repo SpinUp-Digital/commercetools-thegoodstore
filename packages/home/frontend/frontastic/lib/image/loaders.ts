@@ -1,10 +1,10 @@
-import { ImageLoaderProps } from 'next/image';
+import { ImageProps as NextImageProps } from 'next/image';
 
 function normalizeSrc(src: string): string {
   return src[0] === '/' ? src.slice(1) : src;
 }
 
-export function frontasticCloudinaryLoader({ src, width }: ImageLoaderProps): string {
+export function frontasticCloudinaryLoader({ src, width }: NextImageProps): string {
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME; //cloudinary cloud name
   const root = `https://res.cloudinary.com/${cloudName}/image/upload`; //base path
 
