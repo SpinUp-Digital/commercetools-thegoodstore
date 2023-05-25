@@ -282,6 +282,13 @@
                 "type": "encrypted",
                 "translatable": false,
                 "required": true
+              },
+              {
+                "label": "Newsletter List ID",
+                "field": "EXTENSION_SENDGRID_LIST_NEWSLETTER",
+                "type": "encrypted",
+                "translatable": false,
+                "required": true
               }
             ]
           }
@@ -3902,95 +3909,6 @@
       }
     },
     {
-      "_id": "128f5754b95e5c9e1a1955fa1f5caf0b",
-      "type": "Frontastic.Backstage.StageBundle.Domain.Node",
-      "isMaster": false,
-      "configuration": {
-        "path": "/",
-        "pathTranslations": []
-      },
-      "streams": [
-        {
-          "streamId": "788eccfd-bc94-4a95-aa7d-7e9fee1ec8ee",
-          "type": "frontastic/product-list",
-          "name": "Product list",
-          "configuration": {
-            "query": "",
-            "productFilters": {
-              "filters": [
-                {
-                  "field": "categoryId",
-                  "type": "enum"
-                }
-              ],
-              "values": {
-                "categoryId": "076ab018-de9f-4a55-a436-ffd18d22fc66"
-              }
-            }
-          }
-        },
-        {
-          "streamId": "0847282c-4141-4050-8f0a-1f406bfb0805",
-          "type": "frontastic/product-list",
-          "name": "Product list",
-          "configuration": {
-            "productFilters": {
-              "filters": [
-                {
-                  "field": "categoryId",
-                  "type": "enum"
-                }
-              ],
-              "values": {
-                "categoryId": "076ab018-de9f-4a55-a436-ffd18d22fc66"
-              }
-            }
-          }
-        },
-        {
-          "streamId": "c91eb329-4ba9-4a7d-b8f0-52e3858d56b4",
-          "type": "frontastic/product-list",
-          "name": "Product list",
-          "configuration": []
-        }
-      ],
-      "name": "Home",
-      "path": [],
-      "sort": 1,
-      "environments": {
-        "development": true,
-        "staging": true,
-        "production": true
-      }
-    },
-    {
-      "_id": "c3f1dea4a72614539d5cf50bb40092f8",
-      "type": "Frontastic.Backstage.StageBundle.Domain.Node",
-      "isMaster": false,
-      "configuration": {
-        "path": "hin",
-        "pathTranslations": []
-      },
-      "streams": [
-        {
-          "streamId": "ce19399d-4e2e-4616-964e-14da52673b25",
-          "type": "frontastic/product",
-          "name": "Single product",
-          "configuration": {
-            "productId": "123456"
-          }
-        }
-      ],
-      "name": "Hin",
-      "path": [],
-      "sort": 0,
-      "environments": {
-        "development": true,
-        "staging": true,
-        "production": true
-      }
-    },
-    {
       "_id": "3ef723eb078b0d38bedaf37a3002ae35",
       "type": "Frontastic.Backstage.StageBundle.Domain.Node",
       "isMaster": false,
@@ -4046,6 +3964,68 @@
       "name": "Default",
       "path": [],
       "sort": 0,
+      "environments": {
+        "development": true,
+        "staging": true,
+        "production": true
+      }
+    },
+    {
+      "_id": "128f5754b95e5c9e1a1955fa1f5caf0b",
+      "type": "Frontastic.Backstage.StageBundle.Domain.Node",
+      "isMaster": false,
+      "configuration": {
+        "path": "/",
+        "pathTranslations": []
+      },
+      "streams": [
+        {
+          "streamId": "788eccfd-bc94-4a95-aa7d-7e9fee1ec8ee",
+          "type": "frontastic/product-list",
+          "name": "Product list",
+          "configuration": {
+            "query": "",
+            "productFilters": {
+              "filters": [
+                {
+                  "field": "categoryId",
+                  "type": "enum"
+                }
+              ],
+              "values": {
+                "categoryId": "076ab018-de9f-4a55-a436-ffd18d22fc66"
+              }
+            }
+          }
+        },
+        {
+          "streamId": "0847282c-4141-4050-8f0a-1f406bfb0805",
+          "type": "frontastic/product-list",
+          "name": "Product list",
+          "configuration": {
+            "productFilters": {
+              "filters": [
+                {
+                  "field": "categoryId",
+                  "type": "enum"
+                }
+              ],
+              "values": {
+                "categoryId": "076ab018-de9f-4a55-a436-ffd18d22fc66"
+              }
+            }
+          }
+        },
+        {
+          "streamId": "c91eb329-4ba9-4a7d-b8f0-52e3858d56b4",
+          "type": "frontastic/product-list",
+          "name": "Product list",
+          "configuration": []
+        }
+      ],
+      "name": "Home",
+      "path": [],
+      "sort": 1,
       "environments": {
         "development": true,
         "staging": true,
@@ -5831,6 +5811,573 @@
       }
     },
     {
+      "_id": "3ef723eb078b0d38bedaf37a300421d6",
+      "type": "Frontastic.Backstage.StageBundle.Domain.Page",
+      "state": "default",
+      "nodes": ["3ef723eb078b0d38bedaf37a3002ae35"],
+      "layoutId": "three_rows",
+      "name": "V1",
+      "environments": {
+        "development": true,
+        "staging": true,
+        "production": true
+      },
+      "scheduledFrom": null,
+      "scheduledTo": null,
+      "nodesPagesOfTypeSortIndex": null,
+      "scheduleCriterion": "",
+      "hostCriteria": [],
+      "localeCriteria": [],
+      "scheduledExperiment": null,
+      "regions": {
+        "head": {
+          "type": "Frontastic.Backstage.StageBundle.Domain.Region",
+          "regionId": "head",
+          "configuration": [],
+          "elements": [
+            {
+              "type": "Frontastic.Backstage.StageBundle.Domain.Kit",
+              "kitId": "b611cda7-c8e8-4e89-bf89-9b512c2b2381",
+              "kitDefinitionId": "128f5754b95e5c9e1a1955fa1f5b0a9c",
+              "configuration": []
+            }
+          ],
+          "cells": []
+        },
+        "main": {
+          "type": "Frontastic.Backstage.StageBundle.Domain.Region",
+          "regionId": "main",
+          "configuration": [],
+          "elements": [
+            {
+              "type": "Frontastic.Backstage.StageBundle.Domain.Cell",
+              "cellId": "7f3043c2-9d5a-43c0-9670-930c1d5a2f66",
+              "configuration": {
+                "size": 12
+              },
+              "customConfiguration": [],
+              "tastics": [
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "8a2f8dee-2091-4879-a9ee-6cca2d455c48",
+                  "tasticType": "commercetools/ui/content/markdown",
+                  "configuration": {
+                    "markdown": {
+                      "en_GB": "##Our Story: Crafting Beautiful Homes with Quality \n",
+                      "de_DE": "##Unsere Geschichte: Schöne Häuser mit Qualität herstellen"
+                    },
+                    "name": {
+                      "en_GB": "Page Title"
+                    },
+                    "mobile": true,
+                    "fullWidth": true,
+                    "textAlign": "center"
+                  },
+                  "isDeleted": false
+                },
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "bc772861-ae40-4678-ab59-742214228a0d",
+                  "tasticType": "commercetools/ui/content/hero",
+                  "configuration": {
+                    "image": {
+                      "media": {
+                        "_type": "Frontastic\\Backstage\\MediaApiBundle\\Domain\\MediaApi\\Media",
+                        "mediaId": "ocdculmgvpam05ernext",
+                        "resourceType": "image",
+                        "name": "AdobeStock 236440341",
+                        "tags": ["__none"],
+                        "file": "https://res.cloudinary.com/dlwdq84ig/image/upload/v1680510249/ocdculmgvpam05ernext.jpg",
+                        "size": 3849485,
+                        "width": 5700,
+                        "height": 2537,
+                        "format": "jpg",
+                        "created": "2023-04-03T08:24:09+00:00",
+                        "metaData": []
+                      }
+                    }
+                  },
+                  "isDeleted": false
+                },
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "15a53706-724d-4bed-bd77-fb0e5603d1d2",
+                  "tasticType": "commercetools/ui/content/spacer",
+                  "configuration": {
+                    "customDesktop": 12
+                  },
+                  "isDeleted": false
+                },
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "2fb888d1-2cb1-4585-b653-7bc79e5099bb",
+                  "tasticType": "commercetools/ui/content/markdown",
+                  "configuration": {
+                    "markdown": {
+                      "en_GB": "Beautifully designed interiors have the power to inspire, invigorate, and soothe us all at once. A well-designed interior can enhance our relationships, boost our creativity, and even improve our mental and physical health. A beautiful interior is not just a luxurious indulgence, but a transformative investment in our well-being, and it is well worth the effort.",
+                      "de_DE": "Wunderschön gestaltete Innenräume haben die Kraft, uns alle gleichzeitig zu inspirieren, zu beleben und zu beruhigen. Ein gut gestaltetes Interieur kann unsere Beziehungen verbessern, unsere Kreativität fördern und sogar unsere geistige und körperliche Gesundheit verbessern. Ein schönes Interieur ist nicht nur ein luxuriöser Genuss, sondern eine transformative Investition in unser Wohlbefinden, und es lohnt sich."
+                    },
+                    "fullWidth": true,
+                    "textAlign": "center"
+                  },
+                  "isDeleted": false
+                },
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "8f7de6c7-4196-49b6-a778-2d243a839733",
+                  "tasticType": "commercetools/ui/content/spacer",
+                  "configuration": {
+                    "customDesktop": 12
+                  },
+                  "isDeleted": false
+                },
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "9f240fce-3eaf-4f80-8e76-eb096e4ef710",
+                  "tasticType": "commercetools/ui/content/content-slider",
+                  "configuration": {
+                    "slides": [
+                      {
+                        "image": {
+                          "media": {
+                            "_type": "Frontastic\\Backstage\\MediaApiBundle\\Domain\\MediaApi\\Media",
+                            "mediaId": "ijobrbzcedd2uy0wh5zo",
+                            "resourceType": "image",
+                            "name": "AdobeStock 153426336",
+                            "tags": ["__none"],
+                            "file": "https://res.cloudinary.com/dlwdq84ig/image/upload/v1679645083/ijobrbzcedd2uy0wh5zo.jpg",
+                            "size": 7054940,
+                            "width": 5616,
+                            "height": 3744,
+                            "format": "jpg",
+                            "created": "2023-03-24T08:04:43+00:00",
+                            "metaData": []
+                          }
+                        },
+                        "title": {
+                          "en_GB": "OUR CRAFT"
+                        },
+                        "ctaLabel": {
+                          "en_GB": "Learn More"
+                        },
+                        "ctaReference": null,
+                        "summary": {
+                          "en_GB": "Our skilled craftsmen use only the finest materials and techniques to create beautiful, durable furniture that will stand the test of time."
+                        }
+                      },
+                      {
+                        "image": {
+                          "media": {
+                            "_type": "Frontastic\\Backstage\\MediaApiBundle\\Domain\\MediaApi\\Media",
+                            "mediaId": "lz2wcz3hnq0cwbcilfse",
+                            "resourceType": "image",
+                            "name": "AdobeStock 537126786",
+                            "tags": ["__none"],
+                            "file": "https://res.cloudinary.com/dlwdq84ig/image/upload/v1679646102/lz2wcz3hnq0cwbcilfse.jpg",
+                            "size": 9912515,
+                            "width": 7202,
+                            "height": 4807,
+                            "format": "jpg",
+                            "created": "2023-03-24T08:21:42+00:00",
+                            "metaData": []
+                          }
+                        },
+                        "title": {
+                          "en_GB": "OUR DESIGN"
+                        },
+                        "ctaLabel": {
+                          "en_GB": "Learn More"
+                        },
+                        "ctaReference": null,
+                        "summary": {
+                          "en_GB": "We carefully curate our fabrics and designs for modern interiors, selecting only the highest quality materials and contemporary styles."
+                        }
+                      },
+                      {
+                        "image": {
+                          "media": {
+                            "_type": "Frontastic\\Backstage\\MediaApiBundle\\Domain\\MediaApi\\Media",
+                            "mediaId": "g30omcevw3okamqcdqcw",
+                            "resourceType": "image",
+                            "name": "AdobeStock 541156563",
+                            "tags": ["__none"],
+                            "file": "https://res.cloudinary.com/dlwdq84ig/image/upload/v1679646203/g30omcevw3okamqcdqcw.jpg",
+                            "size": 11173676,
+                            "width": 7934,
+                            "height": 5292,
+                            "format": "jpg",
+                            "created": "2023-03-24T08:23:23+00:00",
+                            "metaData": []
+                          }
+                        },
+                        "title": {
+                          "en_GB": "OUR PEOPLE"
+                        },
+                        "ctaLabel": {
+                          "en_GB": "Learn More"
+                        },
+                        "ctaReference": null,
+                        "summary": {
+                          "en_GB": "We take pride in our team of knowledgeable individuals who are committed to providing our customers with the best products possible."
+                        }
+                      }
+                    ]
+                  },
+                  "isDeleted": false
+                },
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "7da01292-f2b5-4580-84ea-c8c46f901aec",
+                  "tasticType": "commercetools/ui/content/spacer",
+                  "configuration": {
+                    "customMobile": 24,
+                    "customTablet": 24,
+                    "customDesktop": 24
+                  },
+                  "isDeleted": false
+                }
+              ]
+            },
+            {
+              "type": "Frontastic.Backstage.StageBundle.Domain.Cell",
+              "cellId": "c998a087-58c2-47b0-a630-25208544ffda",
+              "configuration": {
+                "size": 12
+              },
+              "customConfiguration": [],
+              "tastics": [
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "47a6bb47-4a92-4459-9ce3-8a0976351534",
+                  "tasticType": "commercetools/ui/content/spacer",
+                  "configuration": {
+                    "customMobile": 0,
+                    "customDesktop": 24,
+                    "backgroundColor": "neutral-200",
+                    "mobile": true
+                  },
+                  "isDeleted": false
+                },
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "c62ede60-274c-4e1b-a239-733bed414e68",
+                  "tasticType": "commercetools/ui/products/slider",
+                  "configuration": {
+                    "title": {
+                      "en_GB": "Our Home Decor"
+                    },
+                    "subline": {
+                      "en_GB": "Explore our selection stylish home decor"
+                    },
+                    "subtitleVariant": "sm",
+                    "data": "aa2201bd-0678-4de1-bdb9-58601e08e3d8",
+                    "ctaLabel": {
+                      "en_GB": "Shop all"
+                    },
+                    "ctaLink": {
+                      "type": "link",
+                      "target": "/home-decor"
+                    }
+                  },
+                  "isDeleted": false
+                },
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "1fca7565-7389-4255-9440-b3096b2cc730",
+                  "tasticType": "commercetools/ui/content/spacer",
+                  "configuration": {
+                    "customDesktop": 24,
+                    "backgroundColor": "neutral-200"
+                  },
+                  "isDeleted": false
+                },
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "5c22e176-60ee-4190-a84b-5f60f1803190",
+                  "tasticType": "commercetools/ui/content/spacer",
+                  "configuration": {
+                    "customDesktop": 66,
+                    "backgroundColor": "neutral-200"
+                  },
+                  "isDeleted": false
+                }
+              ]
+            },
+            {
+              "type": "Frontastic.Backstage.StageBundle.Domain.Cell",
+              "cellId": "7300a7a7-a4c4-414e-9ac0-7125a5111b19",
+              "configuration": {
+                "size": 8
+              },
+              "customConfiguration": [],
+              "tastics": [
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "b5716f91-c595-426d-8cc0-1ddaa125c874",
+                  "tasticType": "commercetools/ui/content/tiles-group",
+                  "configuration": {
+                    "tiles": [
+                      {
+                        "image": {
+                          "media": {
+                            "_type": "Frontastic\\Backstage\\MediaApiBundle\\Domain\\MediaApi\\Media",
+                            "mediaId": "gz16uea9m6n9v0hoaiyf",
+                            "resourceType": "image",
+                            "name": "AdobeStock 552091366",
+                            "tags": ["__none"],
+                            "file": "https://res.cloudinary.com/dlwdq84ig/image/upload/v1679506230/gz16uea9m6n9v0hoaiyf.jpg",
+                            "size": 6240082,
+                            "width": 5000,
+                            "height": 3750,
+                            "format": "jpg",
+                            "created": "2023-03-22T17:30:30+00:00",
+                            "metaData": []
+                          }
+                        },
+                        "title": null,
+                        "subtitle": null,
+                        "ctaLabel": null,
+                        "ctaReference": null,
+                        "roundedBorders": true
+                      },
+                      {
+                        "image": {
+                          "media": {
+                            "_type": "Frontastic\\Backstage\\MediaApiBundle\\Domain\\MediaApi\\Media",
+                            "mediaId": "vlwuyaiwgbluppveephw",
+                            "resourceType": "image",
+                            "name": "AdobeStock 535545668",
+                            "tags": ["__none"],
+                            "file": "https://res.cloudinary.com/dlwdq84ig/image/upload/v1679647184/vlwuyaiwgbluppveephw.jpg",
+                            "size": 10229170,
+                            "width": 8256,
+                            "height": 6192,
+                            "format": "jpg",
+                            "created": "2023-03-24T08:39:44+00:00",
+                            "metaData": []
+                          }
+                        },
+                        "title": null,
+                        "subtitle": null,
+                        "ctaLabel": null,
+                        "ctaReference": null,
+                        "roundedBorders": true
+                      }
+                    ]
+                  },
+                  "isDeleted": false
+                }
+              ]
+            },
+            {
+              "type": "Frontastic.Backstage.StageBundle.Domain.Cell",
+              "cellId": "e7216908-e34a-455e-b4a0-ccf82585b8c4",
+              "configuration": {
+                "size": 4
+              },
+              "customConfiguration": [],
+              "tastics": [
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "ed908f75-0818-4265-af9d-8b967761e116",
+                  "tasticType": "commercetools/ui/content/spacer",
+                  "configuration": {
+                    "customDesktop": 40
+                  },
+                  "isDeleted": false
+                },
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "3a651eee-d3ec-4138-82aa-8f66bdaf464e",
+                  "tasticType": "commercetools/ui/content/markdown",
+                  "configuration": {
+                    "markdown": {
+                      "en_GB": "##MINIMALIST FURNITURE\nMinimalist furniture is characterized by its simple and clean design, often featuring sleek lines, neutral colors, and a focus on functionality over ornamentation.\n\n[Shop the collection](https://home-thegoodstore.netlify.app/the-minimalist)",
+                      "de_DE": "##MINIMALISTISCHE MÖBEL\nMinimalistische Möbel zeichnen sich durch ihr einfaches und klares Design aus, oft mit schlanken Linien, neutralen Farben und einem Fokus auf Funktionalität statt Ornamentik.\n\n[Kaufen Sie die Kollektion](https://home-thegoodstore.netlify.app/the-minimalist)"
+                    }
+                  },
+                  "isDeleted": false
+                }
+              ]
+            },
+            {
+              "type": "Frontastic.Backstage.StageBundle.Domain.Cell",
+              "cellId": "365a5be0-17cc-4936-968d-cf9d96654b4d",
+              "configuration": {
+                "size": 12
+              },
+              "customConfiguration": [],
+              "tastics": [
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "146bb427-69c9-4006-8044-8f7b272873d3",
+                  "tasticType": "commercetools/ui/content/spacer",
+                  "configuration": {
+                    "customDesktop": 66,
+                    "backgroundColor": "neutral-200"
+                  },
+                  "isDeleted": false
+                }
+              ]
+            }
+          ],
+          "cells": []
+        },
+        "footer": {
+          "type": "Frontastic.Backstage.StageBundle.Domain.Region",
+          "regionId": "footer",
+          "configuration": [],
+          "elements": [
+            {
+              "type": "Frontastic.Backstage.StageBundle.Domain.Kit",
+              "kitId": "3a6fc4cd-8763-4e10-9220-d68a3dd5ef92",
+              "kitDefinitionId": "128f5754b95e5c9e1a1955fa1f5bd0af",
+              "configuration": []
+            }
+          ],
+          "cells": []
+        }
+      }
+    },
+    {
+      "_id": "128f5754b95e5c9e1a1955fa1f68d920",
+      "type": "Frontastic.Backstage.StageBundle.Domain.Page",
+      "state": "default",
+      "nodes": ["128f5754b95e5c9e1a1955fa1f5a7dcb"],
+      "layoutId": "three_rows",
+      "name": "Default",
+      "environments": {
+        "development": true,
+        "staging": true,
+        "production": true
+      },
+      "scheduledFrom": null,
+      "scheduledTo": null,
+      "nodesPagesOfTypeSortIndex": null,
+      "scheduleCriterion": "",
+      "hostCriteria": null,
+      "localeCriteria": null,
+      "scheduledExperiment": null,
+      "regions": {
+        "head": {
+          "type": "Frontastic.Backstage.StageBundle.Domain.Region",
+          "regionId": "head",
+          "configuration": [],
+          "elements": [
+            {
+              "type": "Frontastic.Backstage.StageBundle.Domain.Kit",
+              "kitId": "95519c25-b5a7-4063-adc3-d87459fb86b6",
+              "kitDefinitionId": "128f5754b95e5c9e1a1955fa1f5b0a9c",
+              "configuration": []
+            }
+          ],
+          "cells": []
+        },
+        "main": {
+          "type": "Frontastic.Backstage.StageBundle.Domain.Region",
+          "regionId": "main",
+          "configuration": [],
+          "elements": [
+            {
+              "type": "Frontastic.Backstage.StageBundle.Domain.Cell",
+              "cellId": "c2bedc71-7095-4daf-99ce-ce263a85a1a5",
+              "configuration": {
+                "size": 12
+              },
+              "customConfiguration": [],
+              "tastics": [
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "7aa51854-b2cc-42d7-8083-1faf20683353",
+                  "tasticType": "commercetools/ui/products/product-list",
+                  "configuration": {
+                    "facetsConfiguration": [
+                      {
+                        "key": "variants.price",
+                        "type": "range",
+                        "label": {
+                          "en_GB": "Price"
+                        }
+                      },
+                      {
+                        "key": "variants.attributes.colorlabel",
+                        "type": "color",
+                        "label": {
+                          "en_GB": "Color"
+                        }
+                      },
+                      {
+                        "key": "variants.scopedPriceDiscounted",
+                        "type": "boolean",
+                        "label": {
+                          "en_GB": "Sale"
+                        }
+                      }
+                    ],
+                    "pricesConfiguration": [],
+                    "data": "__master",
+                    "mobile": true,
+                    "tablet": true,
+                    "desktop": true
+                  },
+                  "isDeleted": false
+                },
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "fd8a0797-9001-411d-8258-df13d6e0a053",
+                  "tasticType": "commercetools/ui/products/product-list-algolia",
+                  "configuration": {
+                    "facetsConfiguration": [
+                      {
+                        "key": "variants.attributes.colorlabel",
+                        "type": "color",
+                        "label": {
+                          "en_GB": "Color"
+                        }
+                      },
+                      {
+                        "key": "variants.price.centAmount",
+                        "type": "range",
+                        "label": {
+                          "en_GB": "Price"
+                        }
+                      },
+                      {
+                        "key": "variants.isOnSale",
+                        "type": "boolean",
+                        "label": {
+                          "en_GB": "Sale"
+                        }
+                      }
+                    ],
+                    "mobile": false,
+                    "tablet": false,
+                    "desktop": false
+                  },
+                  "isDeleted": false
+                }
+              ]
+            }
+          ],
+          "cells": []
+        },
+        "footer": {
+          "type": "Frontastic.Backstage.StageBundle.Domain.Region",
+          "regionId": "footer",
+          "configuration": [],
+          "elements": [
+            {
+              "type": "Frontastic.Backstage.StageBundle.Domain.Kit",
+              "kitId": "8a40ea2d-231f-4c7f-9bad-4ed74e3c3736",
+              "kitDefinitionId": "128f5754b95e5c9e1a1955fa1f5bd0af",
+              "configuration": []
+            }
+          ],
+          "cells": []
+        }
+      }
+    },
+    {
       "_id": "128f5754b95e5c9e1a1955fa1f6ea521",
       "type": "Frontastic.Backstage.StageBundle.Domain.Page",
       "state": "default",
@@ -5890,7 +6437,7 @@
                         "metaData": []
                       },
                       "gravity": {
-                        "mode": "faces:auto"
+                        "mode": "body:face"
                       }
                     },
                     "title": {
@@ -6484,650 +7031,6 @@
             {
               "type": "Frontastic.Backstage.StageBundle.Domain.Kit",
               "kitId": "167e858f-2f31-4a9d-b19a-8d1d856e88b4",
-              "kitDefinitionId": "128f5754b95e5c9e1a1955fa1f5bd0af",
-              "configuration": []
-            }
-          ],
-          "cells": []
-        }
-      }
-    },
-    {
-      "_id": "c3f1dea4a72614539d5cf50bb4055756",
-      "type": "Frontastic.Backstage.StageBundle.Domain.Page",
-      "state": "default",
-      "nodes": ["c3f1dea4a72614539d5cf50bb40092f8"],
-      "layoutId": "three_rows",
-      "name": "datasource",
-      "environments": {
-        "development": true,
-        "staging": true,
-        "production": true
-      },
-      "scheduledFrom": null,
-      "scheduledTo": null,
-      "nodesPagesOfTypeSortIndex": null,
-      "scheduleCriterion": "",
-      "hostCriteria": [],
-      "localeCriteria": [],
-      "scheduledExperiment": null,
-      "regions": {
-        "head": {
-          "type": "Frontastic.Backstage.StageBundle.Domain.Region",
-          "regionId": "head",
-          "configuration": [],
-          "elements": [],
-          "cells": []
-        },
-        "main": {
-          "type": "Frontastic.Backstage.StageBundle.Domain.Region",
-          "regionId": "main",
-          "configuration": [],
-          "elements": [
-            {
-              "type": "Frontastic.Backstage.StageBundle.Domain.Cell",
-              "cellId": "7ec51298-0247-40f6-bdff-a630385721ee",
-              "configuration": {
-                "size": 12
-              },
-              "customConfiguration": [],
-              "tastics": [
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "0d1a7ba1-1f05-4a70-a075-c771ca53f234",
-                  "tasticType": "commercetools/ui/products/details",
-                  "configuration": {
-                    "data": "ce19399d-4e2e-4616-964e-14da52673b25"
-                  },
-                  "isDeleted": false
-                }
-              ]
-            }
-          ],
-          "cells": []
-        },
-        "footer": {
-          "type": "Frontastic.Backstage.StageBundle.Domain.Region",
-          "regionId": "footer",
-          "configuration": [],
-          "elements": [],
-          "cells": []
-        }
-      }
-    },
-    {
-      "_id": "3ef723eb078b0d38bedaf37a300421d6",
-      "type": "Frontastic.Backstage.StageBundle.Domain.Page",
-      "state": "default",
-      "nodes": ["3ef723eb078b0d38bedaf37a3002ae35"],
-      "layoutId": "three_rows",
-      "name": "V1",
-      "environments": {
-        "development": true,
-        "staging": true,
-        "production": true
-      },
-      "scheduledFrom": null,
-      "scheduledTo": null,
-      "nodesPagesOfTypeSortIndex": null,
-      "scheduleCriterion": "",
-      "hostCriteria": [],
-      "localeCriteria": [],
-      "scheduledExperiment": null,
-      "regions": {
-        "head": {
-          "type": "Frontastic.Backstage.StageBundle.Domain.Region",
-          "regionId": "head",
-          "configuration": [],
-          "elements": [
-            {
-              "type": "Frontastic.Backstage.StageBundle.Domain.Kit",
-              "kitId": "b611cda7-c8e8-4e89-bf89-9b512c2b2381",
-              "kitDefinitionId": "128f5754b95e5c9e1a1955fa1f5b0a9c",
-              "configuration": []
-            }
-          ],
-          "cells": []
-        },
-        "main": {
-          "type": "Frontastic.Backstage.StageBundle.Domain.Region",
-          "regionId": "main",
-          "configuration": [],
-          "elements": [
-            {
-              "type": "Frontastic.Backstage.StageBundle.Domain.Cell",
-              "cellId": "7f3043c2-9d5a-43c0-9670-930c1d5a2f66",
-              "configuration": {
-                "size": 12
-              },
-              "customConfiguration": [],
-              "tastics": [
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "8a2f8dee-2091-4879-a9ee-6cca2d455c48",
-                  "tasticType": "commercetools/ui/content/markdown",
-                  "configuration": {
-                    "markdown": {
-                      "en_GB": "##Our Story: Crafting Beautiful Homes with Quality \n",
-                      "de_DE": "##Unsere Geschichte: Schöne Häuser mit Qualität herstellen"
-                    },
-                    "name": {
-                      "en_GB": "Page Title"
-                    },
-                    "mobile": true,
-                    "fullWidth": true,
-                    "textAlign": "center"
-                  },
-                  "isDeleted": false
-                },
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "bc772861-ae40-4678-ab59-742214228a0d",
-                  "tasticType": "commercetools/ui/content/hero",
-                  "configuration": {
-                    "image": {
-                      "media": {
-                        "_type": "Frontastic\\Backstage\\MediaApiBundle\\Domain\\MediaApi\\Media",
-                        "mediaId": "ocdculmgvpam05ernext",
-                        "resourceType": "image",
-                        "name": "AdobeStock 236440341",
-                        "tags": ["__none"],
-                        "file": "https://res.cloudinary.com/dlwdq84ig/image/upload/v1680510249/ocdculmgvpam05ernext.jpg",
-                        "size": 3849485,
-                        "width": 5700,
-                        "height": 2537,
-                        "format": "jpg",
-                        "created": "2023-04-03T08:24:09+00:00",
-                        "metaData": []
-                      }
-                    }
-                  },
-                  "isDeleted": false
-                },
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "15a53706-724d-4bed-bd77-fb0e5603d1d2",
-                  "tasticType": "commercetools/ui/content/spacer",
-                  "configuration": {
-                    "customDesktop": 12
-                  },
-                  "isDeleted": false
-                },
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "2fb888d1-2cb1-4585-b653-7bc79e5099bb",
-                  "tasticType": "commercetools/ui/content/markdown",
-                  "configuration": {
-                    "markdown": {
-                      "en_GB": "Beautifully designed interiors have the power to inspire, invigorate, and soothe us all at once. A well-designed interior can enhance our relationships, boost our creativity, and even improve our mental and physical health. A beautiful interior is not just a luxurious indulgence, but a transformative investment in our well-being, and it is well worth the effort.",
-                      "de_DE": "Wunderschön gestaltete Innenräume haben die Kraft, uns alle gleichzeitig zu inspirieren, zu beleben und zu beruhigen. Ein gut gestaltetes Interieur kann unsere Beziehungen verbessern, unsere Kreativität fördern und sogar unsere geistige und körperliche Gesundheit verbessern. Ein schönes Interieur ist nicht nur ein luxuriöser Genuss, sondern eine transformative Investition in unser Wohlbefinden, und es lohnt sich."
-                    },
-                    "fullWidth": true,
-                    "textAlign": "center"
-                  },
-                  "isDeleted": false
-                },
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "8f7de6c7-4196-49b6-a778-2d243a839733",
-                  "tasticType": "commercetools/ui/content/spacer",
-                  "configuration": {
-                    "customDesktop": 12
-                  },
-                  "isDeleted": false
-                },
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "9f240fce-3eaf-4f80-8e76-eb096e4ef710",
-                  "tasticType": "commercetools/ui/content/content-slider",
-                  "configuration": {
-                    "slides": [
-                      {
-                        "image": {
-                          "media": {
-                            "_type": "Frontastic\\Backstage\\MediaApiBundle\\Domain\\MediaApi\\Media",
-                            "mediaId": "ijobrbzcedd2uy0wh5zo",
-                            "resourceType": "image",
-                            "name": "AdobeStock 153426336",
-                            "tags": ["__none"],
-                            "file": "https://res.cloudinary.com/dlwdq84ig/image/upload/v1679645083/ijobrbzcedd2uy0wh5zo.jpg",
-                            "size": 7054940,
-                            "width": 5616,
-                            "height": 3744,
-                            "format": "jpg",
-                            "created": "2023-03-24T08:04:43+00:00",
-                            "metaData": []
-                          }
-                        },
-                        "title": {
-                          "en_GB": "OUR CRAFT"
-                        },
-                        "ctaLabel": {
-                          "en_GB": "Learn More"
-                        },
-                        "ctaReference": null,
-                        "summary": {
-                          "en_GB": "Our skilled craftsmen use only the finest materials and techniques to create beautiful, durable furniture that will stand the test of time."
-                        }
-                      },
-                      {
-                        "image": {
-                          "media": {
-                            "_type": "Frontastic\\Backstage\\MediaApiBundle\\Domain\\MediaApi\\Media",
-                            "mediaId": "lz2wcz3hnq0cwbcilfse",
-                            "resourceType": "image",
-                            "name": "AdobeStock 537126786",
-                            "tags": ["__none"],
-                            "file": "https://res.cloudinary.com/dlwdq84ig/image/upload/v1679646102/lz2wcz3hnq0cwbcilfse.jpg",
-                            "size": 9912515,
-                            "width": 7202,
-                            "height": 4807,
-                            "format": "jpg",
-                            "created": "2023-03-24T08:21:42+00:00",
-                            "metaData": []
-                          }
-                        },
-                        "title": {
-                          "en_GB": "OUR DESIGN"
-                        },
-                        "ctaLabel": {
-                          "en_GB": "Learn More"
-                        },
-                        "ctaReference": null,
-                        "summary": {
-                          "en_GB": "We carefully curate our fabrics and designs for modern interiors, selecting only the highest quality materials and contemporary styles."
-                        }
-                      },
-                      {
-                        "image": {
-                          "media": {
-                            "_type": "Frontastic\\Backstage\\MediaApiBundle\\Domain\\MediaApi\\Media",
-                            "mediaId": "g30omcevw3okamqcdqcw",
-                            "resourceType": "image",
-                            "name": "AdobeStock 541156563",
-                            "tags": ["__none"],
-                            "file": "https://res.cloudinary.com/dlwdq84ig/image/upload/v1679646203/g30omcevw3okamqcdqcw.jpg",
-                            "size": 11173676,
-                            "width": 7934,
-                            "height": 5292,
-                            "format": "jpg",
-                            "created": "2023-03-24T08:23:23+00:00",
-                            "metaData": []
-                          }
-                        },
-                        "title": {
-                          "en_GB": "OUR PEOPLE"
-                        },
-                        "ctaLabel": {
-                          "en_GB": "Learn More"
-                        },
-                        "ctaReference": null,
-                        "summary": {
-                          "en_GB": "We take pride in our team of knowledgeable individuals who are committed to providing our customers with the best products possible."
-                        }
-                      }
-                    ]
-                  },
-                  "isDeleted": false
-                },
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "7da01292-f2b5-4580-84ea-c8c46f901aec",
-                  "tasticType": "commercetools/ui/content/spacer",
-                  "configuration": {
-                    "customMobile": 24,
-                    "customTablet": 24,
-                    "customDesktop": 24
-                  },
-                  "isDeleted": false
-                }
-              ]
-            },
-            {
-              "type": "Frontastic.Backstage.StageBundle.Domain.Cell",
-              "cellId": "c998a087-58c2-47b0-a630-25208544ffda",
-              "configuration": {
-                "size": 12
-              },
-              "customConfiguration": [],
-              "tastics": [
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "47a6bb47-4a92-4459-9ce3-8a0976351534",
-                  "tasticType": "commercetools/ui/content/spacer",
-                  "configuration": {
-                    "customMobile": 0,
-                    "customDesktop": 24,
-                    "backgroundColor": "neutral-200",
-                    "mobile": true
-                  },
-                  "isDeleted": false
-                },
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "c62ede60-274c-4e1b-a239-733bed414e68",
-                  "tasticType": "commercetools/ui/products/slider",
-                  "configuration": {
-                    "title": {
-                      "en_GB": "Our Home Decor"
-                    },
-                    "subline": {
-                      "en_GB": "Explore our selection stylish home decor"
-                    },
-                    "subtitleVariant": "sm",
-                    "data": "aa2201bd-0678-4de1-bdb9-58601e08e3d8",
-                    "ctaLabel": {
-                      "en_GB": "Shop all"
-                    },
-                    "ctaLink": {
-                      "type": "link",
-                      "target": "/home-decor"
-                    }
-                  },
-                  "isDeleted": false
-                },
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "1fca7565-7389-4255-9440-b3096b2cc730",
-                  "tasticType": "commercetools/ui/content/spacer",
-                  "configuration": {
-                    "customDesktop": 24,
-                    "backgroundColor": "neutral-200"
-                  },
-                  "isDeleted": false
-                },
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "5c22e176-60ee-4190-a84b-5f60f1803190",
-                  "tasticType": "commercetools/ui/content/spacer",
-                  "configuration": {
-                    "customDesktop": 66,
-                    "backgroundColor": "neutral-200"
-                  },
-                  "isDeleted": false
-                }
-              ]
-            },
-            {
-              "type": "Frontastic.Backstage.StageBundle.Domain.Cell",
-              "cellId": "7300a7a7-a4c4-414e-9ac0-7125a5111b19",
-              "configuration": {
-                "size": 8
-              },
-              "customConfiguration": [],
-              "tastics": [
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "b5716f91-c595-426d-8cc0-1ddaa125c874",
-                  "tasticType": "commercetools/ui/content/tiles-group",
-                  "configuration": {
-                    "tiles": [
-                      {
-                        "image": {
-                          "media": {
-                            "_type": "Frontastic\\Backstage\\MediaApiBundle\\Domain\\MediaApi\\Media",
-                            "mediaId": "gz16uea9m6n9v0hoaiyf",
-                            "resourceType": "image",
-                            "name": "AdobeStock 552091366",
-                            "tags": ["__none"],
-                            "file": "https://res.cloudinary.com/dlwdq84ig/image/upload/v1679506230/gz16uea9m6n9v0hoaiyf.jpg",
-                            "size": 6240082,
-                            "width": 5000,
-                            "height": 3750,
-                            "format": "jpg",
-                            "created": "2023-03-22T17:30:30+00:00",
-                            "metaData": []
-                          }
-                        },
-                        "title": null,
-                        "subtitle": null,
-                        "ctaLabel": null,
-                        "ctaReference": null,
-                        "roundedBorders": true
-                      },
-                      {
-                        "image": {
-                          "media": {
-                            "_type": "Frontastic\\Backstage\\MediaApiBundle\\Domain\\MediaApi\\Media",
-                            "mediaId": "vlwuyaiwgbluppveephw",
-                            "resourceType": "image",
-                            "name": "AdobeStock 535545668",
-                            "tags": ["__none"],
-                            "file": "https://res.cloudinary.com/dlwdq84ig/image/upload/v1679647184/vlwuyaiwgbluppveephw.jpg",
-                            "size": 10229170,
-                            "width": 8256,
-                            "height": 6192,
-                            "format": "jpg",
-                            "created": "2023-03-24T08:39:44+00:00",
-                            "metaData": []
-                          }
-                        },
-                        "title": null,
-                        "subtitle": null,
-                        "ctaLabel": null,
-                        "ctaReference": null,
-                        "roundedBorders": true
-                      }
-                    ]
-                  },
-                  "isDeleted": false
-                }
-              ]
-            },
-            {
-              "type": "Frontastic.Backstage.StageBundle.Domain.Cell",
-              "cellId": "e7216908-e34a-455e-b4a0-ccf82585b8c4",
-              "configuration": {
-                "size": 4
-              },
-              "customConfiguration": [],
-              "tastics": [
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "ed908f75-0818-4265-af9d-8b967761e116",
-                  "tasticType": "commercetools/ui/content/spacer",
-                  "configuration": {
-                    "customDesktop": 40
-                  },
-                  "isDeleted": false
-                },
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "3a651eee-d3ec-4138-82aa-8f66bdaf464e",
-                  "tasticType": "commercetools/ui/content/markdown",
-                  "configuration": {
-                    "markdown": {
-                      "en_GB": "##MINIMALIST FURNITURE\nMinimalist furniture is characterized by its simple and clean design, often featuring sleek lines, neutral colors, and a focus on functionality over ornamentation.\n\n[Shop the collection](https://home-thegoodstore.netlify.app/the-minimalist)",
-                      "de_DE": "##MINIMALISTISCHE MÖBEL\nMinimalistische Möbel zeichnen sich durch ihr einfaches und klares Design aus, oft mit schlanken Linien, neutralen Farben und einem Fokus auf Funktionalität statt Ornamentik.\n\n[Kaufen Sie die Kollektion](https://home-thegoodstore.netlify.app/the-minimalist)"
-                    }
-                  },
-                  "isDeleted": false
-                }
-              ]
-            },
-            {
-              "type": "Frontastic.Backstage.StageBundle.Domain.Cell",
-              "cellId": "365a5be0-17cc-4936-968d-cf9d96654b4d",
-              "configuration": {
-                "size": 12
-              },
-              "customConfiguration": [],
-              "tastics": [
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "146bb427-69c9-4006-8044-8f7b272873d3",
-                  "tasticType": "commercetools/ui/content/spacer",
-                  "configuration": {
-                    "customDesktop": 66,
-                    "backgroundColor": "neutral-200"
-                  },
-                  "isDeleted": false
-                }
-              ]
-            }
-          ],
-          "cells": []
-        },
-        "footer": {
-          "type": "Frontastic.Backstage.StageBundle.Domain.Region",
-          "regionId": "footer",
-          "configuration": [],
-          "elements": [
-            {
-              "type": "Frontastic.Backstage.StageBundle.Domain.Kit",
-              "kitId": "3a6fc4cd-8763-4e10-9220-d68a3dd5ef92",
-              "kitDefinitionId": "128f5754b95e5c9e1a1955fa1f5bd0af",
-              "configuration": []
-            }
-          ],
-          "cells": []
-        }
-      }
-    },
-    {
-      "_id": "128f5754b95e5c9e1a1955fa1f68d920",
-      "type": "Frontastic.Backstage.StageBundle.Domain.Page",
-      "state": "default",
-      "nodes": ["128f5754b95e5c9e1a1955fa1f5a7dcb"],
-      "layoutId": "three_rows",
-      "name": "Default",
-      "environments": {
-        "development": true,
-        "staging": true,
-        "production": true
-      },
-      "scheduledFrom": null,
-      "scheduledTo": null,
-      "nodesPagesOfTypeSortIndex": null,
-      "scheduleCriterion": "",
-      "hostCriteria": null,
-      "localeCriteria": null,
-      "scheduledExperiment": null,
-      "regions": {
-        "head": {
-          "type": "Frontastic.Backstage.StageBundle.Domain.Region",
-          "regionId": "head",
-          "configuration": [],
-          "elements": [
-            {
-              "type": "Frontastic.Backstage.StageBundle.Domain.Kit",
-              "kitId": "95519c25-b5a7-4063-adc3-d87459fb86b6",
-              "kitDefinitionId": "128f5754b95e5c9e1a1955fa1f5b0a9c",
-              "configuration": []
-            }
-          ],
-          "cells": []
-        },
-        "main": {
-          "type": "Frontastic.Backstage.StageBundle.Domain.Region",
-          "regionId": "main",
-          "configuration": [],
-          "elements": [
-            {
-              "type": "Frontastic.Backstage.StageBundle.Domain.Cell",
-              "cellId": "c2bedc71-7095-4daf-99ce-ce263a85a1a5",
-              "configuration": {
-                "size": 12
-              },
-              "customConfiguration": [],
-              "tastics": [
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "7aa51854-b2cc-42d7-8083-1faf20683353",
-                  "tasticType": "commercetools/ui/products/product-list",
-                  "configuration": {
-                    "facetsConfiguration": [
-                      {
-                        "key": "variants.price",
-                        "type": "range",
-                        "label": {
-                          "en_GB": "Price"
-                        }
-                      },
-                      {
-                        "key": "variants.attributes.colorlabel",
-                        "type": "color",
-                        "label": {
-                          "en_GB": "Color"
-                        }
-                      },
-                      {
-                        "key": "variants.scopedPriceDiscounted",
-                        "type": "boolean",
-                        "label": {
-                          "en_GB": "Sale"
-                        }
-                      }
-                    ],
-                    "pricesConfiguration": [
-                      {
-                        "key": "variants.price",
-                        "ranges": [
-                          {
-                            "min": 0,
-                            "max": 100
-                          },
-                          {
-                            "min": 100,
-                            "max": 300
-                          }
-                        ]
-                      }
-                    ],
-                    "data": "__master",
-                    "mobile": true,
-                    "tablet": true,
-                    "desktop": true
-                  },
-                  "isDeleted": false
-                },
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "fd8a0797-9001-411d-8258-df13d6e0a053",
-                  "tasticType": "commercetools/ui/products/product-list-algolia",
-                  "configuration": {
-                    "facetsConfiguration": [
-                      {
-                        "key": "variants.attributes.colorlabel",
-                        "type": "color",
-                        "label": {
-                          "en_GB": "Color"
-                        }
-                      },
-                      {
-                        "key": "variants.price.centAmount",
-                        "type": "range",
-                        "label": {
-                          "en_GB": "Price"
-                        }
-                      },
-                      {
-                        "key": "variants.isOnSale",
-                        "type": "boolean",
-                        "label": {
-                          "en_GB": "Sale"
-                        }
-                      }
-                    ],
-                    "mobile": false,
-                    "tablet": false,
-                    "desktop": false
-                  },
-                  "isDeleted": false
-                }
-              ]
-            }
-          ],
-          "cells": []
-        },
-        "footer": {
-          "type": "Frontastic.Backstage.StageBundle.Domain.Region",
-          "regionId": "footer",
-          "configuration": [],
-          "elements": [
-            {
-              "type": "Frontastic.Backstage.StageBundle.Domain.Kit",
-              "kitId": "8a40ea2d-231f-4c7f-9bad-4ed74e3c3736",
               "kitDefinitionId": "128f5754b95e5c9e1a1955fa1f5bd0af",
               "configuration": []
             }
