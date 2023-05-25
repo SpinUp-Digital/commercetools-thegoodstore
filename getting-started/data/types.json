@@ -1,0 +1,45 @@
+[
+  {
+    "key": "customer-isSubscribedType",
+    "name": {
+      "en": "isSubscribed"
+    },
+    "resourceTypeIds": ["customer"],
+    "fieldDefinitions": [
+      {
+        "name": "isSubscribed",
+        "label": {
+          "en": "isSubscribed"
+        },
+        "required": false,
+        "type": {
+          "name": "Boolean"
+        },
+        "inputHint": "SingleLine"
+      }
+    ]
+  },
+  {
+    "key": "paymenttype",
+    "name": {
+      "en": "Payment Additional Fields"
+    },
+    "description": {
+      "en": "Payment custom type."
+    },
+    "resourceTypeIds": ["payment"],
+    "fieldDefinitions": [
+      {
+        "name": "cardSummary",
+        "label": {
+          "en": "Card Summary"
+        },
+        "required": false,
+        "type": {
+          "name": "String"
+        },
+        "inputHint": "SingleLine"
+      }
+    ]
+  }
+]

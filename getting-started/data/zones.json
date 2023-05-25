@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Europe",
+    "locations": [
+      {
+        "country": "DE"
+      }
+    ]
+  },
+  {
+    "name": "United Kingdom",
+    "locations": [
+      {
+        "country": "GB"
+      }
+    ]
+  }
+]

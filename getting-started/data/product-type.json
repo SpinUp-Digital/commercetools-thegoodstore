@@ -1,0 +1,404 @@
+[
+  {
+    "key": "furniture-decor",
+    "name": "Furniture and decor",
+    "description": "items with color, fabric, size, finish and/or product spec attributes",
+    "classifier": "Complex",
+    "attributes": [
+      {
+        "name": "productspec",
+        "label": {
+          "de-DE": "Produktspezifikationen",
+          "en-US": "Product Specifications",
+          "en-GB": "Product Specifications"
+        },
+        "inputTip": {
+          "de-DE": "",
+          "en-US": "Details on the specifications of the product, including size, wood type, fabric type, to be detailed in bullet points.",
+          "en-GB": "Details on the specifications of the product, including size, wood type, fabric type, to be detailed in bullet points."
+        },
+        "isRequired": false,
+        "type": {
+          "name": "ltext"
+        },
+        "attributeConstraint": "SameForAll",
+        "isSearchable": true,
+        "inputHint": "MultiLine",
+        "displayGroup": "Other"
+      },
+      {
+        "name": "color",
+        "label": {
+          "de-DE": "Farbe",
+          "en-US": "Color",
+          "en-GB": "Color"
+        },
+        "inputTip": {
+          "de-DE": "",
+          "en-US": ""
+        },
+        "isRequired": false,
+        "type": {
+          "name": "ltext"
+        },
+        "attributeConstraint": "None",
+        "isSearchable": true,
+        "inputHint": "SingleLine",
+        "displayGroup": "Other"
+      },
+      {
+        "name": "finish",
+        "label": {
+          "de-DE": " Fertig",
+          "en-US": "Finish",
+          "en-GB": "Finish"
+        },
+        "inputTip": {
+          "de-DE": "",
+          "en-US": ""
+        },
+        "isRequired": false,
+        "type": {
+          "name": "ltext"
+        },
+        "attributeConstraint": "None",
+        "isSearchable": true,
+        "inputHint": "SingleLine",
+        "displayGroup": "Other"
+      },
+      {
+        "name": "colorlabel",
+        "label": {
+          "de-DE": "Farbetikett",
+          "en-US": "Color Label",
+          "en-GB": "Color Label"
+        },
+        "inputTip": {
+          "de-DE": "",
+          "en-US": ""
+        },
+        "isRequired": false,
+        "type": {
+          "name": "ltext"
+        },
+        "attributeConstraint": "None",
+        "isSearchable": true,
+        "inputHint": "SingleLine",
+        "displayGroup": "Other"
+      },
+      {
+        "name": "finishlabel",
+        "label": {
+          "de-DE": " Fertiges Etikett",
+          "en-US": "Finish Label",
+          "en-GB": "Finish Label"
+        },
+        "inputTip": {
+          "de-DE": "",
+          "en-US": ""
+        },
+        "isRequired": false,
+        "type": {
+          "name": "ltext"
+        },
+        "attributeConstraint": "None",
+        "isSearchable": true,
+        "inputHint": "SingleLine",
+        "displayGroup": "Other"
+      },
+      {
+        "name": "new-arrival",
+        "label": {
+          "de-DE": "Neuankömmling",
+          "en-GB": "New Arrival",
+          "en-US": "New Arrival"
+        },
+        "inputTip": {
+          "de-DE": "",
+          "en-GB": "",
+          "en-US": ""
+        },
+        "isRequired": false,
+        "type": {
+          "name": "boolean"
+        },
+        "attributeConstraint": "None",
+        "isSearchable": false,
+        "inputHint": "SingleLine",
+        "displayGroup": "Other"
+      },
+      {
+        "name": "size",
+        "label": {
+          "de-DE": "",
+          "en-GB": "Size",
+          "en-US": ""
+        },
+        "inputTip": {
+          "de-DE": "",
+          "en-GB": "size set as a string value",
+          "en-US": ""
+        },
+        "isRequired": false,
+        "type": {
+          "name": "ltext"
+        },
+        "attributeConstraint": "None",
+        "isSearchable": true,
+        "inputHint": "SingleLine",
+        "displayGroup": "Other"
+      },
+      {
+        "name": "color-filter",
+        "label": {
+          "de-DE": "",
+          "en-GB": "Color Filter",
+          "en-US": ""
+        },
+        "inputTip": {
+          "de-DE": "",
+          "en-GB": "Used for the color faceting for the PLP color filter. For each variant, set hex value as key and the color label as the valuel.",
+          "en-US": ""
+        },
+        "isRequired": false,
+        "type": {
+          "name": "lenum",
+          "values": [
+            {
+              "key": "color",
+              "label": {
+                "de-DE": "colorlabel",
+                "en-GB": "colorlabel",
+                "en-US": "colorlabel"
+              }
+            }
+          ]
+        },
+        "attributeConstraint": "None",
+        "isSearchable": true,
+        "inputHint": "SingleLine",
+        "displayGroup": "Other"
+      }
+    ]
+  },
+  {
+    "key": "single-variant",
+    "name": "Single variant",
+    "description": "any cheese tray or serving tray with no attributes",
+    "classifier": "Complex",
+    "attributes": [
+      {
+        "name": "productspec",
+        "label": {
+          "de-DE": "Produktspezifikationen",
+          "en-US": "Product Specifications",
+          "en-GB": "Product Specifications"
+        },
+        "inputTip": {
+          "de-DE": "",
+          "en-US": ""
+        },
+        "isRequired": false,
+        "type": {
+          "name": "ltext"
+        },
+        "attributeConstraint": "SameForAll",
+        "isSearchable": true,
+        "inputHint": "MultiLine",
+        "displayGroup": "Other"
+      }
+    ]
+  },
+  {
+    "key": "product-sets",
+    "name": "Product sets",
+    "description": "products also sold as sets with their variants",
+    "classifier": "Complex",
+    "attributes": [
+      {
+        "name": "type",
+        "label": {
+          "de-DE": "Typ",
+          "en-US": "Type",
+          "en-GB": "Type"
+        },
+        "inputTip": {
+          "de-DE": "",
+          "en-US": ""
+        },
+        "isRequired": false,
+        "type": {
+          "name": "set",
+          "elementType": {
+            "name": "ltext"
+          }
+        },
+        "attributeConstraint": "None",
+        "isSearchable": true,
+        "inputHint": "SingleLine",
+        "displayGroup": "Other"
+      }
+    ]
+  },
+  {
+    "key": "products-with-sizes",
+    "name": "Products with sizes",
+    "description": "Products that have multiple sizes",
+    "classifier": "Complex",
+    "attributes": [
+      {
+        "name": "size",
+        "label": {
+          "de-DE": "Größe",
+          "en-US": "Size",
+          "en-GB": "Size"
+        },
+        "inputTip": {
+          "de-DE": "",
+          "en-US": ""
+        },
+        "isRequired": false,
+        "type": {
+          "name": "ltext"
+        },
+        "attributeConstraint": "None",
+        "isSearchable": false,
+        "inputHint": "SingleLine",
+        "displayGroup": "Other"
+      },
+      {
+        "name": "sizelabel",
+        "label": {
+          "de-DE": "",
+          "en-US": "Size Label",
+          "en-GB": "Size Label"
+        },
+        "inputTip": {
+          "de-DE": "",
+          "en-US": ""
+        },
+        "isRequired": false,
+        "type": {
+          "name": "ltext"
+        },
+        "attributeConstraint": "None",
+        "isSearchable": false,
+        "inputHint": "SingleLine",
+        "displayGroup": "Other"
+      },
+      {
+        "name": "productspec",
+        "label": {
+          "de-DE": "Produktspezifikationen",
+          "en-US": "Product Specifications",
+          "en-GB": "Product Specifications"
+        },
+        "inputTip": {
+          "de-DE": "",
+          "en-US": ""
+        },
+        "isRequired": false,
+        "type": {
+          "name": "ltext"
+        },
+        "attributeConstraint": "SameForAll",
+        "isSearchable": true,
+        "inputHint": "MultiLine",
+        "displayGroup": "Other"
+      }
+    ]
+  },
+  {
+    "key": "bedding-bundle",
+    "name": "Bedding Bundle",
+    "description": "Product type used to bundle bedding components",
+    "classifier": "Complex",
+    "attributes": [
+      {
+        "name": "sheets",
+        "label": {
+          "de-DE": "",
+          "en-GB": "",
+          "en-US": "sheets"
+        },
+        "inputTip": {
+          "de-DE": "",
+          "en-GB": "",
+          "en-US": ""
+        },
+        "isRequired": false,
+        "type": {
+          "name": "text"
+        },
+        "attributeConstraint": "None",
+        "isSearchable": false,
+        "inputHint": "SingleLine",
+        "displayGroup": "Other"
+      },
+      {
+        "name": "style",
+        "label": {
+          "de-DE": "",
+          "en-GB": "",
+          "en-US": "Style of all components of the bundle"
+        },
+        "inputTip": {
+          "de-DE": "",
+          "en-GB": "",
+          "en-US": ""
+        },
+        "isRequired": false,
+        "type": {
+          "name": "ltext"
+        },
+        "attributeConstraint": "Unique",
+        "isSearchable": false,
+        "inputHint": "SingleLine",
+        "displayGroup": "Other"
+      },
+      {
+        "name": "pillow-cases",
+        "label": {
+          "de-DE": "",
+          "en-GB": "",
+          "en-US": "Pillow Cases"
+        },
+        "inputTip": {
+          "de-DE": "",
+          "en-GB": "",
+          "en-US": ""
+        },
+        "isRequired": false,
+        "type": {
+          "name": "text"
+        },
+        "attributeConstraint": "None",
+        "isSearchable": false,
+        "inputHint": "SingleLine",
+        "displayGroup": "Other"
+      },
+      {
+        "name": "product-reference-example",
+        "label": {
+          "de-DE": "",
+          "en-GB": "",
+          "en-US": "Example Product reference"
+        },
+        "inputTip": {
+          "de-DE": "",
+          "en-GB": "",
+          "en-US": ""
+        },
+        "isRequired": false,
+        "type": {
+          "name": "reference",
+          "referenceTypeId": "product"
+        },
+        "attributeConstraint": "None",
+        "isSearchable": false,
+        "inputHint": "SingleLine",
+        "displayGroup": "Other"
+      }
+    ]
+  }
+]
