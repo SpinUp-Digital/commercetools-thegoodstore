@@ -1,0 +1,22 @@
+[
+  {
+    "key": "channel-key",
+    "roles": ["InventorySupply"],
+    "name": {
+      "de-DE": "channel name"
+    },
+    "description": {
+      "de-DE": "channel description"
+    }
+  },
+  {
+    "key": "product-distribution",
+    "roles": ["ProductDistribution"],
+    "name": {
+      "de-DE": "Product distribution name"
+    },
+    "description": {
+      "de-DE": "Product distribution description"
+    }
+  }
+]

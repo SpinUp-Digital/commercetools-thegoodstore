@@ -1,0 +1,48 @@
+[
+  {
+    "key": "EU",
+    "name": "EU",
+    "description": "",
+    "rates": [
+      {
+        "name": "EU tax",
+        "amount": 0.1,
+        "includedInPrice": false,
+        "country": "DE",
+        "id": "6Csnj-BQ",
+        "subRates": []
+      },
+      {
+        "name": "UK tax",
+        "amount": 0.1,
+        "includedInPrice": false,
+        "country": "GB",
+        "id": "AQUJzQEm",
+        "subRates": []
+      }
+    ]
+  },
+  {
+    "key": "EU2",
+    "name": "EU2",
+    "description": "",
+    "rates": [
+      {
+        "name": "Germany",
+        "amount": 0.1,
+        "includedInPrice": true,
+        "country": "DE",
+        "id": "2dKEEWuz",
+        "subRates": []
+      },
+      {
+        "name": "United Kingdom",
+        "amount": 0.1,
+        "includedInPrice": true,
+        "country": "GB",
+        "id": "XolHKRDX",
+        "subRates": []
+      }
+    ]
+  }
+]

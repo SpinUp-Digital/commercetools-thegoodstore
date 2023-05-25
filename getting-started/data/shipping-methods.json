@@ -1,0 +1,134 @@
+[
+  {
+    "name": "Standard Delivery",
+    "localizedDescription": {
+      "de-DE": "4",
+      "en-GB": "4",
+      "en-US": "4"
+    },
+    "taxCategory": {
+      "typeId": "tax-category",
+      "id": "ff653358-d76f-49a5-be78-995c5b028796"
+    },
+    "zoneRates": [
+      {
+        "zone": {
+          "typeId": "zone",
+          "id": "United Kingdom"
+        },
+        "shippingRates": [
+          {
+            "price": {
+              "type": "centPrecision",
+              "currencyCode": "GBP",
+              "centAmount": 10000,
+              "fractionDigits": 2
+            },
+            "tiers": []
+          },
+          {
+            "price": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 10000,
+              "fractionDigits": 2
+            },
+            "tiers": []
+          }
+        ]
+      },
+      {
+        "zone": {
+          "typeId": "zone",
+          "id": "Europe"
+        },
+        "shippingRates": [
+          {
+            "price": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 10000,
+              "fractionDigits": 2
+            },
+            "freeAbove": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 0,
+              "fractionDigits": 2
+            },
+            "tiers": []
+          },
+          {
+            "price": {
+              "type": "centPrecision",
+              "currencyCode": "GBP",
+              "centAmount": 10000,
+              "fractionDigits": 2
+            },
+            "tiers": []
+          }
+        ]
+      }
+    ],
+    "isDefault": true,
+    "references": [],
+    "attributeTypes": {},
+    "cartFieldTypes": {},
+    "lineItemFieldTypes": {},
+    "customLineItemFieldTypes": {}
+  },
+  {
+    "name": "Express Delivery",
+    "localizedDescription": {
+      "de-DE": "2",
+      "en-GB": "2",
+      "en-US": "2"
+    },
+    "taxCategory": {
+      "typeId": "tax-category",
+      "id": "ff653358-d76f-49a5-be78-995c5b028796"
+    },
+    "zoneRates": [
+      {
+        "zone": {
+          "typeId": "zone",
+          "id": "Europe"
+        },
+        "shippingRates": [
+          {
+            "price": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 50000,
+              "fractionDigits": 2
+            },
+            "tiers": []
+          }
+        ]
+      },
+      {
+        "zone": {
+          "typeId": "zone",
+          "id": "United Kingdom"
+        },
+        "shippingRates": [
+          {
+            "price": {
+              "type": "centPrecision",
+              "currencyCode": "GBP",
+              "centAmount": 50000,
+              "fractionDigits": 2
+            },
+            "tiers": []
+          }
+        ]
+      }
+    ],
+    "isDefault": false,
+    "references": [],
+    "attributeTypes": {},
+    "cartFieldTypes": {},
+    "lineItemFieldTypes": {},
+    "customLineItemFieldTypes": {}
+  }
+]
