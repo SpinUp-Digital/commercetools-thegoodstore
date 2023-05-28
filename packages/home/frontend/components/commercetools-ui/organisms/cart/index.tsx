@@ -35,15 +35,11 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods, emptyStateDescripti
   const { loggedIn } = useAccount();
 
   const lineItems = useMemo(() => {
-    return (data?.lineItems ?? []).filter(
-      (lineItem) => lineItem.variant.isOnStock || lineItem.variant.restockableInDays,
-    );
+    return (data?.lineItems ?? []).filter((lineItem) => lineItem.variant.isOnStock);
   }, [data?.lineItems]);
 
   const soldoutItems = useMemo(() => {
-    return (data?.lineItems ?? []).filter(
-      (lineItem) => !(lineItem.variant.isOnStock || lineItem.variant.restockableInDays),
-    );
+    return (data?.lineItems ?? []).filter((lineItem) => !lineItem.variant.isOnStock);
   }, [data?.lineItems]);
 
   const loginLink = '/login?lvp=cart';
@@ -66,13 +62,11 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods, emptyStateDescripti
 
           {!isEmpty ? (
             <div className="mt-12 divide-y divide-neutral-400 border-t border-neutral-400 lg:mt-34 lg:border-none">
-              {lineItems
-                ?.filter((lineItem) => lineItem.variant.isOnStock || !lineItem.variant.restockableInDays)
-                .map((lineItem) => (
-                  <div key={lineItem.lineItemId}>
-                    <CartItem item={lineItem} classNames={{ moveToWishlist: 'text-14' }} />
-                  </div>
-                ))}
+              {lineItems.map((lineItem) => (
+                <div key={lineItem.lineItemId}>
+                  <CartItem item={lineItem} classNames={{ moveToWishlist: 'text-14' }} />
+                </div>
+              ))}
 
               {soldoutItems.length > 0 && (
                 <div className="border-t border-neutral-400 pt-36">
@@ -80,13 +74,11 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods, emptyStateDescripti
                     {formatProductMessage({ id: 'sold.out', defaultMessage: 'Sold out' })}
                   </h3>
                   <div className="mt-52">
-                    {soldoutItems
-                      ?.filter((lineItem) => lineItem.variant.isOnStock || !lineItem.variant.restockableInDays)
-                      .map((lineItem) => (
-                        <div key={lineItem.lineItemId}>
-                          <CartItem item={lineItem} classNames={{ moveToWishlist: 'text-14' }} />
-                        </div>
-                      ))}
+                    {soldoutItems.map((lineItem) => (
+                      <div key={lineItem.lineItemId}>
+                        <CartItem item={lineItem} classNames={{ moveToWishlist: 'text-14' }} />
+                      </div>
+                    ))}
                   </div>
                 </div>
               )}

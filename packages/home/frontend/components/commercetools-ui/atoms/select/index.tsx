@@ -47,7 +47,7 @@ const Select: React.FC<Props> = ({ onChange, defaultValue, options = [] }) => {
               <Listbox.Option
                 key={option.value}
                 className={({ active }) =>
-                  `relative cursor-default select-none py-2 pl-10 pr-4 hover:bg-neutral-200 ${
+                  `relative cursor-default select-none py-2 pl-12 pr-4 text-14 hover:bg-neutral-200 ${
                     active ? 'bg-neutral-200' : ''
                   }`
                 }

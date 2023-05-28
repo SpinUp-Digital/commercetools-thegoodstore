@@ -70,7 +70,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
   ]);
 
   const iconClassName = useClassNames([
-    'absolute top-[50%] z-[1] left-[50%] h-16 w-16 translate-y-[-50%] translate-x-[-50%] stroke-[1.5px]',
+    'absolute top-[50%] z-[1] left-[50%] h-16 w-16 translate-y-[-50%] translate-x-[-50%] stroke-[2px]',
     isChecked || isHovered ? 'block' : 'hidden',
     isChecked && !disableBackground ? 'text-white' : 'text-secondary-black',
   ]);

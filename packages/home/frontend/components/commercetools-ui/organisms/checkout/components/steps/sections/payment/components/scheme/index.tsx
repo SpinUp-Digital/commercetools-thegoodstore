@@ -23,7 +23,7 @@ const Scheme = () => {
 
     while (year < now.getFullYear() + 10) {
       options.push({
-        name: `${month} / ${year.toString().slice(2)}`,
+        name: `${month < 10 ? '0' : ''}${month} / ${year.toString().slice(2)}`,
         value: `${month}/${year}`,
       });
 
@@ -107,7 +107,9 @@ const Scheme = () => {
             defaultValue={
               paymentData.expiryMonth && paymentData.expiryYear
                 ? {
-                    name: `${paymentData.expiryMonth} / ${paymentData.expiryYear.slice(2)}`,
+                    name: `${+paymentData.expiryMonth < 10 ? '0' : ''}${
+                      paymentData.expiryMonth
+                    } / ${paymentData.expiryYear.slice(2)}`,
                     value: `${paymentData.expiryMonth}/${paymentData.expiryYear}`,
                   }
                 : { name: 'MM / YY', value: 'MM/YY' }
