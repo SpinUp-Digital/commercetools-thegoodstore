@@ -13,10 +13,13 @@ import useCardNumberFormatter from '../helper-hooks/useFormatCredit';
 import usePaymentHelpers from '../helper-hooks/usePaymentHelpers';
 import PaymentDelete from '../payment-delete';
 
-const PaymentEdit: FC = () => {
+const PaymentEdit = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_, hashId] = useHash();
   const router = useRouter();
-  // eslint-disable-next-line
-  const [_hash, id] = useHash();
+
+  const id = hashId?.split('-')[1];
+
   const { formatMessage: formatPaymentMessage } = useFormat({ name: 'payment' });
   const paymentEditData = useEditPaymentMethods(id as string);
 

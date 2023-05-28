@@ -55,12 +55,17 @@ const OrderInfoSection: FC<Props> = ({ order, shippingInfo, paymentInfo, shippin
         </Typography>
 
         <div className="pl-8 md:pl-20 2xl:pl-44">
-          <Typography fontSize={14} medium fontFamily="inter" className="text-primary-black md:text-16">
-            {shippingAddress.streetName}
+          <Typography fontSize={14} medium fontFamily="inter" className="pb-8 text-primary-black md:text-16">
+            {`${shippingAddress.firstName} ${shippingAddress.lastName}`}
           </Typography>
-          <Typography fontSize={14} fontFamily="inter" className="mt-8 text-primary-black md:text-16">
-            {shippingAddress.additionalAddressInfo}
+          <Typography fontSize={14} fontFamily="inter" className="text-primary-black md:text-16">
+            {`${shippingAddress.streetName}, ${shippingAddress.city}, ${shippingAddress.postalCode}`}
           </Typography>
+          {shippingAddress.additionalAddressInfo && (
+            <Typography fontSize={14} fontFamily="inter" className="mt-8 text-primary-black md:text-16">
+              {shippingAddress.additionalAddressInfo}
+            </Typography>
+          )}
         </div>
       </div>
 
@@ -87,7 +92,7 @@ const OrderInfoSection: FC<Props> = ({ order, shippingInfo, paymentInfo, shippin
       <div className="flex flex-col px-16 md:px-24 lg:mt-40 lg:px-44 2xl:px-0">
         <div className="flex flex-col lg:grid lg:grid-cols-2 2xl:grid-cols-1 2xl:gap-y-16">
           <div className="lg:w-full lg:pr-10 2xl:w-[276px] 2xl:pr-0">
-            <Button variant="secondary" className="h-40 w-full py-0" onClick={handlePrint}>
+            <Button variant="secondary" className="h-fit w-full" onClick={handlePrint}>
               <Typography fontSize={14} align="center" fontFamily="inter" className="md:text-16">
                 {formatOrdersMessage({
                   id: 'print.invoice',
@@ -99,7 +104,7 @@ const OrderInfoSection: FC<Props> = ({ order, shippingInfo, paymentInfo, shippin
 
           {orderState === 'Confirmed' && (
             <div className="mt-20 lg:mt-0 lg:w-full lg:pl-10 2xl:w-[276px] 2xl:pl-0">
-              <Button variant="secondary" className="h-40 w-full py-0">
+              <Button variant="secondary" className="h-fit w-full">
                 <Typography fontSize={14} align="center" fontFamily="inter" className="md:text-16">
                   {formatOrdersMessage({
                     id: 'request.cancellation',
@@ -112,7 +117,7 @@ const OrderInfoSection: FC<Props> = ({ order, shippingInfo, paymentInfo, shippin
 
           {orderState === 'Complete' && (
             <div className="mt-20 lg:mt-0 lg:w-full lg:pl-10 2xl:w-[276px] 2xl:pl-0">
-              <Button variant="secondary" className="h-40 w-full py-0">
+              <Button variant="secondary" className="h-fit w-full">
                 <Typography fontSize={14} align="center" fontFamily="inter" className="md:text-16">
                   {formatOrdersMessage({
                     id: 'create.return',
