@@ -1,7 +1,7 @@
 import { ImageProps as NextImageProps } from 'next/image';
 
 export type Gravity = {
-  mode?: 'string';
+  mode?: string;
   coordinates?: { x: number; y: number };
 };
 
