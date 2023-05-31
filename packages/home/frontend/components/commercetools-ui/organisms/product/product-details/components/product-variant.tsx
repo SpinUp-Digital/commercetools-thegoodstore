@@ -51,7 +51,7 @@ const ProductVariant: FC<ProductVariantProps> = ({
   const labelClassName = useClassNames(['capitalize', `text-${inModalVersion ? 12 : 14}`]);
   const defaultVariantClassName = useClassNames(['h-20 w-20 rounded-full', hoverEffectClassName]);
   const sizeVariantClassname = useClassNames(['p-12', hoverEffectClassName]);
-  const variantContainerClassName = useClassNames(['mt-15 flex', attribute == 'size' ? 'gap-12' : 'gap-24']);
+  const variantContainerClassName = useClassNames(['mt-16 flex', attribute == 'size' ? 'gap-12' : 'gap-24']);
 
   const sortVariantsCmp = (a: VariantType, b: VariantType) => {
     const first = a.attributes?.[attribute];
@@ -64,7 +64,7 @@ const ProductVariant: FC<ProductVariantProps> = ({
 
   return (
     <div className={className}>
-      <div>
+      <div className={attribute == 'color' ? 'mt-4' : ''}>
         <Typography medium lineHeight="loose" className={labelClassName}>
           {formatMessage({ id: attributeString, defaultMessage: attributeString })}
         </Typography>

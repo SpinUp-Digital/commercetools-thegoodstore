@@ -88,7 +88,7 @@ const ProductInformation: FC<ProductInformationProps> = ({ product, variant, onC
           return (
             <ProductVariant
               key={attribute}
-              className="mt-25 border-b border-b-neutral-400 pb-20"
+              className="mt-20 border-b border-b-neutral-400 pb-20 md:mt-24"
               variants={product?.variants}
               currentVariant={variant}
               attribute={attribute}
