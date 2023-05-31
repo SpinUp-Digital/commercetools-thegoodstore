@@ -10,7 +10,7 @@ const ContentSliderSlide: FC<ContentSliderSlideProps> = ({ image, title, ctaLabe
   const tileImageSizes = useImageSizes({ md: 1, lg: 0.33, defaultSize: 0.33 });
 
   return (
-    <Link link={ctaReference} className="shrink overflow-hidden lg:shrink-0 lg:grow lg:basis-0">
+    <Link link={ctaReference} className="w-full overflow-hidden">
       {image && (
         <div className="relative h-[220px] md:h-[356px]">
           <div className="absolute z-10 h-full w-full rounded-md bg-black opacity-20"></div>
