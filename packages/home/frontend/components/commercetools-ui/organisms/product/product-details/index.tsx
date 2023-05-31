@@ -198,7 +198,10 @@ const ProductDetails: FC<ProductDetailsProps> = ({
 
       {!inModalVersion && (
         <div className="grid gap-y-34 md:col-span-7 md:mb-50 md:pr-20 lg:col-span-8 lg:pr-52">
-          <AdditionalInfo productspec={variant?.attributes?.productspec} description={product?.description} />
+          <AdditionalInfo
+            productspec={variant?.attributes?.productspec}
+            description={variant.attributes?.['product-description']}
+          />
         </div>
       )}
     </div>
