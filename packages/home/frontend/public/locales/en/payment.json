@@ -15,5 +15,6 @@
     "delete.question": "Delete payment method?",
     "delete.warning": "This action can not be undone.",
     "card.number.error": "Please enter a valid credit card number",
-    "card.holder.error": "Insert card holder name"
+    "card.holder.error": "Insert card holder name",
+    "card.expiry.error": "Please select the card expiration date"
 }

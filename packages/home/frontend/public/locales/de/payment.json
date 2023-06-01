@@ -15,5 +15,6 @@
     "delete.question": "Zahlungsmethode löschen?",
     "delete.warning": "Diese Aktion kann nicht rückgängig gemacht werden.",
     "card.number.error": "Bitte geben Sie eine gültige Kreditkartennummer ein",
-    "card.holder.error": "Karteninhabernamen eingeben"
+    "card.holder.error": "Karteninhabernamen eingeben",
+    "card.expiry.error": "Bitte wählen Sie das Ablaufdatum der Karte aus"
 }
