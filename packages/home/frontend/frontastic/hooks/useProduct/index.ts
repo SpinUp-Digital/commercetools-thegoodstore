@@ -3,6 +3,7 @@ import { ProductQuery } from '@commercetools/frontend-domain-types/query/Product
 import useSWR from 'swr';
 import { sdk } from 'sdk';
 import { Category } from 'types/category';
+import { Inventory } from 'types/inventory';
 import { revalidateOptions } from 'frontastic';
 import { UseProductReturn } from './types';
 
@@ -36,7 +37,12 @@ const useProduct = (): UseProductReturn => {
     // return { data: res, isError: false } as SDKResponse<Result>;
   }, []);
 
-  return { categories, query };
+  const getInventory = useCallback(async (sku: string) => {
+    const response = await sdk.callAction({ actionName: 'product/getInventory', query: { sku } });
+    return (response.isError ? {} : response.data) as Inventory;
+  }, []);
+
+  return { categories, query, getInventory };
 };
 
 export default useProduct;

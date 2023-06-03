@@ -60,7 +60,7 @@ const Search: React.FC<Props> = ({ categories }) => {
 
       {focused && <Overlay />}
 
-      <div className="relative z-[300]">
+      <div className="relative z-[300] lg:px-20">
         <SearchBox
           onFocus={onFocus}
           onBlur={onBlur}

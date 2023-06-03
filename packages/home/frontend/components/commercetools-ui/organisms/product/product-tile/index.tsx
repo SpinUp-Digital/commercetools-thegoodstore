@@ -135,7 +135,7 @@ const ProductTile: FC<ProductTileProps> = ({
           <div className="w-full text-center">
             {!selectedVariant.isOnStock && (
               <div className="mb-8 ml-8">
-                <OutOfStock restockableInDays={selectedVariant.restockableInDays} />
+                <OutOfStock variant={selectedVariant} />
               </div>
             )}
           </div>
@@ -151,19 +151,24 @@ const ProductTile: FC<ProductTileProps> = ({
             </div>
             {!disableVariants && (
               <div className="mt-8 flex items-center gap-4 md:mt-12">
-                {product?.variants.map((variant, index) => (
-                  <span
-                    key={index}
-                    className={`block cursor-pointer rounded-full border p-[6px] ${
-                      variant.sku !== selectedVariant.sku ? 'border-neutral-300' : 'border-neutral-500'
-                    }`}
-                    style={{ backgroundColor: variant.attributes?.color || variant.attributes?.finish }}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setSelectedVariant(variant);
-                    }}
-                  ></span>
-                ))}
+                {product?.variants
+                  .filter(
+                    (variant, index, arr) =>
+                      arr.findIndex((v) => v.attributes?.color === variant.attributes?.color) === index,
+                  )
+                  .map((variant, index) => (
+                    <span
+                      key={index}
+                      className={`block cursor-pointer rounded-full border p-[6px] ${
+                        variant.sku !== selectedVariant.sku ? 'border-neutral-300' : 'border-neutral-500'
+                      }`}
+                      style={{ backgroundColor: variant.attributes?.color || variant.attributes?.finish }}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setSelectedVariant(variant);
+                      }}
+                    ></span>
+                  ))}
               </div>
             )}
             <div className="mt-8 md:mt-12">

@@ -27,7 +27,11 @@ export interface ColorFacet extends Omit<TermFacet, 'type'> {
   type: 'color';
 }
 
-export type FacetConfiguration = RangeFacet | TermFacet | ColorFacet;
+export interface BooleanFacet extends Omit<TermFacet, 'type'> {
+  type: 'boolean';
+}
+
+export type FacetConfiguration = RangeFacet | TermFacet | ColorFacet | BooleanFacet;
 
 export interface PriceConfigurationRange {
   min: number;

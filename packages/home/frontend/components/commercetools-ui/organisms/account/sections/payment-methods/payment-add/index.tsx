@@ -27,21 +27,9 @@ const PaymentAdd = () => {
         </Typography>
       </div>
 
-      <div className="mt-0 w-full px-16 py-0 md:px-24 lg:mt-36 lg:w-[800px] lg:rounded-md lg:border lg:px-24 lg:py-32">
+      <div className="mt-0 w-full px-16 py-0 md:px-24 lg:mt-36 lg:w-[65%] lg:rounded-md lg:border lg:px-24 lg:py-32">
         <div className="mt-24 md:w-[375px] lg:mt-0">
-          <Typography as="label" medium fontSize={14} className="text-secondary-black">
-            {formatPaymentMessage({ id: 'card.holder', defaultMessage: 'Card holder *' })}
-          </Typography>
-          <Input
-            name="holderName"
-            value={paymentAddData.cardHolder}
-            className="mt-8 sm:px-8"
-            labelPosition="inline"
-            onChange={paymentAddData.handleCardHolderChange}
-            error={paymentAddData.cardHolderError}
-          />
-
-          <div className="relative mt-16 lg:mt-12">
+          <div className="relative">
             <Typography as="label" medium fontSize={14} className="text-secondary-black">
               {formatPaymentMessage({ id: 'card.number', defaultMessage: 'Card number *' })}
             </Typography>
@@ -51,7 +39,11 @@ const PaymentAdd = () => {
               labelPosition="inline"
               type="text"
               onChange={paymentAddData.handleCardNumberChange}
-              error={paymentAddData.cardNumberError}
+              validation={paymentAddData.isCardNumber}
+              errorMessage={formatPaymentMessage({
+                id: 'card.number.error',
+                defaultMessage: 'Please insert all 16 numbers',
+              })}
             />
             {resolveCCImage(paymentAddData.cardNumberFormatted) && (
               // eslint-disable-next-line
@@ -62,7 +54,7 @@ const PaymentAdd = () => {
             )}
           </div>
 
-          <div className="mt-16 w-full flex-col gap-8 md:max-w-[436px] lg:mt-12 lg:flex lg:flex-row">
+          <div className="mt-24 w-full flex-col gap-8 md:max-w-[436px] lg:mt-12 lg:flex lg:flex-row">
             <div className="w-full lg:w-[60%]">
               <Typography as="label" fontSize={14} medium className="text-secondary-black">
                 {formatPaymentMessage({ id: 'expiration.date', defaultMessage: 'Expiration date *' })}

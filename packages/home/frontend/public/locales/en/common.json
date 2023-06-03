@@ -68,5 +68,12 @@
   "view.all": "View All",
   "optional": "Optional",
   "powered": "Powered by commercetools",
-  "quick.view": "Quick view"
+  "quick.view": "Quick view",
+  "years": "years",
+  "months": "months",
+  "weeks": "weeks",
+  "days": "days",
+  "hours": "hours",
+  "minutes": "minutes",
+  "seconds": "seconds"
 }

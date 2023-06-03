@@ -7,7 +7,6 @@ import { useFormat } from 'helpers/hooks/useFormat';
 import PaymentCard from './payment-card';
 export interface Payment {
   id: string;
-  cardHolder: string;
   cardNumber: string;
   cardExpiryMonth: Option;
   cardExpiryYear: Option;
@@ -16,21 +15,18 @@ export interface Payment {
 export const payments: Payment[] = [
   {
     id: '1',
-    cardHolder: 'Ahmed Amir',
     cardNumber: '4646464646464644',
     cardExpiryMonth: { name: '03', value: '03' },
     cardExpiryYear: { name: '27', value: '27' },
   },
   {
     id: '2',
-    cardHolder: 'Ahmed George',
     cardNumber: '4988438843884305',
     cardExpiryMonth: { name: '03', value: '03' },
     cardExpiryYear: { name: '25', value: '25' },
   },
   {
     id: '3',
-    cardHolder: 'Dio Brando',
     cardNumber: '5555444433337777',
     cardExpiryMonth: { name: '03', value: '03' },
     cardExpiryYear: { name: '30', value: '30' },
@@ -61,7 +57,7 @@ const PaymentMethods = () => {
       </div>
       <Button
         variant="primary"
-        onClick={() => router.push('/account#add-payment')}
+        onClick={() => router.push('/account#payment/add')}
         className="mt-24 min-w-full md:min-w-[150px] lg:mt-36 lg:min-w-[200px]"
       >
         {formatPaymentMessage({

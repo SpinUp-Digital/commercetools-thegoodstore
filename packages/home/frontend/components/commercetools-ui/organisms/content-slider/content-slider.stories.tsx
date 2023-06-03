@@ -1,7 +1,8 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
 import Typography from 'components/commercetools-ui/atoms/typography';
-import ContentSlider, { ContentSliderProps } from '.';
+import ContentSlider from '.';
+import { ContentSliderProps } from './types';
 
 export default {
   title: 'Components/Content Slider',

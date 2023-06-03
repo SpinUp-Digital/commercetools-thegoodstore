@@ -19,6 +19,7 @@ const PaymentDelete: FC<Props> = ({ modalIsOpen, closeModal, handleCancelClick, 
   return (
     <Modal
       shouldCloseOnOverlayClick
+      preventScroll
       isOpen={modalIsOpen}
       style={{ content: { width: 400, height: 280, overflow: 'hidden' } }}
       contentLabel={formatMessage({ id: 'quick.view', defaultMessage: 'Quick view' })}

@@ -1,5 +1,6 @@
 import React from 'react';
-import ContentSlider, { ContentSliderProps } from 'components/commercetools-ui/organisms/content-slider';
+import ContentSlider from 'components/commercetools-ui/organisms/content-slider';
+import { ContentSliderProps } from 'components/commercetools-ui/organisms/content-slider/types';
 
 interface Props {
   data: ContentSliderProps;

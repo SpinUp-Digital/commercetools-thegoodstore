@@ -2,7 +2,7 @@ import { FC, useMemo } from 'react';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import useTouchDevice from 'helpers/hooks/useTouchDevice';
-import { mediumDesktop, tablet } from 'helpers/utils/screensizes';
+import { mobile, desktop, mediumDesktop, tablet } from 'helpers/utils/screensizes';
 import Wrapper from '../../../HOC/wrapper';
 import Slider from '../../atoms/slider';
 import Subtitle from '../../atoms/subtitle';
@@ -11,17 +11,16 @@ import { ContentSliderProps } from './types';
 
 const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
   const [isDesktopSize] = useMediaQuery(mediumDesktop);
-  const [isTablet] = useMediaQuery(tablet);
 
   const { isTouchDevice } = useTouchDevice();
 
   const slidesElement = useMemo(
-    () => slides.map((slide, index) => <ContentSliderSlide key={index} {...slide} />),
+    () => slides.map((slide) => <ContentSliderSlide key={slide.title} {...slide} />),
     [slides],
   );
 
   return (
-    <Wrapper>
+    <Wrapper clearDefaultStyles className="pl-16 md:pl-24 lg:pl-48 xl:px-48">
       {title && (
         <Typography className="mb-12 md:text-22 lg:text-28" fontSize={20} as="h3" fontFamily="libre">
           {title}
@@ -36,10 +35,20 @@ const ContentSlider: FC<ContentSliderProps> = ({ title, subtitle, slides }) => {
             dots={false}
             solidArrows
             arrows={!isTouchDevice}
-            slideWidth={isTablet ? 400 : 246}
             allowTouchMove={isTouchDevice}
             nextButtonStyles={{ transform: 'translateY(-150%)', right: '10px' }}
             prevButtonStyles={{ transform: 'translateY(-150%)', left: '10px' }}
+            breakpoints={{
+              [mobile]: {
+                slidesPerView: 1.2,
+              },
+              [tablet]: {
+                slidesPerView: 2,
+              },
+              [desktop]: {
+                slidesPerView: 2.2,
+              },
+            }}
           >
             {slidesElement}
           </Slider>

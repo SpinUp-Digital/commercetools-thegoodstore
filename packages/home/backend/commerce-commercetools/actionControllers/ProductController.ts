@@ -5,6 +5,7 @@ import { ProductQueryFactory } from '../utils/ProductQueryFactory';
 import { ProductQuery } from '@commercetools/frontend-domain-types/query/ProductQuery';
 import { CategoryQuery } from '../interfaces/CategoryQuery';
 import { getLocale } from '../utils/Request';
+import { ResponseAdditionalData3DSecure } from '@adyen/api-library/lib/src/typings/checkout/responseAdditionalData3DSecure';
 
 type ActionHook = (request: Request, actionContext: ActionContext) => Promise<Response>;
 
@@ -81,6 +82,22 @@ export const searchableAttributes: ActionHook = async (request: Request, actionC
   const response: Response = {
     statusCode: 200,
     body: JSON.stringify(result),
+    sessionData: request.sessionData,
+  };
+
+  return response;
+};
+
+export const getInventory: ActionHook = async (request: Request, actionContext: ActionContext) => {
+  const productApi = new ProductApi(actionContext.frontasticContext, getLocale(request));
+
+  const sku = request.query.sku;
+
+  const data = await productApi.getInventory(sku);
+
+  const response: Response = {
+    statusCode: 200,
+    body: JSON.stringify(data),
     sessionData: request.sessionData,
   };
 

@@ -12,6 +12,7 @@ import {
   FacetConfiguration,
   PriceConfiguration,
 } from 'components/commercetools-ui/organisms/product/product-list/types';
+import { useFormat } from 'helpers/hooks/useFormat';
 import { Category } from 'types/category';
 import { Tastic } from 'types/tastic';
 
@@ -37,6 +38,8 @@ export type Props = Tastic<
 
 const ProductListWrapped: React.FC<Props> = ({ data, categories }) => {
   const { query } = useRouter();
+
+  const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
   const { updatePricesConfiguration, updateFacetsConfiguration, updateUiState, slug, searchQuery } = useProductList();
 
@@ -80,7 +83,14 @@ const ProductListWrapped: React.FC<Props> = ({ data, categories }) => {
           (facet as TermFacet).terms = (facet as TermFacet).terms.map((term) => ({
             ...term,
             label: categories.find((c) => c.categoryId === term.key)?.name ?? '',
-            count: 0,
+          }));
+        } else if (facet.type === 'boolean') {
+          (facet as TermFacet).terms = (facet as TermFacet).terms.map((term) => ({
+            ...term,
+            label:
+              term.key === 'T'
+                ? externalFacetsConfiguration[facet.key].label
+                : formatProductMessage({ id: 'regular', defaultMessage: 'Regular' }),
           }));
         }
 
@@ -97,7 +107,7 @@ const ProductListWrapped: React.FC<Props> = ({ data, categories }) => {
         }),
         {},
       );
-  }, [data.data?.dataSource?.facets, externalFacetsConfiguration, categories]);
+  }, [data.data?.dataSource?.facets, externalFacetsConfiguration, categories, formatProductMessage]);
 
   useEffect(() => {
     updateFacetsConfiguration(facetsConfiguration);

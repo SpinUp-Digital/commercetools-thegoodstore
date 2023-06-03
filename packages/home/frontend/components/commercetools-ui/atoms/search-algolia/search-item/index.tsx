@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { Product } from '@commercetools/frontend-domain-types/product/Product';
 // import { Variant } from 'types/product';
 import { Hit } from 'instantsearch.js';
-import { Highlight, useHits } from 'react-instantsearch-hooks-web';
+import { Highlight } from 'react-instantsearch-hooks-web';
 import { AUTOCOMPLETE_PRODUCT_CLICKED } from 'helpers/constants/events';
 // import useVariantWithDiscount from 'helpers/hooks/useVariantWithDiscount';
 import { Category } from 'types/category';
@@ -29,16 +29,13 @@ const SearchItem: React.FC<Props> = ({ hit, categories, onClick }) => {
   const variant = useMemo(() => hit.variants?.[0], [hit]);
   // const discountedVariant = useVariantWithDiscount(hit.variants as Partial<Variant>[]);
 
-  const { sendEvent } = useHits();
-
   const handleClick = useCallback(() => {
     onClick?.();
 
-    sendEvent('click', hit, AUTOCOMPLETE_PRODUCT_CLICKED);
     gtag('event', AUTOCOMPLETE_PRODUCT_CLICKED, hit);
 
     router.push(hit._url ?? '#');
-  }, [hit, sendEvent, onClick, router]);
+  }, [hit, onClick, router]);
 
   return (
     <Link link={hit._url} onMouseUp={handleClick}>

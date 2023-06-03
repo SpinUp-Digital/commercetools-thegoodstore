@@ -13,7 +13,7 @@ type ProductInformationProps = Omit<ProductDetailsProps, 'onAddToCart'>;
 const ProductInformation: FC<ProductInformationProps> = ({ product, variant, onChangeVariant, inModalVersion }) => {
   const router = useRouter();
 
-  const attributesToDisplay = ['color', 'finish'];
+  const attributesToDisplay = ['color', 'finish', 'size'];
 
   const discountPercentage =
     variant.discountedPrice &&
@@ -21,8 +21,8 @@ const ProductInformation: FC<ProductInformationProps> = ({ product, variant, onC
       (variant.price?.centAmount as number)) *
       100;
 
-  const updateVariantSKU = (sku: string) => {
-    router.replace(`${router.asPath.split('/').slice(0, -1).join('/')}/${sku}`, undefined, {
+  const updateVariantSKU = async (sku: string) => {
+    await router.replace(`${router.asPath.split('/').slice(0, -1).join('/')}/${sku}`, undefined, {
       shallow: true,
     });
   };
@@ -83,12 +83,12 @@ const ProductInformation: FC<ProductInformationProps> = ({ product, variant, onC
           {CurrencyHelpers.formatForCurrency(variant.price as number, router.locale)}
         </Typography>
       )}
-      {attributesToDisplay.map((attribute, index) => {
+      {attributesToDisplay.map((attribute) => {
         if (variant?.attributes?.[attribute]) {
           return (
             <ProductVariant
-              key={index}
-              className="mt-25 border-b border-b-neutral-400 pb-20"
+              key={attribute}
+              className="mt-20 border-b border-b-neutral-400 pb-20 md:mt-24"
               variants={product?.variants}
               currentVariant={variant}
               attribute={attribute}

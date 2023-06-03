@@ -50,12 +50,11 @@ const ProductListAlgolia: React.FC<Props> = ({ slug, searchQuery, categories, fa
 
         <InfiniteHits
           showPrevious={false}
-          hitComponent={({ hit, sendEvent }) => (
+          hitComponent={({ hit }) => (
             <ProductTile
               product={hit as unknown as Product}
               isSearchResult={!!searchQuery}
               onClick={() => {
-                sendEvent('click', hit, PLP_PRODUCT_CLICKED);
                 gtag('event', PLP_PRODUCT_CLICKED, hit);
               }}
             />

@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import useTouchDevice from 'helpers/hooks/useTouchDevice';
-import { mediumDesktop, tablet } from 'helpers/utils/screensizes';
+import { desktop, mediumDesktop, tablet } from 'helpers/utils/screensizes';
 import Wrapper from '../../../HOC/wrapper';
 import Slider from '../../atoms/slider';
 import Tile, { Props as TileProps } from './tile';
@@ -21,7 +21,7 @@ const CategorySlider: React.FC<Props> = ({ tiles = [] }) => {
   );
 
   return (
-    <Wrapper background="neutral-200" clearDefaultStyles className="px-8 md:px-12 lg:px-20 xl:px-48">
+    <Wrapper background="neutral-200" clearDefaultStyles className="pl-8 md:pl-12 lg:px-20 xl:px-48">
       <Slider
         containerClassName={showArrows ? 'px-48' : ''}
         slidesPerView={isTouchDevice ? 2.3 : 1.3}
@@ -30,10 +30,15 @@ const CategorySlider: React.FC<Props> = ({ tiles = [] }) => {
         arrows={showArrows}
         innerArrows
         allowTouchMove={!showArrows}
+        slidesOffsetAfter={8}
         breakpoints={{
           [tablet]: {
             spaceBetween: 12,
             slidesPerView: 2.3,
+            slidesOffsetAfter: 12,
+          },
+          [desktop]: {
+            slidesOffsetAfter: 0,
           },
           [mediumDesktop]: {
             spaceBetween: 16,

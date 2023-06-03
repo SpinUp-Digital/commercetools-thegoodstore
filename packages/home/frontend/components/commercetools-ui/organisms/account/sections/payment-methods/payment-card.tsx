@@ -17,7 +17,7 @@ const PaymentCard: FC<Props> = ({ payment }) => {
   const resolveCCImage = useResolveCCImage();
 
   const goToEdit = (payment: Payment) => {
-    router.push(`/account#edit-payment/${payment.id}`);
+    router.push(`/account#payment/edit-${payment.id}`);
   };
   return (
     <div className="mt-16 flex items-center justify-between rounded-md border px-16 py-12 lg:p-24">
@@ -25,7 +25,9 @@ const PaymentCard: FC<Props> = ({ payment }) => {
         {/* eslint-disable-next-line */}
         <img className="h-fit w-[32px]" src={resolveCCImage(payment.cardNumber)} />
         <Typography fontSize={14} className="ml-16 text-primary-black">
-          {`...${payment.cardNumber.substring(12, 16)} ${payment.cardExpiryMonth.name}/${payment.cardExpiryYear.name}`}
+          {`...${payment.cardNumber.substring(payment.cardNumber.length - 4, payment.cardNumber.length)} ${
+            payment.cardExpiryMonth.name
+          }/${payment.cardExpiryYear.name}`}
         </Typography>
       </div>
       <Button variant="ghost" onClick={() => goToEdit(payment)} className="py-0 text-primary-black hover:underline">
@@ -37,7 +39,12 @@ const PaymentCard: FC<Props> = ({ payment }) => {
         </Typography>
       </Button>
 
-      <Button variant="ghost" onClick={() => goToEdit(payment)} className="rounded-full bg-neutral-200 px-12 md:hidden">
+      <Button
+        variant="ghost"
+        size="fit"
+        onClick={() => goToEdit(payment)}
+        className="rounded-full bg-neutral-200 p-12 md:hidden"
+      >
         <PencilSquareIcon className="w-20" />
       </Button>
     </div>

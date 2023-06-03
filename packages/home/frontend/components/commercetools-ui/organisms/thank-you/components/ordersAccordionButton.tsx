@@ -8,8 +8,8 @@ type OrdersAccordionButtonProps = { order: Order };
 const OrdersAccordionButton: FC<OrdersAccordionButtonProps> = ({ order }) => {
   const hiddenItemsCount = (order?.lineItems?.length ?? 0) - 3;
   return (
-    <div className="hidden gap-20 lg:flex">
-      <div className={`grid max-h-[104px] grid-cols-3 gap-16 overflow-hidden`}>
+    <div className="hidden w-full justify-between gap-20 lg:flex">
+      <div className={`grid max-h-[104px] grid-cols-3 gap-20 overflow-hidden`}>
         {order?.lineItems?.map((lineItem) => (
           <div key={lineItem.lineItemId} className="relative h-[104px] w-[88px] shrink-0">
             <Image layout="fill" src={lineItem.variant?.images?.[0]} objectFit="contain" suffix="small" />

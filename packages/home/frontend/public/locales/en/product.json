@@ -42,6 +42,8 @@
   "cart.added": "Added to cart",
   "bought.together": "Frequently bought together",
   "more.on.way": "More on the way",
+  "expected.in": "Expected availability",
+  "available.in": "Available in",
   "expected.in.weeks": "Expected availability: {weeks} weeks",
   "expected.in.days": "Expected availability: {days} days",
   "available.in.weeks": "Available in {weeks} weeks",

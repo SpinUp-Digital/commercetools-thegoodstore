@@ -1,6 +1,6 @@
 {
   "tasticType": "commercetools/ui/category-slider",
-  "name": "Commercetools UI category slider",
+  "name": "commercetools UI category slider",
   "category": "Content",
   "icon": "card_giftcard",
   "schema": [

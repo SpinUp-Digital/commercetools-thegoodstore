@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import cloneDeep from 'lodash/cloneDeep';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import useI18n from 'helpers/hooks/useI18n';
-import { FacetConfiguration, PriceConfiguration, RangeFacet, TermFacet } from '../types';
+import { BooleanFacet, FacetConfiguration, PriceConfiguration, RangeFacet, TermFacet } from '../types';
 import { refinementRemovedEventName, refinementsClearedEventName } from './constants';
 import { ActiveRefinement, ProductListContextShape, RefinementRemovedEvent, Sort, UiState } from './types';
 
@@ -81,6 +81,10 @@ const ProductListProvider: React.FC = ({ children }) => {
               .filter((term) => term.selected)
               .forEach((term, index) => params.set(`facets[${configuration.key}][terms][${index}]`, term.key));
           }
+        } else if (configuration.type === 'boolean') {
+          configuration.terms
+            .filter((term) => term.selected)
+            .forEach((term) => params.set(`facets[${configuration.key}][boolean]`, term.key));
         }
       });
 
@@ -137,7 +141,11 @@ const ProductListProvider: React.FC = ({ children }) => {
               configuration.selected = false;
             },
           );
-        } else if (configuration.type === 'term' || configuration.type === 'color') {
+        } else if (
+          configuration.type === 'term' ||
+          configuration.type === 'color' ||
+          configuration.type === 'boolean'
+        ) {
           configuration.terms
             .filter((t) => t.selected)
             .forEach((term) => {
@@ -163,11 +171,16 @@ const ProductListProvider: React.FC = ({ children }) => {
     (attribute: string, key: string) => {
       const newFacetsConfiguration = cloneDeep(facetsConfiguration);
 
-      const facet = newFacetsConfiguration[attribute] as TermFacet;
+      const facet = newFacetsConfiguration[attribute] as TermFacet | BooleanFacet;
 
       const term = facet.terms.find((t) => t.key === key);
 
-      if (term) term.selected = !term.selected;
+      if (term) {
+        term.selected = !term.selected;
+
+        if (facet.type === 'boolean')
+          facet.terms.filter((t) => t.key !== term.key).forEach((term) => (term.selected = false));
+      }
 
       facet.selected = facet.terms.some((t) => t.selected);
 
