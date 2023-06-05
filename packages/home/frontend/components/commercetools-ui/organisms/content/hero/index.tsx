@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import Button from 'components/commercetools-ui/atoms/button';
 import Link from 'components/commercetools-ui/atoms/link';
 import Typography from 'components/commercetools-ui/atoms/typography';
@@ -13,6 +14,21 @@ export interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ image, title, subtitle, ctaLabel, ctaReference }) => {
+  const cropFocus = useMemo(() => {
+    if (image.gravity?.coordinates) {
+      const right = Math.ceil((image.gravity?.coordinates.x / (image.media?.width as number)) * 100);
+      const top = Math.ceil((image.gravity?.coordinates.y / (image.media?.height as number)) * 100);
+
+      return `right ${right.toString()}% top ${top.toString()}%`;
+    }
+
+    if (image.gravity?.mode === 'center') {
+      return 'center';
+    }
+
+    return '';
+  }, [image]);
+
   return (
     <div className="relative w-full">
       {image && (
@@ -25,6 +41,7 @@ const Hero: React.FC<HeroProps> = ({ image, title, subtitle, ctaLabel, ctaRefere
             layout="fill"
             objectFit="cover"
             className="brightness-75"
+            objectPosition={cropFocus}
           />
         </div>
       )}
