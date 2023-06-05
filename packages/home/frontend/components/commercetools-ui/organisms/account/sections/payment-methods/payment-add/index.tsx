@@ -5,6 +5,7 @@ import Input from 'components/commercetools-ui/atoms/input';
 import Select from 'components/commercetools-ui/atoms/select';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import useResolveCCImage from 'components/commercetools-ui/organisms/checkout/hooks/useResolveCCImage';
+import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useAddPaymentMethods from '../helper-hooks/useAddPaymentMethod';
 import usePaymentHelpers from '../helper-hooks/usePaymentHelpers';
@@ -15,6 +16,18 @@ const PaymentAdd = () => {
   const resolveCCImage = useResolveCCImage();
   const { expiryDateMonthOptions, expiryDateYearOptions } = usePaymentHelpers();
   const paymentAddData = useAddPaymentMethods();
+  const monthSelectButtonClassNames = useClassNames([
+    paymentAddData.dateError && paymentAddData.cardExpMonthDate.name === 'MM'
+      ? 'border-accent-red'
+      : 'border-neutral-500',
+    'relative flex h-[40px] w-full cursor-default items-center rounded-sm border  bg-white pl-12 pr-32 text-left focus:outline-none',
+  ]);
+  const yearSelectButtonClassNames = useClassNames([
+    paymentAddData.dateError && paymentAddData.cardExpYearDate.name === 'YY'
+      ? 'border-accent-red'
+      : 'border-neutral-500',
+    'relative flex h-[40px] w-full cursor-default items-center rounded-sm border  bg-white pl-12 pr-32 text-left focus:outline-none',
+  ]);
 
   return (
     <div className="ml-0 mt-20 lg:ml-44 lg:mt-40">
@@ -62,6 +75,7 @@ const PaymentAdd = () => {
               <div className="mt-8 flex grow items-center md:flex-1">
                 <div className="mr-12">
                   <Select
+                    selectButtonClassName={monthSelectButtonClassNames}
                     defaultValue={paymentAddData.cardExpMonthDate}
                     options={expiryDateMonthOptions}
                     onChange={paymentAddData.handleExpiryMonthDateChange}
@@ -70,6 +84,7 @@ const PaymentAdd = () => {
                 /
                 <div className="ml-12">
                   <Select
+                    selectButtonClassName={yearSelectButtonClassNames}
                     defaultValue={paymentAddData.cardExpYearDate}
                     options={expiryDateYearOptions}
                     onChange={paymentAddData.handleExpiryYearDateChange}
@@ -78,6 +93,11 @@ const PaymentAdd = () => {
               </div>
             </div>
           </div>
+          {paymentAddData.dateError && (
+            <Typography as="label" fontSize={12} medium className="text-accent-red">
+              {formatPaymentMessage({ id: paymentAddData.dateError, defaultMessage: paymentAddData.dateError })}
+            </Typography>
+          )}
         </div>
         <div className="mt-32 flex">
           <Button variant="secondary" className="w-[112px]" onClick={() => router.push('/account#payment')}>

@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
+import useClassNames from 'helpers/hooks/useClassNames';
 import Typography from '../typography';
 
 export interface Option {
@@ -14,9 +15,18 @@ export interface Props {
   options?: Option[];
   defaultValue?: Option;
   onChange?: (option: Option) => void;
+  selectButtonClassName?: string;
 }
 
-const Select: React.FC<Props> = ({ onChange, defaultValue, label, required, labelClassName = '', options = [] }) => {
+const Select: React.FC<Props> = ({
+  onChange,
+  defaultValue,
+  label,
+  required,
+  labelClassName = '',
+  selectButtonClassName,
+  options = [],
+}) => {
   const [selected, setSelected] = useState<Option | undefined>(defaultValue ?? options?.[0]);
 
   useEffect(() => {
@@ -31,6 +41,11 @@ const Select: React.FC<Props> = ({ onChange, defaultValue, label, required, labe
     [onChange],
   );
 
+  const buttonClassNames = useClassNames([
+    selectButtonClassName ??
+      'relative flex h-[40px] w-full cursor-default items-center rounded-sm border border-neutral-500 bg-white pl-8 pr-32 text-left focus:outline-none',
+  ]);
+
   return (
     <>
       {label && (
@@ -42,7 +57,7 @@ const Select: React.FC<Props> = ({ onChange, defaultValue, label, required, labe
       )}
       <Listbox value={selected} onChange={handleChange}>
         <div className="relative">
-          <Listbox.Button className="relative flex h-[40px] w-full cursor-default items-center rounded-sm border border-neutral-500 bg-white pl-8 pr-32 text-left focus:outline-none">
+          <Listbox.Button className={buttonClassNames}>
             <span className="text-14">{selected?.name}</span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-8">
               <ChevronDownIcon className="h-20 w-20 text-secondary-black" aria-hidden="true" />
