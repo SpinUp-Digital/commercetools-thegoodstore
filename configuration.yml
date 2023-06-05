@@ -79,6 +79,6 @@ configuration:
       newsletter: 89beb094-0bb1-4637-b057-6b23bf4fc87f
 data: {}
 languages:
-  - de_DE@EUR
-  - en_GB@GBP
-defaultLanguage: en_GB@GBP
+  - de_DE
+  - en_GB
+defaultLanguage: en_GB

@@ -1,15 +1,13 @@
 const localizationMapper = {
   en: {
-    locale: 'en_GB@GBP',
-    useCurrencyInLocale: true,
+    locale: 'en_GB',
     currency: 'GBP',
     currencyCode: '£',
     countryCode: 'GB',
     countryName: 'United Kingdom',
   },
   de: {
-    locale: 'de_DE@EUR',
-    useCurrencyInLocale: true,
+    locale: 'de_DE',
     currency: 'EUR',
     currencyCode: '€',
     countryCode: 'DE',
