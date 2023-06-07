@@ -49,11 +49,11 @@ const UtilitySection: React.FC<Props> = ({
   };
 
   return (
-    <div className="mt-12 flex h-40 items-center xl:mt-20">
-      <div className="flex w-full justify-center">
+    <div className="mt-12 flex h-40 items-center">
+      <div className="flex justify-between gap-x-8 lg:gap-x-16">
         <AccountButton />
 
-        <div className="mx-16 h-40 lg:mx-32">
+        <div className="h-40 w-fit">
           <div
             title={formatWishlistMessage({ id: 'wishlist', defaultMessage: 'Wishlist' })}
             className="relative h-fit cursor-pointer border-secondary-black pb-8 hover:border-b-2"
@@ -63,7 +63,7 @@ const UtilitySection: React.FC<Props> = ({
           </div>
         </div>
 
-        <div className="h-40">
+        <div className="h-40 w-fit">
           <div
             title={formatCartMessage({ id: 'myCart', defaultMessage: 'My Cart' })}
             className="h-fit cursor-pointer border-secondary-black pb-8 hover:border-b-2"

@@ -60,7 +60,7 @@ const Search: React.FC<Props> = ({ categories }) => {
 
       {focused && <Overlay />}
 
-      <div className="relative z-[300] lg:px-20">
+      <div className="relative z-[300] xl:px-20">
         <SearchBox
           onFocus={onFocus}
           onBlur={onBlur}
@@ -87,7 +87,7 @@ const Search: React.FC<Props> = ({ categories }) => {
 
         <Transition
           show={focused}
-          className="absolute bottom-0 left-0 max-h-[60vh] w-full translate-y-full overflow-auto bg-white px-20 py-28 lg:max-h-[unset] lg:translate-y-[calc(100%-56px)] lg:rounded-md lg:pt-84"
+          className="absolute bottom-0 left-0 max-h-[60vh] w-full translate-y-full overflow-auto bg-white px-20 py-28 xl:max-h-[unset] xl:translate-y-[calc(100%-56px)] xl:rounded-md xl:pt-84"
           enter="transition duration-75"
           enterFrom="opacity-0"
           enterTo="opacity-100"

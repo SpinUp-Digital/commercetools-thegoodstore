@@ -28,9 +28,9 @@ const MarketButton = () => {
   };
 
   return (
-    <div className="hidden justify-center lg:flex">
+    <div className="hidden w-fit justify-center lg:flex">
       {selectedMarket && (
-        <Button variant="ghost" onClick={showMarketMenu} className="flex w-fit items-center px-0 py-4">
+        <Button variant="ghost" size="fit" onClick={showMarketMenu} className="flex w-fit items-center">
           <FlagIcons flagName={selectedMarket?.flag} className="mr-3 h-16 w-24" />
           <Typography fontSize={14} className="ml-5 font-normal text-neutral-100 hover:underline">
             {selectedMarket?.region}

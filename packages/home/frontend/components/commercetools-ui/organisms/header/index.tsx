@@ -36,7 +36,7 @@ const Header: React.FC<HeaderProps> = ({
           <HeaderLogo
             logo={logo}
             logoLink={logoLink}
-            imageClassName="flex h-44 w-200 justify-center text-center text-16 font-bold md:h-76 md:w-214 md:text-28"
+            imageClassName="flex h-44 w-188 justify-center text-center text-16 font-bold md:h-76 md:w-214 md:text-28"
           />
         </div>
 
