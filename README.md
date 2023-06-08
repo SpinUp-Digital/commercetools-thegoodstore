@@ -10,9 +10,10 @@ In order to get you started quickly with your demo, you can follow those steps:
    ```bash
    cd getting-started
    ```
-2. Install dependencies
+2. Install dependencies & build the project:
    ```bash
    yarn install
+   yarn build
    ```
 3. Add a `.env` file under `getting-started` directory with your merchant center credentials.
    ```bash
