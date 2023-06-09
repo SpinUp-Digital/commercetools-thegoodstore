@@ -6,12 +6,10 @@ import 'regenerator-runtime/runtime'
 
 import commercetoolsExtension from './commerce-commercetools';
 import adyenExtension from './payment-adyen';
-import contentfulExtensions from './content-contentful';
 
 const extensionsToMerge = [
   commercetoolsExtension,
   adyenExtension,
-  contentfulExtensions,
 ] as Array<ExtensionRegistry>;
 // END: Generated extension imports
 

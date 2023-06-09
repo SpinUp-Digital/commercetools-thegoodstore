@@ -188,4 +188,3 @@ If you want to deploy your project. All you have to do is push to master and Net
 
 - [Frontastic-CLI](https://docs.frontastic.cloud/docs/frontastic-cli)
 - [Adyen setup](https://docs.commercetools.com/frontend-development/adyen)
-- [Contentful guide](https://docs.commercetools.com/frontend-development/creating-a-blog-using-contentful)
