@@ -75,7 +75,7 @@ const Address: React.FC<AddressProps> = ({ address, isDefaultAddress, selectAddr
       </div>
 
       <div onClick={(e) => e.stopPropagation()}>
-        <EditCTA editHref={`#edit-address/${address.addressId}`} />
+        <EditCTA editHref={`#addresses/address_${address.addressId}`} />
       </div>
     </div>
   );
