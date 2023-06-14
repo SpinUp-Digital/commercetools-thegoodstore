@@ -1,7 +1,7 @@
 [
   {
     "id": "11721308-ff83-4c35-9ff4-fd77f252e986",
-    "email": "saumya.goel@commercetools.com",
+    "email": "saumya.goel@example.com",
     "firstName": "Saumya",
     "lastName": "Goel",
     "password": "****MHY=",
@@ -58,7 +58,7 @@
   },
   {
     "id": "08fd0709-d76f-41c8-a0a0-b85276a4c39f",
-    "email": "saumya.goel+1@commercetools.com",
+    "email": "saumya.goel+1@example.com",
     "password": "****SsY=",
     "addresses": [],
     "shippingAddressIds": [],
@@ -69,7 +69,7 @@
   },
   {
     "id": "35e5fa3a-6d8c-4965-aee6-c537ea02a3b8",
-    "email": "saumya.goel+2@commercetools.com",
+    "email": "saumya.goel+2@example.com",
     "password": "****Ars=",
     "addresses": [],
     "shippingAddressIds": [],
@@ -80,7 +80,7 @@
   },
   {
     "id": "b36835e3-b005-4dea-a83c-591a0bc2c54e",
-    "email": "abdelrahman.khaled@commercetools.com",
+    "email": "abdelrahman.khaled@example.com",
     "firstName": "Abdu",
     "password": "****WaM=",
     "addresses": [
@@ -105,7 +105,7 @@
   },
   {
     "id": "ea716dae-3ce1-40d4-a8cf-7ef7ea306768",
-    "email": "carlos.mourullo+541@commercetools.com",
+    "email": "carlos.mourullo+541@example.com",
     "firstName": "Manley",
     "lastName": "Emard",
     "dateOfBirth": "2001-01-26",
@@ -133,7 +133,7 @@
   },
   {
     "id": "55091b7f-c0ab-4f33-86a2-94b60ffa4e46",
-    "email": "carlos.mourullo+509@commercetools.com",
+    "email": "carlos.mourullo+509@example.com",
     "firstName": "Cruz",
     "lastName": "Kub",
     "dateOfBirth": "2001-01-26",
@@ -161,7 +161,7 @@
   },
   {
     "id": "c696024d-eb2e-4d36-ae6f-cda8e453eed6",
-    "email": "carlos.mourullo+347@commercetools.com",
+    "email": "carlos.mourullo+347@example.com",
     "firstName": "Hellen",
     "lastName": "Ledner",
     "dateOfBirth": "2001-01-26",
@@ -216,7 +216,7 @@
       "clientId": "wnfsvNK4KWFIxU7z3Yfy9-WZ",
       "isPlatformClient": false
     },
-    "email": "andrius.mikalauskas@commercetools.com",
+    "email": "andrius.mikalauskas@example.com",
     "password": "****uqU=",
     "addresses": [
       {
@@ -255,7 +255,7 @@
   },
   {
     "id": "b4b5ced2-eed2-4e5e-bf81-9fce8be5210d",
-    "email": "eustace.marks@commercetools.com",
+    "email": "eustace.marks@example.com",
     "password": "****3pQ=",
     "addresses": [
       {
@@ -384,7 +384,7 @@
   },
   {
     "id": "77618e41-88ca-4722-9f6d-6cc8e40a2aca",
-    "email": "saumya.goel+98@commercetools.com",
+    "email": "saumya.goel+98@example.com",
     "password": "****QqI=",
     "addresses": [],
     "shippingAddressIds": [],
@@ -395,7 +395,7 @@
   },
   {
     "id": "6de5559b-390f-4329-80c4-39fa6526bce1",
-    "email": "carlos.mourullo+test011601@commercetools.com",
+    "email": "carlos.mourullo+test011601@example.com",
     "password": "****Qqs=",
     "addresses": [],
     "shippingAddressIds": [],
@@ -417,7 +417,7 @@
   },
   {
     "id": "e9ce71ab-83e7-4fae-af56-d2a02d94aaf0",
-    "email": "alexandra.olsson@commercetools.com",
+    "email": "alexandra.olsson@example.com",
     "firstName": "Alexandra",
     "lastName": "Olsson",
     "password": "****fy4=",
@@ -452,7 +452,7 @@
   },
   {
     "id": "dbf55cad-5121-4886-ad37-3da7e5c83398",
-    "email": "bryan.yale@commercetools.com",
+    "email": "bryan.yale@example.com",
     "password": "****cR8=",
     "addresses": [],
     "shippingAddressIds": [],
@@ -463,7 +463,7 @@
   },
   {
     "id": "caf2788f-e8ed-410c-9a8d-54108c388bec",
-    "email": "saumya.goel+18@commercetools.com",
+    "email": "saumya.goel+18@example.com",
     "firstName": "Saumya",
     "password": "****c4c=",
     "addresses": [],
@@ -475,7 +475,7 @@
   },
   {
     "id": "1571e5bc-e8a7-4c1c-8b23-1cc047c8dfac",
-    "email": "saumya.goel+19@commercetools.com",
+    "email": "saumya.goel+19@example.com",
     "password": "****bcs=",
     "addresses": [],
     "shippingAddressIds": [],
@@ -486,7 +486,7 @@
   },
   {
     "id": "020b747c-024b-4957-bfcf-75d045be83c2",
-    "email": "saumya.goel+20@commercetools.com",
+    "email": "saumya.goel+20@example.com",
     "firstName": "Saumya Goel",
     "password": "****4PM=",
     "addresses": [],
@@ -498,7 +498,7 @@
   },
   {
     "id": "a75cbec9-067c-4174-a841-4a8e9d280ad4",
-    "email": "carlos.mourullo+testthegoodstore01@commercetools.com",
+    "email": "carlos.mourullo+testthegoodstore01@example.com",
     "password": "****gMw=",
     "addresses": [],
     "shippingAddressIds": [],
@@ -589,7 +589,7 @@
   },
   {
     "id": "f54f5d56-2e06-43f1-83d3-febb2685d40d",
-    "email": "saumya.goel+76@commercetools.com",
+    "email": "saumya.goel+76@example.com",
     "firstName": "Saumya Goel",
     "password": "****+Fk=",
     "addresses": [],
@@ -602,7 +602,7 @@
   },
   {
     "id": "e9b6dee7-40d1-480a-9599-46481524a04d",
-    "email": "saumya.goel+45@commercetools.com",
+    "email": "saumya.goel+45@example.com",
     "firstName": "Saumya Go",
     "password": "****YGk=",
     "addresses": [
@@ -750,7 +750,7 @@
   },
   {
     "id": "c80a7780-71af-4a37-bdc3-1ce809f2f488",
-    "email": "justus.nagel@commercetools.com",
+    "email": "justus.nagel@example.com",
     "firstName": "Justus Nagel",
     "password": "****teU=",
     "addresses": [
@@ -855,7 +855,7 @@
   },
   {
     "id": "4f977b62-8c0e-4049-811b-67ced7b0d487",
-    "email": "philipp.hofmann@commercetools.com",
+    "email": "philipp.hofmann@example.com",
     "firstName": "Philipp Hofmann",
     "password": "****asw=",
     "addresses": [
@@ -880,7 +880,7 @@
   },
   {
     "id": "4da6500c-17b0-4921-8394-505ad3cd4c6a",
-    "email": "saumya.goel+78@commercetools.com",
+    "email": "saumya.goel+78@example.com",
     "firstName": "Saumya",
     "lastName": "Goel",
     "password": "****3Jg=",
@@ -905,7 +905,7 @@
   },
   {
     "id": "3ea41ed8-7189-4b8c-a820-2e1d17edea8f",
-    "email": "saumya.goel+64@commercetools.com",
+    "email": "saumya.goel+64@example.com",
     "firstName": "Saumya",
     "lastName": "Goel",
     "password": "****5+A=",
@@ -947,7 +947,7 @@
   },
   {
     "id": "a53b821c-7e9c-4251-969e-4e49684be0db",
-    "email": "andriusmikalauskas@commercetools.com",
+    "email": "andriusmikalauskas@example.com",
     "firstName": "Andrius",
     "lastName": "Mikalauskas",
     "password": "****M/g=",
@@ -961,7 +961,7 @@
   },
   {
     "id": "e6edd39a-d143-490c-8dab-972e2d98df4d",
-    "email": "praveen.kumar@commercetools.com",
+    "email": "praveen.kumar@example.com",
     "firstName": "Praveen Kumar",
     "lastName": "Venkateshappa",
     "password": "****pQI=",
@@ -975,7 +975,7 @@
   },
   {
     "id": "d7084395-71cc-454c-9122-04decf55c088",
-    "email": "saumya.goel+876@commercetools.com",
+    "email": "saumya.goel+876@example.com",
     "firstName": "Saumya",
     "lastName": "Goel",
     "password": "****IuY=",
@@ -989,7 +989,7 @@
   },
   {
     "id": "59d62eca-7a5f-431c-be21-1780152bcea5",
-    "email": "saumya.goel+22@commercetools.com",
+    "email": "saumya.goel+22@example.com",
     "firstName": "Saumya",
     "lastName": "Goel",
     "password": "****vT8=",
@@ -1025,7 +1025,7 @@
   },
   {
     "id": "490fac4c-855f-49a4-bd2b-cbcf44ef3464",
-    "email": "andrius.mikalauskas+2@commercetools.com",
+    "email": "andrius.mikalauskas+2@example.com",
     "firstName": "Andrius",
     "lastName": "Mikalauskas",
     "password": "****TxM=",
@@ -1039,7 +1039,7 @@
   },
   {
     "id": "c0437a3d-5f99-41c6-8c7d-655c9a762cc9",
-    "email": "andrius.mikalauskas+3@commercetools.com",
+    "email": "andrius.mikalauskas+3@example.com",
     "firstName": "Andrius",
     "lastName": "Mikalauskas",
     "password": "****iJA=",
@@ -1064,7 +1064,7 @@
   },
   {
     "id": "a0580e73-a5bd-4902-85d7-52247eaf534d",
-    "email": "andrius.mikalauskas+4@commercetools.com",
+    "email": "andrius.mikalauskas+4@example.com",
     "firstName": "Andrius",
     "lastName": "Mikalauskas",
     "password": "****R0Y=",
@@ -1078,7 +1078,7 @@
   },
   {
     "id": "761e52b9-79c6-4466-accc-abfd7bfe72f4",
-    "email": "andrius.mikalauskas+5@commercetools.com",
+    "email": "andrius.mikalauskas+5@example.com",
     "firstName": "Andrius",
     "lastName": "Mikalauskas",
     "password": "****Nts=",
@@ -1092,7 +1092,7 @@
   },
   {
     "id": "c562b26a-660f-4e1c-8876-38137fbe151c",
-    "email": "andrius.mikalauskas+6@commercetools.com",
+    "email": "andrius.mikalauskas+6@example.com",
     "firstName": "Andrius",
     "lastName": "Mikalauskas",
     "password": "****6GU=",
@@ -1106,7 +1106,7 @@
   },
   {
     "id": "9971e6bd-3cda-4d29-bd19-6f7607a9e26e",
-    "email": "andrius.mikalauskas+7@commercetools.com",
+    "email": "andrius.mikalauskas+7@example.com",
     "firstName": "Andrius",
     "lastName": "Mikalauskas",
     "password": "****o68=",
@@ -1120,7 +1120,7 @@
   },
   {
     "id": "4c05f974-0cda-47ee-84e9-991538700a0b",
-    "email": "andrius.mikalauskas+8@commercetools.com",
+    "email": "andrius.mikalauskas+8@example.com",
     "firstName": "Andrius",
     "lastName": "Mikalauskas",
     "password": "****VTc=",
@@ -1134,7 +1134,7 @@
   },
   {
     "id": "90d06a20-5780-488d-85e6-e998183ed5ce",
-    "email": "andrius.mikalauskas+9@commercetools.com",
+    "email": "andrius.mikalauskas+9@example.com",
     "firstName": "Andrius",
     "lastName": "Mikalauskas",
     "password": "****qL0=",
@@ -1148,7 +1148,7 @@
   },
   {
     "id": "be37a05d-70b3-4e64-acc3-b5d86605374a",
-    "email": "yizhuang.chew@commercetools.com",
+    "email": "yizhuang.chew@example.com",
     "firstName": "yizhuang",
     "lastName": "chew",
     "password": "****lis=",
@@ -1253,7 +1253,7 @@
   },
   {
     "id": "edda0454-3153-40bf-9dd9-e5bb64487d02",
-    "email": "daniel.strassenburg@commercetools.com",
+    "email": "daniel.strassenburg@example.com",
     "firstName": "Daniel",
     "lastName": "Strassenburg",
     "password": "****WT0=",
@@ -1342,7 +1342,7 @@
       "isPlatformClient": false
     },
     "customerNumber": "9837492382343209488923749837264823764",
-    "email": "nate.holland@commercetools.com",
+    "email": "nate.holland@example.com",
     "firstName": "Nate",
     "lastName": "Holland",
     "middleName": "",
@@ -1381,7 +1381,7 @@
   },
   {
     "id": "150f0530-df2d-4614-92d0-20aaa28fb806",
-    "email": "saumya.goel+67@commercetools.com",
+    "email": "saumya.goel+67@example.com",
     "firstName": "Saumya",
     "lastName": "Goel",
     "password": "****OgI=",
@@ -1394,7 +1394,7 @@
   },
   {
     "id": "f284780a-7c2b-41cc-a20e-a99946b688e7",
-    "email": "saumya.goel+66@commercetools.com",
+    "email": "saumya.goel+66@example.com",
     "firstName": "Saumya",
     "lastName": "Goel",
     "password": "****xlk=",
@@ -1445,7 +1445,7 @@
   },
   {
     "id": "2b4c0848-b5ac-4663-a302-d9e91a55c1a4",
-    "email": "pallavi.verma@commercetools.com",
+    "email": "pallavi.verma@example.com",
     "firstName": "test",
     "lastName": "test",
     "password": "****XEU=",
@@ -1498,7 +1498,7 @@
   },
   {
     "id": "0870998b-90b0-4be6-9f1a-ece2d2ecddeb",
-    "email": "saumya.goel+13@commercetools.com",
+    "email": "saumya.goel+13@example.com",
     "firstName": "sadsad",
     "lastName": "sadada",
     "password": "****3es=",
@@ -1548,7 +1548,7 @@
   },
   {
     "id": "f39479e2-81b4-4fbf-9462-3b476ae02956",
-    "email": "saumya.goel+25@commercetools.com",
+    "email": "saumya.goel+25@example.com",
     "firstName": "Saumya",
     "lastName": "Goel",
     "password": "****EAM=",
@@ -1607,7 +1607,7 @@
   },
   {
     "id": "2d56beff-0d19-4026-a639-3ba34c73dfeb",
-    "email": "bruno.jesus@commercetools.com",
+    "email": "bruno.jesus@example.com",
     "firstName": "Bruno",
     "lastName": "Jesus",
     "password": "****stE=",
@@ -1889,7 +1889,7 @@
   },
   {
     "id": "37277ce5-e044-4eed-a934-0cb8b87e8e75",
-    "email": "saumya.goel+21@commercetools.com",
+    "email": "saumya.goel+21@example.com",
     "firstName": "Saumya",
     "lastName": "Goel",
     "password": "****wxU=",

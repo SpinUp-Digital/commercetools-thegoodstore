@@ -15,24 +15,35 @@ export class EmailApi implements BaseEmailApi {
   configuration: {
     sender: string;
     clientHost: string;
-    templateIds: Record<string, string>;
-    listIds: Record<string, string>;
+    templateIds: Record<
+      'welcomeCustomer' | 'accountDeletion' | 'passwordReset' | 'orderConfirmation' | 'accountVerification',
+      string
+    >;
+    listIds: Record<'newsletter', string>;
   };
 
   constructor(frontasticContext: Context, locale?: string) {
     this.client = SendgridClient;
     this.emailClient = SendgridEmailClient;
 
-    this.client.setApiKey(frontasticContext.project.configuration.sendgrid.apiKey);
-    this.emailClient.setApiKey(frontasticContext.project.configuration.sendgrid.apiKey);
+    this.client.setApiKey(frontasticContext.projectConfiguration.EXTENSION_SENDGRID_API_KEY);
+    this.emailClient.setApiKey(frontasticContext.projectConfiguration.EXTENSION_SENDGRID_API_KEY);
 
     this.locale = locale;
 
     this.configuration = {
-      sender: frontasticContext.project.configuration.sendgrid.sender,
-      clientHost: frontasticContext.project.configuration.sendgrid.client_host,
-      templateIds: frontasticContext.project.configuration.sendgrid.templateIds,
-      listIds: frontasticContext.project.configuration.sendgrid.listIds,
+      sender: frontasticContext.projectConfiguration.EXTENSION_SENDGRID_SENDER,
+      clientHost: frontasticContext.projectConfiguration.EXTENSION_SENDGRID_CLIENT_HOST,
+      templateIds: {
+        welcomeCustomer: frontasticContext.projectConfiguration.EXTENSION_SENDGRID_TEMPLATE_WELCOME_CUSTOMER,
+        accountVerification: frontasticContext.projectConfiguration.EXTENSION_SENDGRID_TEMPLATE_ACCOUNT_VERIFICATION,
+        passwordReset: frontasticContext.projectConfiguration.EXTENSION_SENDGRID_TEMPLATE_PASSWORD_RESET,
+        accountDeletion: frontasticContext.projectConfiguration.EXTENSION_SENDGRID_TEMPLATE_ACCOUNT_DELETION,
+        orderConfirmation: frontasticContext.projectConfiguration.EXTENSION_SENDGRID_TEMPLATE_ORDER_CONFIRMATION,
+      },
+      listIds: {
+        newsletter: frontasticContext.projectConfiguration.EXTENSION_SENDGRID_LIST_NEWSLETTER,
+      },
     };
   }
 
@@ -160,7 +171,7 @@ export class EmailApi implements BaseEmailApi {
       body: { emails: [account.email] },
     });
 
-    const contact = (Object.values(contactBody.result)[0] as any).contact;
+    const contact = (Object.values(contactBody.result)[0] as { contact: { id: string } }).contact;
 
     const [deleteResponse, deleteBody] = await this.client.request({
       url: `/v3/marketing/lists/${this.configuration.listIds[list]}/contacts`,
