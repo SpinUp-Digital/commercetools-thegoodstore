@@ -25,6 +25,7 @@ export const parameters = {
     storySort: {
       order: ['Style guide', '*'],
     },
+    showPanel: false,
   },
 };
 
