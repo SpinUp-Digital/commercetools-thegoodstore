@@ -18,7 +18,7 @@ import usePaymentTestData from './hooks/usePaymentTestData';
 
 export const AdyenContext = React.createContext<PaymentProvider>({} as PaymentProvider);
 
-const AdyenPaymentProvider: React.FC<React.PropsWithChildren<object>> = ({ children }) => {
+const AdyenPaymentProvider: React.FC = ({ children }) => {
   const adyen = useAdyen();
 
   const paymentTestData = usePaymentTestData();

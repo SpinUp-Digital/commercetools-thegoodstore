@@ -15,7 +15,7 @@ type Props = {
   handleCategoryClick?: () => void;
 };
 
-export const EmptyState: React.FC<React.PropsWithChildren<Props>> = ({
+export const EmptyState: React.FC<Props> = ({
   image,
   title,
   subtitle,
@@ -32,7 +32,7 @@ export const EmptyState: React.FC<React.PropsWithChildren<Props>> = ({
       </Typography>
       <div className="hidden w-full justify-center md:flex">
         <div className="relative h-92 w-197 px-10 text-center md:mb-120 md:mt-55">
-          <Image media={image?.media} fill style={{ objectFit: 'contain' }} alt={image?.title} />
+          <Image media={image?.media} layout="fill" objectFit="contain" alt={image?.title} />
         </div>
       </div>
       <ul className="mt-55 flex flex-col items-center gap-y-20">

@@ -9,7 +9,7 @@ interface Props {
   price?: Money;
 }
 
-const Prices: React.FC<React.PropsWithChildren<Props>> = ({ price, discountedPrice }) => {
+const Prices: React.FC<Props> = ({ price, discountedPrice }) => {
   const { locale } = useRouter();
 
   return (

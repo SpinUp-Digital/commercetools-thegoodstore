@@ -9,7 +9,7 @@ export interface Props {
   target?: Reference;
 }
 
-const AnnouncementBar: React.FC<React.PropsWithChildren<Props>> = ({ text, highlightedSubstring, target }) => {
+const AnnouncementBar: React.FC<Props> = ({ text, highlightedSubstring, target }) => {
   const [previewText, setPreviewText] = useState({ prefix: text, middle: '', suffix: '' });
 
   const processHighlighting = useCallback(() => {
@@ -45,7 +45,7 @@ const AnnouncementBar: React.FC<React.PropsWithChildren<Props>> = ({ text, highl
         </p>
       </div>
 
-      <div className="flex h-full w-full items-center justify-end pr-48">
+      <div className="flex h-full w-full items-center justify-end pr-20 xl:pr-48">
         <MarketButton />
       </div>
     </div>

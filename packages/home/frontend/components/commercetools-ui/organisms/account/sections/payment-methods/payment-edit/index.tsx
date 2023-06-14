@@ -13,14 +13,18 @@ import useCardNumberFormatter from '../helper-hooks/useFormatCredit';
 import usePaymentHelpers from '../helper-hooks/usePaymentHelpers';
 import PaymentDelete from '../payment-delete';
 
-const PaymentEdit: React.FC<React.PropsWithChildren<object>> = () => {
+const PaymentEdit = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_, hashId] = useHash();
   const router = useRouter();
-  // eslint-disable-next-line
-  const [_hash, id] = useHash();
+
+  const id = hashId?.split('-')[1];
+
   const { formatMessage: formatPaymentMessage } = useFormat({ name: 'payment' });
   const paymentEditData = useEditPaymentMethods(id as string);
 
   const { expiryDateMonthOptions, expiryDateYearOptions } = usePaymentHelpers();
+
   const cardNumberFormatted = useCardNumberFormatter(paymentEditData.cardNumber ?? '');
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -85,7 +89,7 @@ const PaymentEdit: React.FC<React.PropsWithChildren<object>> = () => {
                 <div className="mr-12">
                   <Select
                     defaultValue={paymentEditData.cardExpMonthDate}
-                    options={expiryDateMonthOptions}
+                    options={expiryDateMonthOptions.slice(1)}
                     onChange={paymentEditData.handleExpiryDateMonthChange}
                   />
                 </div>
@@ -93,7 +97,7 @@ const PaymentEdit: React.FC<React.PropsWithChildren<object>> = () => {
                 <div className="ml-12">
                   <Select
                     defaultValue={paymentEditData.cardExpYearDate}
-                    options={expiryDateYearOptions}
+                    options={expiryDateYearOptions.slice(1)}
                     onChange={paymentEditData.handleExpiryDateYearChange}
                   />
                 </div>
@@ -102,7 +106,7 @@ const PaymentEdit: React.FC<React.PropsWithChildren<object>> = () => {
           </div>
         </div>
 
-        <div className="mt-24 flex-col justify-start pl-4 lg:mt-32 lg:flex lg:max-w-[436px] lg:flex-row lg:justify-between lg:pl-0">
+        <div className="mt-24 flex-col justify-start lg:mt-32 lg:flex lg:max-w-[436px] lg:flex-row lg:justify-between">
           <Button variant="ghost" size="fit" className="flex items-center px-0" onClick={() => setModalIsOpen(true)}>
             <TrashIcon className="w-20 text-secondary-black" />
             <Typography as="h2" align="center" fontSize={14} className="ml-8 font-normal text-secondary-black">

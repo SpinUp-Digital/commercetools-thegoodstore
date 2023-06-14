@@ -7,7 +7,7 @@ interface PersonalInformation {
   account: Account;
 }
 
-const PersonalInfo: FC<React.PropsWithChildren<PersonalInformation>> = ({ account }) => {
+const PersonalInfo: FC<PersonalInformation> = ({ account }) => {
   const { formatMessage } = useFormat({ name: 'common' });
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
 
@@ -22,7 +22,7 @@ const PersonalInfo: FC<React.PropsWithChildren<PersonalInformation>> = ({ accoun
       title={formatAccountMessage({ id: 'personal.info', defaultMessage: 'Personal information' })}
       isEditable
       infoFields={personalInformationFields}
-      editHref="#edit-personal-info"
+      editHref="#/edit-personal-info"
     />
   );
 };

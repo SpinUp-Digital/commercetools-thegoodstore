@@ -1,9 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useHits, useRange } from 'react-instantsearch-hooks-web';
-import aa from 'search-insights';
 import Checkbox from 'components/commercetools-ui/atoms/checkbox';
-import { FILTER_APPLIED } from 'helpers/constants/events';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useI18n from 'helpers/hooks/useI18n';
@@ -12,7 +10,7 @@ import { refinementRemovedEventName, refinementsClearedEventName } from '../../c
 import { RefinementRemovedEvent } from '../../context/types';
 import { FacetProps } from './types';
 
-const RangeFacet: React.FC<React.PropsWithChildren<FacetProps>> = ({ attribute }) => {
+const RangeFacet: React.FC<FacetProps> = ({ attribute }) => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
   const router = useRouter();
@@ -49,20 +47,6 @@ const RangeFacet: React.FC<React.PropsWithChildren<FacetProps>> = ({ attribute }
     if (range.min && range.max) updateNumericRange(attribute, [range.min, range.max]);
   }, [range.min, range.max, updateNumericRange, attribute]);
 
-  const sendEvent = useCallback(
-    (appliedRange: typeof priceRange) => {
-      const min = Math.max(range.min as number, appliedRange.min);
-      const max = Math.min(range.max as number, appliedRange.max);
-
-      aa('clickedFilters', {
-        eventName: FILTER_APPLIED,
-        filters: [`${attribute}:${min} TO ${max}`],
-        index: results?.index as string,
-      });
-    },
-    [results?.index, attribute, range],
-  );
-
   const applyRefinement = useCallback(
     (appliedRange: typeof priceRange) => {
       const min = Math.max(range.min as number, appliedRange.min);
@@ -94,13 +78,11 @@ const RangeFacet: React.FC<React.PropsWithChildren<FacetProps>> = ({ attribute }
 
       applyRefinement({ min: appliedRange.min * 100, max: appliedRange.max * 100 });
 
-      sendEvent({ min: appliedRange.min * 100, max: appliedRange.max * 100 });
-
       setAppliedOptions(newAppliedOptions);
 
       setPriceRange({ ...appliedRange });
     },
-    [appliedOptions, configuration, sendEvent, applyRefinement],
+    [appliedOptions, configuration, applyRefinement],
   );
 
   const clearAppliedOptions = useCallback(() => {
@@ -148,11 +130,9 @@ const RangeFacet: React.FC<React.PropsWithChildren<FacetProps>> = ({ attribute }
 
       applyRefinement({ min: priceRange.min * 100, max: priceRange.max * 100 });
 
-      sendEvent({ min: priceRange.min * 100, max: priceRange.max * 100 });
-
       clearAppliedOptions();
     },
-    [priceRange, clearAppliedOptions, applyRefinement, sendEvent],
+    [priceRange, clearAppliedOptions, applyRefinement],
   );
 
   const rangeOptions = useMemo(() => {

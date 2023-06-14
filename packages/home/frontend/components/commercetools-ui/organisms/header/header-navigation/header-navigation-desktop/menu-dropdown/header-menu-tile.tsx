@@ -9,7 +9,7 @@ export interface Props {
   tileContent: Tile;
 }
 
-const HeaderDropdownTile: FC<React.PropsWithChildren<Props>> = ({ tileContent }) => {
+const HeaderDropdownTile: FC<Props> = ({ tileContent }) => {
   const tileHeaderTextClassName = useClassNames(['text-white drop-shadow-xl pb-15', tileContent?.tileHeaderDecoration]);
   const tileButtonClassName = useClassNames(['border-b-2 drop-shadow-xl', tileContent?.tileButtonLabelDecoration]);
 
@@ -17,8 +17,8 @@ const HeaderDropdownTile: FC<React.PropsWithChildren<Props>> = ({ tileContent })
     <div className="relative mt-2 h-[265px] w-[30%] lg:hidden xl:pl-20 2xl:flex">
       <Image
         media={tileContent?.tileImage.media}
-        fill
-        style={{ objectFit: 'cover' }}
+        layout="fill"
+        objectFit="cover"
         className="brightness-75"
         alt={tileContent?.tileImage.title}
       />

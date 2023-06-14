@@ -1,23 +1,28 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Option } from 'components/commercetools-ui/atoms/select';
+import { useFormat } from 'helpers/hooks/useFormat';
 import { payments } from '..';
 import useCardNumberFormatter from './useFormatCredit';
 import usePaymentHelpers from './usePaymentHelpers';
 
 const useAddPaymentMethod = () => {
   const router = useRouter();
+  const { formatMessage: formatPaymentMessage } = useFormat({ name: 'payment' });
   const [cardNumber, setCardNumber] = useState('');
   const cardNumberFormatted = useCardNumberFormatter(cardNumber ?? '');
   const { expiryDateMonthOptions, expiryDateYearOptions, hasNumbersAndSpaces } = usePaymentHelpers();
-  const [cardExpMonthDate, setCardExpMonthDate] = useState<Option>(expiryDateMonthOptions[1]);
-  const [cardExpYearDate, setCardExpYearDate] = useState<Option>(expiryDateYearOptions[1]);
+  const [cardExpMonthDate, setCardExpMonthDate] = useState<Option>(expiryDateMonthOptions[0]);
+  const [cardExpYearDate, setCardExpYearDate] = useState<Option>(expiryDateYearOptions[0]);
+  const [dateError, setDateError] = useState('');
 
   const concatCardNumber = useMemo(() => {
     return cardNumber.replaceAll(' ', '');
   }, [cardNumber]);
 
   const isCardNumber = () => concatCardNumber.length >= 12 && concatCardNumber.length <= 19;
+
+  const monthAndYearSelected = () => cardExpMonthDate.name !== 'MM' && cardExpYearDate.name !== 'YY';
 
   const handleCardNumberChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,20 +40,29 @@ const useAddPaymentMethod = () => {
 
   const handleExpiryMonthDateChange = useCallback(
     (option: Option) => {
+      setDateError('');
       setCardExpMonthDate(option);
     },
-    [setCardExpMonthDate],
+    [setDateError, setCardExpMonthDate],
   );
 
   const handleExpiryYearDateChange = useCallback(
     (option: Option) => {
+      setDateError('');
       setCardExpYearDate(option);
     },
-    [setCardExpYearDate],
+    [setDateError, setCardExpYearDate],
   );
 
   const handleAddClick = () => {
     if (!isCardNumber()) return;
+
+    if (!monthAndYearSelected()) {
+      setDateError(
+        formatPaymentMessage({ id: 'card.expiry.error', defaultMessage: 'Please select the card expiration date' }),
+      );
+      return;
+    }
 
     payments.push({
       id: Date.now().toString(),
@@ -60,6 +74,7 @@ const useAddPaymentMethod = () => {
   };
 
   return {
+    dateError,
     expiryDateMonthOptions,
     expiryDateYearOptions,
     cardNumber,

@@ -3,29 +3,22 @@ import { AdyenMapper } from '../mappers/AdyenMapper';
 import { AdyenPaymentMethod } from '../types/paymentMethod';
 import { AdyenPaymentResponse } from '../types/payment';
 
-interface AdyenConfig {
-  apiKey: string;
-  merchantAccount: string;
-  baseUrl: string;
-  clientKey: string;
-}
-
 class BaseApi {
   private instance: AxiosInstance;
 
-  constructor(config: AdyenConfig) {
+  constructor(config: Record<string, string>) {
     //Axios instance
     this.instance = axios.create({
-      baseURL: config.baseUrl,
+      baseURL: config.EXTENSION_ADYEN_BASE_URL,
       headers: {
-        'x-API-key': config.apiKey,
+        'x-API-key': config.EXTENSION_ADYEN_API_KEY,
         'content-type': 'application/json',
       },
     });
 
     //Request interceptor
     this.instance.interceptors.request.use((req) => {
-      req.data = { ...(req.data || {}), merchantAccount: config.merchantAccount };
+      req.data = { ...(req.data || {}), merchantAccount: config.EXTENSION_ADYEN_MERCHANT_ACCOUNT };
       return req;
     });
   }

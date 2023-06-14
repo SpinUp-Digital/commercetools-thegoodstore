@@ -22,7 +22,7 @@ interface ProductTileProps {
   disableVariants?: boolean;
 }
 
-const ProductTile: FC<React.PropsWithChildren<ProductTileProps>> = ({
+const ProductTile: FC<ProductTileProps> = ({
   product,
   onClick,
   isSearchResult = false,
@@ -87,35 +87,37 @@ const ProductTile: FC<React.PropsWithChildren<ProductTileProps>> = ({
     <div onClick={onClick} ref={ref}>
       <div className="relative">
         <NextLink href={productUrl}>
-          <div
-            className="relative w-full"
-            onMouseEnter={() => setImageHovered(true)}
-            onMouseLeave={() => setImageHovered(false)}
-          >
-            <div className="relative bg-white p-8 md:p-16">
-              <div className="relative block w-full" style={{ paddingBottom: '122%' }}>
-                <Image
-                  fill
-                  src={selectedVariant.images?.[0]}
-                  suffix="medium"
-                  alt={product.name ?? ''}
-                  className="w-full rounded-sm group-hover:opacity-75 md:p-16"
-                  style={{ objectFit: 'contain' }}
-                />
-              </div>
-            </div>
-            <span
-              className="absolute right-0 top-0 z-[5] flex h-[32px] w-[32px] cursor-pointer items-center justify-center md:h-[48px] md:w-[48px]"
-              onClick={(e) => e.preventDefault()}
+          <a>
+            <div
+              className="relative w-full"
+              onMouseEnter={() => setImageHovered(true)}
+              onMouseLeave={() => setImageHovered(false)}
             >
-              {!disableWishlistButton && productToWishlistLineItem && (
-                <WishlistButton
-                  lineItem={productToWishlistLineItem}
-                  className="h-[16px] w-[16px] md:h-[20px] md:w-[20px] lg:h-[24px] lg:w-[24px]"
-                />
-              )}
-            </span>
-          </div>
+              <div className="relative bg-white p-8 md:p-16">
+                <div className="relative block w-full" style={{ paddingBottom: '122%' }}>
+                  <Image
+                    src={selectedVariant.images?.[0]}
+                    suffix="medium"
+                    alt={product.name}
+                    objectFit="contain"
+                    objectPosition="center"
+                    className="w-full rounded-sm group-hover:opacity-75 md:p-16"
+                  />
+                </div>
+              </div>
+              <span
+                className="absolute right-0 top-0 z-10 flex h-[32px] w-[32px] cursor-pointer items-center justify-center md:h-[48px] md:w-[48px]"
+                onClick={(e) => e.preventDefault()}
+              >
+                {!disableWishlistButton && productToWishlistLineItem && (
+                  <WishlistButton
+                    lineItem={productToWishlistLineItem}
+                    className="h-[16px] w-[16px] md:h-[20px] md:w-[20px] lg:h-[24px] lg:w-[24px]"
+                  />
+                )}
+              </span>
+            </div>
+          </a>
         </NextLink>
 
         <div
@@ -142,34 +144,41 @@ const ProductTile: FC<React.PropsWithChildren<ProductTileProps>> = ({
       </div>
 
       <NextLink href={productUrl}>
-        <div>
-          <div className="mt-4 block max-w-[80%] overflow-hidden text-ellipsis whitespace-pre text-12 uppercase leading-loose md:mt-12 md:text-14">
-            {product?.name}
-          </div>
-          {!disableVariants && (
-            <div className="mt-8 flex items-center gap-4 md:mt-12">
-              {product?.variants.map((variant, index) => (
-                <span
-                  key={index}
-                  className={`block cursor-pointer rounded-full border p-[6px] ${
-                    variant.sku !== selectedVariant.sku ? 'border-neutral-300' : 'border-neutral-500'
-                  }`}
-                  style={{ backgroundColor: variant.attributes?.color || variant.attributes?.finish }}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setSelectedVariant(variant);
-                  }}
-                ></span>
-              ))}
+        <a>
+          <div>
+            <div className="mt-4 block max-w-[80%] overflow-hidden text-ellipsis whitespace-pre text-12 uppercase leading-loose md:mt-12 md:text-14">
+              {product?.name}
             </div>
-          )}
-          <div className="mt-8 md:mt-12">
-            <Prices
-              price={variantWithDiscount?.price ?? selectedVariant?.price}
-              discountedPrice={variantWithDiscount?.discountedPrice}
-            />
+            {!disableVariants && (
+              <div className="mt-8 flex items-center gap-4 md:mt-12">
+                {product?.variants
+                  .filter(
+                    (variant, index, arr) =>
+                      arr.findIndex((v) => v.attributes?.color === variant.attributes?.color) === index,
+                  )
+                  .map((variant, index) => (
+                    <span
+                      key={index}
+                      className={`block cursor-pointer rounded-full border p-[6px] ${
+                        variant.sku !== selectedVariant.sku ? 'border-neutral-300' : 'border-neutral-500'
+                      }`}
+                      style={{ backgroundColor: variant.attributes?.color || variant.attributes?.finish }}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setSelectedVariant(variant);
+                      }}
+                    ></span>
+                  ))}
+              </div>
+            )}
+            <div className="mt-8 md:mt-12">
+              <Prices
+                price={variantWithDiscount?.price ?? selectedVariant?.price}
+                discountedPrice={variantWithDiscount?.discountedPrice}
+              />
+            </div>
           </div>
-        </div>
+        </a>
       </NextLink>
     </div>
   );

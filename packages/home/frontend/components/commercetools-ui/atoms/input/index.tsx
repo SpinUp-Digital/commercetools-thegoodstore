@@ -15,9 +15,10 @@ export interface InputProps extends Omit<ComponentProps<'input'>, 'onChange'> {
   isValid?: boolean;
   hideCheckIcon?: boolean;
   validation?: (valueToValidate: string) => boolean;
+  renderEndIcon?: () => React.ReactNode;
 }
 
-const Input: FC<React.PropsWithChildren<InputProps>> = ({
+const Input: FC<InputProps> = ({
   label,
   labelDesc,
   onChange,

@@ -21,12 +21,7 @@ interface Props {
   facetsConfiguration: Record<string, FacetConfiguration>;
 }
 
-const ProductListAlgolia: React.FC<React.PropsWithChildren<Props>> = ({
-  slug,
-  searchQuery,
-  categories,
-  facetsConfiguration,
-}) => {
+const ProductListAlgolia: React.FC<Props> = ({ slug, searchQuery, categories, facetsConfiguration }) => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
   const category = useMemo(() => categories.find((category) => category.slug === slug), [categories, slug]);
@@ -55,12 +50,11 @@ const ProductListAlgolia: React.FC<React.PropsWithChildren<Props>> = ({
 
         <InfiniteHits
           showPrevious={false}
-          hitComponent={({ hit, sendEvent }) => (
+          hitComponent={({ hit }) => (
             <ProductTile
               product={hit as unknown as Product}
               isSearchResult={!!searchQuery}
               onClick={() => {
-                sendEvent('click', hit, PLP_PRODUCT_CLICKED);
                 gtag('event', PLP_PRODUCT_CLICKED, hit);
               }}
             />

@@ -11,13 +11,13 @@ interface Props {
   payment: Payment;
 }
 
-const PaymentCard: FC<React.PropsWithChildren<Props>> = ({ payment }) => {
+const PaymentCard: FC<Props> = ({ payment }) => {
   const { formatMessage: formatPaymentMessage } = useFormat({ name: 'payment' });
   const router = useRouter();
   const resolveCCImage = useResolveCCImage();
 
   const goToEdit = (payment: Payment) => {
-    router.push(`/account#edit-payment/${payment.id}`);
+    router.push(`/account#payment/edit-${payment.id}`);
   };
   return (
     <div className="mt-16 flex items-center justify-between rounded-md border px-16 py-12 lg:p-24">

@@ -11,7 +11,7 @@ type AccordionButtonProps = AccordionProps & {
   buttonClassName?: string;
 };
 
-const AccordionButton: FC<React.PropsWithChildren<AccordionButtonProps>> = ({
+const AccordionButton: FC<AccordionButtonProps> = ({
   open,
   buttonWrapperClassName,
   buttonClassName,

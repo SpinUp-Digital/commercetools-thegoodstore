@@ -7,7 +7,7 @@ type Props = {
   onClick?: () => void;
 };
 
-const Icon: FC<React.PropsWithChildren<Props>> = ({ className, onClick, pathClassName = '' }) => (
+const Icon: FC<Props> = ({ className, onClick, pathClassName = '' }) => (
   <svg
     className={className}
     width="24"

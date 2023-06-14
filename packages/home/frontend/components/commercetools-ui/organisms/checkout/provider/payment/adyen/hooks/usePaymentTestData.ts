@@ -7,7 +7,7 @@ const usePaymentTestData = () => {
       ({
         holderName: 'Joe Wheeler',
         number: '4917 6100 0000 0000',
-        expiryMonth: '03',
+        expiryMonth: '3',
         expiryYear: '2030',
         cvc: '737',
       } as PaymentData),

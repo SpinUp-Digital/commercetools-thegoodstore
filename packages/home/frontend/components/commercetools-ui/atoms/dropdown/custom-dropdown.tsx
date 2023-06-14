@@ -8,7 +8,7 @@ export interface CustomDropdownProps {
   menuClassNames?: (open?: boolean) => string | string;
 }
 
-const CustomDropDown: FC<React.PropsWithChildren<CustomDropdownProps>> = ({
+const CustomDropDown: FC<CustomDropdownProps> = ({
   buttonElement,
   buttonClassNames,
   menuWrapperClassNames,

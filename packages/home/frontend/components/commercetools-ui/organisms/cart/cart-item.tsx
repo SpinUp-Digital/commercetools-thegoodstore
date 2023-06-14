@@ -19,7 +19,7 @@ export interface Props {
   classNames?: ClassNames;
 }
 
-const CartItem: React.FC<React.PropsWithChildren<Props>> = ({ item, classNames = {} }) => {
+const CartItem: React.FC<Props> = ({ item, classNames = {} }) => {
   const { locale } = useRouter();
 
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
@@ -71,7 +71,7 @@ const CartItem: React.FC<React.PropsWithChildren<Props>> = ({ item, classNames =
     <div className="flex max-w-full items-stretch justify-start gap-10 py-18 md:gap-15">
       <div className="w-[125px] shrink-0 bg-white p-12">
         <div className="relative h-full w-full rounded-sm">
-          <Image fill src={item.variant?.images?.[0]} suffix="small" style={{ objectFit: 'contain' }} />
+          <Image src={item.variant?.images?.[0]} suffix="small" objectFit="contain" />
         </div>
       </div>
       <div className="max-w-full grow overflow-hidden">

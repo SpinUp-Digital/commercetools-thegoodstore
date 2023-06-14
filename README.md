@@ -4,7 +4,38 @@
 
 # Before you begin:
 
-In order to get you started quickly with your demo, we made read [CSV import files](https://github.com/frontastic-developers/customer-thegoodstore/blob/master/import) that you can [import in merchant center](https://docs.commercetools.com/import-export/) to populate it with sample data.
+In order to get you started quickly with your demo, you can follow those steps:
+
+1. In the root run:
+   ```bash
+   cd getting-started
+   ```
+2. Install dependencies & build the project:
+   ```bash
+   yarn install
+   yarn build
+   ```
+3. Add a `.env` file under `getting-started` directory with your merchant center credentials.
+   ```bash
+   CTP_PROJECT_KEY=
+   CTP_CLIENT_SECRET=
+   CTP_CLIENT_ID=
+   CTP_AUTH_URL=
+   CTP_API_URL=
+   CTP_SCOPES=
+   ```
+4. Now, in your terminal you can run the following
+   ```bash
+   yarn run import:data # Imports demo data to your merchant center
+   yarn run clean:data # Cleans all the data in your merchant center
+   yarn run reset:data # Cleans all data and then imports demo data
+   ```
+5. You can also clear/import specific resources if needed
+   ```bash
+   yarn run clean:products # Cleans all products in merchant center
+   yarn run import:products # Imports demo product to merchant center
+   ```
+   For a full list, check the scripts in [package.json](./getting-started/package.json).
 
 # Getting Started:
 
@@ -157,4 +188,3 @@ If you want to deploy your project. All you have to do is push to master and Net
 
 - [Frontastic-CLI](https://docs.frontastic.cloud/docs/frontastic-cli)
 - [Adyen setup](https://docs.commercetools.com/frontend-development/adyen)
-- [Contentful guide](https://docs.commercetools.com/frontend-development/creating-a-blog-using-contentful)

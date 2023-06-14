@@ -10,7 +10,7 @@ interface Props {
   categories: Category[];
 }
 
-const Breadcrumbs: React.FC<React.PropsWithChildren<Props>> = ({ categoryId, categories }) => {
+const Breadcrumbs: React.FC<Props> = ({ categoryId, categories }) => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
   const router = useRouter();

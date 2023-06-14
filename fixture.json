@@ -51,32 +51,6 @@
             ]
           },
           {
-            "name": "Commercetools Contentful Extension",
-            "fields": [
-              {
-                "label": "Access Token",
-                "field": "EXTENSION_CONTENTFUL_ACCESS_TOKEN",
-                "type": "encrypted",
-                "translatable": false,
-                "required": true
-              },
-              {
-                "label": "Preview Token",
-                "field": "EXTENSION_CONTENTFUL_PREVIEW_TOKEN",
-                "type": "encrypted",
-                "translatable": false,
-                "required": true
-              },
-              {
-                "label": "Space ID",
-                "field": "EXTENSION_CONTENTFUL_SPACE_ID",
-                "type": "encrypted",
-                "translatable": false,
-                "required": true
-              }
-            ]
-          },
-          {
             "name": "Commercetools Cloudinary Extension",
             "fields": [
               {
@@ -171,60 +145,6 @@
             ]
           },
           {
-            "name": "Commercetools SMTP Extension",
-            "fields": [
-              {
-                "label": "Host",
-                "field": "EXTENSION_SMTP_HOST",
-                "type": "encrypted",
-                "translatable": false,
-                "required": true
-              },
-              {
-                "label": "Port",
-                "field": "EXTENSION_SMTP_PORT",
-                "type": "encrypted",
-                "translatable": false,
-                "required": true
-              },
-              {
-                "label": "Encryption",
-                "field": "EXTENSION_SMTP_ENCRYPTION",
-                "type": "encrypted",
-                "translatable": false,
-                "required": true
-              },
-              {
-                "label": "User",
-                "field": "EXTENSION_SMTP_USER",
-                "type": "encrypted",
-                "translatable": false,
-                "required": true
-              },
-              {
-                "label": "Password",
-                "field": "EXTENSION_SMTP_PASSWORD",
-                "type": "encrypted",
-                "translatable": false,
-                "required": true
-              },
-              {
-                "label": "Sender",
-                "field": "EXTENSION_SMTP_SENDER",
-                "type": "encrypted",
-                "translatable": false,
-                "required": true
-              },
-              {
-                "label": "Client Host",
-                "field": "EXTENSION_SMTP_CLIENT_HOST",
-                "type": "encrypted",
-                "translatable": false,
-                "required": true
-              }
-            ]
-          },
-          {
             "name": "Commercetools Sendgrid Extension",
             "fields": [
               {
@@ -282,6 +202,13 @@
                 "type": "encrypted",
                 "translatable": false,
                 "required": true
+              },
+              {
+                "label": "Newsletter List ID",
+                "field": "EXTENSION_SENDGRID_LIST_NEWSLETTER",
+                "type": "encrypted",
+                "translatable": false,
+                "required": true
               }
             ]
           }
@@ -314,21 +241,6 @@
           "type": "encrypted",
           "isEncrypted": true,
           "data": "OBwbAQvQV+C3RpcRtjp7SjsFQXAAgTZBnu3byALlyWPCm3UUR6RzrefOh5cdRkGwXiHI1jEJioKLfFjF/Pz1eZ4PFdQgvL+uD96m3Era89gLQkFAEES54SJnptvBhcwa0yXpk6MaQOM2ML0x9rJjayIIHw1PQ0yEM21XvL6FaAjOCQKMJa4+qkGWIcXZ8OiiZgvBOxp9AnbwPuvd+Wxci+HmA7oAG3U7051z8vMNEcaidm1rv3DLTJ7h/ShU/ylYdAZr8zN/W18UegMHWifEBO5dc/FPnX+0S1iMOClpTowEmRylKhGRVUaoXV6dGB4MsoO0gkQU7Gn3nOUFuMZ+vdG5H1VENUW6ZOzb//Rj8XEJFPtQN0jcV+9yG/LW34qcgb2sdaCR6KrFFCNvqH5w9Y4l2f29IAFETOeCb/IZI8Xbl07mdYyo/xwRs4oMKRis3E9K8Ds8YrpsiMYpr14dM4zZgP5TbQLsl/GwVqTwFOjtAZFPEwbe5ZBCQhuCoCD+ycFApC9QXlWqppPrpslT6bht7+/1EG4Xr24qO4v6k+Jukm498sPJJ32eatjz0x9yZM3F/h+jrfxq50sdbTg0kb9hd5EmiKXQsT4uGTwb6VERSDcHZQgZlFRG0pxBcbHd4uOqvgsT1fzcEt9Lz8UYh6UY5A3weP2RZCxS3JIME2U="
-        },
-        "EXTENSION_CONTENTFUL_ACCESS_TOKEN": {
-          "type": "encrypted",
-          "isEncrypted": true,
-          "data": "GeiBGwCofehj8Rde+CBBOixkkT7mkzcFS9jtAzAPxttVnmrFsXB5Xo0MLVDS/gqhEY4JZUt17MluXcDndLfOKzOfOI9qnFw1y/t/Fmpv2jIETWHEsdLIu3jOXLaA8R+fXEfF4eqQkBcmxiKYrBHXxiBWibg4iTyzMnl9RrNbDf1pPXFSCi4wNIm6c7+4DTnVXiwesPluBc23bwbeE38ej7xjP0rkXHIaJ5VRZgDIpHjwt9cBVwAvBGskYprSPgJUoNyVAfEiKmKOFgv7xQbVGnap+R9h+W2QBxjn+gdIHejc2kSpK7kJt5ivEm07TgeX0g7cSsGfYMVmgDoWoDKl8n5xwvApBGo6BCnpylGDhOqYh4lBo2Z7Sz5zBqwLQZcPkUw2U1cjYalA8mvoo/aZHdb55No7DgLh9/njH17H0iFK4kyxIO6t7DerOwSO2XvmlQ5AX0M5DlK62Fp04X7oRsk7SoZnApba9GHH/aM2H7xi1dfkHps2QIRdoQhfSWbz6b7xRyHK4Q5tRMZHSwWajUrZuGs69Dv/wAKV+0SQXkeDnHZUpjsjBt5OmRcAa+mpZ9UhSTrvWW0iq3IQZWo7+MzgSMkzTNFDjvwTO0S6lg4gkaum5bMkhA0ylB2n4OA9juuxI/V0oFyVwAQ+DSDOQC2CpwTQCBQxi1DVChQfM+0="
-        },
-        "EXTENSION_CONTENTFUL_PREVIEW_TOKEN": {
-          "type": "encrypted",
-          "isEncrypted": true,
-          "data": "tSqzrWO3iYnsvJ1DOIr8M/Od+TBCQZzqw0qIL5essbh1MbDAJLJaqp7RQ+0jPYVmZHNeSwCYa3UEKvFHDgUcfTmEUNwJRWYfGc20jAZZw1OsUYPpqnVpB9IEkGbsUfWry3acgrlu6AwBIQRyjdePcUZ2xZDLUFhTETNoo3/RlN2hmPxneJfzuxqtX0N3JcQ19F3LuQ6v1TT48rTSGtka36HSI2dzmLzYBPAc0cO4aeBo4844u3E+u/pJx/rYBFHWUnQAH2i1FjLG7HXGIaBsjTVfm7A2iMsn0iZU+Lj8WWs+OYKMHM5Z80oR7Lf7aEBAak07lI+0AdwNaR1xJOeSuPrcMJ4nTpwGrG+cNMl7c0aDte3nCPiTAAdaPzsXXz0PhAwnNlSSKX3FBl1CHMANYryHB+u6lAICqbZLd5lQ+LPKkLgdkGjOsDjh8yXfU7z+bGUYTq78YvmWt0zE8/QTqiy3inzufiCBnYbha1rRrf/6fGo8qgc0/p9vrXqzz4Ragiie6Gf4sKqFwnD9G5oaMnqkfWdpxfEWSfSUv9g89SpCVMOa7NT+vcqsvvZwnq9SUwU66CnTaHN+g2dRmaJjuSO/GO60WF4JafGRYV7xadmNWeNV7w8ZQzR2YG1SyKT0R8XQNwFYkZU0hg83ewjgmQPeJSeNzT0nRNXzf5yOflY="
-        },
-        "EXTENSION_CONTENTFUL_SPACE_ID": {
-          "type": "encrypted",
-          "isEncrypted": true,
-          "data": "ldK24ZarAzo9NI0fYmg39kfGFAqc3o6ARcO9aiMa2TKzA+67s+1QlDFsar3ddXXvqRlNlBVlO8bYIsic+dZFMVbwITf53+dMr2ogLMjJic1kS4f0lhNbYEZcgXeRAENLwylzs+m3STHKTMrPxr0kOoZOxBMcrBrNE6tS0W6QpyfzUi0NNQb0H/1Mjjs6GQyhWvWfe6VN+c+BT2dC5Rbb4PJKNPuTS3bE088knAZv4Dmm/6dZaNFJwkN94Y8L4NS6P966lYLw/2xSREmAxd19wh1eQnJBCXyOoQxl68zo5Qr6kTWnVVKE0Zx8j/6XgJiE1VrRcZOjyPAq+gJraCKhiR7bfXxXumxPnQu7i9AeeXWY624OETFj2bJIpdXG2is4ekirmRmHfRSQ6JIBR4zJNHGImFkWwAjZeceki6FVxe8M05IqlGkeJFAFK3Ww+fiP64LS7OMNpPhXP2FxXvrJ38wItWXvnwHuotNzA3gfC6oR95tH0EZt9HX+dBPH39R9Gd9s7klyuDw/4eI/leN8pD7fPaYh967YDK8c/MNyqgJHZlkf+sRMoOWhgp8GNf0Mno0+XURh+vcpNn19NWs75GdHFgQ+Zaip8wy4rN4XQTe9lwC64HfaGluDXHtm+AMVPQ/dvb3n/Zm1krxs+czZqyU1E44cSuYigpc4+Rxb7u8="
         },
         "EXTENSION_CLOUDINARY_CLOUD_NAME": {
           "type": "encrypted",
@@ -384,41 +296,6 @@
           "type": "encrypted",
           "isEncrypted": true,
           "data": "spwXQf4DBgiLNFQmxDICssvmLerV+d3/gBtYoOjMcgNPa48Pvuo2T/dF0ar1zHVGhtYJ2LjLJc3Q6jUq5NYvva4TtkldiRk7QL8On11oIVE3t4EI+JraWRkHmukp1Q+noziHPZdbpeQtl53mOe6bdtwgP+VWSxB2FNEiDSLOBFh2j/xolrPfdquWX8/Mz9/GlC3QPSfBT7U7xtJflnzyGfZygi8Jy7MEM2HBEfQZppt68eQEeVTO0fVuvCu7sP7Thzpj74UwVu9VJYJpApZ+PPBpkfAWEKDzJjWaRRhv0wv0Yk2rLIi1r2Z+BM7E0c4boThaJ0vP7jGmKtyXWfgExR+r1PW0dcHzRsTDAwHuucu+vmkOHx+MIw6ny8nqUzCCwSFcHFQfCuA2+e1/2DySeUKLk7Cuk987es7CWvkpdQPuohxbEGYIE+aLIP18oXyD2FTdtwZq5xSNgyz3T8wZuu+gASDNh05jsrFXYqLc42VuLxYEi7hIGLqYH3aCNPPgWA/pgXBGgGwcq5C2wbbLzcThnteWU7TjMCeQ7bGZy6vVYwdrSIfAs7XrEjbSVu+Agc85t55SwOWPBxZibo2zEmAJ/6axHdF+xKhK6ddsNhJSPCteE6BOAfWq0HxIM9I3VlXW5FB3MpL/MHEawdv86ZsNxJ+L8zTtajsKOrhifWw="
-        },
-        "EXTENSION_SMTP_HOST": {
-          "type": "encrypted",
-          "isEncrypted": true,
-          "data": "tQC/lAQ4T4k81xSHLjl74X6xkPYOYK8ptUk3gf7+2D4ui0l89ECCGaqu/UyGt4tj13tf9lySstOfoUj08PrtcG9EWPEvk/rUZUzS/rOFDqcLsd7DSnxJ5eEJFdRRRmpGefgLRIr03P1iJjTJrS9H/WzUV9R5ZMvcBZLONQGjmvzPFp/4DjzL/N1P4H7y2uVV6v8MpExmm3uSdabp8tHw61RoNAXEv++j8FM7tboe67aBmC0nc9y1pw9YZAEK7qiU+TojiUpiky3N/hJy5fHqE0x83RQjWIYrHGtpCGfq4SR0GfUMluk/yswUETGPZHKwlUvyz5xIh9UH1MofIGpGJQQ8zSxRzYk/pnw6ut3F7yobmzLTeDtKNFMo2fmjBBFBoZV4suc3pO+yq0xESQWjRJ3L3xRT729jF4Yb8Vpb25WvrRfpW7+SdMEtbwDcNLHou6pR1Fdq+jt8W09RZpfjn0YUY6u6tPw9wmoNSUmnN3GxBNX0Nl22SavKpexQ4Q5tZxyzxvVD80QbXzMmrR2dX0wUHH+8d4mcS++nMkR4aYd119nYcbk8pIOpRPN6jOQVKlxdtFtXb3j+WPskEC7QzOJwVDorWCtPoINxUBsa9tIlmg/PTfRQOSC119KD/kUuso+1/hy9rke+scb0bpCNOKZTjYrZ33/UIIxtfA5ln8M="
-        },
-        "EXTENSION_SMTP_PORT": {
-          "type": "encrypted",
-          "isEncrypted": true,
-          "data": "X+3R/t27sTDoB/WKr2uTaTI8e15DHxSnFbOKezw15a8C5Lj1WVSGKC/SWUFTcNVSDZiJtayxgPwpzjPHpQJaXikSqbYoU5otM0J6HjUC82AlswIDvTdBEXdOwC0Vv/kuqWdCh1gABpop5Qf7sRHlnUUVhIVumnrlf0L+DJy6uoa5+lGoc0a+m62Q3+xSSMcZn608eXgvkBIn61oM+LUaaeGSD3oLKk7DCHaD6tV133Vv4zUHAD5kZ2U5dCBecne6t8aaWeN+yPnlLHi/Z0pGlArKHNzu7bvMtHtkeeFbulTiqoulznmTR4ab2pY9p880hlVusixcwvsblk4660xCZaR3m3b3gEwqYLKGA1pO/GSiJiWwPfgxqs/01TAZxSpJYqMxCWdf7pNeixX/ugUx9bAgHSIWqUrf4YeX2D1bgQlkZd+PtGWsF7M2FaKaE6ZPe1p46XwXmQSNQZiPphXWzgYXDUuxq4me9Cdopt+mY4CLvNACOuJsilbBBinqr6uAhttfekCGTCKKfgvy+1pBZA5I2UkNjoyucYLvH8o0DNOn6ybVJp+rV2vtaXGJBs++WW5KnDCmvhqfhXYs3eQQOXc8miGwF+2iiAoupS342Pwkl6hEIYnXgumA0gfQKy44nde3Q2rxaEYEPqHyuBwbs0mQYOiGFhCGJsRBXR4TmG8="
-        },
-        "EXTENSION_SMTP_ENCRYPTION": {
-          "type": "encrypted",
-          "isEncrypted": true,
-          "data": "SU9XwNA1Mu2zZRTwm5Grq8TzLnoIvFBHTvPuqRRdU5Ei0mnYX/cnA2ypCl/gnE09XTZ7Mb+7HIiEP53CDY7F/hlbPvLzZ+cU+2LiFqpmErhMzz3wRWG1q2TexgcKWIMUiLjx4yj/D3qOaoGL0/q+MMiKzNnNR5eeroiUq+KowmzyVHrLYTz97lxMsuKmxJ8Sm4hnYFmWW9n1S3RimJlo3biIgXvyeRAGX1A9yH71RCB6m1Zq9/1zDvOvSJ2ZRE6WYOmht4SmLNcbsv1m1s5+UEA1lzznI3xWKf5TPtJh3brFay+UbjH/lYVygPHZ4aWXShUyAoSySIVRvtcGl+kbnX8of5g7duJmaHI4myfBVy1EpEESiDrTJB6Cfm6CbnEbEW+ub9GXb4m3rKKVGq7OZQwmTvvJw4Irw6tFDImx/oDMNhGYVU8NgXkXEjnhzDWuOEvakvHfYrx6O+0SzvUVFImR3hp3vwai0h8kvRNXulJuvkWPArEZpPFfL8KWePL2CnuS39S7MPw54rjxhsUjoezCpYATHCmFX89OQuvSVnrci+uksPs7v2uek6whgfA6XA0JCdoTyNK6FFxSR4D2CEZ2EWqi3NhKMDX0qO0UeOqJLwZrQayN4hu0TlG21tJEoBV8uNU/q1fU3VyrqDZHiO8BK0+3EnLF3cNfhAsiKeE="
-        },
-        "EXTENSION_SMTP_USER": {
-          "type": "encrypted",
-          "isEncrypted": true,
-          "data": "ocUFBC0e4HRQEmL7ZEyPTJ5VitUhfhEDj8021XhAi/UR7A0I42JMnW/mFyrho53U/Z/1YgJOdhZn2kYHR8LOTNUn2n1oqVJRNi5v7zH87CFW1Z+GTtdKFh9OyNjFifJJBIsui2xqoKBfLtjzaJvxH09ZraieNNGb+HeX8rWWl5HemGAYakkOKWugbuIxxCXuNx09vDJY3SWFK0Bv/NYkOZSKYutwm9FfwOmblMTnYdu8lVV21C5AclX42IF/Qs8Yi+Lu3uw2jrd3AU/v38QxpPHk9mpZ9Ob67Xh4qz9k+RwdOQU0qt50kuSMPlWW1lBpXR24P13M2ACMIeCyphNvMTOf+JSufcNijcZaK+YGgLV4K+3uLoGD2jzcw6NwLoZf14z/AFgUSJNBDctOK43QSUyBicqF4GZ+Nh8bVS36obpfB/jv7o2d/2HCiCDSPrPIjbIseJWii9bPEXFrNNA1WmLMSid4Alr5n2YqK9LFGflGW/yzP3iFFZN4+abhXdXK70BMUsXw75OlPtMmFVpnxfD2vBGoSXt4+3DwWNa9tj4AoQIRQtlKUoNbCPRWrcOYtqXwJkGTTmgKxeyNNgPZW4ZhgLf41jTtpru5TvPGB4O/P0JkUMOAnj4qBfrZPGHeTVWcp+toLdFHgfh66uXQaXgedLOs0zHJCZRMkUiU5O0="
-        },
-        "EXTENSION_SMTP_PASSWORD": {
-          "type": "encrypted",
-          "isEncrypted": true,
-          "data": "H2fobvbztxQfsvmnZEXzeWs6uNixnrm43NMoywxZnD6uT3rliTsd4DnoHYV5dPn0BorJUd5F9LYwbpPVtNvW/lN1d1fYwyQRJ8pDL2riYLgfeM5j+SwMJPmg66PSnabSpGbiSjL4UdXoJcBMTP973R/EgEM1/dhpWRj5RUn+k0vcC6RBaFegd55IWv2Lr/h1ZmFxJ0mVGyUex1sgf//heF4WNZpHcuO4n6oWJH0Mb0GX4q0AinftSsw2rq64NAd4Wa401motXo+ubHGgiA4LgDIcr388Gd+RR4oh9WP1J0Jlu7Pxg8tOOY1zxtorfL031y87GowFjc7ZGmKRtc6Z8e6D4eppRPqMPGY2Mr/edcuU4VEsedkNRpzHcL6L8dmbeebVh9tVXKUmXmykIwKgBrioUGOwLEKl0b+LbouyId3PqDPpZh2A5tefJiHXr4JfSlfVqZM6X0870GLdEdQhXfU28x7zigtsk3nNdLnHp9Dpk9Lk+yursfzBuH4JR1a+iyFx1vgOGlUpnVyDtVniaMQGp0hhWqbdeYaWoUDr/izInR+U4BmSCNG/8ARB5OLi6sx8qtX9T6MqZiCY7Re2AvdPPfwmFyRZ5YWkLzgEDvZ1QwpcFx2KtRY8UXyLOZcwpRNsxz/V1CjJME3vMw3FU8N/MAKy1nRPEWfnttLFWZ0="
-        },
-        "EXTENSION_SMTP_SENDER": {
-          "type": "encrypted",
-          "isEncrypted": true,
-          "data": "jEElh4Q5NqRrAy37jy091BAVHcxBoJC4gJkaAgZHM5C2kb9s3h8Z2B+shk2W1ANFJ7i6DWQX//XBIlU36h3Sjr7HwM+YNPgQ0hTgK0aNlPi4XNlalx1VPNC/GaB00MZ99PGFxzh/Nq1PZbXO8bfsLTK9gS/gUM9TCI+cYjDwSCpy4VYpBPRZfdA5q/UqDdzgza6fq75BxnRpp19CPh95KZOp8sNyRGndN+ETc/bmmCiXKZ5dhe1yGC738YSx/J5QBOUsGP5RBF45Q41nNPxBUk1Z5lpQDCUIQfZNHKsvE2L4zKcpF6FCl717nkwYfiwDTJUTS3dC4ZIYYuNsvvoTwODhpxfatmyQKOWrm/IAFwF95FKIS4r5A3e66YDtEK/XtYk9kamzs6T0Y4M+4zZ0ST/DgjXPDKG98yptZPrrn6ODRc0FOIUnRZnDugns/5TwiaQz9JHgKxA9L9jk3tiDrVTb1QXQ4kLGLaGVAvw4Z40LzcCY1A3IU0xlx3PTLhaiVdcxQHJeQpgpS31AMH6DJHB/d0SbeNajglCV2byHibIciK9IxMNCCO0OtbPW9kQyycsWpkmfC4GXysPl02RtLzfmD0dMBcnEyrObhLwGk1kkeDAbf1AgrJ/49ZUY1OPJyTBGnFZEK0AThr6VytBxWgJH+HO8I2evV0GKdtukEhk="
-        },
-        "EXTENSION_SMTP_CLIENT_HOST": {
-          "type": "encrypted",
-          "isEncrypted": true,
-          "data": "CHfNYwasliZqiNBexIj81hs06e8Qme6lNSbPVV3T3fnKUwU4Jksyr3vFFttw+BthfROdhfu/ZY3ySCXZZua/kjjjQKFc/NWjRh/u4EtAWAHMSv+py8QXqn7uWZe5aa6ttWUJbZTpmSq0EmJa8IL5jpfm+7NfICOC0uZIRkysI1ycLKxjLZb2AMSvF4Lqm9oQA8op0wrwPu8bQqcLIQ06iLWZ863pl+QXE4GIOJhN/NOsAmkIbHFGpxxSpW+f2MJt5MQrpo/+SjAnFM063zePkSyxriOG7lvTnEuzG80K+C6y+p63K5K6cshM74md/zMYFJFpD2gtVptMkAb5O+RweSNv9Jr/Lff2o/0rIJoGaYoy/wAigUy6i9qFJVUcljblUlRtFCKH3qOuEwmgM7YmyJjW+K3JR5pKvh2S5CPRUJ26ruy73I/igNwZ2yltS4E/Ci8cOFf2BTCr1ZujXFRWW1us33DPXL0uENdyhET2nnzVfJQqMR65rEzm7cdgNETIwZOqWVbWUuryS22dVXcuF1ev+ldXXi0VqQnLBKG/iNc9A87Jc31HsCHhfUH/1saXyMf8gwsCG8WS179xauRUgmd15wvJEIfMsCieYpnAy4Xsvp0buvg1genut1WiXFWcpLljEm0heRHoSqi7oVRcEC9ZrEgrzmnCZq0WyqJcgr8="
         },
         "EXTENSION_SENDGRID_SENDER": {
           "type": "encrypted",
@@ -498,21 +375,6 @@
           "isEncrypted": true,
           "data": "D9UfP+ZU2orH4w9J9jPBhuasdNHJG5x6QGmV4d+b9eIh+zAneB6yRCbcdSEtvmTCywfWOi82O+Y1CzfYvEcorJWYikxpCFWHAITIrNBBzBUhCHWbnkYY/hVrK/AH8jXKmsUdOFzB7VzpDK3qXokR9mh5wq5UIkiUfQBcmr+usExfOrhUcmi9nLU1LDe7QsU7ODrIk4ac4i9MzHDAd3pB9yG5AVmD3pkQAAdQkVaAd8w4R80h1J1advuA9iD0fiJX9Pw+XcrGX++JL5x/4yqPtOZN4oC7NC3wdj3Wxg8gglnkLketMjfMcrS/IhsBP2ctzhcpO1ZxoUBqktjeZpX07M+t7f1ZIoZj5LZaNlQUSGaMSTjg0tr7++4pq71hakkh3+NXyNWgI7c3vOTleHL6N1UCStlbsd1mR9lEVn9e3sotzmOSjZqMbEiRt0y67T2DLD0NsZHSs+In9J2cMhYfkXA/rSaRYpTjo+TYpYM66ZsoZ8B7Ci6JcE6KSjfR3W1W+HZkd/2aNxXGz9moe3u5aJ4nCxX7Zz5q3gSovOIQCxr8ag+eVr+acElW8g5N4v1k7Qr3ViGKDxSYVdHguRKIgr7PsLi073ayuENfspQn43PZPQN5Rzf49kcOvQ3w1/NzmHY9A+fZR3HTfQ69m5X++uivGOiZNPXxCRN0ngO/HgE="
         },
-        "EXTENSION_CONTENTFUL_ACCESS_TOKEN": {
-          "type": "encrypted",
-          "isEncrypted": true,
-          "data": "esPzNB0h8zJo535XEULyx5/vEVxWIAjmsxNyl94K4hAHk89AICHc/8m1SI9fVWhpTNw+QEwQ+vPlK59nTZX9h38LD2d/hnPtbJcQeEKtZtPnlX2BgOLVEK+cNmEwreT27mKc9TT/aWqql5raxodD/VaCgbplfYB+tRI60OrjRHscHuxaDkv5qC6ca+Awb4BZc9h6lgYc/O6EGRBBk6zaHNe4ZLn5BMXPTO7cqzNTBMPhklbuJLjdGEM0mN78UP+ZFESuHhZ0FeqZxDXjo1mkMAq4OGwSuby3MZxp5MW9sHW2Bbyy5/l1XKj++FUIkgnAiQ6EjClJXMKdCUj8nRtvgm7y04TfRcV7maPvMcN/bJZgym/LxRFXce6OfTbFSAsYG4NL6BSkj0/IBc1JaIzTPX5WqaJP0Cc5Y857aPMnL3Giua/SUE3NQkd1y3no2cUBnBIUqXXJN/K+LXe97AR0CUR+eV/pmwnfSnLo6xQnBY8x01BuDiRXulHZBhuRUYmP3X5BwwQ55pNk1G6nm5OrIiDEZanaZLSjQx/4VySpTYcrAanTUhWfLOQTKSPmPA6Fviblas5c5FgOO7ZyP72/q/NbEz/dYCaqhEdshxs6Dt0Wi4r0GfQZxSy7bs6j3PLrimWhZVCj409PuxzcyZmwHc5FNA1DA1xLvh3/4dDvobA="
-        },
-        "EXTENSION_CONTENTFUL_PREVIEW_TOKEN": {
-          "type": "encrypted",
-          "isEncrypted": true,
-          "data": "THoV3ymC3Lhl59gNDe3fyT0+LmuLeEIIURRfPT1s6H7JKESJkpVAQrLc7FrrLYMkXlexpqyFGMVf5GDaa5FVxoJJiuU7zZ0tnuGy/eVY8002ZAmk1hCJtL/eVrETXMtVIAyZd8XVb/ZbFt3aqfUawwKF24SEIDunrPODiZKjg1xEuB6o6hNot/PDqgRQIJykhRmn7oZavB1z9Ae0Jwuo3+s3PWpwN3A3kal8T4rtKQaoi8EsICros5+qSS4qRnPSntiGOotTpRe4ONLZpx8q/Ie2q1A6KWR9HYNJ5h9dtF8P5VolTWpESLHhi+Tk62j1a5VCzt9MuoG3XyVDQ7mLTS6t33+DFNhJzRpRfgC2TxlTCD5aPpAcP7Z/Za2LGnaDkOb9fjecH0d8FC6Z0wmI2RRezePDEb9aSPNR41cBZ5CJb8MzcXHALcsJhGmZuRLYla4yUO1xzHk9XbEvDgIWRr8heCAhFveagMPsNASm06VN3FoB/bcIIKCpevffAItnk9YePoR+l0K3zq3kOpQOYmeT42/v/mJ/1+WCUd/e2xjSquBF5vWSzIFPWzgrb1/A6TjFTRmK4huFtB70Ts2D8VyT7PypxEj53WS3HHAEpR705sKQoSi0Mr0H/tm5DmXxZ+bDRBVsxsOEPk71DSr4Si3SvO5zYOzSS+yLe7EIi4c="
-        },
-        "EXTENSION_CONTENTFUL_SPACE_ID": {
-          "type": "encrypted",
-          "isEncrypted": true,
-          "data": "bhgDPwDD2BUic5s25B6t+OHxe0tWWHqVVvXSnSQ40qkUMbpyFlftwKpooMRW+8LxgN7HAHLPfO+X1mIJgQK3yAvTOxVzWId18zI/3DFl38FdDvfhSrvK8n0qWvCYiakA+L7tBptVoZ5NpPDAb0FfptmQIjTeUJiEniwxBsx1dWAWI08vQaw2Ffq4WtiThyLFABkv+eknDSe1vj5nLvwG/m1yjez0b9/u7NV/RqnnHBDVBQvCPsy79P4SwiO+ZPRLn9BrYkTkS/ukpJw+G8Rd34m3vHuDZru996zsCTSnqsdbmkE4UBWVFDTmYlI6+1j9GpBwEQERq3RieG7Tp46+4P0yCVMBrZI6tY9E1NrzFU4jlE7x44LDgkpGVFgqeiwlDMS0OiInTYfxkrUVd9c22FtUz+U1celUnadzvM8IOvj6n6TB3hnHlaj1HQaNc0sfQpJjuwGv6ZMOQ8SHSzJkzruuXIokQU469b0fx4lZs9R12FvucgvhpxhKL9mleTPI+swRfzoGeTArsF/UavYoa2Ydb1cwiJD/Y8VgH1UEObZTZsGZeTufX5E52Hmec0JsSKffl/XjVSLZ7m4RNPM95UqdnEuJ23QwwUY/7Oq3YYfm5d4XghaPLTKT2y6Ez33NqhTv+D+V2+18OaGiP23BiFqHk1sjR1RgTAJ6m+dSqZQ="
-        },
         "EXTENSION_CLOUDINARY_API_KEY": {
           "type": "encrypted",
           "isEncrypted": true,
@@ -567,41 +429,6 @@
           "type": "encrypted",
           "isEncrypted": true,
           "data": "RejjJiyUkEbwqrV+87VnDahmAe12o4Zq3dtSF8c3osFjrB9lCk1Ho9HZ6gDp1DlxiecZqqOQGNYCUkXp5zPXbu0Qbzfw8Hc8HeUfz2jqCjlQBGxmCjBGKfbbMua86areZc10mwLgoQaGg8B0lKrH4N5FXlHSzJAStLkxFF4IUBL3qciyi5dmi5bhfPQxVcm3vPNkp1W6lrrc+yBbVHQY1ZyobkHIV5JZA/0EAbl84Pq98OCApGKERo9cZpUajBE1EEQE/YiET4wDLXML2l7MncIzbqMRRyoDDRmMvYzqr/vjxj0Tz/vfjayvp8NTmhVs3y7puPMs73iHb8J60DOoOxkzB24I4aqs0MtVd5dC2NyDMQM/Aa/Geu/xl/Wb0NzbE9Ozd3bsxCXtcaC230qtSxz2o+xK4eD6Wri74iKxgfC3IjeGhUorBmZCAk9jQPjsuTzjTmbumiQ+iWl/X9ZcaXdayUGDN7vMbA4xywwmMVt95jVGH4OBVd4FlHl7wZlua2Z1lxPtR+gIR1el6T3/tbA4f2rlCDPV1+FfIlDBE00xZjq7nw5cXAXin65GhwG3dbFFkCjdCEPWR3IxPWDgK/Y3xzFRH8oTOgEvgk8pJrUvUSHUqklnTIXV8y1hsitx8usrzOSuRsoPdGoIxscaP7+pKYZ8p7NHQsgGgLKOPU4="
-        },
-        "EXTENSION_SMTP_HOST": {
-          "type": "encrypted",
-          "isEncrypted": true,
-          "data": "buou3w6ctRETqjXiJGC1S0jxyp0kxjzfYppuEFPRKL6X2I767frbQcU9qzP8lMhy3kKB+J4sxJN+KzHHQy+xMoErN571hV+6t1hbIUnyhRmfg3NTbnM0gmEs+KyUll1gLJzgS7jeeGf/YCayjV+8mTt148nze+CTy4os/Q/weQBt7DufdbhSOFGajt8MisMzGEV0xpdfcdK3pBGL0sOMVKXP8irlQhZHFm+eD8Qdxn3OP66Cy0tuC50CNhJ5IiaFMaVm8Xxx8t30e0ODbzGVwSUickRr698/4TVPnuyRvpJmqMQmjx99wFPteEX7L0BmHzOq7Z53rLZj2F71wHBTjnR8TCab2KIubeM2GvvbsMWmK2KmxD1KXXsPsbd7YJ9hked9RMnfeC0ChztcVw2zl7RSrF54q29V0WGZVyWBxfjoEBgqjiWA9Ojk5di0x8vsjcLYpGPTBDmiTgk/Q7Uc0wsNL11Fvv4oQV+9QMMtPhSdU/PpsV4nCiBdAhgPAgviaJnHuHuqRDchXkXYKZhO8+eYVkQ1KaQDyGezMggdBn8B7434G5P2VFThG5A7tu+hU31ngvOJAr9mTAaKF124poX4CpFyi9Hidn5o1myTVCvmVESN+DEfdB3CL7xUvvbJXdbJTopUFXbh1rztEO3+htXg43kXnVnLLhCwy6k+LvA="
-        },
-        "EXTENSION_SMTP_PORT": {
-          "type": "encrypted",
-          "isEncrypted": true,
-          "data": "diSdeVSUIQCbi6fWIqBZGpSAS3rIUWDAevGc4eDUppA79HHizC3E4MT3s3aQeYR4pRjlBYi+BX1j3ZflnUthk/2Egoc0pjm/C/p13y0R/tJn8+NIIcqUaBu/ev9CgVb6RyFnzx8J5hqdNNtv3EvkWMJ4O+Crkaz3IiR5RWic0yU3u+vFNjHXIszkvIRgucAmXKL+qrhpIgo6DXx4yS5vbCAsazY5VdBbz7otEsQh0LJFVmr8X+02kjQveebIeM/giozXarEqGBK+h+ef9hzVhCY4ApcPspmIyg7dou04bfb6ELjdyHFImRXxjge3NVeHygpa3mehwux4WcJHO0hVj3ncglDMK+wYr6rwTwFSXr1/RvgfGmGcalGgJuD8tvOqIHm+Mbz/wHRJgmjmdg3Ekhax8IEvsUKBLe6OiOE15AZDBVdiVYE9VUqHpH7km0d3uyHDEcQ7vRjU5sp+fK9fegL6TBwG2C99yENdVhYC8nmgxJVel2yn4o1DjqIwDdqe8xNvhb9QpU5Se6grONxERF5IdU+qYcb8Rsg/lpTeKrWnOMUD6UIh6S6kvMmrv0NUu5fmZjvmrxK3cUAygNqi8yB9yRlZ4zQQ1KFrgS2DH73v5sfJznSji3LYU3MSQKJW8mdrusDiq2G8YU/EM0O1EE000enQiu/ZOUYhwkUXJis="
-        },
-        "EXTENSION_SMTP_ENCRYPTION": {
-          "type": "encrypted",
-          "isEncrypted": true,
-          "data": "rnk9PRbgMIqp5SDbPMi5RLoJDr3VAD9PzwOrPfAkW4Ge4Qp+viPYWEBE0Q5xj88pIKUPTuc5UGvZZM9efUy6nABzpczLzXaHO0rGTSm70iZjM6ngfLjz+wbz262ySCIk4Ba5uiKgapkfx3Ax7GAo4i8oy4/HuHcpL8wxPajHWM85Zv9+2z2ysbnXC0CRDEBpqM62ShA7xXjrVQ5KBqNDI/KTrwJ73/j9LsGim/tCOZlUHIulLKshfpILvDQnlZWWYQZ0Z9bwitq3/42qGPShhMJ16vBIYxkI24JJSyMZrwZbQhT2CXQEbPfYv7P2ktf8Lh3kyz0BiI0MJcQ+5rnj4nHzgplkbJJlEVak5ZnrZD1mW6Xog8XBe+9E9/cp5JIple5tZEpP5NFdwL+2DzDzbofZMuyPh9p4Jf8ZT3h+Gq3dl71tT/cp2+JJ3nPcN+es8nSd26JR6QSbx059EmweqnQRT0dfMwDxBPbW15X0buaXcjg/X//7y6KflN984/0oR0V1a+jdNL9iQADKiWBxKNSXYC4n2y+b7LGua+b+XNiRnsRj5p8UFynloLI2SkDAzj7Bxic9IC40lgQ3mQZWD2PII4EfMp9hctAnEUbaTK1bCGpczooYdd95x9EjtBvFdHWvWKPz46/dTjeAYckPjA+wvmutaYdwXxQh7R9fvpA="
-        },
-        "EXTENSION_SMTP_USER": {
-          "type": "encrypted",
-          "isEncrypted": true,
-          "data": "j78qGfGghqXpEz1Bf9IVJnWv7sy78FyhkE8vWG+DsKFGbXLed+OXk+xH4OzAoK4eVBEbXy9veY5Ds8shvC1qDS+Mw9WKHCkk+vWrCU7pXYxhm/PasGKwQkr5/axrCH7u8M/i/j32F62fn9m4wnjumUYKnUg0Hek3LgxxTIDHc6QophRzKcqL4NUUoIeSFAkyO/RXGZNnbdIEdzssLbz81zJYTKISnqDLA7av4H451kF/swMVxt/REb/S5Voum1vRI0CIfc6UzJYONNuvgyJojlYCr/G+JHk0uyJy3l4VWuuM3ol+QeEG6LltY54A/Z9j79XraN4r5ZdpJ2s6DRZauGOxA4z9dCSNsJbrNUMR9Ptx8b8h9JxURo4+KYsQnyq7kWWPa3DZZBMwRTDOpvaOhK6vlsMBFXaJz/Xm+NKvayXNzKbMe6cb0ctSx4NwtR3TKQnDb0yWzGJp1+/tP8m5kUhQ+JlU0SZsN8Ntf4qqVObLXBzdpPK8vW+YmQliGYbHhHLW28egT/j8S2nME/aFSO8gzIynIK7eEP1kDUYk3OGx0MDmOmud8x2nQcnuliRyD9UZDyJtw6Khvj+2F5h1nS54wCjFEoCJtLnd0LfrX1nmk/0o4FCWvxgh/QnL+Nu6AheKWtRsDyUGXJDgqENIMyR8qp2HXbnDELo2M561Md8="
-        },
-        "EXTENSION_SMTP_PASSWORD": {
-          "type": "encrypted",
-          "isEncrypted": true,
-          "data": "s7lb/WQWVFN70/f7G4G+C9qzajQAv6Wm8iOd+j7+sf72ttSpvakjyfWnUB3YrYklZhHgnmMhwe2JbBk4ZrdZGf3ikyozNV2WerAKO1XIyHQv7ui4+JRysp6Mhg9c8cEy2qrrGow8vzB2Y9RMNdjJMr+Spu0I0MNqQzSmLdmBhyeHmMnufJVnWWZEUl6EciXZEOaMiV0bnhuYCckMKQ7jIckY9pNiff5un70Qm927pLIE3IbH3JPm9n1ybLkcIiqEqqGN7AwWLqUsnPjvG3YLuoZQtKWGnrh9ZuSfHKqfCFcFbW3aF57Cxk3dh6MAea3dTiWolpjy1VxksZNrEIo7VnMqg11KVhamzY7PcD7EtqDHiJWvFfdEqvZmfO+ztH0PaqAi4SdtFg+Eef5acgAhzDN1L0XJP8eI08tOh+SqvhylIkTVwBJrtZrulyyUmcB0F3VSqln4nYjttwkjjAtocsCX0Ff2OveXTc6/fy43oLdH527lEtU1bF7t7L3+b1wlhl2x8KihCQJ6VCAlEGOtASNVwZYi30UzAn7ZSamgfZ3kRDeYKn5lvALvZhR43p+af7bzkcUHPEpAreBfmmtLmnnGKUGeIXEK5UO0NzZjvJTsNXviM5DRhdfqGj+mArIMpsmSeWI5VUZVcWJ0DGqhuhXoynaFiZXicfAIBdnTaH4="
-        },
-        "EXTENSION_SMTP_SENDER": {
-          "type": "encrypted",
-          "isEncrypted": true,
-          "data": "L1gvkEsUWy8iLcTfk4OCPZu2S7GtWZ3ztHgxDBgX9WpmptwYUqE7/0MvfZDCFBShXMlZh4JCpKBxJmkCcUufvc56oNDMAcIZRqXNsK7RO9c92mibaWrxaz4UPWjgFnaHy5ifvKsLVPdGzYrKX3QYeqMHufcRyVOJgKQM5R26paouMBERebVuaLYvPvLV+UywjkT1nJg+ggPzTPsBGL+kg91XG4D6LYIJiG35cnidKLrzeb2bl6DiEB3aET1W9weYxsrRzhUPWP6L75ckc4Z+enMFSOW9pnHhMoHJd/lWT1xlPr+jTgGrNjc9OHC9KTiB3BCUFOvHzuw37gz/Gp0sWlFUWvYSUQJIPoV2DAiX7HzoT5Uh1MZhnT2FTV104xweqeagrPToEeOF6HCDucQnfPLKdUasTTfEZ9DyDophv3y1QbRGJ7ftXMq3puDneoiexZ0PyUK1+q16gYxuuSxhdInvZPKEP/xs+lafjqFXm4pZbDiUmhQzkdA3zGXHuPCmRG1d3qaxsYdXZYTQxpsz1xPPEIw4B+7UJ6FkdhV7T2pXcPhPmF00jlgSxNaHLZofd61RQ6m7PM2Vz3ShZxlmChNZS9vDsnSM6pSoAl9M6B8cQjbuzFLkfhlic9QVSHZZ+V9WL5SmGx308h4KhRq05aheEpKyVyKn9gGBF3druts="
-        },
-        "EXTENSION_SMTP_CLIENT_HOST": {
-          "type": "encrypted",
-          "isEncrypted": true,
-          "data": "vrAN7EMwHrt0IEXu4lRtQ46aAKunV90HhN6SyF8iX7bfoGhQ0dO7NOLTqpUSOwxYv/hT/n0VuD9AXUdFOqFeJx2SRQeIRYeiUHY3zz696Juq3q7YmvsaLZ7tCydQQ7ypRsH9YaucyoSCCrQsZkAjA08MhRkVPSjicl+va65yzu0ONmbKKPtvUK4usa2fB780wGxF8BWc32F1k3GM5ZE6hHGEWwXEDOYVFjZJmw9qzpkKaeF6In7jb5KWZUzsi3vMiufH50NWZ41jLOFNulBiNPgYuC4USGD3rJlGlHVYVqoXJ9KhniJJDcDOW+UXE8G9YGOwOgEWQn+BR80yLqEYVM/RzcBjTMcIr06bbRyx/3D/f8m06wX62FAzKmb1us8o0Dld27aeEauXxUToglyrPRM+yubx0wvoFo29bu9k75io/XitocwYK6nFxVP7ceCB8DgvxE9iES14y8DDcQpPkfKFhvak0UYRlHjeANouXs+f/eem3lSl/dwaAukFx6jL3n5MA7nLwn2iUhgvHygxKp23Xd4fPy+ppG2EEWgtqjCPntYhPwSZ/EuEbhOIHIjzwYq8w5kulWiwiUSqpAOovrOyv/NRmVrHGnjRxWvwZkv67PqM1TzZy1psWuKLRGxKDMzPZMQpZ32wCab+2RCeF8yL9pl8RaQiOfzW3XDyYeo="
         },
         "EXTENSION_SENDGRID_SENDER": {
           "type": "encrypted",
@@ -3902,95 +3729,6 @@
       }
     },
     {
-      "_id": "128f5754b95e5c9e1a1955fa1f5caf0b",
-      "type": "Frontastic.Backstage.StageBundle.Domain.Node",
-      "isMaster": false,
-      "configuration": {
-        "path": "/",
-        "pathTranslations": []
-      },
-      "streams": [
-        {
-          "streamId": "788eccfd-bc94-4a95-aa7d-7e9fee1ec8ee",
-          "type": "frontastic/product-list",
-          "name": "Product list",
-          "configuration": {
-            "query": "",
-            "productFilters": {
-              "filters": [
-                {
-                  "field": "categoryId",
-                  "type": "enum"
-                }
-              ],
-              "values": {
-                "categoryId": "076ab018-de9f-4a55-a436-ffd18d22fc66"
-              }
-            }
-          }
-        },
-        {
-          "streamId": "0847282c-4141-4050-8f0a-1f406bfb0805",
-          "type": "frontastic/product-list",
-          "name": "Product list",
-          "configuration": {
-            "productFilters": {
-              "filters": [
-                {
-                  "field": "categoryId",
-                  "type": "enum"
-                }
-              ],
-              "values": {
-                "categoryId": "076ab018-de9f-4a55-a436-ffd18d22fc66"
-              }
-            }
-          }
-        },
-        {
-          "streamId": "c91eb329-4ba9-4a7d-b8f0-52e3858d56b4",
-          "type": "frontastic/product-list",
-          "name": "Product list",
-          "configuration": []
-        }
-      ],
-      "name": "Home",
-      "path": [],
-      "sort": 1,
-      "environments": {
-        "development": true,
-        "staging": true,
-        "production": true
-      }
-    },
-    {
-      "_id": "c3f1dea4a72614539d5cf50bb40092f8",
-      "type": "Frontastic.Backstage.StageBundle.Domain.Node",
-      "isMaster": false,
-      "configuration": {
-        "path": "hin",
-        "pathTranslations": []
-      },
-      "streams": [
-        {
-          "streamId": "ce19399d-4e2e-4616-964e-14da52673b25",
-          "type": "frontastic/product",
-          "name": "Single product",
-          "configuration": {
-            "productId": "123456"
-          }
-        }
-      ],
-      "name": "Hin",
-      "path": [],
-      "sort": 0,
-      "environments": {
-        "development": true,
-        "staging": true,
-        "production": true
-      }
-    },
-    {
       "_id": "3ef723eb078b0d38bedaf37a3002ae35",
       "type": "Frontastic.Backstage.StageBundle.Domain.Node",
       "isMaster": false,
@@ -4046,6 +3784,68 @@
       "name": "Default",
       "path": [],
       "sort": 0,
+      "environments": {
+        "development": true,
+        "staging": true,
+        "production": true
+      }
+    },
+    {
+      "_id": "128f5754b95e5c9e1a1955fa1f5caf0b",
+      "type": "Frontastic.Backstage.StageBundle.Domain.Node",
+      "isMaster": false,
+      "configuration": {
+        "path": "/",
+        "pathTranslations": []
+      },
+      "streams": [
+        {
+          "streamId": "788eccfd-bc94-4a95-aa7d-7e9fee1ec8ee",
+          "type": "frontastic/product-list",
+          "name": "Product list",
+          "configuration": {
+            "query": "",
+            "productFilters": {
+              "filters": [
+                {
+                  "field": "categoryId",
+                  "type": "enum"
+                }
+              ],
+              "values": {
+                "categoryId": "076ab018-de9f-4a55-a436-ffd18d22fc66"
+              }
+            }
+          }
+        },
+        {
+          "streamId": "0847282c-4141-4050-8f0a-1f406bfb0805",
+          "type": "frontastic/product-list",
+          "name": "Product list",
+          "configuration": {
+            "productFilters": {
+              "filters": [
+                {
+                  "field": "categoryId",
+                  "type": "enum"
+                }
+              ],
+              "values": {
+                "categoryId": "076ab018-de9f-4a55-a436-ffd18d22fc66"
+              }
+            }
+          }
+        },
+        {
+          "streamId": "c91eb329-4ba9-4a7d-b8f0-52e3858d56b4",
+          "type": "frontastic/product-list",
+          "name": "Product list",
+          "configuration": []
+        }
+      ],
+      "name": "Home",
+      "path": [],
+      "sort": 1,
       "environments": {
         "development": true,
         "staging": true,
@@ -5831,6 +5631,573 @@
       }
     },
     {
+      "_id": "3ef723eb078b0d38bedaf37a300421d6",
+      "type": "Frontastic.Backstage.StageBundle.Domain.Page",
+      "state": "default",
+      "nodes": ["3ef723eb078b0d38bedaf37a3002ae35"],
+      "layoutId": "three_rows",
+      "name": "V1",
+      "environments": {
+        "development": true,
+        "staging": true,
+        "production": true
+      },
+      "scheduledFrom": null,
+      "scheduledTo": null,
+      "nodesPagesOfTypeSortIndex": null,
+      "scheduleCriterion": "",
+      "hostCriteria": [],
+      "localeCriteria": [],
+      "scheduledExperiment": null,
+      "regions": {
+        "head": {
+          "type": "Frontastic.Backstage.StageBundle.Domain.Region",
+          "regionId": "head",
+          "configuration": [],
+          "elements": [
+            {
+              "type": "Frontastic.Backstage.StageBundle.Domain.Kit",
+              "kitId": "b611cda7-c8e8-4e89-bf89-9b512c2b2381",
+              "kitDefinitionId": "128f5754b95e5c9e1a1955fa1f5b0a9c",
+              "configuration": []
+            }
+          ],
+          "cells": []
+        },
+        "main": {
+          "type": "Frontastic.Backstage.StageBundle.Domain.Region",
+          "regionId": "main",
+          "configuration": [],
+          "elements": [
+            {
+              "type": "Frontastic.Backstage.StageBundle.Domain.Cell",
+              "cellId": "7f3043c2-9d5a-43c0-9670-930c1d5a2f66",
+              "configuration": {
+                "size": 12
+              },
+              "customConfiguration": [],
+              "tastics": [
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "8a2f8dee-2091-4879-a9ee-6cca2d455c48",
+                  "tasticType": "commercetools/ui/content/markdown",
+                  "configuration": {
+                    "markdown": {
+                      "en_GB": "##Our Story: Crafting Beautiful Homes with Quality \n",
+                      "de_DE": "##Unsere Geschichte: Schöne Häuser mit Qualität herstellen"
+                    },
+                    "name": {
+                      "en_GB": "Page Title"
+                    },
+                    "mobile": true,
+                    "fullWidth": true,
+                    "textAlign": "center"
+                  },
+                  "isDeleted": false
+                },
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "bc772861-ae40-4678-ab59-742214228a0d",
+                  "tasticType": "commercetools/ui/content/hero",
+                  "configuration": {
+                    "image": {
+                      "media": {
+                        "_type": "Frontastic\\Backstage\\MediaApiBundle\\Domain\\MediaApi\\Media",
+                        "mediaId": "ocdculmgvpam05ernext",
+                        "resourceType": "image",
+                        "name": "AdobeStock 236440341",
+                        "tags": ["__none"],
+                        "file": "https://res.cloudinary.com/dlwdq84ig/image/upload/v1680510249/ocdculmgvpam05ernext.jpg",
+                        "size": 3849485,
+                        "width": 5700,
+                        "height": 2537,
+                        "format": "jpg",
+                        "created": "2023-04-03T08:24:09+00:00",
+                        "metaData": []
+                      }
+                    }
+                  },
+                  "isDeleted": false
+                },
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "15a53706-724d-4bed-bd77-fb0e5603d1d2",
+                  "tasticType": "commercetools/ui/content/spacer",
+                  "configuration": {
+                    "customDesktop": 12
+                  },
+                  "isDeleted": false
+                },
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "2fb888d1-2cb1-4585-b653-7bc79e5099bb",
+                  "tasticType": "commercetools/ui/content/markdown",
+                  "configuration": {
+                    "markdown": {
+                      "en_GB": "Beautifully designed interiors have the power to inspire, invigorate, and soothe us all at once. A well-designed interior can enhance our relationships, boost our creativity, and even improve our mental and physical health. A beautiful interior is not just a luxurious indulgence, but a transformative investment in our well-being, and it is well worth the effort.",
+                      "de_DE": "Wunderschön gestaltete Innenräume haben die Kraft, uns alle gleichzeitig zu inspirieren, zu beleben und zu beruhigen. Ein gut gestaltetes Interieur kann unsere Beziehungen verbessern, unsere Kreativität fördern und sogar unsere geistige und körperliche Gesundheit verbessern. Ein schönes Interieur ist nicht nur ein luxuriöser Genuss, sondern eine transformative Investition in unser Wohlbefinden, und es lohnt sich."
+                    },
+                    "fullWidth": true,
+                    "textAlign": "center"
+                  },
+                  "isDeleted": false
+                },
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "8f7de6c7-4196-49b6-a778-2d243a839733",
+                  "tasticType": "commercetools/ui/content/spacer",
+                  "configuration": {
+                    "customDesktop": 12
+                  },
+                  "isDeleted": false
+                },
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "9f240fce-3eaf-4f80-8e76-eb096e4ef710",
+                  "tasticType": "commercetools/ui/content/content-slider",
+                  "configuration": {
+                    "slides": [
+                      {
+                        "image": {
+                          "media": {
+                            "_type": "Frontastic\\Backstage\\MediaApiBundle\\Domain\\MediaApi\\Media",
+                            "mediaId": "ijobrbzcedd2uy0wh5zo",
+                            "resourceType": "image",
+                            "name": "AdobeStock 153426336",
+                            "tags": ["__none"],
+                            "file": "https://res.cloudinary.com/dlwdq84ig/image/upload/v1679645083/ijobrbzcedd2uy0wh5zo.jpg",
+                            "size": 7054940,
+                            "width": 5616,
+                            "height": 3744,
+                            "format": "jpg",
+                            "created": "2023-03-24T08:04:43+00:00",
+                            "metaData": []
+                          }
+                        },
+                        "title": {
+                          "en_GB": "OUR CRAFT"
+                        },
+                        "ctaLabel": {
+                          "en_GB": "Learn More"
+                        },
+                        "ctaReference": null,
+                        "summary": {
+                          "en_GB": "Our skilled craftsmen use only the finest materials and techniques to create beautiful, durable furniture that will stand the test of time."
+                        }
+                      },
+                      {
+                        "image": {
+                          "media": {
+                            "_type": "Frontastic\\Backstage\\MediaApiBundle\\Domain\\MediaApi\\Media",
+                            "mediaId": "lz2wcz3hnq0cwbcilfse",
+                            "resourceType": "image",
+                            "name": "AdobeStock 537126786",
+                            "tags": ["__none"],
+                            "file": "https://res.cloudinary.com/dlwdq84ig/image/upload/v1679646102/lz2wcz3hnq0cwbcilfse.jpg",
+                            "size": 9912515,
+                            "width": 7202,
+                            "height": 4807,
+                            "format": "jpg",
+                            "created": "2023-03-24T08:21:42+00:00",
+                            "metaData": []
+                          }
+                        },
+                        "title": {
+                          "en_GB": "OUR DESIGN"
+                        },
+                        "ctaLabel": {
+                          "en_GB": "Learn More"
+                        },
+                        "ctaReference": null,
+                        "summary": {
+                          "en_GB": "We carefully curate our fabrics and designs for modern interiors, selecting only the highest quality materials and contemporary styles."
+                        }
+                      },
+                      {
+                        "image": {
+                          "media": {
+                            "_type": "Frontastic\\Backstage\\MediaApiBundle\\Domain\\MediaApi\\Media",
+                            "mediaId": "g30omcevw3okamqcdqcw",
+                            "resourceType": "image",
+                            "name": "AdobeStock 541156563",
+                            "tags": ["__none"],
+                            "file": "https://res.cloudinary.com/dlwdq84ig/image/upload/v1679646203/g30omcevw3okamqcdqcw.jpg",
+                            "size": 11173676,
+                            "width": 7934,
+                            "height": 5292,
+                            "format": "jpg",
+                            "created": "2023-03-24T08:23:23+00:00",
+                            "metaData": []
+                          }
+                        },
+                        "title": {
+                          "en_GB": "OUR PEOPLE"
+                        },
+                        "ctaLabel": {
+                          "en_GB": "Learn More"
+                        },
+                        "ctaReference": null,
+                        "summary": {
+                          "en_GB": "We take pride in our team of knowledgeable individuals who are committed to providing our customers with the best products possible."
+                        }
+                      }
+                    ]
+                  },
+                  "isDeleted": false
+                },
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "7da01292-f2b5-4580-84ea-c8c46f901aec",
+                  "tasticType": "commercetools/ui/content/spacer",
+                  "configuration": {
+                    "customMobile": 24,
+                    "customTablet": 24,
+                    "customDesktop": 24
+                  },
+                  "isDeleted": false
+                }
+              ]
+            },
+            {
+              "type": "Frontastic.Backstage.StageBundle.Domain.Cell",
+              "cellId": "c998a087-58c2-47b0-a630-25208544ffda",
+              "configuration": {
+                "size": 12
+              },
+              "customConfiguration": [],
+              "tastics": [
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "47a6bb47-4a92-4459-9ce3-8a0976351534",
+                  "tasticType": "commercetools/ui/content/spacer",
+                  "configuration": {
+                    "customMobile": 0,
+                    "customDesktop": 24,
+                    "backgroundColor": "neutral-200",
+                    "mobile": true
+                  },
+                  "isDeleted": false
+                },
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "c62ede60-274c-4e1b-a239-733bed414e68",
+                  "tasticType": "commercetools/ui/products/slider",
+                  "configuration": {
+                    "title": {
+                      "en_GB": "Our Home Decor"
+                    },
+                    "subline": {
+                      "en_GB": "Explore our selection stylish home decor"
+                    },
+                    "subtitleVariant": "sm",
+                    "data": "aa2201bd-0678-4de1-bdb9-58601e08e3d8",
+                    "ctaLabel": {
+                      "en_GB": "Shop all"
+                    },
+                    "ctaLink": {
+                      "type": "link",
+                      "target": "/home-decor"
+                    }
+                  },
+                  "isDeleted": false
+                },
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "1fca7565-7389-4255-9440-b3096b2cc730",
+                  "tasticType": "commercetools/ui/content/spacer",
+                  "configuration": {
+                    "customDesktop": 24,
+                    "backgroundColor": "neutral-200"
+                  },
+                  "isDeleted": false
+                },
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "5c22e176-60ee-4190-a84b-5f60f1803190",
+                  "tasticType": "commercetools/ui/content/spacer",
+                  "configuration": {
+                    "customDesktop": 66,
+                    "backgroundColor": "neutral-200"
+                  },
+                  "isDeleted": false
+                }
+              ]
+            },
+            {
+              "type": "Frontastic.Backstage.StageBundle.Domain.Cell",
+              "cellId": "7300a7a7-a4c4-414e-9ac0-7125a5111b19",
+              "configuration": {
+                "size": 8
+              },
+              "customConfiguration": [],
+              "tastics": [
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "b5716f91-c595-426d-8cc0-1ddaa125c874",
+                  "tasticType": "commercetools/ui/content/tiles-group",
+                  "configuration": {
+                    "tiles": [
+                      {
+                        "image": {
+                          "media": {
+                            "_type": "Frontastic\\Backstage\\MediaApiBundle\\Domain\\MediaApi\\Media",
+                            "mediaId": "gz16uea9m6n9v0hoaiyf",
+                            "resourceType": "image",
+                            "name": "AdobeStock 552091366",
+                            "tags": ["__none"],
+                            "file": "https://res.cloudinary.com/dlwdq84ig/image/upload/v1679506230/gz16uea9m6n9v0hoaiyf.jpg",
+                            "size": 6240082,
+                            "width": 5000,
+                            "height": 3750,
+                            "format": "jpg",
+                            "created": "2023-03-22T17:30:30+00:00",
+                            "metaData": []
+                          }
+                        },
+                        "title": null,
+                        "subtitle": null,
+                        "ctaLabel": null,
+                        "ctaReference": null,
+                        "roundedBorders": true
+                      },
+                      {
+                        "image": {
+                          "media": {
+                            "_type": "Frontastic\\Backstage\\MediaApiBundle\\Domain\\MediaApi\\Media",
+                            "mediaId": "vlwuyaiwgbluppveephw",
+                            "resourceType": "image",
+                            "name": "AdobeStock 535545668",
+                            "tags": ["__none"],
+                            "file": "https://res.cloudinary.com/dlwdq84ig/image/upload/v1679647184/vlwuyaiwgbluppveephw.jpg",
+                            "size": 10229170,
+                            "width": 8256,
+                            "height": 6192,
+                            "format": "jpg",
+                            "created": "2023-03-24T08:39:44+00:00",
+                            "metaData": []
+                          }
+                        },
+                        "title": null,
+                        "subtitle": null,
+                        "ctaLabel": null,
+                        "ctaReference": null,
+                        "roundedBorders": true
+                      }
+                    ]
+                  },
+                  "isDeleted": false
+                }
+              ]
+            },
+            {
+              "type": "Frontastic.Backstage.StageBundle.Domain.Cell",
+              "cellId": "e7216908-e34a-455e-b4a0-ccf82585b8c4",
+              "configuration": {
+                "size": 4
+              },
+              "customConfiguration": [],
+              "tastics": [
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "ed908f75-0818-4265-af9d-8b967761e116",
+                  "tasticType": "commercetools/ui/content/spacer",
+                  "configuration": {
+                    "customDesktop": 40
+                  },
+                  "isDeleted": false
+                },
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "3a651eee-d3ec-4138-82aa-8f66bdaf464e",
+                  "tasticType": "commercetools/ui/content/markdown",
+                  "configuration": {
+                    "markdown": {
+                      "en_GB": "##MINIMALIST FURNITURE\nMinimalist furniture is characterized by its simple and clean design, often featuring sleek lines, neutral colors, and a focus on functionality over ornamentation.\n\n[Shop the collection](https://home-thegoodstore.netlify.app/the-minimalist)",
+                      "de_DE": "##MINIMALISTISCHE MÖBEL\nMinimalistische Möbel zeichnen sich durch ihr einfaches und klares Design aus, oft mit schlanken Linien, neutralen Farben und einem Fokus auf Funktionalität statt Ornamentik.\n\n[Kaufen Sie die Kollektion](https://home-thegoodstore.netlify.app/the-minimalist)"
+                    }
+                  },
+                  "isDeleted": false
+                }
+              ]
+            },
+            {
+              "type": "Frontastic.Backstage.StageBundle.Domain.Cell",
+              "cellId": "365a5be0-17cc-4936-968d-cf9d96654b4d",
+              "configuration": {
+                "size": 12
+              },
+              "customConfiguration": [],
+              "tastics": [
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "146bb427-69c9-4006-8044-8f7b272873d3",
+                  "tasticType": "commercetools/ui/content/spacer",
+                  "configuration": {
+                    "customDesktop": 66,
+                    "backgroundColor": "neutral-200"
+                  },
+                  "isDeleted": false
+                }
+              ]
+            }
+          ],
+          "cells": []
+        },
+        "footer": {
+          "type": "Frontastic.Backstage.StageBundle.Domain.Region",
+          "regionId": "footer",
+          "configuration": [],
+          "elements": [
+            {
+              "type": "Frontastic.Backstage.StageBundle.Domain.Kit",
+              "kitId": "3a6fc4cd-8763-4e10-9220-d68a3dd5ef92",
+              "kitDefinitionId": "128f5754b95e5c9e1a1955fa1f5bd0af",
+              "configuration": []
+            }
+          ],
+          "cells": []
+        }
+      }
+    },
+    {
+      "_id": "128f5754b95e5c9e1a1955fa1f68d920",
+      "type": "Frontastic.Backstage.StageBundle.Domain.Page",
+      "state": "default",
+      "nodes": ["128f5754b95e5c9e1a1955fa1f5a7dcb"],
+      "layoutId": "three_rows",
+      "name": "Default",
+      "environments": {
+        "development": true,
+        "staging": true,
+        "production": true
+      },
+      "scheduledFrom": null,
+      "scheduledTo": null,
+      "nodesPagesOfTypeSortIndex": null,
+      "scheduleCriterion": "",
+      "hostCriteria": null,
+      "localeCriteria": null,
+      "scheduledExperiment": null,
+      "regions": {
+        "head": {
+          "type": "Frontastic.Backstage.StageBundle.Domain.Region",
+          "regionId": "head",
+          "configuration": [],
+          "elements": [
+            {
+              "type": "Frontastic.Backstage.StageBundle.Domain.Kit",
+              "kitId": "95519c25-b5a7-4063-adc3-d87459fb86b6",
+              "kitDefinitionId": "128f5754b95e5c9e1a1955fa1f5b0a9c",
+              "configuration": []
+            }
+          ],
+          "cells": []
+        },
+        "main": {
+          "type": "Frontastic.Backstage.StageBundle.Domain.Region",
+          "regionId": "main",
+          "configuration": [],
+          "elements": [
+            {
+              "type": "Frontastic.Backstage.StageBundle.Domain.Cell",
+              "cellId": "c2bedc71-7095-4daf-99ce-ce263a85a1a5",
+              "configuration": {
+                "size": 12
+              },
+              "customConfiguration": [],
+              "tastics": [
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "7aa51854-b2cc-42d7-8083-1faf20683353",
+                  "tasticType": "commercetools/ui/products/product-list",
+                  "configuration": {
+                    "facetsConfiguration": [
+                      {
+                        "key": "variants.price",
+                        "type": "range",
+                        "label": {
+                          "en_GB": "Price"
+                        }
+                      },
+                      {
+                        "key": "variants.attributes.colorlabel",
+                        "type": "color",
+                        "label": {
+                          "en_GB": "Color"
+                        }
+                      },
+                      {
+                        "key": "variants.scopedPriceDiscounted",
+                        "type": "boolean",
+                        "label": {
+                          "en_GB": "Sale"
+                        }
+                      }
+                    ],
+                    "pricesConfiguration": [],
+                    "data": "__master",
+                    "mobile": true,
+                    "tablet": true,
+                    "desktop": true
+                  },
+                  "isDeleted": false
+                },
+                {
+                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
+                  "tasticId": "fd8a0797-9001-411d-8258-df13d6e0a053",
+                  "tasticType": "commercetools/ui/products/product-list-algolia",
+                  "configuration": {
+                    "facetsConfiguration": [
+                      {
+                        "key": "variants.attributes.colorlabel",
+                        "type": "color",
+                        "label": {
+                          "en_GB": "Color"
+                        }
+                      },
+                      {
+                        "key": "variants.price.centAmount",
+                        "type": "range",
+                        "label": {
+                          "en_GB": "Price"
+                        }
+                      },
+                      {
+                        "key": "variants.isOnSale",
+                        "type": "boolean",
+                        "label": {
+                          "en_GB": "Sale"
+                        }
+                      }
+                    ],
+                    "mobile": false,
+                    "tablet": false,
+                    "desktop": false
+                  },
+                  "isDeleted": false
+                }
+              ]
+            }
+          ],
+          "cells": []
+        },
+        "footer": {
+          "type": "Frontastic.Backstage.StageBundle.Domain.Region",
+          "regionId": "footer",
+          "configuration": [],
+          "elements": [
+            {
+              "type": "Frontastic.Backstage.StageBundle.Domain.Kit",
+              "kitId": "8a40ea2d-231f-4c7f-9bad-4ed74e3c3736",
+              "kitDefinitionId": "128f5754b95e5c9e1a1955fa1f5bd0af",
+              "configuration": []
+            }
+          ],
+          "cells": []
+        }
+      }
+    },
+    {
       "_id": "128f5754b95e5c9e1a1955fa1f6ea521",
       "type": "Frontastic.Backstage.StageBundle.Domain.Page",
       "state": "default",
@@ -5890,7 +6257,7 @@
                         "metaData": []
                       },
                       "gravity": {
-                        "mode": "faces:auto"
+                        "mode": "body:face"
                       }
                     },
                     "title": {
@@ -6484,650 +6851,6 @@
             {
               "type": "Frontastic.Backstage.StageBundle.Domain.Kit",
               "kitId": "167e858f-2f31-4a9d-b19a-8d1d856e88b4",
-              "kitDefinitionId": "128f5754b95e5c9e1a1955fa1f5bd0af",
-              "configuration": []
-            }
-          ],
-          "cells": []
-        }
-      }
-    },
-    {
-      "_id": "c3f1dea4a72614539d5cf50bb4055756",
-      "type": "Frontastic.Backstage.StageBundle.Domain.Page",
-      "state": "default",
-      "nodes": ["c3f1dea4a72614539d5cf50bb40092f8"],
-      "layoutId": "three_rows",
-      "name": "datasource",
-      "environments": {
-        "development": true,
-        "staging": true,
-        "production": true
-      },
-      "scheduledFrom": null,
-      "scheduledTo": null,
-      "nodesPagesOfTypeSortIndex": null,
-      "scheduleCriterion": "",
-      "hostCriteria": [],
-      "localeCriteria": [],
-      "scheduledExperiment": null,
-      "regions": {
-        "head": {
-          "type": "Frontastic.Backstage.StageBundle.Domain.Region",
-          "regionId": "head",
-          "configuration": [],
-          "elements": [],
-          "cells": []
-        },
-        "main": {
-          "type": "Frontastic.Backstage.StageBundle.Domain.Region",
-          "regionId": "main",
-          "configuration": [],
-          "elements": [
-            {
-              "type": "Frontastic.Backstage.StageBundle.Domain.Cell",
-              "cellId": "7ec51298-0247-40f6-bdff-a630385721ee",
-              "configuration": {
-                "size": 12
-              },
-              "customConfiguration": [],
-              "tastics": [
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "0d1a7ba1-1f05-4a70-a075-c771ca53f234",
-                  "tasticType": "commercetools/ui/products/details",
-                  "configuration": {
-                    "data": "ce19399d-4e2e-4616-964e-14da52673b25"
-                  },
-                  "isDeleted": false
-                }
-              ]
-            }
-          ],
-          "cells": []
-        },
-        "footer": {
-          "type": "Frontastic.Backstage.StageBundle.Domain.Region",
-          "regionId": "footer",
-          "configuration": [],
-          "elements": [],
-          "cells": []
-        }
-      }
-    },
-    {
-      "_id": "3ef723eb078b0d38bedaf37a300421d6",
-      "type": "Frontastic.Backstage.StageBundle.Domain.Page",
-      "state": "default",
-      "nodes": ["3ef723eb078b0d38bedaf37a3002ae35"],
-      "layoutId": "three_rows",
-      "name": "V1",
-      "environments": {
-        "development": true,
-        "staging": true,
-        "production": true
-      },
-      "scheduledFrom": null,
-      "scheduledTo": null,
-      "nodesPagesOfTypeSortIndex": null,
-      "scheduleCriterion": "",
-      "hostCriteria": [],
-      "localeCriteria": [],
-      "scheduledExperiment": null,
-      "regions": {
-        "head": {
-          "type": "Frontastic.Backstage.StageBundle.Domain.Region",
-          "regionId": "head",
-          "configuration": [],
-          "elements": [
-            {
-              "type": "Frontastic.Backstage.StageBundle.Domain.Kit",
-              "kitId": "b611cda7-c8e8-4e89-bf89-9b512c2b2381",
-              "kitDefinitionId": "128f5754b95e5c9e1a1955fa1f5b0a9c",
-              "configuration": []
-            }
-          ],
-          "cells": []
-        },
-        "main": {
-          "type": "Frontastic.Backstage.StageBundle.Domain.Region",
-          "regionId": "main",
-          "configuration": [],
-          "elements": [
-            {
-              "type": "Frontastic.Backstage.StageBundle.Domain.Cell",
-              "cellId": "7f3043c2-9d5a-43c0-9670-930c1d5a2f66",
-              "configuration": {
-                "size": 12
-              },
-              "customConfiguration": [],
-              "tastics": [
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "8a2f8dee-2091-4879-a9ee-6cca2d455c48",
-                  "tasticType": "commercetools/ui/content/markdown",
-                  "configuration": {
-                    "markdown": {
-                      "en_GB": "##Our Story: Crafting Beautiful Homes with Quality \n",
-                      "de_DE": "##Unsere Geschichte: Schöne Häuser mit Qualität herstellen"
-                    },
-                    "name": {
-                      "en_GB": "Page Title"
-                    },
-                    "mobile": true,
-                    "fullWidth": true,
-                    "textAlign": "center"
-                  },
-                  "isDeleted": false
-                },
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "bc772861-ae40-4678-ab59-742214228a0d",
-                  "tasticType": "commercetools/ui/content/hero",
-                  "configuration": {
-                    "image": {
-                      "media": {
-                        "_type": "Frontastic\\Backstage\\MediaApiBundle\\Domain\\MediaApi\\Media",
-                        "mediaId": "ocdculmgvpam05ernext",
-                        "resourceType": "image",
-                        "name": "AdobeStock 236440341",
-                        "tags": ["__none"],
-                        "file": "https://res.cloudinary.com/dlwdq84ig/image/upload/v1680510249/ocdculmgvpam05ernext.jpg",
-                        "size": 3849485,
-                        "width": 5700,
-                        "height": 2537,
-                        "format": "jpg",
-                        "created": "2023-04-03T08:24:09+00:00",
-                        "metaData": []
-                      }
-                    }
-                  },
-                  "isDeleted": false
-                },
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "15a53706-724d-4bed-bd77-fb0e5603d1d2",
-                  "tasticType": "commercetools/ui/content/spacer",
-                  "configuration": {
-                    "customDesktop": 12
-                  },
-                  "isDeleted": false
-                },
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "2fb888d1-2cb1-4585-b653-7bc79e5099bb",
-                  "tasticType": "commercetools/ui/content/markdown",
-                  "configuration": {
-                    "markdown": {
-                      "en_GB": "Beautifully designed interiors have the power to inspire, invigorate, and soothe us all at once. A well-designed interior can enhance our relationships, boost our creativity, and even improve our mental and physical health. A beautiful interior is not just a luxurious indulgence, but a transformative investment in our well-being, and it is well worth the effort.",
-                      "de_DE": "Wunderschön gestaltete Innenräume haben die Kraft, uns alle gleichzeitig zu inspirieren, zu beleben und zu beruhigen. Ein gut gestaltetes Interieur kann unsere Beziehungen verbessern, unsere Kreativität fördern und sogar unsere geistige und körperliche Gesundheit verbessern. Ein schönes Interieur ist nicht nur ein luxuriöser Genuss, sondern eine transformative Investition in unser Wohlbefinden, und es lohnt sich."
-                    },
-                    "fullWidth": true,
-                    "textAlign": "center"
-                  },
-                  "isDeleted": false
-                },
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "8f7de6c7-4196-49b6-a778-2d243a839733",
-                  "tasticType": "commercetools/ui/content/spacer",
-                  "configuration": {
-                    "customDesktop": 12
-                  },
-                  "isDeleted": false
-                },
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "9f240fce-3eaf-4f80-8e76-eb096e4ef710",
-                  "tasticType": "commercetools/ui/content/content-slider",
-                  "configuration": {
-                    "slides": [
-                      {
-                        "image": {
-                          "media": {
-                            "_type": "Frontastic\\Backstage\\MediaApiBundle\\Domain\\MediaApi\\Media",
-                            "mediaId": "ijobrbzcedd2uy0wh5zo",
-                            "resourceType": "image",
-                            "name": "AdobeStock 153426336",
-                            "tags": ["__none"],
-                            "file": "https://res.cloudinary.com/dlwdq84ig/image/upload/v1679645083/ijobrbzcedd2uy0wh5zo.jpg",
-                            "size": 7054940,
-                            "width": 5616,
-                            "height": 3744,
-                            "format": "jpg",
-                            "created": "2023-03-24T08:04:43+00:00",
-                            "metaData": []
-                          }
-                        },
-                        "title": {
-                          "en_GB": "OUR CRAFT"
-                        },
-                        "ctaLabel": {
-                          "en_GB": "Learn More"
-                        },
-                        "ctaReference": null,
-                        "summary": {
-                          "en_GB": "Our skilled craftsmen use only the finest materials and techniques to create beautiful, durable furniture that will stand the test of time."
-                        }
-                      },
-                      {
-                        "image": {
-                          "media": {
-                            "_type": "Frontastic\\Backstage\\MediaApiBundle\\Domain\\MediaApi\\Media",
-                            "mediaId": "lz2wcz3hnq0cwbcilfse",
-                            "resourceType": "image",
-                            "name": "AdobeStock 537126786",
-                            "tags": ["__none"],
-                            "file": "https://res.cloudinary.com/dlwdq84ig/image/upload/v1679646102/lz2wcz3hnq0cwbcilfse.jpg",
-                            "size": 9912515,
-                            "width": 7202,
-                            "height": 4807,
-                            "format": "jpg",
-                            "created": "2023-03-24T08:21:42+00:00",
-                            "metaData": []
-                          }
-                        },
-                        "title": {
-                          "en_GB": "OUR DESIGN"
-                        },
-                        "ctaLabel": {
-                          "en_GB": "Learn More"
-                        },
-                        "ctaReference": null,
-                        "summary": {
-                          "en_GB": "We carefully curate our fabrics and designs for modern interiors, selecting only the highest quality materials and contemporary styles."
-                        }
-                      },
-                      {
-                        "image": {
-                          "media": {
-                            "_type": "Frontastic\\Backstage\\MediaApiBundle\\Domain\\MediaApi\\Media",
-                            "mediaId": "g30omcevw3okamqcdqcw",
-                            "resourceType": "image",
-                            "name": "AdobeStock 541156563",
-                            "tags": ["__none"],
-                            "file": "https://res.cloudinary.com/dlwdq84ig/image/upload/v1679646203/g30omcevw3okamqcdqcw.jpg",
-                            "size": 11173676,
-                            "width": 7934,
-                            "height": 5292,
-                            "format": "jpg",
-                            "created": "2023-03-24T08:23:23+00:00",
-                            "metaData": []
-                          }
-                        },
-                        "title": {
-                          "en_GB": "OUR PEOPLE"
-                        },
-                        "ctaLabel": {
-                          "en_GB": "Learn More"
-                        },
-                        "ctaReference": null,
-                        "summary": {
-                          "en_GB": "We take pride in our team of knowledgeable individuals who are committed to providing our customers with the best products possible."
-                        }
-                      }
-                    ]
-                  },
-                  "isDeleted": false
-                },
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "7da01292-f2b5-4580-84ea-c8c46f901aec",
-                  "tasticType": "commercetools/ui/content/spacer",
-                  "configuration": {
-                    "customMobile": 24,
-                    "customTablet": 24,
-                    "customDesktop": 24
-                  },
-                  "isDeleted": false
-                }
-              ]
-            },
-            {
-              "type": "Frontastic.Backstage.StageBundle.Domain.Cell",
-              "cellId": "c998a087-58c2-47b0-a630-25208544ffda",
-              "configuration": {
-                "size": 12
-              },
-              "customConfiguration": [],
-              "tastics": [
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "47a6bb47-4a92-4459-9ce3-8a0976351534",
-                  "tasticType": "commercetools/ui/content/spacer",
-                  "configuration": {
-                    "customMobile": 0,
-                    "customDesktop": 24,
-                    "backgroundColor": "neutral-200",
-                    "mobile": true
-                  },
-                  "isDeleted": false
-                },
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "c62ede60-274c-4e1b-a239-733bed414e68",
-                  "tasticType": "commercetools/ui/products/slider",
-                  "configuration": {
-                    "title": {
-                      "en_GB": "Our Home Decor"
-                    },
-                    "subline": {
-                      "en_GB": "Explore our selection stylish home decor"
-                    },
-                    "subtitleVariant": "sm",
-                    "data": "aa2201bd-0678-4de1-bdb9-58601e08e3d8",
-                    "ctaLabel": {
-                      "en_GB": "Shop all"
-                    },
-                    "ctaLink": {
-                      "type": "link",
-                      "target": "/home-decor"
-                    }
-                  },
-                  "isDeleted": false
-                },
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "1fca7565-7389-4255-9440-b3096b2cc730",
-                  "tasticType": "commercetools/ui/content/spacer",
-                  "configuration": {
-                    "customDesktop": 24,
-                    "backgroundColor": "neutral-200"
-                  },
-                  "isDeleted": false
-                },
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "5c22e176-60ee-4190-a84b-5f60f1803190",
-                  "tasticType": "commercetools/ui/content/spacer",
-                  "configuration": {
-                    "customDesktop": 66,
-                    "backgroundColor": "neutral-200"
-                  },
-                  "isDeleted": false
-                }
-              ]
-            },
-            {
-              "type": "Frontastic.Backstage.StageBundle.Domain.Cell",
-              "cellId": "7300a7a7-a4c4-414e-9ac0-7125a5111b19",
-              "configuration": {
-                "size": 8
-              },
-              "customConfiguration": [],
-              "tastics": [
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "b5716f91-c595-426d-8cc0-1ddaa125c874",
-                  "tasticType": "commercetools/ui/content/tiles-group",
-                  "configuration": {
-                    "tiles": [
-                      {
-                        "image": {
-                          "media": {
-                            "_type": "Frontastic\\Backstage\\MediaApiBundle\\Domain\\MediaApi\\Media",
-                            "mediaId": "gz16uea9m6n9v0hoaiyf",
-                            "resourceType": "image",
-                            "name": "AdobeStock 552091366",
-                            "tags": ["__none"],
-                            "file": "https://res.cloudinary.com/dlwdq84ig/image/upload/v1679506230/gz16uea9m6n9v0hoaiyf.jpg",
-                            "size": 6240082,
-                            "width": 5000,
-                            "height": 3750,
-                            "format": "jpg",
-                            "created": "2023-03-22T17:30:30+00:00",
-                            "metaData": []
-                          }
-                        },
-                        "title": null,
-                        "subtitle": null,
-                        "ctaLabel": null,
-                        "ctaReference": null,
-                        "roundedBorders": true
-                      },
-                      {
-                        "image": {
-                          "media": {
-                            "_type": "Frontastic\\Backstage\\MediaApiBundle\\Domain\\MediaApi\\Media",
-                            "mediaId": "vlwuyaiwgbluppveephw",
-                            "resourceType": "image",
-                            "name": "AdobeStock 535545668",
-                            "tags": ["__none"],
-                            "file": "https://res.cloudinary.com/dlwdq84ig/image/upload/v1679647184/vlwuyaiwgbluppveephw.jpg",
-                            "size": 10229170,
-                            "width": 8256,
-                            "height": 6192,
-                            "format": "jpg",
-                            "created": "2023-03-24T08:39:44+00:00",
-                            "metaData": []
-                          }
-                        },
-                        "title": null,
-                        "subtitle": null,
-                        "ctaLabel": null,
-                        "ctaReference": null,
-                        "roundedBorders": true
-                      }
-                    ]
-                  },
-                  "isDeleted": false
-                }
-              ]
-            },
-            {
-              "type": "Frontastic.Backstage.StageBundle.Domain.Cell",
-              "cellId": "e7216908-e34a-455e-b4a0-ccf82585b8c4",
-              "configuration": {
-                "size": 4
-              },
-              "customConfiguration": [],
-              "tastics": [
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "ed908f75-0818-4265-af9d-8b967761e116",
-                  "tasticType": "commercetools/ui/content/spacer",
-                  "configuration": {
-                    "customDesktop": 40
-                  },
-                  "isDeleted": false
-                },
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "3a651eee-d3ec-4138-82aa-8f66bdaf464e",
-                  "tasticType": "commercetools/ui/content/markdown",
-                  "configuration": {
-                    "markdown": {
-                      "en_GB": "##MINIMALIST FURNITURE\nMinimalist furniture is characterized by its simple and clean design, often featuring sleek lines, neutral colors, and a focus on functionality over ornamentation.\n\n[Shop the collection](https://home-thegoodstore.netlify.app/the-minimalist)",
-                      "de_DE": "##MINIMALISTISCHE MÖBEL\nMinimalistische Möbel zeichnen sich durch ihr einfaches und klares Design aus, oft mit schlanken Linien, neutralen Farben und einem Fokus auf Funktionalität statt Ornamentik.\n\n[Kaufen Sie die Kollektion](https://home-thegoodstore.netlify.app/the-minimalist)"
-                    }
-                  },
-                  "isDeleted": false
-                }
-              ]
-            },
-            {
-              "type": "Frontastic.Backstage.StageBundle.Domain.Cell",
-              "cellId": "365a5be0-17cc-4936-968d-cf9d96654b4d",
-              "configuration": {
-                "size": 12
-              },
-              "customConfiguration": [],
-              "tastics": [
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "146bb427-69c9-4006-8044-8f7b272873d3",
-                  "tasticType": "commercetools/ui/content/spacer",
-                  "configuration": {
-                    "customDesktop": 66,
-                    "backgroundColor": "neutral-200"
-                  },
-                  "isDeleted": false
-                }
-              ]
-            }
-          ],
-          "cells": []
-        },
-        "footer": {
-          "type": "Frontastic.Backstage.StageBundle.Domain.Region",
-          "regionId": "footer",
-          "configuration": [],
-          "elements": [
-            {
-              "type": "Frontastic.Backstage.StageBundle.Domain.Kit",
-              "kitId": "3a6fc4cd-8763-4e10-9220-d68a3dd5ef92",
-              "kitDefinitionId": "128f5754b95e5c9e1a1955fa1f5bd0af",
-              "configuration": []
-            }
-          ],
-          "cells": []
-        }
-      }
-    },
-    {
-      "_id": "128f5754b95e5c9e1a1955fa1f68d920",
-      "type": "Frontastic.Backstage.StageBundle.Domain.Page",
-      "state": "default",
-      "nodes": ["128f5754b95e5c9e1a1955fa1f5a7dcb"],
-      "layoutId": "three_rows",
-      "name": "Default",
-      "environments": {
-        "development": true,
-        "staging": true,
-        "production": true
-      },
-      "scheduledFrom": null,
-      "scheduledTo": null,
-      "nodesPagesOfTypeSortIndex": null,
-      "scheduleCriterion": "",
-      "hostCriteria": null,
-      "localeCriteria": null,
-      "scheduledExperiment": null,
-      "regions": {
-        "head": {
-          "type": "Frontastic.Backstage.StageBundle.Domain.Region",
-          "regionId": "head",
-          "configuration": [],
-          "elements": [
-            {
-              "type": "Frontastic.Backstage.StageBundle.Domain.Kit",
-              "kitId": "95519c25-b5a7-4063-adc3-d87459fb86b6",
-              "kitDefinitionId": "128f5754b95e5c9e1a1955fa1f5b0a9c",
-              "configuration": []
-            }
-          ],
-          "cells": []
-        },
-        "main": {
-          "type": "Frontastic.Backstage.StageBundle.Domain.Region",
-          "regionId": "main",
-          "configuration": [],
-          "elements": [
-            {
-              "type": "Frontastic.Backstage.StageBundle.Domain.Cell",
-              "cellId": "c2bedc71-7095-4daf-99ce-ce263a85a1a5",
-              "configuration": {
-                "size": 12
-              },
-              "customConfiguration": [],
-              "tastics": [
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "7aa51854-b2cc-42d7-8083-1faf20683353",
-                  "tasticType": "commercetools/ui/products/product-list",
-                  "configuration": {
-                    "facetsConfiguration": [
-                      {
-                        "key": "variants.price",
-                        "type": "range",
-                        "label": {
-                          "en_GB": "Price"
-                        }
-                      },
-                      {
-                        "key": "variants.attributes.colorlabel",
-                        "type": "color",
-                        "label": {
-                          "en_GB": "Color"
-                        }
-                      },
-                      {
-                        "key": "variants.scopedPriceDiscounted",
-                        "type": "boolean",
-                        "label": {
-                          "en_GB": "Sale"
-                        }
-                      }
-                    ],
-                    "pricesConfiguration": [
-                      {
-                        "key": "variants.price",
-                        "ranges": [
-                          {
-                            "min": 0,
-                            "max": 100
-                          },
-                          {
-                            "min": 100,
-                            "max": 300
-                          }
-                        ]
-                      }
-                    ],
-                    "data": "__master",
-                    "mobile": true,
-                    "tablet": true,
-                    "desktop": true
-                  },
-                  "isDeleted": false
-                },
-                {
-                  "type": "Frontastic.Backstage.StageBundle.Domain.Tastic",
-                  "tasticId": "fd8a0797-9001-411d-8258-df13d6e0a053",
-                  "tasticType": "commercetools/ui/products/product-list-algolia",
-                  "configuration": {
-                    "facetsConfiguration": [
-                      {
-                        "key": "variants.attributes.colorlabel",
-                        "type": "color",
-                        "label": {
-                          "en_GB": "Color"
-                        }
-                      },
-                      {
-                        "key": "variants.price.centAmount",
-                        "type": "range",
-                        "label": {
-                          "en_GB": "Price"
-                        }
-                      },
-                      {
-                        "key": "variants.isOnSale",
-                        "type": "boolean",
-                        "label": {
-                          "en_GB": "Sale"
-                        }
-                      }
-                    ],
-                    "mobile": false,
-                    "tablet": false,
-                    "desktop": false
-                  },
-                  "isDeleted": false
-                }
-              ]
-            }
-          ],
-          "cells": []
-        },
-        "footer": {
-          "type": "Frontastic.Backstage.StageBundle.Domain.Region",
-          "regionId": "footer",
-          "configuration": [],
-          "elements": [
-            {
-              "type": "Frontastic.Backstage.StageBundle.Domain.Kit",
-              "kitId": "8a40ea2d-231f-4c7f-9bad-4ed74e3c3736",
               "kitDefinitionId": "128f5754b95e5c9e1a1955fa1f5bd0af",
               "configuration": []
             }
@@ -10887,27 +10610,6 @@
       }
     },
     {
-      "EXTENSION_CONTENTFUL_ACCESS_TOKEN": {
-        "type": "encrypted",
-        "isEncrypted": true,
-        "data": "GeiBGwCofehj8Rde+CBBOixkkT7mkzcFS9jtAzAPxttVnmrFsXB5Xo0MLVDS/gqhEY4JZUt17MluXcDndLfOKzOfOI9qnFw1y/t/Fmpv2jIETWHEsdLIu3jOXLaA8R+fXEfF4eqQkBcmxiKYrBHXxiBWibg4iTyzMnl9RrNbDf1pPXFSCi4wNIm6c7+4DTnVXiwesPluBc23bwbeE38ej7xjP0rkXHIaJ5VRZgDIpHjwt9cBVwAvBGskYprSPgJUoNyVAfEiKmKOFgv7xQbVGnap+R9h+W2QBxjn+gdIHejc2kSpK7kJt5ivEm07TgeX0g7cSsGfYMVmgDoWoDKl8n5xwvApBGo6BCnpylGDhOqYh4lBo2Z7Sz5zBqwLQZcPkUw2U1cjYalA8mvoo/aZHdb55No7DgLh9/njH17H0iFK4kyxIO6t7DerOwSO2XvmlQ5AX0M5DlK62Fp04X7oRsk7SoZnApba9GHH/aM2H7xi1dfkHps2QIRdoQhfSWbz6b7xRyHK4Q5tRMZHSwWajUrZuGs69Dv/wAKV+0SQXkeDnHZUpjsjBt5OmRcAa+mpZ9UhSTrvWW0iq3IQZWo7+MzgSMkzTNFDjvwTO0S6lg4gkaum5bMkhA0ylB2n4OA9juuxI/V0oFyVwAQ+DSDOQC2CpwTQCBQxi1DVChQfM+0="
-      }
-    },
-    {
-      "EXTENSION_CONTENTFUL_PREVIEW_TOKEN": {
-        "type": "encrypted",
-        "isEncrypted": true,
-        "data": "tSqzrWO3iYnsvJ1DOIr8M/Od+TBCQZzqw0qIL5essbh1MbDAJLJaqp7RQ+0jPYVmZHNeSwCYa3UEKvFHDgUcfTmEUNwJRWYfGc20jAZZw1OsUYPpqnVpB9IEkGbsUfWry3acgrlu6AwBIQRyjdePcUZ2xZDLUFhTETNoo3/RlN2hmPxneJfzuxqtX0N3JcQ19F3LuQ6v1TT48rTSGtka36HSI2dzmLzYBPAc0cO4aeBo4844u3E+u/pJx/rYBFHWUnQAH2i1FjLG7HXGIaBsjTVfm7A2iMsn0iZU+Lj8WWs+OYKMHM5Z80oR7Lf7aEBAak07lI+0AdwNaR1xJOeSuPrcMJ4nTpwGrG+cNMl7c0aDte3nCPiTAAdaPzsXXz0PhAwnNlSSKX3FBl1CHMANYryHB+u6lAICqbZLd5lQ+LPKkLgdkGjOsDjh8yXfU7z+bGUYTq78YvmWt0zE8/QTqiy3inzufiCBnYbha1rRrf/6fGo8qgc0/p9vrXqzz4Ragiie6Gf4sKqFwnD9G5oaMnqkfWdpxfEWSfSUv9g89SpCVMOa7NT+vcqsvvZwnq9SUwU66CnTaHN+g2dRmaJjuSO/GO60WF4JafGRYV7xadmNWeNV7w8ZQzR2YG1SyKT0R8XQNwFYkZU0hg83ewjgmQPeJSeNzT0nRNXzf5yOflY="
-      }
-    },
-    {
-      "EXTENSION_CONTENTFUL_SPACE_ID": {
-        "type": "encrypted",
-        "isEncrypted": true,
-        "data": "ldK24ZarAzo9NI0fYmg39kfGFAqc3o6ARcO9aiMa2TKzA+67s+1QlDFsar3ddXXvqRlNlBVlO8bYIsic+dZFMVbwITf53+dMr2ogLMjJic1kS4f0lhNbYEZcgXeRAENLwylzs+m3STHKTMrPxr0kOoZOxBMcrBrNE6tS0W6QpyfzUi0NNQb0H/1Mjjs6GQyhWvWfe6VN+c+BT2dC5Rbb4PJKNPuTS3bE088knAZv4Dmm/6dZaNFJwkN94Y8L4NS6P966lYLw/2xSREmAxd19wh1eQnJBCXyOoQxl68zo5Qr6kTWnVVKE0Zx8j/6XgJiE1VrRcZOjyPAq+gJraCKhiR7bfXxXumxPnQu7i9AeeXWY624OETFj2bJIpdXG2is4ekirmRmHfRSQ6JIBR4zJNHGImFkWwAjZeceki6FVxe8M05IqlGkeJFAFK3Ww+fiP64LS7OMNpPhXP2FxXvrJ38wItWXvnwHuotNzA3gfC6oR95tH0EZt9HX+dBPH39R9Gd9s7klyuDw/4eI/leN8pD7fPaYh967YDK8c/MNyqgJHZlkf+sRMoOWhgp8GNf0Mno0+XURh+vcpNn19NWs75GdHFgQ+Zaip8wy4rN4XQTe9lwC64HfaGluDXHtm+AMVPQ/dvb3n/Zm1krxs+czZqyU1E44cSuYigpc4+Rxb7u8="
-      }
-    },
-    {
       "EXTENSION_CLOUDINARY_CLOUD_NAME": {
         "type": "encrypted",
         "isEncrypted": true,
@@ -10982,55 +10684,6 @@
         "type": "encrypted",
         "isEncrypted": true,
         "data": "spwXQf4DBgiLNFQmxDICssvmLerV+d3/gBtYoOjMcgNPa48Pvuo2T/dF0ar1zHVGhtYJ2LjLJc3Q6jUq5NYvva4TtkldiRk7QL8On11oIVE3t4EI+JraWRkHmukp1Q+noziHPZdbpeQtl53mOe6bdtwgP+VWSxB2FNEiDSLOBFh2j/xolrPfdquWX8/Mz9/GlC3QPSfBT7U7xtJflnzyGfZygi8Jy7MEM2HBEfQZppt68eQEeVTO0fVuvCu7sP7Thzpj74UwVu9VJYJpApZ+PPBpkfAWEKDzJjWaRRhv0wv0Yk2rLIi1r2Z+BM7E0c4boThaJ0vP7jGmKtyXWfgExR+r1PW0dcHzRsTDAwHuucu+vmkOHx+MIw6ny8nqUzCCwSFcHFQfCuA2+e1/2DySeUKLk7Cuk987es7CWvkpdQPuohxbEGYIE+aLIP18oXyD2FTdtwZq5xSNgyz3T8wZuu+gASDNh05jsrFXYqLc42VuLxYEi7hIGLqYH3aCNPPgWA/pgXBGgGwcq5C2wbbLzcThnteWU7TjMCeQ7bGZy6vVYwdrSIfAs7XrEjbSVu+Agc85t55SwOWPBxZibo2zEmAJ/6axHdF+xKhK6ddsNhJSPCteE6BOAfWq0HxIM9I3VlXW5FB3MpL/MHEawdv86ZsNxJ+L8zTtajsKOrhifWw="
-      }
-    },
-    {
-      "EXTENSION_SMTP_HOST": {
-        "type": "encrypted",
-        "isEncrypted": true,
-        "data": "tQC/lAQ4T4k81xSHLjl74X6xkPYOYK8ptUk3gf7+2D4ui0l89ECCGaqu/UyGt4tj13tf9lySstOfoUj08PrtcG9EWPEvk/rUZUzS/rOFDqcLsd7DSnxJ5eEJFdRRRmpGefgLRIr03P1iJjTJrS9H/WzUV9R5ZMvcBZLONQGjmvzPFp/4DjzL/N1P4H7y2uVV6v8MpExmm3uSdabp8tHw61RoNAXEv++j8FM7tboe67aBmC0nc9y1pw9YZAEK7qiU+TojiUpiky3N/hJy5fHqE0x83RQjWIYrHGtpCGfq4SR0GfUMluk/yswUETGPZHKwlUvyz5xIh9UH1MofIGpGJQQ8zSxRzYk/pnw6ut3F7yobmzLTeDtKNFMo2fmjBBFBoZV4suc3pO+yq0xESQWjRJ3L3xRT729jF4Yb8Vpb25WvrRfpW7+SdMEtbwDcNLHou6pR1Fdq+jt8W09RZpfjn0YUY6u6tPw9wmoNSUmnN3GxBNX0Nl22SavKpexQ4Q5tZxyzxvVD80QbXzMmrR2dX0wUHH+8d4mcS++nMkR4aYd119nYcbk8pIOpRPN6jOQVKlxdtFtXb3j+WPskEC7QzOJwVDorWCtPoINxUBsa9tIlmg/PTfRQOSC119KD/kUuso+1/hy9rke+scb0bpCNOKZTjYrZ33/UIIxtfA5ln8M="
-      }
-    },
-    {
-      "EXTENSION_SMTP_PORT": {
-        "type": "encrypted",
-        "isEncrypted": true,
-        "data": "X+3R/t27sTDoB/WKr2uTaTI8e15DHxSnFbOKezw15a8C5Lj1WVSGKC/SWUFTcNVSDZiJtayxgPwpzjPHpQJaXikSqbYoU5otM0J6HjUC82AlswIDvTdBEXdOwC0Vv/kuqWdCh1gABpop5Qf7sRHlnUUVhIVumnrlf0L+DJy6uoa5+lGoc0a+m62Q3+xSSMcZn608eXgvkBIn61oM+LUaaeGSD3oLKk7DCHaD6tV133Vv4zUHAD5kZ2U5dCBecne6t8aaWeN+yPnlLHi/Z0pGlArKHNzu7bvMtHtkeeFbulTiqoulznmTR4ab2pY9p880hlVusixcwvsblk4660xCZaR3m3b3gEwqYLKGA1pO/GSiJiWwPfgxqs/01TAZxSpJYqMxCWdf7pNeixX/ugUx9bAgHSIWqUrf4YeX2D1bgQlkZd+PtGWsF7M2FaKaE6ZPe1p46XwXmQSNQZiPphXWzgYXDUuxq4me9Cdopt+mY4CLvNACOuJsilbBBinqr6uAhttfekCGTCKKfgvy+1pBZA5I2UkNjoyucYLvH8o0DNOn6ybVJp+rV2vtaXGJBs++WW5KnDCmvhqfhXYs3eQQOXc8miGwF+2iiAoupS342Pwkl6hEIYnXgumA0gfQKy44nde3Q2rxaEYEPqHyuBwbs0mQYOiGFhCGJsRBXR4TmG8="
-      }
-    },
-    {
-      "EXTENSION_SMTP_ENCRYPTION": {
-        "type": "encrypted",
-        "isEncrypted": true,
-        "data": "SU9XwNA1Mu2zZRTwm5Grq8TzLnoIvFBHTvPuqRRdU5Ei0mnYX/cnA2ypCl/gnE09XTZ7Mb+7HIiEP53CDY7F/hlbPvLzZ+cU+2LiFqpmErhMzz3wRWG1q2TexgcKWIMUiLjx4yj/D3qOaoGL0/q+MMiKzNnNR5eeroiUq+KowmzyVHrLYTz97lxMsuKmxJ8Sm4hnYFmWW9n1S3RimJlo3biIgXvyeRAGX1A9yH71RCB6m1Zq9/1zDvOvSJ2ZRE6WYOmht4SmLNcbsv1m1s5+UEA1lzznI3xWKf5TPtJh3brFay+UbjH/lYVygPHZ4aWXShUyAoSySIVRvtcGl+kbnX8of5g7duJmaHI4myfBVy1EpEESiDrTJB6Cfm6CbnEbEW+ub9GXb4m3rKKVGq7OZQwmTvvJw4Irw6tFDImx/oDMNhGYVU8NgXkXEjnhzDWuOEvakvHfYrx6O+0SzvUVFImR3hp3vwai0h8kvRNXulJuvkWPArEZpPFfL8KWePL2CnuS39S7MPw54rjxhsUjoezCpYATHCmFX89OQuvSVnrci+uksPs7v2uek6whgfA6XA0JCdoTyNK6FFxSR4D2CEZ2EWqi3NhKMDX0qO0UeOqJLwZrQayN4hu0TlG21tJEoBV8uNU/q1fU3VyrqDZHiO8BK0+3EnLF3cNfhAsiKeE="
-      }
-    },
-    {
-      "EXTENSION_SMTP_USER": {
-        "type": "encrypted",
-        "isEncrypted": true,
-        "data": "ocUFBC0e4HRQEmL7ZEyPTJ5VitUhfhEDj8021XhAi/UR7A0I42JMnW/mFyrho53U/Z/1YgJOdhZn2kYHR8LOTNUn2n1oqVJRNi5v7zH87CFW1Z+GTtdKFh9OyNjFifJJBIsui2xqoKBfLtjzaJvxH09ZraieNNGb+HeX8rWWl5HemGAYakkOKWugbuIxxCXuNx09vDJY3SWFK0Bv/NYkOZSKYutwm9FfwOmblMTnYdu8lVV21C5AclX42IF/Qs8Yi+Lu3uw2jrd3AU/v38QxpPHk9mpZ9Ob67Xh4qz9k+RwdOQU0qt50kuSMPlWW1lBpXR24P13M2ACMIeCyphNvMTOf+JSufcNijcZaK+YGgLV4K+3uLoGD2jzcw6NwLoZf14z/AFgUSJNBDctOK43QSUyBicqF4GZ+Nh8bVS36obpfB/jv7o2d/2HCiCDSPrPIjbIseJWii9bPEXFrNNA1WmLMSid4Alr5n2YqK9LFGflGW/yzP3iFFZN4+abhXdXK70BMUsXw75OlPtMmFVpnxfD2vBGoSXt4+3DwWNa9tj4AoQIRQtlKUoNbCPRWrcOYtqXwJkGTTmgKxeyNNgPZW4ZhgLf41jTtpru5TvPGB4O/P0JkUMOAnj4qBfrZPGHeTVWcp+toLdFHgfh66uXQaXgedLOs0zHJCZRMkUiU5O0="
-      }
-    },
-    {
-      "EXTENSION_SMTP_PASSWORD": {
-        "type": "encrypted",
-        "isEncrypted": true,
-        "data": "H2fobvbztxQfsvmnZEXzeWs6uNixnrm43NMoywxZnD6uT3rliTsd4DnoHYV5dPn0BorJUd5F9LYwbpPVtNvW/lN1d1fYwyQRJ8pDL2riYLgfeM5j+SwMJPmg66PSnabSpGbiSjL4UdXoJcBMTP973R/EgEM1/dhpWRj5RUn+k0vcC6RBaFegd55IWv2Lr/h1ZmFxJ0mVGyUex1sgf//heF4WNZpHcuO4n6oWJH0Mb0GX4q0AinftSsw2rq64NAd4Wa401motXo+ubHGgiA4LgDIcr388Gd+RR4oh9WP1J0Jlu7Pxg8tOOY1zxtorfL031y87GowFjc7ZGmKRtc6Z8e6D4eppRPqMPGY2Mr/edcuU4VEsedkNRpzHcL6L8dmbeebVh9tVXKUmXmykIwKgBrioUGOwLEKl0b+LbouyId3PqDPpZh2A5tefJiHXr4JfSlfVqZM6X0870GLdEdQhXfU28x7zigtsk3nNdLnHp9Dpk9Lk+yursfzBuH4JR1a+iyFx1vgOGlUpnVyDtVniaMQGp0hhWqbdeYaWoUDr/izInR+U4BmSCNG/8ARB5OLi6sx8qtX9T6MqZiCY7Re2AvdPPfwmFyRZ5YWkLzgEDvZ1QwpcFx2KtRY8UXyLOZcwpRNsxz/V1CjJME3vMw3FU8N/MAKy1nRPEWfnttLFWZ0="
-      }
-    },
-    {
-      "EXTENSION_SMTP_SENDER": {
-        "type": "encrypted",
-        "isEncrypted": true,
-        "data": "jEElh4Q5NqRrAy37jy091BAVHcxBoJC4gJkaAgZHM5C2kb9s3h8Z2B+shk2W1ANFJ7i6DWQX//XBIlU36h3Sjr7HwM+YNPgQ0hTgK0aNlPi4XNlalx1VPNC/GaB00MZ99PGFxzh/Nq1PZbXO8bfsLTK9gS/gUM9TCI+cYjDwSCpy4VYpBPRZfdA5q/UqDdzgza6fq75BxnRpp19CPh95KZOp8sNyRGndN+ETc/bmmCiXKZ5dhe1yGC738YSx/J5QBOUsGP5RBF45Q41nNPxBUk1Z5lpQDCUIQfZNHKsvE2L4zKcpF6FCl717nkwYfiwDTJUTS3dC4ZIYYuNsvvoTwODhpxfatmyQKOWrm/IAFwF95FKIS4r5A3e66YDtEK/XtYk9kamzs6T0Y4M+4zZ0ST/DgjXPDKG98yptZPrrn6ODRc0FOIUnRZnDugns/5TwiaQz9JHgKxA9L9jk3tiDrVTb1QXQ4kLGLaGVAvw4Z40LzcCY1A3IU0xlx3PTLhaiVdcxQHJeQpgpS31AMH6DJHB/d0SbeNajglCV2byHibIciK9IxMNCCO0OtbPW9kQyycsWpkmfC4GXysPl02RtLzfmD0dMBcnEyrObhLwGk1kkeDAbf1AgrJ/49ZUY1OPJyTBGnFZEK0AThr6VytBxWgJH+HO8I2evV0GKdtukEhk="
-      }
-    },
-    {
-      "EXTENSION_SMTP_CLIENT_HOST": {
-        "type": "encrypted",
-        "isEncrypted": true,
-        "data": "CHfNYwasliZqiNBexIj81hs06e8Qme6lNSbPVV3T3fnKUwU4Jksyr3vFFttw+BthfROdhfu/ZY3ySCXZZua/kjjjQKFc/NWjRh/u4EtAWAHMSv+py8QXqn7uWZe5aa6ttWUJbZTpmSq0EmJa8IL5jpfm+7NfICOC0uZIRkysI1ycLKxjLZb2AMSvF4Lqm9oQA8op0wrwPu8bQqcLIQ06iLWZ863pl+QXE4GIOJhN/NOsAmkIbHFGpxxSpW+f2MJt5MQrpo/+SjAnFM063zePkSyxriOG7lvTnEuzG80K+C6y+p63K5K6cshM74md/zMYFJFpD2gtVptMkAb5O+RweSNv9Jr/Lff2o/0rIJoGaYoy/wAigUy6i9qFJVUcljblUlRtFCKH3qOuEwmgM7YmyJjW+K3JR5pKvh2S5CPRUJ26ruy73I/igNwZ2yltS4E/Ci8cOFf2BTCr1ZujXFRWW1us33DPXL0uENdyhET2nnzVfJQqMR65rEzm7cdgNETIwZOqWVbWUuryS22dVXcuF1ev+ldXXi0VqQnLBKG/iNc9A87Jc31HsCHhfUH/1saXyMf8gwsCG8WS179xauRUgmd15wvJEIfMsCieYpnAy4Xsvp0buvg1genut1WiXFWcpLljEm0heRHoSqi7oVRcEC9ZrEgrzmnCZq0WyqJcgr8="
       }
     },
     {
@@ -11118,27 +10771,6 @@
       }
     },
     {
-      "EXTENSION_CONTENTFUL_ACCESS_TOKEN": {
-        "type": "encrypted",
-        "isEncrypted": true,
-        "data": "esPzNB0h8zJo535XEULyx5/vEVxWIAjmsxNyl94K4hAHk89AICHc/8m1SI9fVWhpTNw+QEwQ+vPlK59nTZX9h38LD2d/hnPtbJcQeEKtZtPnlX2BgOLVEK+cNmEwreT27mKc9TT/aWqql5raxodD/VaCgbplfYB+tRI60OrjRHscHuxaDkv5qC6ca+Awb4BZc9h6lgYc/O6EGRBBk6zaHNe4ZLn5BMXPTO7cqzNTBMPhklbuJLjdGEM0mN78UP+ZFESuHhZ0FeqZxDXjo1mkMAq4OGwSuby3MZxp5MW9sHW2Bbyy5/l1XKj++FUIkgnAiQ6EjClJXMKdCUj8nRtvgm7y04TfRcV7maPvMcN/bJZgym/LxRFXce6OfTbFSAsYG4NL6BSkj0/IBc1JaIzTPX5WqaJP0Cc5Y857aPMnL3Giua/SUE3NQkd1y3no2cUBnBIUqXXJN/K+LXe97AR0CUR+eV/pmwnfSnLo6xQnBY8x01BuDiRXulHZBhuRUYmP3X5BwwQ55pNk1G6nm5OrIiDEZanaZLSjQx/4VySpTYcrAanTUhWfLOQTKSPmPA6Fviblas5c5FgOO7ZyP72/q/NbEz/dYCaqhEdshxs6Dt0Wi4r0GfQZxSy7bs6j3PLrimWhZVCj409PuxzcyZmwHc5FNA1DA1xLvh3/4dDvobA="
-      }
-    },
-    {
-      "EXTENSION_CONTENTFUL_PREVIEW_TOKEN": {
-        "type": "encrypted",
-        "isEncrypted": true,
-        "data": "THoV3ymC3Lhl59gNDe3fyT0+LmuLeEIIURRfPT1s6H7JKESJkpVAQrLc7FrrLYMkXlexpqyFGMVf5GDaa5FVxoJJiuU7zZ0tnuGy/eVY8002ZAmk1hCJtL/eVrETXMtVIAyZd8XVb/ZbFt3aqfUawwKF24SEIDunrPODiZKjg1xEuB6o6hNot/PDqgRQIJykhRmn7oZavB1z9Ae0Jwuo3+s3PWpwN3A3kal8T4rtKQaoi8EsICros5+qSS4qRnPSntiGOotTpRe4ONLZpx8q/Ie2q1A6KWR9HYNJ5h9dtF8P5VolTWpESLHhi+Tk62j1a5VCzt9MuoG3XyVDQ7mLTS6t33+DFNhJzRpRfgC2TxlTCD5aPpAcP7Z/Za2LGnaDkOb9fjecH0d8FC6Z0wmI2RRezePDEb9aSPNR41cBZ5CJb8MzcXHALcsJhGmZuRLYla4yUO1xzHk9XbEvDgIWRr8heCAhFveagMPsNASm06VN3FoB/bcIIKCpevffAItnk9YePoR+l0K3zq3kOpQOYmeT42/v/mJ/1+WCUd/e2xjSquBF5vWSzIFPWzgrb1/A6TjFTRmK4huFtB70Ts2D8VyT7PypxEj53WS3HHAEpR705sKQoSi0Mr0H/tm5DmXxZ+bDRBVsxsOEPk71DSr4Si3SvO5zYOzSS+yLe7EIi4c="
-      }
-    },
-    {
-      "EXTENSION_CONTENTFUL_SPACE_ID": {
-        "type": "encrypted",
-        "isEncrypted": true,
-        "data": "bhgDPwDD2BUic5s25B6t+OHxe0tWWHqVVvXSnSQ40qkUMbpyFlftwKpooMRW+8LxgN7HAHLPfO+X1mIJgQK3yAvTOxVzWId18zI/3DFl38FdDvfhSrvK8n0qWvCYiakA+L7tBptVoZ5NpPDAb0FfptmQIjTeUJiEniwxBsx1dWAWI08vQaw2Ffq4WtiThyLFABkv+eknDSe1vj5nLvwG/m1yjez0b9/u7NV/RqnnHBDVBQvCPsy79P4SwiO+ZPRLn9BrYkTkS/ukpJw+G8Rd34m3vHuDZru996zsCTSnqsdbmkE4UBWVFDTmYlI6+1j9GpBwEQERq3RieG7Tp46+4P0yCVMBrZI6tY9E1NrzFU4jlE7x44LDgkpGVFgqeiwlDMS0OiInTYfxkrUVd9c22FtUz+U1celUnadzvM8IOvj6n6TB3hnHlaj1HQaNc0sfQpJjuwGv6ZMOQ8SHSzJkzruuXIokQU469b0fx4lZs9R12FvucgvhpxhKL9mleTPI+swRfzoGeTArsF/UavYoa2Ydb1cwiJD/Y8VgH1UEObZTZsGZeTufX5E52Hmec0JsSKffl/XjVSLZ7m4RNPM95UqdnEuJ23QwwUY/7Oq3YYfm5d4XghaPLTKT2y6Ez33NqhTv+D+V2+18OaGiP23BiFqHk1sjR1RgTAJ6m+dSqZQ="
-      }
-    },
-    {
       "EXTENSION_CLOUDINARY_API_KEY": {
         "type": "encrypted",
         "isEncrypted": true,
@@ -11213,55 +10845,6 @@
         "type": "encrypted",
         "isEncrypted": true,
         "data": "RejjJiyUkEbwqrV+87VnDahmAe12o4Zq3dtSF8c3osFjrB9lCk1Ho9HZ6gDp1DlxiecZqqOQGNYCUkXp5zPXbu0Qbzfw8Hc8HeUfz2jqCjlQBGxmCjBGKfbbMua86areZc10mwLgoQaGg8B0lKrH4N5FXlHSzJAStLkxFF4IUBL3qciyi5dmi5bhfPQxVcm3vPNkp1W6lrrc+yBbVHQY1ZyobkHIV5JZA/0EAbl84Pq98OCApGKERo9cZpUajBE1EEQE/YiET4wDLXML2l7MncIzbqMRRyoDDRmMvYzqr/vjxj0Tz/vfjayvp8NTmhVs3y7puPMs73iHb8J60DOoOxkzB24I4aqs0MtVd5dC2NyDMQM/Aa/Geu/xl/Wb0NzbE9Ozd3bsxCXtcaC230qtSxz2o+xK4eD6Wri74iKxgfC3IjeGhUorBmZCAk9jQPjsuTzjTmbumiQ+iWl/X9ZcaXdayUGDN7vMbA4xywwmMVt95jVGH4OBVd4FlHl7wZlua2Z1lxPtR+gIR1el6T3/tbA4f2rlCDPV1+FfIlDBE00xZjq7nw5cXAXin65GhwG3dbFFkCjdCEPWR3IxPWDgK/Y3xzFRH8oTOgEvgk8pJrUvUSHUqklnTIXV8y1hsitx8usrzOSuRsoPdGoIxscaP7+pKYZ8p7NHQsgGgLKOPU4="
-      }
-    },
-    {
-      "EXTENSION_SMTP_HOST": {
-        "type": "encrypted",
-        "isEncrypted": true,
-        "data": "buou3w6ctRETqjXiJGC1S0jxyp0kxjzfYppuEFPRKL6X2I767frbQcU9qzP8lMhy3kKB+J4sxJN+KzHHQy+xMoErN571hV+6t1hbIUnyhRmfg3NTbnM0gmEs+KyUll1gLJzgS7jeeGf/YCayjV+8mTt148nze+CTy4os/Q/weQBt7DufdbhSOFGajt8MisMzGEV0xpdfcdK3pBGL0sOMVKXP8irlQhZHFm+eD8Qdxn3OP66Cy0tuC50CNhJ5IiaFMaVm8Xxx8t30e0ODbzGVwSUickRr698/4TVPnuyRvpJmqMQmjx99wFPteEX7L0BmHzOq7Z53rLZj2F71wHBTjnR8TCab2KIubeM2GvvbsMWmK2KmxD1KXXsPsbd7YJ9hked9RMnfeC0ChztcVw2zl7RSrF54q29V0WGZVyWBxfjoEBgqjiWA9Ojk5di0x8vsjcLYpGPTBDmiTgk/Q7Uc0wsNL11Fvv4oQV+9QMMtPhSdU/PpsV4nCiBdAhgPAgviaJnHuHuqRDchXkXYKZhO8+eYVkQ1KaQDyGezMggdBn8B7434G5P2VFThG5A7tu+hU31ngvOJAr9mTAaKF124poX4CpFyi9Hidn5o1myTVCvmVESN+DEfdB3CL7xUvvbJXdbJTopUFXbh1rztEO3+htXg43kXnVnLLhCwy6k+LvA="
-      }
-    },
-    {
-      "EXTENSION_SMTP_PORT": {
-        "type": "encrypted",
-        "isEncrypted": true,
-        "data": "diSdeVSUIQCbi6fWIqBZGpSAS3rIUWDAevGc4eDUppA79HHizC3E4MT3s3aQeYR4pRjlBYi+BX1j3ZflnUthk/2Egoc0pjm/C/p13y0R/tJn8+NIIcqUaBu/ev9CgVb6RyFnzx8J5hqdNNtv3EvkWMJ4O+Crkaz3IiR5RWic0yU3u+vFNjHXIszkvIRgucAmXKL+qrhpIgo6DXx4yS5vbCAsazY5VdBbz7otEsQh0LJFVmr8X+02kjQveebIeM/giozXarEqGBK+h+ef9hzVhCY4ApcPspmIyg7dou04bfb6ELjdyHFImRXxjge3NVeHygpa3mehwux4WcJHO0hVj3ncglDMK+wYr6rwTwFSXr1/RvgfGmGcalGgJuD8tvOqIHm+Mbz/wHRJgmjmdg3Ekhax8IEvsUKBLe6OiOE15AZDBVdiVYE9VUqHpH7km0d3uyHDEcQ7vRjU5sp+fK9fegL6TBwG2C99yENdVhYC8nmgxJVel2yn4o1DjqIwDdqe8xNvhb9QpU5Se6grONxERF5IdU+qYcb8Rsg/lpTeKrWnOMUD6UIh6S6kvMmrv0NUu5fmZjvmrxK3cUAygNqi8yB9yRlZ4zQQ1KFrgS2DH73v5sfJznSji3LYU3MSQKJW8mdrusDiq2G8YU/EM0O1EE000enQiu/ZOUYhwkUXJis="
-      }
-    },
-    {
-      "EXTENSION_SMTP_ENCRYPTION": {
-        "type": "encrypted",
-        "isEncrypted": true,
-        "data": "rnk9PRbgMIqp5SDbPMi5RLoJDr3VAD9PzwOrPfAkW4Ge4Qp+viPYWEBE0Q5xj88pIKUPTuc5UGvZZM9efUy6nABzpczLzXaHO0rGTSm70iZjM6ngfLjz+wbz262ySCIk4Ba5uiKgapkfx3Ax7GAo4i8oy4/HuHcpL8wxPajHWM85Zv9+2z2ysbnXC0CRDEBpqM62ShA7xXjrVQ5KBqNDI/KTrwJ73/j9LsGim/tCOZlUHIulLKshfpILvDQnlZWWYQZ0Z9bwitq3/42qGPShhMJ16vBIYxkI24JJSyMZrwZbQhT2CXQEbPfYv7P2ktf8Lh3kyz0BiI0MJcQ+5rnj4nHzgplkbJJlEVak5ZnrZD1mW6Xog8XBe+9E9/cp5JIple5tZEpP5NFdwL+2DzDzbofZMuyPh9p4Jf8ZT3h+Gq3dl71tT/cp2+JJ3nPcN+es8nSd26JR6QSbx059EmweqnQRT0dfMwDxBPbW15X0buaXcjg/X//7y6KflN984/0oR0V1a+jdNL9iQADKiWBxKNSXYC4n2y+b7LGua+b+XNiRnsRj5p8UFynloLI2SkDAzj7Bxic9IC40lgQ3mQZWD2PII4EfMp9hctAnEUbaTK1bCGpczooYdd95x9EjtBvFdHWvWKPz46/dTjeAYckPjA+wvmutaYdwXxQh7R9fvpA="
-      }
-    },
-    {
-      "EXTENSION_SMTP_USER": {
-        "type": "encrypted",
-        "isEncrypted": true,
-        "data": "j78qGfGghqXpEz1Bf9IVJnWv7sy78FyhkE8vWG+DsKFGbXLed+OXk+xH4OzAoK4eVBEbXy9veY5Ds8shvC1qDS+Mw9WKHCkk+vWrCU7pXYxhm/PasGKwQkr5/axrCH7u8M/i/j32F62fn9m4wnjumUYKnUg0Hek3LgxxTIDHc6QophRzKcqL4NUUoIeSFAkyO/RXGZNnbdIEdzssLbz81zJYTKISnqDLA7av4H451kF/swMVxt/REb/S5Voum1vRI0CIfc6UzJYONNuvgyJojlYCr/G+JHk0uyJy3l4VWuuM3ol+QeEG6LltY54A/Z9j79XraN4r5ZdpJ2s6DRZauGOxA4z9dCSNsJbrNUMR9Ptx8b8h9JxURo4+KYsQnyq7kWWPa3DZZBMwRTDOpvaOhK6vlsMBFXaJz/Xm+NKvayXNzKbMe6cb0ctSx4NwtR3TKQnDb0yWzGJp1+/tP8m5kUhQ+JlU0SZsN8Ntf4qqVObLXBzdpPK8vW+YmQliGYbHhHLW28egT/j8S2nME/aFSO8gzIynIK7eEP1kDUYk3OGx0MDmOmud8x2nQcnuliRyD9UZDyJtw6Khvj+2F5h1nS54wCjFEoCJtLnd0LfrX1nmk/0o4FCWvxgh/QnL+Nu6AheKWtRsDyUGXJDgqENIMyR8qp2HXbnDELo2M561Md8="
-      }
-    },
-    {
-      "EXTENSION_SMTP_PASSWORD": {
-        "type": "encrypted",
-        "isEncrypted": true,
-        "data": "s7lb/WQWVFN70/f7G4G+C9qzajQAv6Wm8iOd+j7+sf72ttSpvakjyfWnUB3YrYklZhHgnmMhwe2JbBk4ZrdZGf3ikyozNV2WerAKO1XIyHQv7ui4+JRysp6Mhg9c8cEy2qrrGow8vzB2Y9RMNdjJMr+Spu0I0MNqQzSmLdmBhyeHmMnufJVnWWZEUl6EciXZEOaMiV0bnhuYCckMKQ7jIckY9pNiff5un70Qm927pLIE3IbH3JPm9n1ybLkcIiqEqqGN7AwWLqUsnPjvG3YLuoZQtKWGnrh9ZuSfHKqfCFcFbW3aF57Cxk3dh6MAea3dTiWolpjy1VxksZNrEIo7VnMqg11KVhamzY7PcD7EtqDHiJWvFfdEqvZmfO+ztH0PaqAi4SdtFg+Eef5acgAhzDN1L0XJP8eI08tOh+SqvhylIkTVwBJrtZrulyyUmcB0F3VSqln4nYjttwkjjAtocsCX0Ff2OveXTc6/fy43oLdH527lEtU1bF7t7L3+b1wlhl2x8KihCQJ6VCAlEGOtASNVwZYi30UzAn7ZSamgfZ3kRDeYKn5lvALvZhR43p+af7bzkcUHPEpAreBfmmtLmnnGKUGeIXEK5UO0NzZjvJTsNXviM5DRhdfqGj+mArIMpsmSeWI5VUZVcWJ0DGqhuhXoynaFiZXicfAIBdnTaH4="
-      }
-    },
-    {
-      "EXTENSION_SMTP_SENDER": {
-        "type": "encrypted",
-        "isEncrypted": true,
-        "data": "L1gvkEsUWy8iLcTfk4OCPZu2S7GtWZ3ztHgxDBgX9WpmptwYUqE7/0MvfZDCFBShXMlZh4JCpKBxJmkCcUufvc56oNDMAcIZRqXNsK7RO9c92mibaWrxaz4UPWjgFnaHy5ifvKsLVPdGzYrKX3QYeqMHufcRyVOJgKQM5R26paouMBERebVuaLYvPvLV+UywjkT1nJg+ggPzTPsBGL+kg91XG4D6LYIJiG35cnidKLrzeb2bl6DiEB3aET1W9weYxsrRzhUPWP6L75ckc4Z+enMFSOW9pnHhMoHJd/lWT1xlPr+jTgGrNjc9OHC9KTiB3BCUFOvHzuw37gz/Gp0sWlFUWvYSUQJIPoV2DAiX7HzoT5Uh1MZhnT2FTV104xweqeagrPToEeOF6HCDucQnfPLKdUasTTfEZ9DyDophv3y1QbRGJ7ftXMq3puDneoiexZ0PyUK1+q16gYxuuSxhdInvZPKEP/xs+lafjqFXm4pZbDiUmhQzkdA3zGXHuPCmRG1d3qaxsYdXZYTQxpsz1xPPEIw4B+7UJ6FkdhV7T2pXcPhPmF00jlgSxNaHLZofd61RQ6m7PM2Vz3ShZxlmChNZS9vDsnSM6pSoAl9M6B8cQjbuzFLkfhlic9QVSHZZ+V9WL5SmGx308h4KhRq05aheEpKyVyKn9gGBF3druts="
-      }
-    },
-    {
-      "EXTENSION_SMTP_CLIENT_HOST": {
-        "type": "encrypted",
-        "isEncrypted": true,
-        "data": "vrAN7EMwHrt0IEXu4lRtQ46aAKunV90HhN6SyF8iX7bfoGhQ0dO7NOLTqpUSOwxYv/hT/n0VuD9AXUdFOqFeJx2SRQeIRYeiUHY3zz696Juq3q7YmvsaLZ7tCydQQ7ypRsH9YaucyoSCCrQsZkAjA08MhRkVPSjicl+va65yzu0ONmbKKPtvUK4usa2fB780wGxF8BWc32F1k3GM5ZE6hHGEWwXEDOYVFjZJmw9qzpkKaeF6In7jb5KWZUzsi3vMiufH50NWZ41jLOFNulBiNPgYuC4USGD3rJlGlHVYVqoXJ9KhniJJDcDOW+UXE8G9YGOwOgEWQn+BR80yLqEYVM/RzcBjTMcIr06bbRyx/3D/f8m06wX62FAzKmb1us8o0Dld27aeEauXxUToglyrPRM+yubx0wvoFo29bu9k75io/XitocwYK6nFxVP7ceCB8DgvxE9iES14y8DDcQpPkfKFhvak0UYRlHjeANouXs+f/eem3lSl/dwaAukFx6jL3n5MA7nLwn2iUhgvHygxKp23Xd4fPy+ppG2EEWgtqjCPntYhPwSZ/EuEbhOIHIjzwYq8w5kulWiwiUSqpAOovrOyv/NRmVrHGnjRxWvwZkv67PqM1TzZy1psWuKLRGxKDMzPZMQpZ32wCab+2RCeF8yL9pl8RaQiOfzW3XDyYeo="
       }
     },
     {

@@ -13,7 +13,7 @@ export interface Props {
   item: LineItem;
 }
 
-const WishlistItem: FC<React.PropsWithChildren<Props>> = ({ item }) => {
+const WishlistItem: FC<Props> = ({ item }) => {
   const { locale } = useRouter();
 
   const { formatMessage: formatWishlistMessage } = useFormat({ name: 'wishlist' });
@@ -29,7 +29,7 @@ const WishlistItem: FC<React.PropsWithChildren<Props>> = ({ item }) => {
     <div className="flex max-w-full items-stretch justify-start gap-10 py-18 md:gap-15">
       <div className="h-[145px] w-[125px] shrink-0 bg-white p-12">
         <div className="relative h-full w-full">
-          <Image fill src={item.variant?.images?.[0]} suffix="small" style={{ objectFit: 'contain' }} />
+          <Image src={item.variant?.images?.[0]} suffix="small" objectFit="contain" />
         </div>
       </div>
       <div className="grow">

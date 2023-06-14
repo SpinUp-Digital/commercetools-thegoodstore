@@ -8,7 +8,7 @@ type ThankYouFooterProps = {
   loading: boolean;
 };
 
-const ThankYouFooter: FC<React.PropsWithChildren<ThankYouFooterProps>> = ({ loading }) => {
+const ThankYouFooter: FC<ThankYouFooterProps> = ({ loading }) => {
   const { loggedIn } = useAccount();
 
   const { bottomSectionProps } = useBottomSectionProps(loggedIn);

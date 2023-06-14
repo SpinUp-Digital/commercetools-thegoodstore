@@ -4,7 +4,7 @@ type Props = {
   className?: string;
 };
 
-const France: React.FC<React.PropsWithChildren<Props>> = ({ className }: Props) => (
+const France: React.FC<Props> = ({ className }: Props) => (
   <svg className={className} xmlns="http://www.w3.org/2000/svg" width="21" height="14" viewBox="-10 -10 3020 2020">
     <g id="French_Flag_by_Adam_Stanislav">
       <title>Flag of France, by Adam Stanislav</title>

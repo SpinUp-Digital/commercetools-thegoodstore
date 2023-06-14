@@ -24,7 +24,7 @@ const AddToCartOverlayContext = React.createContext<AddToCartOverlayContextShape
   },
 });
 
-const AddToCartOverlayProvider: React.FC<React.PropsWithChildren<object>> = ({ children }) => {
+const AddToCartOverlayProvider: React.FC = ({ children }) => {
   const router = useRouter();
 
   const { isTouchDevice } = useTouchDevice();
@@ -96,11 +96,11 @@ const AddToCartOverlayProvider: React.FC<React.PropsWithChildren<object>> = ({ c
               <div className="flex items-center gap-24">
                 <div className="shrink-0">
                   <Image
-                    alt={product?.name ?? ''}
                     width={135}
                     height={150}
                     src={product?.images?.[0] ?? '#'}
-                    style={{ objectFit: 'contain' }}
+                    layout="intrinsic"
+                    objectFit="contain"
                   />
                 </div>
                 <div className="flex grow items-start justify-between overflow-hidden">

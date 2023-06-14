@@ -6,7 +6,7 @@ export interface Props {
   data: AccountDetailsProps;
 }
 
-const AccountDetailsTastic: React.FC<React.PropsWithChildren<Props>> = ({ data }) => {
+const AccountDetailsTastic: React.FC<Props> = ({ data }) => {
   const updateCartAddresses = useUpdateCartAddresses();
 
   useEffect(() => {

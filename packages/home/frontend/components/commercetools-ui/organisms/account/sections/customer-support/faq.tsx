@@ -8,7 +8,7 @@ interface Props {
   faqs: FAQShape[];
 }
 
-const FAQ: React.FC<React.PropsWithChildren<Props>> = ({ faqs }) => {
+const FAQ: React.FC<Props> = ({ faqs }) => {
   const { formatMessage: formatCustomerSupportMessage } = useFormat({ name: 'customer-support' });
   return (
     <div className="pb-24 md:pb-36 lg:pb-0">

@@ -6,7 +6,7 @@ export interface Props {
   tiles: TileProps[];
 }
 
-const TilesGroup: React.FC<React.PropsWithChildren<Props>> = ({ tiles }) => {
+const TilesGroup: React.FC<Props> = ({ tiles }) => {
   const imageSizes = useImageSizes({ md: 1, lg: 0.5, defaultSize: 0.5 });
 
   return (
@@ -16,7 +16,7 @@ const TilesGroup: React.FC<React.PropsWithChildren<Props>> = ({ tiles }) => {
           <Tile
             key={index}
             {...tile}
-            image={{ ...tile.image, fill: true, sizes: imageSizes }}
+            image={{ ...tile.image, layout: 'fill', sizes: imageSizes }}
             className="h-[320px] lg:h-[475px]"
           />
         ))}

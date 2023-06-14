@@ -13,24 +13,15 @@ interface Props {
   CTA?: JSX.Element;
 }
 
-const Step: React.FC<React.PropsWithChildren<Props>> = ({
-  number,
-  label,
-  isExpanded,
-  isCompleted,
-  onEdit,
-  Component,
-  Preview,
-  CTA,
-}) => {
+const Step: React.FC<Props> = ({ number, label, isExpanded, isCompleted, onEdit, Component, Preview, CTA }) => {
   const { formatMessage } = useFormat({ name: 'common' });
 
   const ref = useRef<HTMLDivElement>(null);
 
   const headerClassName = useClassNames([
-    'rounded-sm p-12 border transition lg:px-36 lg:py-24 lg:bg-white lg:border-none lg:rounded-md flex items-center justify-between',
+    'rounded-t-sm p-12 border transition lg:px-36 lg:py-24 lg:bg-white lg:rounded-t-md flex items-center justify-between',
     {
-      'bg-primary-black border-primary-black': isExpanded,
+      'bg-primary-black border-primary-black lg:border-none': isExpanded,
       'bg-white border-neutral-400': !isExpanded,
     },
   ]);

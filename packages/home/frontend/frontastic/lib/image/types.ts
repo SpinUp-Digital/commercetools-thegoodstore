@@ -1,7 +1,7 @@
 import { ImageProps as NextImageProps } from 'next/image';
 
 export type Gravity = {
-  mode?: 'string';
+  mode?: string;
   coordinates?: { x: number; y: number };
 };
 
@@ -24,6 +24,4 @@ export type FrontasticImage = {
   suffix?: string;
 };
 
-export type NextFrontasticImage = FrontasticImage &
-  Partial<Pick<NextImageProps, 'src'>> &
-  Partial<Omit<NextImageProps, 'src'>>;
+export type NextFrontasticImage = FrontasticImage & Partial<Pick<NextImageProps, 'src'>> & Omit<NextImageProps, 'src'>;

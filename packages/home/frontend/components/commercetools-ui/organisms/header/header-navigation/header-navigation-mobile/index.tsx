@@ -16,7 +16,7 @@ export interface Props {
   links: Category[];
 }
 
-const HeaderNavigationMobile: FC<React.PropsWithChildren<Props>> = ({ links, logo, logoLink }) => {
+const HeaderNavigationMobile: FC<Props> = ({ links, logo, logoLink }) => {
   const { formatMessage } = useFormat({ name: 'common' });
   const [categoriesNavigator, setCategoriesNavigator] = useState<Category[]>([]);
   const [showMenu, setShowMenu] = useState(false);
@@ -42,12 +42,12 @@ const HeaderNavigationMobile: FC<React.PropsWithChildren<Props>> = ({ links, log
     <div className="flex xl:hidden">
       <Button
         variant="ghost"
-        size="icon"
+        size="fit"
         onClick={showHeaderMenu}
         title={formatMessage({ id: 'header.menu.open', defaultMessage: 'Open side menu' })}
         className="mr-8"
       >
-        <Bars3Icon className="w-30 text-secondary-black lg:w-44" />
+        <Bars3Icon className="w-30 text-secondary-black lg:w-48" />
       </Button>
 
       <Drawer

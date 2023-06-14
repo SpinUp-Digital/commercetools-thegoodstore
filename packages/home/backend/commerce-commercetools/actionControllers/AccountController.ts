@@ -479,7 +479,7 @@ export const updateAddress: ActionHook = async (request: Request, actionContext:
 
   let account = fetchAccountFromSession(request);
 
-  const address: Address = JSON.parse(request.body).address;
+  const address: Address = JSON.parse(request.body);
 
   const accountApi = new AccountApi(actionContext.frontasticContext, getLocale(request), getCurrency(request));
 

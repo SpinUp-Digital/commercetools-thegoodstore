@@ -15,7 +15,7 @@ export interface Props {
   hideHeaderMenu: () => void;
 }
 
-const MobileMenuFooter: FC<React.PropsWithChildren<Props>> = ({ showMenu, hideHeaderMenu, insertCategory }) => {
+const MobileMenuFooter: FC<Props> = ({ showMenu, hideHeaderMenu, insertCategory }) => {
   const router = useRouter();
   const { formatMessage } = useFormat({ name: 'common' });
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });

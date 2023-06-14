@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Popover } from '@headlessui/react';
 import { UserIcon } from '@heroicons/react/24/outline';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import AccountDropdown from '..';
 
-const AccountDropdownContent: React.FC<React.PropsWithChildren<object>> = () => {
+const AccountDropdownContent: FC = () => {
   return (
     <div className="ml-44">
       <Typography fontSize={28} className="mt-40 w-[40%] font-bold text-black">

@@ -15,7 +15,7 @@ interface Props {
   categories: Category[];
 }
 
-const Search: React.FC<React.PropsWithChildren<Props>> = ({ categories }) => {
+const Search: React.FC<Props> = ({ categories }) => {
   const form = useRef<HTMLFormElement>(null);
   const input = useRef<HTMLInputElement>(null);
 
@@ -88,7 +88,7 @@ const Search: React.FC<React.PropsWithChildren<Props>> = ({ categories }) => {
     <>
       {focused && <Overlay />}
 
-      <div className="relative z-[350] lg:px-20">
+      <div className="relative z-[350] xl:px-20">
         <div
           className={`relative z-50 border-neutral-400 bg-white lg:rounded-sm lg:border ${
             focused ? 'border-b' : 'border'
@@ -128,7 +128,7 @@ const Search: React.FC<React.PropsWithChildren<Props>> = ({ categories }) => {
 
         <Transition
           show={focused}
-          className="absolute bottom-0 left-0 max-h-[60vh] w-full translate-y-full overflow-auto bg-white px-20 py-28 lg:max-h-[unset] lg:translate-y-[calc(100%-56px)] lg:rounded-md lg:pt-84"
+          className="absolute bottom-0 left-0 max-h-[60vh] w-full translate-y-full overflow-auto bg-white px-20 py-28 xl:max-h-[unset] xl:translate-y-[calc(100%-56px)] xl:rounded-md xl:pt-84"
           enter="transition duration-75"
           enterFrom="opacity-0"
           enterTo="opacity-100"

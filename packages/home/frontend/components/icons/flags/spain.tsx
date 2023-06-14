@@ -4,7 +4,7 @@ type Props = {
   className?: string;
 };
 
-const SpainFlag: React.FC<React.PropsWithChildren<Props>> = ({ className }: Props) => (
+const SpainFlag: React.FC<Props> = ({ className }: Props) => (
   <svg
     className={className}
     xmlns="http://www.w3.org/2000/svg"

@@ -8,7 +8,7 @@ type EditCTAProps = {
   editHref: string;
 };
 
-const EditCTA: FC<React.PropsWithChildren<EditCTAProps>> = ({ editHref }) => {
+const EditCTA: FC<EditCTAProps> = ({ editHref }) => {
   const { formatMessage } = useFormat({ name: 'common' });
   return (
     <Link link={editHref} className="h-fit">

@@ -35,11 +35,6 @@ configuration:
     projectKey: thegoodstore
     authUrl: 'https://auth.sphere.io'
     hostUrl: 'https://api.sphere.io'
-  content:
-    engine: contentful
-    accessToken: 3d50038afea30f11997a73f887c4aa12d7d411d9da6825dabcc250b78623a530
-    previewToken: 7391f414d8febe45caf58672ddb65ae62b2c37d525c10205669ba57c6f47bfa6
-    spaceId: 2yke74xvylnq
   media:
     engine: cloudinary
     apiKey: 183832318368184
@@ -63,10 +58,6 @@ configuration:
     projectKey: thegoodstore
     authUrl: 'https://auth.sphere.io'
     hostUrl: 'https://api.sphere.io'
-  contentful:
-    accessToken: 3d50038afea30f11997a73f887c4aa12d7d411d9da6825dabcc250b78623a530
-    previewToken: 7391f414d8febe45caf58672ddb65ae62b2c37d525c10205669ba57c6f47bfa6
-    spaceId: 2yke74xvylnq
   adyen:
     baseUrl: https://checkout-test.adyen.com/v70
     merchantAccount: Commercetools553ECOM
@@ -74,14 +65,6 @@ configuration:
     password: M_UE[>FTNp25V6uIx#uYCmr+g
     clientKey: test_I3EXGUWPI5BLHACQ2FES3FKEYMNPFTQH
     hmacKey: F7C4C9B613344ACAAC3FECCF5AA28D9B3C7E1E333C53E0F31194E164F8DD34D0
-  smtp:
-    host: smtp.mailgun.org
-    port: 587
-    encryption: tls
-    user: postmaster@mailing.frontastic.cloud
-    password: 2acf9dd7a69cc699b1484b22f1b2fe6c-c1fe131e-bb1f026f
-    sender: no-reply@frontastic.cloud
-    client_host: 'https://home-thegoodstore.frontastic.io.netlify.app'
   sendgrid:
     apiKey: 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
     sender: connect-support@commercetools.com
@@ -96,6 +79,6 @@ configuration:
       newsletter: 89beb094-0bb1-4637-b057-6b23bf4fc87f
 data: {}
 languages:
-  - de_DE@EUR
-  - en_GB@GBP
-defaultLanguage: en_GB@GBP
+  - de_DE
+  - en_GB
+defaultLanguage: en_GB

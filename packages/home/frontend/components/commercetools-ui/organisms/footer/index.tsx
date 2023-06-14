@@ -22,7 +22,7 @@ export interface SocialMedia {
   reference: Reference;
 }
 
-const Footer: React.FC<React.PropsWithChildren<Props>> = ({ columns, logo, socialMedia }) => {
+const Footer: React.FC<Props> = ({ columns, logo, socialMedia }) => {
   const [isBiggerThanTabletSize] = useMediaQuery(screensizes.tablet);
 
   return (

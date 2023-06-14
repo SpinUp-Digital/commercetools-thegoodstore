@@ -1,0 +1,5 @@
+{
+  "currencies": ["EUR", "USD", "GBP"],
+  "countries": ["GB", "DE"],
+  "languages": ["en-US", "en-GB", "de-DE"]
+}

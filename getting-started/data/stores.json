@@ -1,0 +1,19 @@
+[
+  {
+    "key": "the-good-store",
+    "name": {
+      "de-DE": "The Good Store",
+      "en-GB": "",
+      "en-US": ""
+    },
+    "languages": ["de-DE", "en-GB", "en-US"],
+    "countries": [
+      {
+        "code": "DE"
+      },
+      {
+        "code": "GB"
+      }
+    ]
+  }
+]

@@ -16,7 +16,7 @@ interface Props {
   termsOfUseLink?: Reference;
 }
 
-const RegisterForm: FC<React.PropsWithChildren<Props>> = ({ termsOfUseLink }) => {
+const RegisterForm: FC<Props> = ({ termsOfUseLink }) => {
   const { formatMessage: formatErrorMessage } = useFormat({ name: 'error' });
   const { formatMessage: formatAccountMessage } = useFormat({ name: 'account' });
   const { formatMessage } = useFormat({ name: 'common' });

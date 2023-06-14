@@ -15,7 +15,7 @@ interface Props {
   facetsConfiguration: Record<string, FacetConfiguration>;
 }
 
-const MobileFacets: React.FC<React.PropsWithChildren<Props>> = ({ facetsConfiguration }) => {
+const MobileFacets: React.FC<Props> = ({ facetsConfiguration }) => {
   const { formatMessage: formatProductMessage } = useFormat({ name: 'product' });
 
   const { removeAllRefinements } = useProductList();

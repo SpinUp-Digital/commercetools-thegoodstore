@@ -17,7 +17,7 @@ export interface AddressProps {
   selectAddress: (address: AddressFormData) => void;
 }
 
-const Address: React.FC<React.PropsWithChildren<AddressProps>> = ({ address, isDefaultAddress, selectAddress }) => {
+const Address: React.FC<AddressProps> = ({ address, isDefaultAddress, selectAddress }) => {
   const { mapPropsToAddress } = usePropsToAddressType();
   const { label } = mapPropsToAddress(address as AddressFormData);
 
@@ -75,7 +75,7 @@ const Address: React.FC<React.PropsWithChildren<AddressProps>> = ({ address, isD
       </div>
 
       <div onClick={(e) => e.stopPropagation()}>
-        <EditCTA editHref={`#edit-address/${address.addressId}`} />
+        <EditCTA editHref={`#addresses/address_${address.addressId}`} />
       </div>
     </div>
   );

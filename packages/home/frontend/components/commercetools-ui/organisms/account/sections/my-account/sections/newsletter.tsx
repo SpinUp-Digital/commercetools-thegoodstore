@@ -19,7 +19,7 @@ const Newsletter = () => {
       isEditable
       title={formatMessage({ id: 'newsletter', defaultMessage: 'Yes, I want to subscribe.' })}
       infoFields={[subscriptionField]}
-      editHref="#edit-newsletter"
+      editHref="#/edit-newsletter"
     />
   );
 };
