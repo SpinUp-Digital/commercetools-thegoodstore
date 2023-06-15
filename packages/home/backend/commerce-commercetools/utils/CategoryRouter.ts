@@ -1,6 +1,6 @@
 import { Context, Request } from '@frontastic/extension-types';
 import { ProductApi } from '../apis/ProductApi';
-import { getLocale, getPath } from './Request';
+import { getCurrency, getLocale, getPath } from './Request';
 import { Result } from '@commercetools/frontend-domain-types/product/Result';
 import { ProductQueryFactory } from './ProductQueryFactory';
 import { Category } from '@commercetools/frontend-domain-types/product/Category';
@@ -15,7 +15,7 @@ export class CategoryRouter {
   }
 
   static loadFor = async (request: Request, frontasticContext: Context): Promise<Result> => {
-    const productApi = new ProductApi(frontasticContext, getLocale(request));
+    const productApi = new ProductApi(frontasticContext, getLocale(request), getCurrency(request));
 
     const chunks = getPath(request)?.split('/').filter(Boolean);
 

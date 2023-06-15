@@ -291,7 +291,6 @@ const parseLocale = (locale: string): ParsedLocale => {
   }
 
   let currency: undefined | string = undefined;
-
   const modifier = matches.groups.modifier;
   if (modifier !== undefined) {
     if (modifier in modifierToCurrency) {
@@ -385,14 +384,16 @@ export abstract class BaseApi {
   protected apiRoot: ApiRoot;
   protected projectKey: string;
   protected locale: string;
+  protected currency: string;
 
-  constructor(frontasticContext: Context, locale: string) {
+  constructor(frontasticContext: Context, locale: string, currency: string) {
     const clientSettings = getConfig(frontasticContext.projectConfiguration);
     const client = ClientFactory.factor(clientSettings, frontasticContext.environment);
 
     this.apiRoot = createApiBuilderFromCtpClient(client);
     this.projectKey = clientSettings.projectKey;
     this.locale = locale;
+    this.currency = currency;
   }
 
   protected getApiForProject(): ByProjectKeyRequestBuilder {
@@ -400,12 +401,12 @@ export abstract class BaseApi {
   }
 
   protected async getCommercetoolsLocal(): Promise<Locale> {
+    const currency = this.currency;
     const parsedLocale = parseLocale(this.locale);
     const project = await this.getProject();
 
     const language = pickCommercetoolsLanguage(parsedLocale, project.languages);
     const country = pickCommercetoolsCountry(parsedLocale, language, project.countries);
-    const currency = pickCommercetoolsCurrency(parsedLocale, project.currencies);
 
     return Promise.resolve({
       language,
