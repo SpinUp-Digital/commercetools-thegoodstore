@@ -129,9 +129,10 @@ const Scheme = () => {
             placeholder={formatCheckoutMessage({ id: 'card.securityNumber', defaultMessage: 'Security number' })}
             onChange={handleCVCChange}
             defaultValue={paymentData.cvc}
-          />
-          {/* eslint-disable-next-line */}
-          <img className="absolute right-8 top-1/2 w-[32px] -translate-y-1/2" src="/images/cvc.png" />
+          >
+            {/* eslint-disable-next-line */}
+            <img className="absolute right-8 top-1/2 w-[32px] -translate-y-1/2" src="/images/cvc.png" />
+          </Input>
         </div>
       </div>
     </div>
