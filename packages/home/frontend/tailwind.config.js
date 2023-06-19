@@ -8,7 +8,7 @@ module.exports = {
     './context/**/*.{js,ts,jsx,tsx}',
     './frontastic/**/*.{js,ts,jsx,tsx}',
     './stories/**/*.{js,ts,jsx,tsx,mdx}',
-    './business-docs/**/*.{js,ts,jsx,tsx,mdx}',
+    './.storybook/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   safelist: [{ pattern: /bg-(.+)/ }, { pattern: /font-(.+)/ }, { pattern: /text-(.+)/ }],
   theme: {
