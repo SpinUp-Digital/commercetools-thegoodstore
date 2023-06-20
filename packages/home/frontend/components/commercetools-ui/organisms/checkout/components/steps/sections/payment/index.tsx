@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { PaymentMethod, PaymentMethodType } from 'shared/types/cart/Payment';
 import Button from 'components/commercetools-ui/atoms/button';
 import Radio from 'components/commercetools-ui/atoms/radio';
 import { useCheckout } from 'components/commercetools-ui/organisms/checkout/provider';
 import { PaymentData } from 'components/commercetools-ui/organisms/checkout/provider/payment/types';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { PaymentMethod, PaymentMethodType } from 'types/payment';
 import Klarna from './components/klarna';
 import Scheme from './components/scheme';
 

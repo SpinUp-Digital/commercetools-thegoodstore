@@ -1,11 +1,11 @@
 import { useCallback, useMemo } from 'react';
-import { Discount } from '@commercetools/frontend-domain-types/cart/Discount';
+import { Discount } from 'shared/types/cart/Discount';
 import useSWR, { mutate } from 'swr';
 import useI18n from 'helpers/hooks/useI18n';
 import { sdk } from 'sdk';
-import { Cart } from 'types/cart';
-import { Order } from 'types/order';
-import { Variant } from 'types/product';
+import { Cart } from 'shared/types/cart';
+import { Order } from 'shared/types/cart/Order';
+import { Variant } from 'shared/types/product';
 import { revalidateOptions } from 'frontastic';
 import { CartDetails, UseCartReturn } from './types';
 

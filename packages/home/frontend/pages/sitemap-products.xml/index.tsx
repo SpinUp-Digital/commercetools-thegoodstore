@@ -1,5 +1,6 @@
 import { GetServerSideProps } from 'next';
 import { getServerSideSitemap, ISitemapField } from 'next-sitemap';
+import { Product } from 'shared/types/product';
 import { siteUrl } from 'next-sitemap.config';
 import { sdk } from 'sdk';
 
@@ -15,7 +16,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     const response = await extensions.product.query({ cursor: nextCursor, limit: 12 });
 
-    const items = response.isError ? [] : response.data.items;
+    const items = (response.isError ? [] : response.data.items) as Product[];
 
     fields.push(
       ...items.map((product) => ({

@@ -1,4 +1,4 @@
-import { Category } from 'types/category';
+import { Category } from 'shared/types/product/Category';
 import { Reference } from 'types/reference';
 import { NextFrontasticImage } from 'frontastic/lib/image';
 

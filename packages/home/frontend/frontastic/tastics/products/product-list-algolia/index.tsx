@@ -14,7 +14,7 @@ import {
 } from 'components/commercetools-ui/organisms/product/product-list-algolia/types';
 import InstantSearch from 'components/HOC/InstantSearch';
 import { productsIndex } from 'helpers/constants/algolia';
-import { Category } from 'types/category';
+import { Category } from 'shared/types/product/Category';
 
 export interface Props {
   serverUrl: string;

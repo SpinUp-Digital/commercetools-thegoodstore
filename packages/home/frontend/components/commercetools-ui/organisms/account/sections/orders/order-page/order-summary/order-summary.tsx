@@ -1,7 +1,7 @@
 import React, { FC, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
-import { LineItem } from '@commercetools/frontend-domain-types/cart/LineItem';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
+import { LineItem } from 'shared/types/cart/LineItem';
 import Accordion from 'components/commercetools-ui/atoms/accordion';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';

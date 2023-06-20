@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
-import { Product } from '@commercetools/frontend-domain-types/product/Product';
 import { Transition } from '@headlessui/react';
 import { MagnifyingGlassIcon as SearchIcon, XMarkIcon as CloseIcon } from '@heroicons/react/24/solid';
 import debounce from 'lodash.debounce';
+import { Category } from 'shared/types/product/Category';
+import { Product } from 'shared/types/product/Product';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useScrollBlock from 'helpers/hooks/useScrollBlock';
-import { Category } from 'types/category';
 import { useProduct } from 'frontastic';
 import Overlay from '../overlay';
 import SearchItem from './search-item';

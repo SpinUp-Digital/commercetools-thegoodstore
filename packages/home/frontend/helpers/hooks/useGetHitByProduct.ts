@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { Product } from '@commercetools/frontend-domain-types/product/Product';
+import { Product } from 'shared/types/product/Product';
 import { searchClient } from 'algolia/searchClient';
 import { productsIndex } from 'helpers/constants/algolia';
 

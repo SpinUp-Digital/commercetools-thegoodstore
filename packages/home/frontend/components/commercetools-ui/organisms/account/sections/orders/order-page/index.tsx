@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { LineItem } from '@commercetools/frontend-domain-types/cart/LineItem';
-import { Address } from 'types/account';
+import { Address } from 'shared/types/account';
+import { LineItem } from 'shared/types/cart/LineItem';
 import useOrderData from '../helper-hooks/useOrderData';
 import useOrderFetch from '../helper-hooks/useOrderFetch';
 import useOrderTransactions from '../helper-hooks/useOrderTransaction';

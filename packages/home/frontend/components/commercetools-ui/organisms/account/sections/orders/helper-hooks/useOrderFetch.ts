@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Order } from 'types/order';
+import { Order } from 'shared/types/cart/Order';
 import { useCart } from 'frontastic';
 
 const useOrderFetch = () => {

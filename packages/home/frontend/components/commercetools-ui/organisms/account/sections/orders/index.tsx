@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useLayoutEffect, useMemo, useState, useCallback } from 'react';
-import { Order } from '@commercetools/frontend-domain-types/cart/Order';
 import Skeleton from 'react-loading-skeleton';
+import { Order } from 'shared/types/cart/Order';
 import Slider from 'components/commercetools-ui/atoms/slider';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import Wrapper from 'components/HOC/wrapper';

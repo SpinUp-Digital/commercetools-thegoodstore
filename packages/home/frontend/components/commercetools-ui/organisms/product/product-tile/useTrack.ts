@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef } from 'react';
-import { Product } from '@commercetools/frontend-domain-types/product/Product';
 import { useInView } from 'react-intersection-observer';
+import { Product } from 'shared/types/product/Product';
 import { PRODUCT_VIEWED } from 'helpers/constants/events';
 
 interface Options {

@@ -1,6 +1,6 @@
+import { Account } from 'shared/types/account';
 import InfoCard, { InfoField } from 'components/commercetools-ui/organisms/account/account-atoms/info-card';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { Account } from 'types/account';
 import { useAccount } from 'frontastic';
 
 const Newsletter = () => {

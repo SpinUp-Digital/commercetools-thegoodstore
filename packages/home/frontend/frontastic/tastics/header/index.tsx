@@ -4,7 +4,7 @@ import Header from 'components/commercetools-ui/organisms/header';
 import { HeaderProps, Market } from 'components/commercetools-ui/organisms/header/types';
 import { MarketProvider } from 'context/market';
 import useResizeObserver from 'helpers/hooks/useResizeObserver';
-import { Category } from 'types/category';
+import { Category } from 'shared/types/product/Category';
 
 const initialMarketState = {
   market: {} as Market,

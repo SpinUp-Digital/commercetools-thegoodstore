@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
+import { Variant } from 'shared/types/product';
 import useClassNames from 'helpers/hooks/useClassNames';
 import useDates from 'helpers/hooks/useDates';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useInventory from 'helpers/hooks/useInventory';
-import { Variant } from 'types/product';
 
 interface Props {
   variant?: Variant;

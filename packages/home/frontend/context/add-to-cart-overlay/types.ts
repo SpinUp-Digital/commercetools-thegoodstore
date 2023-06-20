@@ -1,5 +1,5 @@
-import { Product } from '@commercetools/frontend-domain-types/product/Product';
-import { Variant } from 'types/product';
+import { Product } from 'shared/types/product/Product';
+import { Variant } from 'shared/types/product';
 
 export interface AddToCartOverlayContextShape {
   show: (product: Product, variant: Variant, count: number) => void;

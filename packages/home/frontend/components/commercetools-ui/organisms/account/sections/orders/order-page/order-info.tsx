@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
+import { Address } from 'shared/types/account';
+import { Order } from 'shared/types/cart/Order';
 import Button from 'components/commercetools-ui/atoms/button';
 import Link from 'components/commercetools-ui/atoms/link';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { Address } from 'types/account';
-import { Order } from 'types/order';
 import OrderSummaryMobile from './order-summary/order-summary-mobile';
 
 export interface Props {

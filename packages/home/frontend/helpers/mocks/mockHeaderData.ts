@@ -1,4 +1,4 @@
-import { Category } from 'types/category';
+import { Category } from 'shared/types/product/Category';
 import { Tile } from 'components/commercetools-ui/organisms/header/types';
 
 export const logo = {

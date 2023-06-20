@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useRouter } from 'next/router';
-import { LineItem } from '@commercetools/frontend-domain-types/cart/LineItem';
 import Skeleton from 'react-loading-skeleton';
+import { LineItem } from 'shared/types/cart/LineItem';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import Image from 'frontastic/lib/image';

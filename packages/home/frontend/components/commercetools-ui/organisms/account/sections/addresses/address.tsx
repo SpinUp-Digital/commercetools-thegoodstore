@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Address as AddressType } from '@commercetools/frontend-domain-types/account/Address';
+import type { Address as AddressType } from 'shared/types/account/Address';
 import Radio from 'components/commercetools-ui/atoms/radio';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { TypographyProps } from 'components/commercetools-ui/atoms/typography/types';

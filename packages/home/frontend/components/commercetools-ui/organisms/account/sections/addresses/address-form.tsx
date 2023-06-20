@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Address } from '@commercetools/frontend-domain-types/account/Address';
 import { TrashIcon } from '@heroicons/react/24/outline';
 import toast from 'react-hot-toast';
+import { Account } from 'shared/types/account';
+import { Address } from 'shared/types/account/Address';
 import Checkbox from 'components/commercetools-ui/atoms/checkbox';
 import Dropdown from 'components/commercetools-ui/atoms/dropdown';
 import Input from 'components/commercetools-ui/atoms/input';
@@ -9,7 +10,6 @@ import Typography from 'components/commercetools-ui/atoms/typography';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useI18n from 'helpers/hooks/useI18n';
 import useValidate from 'helpers/hooks/useValidate';
-import { Account } from 'types/account';
 import { useAccount } from 'frontastic';
 import AccountForm from '../../account-atoms/account-form';
 import SaveOrCancel from '../../account-atoms/save-or-cancel';

@@ -1,5 +1,5 @@
 import React, { FC, useMemo } from 'react';
-import { Product } from '@commercetools/frontend-domain-types/product/Product';
+import { Product } from 'shared/types/product/Product';
 import { SwiperOptions } from 'swiper';
 import Slider from 'components/commercetools-ui/atoms/slider';
 import Subtitle, { SubtitleProps } from 'components/commercetools-ui/atoms/subtitle';

@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useRouter } from 'next/router';
-import { Order } from '@commercetools/frontend-domain-types/cart/Order';
-import { Money } from '@commercetools/frontend-domain-types/product/Money';
+import { Order } from 'shared/types/cart/Order';
+import { Money } from 'shared/types/product/Money';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import useI18n from 'helpers/hooks/useI18n';
 

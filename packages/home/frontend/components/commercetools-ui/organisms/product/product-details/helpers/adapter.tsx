@@ -1,12 +1,12 @@
 import { useState, useEffect, FC } from 'react';
 import { useRouter } from 'next/router';
-import { Product } from '@commercetools/frontend-domain-types/product/Product';
+import { Variant } from 'shared/types/product';
+import { Product } from 'shared/types/product/Product';
 import { UIProduct } from 'components/commercetools-ui/organisms/product/product-details/types';
 import usePreloadImages from 'helpers/hooks/usePreloadImages';
 import { toUIColor } from 'helpers/mappers/toUIColor';
 import { toUIProduct } from 'helpers/mappers/toUIProduct';
 import { toUISize } from 'helpers/mappers/toUIsize';
-import { Variant } from 'types/product';
 import ProductDetails, { ProductDetailsProps } from '..';
 
 type ProductDetailsAdapterProps = {

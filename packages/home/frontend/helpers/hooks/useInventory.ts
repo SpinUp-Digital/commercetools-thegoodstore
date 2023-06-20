@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Inventory } from 'types/inventory';
+import { Inventory } from 'shared/types/product/inventory';
 import { useProduct } from 'frontastic';
 
 export interface UseInventoryOptions {

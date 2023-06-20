@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 import { useRouter } from 'next/router';
+import { Category } from 'shared/types/product/Category';
 import Breadcrumb from 'components/commercetools-ui/atoms/breadcrumb';
 import Link from 'components/commercetools-ui/atoms/link';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { Category } from 'types/category';
 
 interface Props {
   categoryId?: string;

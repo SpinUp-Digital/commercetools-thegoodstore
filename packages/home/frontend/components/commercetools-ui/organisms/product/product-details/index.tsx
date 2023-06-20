@@ -1,4 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
+import { Variant } from 'shared/types/product';
+import { Category } from 'shared/types/product/Category';
 import Breadcrumb from 'components/commercetools-ui/atoms/breadcrumb';
 import Button from 'components/commercetools-ui/atoms/button';
 import Dropdown from 'components/commercetools-ui/atoms/dropdown';
@@ -12,8 +14,6 @@ import { useFormat } from 'helpers/hooks/useFormat';
 import useInventory from 'helpers/hooks/useInventory';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import { desktop } from 'helpers/utils/screensizes';
-import { Category } from 'types/category';
-import { Variant } from 'types/product';
 import { useCart, useProduct } from 'frontastic';
 import AdditionalInfo from './components/additional-info';
 import ProductInformation from './components/product-information';

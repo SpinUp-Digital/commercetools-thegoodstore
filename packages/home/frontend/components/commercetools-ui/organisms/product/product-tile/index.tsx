@@ -1,7 +1,8 @@
 import React, { FC, useMemo, useState } from 'react';
 import NextLink from 'next/link';
-import { Product } from '@commercetools/frontend-domain-types/product/Product';
-import { LineItem } from '@commercetools/frontend-domain-types/wishlist/LineItem';
+import { Variant } from 'shared/types/product';
+import { Product } from 'shared/types/product/Product';
+import { LineItem } from 'shared/types/wishlist/LineItem';
 import OutOfStock from 'components/commercetools-ui/atoms/out-of-stock';
 import QuickView from 'components/commercetools-ui/organisms/product/product-quick-view';
 import Prices from 'components/commercetools-ui/organisms/product/product-tile/prices';
@@ -9,7 +10,6 @@ import WishlistButton from 'components/commercetools-ui/organisms/wishlist/compo
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import useVariantWithDiscount from 'helpers/hooks/useVariantWithDiscount';
 import { desktop } from 'helpers/utils/screensizes';
-import { Variant } from 'types/product';
 import Image from 'frontastic/lib/image';
 import useTrack from './useTrack';
 
