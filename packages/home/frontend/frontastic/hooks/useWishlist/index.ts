@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
-import { LineItem } from '@commercetools/frontend-domain-types/wishlist/LineItem';
-import { Wishlist } from '@commercetools/frontend-domain-types/wishlist/Wishlist';
+import { LineItem } from 'shared/types/wishlist/LineItem';
+import { Wishlist } from 'shared/types/wishlist/Wishlist';
 import useSWR, { mutate, SWRResponse } from 'swr';
 import { sdk } from 'sdk';
 import { revalidateOptions } from 'frontastic';

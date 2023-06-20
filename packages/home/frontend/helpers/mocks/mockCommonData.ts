@@ -1,8 +1,8 @@
-import { LineItem } from '@commercetools/frontend-domain-types/cart/LineItem';
+import { LineItem } from 'shared/types/cart/LineItem';
 import { Reference } from 'types/reference';
-import { Product } from '@commercetools/frontend-domain-types/product/Product';
-import { Order } from 'types/order';
-import { ShippingMethod } from '@commercetools/frontend-domain-types/cart/ShippingMethod';
+import { Product } from 'shared/types/product/Product';
+import { Order } from 'shared/types/cart/Order';
+import { ShippingMethod } from 'shared/types/cart/ShippingMethod';
 
 export const linkReferenceOne: Reference = {
   link: '/',
@@ -31,6 +31,7 @@ export const lineItems: LineItem[] = [
       currencyCode: 'EUR',
       fractionDigits: 2,
     },
+    taxedPrice: {},
     variant: {
       id: '1',
       sku: 'GRCG-01',
@@ -59,6 +60,7 @@ export const lineItems: LineItem[] = [
       currencyCode: 'EUR',
       fractionDigits: 2,
     },
+    taxedPrice: {},
     variant: {
       id: '1',
       sku: 'GPC-01',
@@ -89,6 +91,7 @@ export const lineItems: LineItem[] = [
       currencyCode: 'EUR',
       fractionDigits: 2,
     },
+    taxedPrice: {},
     variant: {
       id: '1',
       sku: 'TTSS-01',
@@ -126,6 +129,7 @@ export const lineItems: LineItem[] = [
       currencyCode: 'EUR',
       fractionDigits: 2,
     },
+    taxedPrice: {},
     variant: {
       id: '1',
       sku: 'ALC-01',
@@ -156,6 +160,7 @@ export const lineItems: LineItem[] = [
       currencyCode: 'EUR',
       fractionDigits: 2,
     },
+    taxedPrice: {},
     variant: {
       id: '1',
       sku: 'MMST-01',

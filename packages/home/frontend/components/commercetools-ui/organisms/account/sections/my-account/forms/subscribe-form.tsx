@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { Account } from 'shared/types/account';
 import Radio from 'components/commercetools-ui/atoms/radio';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import AccountForm from 'components/commercetools-ui/organisms/account/account-atoms/account-form';
 import useDiscardForm from 'components/commercetools-ui/organisms/account/hooks/useDiscardForm';
 import useFeedbackToasts from 'components/commercetools-ui/organisms/account/hooks/useFeedbackToasts';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { Account } from 'types/account';
 import { useAccount } from 'frontastic';
 
 const SubscribeForm = () => {

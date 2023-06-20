@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { XMarkIcon as CloseIcon } from '@heroicons/react/24/solid';
+import { Category } from 'shared/types/product/Category';
 import Button from 'components/commercetools-ui/atoms/button';
 import Link from 'components/commercetools-ui/atoms/link';
 import Modal from 'components/commercetools-ui/atoms/modal';
@@ -7,7 +8,6 @@ import CartItem from 'components/commercetools-ui/organisms/cart/cart-item';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import { tablet } from 'helpers/utils/screensizes';
-import { Category } from 'types/category';
 import { useAccount, useCart } from 'frontastic';
 import Login from '../authentication/login';
 import OrderSummary, { PaymentMethod } from '../order-summary';
@@ -35,11 +35,11 @@ const Cart: React.FC<Props> = ({ categories, paymentMethods, emptyStateDescripti
   const { loggedIn } = useAccount();
 
   const lineItems = useMemo(() => {
-    return (data?.lineItems ?? []).filter((lineItem) => lineItem.variant.isOnStock);
+    return (data?.lineItems ?? []).filter((lineItem) => lineItem.variant?.isOnStock);
   }, [data?.lineItems]);
 
   const soldoutItems = useMemo(() => {
-    return (data?.lineItems ?? []).filter((lineItem) => !lineItem.variant.isOnStock);
+    return (data?.lineItems ?? []).filter((lineItem) => !lineItem.variant?.isOnStock);
   }, [data?.lineItems]);
 
   const loginLink = '/login?lvp=cart';

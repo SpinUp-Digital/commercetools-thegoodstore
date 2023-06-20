@@ -1,4 +1,4 @@
-import { Variant } from '@commercetools/frontend-domain-types/product';
+import { Variant } from 'shared/types/product';
 
 export const filterAttributeBasedVariants = (variants: Variant[], currentVariant: Variant, attribute: string) => {
   const filteredVariants = variants?.filter(

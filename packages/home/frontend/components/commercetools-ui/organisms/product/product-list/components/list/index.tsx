@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Product } from '@commercetools/frontend-domain-types/product/Product';
+import { Product } from 'shared/types/product/Product';
 import ProductTile from 'components/commercetools-ui/organisms/product/product-tile';
 import { PLP_PRODUCT_CLICKED } from 'helpers/constants/events';
 import { useFormat } from 'helpers/hooks/useFormat';

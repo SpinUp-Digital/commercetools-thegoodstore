@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Order } from 'types/order';
+import { Order } from 'shared/types/cart/Order';
 import OrderLineItem from './order-item';
 
 type OrderSummaryListProps = {
@@ -14,7 +14,7 @@ const OrderSummaryList: FC<OrderSummaryListProps> = ({ className, order }) => {
         <OrderLineItem key={index} {...lineItem} />
       ))}
 
-      {!order.lineItems && <OrderLineItem />}
+      {!order.lineItems && <OrderLineItem taxedPrice={{}} />}
     </div>
   );
 };

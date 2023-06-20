@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
-import { Product } from '@commercetools/frontend-domain-types/product/Product';
 import { Configure, InfiniteHits } from 'react-instantsearch-hooks-web';
+import { Category } from 'shared/types/product/Category';
+import { Product } from 'shared/types/product/Product';
 import Wrapper from 'components/HOC/wrapper';
 import { PLP_PRODUCT_CLICKED } from 'helpers/constants/events';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { Category } from 'types/category';
 import ProductTile from '../product-tile';
 import AccumalativeTrace from './components/accumalative-trace';
 import Breadcrumbs from './components/breadcrumb';

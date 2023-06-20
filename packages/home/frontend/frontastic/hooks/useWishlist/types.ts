@@ -1,5 +1,5 @@
-import { LineItem } from '@commercetools/frontend-domain-types/wishlist/LineItem';
-import { Wishlist } from '@commercetools/frontend-domain-types/wishlist/Wishlist';
+import { LineItem } from 'shared/types/wishlist/LineItem';
+import { Wishlist } from 'shared/types/wishlist/Wishlist';
 
 export interface UseWishlist {
   data?: Wishlist;

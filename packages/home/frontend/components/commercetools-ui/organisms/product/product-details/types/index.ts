@@ -1,5 +1,5 @@
-import { Money } from '@commercetools/frontend-domain-types/product/Money';
-import { Product, Variant } from 'types/product';
+import { Product, Variant } from 'shared/types/product';
+import { Money } from 'shared/types/product/Money';
 
 export type UIProduct = Product & {
   name: string;

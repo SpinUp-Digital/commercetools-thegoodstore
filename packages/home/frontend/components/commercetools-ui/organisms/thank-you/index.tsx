@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { Order } from 'types/order';
+import { Order } from 'shared/types/cart/Order';
 import { useCart } from 'frontastic';
 import ThankYouContent from './thank-you-content';
 

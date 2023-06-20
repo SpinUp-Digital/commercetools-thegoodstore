@@ -1,23 +1,38 @@
 {
-  "compilerOptions": {
-    "target": "esnext",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "strictBindCallApply": true,
-    "baseUrl": ".",
-    "incremental": true,
-    "typeRoots": ["./node_modules/@types", "./node_modules/@headlessui/react/dist/index.d.ts", "./types"]
-  },
-  "include": ["."],
-  "exclude": ["node_modules"]
+    "compilerOptions": {
+        "target": "esnext",
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "esnext"
+        ],
+        "paths": {
+            "shared": ["../shared"],
+            "shared/*": ["../shared/*"],
+},
+        "allowJs": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "noEmit": true,
+        "esModuleInterop": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "jsx": "preserve",
+        "strictBindCallApply": true,
+        "baseUrl": ".",
+        "incremental": true,
+        "typeRoots": [
+            "./node_modules/@types",
+            "./node_modules/@headlessui/react/dist/index.d.ts",
+        ]
+    },
+    "include": [
+        "."
+    ],
+    "exclude": [
+        "node_modules"
+    ]
 }

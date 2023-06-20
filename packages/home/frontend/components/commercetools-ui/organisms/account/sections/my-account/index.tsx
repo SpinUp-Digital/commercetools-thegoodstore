@@ -1,8 +1,8 @@
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
+import { Account } from 'shared/types/account';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { Account } from 'types/account';
 import { useAccount } from 'frontastic';
 import Integrity from './sections/integrity';
 import Newsletter from './sections/newsletter';

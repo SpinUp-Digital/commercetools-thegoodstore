@@ -1,12 +1,12 @@
 import React, { FC, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
+import { Order } from 'shared/types/cart/Order';
 import Accordion from 'components/commercetools-ui/atoms/accordion';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { Order } from 'types/order';
 import Image from 'frontastic/lib/image';
 import useOrderTransactions from '../../helper-hooks/useOrderTransaction';
 

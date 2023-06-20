@@ -1,13 +1,13 @@
 import React, { useCallback, useState } from 'react';
 import { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
+import { PaymentResponse } from 'shared/types/cart/Payment';
 import * as uuid from 'uuid';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useI18n from 'helpers/hooks/useI18n';
 import { Guid } from 'helpers/utils/guid';
 import { getLocalizationInfo } from 'project.config';
 import { sdk } from 'sdk';
-import { PaymentResponse } from 'types/payment';
 import { useAccount, useCart } from 'frontastic';
 import Footer from './components/footer';
 import Header, { Props as HeaderProps } from './components/header';
@@ -70,7 +70,7 @@ const CheckoutWrapped: React.FC<Props> = ({ logo, ...emptyState }) => {
     if (!data?.shippingAddress || !data?.billingAddress || !data?.shippingInfo) return;
 
     if (hasOutOfStockItems) {
-      const outOfStockItems = data?.lineItems.filter((lineItem) => lineItem.variant?.isOnStock) ?? [];
+      const outOfStockItems = data?.lineItems?.filter((lineItem) => lineItem.variant?.isOnStock) ?? [];
 
       toast.error(
         `

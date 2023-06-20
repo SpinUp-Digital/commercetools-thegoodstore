@@ -2,16 +2,16 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import type { PaymentAction } from '@adyen/adyen-web/dist/types/types';
 import creditCardType from 'credit-card-type';
-import * as yup from 'yup';
-import { ObjectShape } from 'yup/lib/object';
-import Overlay from 'components/commercetools-ui/atoms/overlay';
-import { getLocalizationInfo } from 'project.config';
 import {
   PaymentMethod,
   PaymentMethodType,
   KlarnaPaymentRequestPayload,
   SchemePaymentRequestPayload,
-} from 'types/payment';
+} from 'shared/types/cart/Payment';
+import * as yup from 'yup';
+import { ObjectShape } from 'yup/lib/object';
+import Overlay from 'components/commercetools-ui/atoms/overlay';
+import { getLocalizationInfo } from 'project.config';
 import { useAdyen } from 'frontastic';
 import { KlarnaData, PaymentData, PaymentProvider, SchemeData, ThreeDS2AuthCallback } from '../types';
 import usePaymentTestData from './hooks/usePaymentTestData';

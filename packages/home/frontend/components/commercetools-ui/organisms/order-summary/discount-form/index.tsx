@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Discount } from '@commercetools/frontend-domain-types/cart/Discount';
 import { XMarkIcon } from '@heroicons/react/24/outline';
+import { Discount } from 'shared/types/cart/Discount';
 import CloseIcon from 'components/icons/close';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';

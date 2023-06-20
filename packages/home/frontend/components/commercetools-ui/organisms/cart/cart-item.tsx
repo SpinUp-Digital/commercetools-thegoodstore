@@ -1,12 +1,12 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
-import { LineItem as LineItemWishlist } from '@commercetools/frontend-domain-types/wishlist/LineItem';
 import { TrashIcon } from '@heroicons/react/24/outline';
+import { LineItem } from 'shared/types/cart/LineItem';
+import { LineItem as LineItemWishlist } from 'shared/types/wishlist/LineItem';
 import OutOfStock from 'components/commercetools-ui/atoms/out-of-stock';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { LineItem } from 'types/cart';
 import { useCart, useWishlist } from 'frontastic';
 import Image from 'frontastic/lib/image';
 

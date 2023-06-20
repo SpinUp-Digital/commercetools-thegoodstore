@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from 'react';
 import { useRouter } from 'next/router';
-import { Product } from '@commercetools/frontend-domain-types/product/Product';
-import { Facet } from '@commercetools/frontend-domain-types/result/Facet';
+import { Product } from 'shared/types/product/Product';
+import { Facet } from 'shared/types/result/Facet';
 import NotFound from 'components/commercetools-ui/organisms/not-found';
 import ProductList, { Props as ProductListProps } from 'components/commercetools-ui/organisms/product/product-list';
 import ProductListProvider, {
@@ -13,7 +13,7 @@ import {
   PriceConfiguration,
 } from 'components/commercetools-ui/organisms/product/product-list/types';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { Category } from 'types/category';
+import { Category } from 'shared/types/product/Category';
 import { Tastic } from 'types/tastic';
 
 interface TasticProps {

@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import { useRouter } from 'next/router';
-import { Money } from '@commercetools/frontend-domain-types/product/Money';
+import { Order } from 'shared/types/cart/Order';
+import { Money } from 'shared/types/product/Money';
 import Accordion from 'components/commercetools-ui/atoms/accordion';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { Order } from 'types/order';
 import OrderSummaryList from './order-summary-list';
 import OrdersAccordionButton from './ordersAccordionButton';
 import PrintButton from './printButton';

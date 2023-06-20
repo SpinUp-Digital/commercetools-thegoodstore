@@ -1,7 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 import { InstantSearchServerState } from 'react-instantsearch-hooks';
-import { Category } from 'types/category';
+import { Category } from 'shared/types/product/Category';
 import { Cell as LayoutElement } from './cell';
 import { highlightClassNames, TasticWrapper } from './component';
 import { Errors } from './errors';

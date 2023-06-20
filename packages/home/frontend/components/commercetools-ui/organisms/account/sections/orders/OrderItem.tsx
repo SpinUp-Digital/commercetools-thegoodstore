@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import { Order } from '@commercetools/frontend-domain-types/cart/Order';
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
 import toast from 'react-hot-toast';
+import { Order } from 'shared/types/cart/Order';
 import Button from 'components/commercetools-ui/atoms/button';
 import Link from 'components/commercetools-ui/atoms/link';
 import Typography from 'components/commercetools-ui/atoms/typography';

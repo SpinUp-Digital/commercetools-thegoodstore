@@ -1,8 +1,8 @@
 import { FC, useEffect, useState } from 'react';
+import { Account } from 'shared/types/account';
+import { Order } from 'shared/types/cart/Order';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { Account } from 'types/account';
-import { Order } from 'types/order';
 import useOrderInfoData from '../hooks/useOrderInfoData';
 
 type ThankYouOrderInfoProps = {

@@ -1,11 +1,11 @@
 import React, { FC, useLayoutEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
+import { Category } from 'shared/types/product/Category';
 import Button from 'components/commercetools-ui/atoms/button';
 import Link from 'components/commercetools-ui/atoms/link';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import MarketButtonMobile from 'components/commercetools-ui/organisms/market-button/market-button-mobile';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { Category } from 'types/category';
 import { useAccount } from 'frontastic';
 import MobileMenuNavButton from '../atoms/menu-nav-button';
 

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Order } from 'types/order';
+import { Order } from 'shared/types/cart/Order';
 import ThankYouOrderInfo from './components/order-info';
 import OrderSummary from './components/order-summary';
 import ThankYouFooter from './components/thank-you-footer';

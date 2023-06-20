@@ -1,5 +1,5 @@
 import type { IncomingMessage, ServerResponse } from 'http';
-import { Result } from '@commercetools/frontend-domain-types/product/Result';
+import { Result } from 'shared/types/product/Result';
 import { serverSession, ServerOptions } from '@commercetools/frontend-sdk';
 import { AcceptedQueryTypes } from '@commercetools/frontend-sdk/lib/types/Query';
 import { sdk } from 'sdk';
