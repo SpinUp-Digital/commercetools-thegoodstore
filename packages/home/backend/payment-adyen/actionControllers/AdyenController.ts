@@ -72,11 +72,11 @@ export const notify = async (request: Request, actionContext: ActionContext) => 
       amount,
       success,
       eventCode,
-      additionalData: { shopperLocale, cardSummary, ...additionalData },
+      additionalData: { shopperLocale, authorisedAmountCurrency, cardSummary, ...additionalData },
     } = NotificationRequestItem;
 
     const emailApi = EmailApiFactory.getDefaultApi(actionContext.frontasticContext, shopperLocale ?? 'en_GB');
-    const cartApi = new CartApi(actionContext.frontasticContext, shopperLocale ?? 'en_GB');
+    const cartApi = new CartApi(actionContext.frontasticContext, shopperLocale ?? 'en_GB', authorisedAmountCurrency ?? 'GBP');
 
     const cartId = additionalData['metadata.cartId'];
 
