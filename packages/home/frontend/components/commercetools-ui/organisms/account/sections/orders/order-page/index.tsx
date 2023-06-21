@@ -1,13 +1,11 @@
 import React, { FC } from 'react';
 import { Address } from 'shared/types/account';
-import { LineItem } from 'shared/types/cart/LineItem';
+import OrderSummary from 'components/commercetools-ui/organisms/order-summary';
 import useOrderData from '../helper-hooks/useOrderData';
 import useOrderFetch from '../helper-hooks/useOrderFetch';
-import useOrderTransactions from '../helper-hooks/useOrderTransaction';
 import OrderInfoSection from './order-info';
 import OrderNumber from './order-number';
 import OrderStatusBar from './order-status-bar';
-import OrderSummary from './order-summary/order-summary';
 
 export interface Props {
   orderId?: string;
@@ -15,11 +13,10 @@ export interface Props {
 
 const OrderPage: FC<Props> = ({ orderId }) => {
   const { orders } = useOrderFetch();
+
   const order = orders.find((order) => order.orderId === orderId);
   const { formattedOrderDate, formattedShippingDate, formattedDeliveryDate, shippingInfo, paymentInfo } =
     useOrderData(order);
-
-  const { hiddenItemsCount, subtotal, shipmentFees, totalTax, total } = useOrderTransactions(order);
 
   return (
     <div className="md:mt-20 lg:mt-40">
@@ -47,12 +44,17 @@ const OrderPage: FC<Props> = ({ orderId }) => {
             />
 
             <OrderSummary
-              hiddenItemsCount={hiddenItemsCount}
-              subtotal={subtotal}
-              shipmentFees={shipmentFees}
-              totalTax={totalTax}
-              total={total}
-              lineItems={order.lineItems as LineItem[]}
+              order={order}
+              includeItemsList
+              includeSummaryAccordion
+              className="ml-44 hidden h-fit w-[42%] rounded-md border lg:px-36 lg:py-20 2xl:block 3xl:w-[37%]"
+              classNames={{
+                itemsList: 'border-transparent lg:m-0',
+                subCostsContainer: 'border-b border-neutral-400 pb-24',
+                totalAmount: 'mt-16',
+                infoContainer: 'lg:pt-24',
+              }}
+              button={undefined}
             />
           </div>
         </>

@@ -1,8 +1,8 @@
 import React from 'react';
-import Checkout, { Props as CheckoutProps } from 'components/commercetools-ui/organisms/checkout';
+import Checkout, { CheckoutWrappedProps } from 'components/commercetools-ui/organisms/checkout';
 
 interface Props {
-  data: CheckoutProps;
+  data: CheckoutWrappedProps;
 }
 
 const CheckoutTastic = ({ data }: Props) => {

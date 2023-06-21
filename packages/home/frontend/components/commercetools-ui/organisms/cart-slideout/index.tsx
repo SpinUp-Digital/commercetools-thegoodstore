@@ -1,21 +1,14 @@
 import React, { FC } from 'react';
+import useCloseFlyouts from 'helpers/hooks/useCloseFlyouts';
 import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart } from 'frontastic';
-import { NextFrontasticImage } from 'frontastic/lib/image';
-import CartItem from '../cart/cart-item';
+import CartItem from '../cart/components/cart-item';
 import { EmptyState } from '../empty-state';
-import { Link } from '../header/types';
-import OrderSummary from '../order-summary';
+import OrderPaymentSection from '../order-payment-section';
+import CheckoutButton from '../order-summary/components/checkout-button';
+import { CartSlideoutProps } from './type';
 
-export interface Props {
-  emptyStateImage: NextFrontasticImage;
-  emptyStateTitle: string;
-  emptyStateSubtitle: string;
-  emptyStateCategories: Link[];
-  handleCategoryClick?: () => void;
-}
-
-const CartSlideout: FC<Props> = ({
+const CartSlideout: FC<CartSlideoutProps> = ({
   emptyStateImage,
   emptyStateTitle,
   emptyStateSubtitle,
@@ -25,6 +18,7 @@ const CartSlideout: FC<Props> = ({
   const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
 
   const { data, isEmpty } = useCart();
+  const closeFlyouts = useCloseFlyouts();
 
   return (
     <>
@@ -44,17 +38,23 @@ const CartSlideout: FC<Props> = ({
           ))}
         </div>
       )}
-      <OrderSummary
+      <OrderPaymentSection
         classNames={{
           applyDiscountButton: 'px-12 py-24 md:px-22',
-          infoContainer: 'px-12 pt-16 pb-18 md:px-22',
+          infoContainer: 'px-12 p-16 md:px-22',
+          totalAmount: 'pb-20',
+          subCost: 'text-14',
         }}
-        button={{
-          text: formatCartMessage({ id: 'cart.go', defaultMessage: 'Go to cart' }),
-          link: '/cart',
-        }}
+        button={
+          <CheckoutButton
+            text={formatCartMessage({ id: 'cart.go', defaultMessage: 'Go to cart' })}
+            link="/cart"
+            onClick={closeFlyouts}
+          />
+        }
       />
     </>
   );
 };
+
 export default CartSlideout;

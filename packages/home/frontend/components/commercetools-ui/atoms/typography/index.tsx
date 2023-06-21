@@ -48,7 +48,6 @@ const Typography: React.FC<TypographyProps> = ({
   const elementClassName = useClassNames([
     { underline },
     `text-${align}`,
-    `text-${fontSize}`,
     { [`text-${fontSize}`]: !!fontSize },
     `leading-${lineHeight}`,
     { 'font-medium': medium },

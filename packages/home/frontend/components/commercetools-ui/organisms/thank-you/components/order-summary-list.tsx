@@ -4,17 +4,17 @@ import OrderLineItem from './order-item';
 
 type OrderSummaryListProps = {
   className?: string;
-  order: Order;
+  order?: Order;
 };
 
 const OrderSummaryList: FC<OrderSummaryListProps> = ({ className, order }) => {
   return (
     <div className={className}>
-      {order.lineItems?.map((lineItem, index) => (
-        <OrderLineItem key={index} {...lineItem} />
+      {order?.lineItems?.map((lineItem) => (
+        <OrderLineItem key={lineItem.productId} {...lineItem} />
       ))}
 
-      {!order.lineItems && <OrderLineItem taxedPrice={{}} />}
+      {!order?.lineItems && <OrderLineItem />}
     </div>
   );
 };
