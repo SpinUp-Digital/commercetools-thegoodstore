@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
+import Dropdown, { Option } from 'components/commercetools-ui/atoms/dropdown';
 import Input from 'components/commercetools-ui/atoms/input';
-import Select, { Option } from 'components/commercetools-ui/atoms/select';
 import useResolveCCImage from 'components/commercetools-ui/organisms/checkout/hooks/useResolveCCImage';
 import { useCheckout } from 'components/commercetools-ui/organisms/checkout/provider';
 import { PaymentData, SchemeData } from 'components/commercetools-ui/organisms/checkout/provider/payment/types';
@@ -102,13 +102,13 @@ const Scheme = () => {
           )}
         </Input>
       </div>
-      <div className="mt-16 flex gap-8">
-        <div className="grow md:flex-1">
-          <Select
+      <div className="mt-16 flex w-full gap-8">
+        <div className="w-full grow md:flex-1">
+          <Dropdown
             label={formatCheckoutMessage({ id: 'expiry.date', defaultMessage: 'Expiry date' })}
-            options={expiryDateOptions}
-            onChange={handleExpiryDateChange}
-            defaultValue={
+            selectOptions={expiryDateOptions}
+            selectOnChange={handleExpiryDateChange}
+            selectDefaultValue={
               paymentData.expiryMonth && paymentData.expiryYear
                 ? {
                     name: `${+paymentData.expiryMonth < 10 ? '0' : ''}${
