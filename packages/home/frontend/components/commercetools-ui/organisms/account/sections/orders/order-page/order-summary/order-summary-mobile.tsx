@@ -4,11 +4,13 @@ import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import { Order } from 'shared/types/cart/Order';
 import Accordion from 'components/commercetools-ui/atoms/accordion';
 import Typography from 'components/commercetools-ui/atoms/typography';
+import Costs from 'components/commercetools-ui/organisms/order-payment-section/components/costs';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
+import useI18n from 'helpers/hooks/useI18n';
+import mapCosts from 'helpers/utils/mapCosts';
 import Image from 'frontastic/lib/image';
-import useOrderTransactions from '../../helper-hooks/useOrderTransaction';
 
 export interface Props {
   order?: Order;
@@ -16,19 +18,13 @@ export interface Props {
 
 const OrderSummaryMobile: FC<Props> = ({ order }) => {
   const { locale } = useRouter();
-
-  const {
-    subtotal: getSubtotal,
-    shipmentFees: getShipmentFees,
-    totalTax: getTotalTax,
-    total: getTotal,
-  } = useOrderTransactions(order);
+  const { currency } = useI18n();
 
   const { formatMessage: formatOrdersMessage } = useFormat({ name: 'orders' });
 
   const [open, setOpen] = useState(false);
 
-  const accordionClassNames = useClassNames([' block 2xl:hidden my-24 lg:mt-40']);
+  const accordionClassNames = useClassNames(['block 2xl:hidden my-24 lg:mt-40']);
 
   const accordionContentClassNames = useClassNames([
     'flex w-full justify-between border-y py-16',
@@ -55,14 +51,14 @@ const OrderSummaryMobile: FC<Props> = ({ order }) => {
 
           <div className="flex">
             <Typography fontSize={16} medium className="hidden pr-8 text-primary-black md:block">
-              {getTotal}
+              {CurrencyHelpers.formatForCurrency(mapCosts({ order, currency }).total)}
             </Typography>
             <ChevronDownIcon width={20} strokeWidth={1.5} className={arrowClassNames} />
           </div>
         </div>
       </div>
     );
-  }, [open, arrowClassNames, formatOrdersMessage, getTotal, accordionContentClassNames]);
+  }, [accordionContentClassNames, formatOrdersMessage, order, currency, arrowClassNames, open]);
 
   return (
     <Accordion customClosedButton={orderSummaryAccordion} className={accordionClassNames} buttonClassName="w-full">
@@ -88,52 +84,8 @@ const OrderSummaryMobile: FC<Props> = ({ order }) => {
           </div>
         ))}
       </div>
-      <div className="flex flex-col gap-8 bg-neutral-200 p-16 md:px-24 lg:px-44">
-        <div className="flex justify-between">
-          <Typography fontSize={16} className="text-secondary-black">
-            {formatOrdersMessage({
-              id: 'subtotal',
-              defaultMessage: 'Subtotal',
-            })}
-          </Typography>
-          <Typography fontSize={16} className="text-secondary-black">
-            {getSubtotal}
-          </Typography>
-        </div>
-        <div className="flex justify-between">
-          <Typography fontSize={16} className="text-secondary-black">
-            {formatOrdersMessage({
-              id: 'shipping',
-              defaultMessage: 'Est. Shipping',
-            })}
-          </Typography>
-          <Typography fontSize={16} className="text-secondary-black">
-            {getShipmentFees}
-          </Typography>
-        </div>
-        <div className="flex justify-between">
-          <Typography fontSize={16} className="text-secondary-black">
-            {formatOrdersMessage({
-              id: 'tax',
-              defaultMessage: 'Tax',
-            })}
-          </Typography>
-          <Typography fontSize={16} className="text-secondary-black">
-            {getTotalTax}
-          </Typography>
-        </div>
-        <div className="mt-16 flex justify-between">
-          <Typography fontSize={18} medium className="text-secondary-black">
-            {formatOrdersMessage({
-              id: 'order.total',
-              defaultMessage: 'Total:',
-            })}
-          </Typography>
-          <Typography fontSize={18} medium className="text-secondary-black">
-            {getTotal}
-          </Typography>
-        </div>
-      </div>
+
+      <Costs className="bg-neutral-200 p-16 md:px-24 lg:px-44" order={order} />
     </Accordion>
   );
 };
