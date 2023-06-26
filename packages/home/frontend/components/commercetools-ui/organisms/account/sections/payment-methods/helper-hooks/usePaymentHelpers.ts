@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react';
-import { Option } from 'components/commercetools-ui/atoms/select';
+import { Option } from 'components/commercetools-ui/atoms/dropdown';
 
 const usePaymentHelpers = () => {
   const expiryDateMonthOptions = useMemo(() => {
