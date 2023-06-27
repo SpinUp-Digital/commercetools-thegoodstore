@@ -1,135 +1,65 @@
-import React from 'react';
-import { useRouter } from 'next/router';
-import AccordionBtn from 'components/commercetools-ui/atoms/accordion';
-import Link from 'components/commercetools-ui/atoms/link';
-import { CurrencyHelpers } from 'helpers/currencyHelpers';
-import useCloseFlyouts from 'helpers/hooks/useCloseFlyouts';
-import { useFormat } from 'helpers/hooks/useFormat';
-import { useCart } from 'frontastic';
-import Image, { NextFrontasticImage } from 'frontastic/lib/image';
-import DiscountForm from './discount-form';
+import { FC } from 'react';
+import Typography from 'components/commercetools-ui/atoms/typography';
+import useClassNames from 'helpers/hooks/useClassNames';
+import useMediaQuery from 'helpers/hooks/useMediaQuery';
+import { desktop } from 'helpers/utils/screensizes';
+import { useAccount, useCart } from 'frontastic';
+import OrderItemsListing from '../order-items-listing';
+import OrderPaymentSection from '../order-payment-section';
+import DiscountForm from '../order-payment-section/components/discount-form';
+import LoginSuggestion from './components/login-suggestion';
+import SummaryAccordion from './components/summary-accordion';
+import { OrderSummaryProps } from './types';
 
-export interface PaymentMethod {
-  name: string;
-  image: NextFrontasticImage;
-}
-
-export interface ButtonProps {
-  text?: string;
-  link?: string;
-  disabled?: boolean;
-}
-
-export interface ClassNames {
-  button?: string;
-  applyDiscountButton?: string;
-  infoContainer?: string;
-  totalAmountContainer?: string;
-}
-
-export interface Props {
-  hideCheckoutButton?: boolean;
-  paymentMethods?: Array<PaymentMethod>;
-  button?: ButtonProps;
-  classNames?: ClassNames;
-}
-
-const OrderSummary: React.FC<Props> = ({
-  hideCheckoutButton = false,
-  paymentMethods = [],
-  button = {},
-  classNames = {},
+const OrderSummary: FC<OrderSummaryProps> = ({
+  title,
+  className,
+  includeLoginSuggestion,
+  includeSummaryAccordion,
+  paymentMethods,
+  includeItemsList,
+  ...props
 }) => {
-  const { locale } = useRouter();
+  const [isDesktopSize] = useMediaQuery(desktop);
 
-  //i18n messages
-  const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
+  const { loggedIn } = useAccount();
+  const { data } = useCart();
 
-  const { isEmpty, transaction } = useCart();
-
-  const closeFlyouts = useCloseFlyouts();
+  const itemsListClassName = useClassNames(['mb-24 border-y border-neutral-400', props.classNames?.itemsList]);
 
   return (
-    <div>
-      {!isEmpty && (
-        <div className={`border-t border-neutral-400 text-14 ${classNames.applyDiscountButton ?? ''}`}>
-          <AccordionBtn
-            closedSectionTitle={formatCartMessage({ id: 'discount.apply', defaultMessage: 'Apply a discount' })}
-            buttonClassName="text-secondary-black"
-          >
-            <DiscountForm />
-          </AccordionBtn>
+    <div className={className}>
+      {(title || includeLoginSuggestion) && (
+        <div className="py-16 md:py-24 lg:pb-24 lg:pt-0">
+          {title && (
+            <Typography fontFamily="libre" fontSize={16} className="md:text-18">
+              {title}
+            </Typography>
+          )}
+
+          {includeLoginSuggestion && !loggedIn && <LoginSuggestion />}
         </div>
       )}
-      <div className={`border-t border-neutral-400 bg-white text-14 ${classNames.infoContainer}`}>
-        {!isEmpty && (
-          <>
-            <div className="flex items-center justify-between">
-              <span>{formatCartMessage({ id: 'subtotal', defaultMessage: 'Subtotal' })} </span>
-              <span>{CurrencyHelpers.formatForCurrency(transaction.subtotal, locale)}</span>
-            </div>
 
-            {transaction.discount.centAmount > 0 && (
-              <div className="flex items-center justify-between">
-                <span>{formatCartMessage({ id: 'discount', defaultMessage: 'Discount' })} </span>
-                <span>{CurrencyHelpers.formatForCurrency(transaction.discount, locale)}</span>
-              </div>
-            )}
+      {includeItemsList && props.order?.lineItems && (
+        <OrderItemsListing className={itemsListClassName} lineItems={props.order?.lineItems} />
+      )}
 
-            <div className="flex items-center justify-between">
-              <span>{formatCartMessage({ id: 'tax', defaultMessage: 'Tax' })} </span>
-              <span>{CurrencyHelpers.formatForCurrency(transaction.tax, locale)}</span>
-            </div>
+      {includeSummaryAccordion && <SummaryAccordion className="lg:hidden" order={props.order} cart={data} />}
 
-            {transaction.shipping.centAmount > 0 && (
-              <div className="flex items-center justify-between">
-                <span>{formatCartMessage({ id: 'shipping.estimate', defaultMessage: 'Est. Shipping' })} </span>
-                <span>{CurrencyHelpers.formatForCurrency(transaction.shipping, locale)}</span>
-              </div>
-            )}
-          </>
-        )}
+      {!isDesktopSize && includeSummaryAccordion && <DiscountForm className={props.classNames?.applyDiscountButton} />}
 
-        <div
-          className={`mt-26 flex items-center justify-between text-16 font-medium ${
-            classNames.totalAmountContainer ?? ''
-          }`}
-        >
-          <span>{formatCartMessage({ id: 'total', defaultMessage: 'Total' })} </span>
-          <span>{CurrencyHelpers.formatForCurrency(transaction.total, locale)}</span>
-        </div>
-
-        {!hideCheckoutButton && (
-          <div className="mt-16">
-            <Link link={button.link}>
-              <button
-                disabled={button.disabled}
-                className="w-full rounded-md bg-primary-black py-12 font-medium text-white transition hover:bg-gray-500 disabled:cursor-not-allowed disabled:bg-neutral-400"
-                onClick={closeFlyouts}
-              >
-                {button.text}
-              </button>
-            </Link>
-          </div>
-        )}
-
-        {paymentMethods.length > 0 && (
-          <div className="lg:mt-28">
-            <div className="hidden lg:block">
-              <p className="text-14 leading-[20px] text-secondary-black">
-                {formatCartMessage({ id: 'we.accept', defaultMessage: 'We accept' })}
-              </p>
-            </div>
-            <div className="mt-26 flex items-center justify-start gap-14 md:justify-center lg:mt-18 lg:justify-start">
-              {paymentMethods.map(({ name, image }) => (
-                <div key={name} className="relative h-30 w-30">
-                  <Image {...image} layout="fill" objectFit="contain" />
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
+      {(isDesktopSize || !includeSummaryAccordion) && (
+        <OrderPaymentSection
+          classNames={{
+            applyDiscountButton: 'py-14 text-16',
+            totalAmount: 'text-18 md:pb-20',
+            subCostsContainer: 'pt-12 md:pt-16 mb-20 lg:py-24 lg:mb-16 lg:border-b border-neutral-400',
+          }}
+          paymentMethods={paymentMethods}
+          {...props}
+        />
+      )}
     </div>
   );
 };

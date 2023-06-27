@@ -4,7 +4,7 @@ import { ShippingMethod } from 'shared/types/cart/ShippingMethod';
 import { shippingMethods as shippingMethodsMock } from 'helpers/mocks/mockCommonData';
 import { useCart } from 'frontastic';
 
-const useOrderInfoData = (order: Order) => {
+const useOrderInfoData = (order?: Order) => {
   const { shippingMethods } = useCart();
 
   const [orderNumber, setOrderNumber] = useState('');
@@ -13,7 +13,7 @@ const useOrderInfoData = (order: Order) => {
   const [paymentInfo, setPaymentInfo] = useState('');
 
   const updateOrderNumber = useCallback(() => {
-    const label = order.orderId?.split('-').join(' ') ?? '';
+    const label = order?.orderId?.split('-').join(' ') ?? '';
     setOrderNumber(label);
   }, [order?.orderId]);
 
@@ -42,7 +42,7 @@ const useOrderInfoData = (order: Order) => {
   }, [order?.shippingAddress]);
 
   const updatePaymentInfo = useCallback(() => {
-    const payment = order.payments?.[0];
+    const payment = order?.payments?.[0];
     const lastDigits = payment?.cardSummary;
     const cardType = payment?.paymentMethod == 'mc' ? 'MASTERCARD' : 'VISA';
     const label = `${cardType} **${lastDigits}`;

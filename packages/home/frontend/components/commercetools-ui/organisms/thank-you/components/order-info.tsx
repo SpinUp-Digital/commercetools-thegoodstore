@@ -7,7 +7,7 @@ import useOrderInfoData from '../hooks/useOrderInfoData';
 
 type ThankYouOrderInfoProps = {
   firstName?: Account['firstName'];
-  order: Order;
+  order?: Order;
 };
 
 type OrderInfoType = Array<{ label: string; value: string; subValue?: string }>;
@@ -48,8 +48,8 @@ const ThankYouOrderInfo: FC<ThankYouOrderInfoProps> = ({ firstName, order }) => 
 
   return (
     <div className="grid gap-16 border-b border-neutral-400 py-24 md:gap-24 lg:py-36">
-      {orderInfo.map(({ label, value, subValue }, index) => (
-        <div key={index}>
+      {orderInfo.map(({ label, value, subValue }) => (
+        <div key={value}>
           <div className="flex flex-wrap gap-5 md:gap-0">
             <div className="md:w-136">
               <Typography

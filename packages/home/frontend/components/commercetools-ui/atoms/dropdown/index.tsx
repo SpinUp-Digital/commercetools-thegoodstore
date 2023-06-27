@@ -1,8 +1,15 @@
 import React, { ComponentProps, FC } from 'react';
 import CustomDropDown from './custom-dropdown';
 import DefaultDropdown from './default-dropdown';
+import Select from './option-dropdown';
+
+export interface Option {
+  name: string;
+  value: string | number;
+}
 
 export interface DropdownProps extends ComponentProps<'select'> {
+  error?: boolean;
   className?: string;
   containerClassName?: string;
   labelClassName?: string;
@@ -14,9 +21,14 @@ export interface DropdownProps extends ComponentProps<'select'> {
   customButtonClassNames?: (open?: boolean) => string | string;
   customMenuClassNames?: (open?: boolean) => string;
   customMenuWrapperClassNames?: string;
+  selectDropdownClassNames?: string;
+  selectDefaultValue?: Option;
+  selectOptions?: Option[];
+  selectOnChange?: (option: Option) => void;
 }
 
 const Dropdown: FC<DropdownProps> = ({
+  error,
   className = '',
   containerClassName = '',
   labelClassName,
@@ -28,6 +40,10 @@ const Dropdown: FC<DropdownProps> = ({
   customButtonClassNames,
   customMenuClassNames,
   customMenuWrapperClassNames,
+  selectDropdownClassNames,
+  selectDefaultValue,
+  selectOptions,
+  selectOnChange,
   children,
   ...props
 }) => {
@@ -42,6 +58,16 @@ const Dropdown: FC<DropdownProps> = ({
         >
           {children}
         </CustomDropDown>
+      ) : selectOptions ? (
+        <Select
+          error={error}
+          label={label}
+          labelClassName={labelClassName}
+          selectButtonClassName={selectDropdownClassNames}
+          defaultValue={selectDefaultValue}
+          options={selectOptions}
+          onChange={selectOnChange}
+        />
       ) : (
         <DefaultDropdown
           className={className}
