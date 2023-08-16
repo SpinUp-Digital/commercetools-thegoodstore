@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Product } from '@commercetools/frontend-domain-types/product/Product';
+import { Product } from 'shared/types/product/Product';
 import ProductDetailsAdapter from 'components/commercetools-ui/organisms/product/product-details/helpers/adapter';
 import { Tastic } from 'types/tastic';
 

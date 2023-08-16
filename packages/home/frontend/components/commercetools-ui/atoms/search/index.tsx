@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
-import { Product } from '@commercetools/frontend-domain-types/product/Product';
 import { Transition } from '@headlessui/react';
 import { MagnifyingGlassIcon as SearchIcon, XMarkIcon as CloseIcon } from '@heroicons/react/24/solid';
 import debounce from 'lodash.debounce';
+import { Category } from 'shared/types/product/Category';
+import { Product } from 'shared/types/product/Product';
 import { useFormat } from 'helpers/hooks/useFormat';
 import useScrollBlock from 'helpers/hooks/useScrollBlock';
-import { Category } from 'types/category';
 import { useProduct } from 'frontastic';
 import Overlay from '../overlay';
 import SearchItem from './search-item';
@@ -88,7 +88,7 @@ const Search: React.FC<Props> = ({ categories }) => {
     <>
       {focused && <Overlay />}
 
-      <div className="relative z-[350] lg:px-20">
+      <div className="relative z-[350] xl:px-20">
         <div
           className={`relative z-50 border-neutral-400 bg-white lg:rounded-sm lg:border ${
             focused ? 'border-b' : 'border'
@@ -128,7 +128,7 @@ const Search: React.FC<Props> = ({ categories }) => {
 
         <Transition
           show={focused}
-          className="absolute bottom-0 left-0 max-h-[60vh] w-full translate-y-full overflow-auto bg-white px-20 py-28 lg:max-h-[unset] lg:translate-y-[calc(100%-56px)] lg:rounded-md lg:pt-84"
+          className="absolute bottom-0 left-0 max-h-[60vh] w-full translate-y-full overflow-auto bg-white px-20 py-28 xl:max-h-[unset] xl:translate-y-[calc(100%-56px)] xl:rounded-md xl:pt-84"
           enter="transition duration-75"
           enterFrom="opacity-0"
           enterTo="opacity-100"

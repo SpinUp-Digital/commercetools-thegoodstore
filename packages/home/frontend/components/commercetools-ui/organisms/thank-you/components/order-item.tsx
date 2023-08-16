@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useRouter } from 'next/router';
-import { LineItem } from '@commercetools/frontend-domain-types/cart/LineItem';
 import Skeleton from 'react-loading-skeleton';
+import { LineItem } from 'shared/types/cart/LineItem';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import Image from 'frontastic/lib/image';
@@ -27,7 +27,7 @@ const OrderLineItem: FC<LineItem> = ({ name, price, count, variant }) => {
             {CurrencyHelpers.formatForCurrency(price ?? 111, locale)}
           </Typography>
           <Typography asSkeleton={!name} fontSize={14} className="mt-12 text-secondary-black">
-            {'x ' + count ?? '2'}
+            {'x ' + (count ?? '2')}
           </Typography>
         </div>
       </div>

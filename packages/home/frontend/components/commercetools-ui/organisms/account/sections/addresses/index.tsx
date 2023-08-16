@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Address as AddressType } from '@commercetools/frontend-domain-types/account';
+import { Address as AddressType } from 'shared/types/account';
 import Link from 'components/commercetools-ui/atoms/link';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { useFormat } from 'helpers/hooks/useFormat';
@@ -75,7 +75,7 @@ const Addresses = () => {
           })}
         </Typography>
         <Link
-          link="#edit-address"
+          link="#addresses/address-add"
           className="block w-full rounded-md bg-gray-700 px-16 py-8 text-center text-14 font-medium leading-[114%] text-neutral-150 hover:cursor-pointer md:w-fit 2xl:px-40 2xl:py-12"
         >
           {formatAccountMessage({ id: 'address.add', defaultMessage: 'Add an address' })}

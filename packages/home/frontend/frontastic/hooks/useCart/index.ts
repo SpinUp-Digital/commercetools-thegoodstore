@@ -1,11 +1,12 @@
 import { useCallback, useMemo } from 'react';
-import { Discount } from '@commercetools/frontend-domain-types/cart/Discount';
+import { Discount } from 'shared/types/cart/Discount';
 import useSWR, { mutate } from 'swr';
 import useI18n from 'helpers/hooks/useI18n';
+import mapCosts from 'helpers/utils/mapCosts';
 import { sdk } from 'sdk';
-import { Cart } from 'types/cart';
-import { Order } from 'types/order';
-import { Variant } from 'types/product';
+import { Cart } from 'shared/types/cart';
+import { Order } from 'shared/types/cart/Order';
+import { Variant } from 'shared/types/product';
 import { revalidateOptions } from 'frontastic';
 import { CartDetails, UseCartReturn } from './types';
 
@@ -34,73 +35,7 @@ const useCart = (): UseCartReturn => {
 
   const hasOutOfStockItems = !!data?.data?.lineItems?.some((lineItem) => !lineItem.variant?.isOnStock);
 
-  const transaction = useMemo(() => {
-    const cartData = data.data;
-
-    if (!cartData?.lineItems?.length)
-      return {
-        subtotal: { centAmount: 0, currencyCode: currency, fractionDigits: 2 },
-        discount: { centAmount: 0, currencyCode: currency, fractionDigits: 2 },
-        tax: { centAmount: 0, currencyCode: currency, fractionDigits: 2 },
-        shipping: { centAmount: 0, currencyCode: currency, fractionDigits: 2 },
-        total: { centAmount: 0, currencyCode: currency, fractionDigits: 2 },
-      };
-
-    const currencyCode = cartData.sum?.currencyCode ?? currency;
-    const fractionDigits = cartData.sum?.fractionDigits ?? 2;
-
-    const totalAmount = cartData.sum?.centAmount as number;
-    const subTotalAmount = cartData.lineItems.reduce(
-      (acc, curr) => acc + (curr.price?.centAmount || 0) * (curr.count as number),
-      0,
-    );
-
-    const discountedAmount = cartData.lineItems.reduce(
-      (acc, curr) =>
-        acc + ((curr.price?.centAmount || 0) * (curr.count as number) - (curr.totalPrice?.centAmount || 0)),
-      0,
-    );
-
-    const totalTax =
-      totalAmount > 0
-        ? cartData.taxed?.taxPortions?.reduce((acc, curr) => acc + (curr.amount?.centAmount as number), 0) ?? 0
-        : 0;
-
-    const totalShipping =
-      totalAmount > 0
-        ? cartData.shippingInfo?.price?.centAmount ??
-          cartData.availableShippingMethods?.[0]?.rates?.[0]?.price?.centAmount ??
-          0
-        : 0;
-
-    return {
-      subtotal: {
-        centAmount: subTotalAmount,
-        currencyCode,
-        fractionDigits,
-      },
-      discount: {
-        centAmount: discountedAmount,
-        currencyCode,
-        fractionDigits,
-      },
-      shipping: {
-        centAmount: totalShipping,
-        currencyCode,
-        fractionDigits,
-      },
-      tax: {
-        centAmount: totalTax,
-        currencyCode,
-        fractionDigits,
-      },
-      total: {
-        centAmount: totalAmount + totalTax,
-        currencyCode,
-        fractionDigits,
-      },
-    };
-  }, [data.data, currency]);
+  const transaction = useMemo(() => mapCosts({ reference: 'cart', cart: data.data, currency }), [data.data, currency]);
 
   const addItem = useCallback(async (variant: Variant, quantity: number) => {
     const extensions = sdk.composableCommerce;

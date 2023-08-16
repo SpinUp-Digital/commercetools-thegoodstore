@@ -1,4 +1,4 @@
-import { Account, Address } from 'types/account';
+import { Account, Address } from 'shared/types/account';
 import { ResponseError } from 'frontastic';
 
 export interface GetAccountResult {

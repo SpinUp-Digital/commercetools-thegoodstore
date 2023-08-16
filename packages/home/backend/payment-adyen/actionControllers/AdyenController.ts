@@ -10,7 +10,7 @@ import { EmailApiFactory } from 'commerce-commercetools/utils/EmailApiFactory';
 export const getPaymentMethods = async (request: Request, actionContext: ActionContext) => {
   const locale = getLocale(request);
 
-  const adyenApi = new BaseApi(actionContext.frontasticContext.project.configuration.adyen);
+  const adyenApi = new BaseApi(actionContext.frontasticContext.projectConfiguration);
 
   const paymentMethods = await adyenApi.getPaymentMethods({ locale, country: getCountry(locale) });
 
@@ -24,7 +24,7 @@ export const getPaymentMethods = async (request: Request, actionContext: ActionC
 };
 
 export const makePayment = async (request: Request, actionContext: ActionContext) => {
-  const adyenApi = new BaseApi(actionContext.frontasticContext.project.configuration.adyen);
+  const adyenApi = new BaseApi(actionContext.frontasticContext.projectConfiguration);
 
   const data = JSON.parse(request.body);
 
@@ -40,7 +40,7 @@ export const makePayment = async (request: Request, actionContext: ActionContext
 };
 
 export const paymentDetails = async (request: Request, actionContext: ActionContext) => {
-  const adyenApi = new BaseApi(actionContext.frontasticContext.project.configuration.adyen);
+  const adyenApi = new BaseApi(actionContext.frontasticContext.projectConfiguration);
 
   const data = JSON.parse(request.body);
 
@@ -58,7 +58,7 @@ export const paymentDetails = async (request: Request, actionContext: ActionCont
 export const notify = async (request: Request, actionContext: ActionContext) => {
   const { notificationItems } = JSON.parse(request.body);
 
-  const hmacKey = actionContext.frontasticContext.project.configuration.adyen.hmacKey;
+  const hmacKey = actionContext.frontasticContext.projectConfiguration.EXTENSION_ADYEN_HMAC_KEY;
 
   const validator = new hmacValidator();
 
@@ -72,11 +72,11 @@ export const notify = async (request: Request, actionContext: ActionContext) => 
       amount,
       success,
       eventCode,
-      additionalData: { shopperLocale, cardSummary, ...additionalData },
+      additionalData: { shopperLocale, authorisedAmountCurrency, cardSummary, ...additionalData },
     } = NotificationRequestItem;
 
     const emailApi = EmailApiFactory.getDefaultApi(actionContext.frontasticContext, shopperLocale ?? 'en_GB');
-    const cartApi = new CartApi(actionContext.frontasticContext, shopperLocale ?? 'en_GB');
+    const cartApi = new CartApi(actionContext.frontasticContext, shopperLocale ?? 'en_GB', authorisedAmountCurrency ?? 'GBP');
 
     const cartId = additionalData['metadata.cartId'];
 

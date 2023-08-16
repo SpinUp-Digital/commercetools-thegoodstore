@@ -1,9 +1,9 @@
 import React, { FC, useState } from 'react';
 import { Bars3Icon } from '@heroicons/react/24/outline';
+import { Category } from 'shared/types/product/Category';
 import Button from 'components/commercetools-ui/atoms/button';
 import Drawer from 'components/commercetools-ui/atoms/drawer';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { Category } from 'types/category';
 import { Reference } from 'types/reference';
 import { NextFrontasticImage } from 'frontastic/lib/image';
 import MobileMenu from './content/mobile-menu';
@@ -42,12 +42,12 @@ const HeaderNavigationMobile: FC<Props> = ({ links, logo, logoLink }) => {
     <div className="flex xl:hidden">
       <Button
         variant="ghost"
-        size="icon"
+        size="fit"
         onClick={showHeaderMenu}
         title={formatMessage({ id: 'header.menu.open', defaultMessage: 'Open side menu' })}
         className="mr-8"
       >
-        <Bars3Icon className="w-30 text-secondary-black lg:w-44" />
+        <Bars3Icon className="w-30 text-secondary-black lg:w-48" />
       </Button>
 
       <Drawer

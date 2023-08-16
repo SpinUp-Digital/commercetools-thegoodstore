@@ -1,7 +1,7 @@
 import { useMemo, useCallback } from 'react';
 import useSWR, { mutate } from 'swr';
+import { Account, Address } from 'shared/types/account';
 import { sdk } from 'sdk';
-import { Account, Address } from 'types/account';
 import { revalidateOptions } from 'frontastic';
 import { GetAccountResult, RegisterAccount, UpdateAccount, UseAccountReturn } from './types';
 

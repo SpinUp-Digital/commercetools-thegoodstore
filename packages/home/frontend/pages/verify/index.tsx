@@ -2,8 +2,8 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import Toast from 'react-hot-toast';
+import { Account } from 'shared/types/account';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { Account } from 'types/account';
 import { useAccount } from 'frontastic';
 
 const Verify: NextPage = () => {

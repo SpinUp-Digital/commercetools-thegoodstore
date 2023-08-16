@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
+import { Address as AccountAddress } from 'shared/types/account';
 import useI18n from 'helpers/hooks/useI18n';
-import { Address as AccountAddress } from 'types/account';
 import { useAccount } from 'frontastic';
 import { Address } from '../types';
 

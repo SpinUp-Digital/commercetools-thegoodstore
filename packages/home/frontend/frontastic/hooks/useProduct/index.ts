@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
-import { ProductQuery } from '@commercetools/frontend-domain-types/query/ProductQuery';
+import { Category } from 'shared/types/product';
+import { Inventory } from 'shared/types/product/inventory';
+import { ProductQuery } from 'shared/types/query/ProductQuery';
 import useSWR from 'swr';
 import { sdk } from 'sdk';
-import { Category } from 'types/category';
-import { Inventory } from 'types/inventory';
 import { revalidateOptions } from 'frontastic';
 import { UseProductReturn } from './types';
 

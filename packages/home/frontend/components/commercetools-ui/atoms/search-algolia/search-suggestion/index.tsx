@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 import { MagnifyingGlassIcon as SearchIcon } from '@heroicons/react/24/outline';
 import { Hit } from 'instantsearch.js';
 import { Highlight } from 'react-instantsearch-hooks-web';
+import { Category } from 'shared/types/product/Category';
 import { productsIndex } from 'helpers/constants/algolia';
-import { Category } from 'types/category';
 import Link from '../../link';
 
 export interface Props {

@@ -1,7 +1,6 @@
 {
   "name": "thegoodstore-data",
   "scripts": {
-    "preinstall": "node preinstall.min.js",
     "build": "rimraf dist/ && babel ./lib/*.js --out-dir dist/lib/ --ignore ./node_modules,./.babelrc,./package.json --copy-files",
     "format": "prettier --write ./lib/**",
     "reset:data": "node dist/lib/data.js --start",

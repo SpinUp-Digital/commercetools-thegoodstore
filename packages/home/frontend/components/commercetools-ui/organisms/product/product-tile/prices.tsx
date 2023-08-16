@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { Money } from '@commercetools/frontend-domain-types/product/Money';
+import { Money } from 'shared/types/product/Money';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import Typography from '../../../atoms/typography';
 

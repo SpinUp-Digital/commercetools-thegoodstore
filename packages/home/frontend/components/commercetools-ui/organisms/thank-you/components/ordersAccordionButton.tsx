@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
-import { Order } from 'types/order';
+import { Order } from 'shared/types/cart/Order';
 import Image from 'frontastic/lib/image';
 
-type OrdersAccordionButtonProps = { order: Order };
+type OrdersAccordionButtonProps = { order?: Order };
 
 const OrdersAccordionButton: FC<OrdersAccordionButtonProps> = ({ order }) => {
   const hiddenItemsCount = (order?.lineItems?.length ?? 0) - 3;

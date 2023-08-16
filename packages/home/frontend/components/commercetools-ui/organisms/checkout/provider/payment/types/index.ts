@@ -4,7 +4,7 @@ import {
   KlarnaPaymentRequestPayload,
   PaymentResponse,
   SchemePaymentRequestPayload,
-} from 'types/payment';
+} from 'shared/types/cart/Payment';
 
 export interface SchemeData {
   type: 'scheme';

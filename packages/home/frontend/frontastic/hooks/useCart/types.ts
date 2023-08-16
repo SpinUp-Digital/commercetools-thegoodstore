@@ -1,11 +1,11 @@
-import { Address } from '@commercetools/frontend-domain-types/account/Address';
-import { Discount } from '@commercetools/frontend-domain-types/cart/Discount';
-import { ShippingMethod } from '@commercetools/frontend-domain-types/cart/ShippingMethod';
-import { Money } from '@commercetools/frontend-domain-types/product/Money';
-import { Variant } from 'types/product';
-import { ProjectSettings } from '@commercetools/frontend-domain-types/ProjectSettings';
-import { Cart } from 'types/cart';
-import { Order } from 'types/order';
+import { Address } from 'shared/types/account/Address';
+import { Cart } from 'shared/types/cart';
+import { Discount } from 'shared/types/cart/Discount';
+import { Order } from 'shared/types/cart/Order';
+import { ShippingMethod } from 'shared/types/cart/ShippingMethod';
+import { Variant } from 'shared/types/product';
+import { Money } from 'shared/types/product/Money';
+import { ProjectSettings } from 'shared/types/ProjectSettings';
 
 export interface CartDetails {
   account?: { email: string };

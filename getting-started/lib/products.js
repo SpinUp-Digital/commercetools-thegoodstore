@@ -85,6 +85,7 @@ const groupProducts = (products) =>
         grouped.push([product]);
         return grouped;
       }
+
       grouped[grouped.length - 1].push(product);
       return grouped;
     }, []);
@@ -93,6 +94,7 @@ const toPrice = (customerGroups, channels) => (stringPrice) => {
   const [currencyCode, amount, custGroup] = stringPrice.split(/\s/);
   const [newAmount, channel] = amount.split('#');
   const [cntry, newCurrencyCode] = currencyCode.split(/-/);
+
   const channelInfo = channel && {
     channel: {
       typeId: 'channel',
@@ -171,6 +173,7 @@ const toAttribute = (attributeName, value, attributeType) => {
     //  therefor it is ignored for now
     return NONE;
   }
+
   if (attributeType.name === 'ltext') {
     value = removeEmpty(value);
     if (Object.keys(value).length === 0) {
@@ -218,6 +221,8 @@ const toProduct = (categoriesById, customerGroups, channels, attributesByType, p
       rejected: 'empty slug',
     };
   }
+
+  if (!products[0].prices || !productType || !tax) return;
 
   const metaDescription = noAllEmpty(removeEmpty(products[0].description));
   const metaTitle = noAllEmpty(removeEmpty(products[0].metaTitle));
@@ -288,12 +293,13 @@ export const importProducts = (productPath, categoriesPath, typesPath, limit = N
           ),
         new Map(),
       );
+
       const groupedProducts = groupProducts(rawProducts).slice(0, limit);
       notifySave.start(groupedProducts.length, 0, {});
       let processed = 0;
-      const productsToSave = groupedProducts.map(
-        toProduct(categoriesById, customerGroupsByKey, channelsByKey, attributesByType, productTypes),
-      );
+      const productsToSave = groupedProducts
+        .map(toProduct(categoriesById, customerGroupsByKey, channelsByKey, attributesByType, productTypes))
+        .filter(Boolean);
 
       return Promise.all(
         productsToSave.map(
@@ -326,11 +332,7 @@ export const importAllProducts = () => {
   const typesPath = process.cwd() + '/data/product-type.json';
 
   return Promise.all(
-    [
-      '/data/products/Furniture-and-decor.csv',
-      '/data/products/Product-sets.csv',
-      '/data/products/Single-variant.csv',
-    ].map((productPath) => {
+    ['/data/products/Furniture-and-decor.csv', '/data/products/Product-sets.csv'].map((productPath) => {
       importProducts(process.cwd() + productPath, categoriesPath, typesPath);
     }),
   );

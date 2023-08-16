@@ -1,8 +1,8 @@
 import { FC } from 'react';
+import { Account } from 'shared/types/account';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { TypographyProps } from 'components/commercetools-ui/atoms/typography/types';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { Account } from 'types/account';
 import PrintButton from './printButton';
 
 type ThankYouHeaderProps = {

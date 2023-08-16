@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import Button from 'components/commercetools-ui/atoms/button';
-import { Option } from 'components/commercetools-ui/atoms/select';
+import { Option } from 'components/commercetools-ui/atoms/dropdown';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import { useFormat } from 'helpers/hooks/useFormat';
 import PaymentCard from './payment-card';

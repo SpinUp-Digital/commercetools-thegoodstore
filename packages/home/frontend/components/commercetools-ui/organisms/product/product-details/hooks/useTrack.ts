@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
-import { Product } from '@commercetools/frontend-domain-types/product/Product';
+import { Product } from 'shared/types/product/Product';
 import {
   PDP_PRODUCT_ADDED_TO_CART,
   QUICK_VIEW_PRODUCT_ADDED_TO_CART,

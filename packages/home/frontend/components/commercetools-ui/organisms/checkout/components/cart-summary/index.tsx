@@ -1,16 +1,14 @@
 import React from 'react';
 import { useRouter } from 'next/router';
+import Costs from 'components/commercetools-ui/organisms/order-payment-section/components/costs';
 import { CurrencyHelpers } from 'helpers/currencyHelpers';
-import { useFormat } from 'helpers/hooks/useFormat';
 import { useCart } from 'frontastic';
 import Image from 'frontastic/lib/image';
 
 const CartSummary = () => {
-  const { formatMessage: formatCartMessage } = useFormat({ name: 'cart' });
-
   const { locale, ...router } = useRouter();
 
-  const { data, transaction, isEmpty, isShippingAccurate } = useCart();
+  const { data } = useCart();
 
   return (
     <div>
@@ -39,44 +37,11 @@ const CartSummary = () => {
           </div>
         ))}
       </div>
-      <div className="mt-16 bg-neutral-200 p-16 pb-24 text-14 md:text-16">
-        {!isEmpty && (
-          <>
-            <div className="flex items-center justify-between">
-              <span>{formatCartMessage({ id: 'subtotal', defaultMessage: 'Subtotal' })} </span>
-              <span>{CurrencyHelpers.formatForCurrency(transaction.subtotal, locale)}</span>
-            </div>
-
-            {transaction.discount.centAmount > 0 && (
-              <div className="mt-8 flex items-center justify-between">
-                <span>{formatCartMessage({ id: 'discount', defaultMessage: 'Discount' })} </span>
-                <span>{CurrencyHelpers.formatForCurrency(transaction.discount, locale)}</span>
-              </div>
-            )}
-
-            {transaction.shipping.centAmount > 0 && (
-              <div className="mt-8 flex items-center justify-between">
-                <span>
-                  {isShippingAccurate
-                    ? formatCartMessage({ id: 'shippingCosts', defaultMessage: 'Shipping costs' })
-                    : formatCartMessage({ id: 'shipping.estimate', defaultMessage: 'Est. Shipping' })}{' '}
-                </span>
-                <span>{CurrencyHelpers.formatForCurrency(transaction.shipping, locale)}</span>
-              </div>
-            )}
-
-            <div className="mt-8 flex items-center justify-between">
-              <span>{formatCartMessage({ id: 'tax', defaultMessage: 'Tax' })} </span>
-              <span>{CurrencyHelpers.formatForCurrency(transaction.tax, locale)}</span>
-            </div>
-          </>
-        )}
-
-        <div className="mt-20 flex items-center justify-between text-16 font-medium">
-          <span>{formatCartMessage({ id: 'total', defaultMessage: 'Total' })}: </span>
-          <span>{CurrencyHelpers.formatForCurrency(transaction.total, locale)}</span>
-        </div>
-      </div>
+      <Costs
+        className="mt-16 border-b border-neutral-400 bg-neutral-200 p-16 pb-24 md:text-16"
+        subCostClassName="text-14"
+        totalAmountClassName="text-16"
+      />
     </div>
   );
 };

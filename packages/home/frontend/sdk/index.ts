@@ -19,12 +19,11 @@ class CommercetoolsSDK extends SDK<ComposableCommerceEvents> {
   }
 
   configureForNext(nextJsLocale: string) {
-    const { locale, currency, useCurrencyInLocale } = getLocalizationInfo(nextJsLocale);
+    const { locale, currency } = getLocalizationInfo(nextJsLocale);
 
     sdk.configure({
       locale,
       currency,
-      useCurrencyInLocale,
       extensionVersion: process.env.NEXT_PUBLIC_EXT_BUILD_ID ?? 'dev',
       endpoint: (process.env.NEXT_PUBLIC_FRONTASTIC_HOST as string).split('/frontastic')[0],
     });

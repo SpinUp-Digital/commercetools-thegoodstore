@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { LineItem } from '@commercetools/frontend-domain-types/wishlist/LineItem';
+import { LineItem } from 'shared/types/wishlist/LineItem';
 import HeartIcon from 'components/icons/heart';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useWishlist } from 'frontastic';

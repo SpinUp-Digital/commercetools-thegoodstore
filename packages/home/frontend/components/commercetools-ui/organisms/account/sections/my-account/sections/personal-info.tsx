@@ -1,6 +1,6 @@
 import { FC } from 'react';
+import { Account } from 'shared/types/account';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { Account } from 'types/account';
 import InfoCard from '../../../account-atoms/info-card';
 
 interface PersonalInformation {
@@ -22,7 +22,7 @@ const PersonalInfo: FC<PersonalInformation> = ({ account }) => {
       title={formatAccountMessage({ id: 'personal.info', defaultMessage: 'Personal information' })}
       isEditable
       infoFields={personalInformationFields}
-      editHref="#edit-personal-info"
+      editHref="#/edit-personal-info"
     />
   );
 };

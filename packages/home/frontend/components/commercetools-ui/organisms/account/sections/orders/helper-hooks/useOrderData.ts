@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import { ShippingMethod } from '@commercetools/frontend-domain-types/cart/ShippingMethod';
-import { Order } from 'types/order';
+import { Order } from 'shared/types/cart/Order';
+import { ShippingMethod } from 'shared/types/cart/ShippingMethod';
 import useOrderFetch from './useOrderFetch';
 
 const useOrderData = (order?: Order) => {

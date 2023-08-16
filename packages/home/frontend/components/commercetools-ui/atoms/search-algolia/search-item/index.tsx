@@ -1,13 +1,13 @@
 import React, { useCallback, useMemo } from 'react';
 import { useRouter } from 'next/router';
-import { Product } from '@commercetools/frontend-domain-types/product/Product';
-// import { Variant } from 'types/product';
+// import { Variant } from 'ct-types/product';
 import { Hit } from 'instantsearch.js';
 import { Highlight } from 'react-instantsearch-hooks-web';
+import { Category } from 'shared/types/product/Category';
+import { Product } from 'shared/types/product/Product';
 import { AUTOCOMPLETE_PRODUCT_CLICKED } from 'helpers/constants/events';
-// import useVariantWithDiscount from 'helpers/hooks/useVariantWithDiscount';
-import { Category } from 'types/category';
 import { Subset } from 'types/subset';
+// import useVariantWithDiscount from 'helpers/hooks/useVariantWithDiscount';
 import Image from 'frontastic/lib/image';
 import Link from '../../link';
 // import Prices from '../prices';

@@ -1,14 +1,14 @@
-import { AccountToken } from '@commercetools/frontend-domain-types/account/AccountToken';
-import { Address } from '@commercetools/frontend-domain-types/account/Address';
-import { Group } from '@commercetools/frontend-domain-types/account/Group';
-import { LineItem as CartLineItem } from '@commercetools/frontend-domain-types/cart/LineItem';
-import { Money } from '@commercetools/frontend-domain-types/product/Money';
-import { Variant } from 'types/product';
-import { LineItem } from '@commercetools/frontend-domain-types/wishlist/LineItem';
-import { Wishlist } from '@commercetools/frontend-domain-types/wishlist/Wishlist';
-import { Account } from 'types/account';
-import { Category } from 'types/category';
-import { ShippingInfo } from 'types/order';
+import { AccountToken } from 'shared/types/account/AccountToken';
+import { Address } from 'shared/types/account/Address';
+import { Group } from 'shared/types/account/Group';
+import { LineItem as CartLineItem } from 'shared/types/cart/LineItem';
+import { Money } from 'shared/types/product/Money';
+import { Variant } from 'shared/types/product';
+import { LineItem } from 'shared/types/wishlist/LineItem';
+import { Wishlist } from 'shared/types/wishlist/Wishlist';
+import { Account } from 'shared/types/account';
+import { Category } from 'shared/types/product/Category';
+import { ShippingInfo } from 'shared/types/cart/ShippingInfo';
 import { NextFrontasticImage } from 'frontastic/lib/image';
 
 export const categories: Category[] = [
@@ -1060,6 +1060,7 @@ export const lineItemsOrderHistory: CartLineItem[] = [
     isGift: false,
     totalPrice: { centAmount: 71820, currencyCode: 'EUR', fractionDigits: 2 },
     price: { centAmount: 71820, currencyCode: 'EUR', fractionDigits: 2 },
+    taxedPrice: {},
   },
   {
     lineItemId: '2b7427e1-d00b-4069-9731-a93aa92869c1',
@@ -1071,6 +1072,7 @@ export const lineItemsOrderHistory: CartLineItem[] = [
     isGift: false,
     totalPrice: { centAmount: 71820, currencyCode: 'EUR', fractionDigits: 2 },
     price: { centAmount: 71820, currencyCode: 'EUR', fractionDigits: 2 },
+    taxedPrice: {},
   },
 ];
 

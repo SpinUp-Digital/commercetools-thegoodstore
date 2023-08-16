@@ -1,6 +1,7 @@
 import React from 'react';
-import Cart, { Props as CartProps } from 'components/commercetools-ui/organisms/cart';
-import { Category } from 'types/category';
+import { Category } from 'shared/types/product/Category';
+import Cart from 'components/commercetools-ui/organisms/cart';
+import { CartProps } from 'components/commercetools-ui/organisms/cart/types';
 
 interface Props {
   data: CartProps;

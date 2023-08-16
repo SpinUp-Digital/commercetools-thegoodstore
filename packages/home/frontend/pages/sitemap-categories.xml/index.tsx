@@ -1,8 +1,8 @@
 import { GetServerSideProps } from 'next';
 import { getServerSideSitemap, ISitemapField } from 'next-sitemap';
+import { Category } from 'shared/types/product/Category';
 import { siteUrl } from 'next-sitemap.config';
 import { sdk } from 'sdk';
-import { Category } from 'types/category';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   sdk.configureForNext(context.locale as string);

@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
+import { ShipmentState } from 'shared/types/cart/Order';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import useClassNames from 'helpers/hooks/useClassNames';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { ShipmentState } from 'types/order';
 
 export interface Props {
   orderDate: string;

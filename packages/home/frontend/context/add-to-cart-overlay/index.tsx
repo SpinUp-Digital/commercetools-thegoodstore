@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useState } from 'react';
 import { useRouter } from 'next/router';
-import { Product } from '@commercetools/frontend-domain-types/product/Product';
+import { Product } from 'shared/types/product/Product';
 import { Transition } from '@headlessui/react';
 import { XMarkIcon as CloseIcon } from '@heroicons/react/24/solid';
 import Link from 'components/commercetools-ui/atoms/link';
@@ -11,7 +11,7 @@ import { useFormat } from 'helpers/hooks/useFormat';
 import useScrollBlock from 'helpers/hooks/useScrollBlock';
 import useTouchDevice from 'helpers/hooks/useTouchDevice';
 import { mediumDesktop, tablet } from 'helpers/utils/screensizes';
-import { Variant } from 'types/product';
+import { Variant } from 'shared/types/product';
 import { useProduct } from 'frontastic';
 import Image from 'frontastic/lib/image';
 import { AddToCartOverlayContextShape, StateProduct } from './types';

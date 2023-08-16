@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
-import { Product } from '@commercetools/frontend-domain-types/product/Product';
+import { Category } from 'shared/types/product/Category';
+import { Product } from 'shared/types/product/Product';
 import Wrapper from 'components/HOC/wrapper';
-import { Category } from 'types/category';
 import AccumalativeTrace from './components/accumalative-trace';
 import Breadcrumbs from './components/breadcrumb';
 import CurrentRefinements from './components/current-refinements';

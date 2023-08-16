@@ -13,7 +13,7 @@ import {
   ExtensionRegistry,
   Request,
 } from '@frontastic/extension-types';
-import { getLocale, getPath } from './utils/Request';
+import { getCurrency, getLocale, getPath } from './utils/Request';
 import { ProductRouter } from './utils/ProductRouter';
 import { Product } from '@commercetools/frontend-domain-types/product/Product';
 import { SearchRouter } from './utils/SearchRouter';
@@ -122,7 +122,7 @@ export default {
   },
   'data-sources': {
     'frontastic/product-list': async (config: DataSourceConfiguration, context: DataSourceContext) => {
-      const productApi = new ProductApi(context.frontasticContext, context.request ? getLocale(context.request) : null);
+      const productApi = new ProductApi(context.frontasticContext, context.request ? getLocale(context.request) : null, getCurrency(context.request));
 
       const productQuery = ProductQueryFactory.queryFromParams(context?.request, config);
 
@@ -138,7 +138,7 @@ export default {
         throw new Error(`Request is not defined in context ${context}`);
       }
 
-      const productApi = new ProductApi(context.frontasticContext, getLocale(context.request));
+      const productApi = new ProductApi(context.frontasticContext, getLocale(context.request), getCurrency(context.request));
       const productQuery = ProductQueryFactory.queryFromParams(context.request, config);
       const queryWithCategoryId = {
         ...productQuery,
@@ -159,7 +159,7 @@ export default {
         throw new Error(`Request is not defined in context ${context}`);
       }
 
-      const productApi = new ProductApi(context.frontasticContext, getLocale(context.request));
+      const productApi = new ProductApi(context.frontasticContext, getLocale(context.request), getCurrency(context.request));
       const productQuery = ProductQueryFactory.queryFromParams(context.request, config);
 
       const shuffleArray = (array: any) => {
@@ -183,7 +183,7 @@ export default {
     },
 
     'frontastic/product': async (config: DataSourceConfiguration, context: DataSourceContext) => {
-      const productApi = new ProductApi(context.frontasticContext, context.request ? getLocale(context.request) : null);
+      const productApi = new ProductApi(context.frontasticContext, context.request ? getLocale(context.request) : null, getCurrency(context.request));
       const productQuery = ProductQueryFactory.queryFromParams(context?.request, config);
 
       return await productApi.getProduct(productQuery).then((queryResult) => {

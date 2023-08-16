@@ -1,8 +1,8 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import Button from 'components/commercetools-ui/atoms/button';
+import Dropdown from 'components/commercetools-ui/atoms/dropdown';
 import Input from 'components/commercetools-ui/atoms/input';
-import Select from 'components/commercetools-ui/atoms/select';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import useResolveCCImage from 'components/commercetools-ui/organisms/checkout/hooks/useResolveCCImage';
 import { useFormat } from 'helpers/hooks/useFormat';
@@ -61,23 +61,30 @@ const PaymentAdd = () => {
               </Typography>
               <div className="mt-8 flex grow items-center md:flex-1">
                 <div className="mr-12">
-                  <Select
-                    defaultValue={paymentAddData.cardExpMonthDate}
-                    options={expiryDateMonthOptions}
-                    onChange={paymentAddData.handleExpiryMonthDateChange}
+                  <Dropdown
+                    error={paymentAddData.dateError && paymentAddData.cardExpMonthDate.name === 'MM' ? true : false}
+                    selectDefaultValue={paymentAddData.cardExpMonthDate}
+                    selectOptions={expiryDateMonthOptions}
+                    selectOnChange={paymentAddData.handleExpiryMonthDateChange}
                   />
                 </div>
                 /
                 <div className="ml-12">
-                  <Select
-                    defaultValue={paymentAddData.cardExpYearDate}
-                    options={expiryDateYearOptions}
-                    onChange={paymentAddData.handleExpiryYearDateChange}
+                  <Dropdown
+                    error={paymentAddData.dateError && paymentAddData.cardExpYearDate.name === 'YY' ? true : false}
+                    selectDefaultValue={paymentAddData.cardExpYearDate}
+                    selectOptions={expiryDateYearOptions}
+                    selectOnChange={paymentAddData.handleExpiryYearDateChange}
                   />
                 </div>
               </div>
             </div>
           </div>
+          {paymentAddData.dateError && (
+            <Typography as="label" fontSize={12} medium className="text-accent-red">
+              {formatPaymentMessage({ id: paymentAddData.dateError, defaultMessage: paymentAddData.dateError })}
+            </Typography>
+          )}
         </div>
         <div className="mt-32 flex">
           <Button variant="secondary" className="w-[112px]" onClick={() => router.push('/account#payment')}>

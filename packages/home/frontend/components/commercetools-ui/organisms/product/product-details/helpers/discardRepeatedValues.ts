@@ -1,4 +1,4 @@
-import { Variant } from 'types/product';
+import { Variant } from 'shared/types/product';
 
 export const discardRepeatedValues = (variants: Variant[], attribute: string) => {
   const uniqueValues: { [key: string]: boolean } = {};

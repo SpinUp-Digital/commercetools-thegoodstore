@@ -1,10 +1,13 @@
 import NextImage from 'next/image';
+import { useRouter } from 'next/router';
+import { getLocalizationInfo } from 'project.config';
 import { frontasticCloudinaryLoader } from './loaders';
 import { NextFrontasticImage } from './types';
 
 export default function Image({
   width,
   height: baseHeight,
+  title: baseTitle,
   ratio,
   media,
   gravity,
@@ -15,6 +18,12 @@ export default function Image({
   src = '',
   ...props
 }: NextFrontasticImage) {
+  const { locale } = useRouter();
+
+  const localizedInfo = getLocalizationInfo(locale);
+
+  const title = typeof baseTitle === 'object' ? baseTitle[localizedInfo.locale] : baseTitle;
+
   if (suffix) {
     if (typeof src === 'string' || src instanceof String) {
       const dotIndex = src.lastIndexOf('.');
@@ -30,6 +39,7 @@ export default function Image({
         unoptimized
         src={src}
         layout={!width || isNaN(+width) || !baseHeight || isNaN(+baseHeight) ? 'fill' : layout}
+        title={title}
         alt={alt}
         loading={loading}
         width={width}
@@ -78,6 +88,7 @@ export default function Image({
       loader={frontasticCloudinaryLoader}
       src={paremeterizedSrc}
       layout={layout}
+      title={title}
       alt={alt}
       loading={loading}
     />

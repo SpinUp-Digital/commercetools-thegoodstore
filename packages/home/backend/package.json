@@ -24,7 +24,6 @@
     "@sendgrid/mail": "^7.7.0",
     "@types/jest": "^27.4.1",
     "axios": "^0.24.0",
-    "contentful": "^9.1.32",
     "core-js": "^3.20.0",
     "nodemailer": "^6.7.3",
     "performance-now": "^2.1.0",

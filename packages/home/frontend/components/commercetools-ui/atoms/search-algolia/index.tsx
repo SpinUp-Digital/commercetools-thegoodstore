@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Transition } from '@headlessui/react';
 import { Hits, Configure, SearchBox, Index } from 'react-instantsearch-hooks-web';
+import { Category } from 'shared/types/product/Category';
 import InstantSearch from 'components/HOC/InstantSearch';
 import GoogleAnalyticsMiddleware from 'components/HOC/InstantSearch/middlewares/GoogleAnalyticsMiddleware';
 import { productsIndex, productsQuerySuggestionsIndex } from 'helpers/constants/algolia';
@@ -9,7 +10,6 @@ import { useFormat } from 'helpers/hooks/useFormat';
 import useMediaQuery from 'helpers/hooks/useMediaQuery';
 import useScrollBlock from 'helpers/hooks/useScrollBlock';
 import { mediumDesktop } from 'helpers/utils/screensizes';
-import { Category } from 'types/category';
 import Overlay from '../overlay';
 import SearchItem from './search-item';
 import SearchSuggestion, { Props as SearchSuggestionProps } from './search-suggestion';
@@ -60,7 +60,7 @@ const Search: React.FC<Props> = ({ categories }) => {
 
       {focused && <Overlay />}
 
-      <div className="relative z-[300] lg:px-20">
+      <div className="relative z-[300] xl:px-20">
         <SearchBox
           onFocus={onFocus}
           onBlur={onBlur}
@@ -87,7 +87,7 @@ const Search: React.FC<Props> = ({ categories }) => {
 
         <Transition
           show={focused}
-          className="absolute bottom-0 left-0 max-h-[60vh] w-full translate-y-full overflow-auto bg-white px-20 py-28 lg:max-h-[unset] lg:translate-y-[calc(100%-56px)] lg:rounded-md lg:pt-84"
+          className="absolute bottom-0 left-0 max-h-[60vh] w-full translate-y-full overflow-auto bg-white px-20 py-28 xl:max-h-[unset] xl:translate-y-[calc(100%-56px)] xl:rounded-md xl:pt-84"
           enter="transition duration-75"
           enterFrom="opacity-0"
           enterTo="opacity-100"

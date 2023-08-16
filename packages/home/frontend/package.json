@@ -24,7 +24,6 @@
   "dependencies": {
     "@adyen/adyen-web": "^5.33.0",
     "@commercetools/frontend-composable-commerce": "^1.2.5",
-    "@commercetools/frontend-domain-types": "^1.0.7",
     "@commercetools/frontend-sdk": "^1.7.5",
     "@emotion/react": "^11.9.0",
     "@headlessui/react": "^1.4.3",
@@ -77,7 +76,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",
-    "@commercetools/frontend-netlify-plugin": "^0.0.3",
+    "@commercetools/frontend-netlify-plugin": "^0.2.0",
     "@storybook/addon-actions": "^6.5.4",
     "@storybook/addon-essentials": "^6.5.4",
     "@storybook/addon-interactions": "^6.5.4",

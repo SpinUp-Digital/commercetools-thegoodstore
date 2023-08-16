@@ -1,5 +1,5 @@
-import { Product } from '@commercetools/frontend-domain-types/product/Product';
-import { Variant } from 'types/product';
+import { Product } from 'shared/types/product/Product';
+import { Variant } from 'shared/types/product';
 import { UISize } from 'components/commercetools-ui/organisms/product/product-details/types';
 
 export const toUISize = (product: Product) => {

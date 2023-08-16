@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
+import { Address } from 'shared/types/account';
+import { Order } from 'shared/types/cart/Order';
 import Button from 'components/commercetools-ui/atoms/button';
 import Link from 'components/commercetools-ui/atoms/link';
 import Typography from 'components/commercetools-ui/atoms/typography';
+import SummaryAccordion from 'components/commercetools-ui/organisms/order-summary/components/summary-accordion';
 import { useFormat } from 'helpers/hooks/useFormat';
-import { Address } from 'types/account';
-import { Order } from 'types/order';
-import OrderSummaryMobile from './order-summary/order-summary-mobile';
 
 export interface Props {
   order: Order;
@@ -23,12 +23,12 @@ const OrderInfoSection: FC<Props> = ({ order, shippingInfo, paymentInfo, shippin
   };
 
   return (
-    <div className="h-fit w-full rounded-none lg:rounded-md lg:border lg:py-44 2xl:w-[60%] 2xl:px-36">
-      <div className="mb-24 block w-full px-16 md:px-24 lg:hidden">
+    <div className="h-fit w-full rounded-none px-16 md:px-24 lg:rounded-md lg:border lg:p-44 2xl:w-[60%] 2xl:px-36">
+      <div className="mb-24 block w-full lg:hidden">
         <div className="h-1 w-full bg-neutral-400 px-24" />
       </div>
 
-      <div className="flex px-16 md:px-24 lg:px-44 2xl:pl-0">
+      <div className="flex 2xl:pl-0">
         <Typography fontSize={14} fontFamily="inter" className="whitespace-nowrap text-secondary-black md:text-16">
           {formatOrdersMessage({
             id: 'shipping.method',
@@ -46,7 +46,7 @@ const OrderInfoSection: FC<Props> = ({ order, shippingInfo, paymentInfo, shippin
         </Typography>
       </div>
 
-      <div className="mt-24 flex px-16 md:px-24 lg:px-44 2xl:pl-0">
+      <div className="mt-24 flex 2xl:pl-0">
         <Typography fontSize={14} fontFamily="inter" className="whitespace-nowrap text-secondary-black md:text-16">
           {formatOrdersMessage({
             id: 'shipping.address',
@@ -69,7 +69,7 @@ const OrderInfoSection: FC<Props> = ({ order, shippingInfo, paymentInfo, shippin
         </div>
       </div>
 
-      <div className="mt-32 flex px-16 md:px-24 lg:px-44 2xl:pl-0">
+      <div className="mt-32 flex 2xl:pl-0">
         <Typography fontSize={14} fontFamily="inter" className="whitespace-nowrap text-secondary-black md:text-16">
           {formatOrdersMessage({
             id: 'payment.method',
@@ -87,9 +87,9 @@ const OrderInfoSection: FC<Props> = ({ order, shippingInfo, paymentInfo, shippin
         </Typography>
       </div>
 
-      <OrderSummaryMobile order={order} />
+      <SummaryAccordion className="my-24 border-b 2xl:hidden" order={order} />
 
-      <div className="flex flex-col px-16 md:px-24 lg:mt-40 lg:px-44 2xl:px-0">
+      <div className="flex flex-col lg:mt-40 2xl:px-0">
         <div className="flex flex-col lg:grid lg:grid-cols-2 2xl:grid-cols-1 2xl:gap-y-16">
           <div className="lg:w-full lg:pr-10 2xl:w-[276px] 2xl:pr-0">
             <Button variant="secondary" className="h-fit w-full" onClick={handlePrint}>

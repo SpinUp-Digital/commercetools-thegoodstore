@@ -1,20 +1,26 @@
 import React, { FC } from 'react';
-import { Order } from '@commercetools/frontend-domain-types/cart/Order';
+import { useRouter } from 'next/router';
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
 import toast from 'react-hot-toast';
+import { Order } from 'shared/types/cart/Order';
 import Button from 'components/commercetools-ui/atoms/button';
 import Link from 'components/commercetools-ui/atoms/link';
 import Typography from 'components/commercetools-ui/atoms/typography';
+import { CurrencyHelpers } from 'helpers/currencyHelpers';
 import { useFormat } from 'helpers/hooks/useFormat';
-import useOrderTransactions from './helper-hooks/useOrderTransaction';
+import useI18n from 'helpers/hooks/useI18n';
+import mapCosts from 'helpers/utils/mapCosts';
 
 interface Props {
   order?: Order;
 }
 
 const OrderItem: FC<Props> = ({ order }) => {
+  const { currency } = useI18n();
+  const { locale } = useRouter();
+
   const { formatMessage: formatOrdersMessage } = useFormat({ name: 'orders' });
-  const { total: getTotal } = useOrderTransactions(order);
+  const { total: getTotal } = mapCosts({ order, currency });
 
   const handleReturnClick = () => {
     toast.success(formatOrdersMessage({ id: 'return.success', defaultMessage: 'Return created' }));
@@ -50,7 +56,7 @@ const OrderItem: FC<Props> = ({ order }) => {
             {formatOrdersMessage({ id: 'total', defaultMessage: 'Total' })}
           </Typography>
           <Typography fontSize={14} className="text-secondary-black">
-            {getTotal}
+            {CurrencyHelpers.formatForCurrency(getTotal, locale)}
           </Typography>
         </div>
 

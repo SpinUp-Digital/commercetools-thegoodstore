@@ -1,6 +1,11 @@
 import { useCallback } from 'react';
 import { sdk } from 'sdk';
-import { PaymentMethod, PaymentResponse, PaymentRequestPayload, KlarnaPaymentRequestPayload } from 'types/payment';
+import {
+  PaymentMethod,
+  PaymentResponse,
+  PaymentRequestPayload,
+  KlarnaPaymentRequestPayload,
+} from 'shared/types/cart/Payment';
 
 const useAdyen = () => {
   const getPaymentMethods = useCallback(async () => {

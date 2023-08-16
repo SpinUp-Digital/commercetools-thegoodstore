@@ -1,9 +1,9 @@
-import React, { FC, useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { TrashIcon } from '@heroicons/react/24/outline';
 import Button from 'components/commercetools-ui/atoms/button';
+import Dropdown from 'components/commercetools-ui/atoms/dropdown';
 import Input from 'components/commercetools-ui/atoms/input';
-import Select from 'components/commercetools-ui/atoms/select';
 import Typography from 'components/commercetools-ui/atoms/typography';
 import useResolveCCImage from 'components/commercetools-ui/organisms/checkout/hooks/useResolveCCImage';
 import { useFormat } from 'helpers/hooks/useFormat';
@@ -24,6 +24,7 @@ const PaymentEdit = () => {
   const paymentEditData = useEditPaymentMethods(id as string);
 
   const { expiryDateMonthOptions, expiryDateYearOptions } = usePaymentHelpers();
+
   const cardNumberFormatted = useCardNumberFormatter(paymentEditData.cardNumber ?? '');
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -86,18 +87,18 @@ const PaymentEdit = () => {
               </Typography>
               <div className="mt-8 flex grow items-center md:flex-1">
                 <div className="mr-12">
-                  <Select
-                    defaultValue={paymentEditData.cardExpMonthDate}
-                    options={expiryDateMonthOptions}
-                    onChange={paymentEditData.handleExpiryDateMonthChange}
+                  <Dropdown
+                    selectDefaultValue={paymentEditData.cardExpMonthDate}
+                    selectOptions={expiryDateMonthOptions.slice(1)}
+                    selectOnChange={paymentEditData.handleExpiryDateMonthChange}
                   />
                 </div>
                 /
                 <div className="ml-12">
-                  <Select
-                    defaultValue={paymentEditData.cardExpYearDate}
-                    options={expiryDateYearOptions}
-                    onChange={paymentEditData.handleExpiryDateYearChange}
+                  <Dropdown
+                    selectDefaultValue={paymentEditData.cardExpYearDate}
+                    selectOptions={expiryDateYearOptions.slice(1)}
+                    selectOnChange={paymentEditData.handleExpiryDateYearChange}
                   />
                 </div>
               </div>
@@ -105,7 +106,7 @@ const PaymentEdit = () => {
           </div>
         </div>
 
-        <div className="mt-24 flex-col justify-start pl-4 lg:mt-32 lg:flex lg:max-w-[436px] lg:flex-row lg:justify-between lg:pl-0">
+        <div className="mt-24 flex-col justify-start lg:mt-32 lg:flex lg:max-w-[436px] lg:flex-row lg:justify-between">
           <Button variant="ghost" size="fit" className="flex items-center px-0" onClick={() => setModalIsOpen(true)}>
             <TrashIcon className="w-20 text-secondary-black" />
             <Typography as="h2" align="center" fontSize={14} className="ml-8 font-normal text-secondary-black">
